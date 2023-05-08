@@ -1,0 +1,10 @@
+part of tuvi_domain;
+
+AmDuongRel findAmDuongRel(int posOfMenh, Chi chiOfBornYear) {
+  final rPos = posOfMenh % 2;
+  final rChi = chiOfBornYear.index % 2;
+  if ((rPos == 0 && rChi == 0) || (rPos != 0 && rChi != 0)) {
+    return AmDuongRel.amDuongThuanLy;
+  }
+  return AmDuongRel.amDuongNghichLy;
+}
