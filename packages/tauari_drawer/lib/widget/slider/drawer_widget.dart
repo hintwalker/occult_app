@@ -46,6 +46,8 @@ class _MyWidgetState extends State<DrawerWidget> with TickerProviderStateMixin {
           selectedId: screenId,
           animationController: animationController!,
         ),
+        animationDuration: 250,
+        sliderBoxShadow: SliderBoxShadow(color: widget.style.boxShadowColor),
         child: widget.screen(screenId));
   }
 

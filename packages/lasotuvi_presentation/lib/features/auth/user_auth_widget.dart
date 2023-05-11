@@ -59,22 +59,37 @@ class _UserAuthWidgetState extends ConsumerState<UserAuthWidget> {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 72,
-                    child: user.photoUrl == null
-                        ? const Icon(
-                            Icons.account_circle,
-                            size: 72.0,
-                          )
-                        // const CircleAvatar(
-                        //     radius: 36,
-                        //     backgroundColor: Colors.transparent,
-                        //     backgroundImage:
-                        //         Svg(AssetFiles.iconFeMale, size: Size(36, 36)),
-                        //   )
-                        : Image.network(user.photoUrl!),
-                  ),
+                  user.photoUrl == null
+                      ? const Icon(
+                          Icons.account_circle,
+                          size: 64.0,
+                        )
+                      : ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(64.0)),
+                          child: Image.network(user.photoUrl!)),
+                  // CircleAvatar(
+                  //   radius: 72,
+                  //   backgroundColor: Colors.transparent,
+                  //   child: user.photoUrl == null
+                  //       ? const Icon(
+                  //           Icons.account_circle,
+                  //           size: 72.0,
+                  //         )
+                  //       // const CircleAvatar(
+                  //       //     radius: 36,
+                  //       //     backgroundColor: Colors.transparent,
+                  //       //     backgroundImage:
+                  //       //         Svg(AssetFiles.iconFeMale, size: Size(36, 36)),
+                  //       //   )
+                  //       : ClipRRect(
+                  //           borderRadius:
+                  //               const BorderRadius.all(Radius.circular(72.0)),
+                  //           child: Image.network(user.photoUrl!)),
+                  // ),
+                  const SizedBox(height: 8.0),
                   Text(user.displayName!),
+                  const SizedBox(height: 8.0),
                   ElevatedButton(
                       onPressed: () {
                         ref.read(signOutProvider).call();
