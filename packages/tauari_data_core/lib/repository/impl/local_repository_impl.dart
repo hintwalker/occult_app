@@ -13,7 +13,7 @@ abstract class LocalRepositoryImpl<T extends SqliteStorable,
   @override
   Future<T?> byIdOnLocal(int itemId) async {
     final model = await dataSource.byId(itemId);
-    return model?.toEntity<T>();
+    return model?.toEntity();
   }
 
   @override
@@ -22,8 +22,7 @@ abstract class LocalRepositoryImpl<T extends SqliteStorable,
   @override
   Stream<Iterable<T>> onLocal([QueryArgs? queryArgs]) {
     return dataSource.onData(queryArgs).asyncMap<Iterable<T>>((list) =>
-        Future.wait(
-            list.map<Future<T>>((e) async => e.toEntity<T>()).toList()));
+        Future.wait(list.map<Future<T>>((e) async => e.toEntity()).toList()));
   }
 
   @override
@@ -32,12 +31,12 @@ abstract class LocalRepositoryImpl<T extends SqliteStorable,
   @override
   Future<Iterable<T>> dataLocal([QueryArgs? queryArgs]) async {
     final result = await dataSource.data(queryArgs);
-    return result.map((e) => e.toEntity<T>());
+    return result.map((e) => e.toEntity());
   }
 
   @override
   Stream<T?> onByIdOnLocal(int itemId) {
-    return dataSource.onById(itemId).map((event) => event?.toEntity<T>());
+    return dataSource.onById(itemId).map((event) => event?.toEntity());
   }
 
   @override

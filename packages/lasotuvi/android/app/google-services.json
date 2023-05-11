@@ -1,0 +1,144 @@
+{
+  "project_info": {
+    "project_number": "609862208770",
+    "firebase_url": "https://tauari-tuvi-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tauari-tuvi",
+    "storage_bucket": "tauari-tuvi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609862208770:android:871ae412b029e23f57461b",
+        "android_client_info": {
+          "package_name": "com.tauari.horoscope.admin.horoscope_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAacqGDQh5G_1Os0_ieIkr4GysQrRktwOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609862208770:android:9e51ffa8e7c5d07957461b",
+        "android_client_info": {
+          "package_name": "com.tauari.lasotuvi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609862208770-j4p8141b5ml1483mm494p6i4g5526oku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tauari.lasotuvi",
+            "certificate_hash": "cc65b371b4785f9fd160ad7b45c7b95550ffcf40"
+          }
+        },
+        {
+          "client_id": "609862208770-ud2gbhdtpim5q1bl31hmirtpnkd7gpdr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tauari.lasotuvi",
+            "certificate_hash": "88f2b6f4219c7fb0d51576c0268e183ec732ec29"
+          }
+        },
+        {
+          "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAacqGDQh5G_1Os0_ieIkr4GysQrRktwOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3794726661349779~6381904542"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609862208770:android:1e2e7c66b11c30a357461b",
+        "android_client_info": {
+          "package_name": "com.tauari.tuvi_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAacqGDQh5G_1Os0_ieIkr4GysQrRktwOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609862208770:android:ce8a0989f047510057461b",
+        "android_client_info": {
+          "package_name": "com.tauari.tuvi_blog_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAacqGDQh5G_1Os0_ieIkr4GysQrRktwOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609862208770-jk8t69hjr0ig9jd01dn9b0d5jrcqjkv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

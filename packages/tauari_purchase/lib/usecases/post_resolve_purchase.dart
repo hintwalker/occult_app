@@ -7,14 +7,14 @@ class PostResolvePurchase {
     List<PurchaseDetails> purchaseDetailsList, {
     required void Function(bool) onPending,
     required void Function(String?) onError,
-    required Future<void> Function(int) onDeliver,
+    required Future<void> Function(int) onDelivery,
   }) async {
     for (var purchaseDetails in purchaseDetailsList) {
       if (isPurchasePending(purchaseDetails)) {
         onPending(true);
       } else {
         await _reviewPurchase(purchaseDetails,
-            onDeliver: onDeliver, onError: onError);
+            onDeliver: onDelivery, onError: onError);
         await _consume(purchaseDetails);
         await _completePurchase(purchaseDetails);
       }

@@ -18,7 +18,7 @@ abstract class CloudRepositoryImpl<T extends CloudStorable,
   @override
   Future<T?> byIdOnCloud({required String uid, required String docId}) async {
     final model = await dataSource.byId(uid, docId);
-    return model?.toEntity<T>();
+    return model?.toEntity();
   }
 
   @override
@@ -57,5 +57,10 @@ abstract class CloudRepositoryImpl<T extends CloudStorable,
   @override
   Future<void> updateOnCloud(T item, String uid) async {
     await dataSource.update(uid, entityToModel(item));
+  }
+
+  @override
+  Future<bool> insert(String uid, T item) async {
+    return await dataSource.insert(uid, entityToModel(item));
   }
 }
