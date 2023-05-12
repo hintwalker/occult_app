@@ -10,10 +10,12 @@ class MainNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DrawerWidget(
-        header: const DrawerHeader(),
-        screen: screen,
-        title: takeScreenTitle,
-        menus: menus,
-        style: const DrawerStyleImpl(lightColorScheme));
+      header: const DrawerHeader(),
+      screen: screen,
+      title: takeScreenTitle,
+      menus: menus,
+      style: const DrawerStyleImpl(lightColorScheme),
+      appBarTrailing: const AppBarTrailing(),
+    );
   }
 }

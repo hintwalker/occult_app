@@ -8,6 +8,8 @@ import 'package:lasotuvi/screen/take_screen.dart';
 // import 'package:lasotuvi/screen/tag/checkbox_tag_list_screen.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
     show DashboardScreen, RouteName, RoutePath, RouterParams;
+
+import '../screen/energy_market_screen.dart';
 // SplashScreen,
 // WelcomeScreen,
 // VerifyUserScreen;
@@ -50,11 +52,11 @@ class LasotuviRoutes {
     //   name: RouteName.chartCreation,
     //   builder: ((context, state) => ChartCreationScreen(uid: getUid(state))),
     // ),
-    // GoRoute(
-    //   path: RoutePath.market,
-    //   name: RouteName.market,
-    //   builder: (context, state) => const MarketScreen(),
-    // ),
+    GoRoute(
+      path: RoutePath.energyMarket,
+      name: RouteName.energyMarket,
+      builder: (context, state) => const EnergyMarketScreen(),
+    ),
     // GoRoute(
     //   path: RoutePath.chartView,
     //   name: RouteName.chartView,

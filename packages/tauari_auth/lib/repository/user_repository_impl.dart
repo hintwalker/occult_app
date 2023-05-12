@@ -14,10 +14,4 @@ class UserRepositoryImpl extends CloudRepositoryImpl<UserEntity, UserModel>
   // @override
   // Future<String> setupInitUserData(UserEntity user) =>
   //     dataSource.setupInitUserData(user);
-
-  //       @override
-  //       Future<bool> insert(String uid, UserEntity item) {
-  //         // TODO: implement insert
-  //         throw UnimplementedError();
-  //       }
 }

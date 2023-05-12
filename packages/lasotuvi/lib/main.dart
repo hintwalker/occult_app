@@ -1,12 +1,21 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:lasotuvi_data/lasotuvi_data.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
+import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_sqflite/tauari_sqflite.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:sqflite/sqflite.dart' as sqflite show databaseFactory;
 
 import 'firebase_options.dart';
 import 'router/router_provider.dart';
@@ -14,6 +23,9 @@ import 'router/router_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await initTempStorage();
+  final localDatabase = await initLocalDatabase();
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
@@ -23,12 +35,29 @@ void main() async {
         supportedLocales: supportedLocales,
         startLocale: Locale(window.locale.languageCode),
         child: ProviderScope(
+            overrides: [localDatabaseProvider.overrideWithValue(localDatabase)],
             child: TauariApp(
-          routerProvider: routerProvider,
-          title: translate('lasotuvi'),
-          theme: AppTheme.light(),
-        )),
+              routerProvider: routerProvider,
+              title: translate('lasotuvi'),
+              theme: AppTheme.light(),
+            )),
       )));
+}
+
+Future<void> initTempStorage() async {
+  final Directory directory =
+      await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+}
+
+Future<LocalDatabase<Database>> initLocalDatabase() async {
+  final dbFactory = sqflite.databaseFactory;
+  final localDatabase = SqliteDatabase(dbFactory,
+      onCreated: onDbCreated,
+      onConfigure: onDbConfigure,
+      databaseName: DatabaseNames.v1_2);
+  await localDatabase.ready;
+  return localDatabase;
 }
 
 class MyApp extends StatelessWidget {
@@ -89,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: const SafeArea(child: EnergyStoreScreenBody()),
+      body: const SafeArea(child: EnergyMarketScreenBody()),
       // body: Center(
       //   // Center is a layout widget. It takes a single child and positions it
       //   // in the middle of the parent.

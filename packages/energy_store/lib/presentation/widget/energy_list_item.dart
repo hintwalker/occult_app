@@ -17,19 +17,31 @@ class EnergyListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        EnergyWidget(
-          Text(ev),
-          color: colorScheme.primary,
-        ),
-        Expanded(
-            child: Text(
-          price,
-          textAlign: TextAlign.center,
-        )),
-        FilledButton(onPressed: onTap, child: Text(translate('buy'))),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          StaticEnergyWidget(
+            Text(
+              ev,
+              style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w500,
+                  color: colorScheme.primary),
+            ),
+            color: colorScheme.primary,
+          ),
+          Expanded(
+              child: Text(
+            price,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 18.0,
+            ),
+          )),
+          FilledButton(onPressed: onTap, child: Text(translate('buy'))),
+        ],
+      ),
     );
   }
 }

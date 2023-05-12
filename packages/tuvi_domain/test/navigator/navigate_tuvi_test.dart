@@ -5,13 +5,13 @@ void main() {
   test('should navigate tuvi', () {
     final luniDay = 13;
     final cuc = 6;
-    final q = luniDay % cuc;
-    final a = luniDay % cuc == 0 ? floor(luniDay / cuc) : ceil(luniDay / cuc);
-    final b = luniDay % cuc == 0
-        ? 0
-        : (luniDay % cuc == 0 ? floor(luniDay / cuc) : ceil(luniDay / cuc)) *
-                cuc -
-            luniDay;
+    // final q = luniDay % cuc;
+    // final a = luniDay % cuc == 0 ? floor(luniDay / cuc) : ceil(luniDay / cuc);
+    // final b = luniDay % cuc == 0
+    //     ? 0
+    //     : (luniDay % cuc == 0 ? floor(luniDay / cuc) : ceil(luniDay / cuc)) *
+    //             cuc -
+    //         luniDay;
 
     final result = 2 +
         (luniDay % cuc == 0 ? floor(luniDay / cuc) : ceil(luniDay / cuc)) -

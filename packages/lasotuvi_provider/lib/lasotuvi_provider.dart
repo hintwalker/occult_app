@@ -8,11 +8,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:tauari_auth/tauari_auth.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_firebase/tauari_firebase.dart';
 import 'package:tauari_purchase/tauari_purchase.dart';
 import 'package:tauari_utils/tauari_utils.dart';
+
+part 'database/local_database_provider.dart';
 
 part 'user/user_data_source_provider.dart';
 part 'user/set_user_provider.dart';
@@ -32,10 +35,12 @@ part 'auth/sign_in_with_google_provider.dart';
 part 'auth/sign_out_provider.dart';
 
 part 'energy_store/controller/energy_store_controller_provider.dart';
+part 'energy_store/controller/energy_widget_controller_provider.dart';
 part 'energy_store/energy_data_source_provider.dart';
 part 'energy_store/energy_repository_provider.dart';
 part 'energy_store/usecase/plus_energy_provider.dart';
 part 'energy_store/usecase/take_energy_provider.dart';
+part 'energy_store/usecase/on_energy_provider.dart';
 
 part 'purchase/usecase/subscribe_purchase_listing_changes_provider.dart';
 part 'purchase/usecase/post_resolve_purchase_provider.dart';

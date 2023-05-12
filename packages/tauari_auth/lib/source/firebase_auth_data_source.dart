@@ -12,7 +12,7 @@ class FirebaseAuthDataSource extends AuthDataSource {
 
   @override
   StreamSubscription<UserEntity?> onAuthStateChanged(
-          Future<String> Function(UserEntity user) onSignIn,
+          FutureOr<String> Function(UserEntity user) onSignIn,
           Function() onSignOut) =>
       service.onAuthStateChanged(onSignIn, onSignOut);
 

@@ -8,6 +8,7 @@ class DrawerWidget extends StatefulWidget {
     required this.title,
     required this.menus,
     required this.style,
+    this.appBarTrailing,
   });
 
   final Widget Function(String id) screen;
@@ -15,6 +16,7 @@ class DrawerWidget extends StatefulWidget {
   final Widget header;
   final Iterable<DrawerData> menus;
   final DrawerStyle style;
+  final Widget? appBarTrailing;
 
   @override
   State<DrawerWidget> createState() => _MyWidgetState();
@@ -37,7 +39,11 @@ class _MyWidgetState extends State<DrawerWidget> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SliderDrawer(
         key: _sliderDrawerKey,
-        appBar: SliderAppBar(title: widget.title(screenId)),
+        appBar: SliderAppBar(
+          title: widget.title(screenId),
+          drawerIconColor: widget.style.menuIconColor,
+          trailing: widget.appBarTrailing,
+        ),
         slider: DrawerPanel(
           header: widget.header,
           menus: widget.menus,
@@ -55,5 +61,6 @@ class _MyWidgetState extends State<DrawerWidget> with TickerProviderStateMixin {
     setState(() {
       screenId = data.id;
     });
+    _sliderDrawerKey.currentState?.closeSlider();
   }
 }

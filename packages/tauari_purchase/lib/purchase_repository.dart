@@ -18,22 +18,21 @@ class PurchaseRepository {
         onDone: onDone,
         cancelOnError: cancelOnError,
       );
-  Future<bool> isAvailable() async => dataSource.isAvailable();
+  Future<bool> isAvailable() => dataSource.isAvailable();
 
-  Future<ProductDetailsResponse> queryProductDetails(
-          Set<String> productIds) async =>
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> productIds) =>
       dataSource.queryProductDetails(productIds);
 
-  Future<bool> buyConsumable(PurchaseParam purchaseParam) async =>
+  Future<bool> buyConsumable(PurchaseParam purchaseParam) =>
       dataSource.buyConsumable(purchaseParam);
 
-  Future<void> consumePurchase(PurchaseDetails purchaseDetails) async =>
+  Future<void> consumePurchase(PurchaseDetails purchaseDetails) =>
       dataSource.consumePurchase(purchaseDetails);
 
-  Future<void> completePurchase(PurchaseDetails purchaseDetails) async =>
+  Future<void> completePurchase(PurchaseDetails purchaseDetails) =>
       dataSource.completePurchase(purchaseDetails);
 
-  Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) async =>
+  Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) =>
       dataSource.verifyPurchase(purchaseDetails);
 
   int productValue(String productID) => dataSource.productValue(productID);

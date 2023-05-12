@@ -1,7 +1,7 @@
 part of energy_store;
 
-class EnergyWidget extends StatelessWidget {
-  const EnergyWidget(this.text, {super.key, this.color});
+class StaticEnergyWidget extends StatelessWidget {
+  const StaticEnergyWidget(this.text, {super.key, this.color});
   final Color? color;
   final Widget text;
 

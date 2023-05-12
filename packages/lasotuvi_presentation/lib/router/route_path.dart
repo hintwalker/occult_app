@@ -31,4 +31,5 @@ class RoutePath {
   static const verifyUser = '/verifyUser';
 
   static var market = '/market';
+  static var energyMarket = '/energyMarket';
 }

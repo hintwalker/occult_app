@@ -16,6 +16,7 @@ class RouteName {
   static const allTags = 'allTags';
 
   static const tagView = 'tagView';
+  static const energyMarket = 'energyMarket';
 
   // static const noteView = 'noteView';
 

@@ -59,20 +59,20 @@ class FirebaseAuthService {
     }
   }
 
-  Future<void> _storeCredential(AuthCredential? credential) async {
-    if (credential == null) return;
-    final box = await Hive.openBox('token');
-    if (kDebugMode) {
-      print(
-          'providerId: ${credential.providerId}, signInMethod: ${credential.signInMethod}, accessToken: ${credential.accessToken}, token: ${credential.token}');
-    }
-    await box.put('lastSignIn', {
-      'providerId': credential.providerId,
-      'accessToken': credential.accessToken,
-      'signInMethod': credential.signInMethod,
-      'token': credential.token,
-    });
-  }
+  // Future<void> _storeCredential(AuthCredential? credential) async {
+  //   if (credential == null) return;
+  //   final box = await Hive.openBox('token');
+  //   if (kDebugMode) {
+  //     print(
+  //         'providerId: ${credential.providerId}, signInMethod: ${credential.signInMethod}, accessToken: ${credential.accessToken}, token: ${credential.token}');
+  //   }
+  //   await box.put('lastSignIn', {
+  //     'providerId': credential.providerId,
+  //     'accessToken': credential.accessToken,
+  //     'signInMethod': credential.signInMethod,
+  //     'token': credential.token,
+  //   });
+  // }
 
   Future<AuthCredential?> _getCredential() async {
     final box = await Hive.openBox('token');
@@ -97,9 +97,9 @@ class FirebaseAuthService {
       final googleAuth = await signInAccount.authentication;
       final oAcredential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      final credential = await firebaseAuth
-          .signInWithCredential(oAcredential)
-          .catchError((onError) {});
+      final credential = await firebaseAuth.signInWithCredential(oAcredential);
+      // .onError((error, stackTrace) => false);
+      // .catchError((onError) {});
       if (credential.user == null) return null;
       // await _storeCredential(credential.credential);
       return userFromCredential(credential);
@@ -112,11 +112,13 @@ class FirebaseAuthService {
   }
 
   Future<void> signOut() async {
-    final isSignIn = await googleSignIn.isSignedIn().catchError((e) {
-      if (kDebugMode) {
-        print(e.toString());
-      }
-    });
+    final isSignIn =
+        await googleSignIn.isSignedIn().onError((error, stackTrace) => false);
+    // .catchError((e) {
+    //   if (kDebugMode) {
+    //     print(e.toString());
+    //   }
+    // });
     if (isSignIn) {
       await googleSignIn.disconnect();
     }
@@ -128,7 +130,7 @@ class FirebaseAuthService {
       firebaseAuth.authStateChanges().map(userFromFirebase);
 
   StreamSubscription<UserEntity?> onAuthStateChanged(
-    Future<String> Function(UserEntity user) onSignIn,
+    FutureOr<String> Function(UserEntity user) onSignIn,
     Function() onSignOut,
   ) {
     return firebaseAuth

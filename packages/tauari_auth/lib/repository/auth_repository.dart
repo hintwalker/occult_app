@@ -4,7 +4,7 @@ abstract class AuthRepository {
   Future<UserEntity?> signInWithGoole();
   Future<void> signOut();
   StreamSubscription<UserEntity?> onAuthStateChanged(
-    Future<String> Function(UserEntity user) onSignIn,
+    FutureOr<String> Function(UserEntity user) onSignIn,
     Function() onSignOut,
   );
   UserEntity? currentUser();

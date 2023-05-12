@@ -8,7 +8,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   StreamSubscription<UserEntity?> onAuthStateChanged(
-          Future<String> Function(UserEntity user) onSignIn,
+          FutureOr<String> Function(UserEntity user) onSignIn,
           Function() onSignOut) =>
       dataSource.onAuthStateChanged(onSignIn, onSignOut);
 

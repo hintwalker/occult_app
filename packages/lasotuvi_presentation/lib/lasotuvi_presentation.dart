@@ -14,6 +14,7 @@ import 'package:tauari_translate/tauari_translate.dart';
 
 part 'features/dashboard/dashboard_screen.dart';
 
+part 'features/navigation/app_bar_trailing.dart';
 part 'features/navigation/take_screen_title.dart';
 part 'features/navigation/drawer_header.dart';
 part 'features/navigation/drawer_ids.dart';
@@ -30,4 +31,4 @@ part 'router/router_notifier_provider.dart';
 part 'router/router_params.dart';
 part 'features/auth/user_auth_widget.dart';
 part 'features/auth/auth_screen_body.dart';
-part 'features/energy_store/energy_store_screen_body.dart';
+part 'features/energy_market/energy_market_screen_body.dart';

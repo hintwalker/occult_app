@@ -1,7 +1,6 @@
 part of energy_store;
 
-class EnergyStoreController
-    extends StateNotifier<AsyncValue<EnergyStoreState>> {
+class EnergyStoreController extends ChangeNotifier {
   EnergyStoreController({
     required this.queryProductDetails,
     required this.availableForSell,
@@ -13,7 +12,7 @@ class EnergyStoreController
     required this.getUid,
     required this.plusEnergy,
     required this.takeEnergy,
-  }) : super(const AsyncValue.loading());
+  });
 
   final QueryProductDetails queryProductDetails;
   final AvailableForSell availableForSell;
@@ -30,15 +29,23 @@ class EnergyStoreController
 
   late StreamSubscription<List<PurchaseDetails>> _subscription;
 
-  List<ProductDetails> _preloadProducts = [];
-  Energy _currentEnergy = const Energy(0);
+  List<ProductDetails> products = [];
+  bool progressing = false;
+  bool initializing = true;
+  // Energy _currentEnergy = const Energy(0);
 
   Future<void> initStore() async {
-    _preloadProducts = await _loadProducts();
-    _currentEnergy = await _loadCurrentEnergy();
+    products = await _loadProducts();
+
+    // _currentEnergy = await _loadCurrentEnergy();
     _subscribe();
-    state = AsyncValue.data(
-        EnergyStoreState(products: _preloadProducts, energy: _currentEnergy));
+    initializing = false;
+    notifyListeners();
+
+    // state = AsyncValue.data(EnergyStoreState(
+    //   products: _preloadProducts,
+    //   //  energy: _currentEnergy
+    // ));
   }
 
   Future<List<ProductDetails>> _loadProducts() async {
@@ -46,13 +53,15 @@ class EnergyStoreController
     return response.productDetails;
   }
 
-  Future<Energy> _loadCurrentEnergy() async {
-    final uid = await getUid();
-    final energy = uid == null ? const Energy(0) : await takeEnergy(uid);
-    return energy;
-  }
+  // Future<Energy> _loadCurrentEnergy() async {
+  //   final uid = await getUid();
+  //   final energy = uid == null ? const Energy(0) : await takeEnergy(uid);
+  //   return energy;
+  // }
 
   Future<bool> buy(ProductDetails product) async {
+    progressing = true;
+    notifyListeners();
     return await buyConsumableProduct(product);
   }
 
@@ -71,15 +80,20 @@ class EnergyStoreController
   }
 
   Future<void> _onDelivery(int value) async {
-    state = const AsyncValue.loading();
+    // state = const AsyncValue.loading();
     if (await availableNetwork()) {
       final uid = await getUid();
+
       if (uid != null) {
-        _currentEnergy = await plusEnergy(uid, value);
+        await plusEnergy(uid, value);
+        // _currentEnergy = await plusEnergy(uid, value);
       }
     }
-    state = AsyncValue.data(
-        EnergyStoreState(energy: _currentEnergy, products: _preloadProducts));
+    progressing = false;
+    notifyListeners();
+    // state = AsyncValue.data(EnergyStoreState(
+    //     // energy: _currentEnergy,
+    //     products: _preloadProducts));
     //kiem tra network
     //lay user id
     //
