@@ -1,4 +1,4 @@
-import 'package:tauari_data_core/tauari_data_core.dart';
+part of tauari_data_core;
 
 class SyncableEntityCarrier<S extends SyncableEntity,
     E extends SyncableEntity> {

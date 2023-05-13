@@ -10,6 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  lasotuvi_domain:
+    path: ../lasotuvi_domain
+  lasotuvi_data:
+    path: ../lasotuvi_data
+  lasotuvi_chart:
+    path: ../lasotuvi_chart
+
   tuvi_domain:
     path: ../tuvi_domain
   tauari_purchase:

@@ -1,6 +1,6 @@
 part of energy_store;
 
-class Energy extends CloudStorable {
+class Energy implements CloudStorable {
   final int value;
   const Energy(this.value);
 

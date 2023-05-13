@@ -1,9 +1,8 @@
 part of tauari_data_core;
 
-abstract class DeleteEntityForever<T extends SyncableEntity,
-    R extends SyncableRepository> {
+class DeleteEveryWhere<T extends SyncableEntity, R extends SyncableRepository> {
   final R repository;
-  const DeleteEntityForever(this.repository);
+  const DeleteEveryWhere(this.repository);
 
   Future<void> call(String uid, T entity) async {
     await repository.deleteEveryWhere(uid, entity);

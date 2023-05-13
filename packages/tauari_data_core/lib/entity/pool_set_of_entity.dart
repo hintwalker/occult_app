@@ -24,17 +24,17 @@ class PoolSetOfEntity<T extends Syncable> {
     return diffOnB.updateOnCloud(OnCloudValues.onlyLocal);
   }
 
-  Map<String, Object?> dump() {
-    // var localMap = {};
-    // for (var i = 0; i < localSet.length; i++) {
-    //   final element = localSet[i];
-    //   localMap.addAll({element.id.toString(): element.toMap()});
-    // }
-    // var cloudMap = {};
-    // for (var i = 0; i < cloudSet.length; i++) {
-    //   final element = cloudSet[i];
-    //   cloudMap.addAll({element.id.toString(): element.toMap()});
-    // }
-    return {'local': localSet.dump(), 'cloud': cloudSet.dump()};
-  }
+  // Map<String, Object?> dump() {
+  //   // var localMap = {};
+  //   // for (var i = 0; i < localSet.length; i++) {
+  //   //   final element = localSet[i];
+  //   //   localMap.addAll({element.id.toString(): element.toMap()});
+  //   // }
+  //   // var cloudMap = {};
+  //   // for (var i = 0; i < cloudSet.length; i++) {
+  //   //   final element = cloudSet[i];
+  //   //   cloudMap.addAll({element.id.toString(): element.toMap()});
+  //   // }
+  //   return {'local': localSet.dump(), 'cloud': cloudSet.dump()};
+  // }
 }

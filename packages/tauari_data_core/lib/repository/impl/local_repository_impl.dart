@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-abstract class LocalRepositoryImpl<T extends SqliteStorable,
+abstract class LocalRepositoryImpl<T extends SqliteGetable,
     M extends LocalModel<T>> implements LocalRepository<T> {
   final LocalDataSource<M> dataSource;
   final M Function(T) entityToModel;

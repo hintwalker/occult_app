@@ -1,6 +1,24 @@
 part of tauari_data_core;
 
 abstract class SyncableEntity<T>
-    implements Syncable<T>, SqliteStorable, Statable<T> {
-  const SyncableEntity();
+    implements Syncable<T>, CloudGetable, SqliteGetable, Statable<T>, Entity {
+  const SyncableEntity(this.id, {this.syncStatus, this.storageState});
+  final int id;
+  final String? syncStatus;
+  final String? storageState;
+
+  @override
+  int get primaryKey => id;
+
+  @override
+  String get docId => id.toString();
+
+  @override
+  String? get onCloud => syncStatus;
+
+  @override
+  String? get state => storageState;
+
+  @override
+  String get sortId => docId;
 }

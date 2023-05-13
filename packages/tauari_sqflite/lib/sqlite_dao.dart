@@ -1,7 +1,7 @@
 part of tauari_sqflite;
 
-abstract class DaoBase extends Dao {
-  DaoBase({required this.database, required this.tableName});
+abstract class SqliteDao extends Dao {
+  SqliteDao({required this.database, required this.tableName});
   final LocalDatabase<Database> database;
   final String tableName;
   @override

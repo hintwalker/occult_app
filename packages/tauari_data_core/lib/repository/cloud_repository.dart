@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-abstract class CloudRepository<T extends CloudStorable> {
+abstract class CloudRepository<T extends CloudGetable> {
   void addOnCloudDeletionTrigger(
       Future<void> Function(String uid, String docId) trigger);
   Stream<Iterable<T>> onCloud(String uid, [QueryArgs? queryArgs]);

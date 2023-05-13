@@ -71,7 +71,7 @@ class SyncableRepositoryImpl<T extends SyncableEntity, M extends SyncableModel>
       SetOfEntity.fromList(cloudNonNull),
     );
     final items = pool.solve().items;
-    final ordered = OrderedSet<E>((a, b) => b.docId.compareTo(a.docId));
+    final ordered = OrderedSet<E>((a, b) => b.sortId.compareTo(a.sortId));
     ordered.addAll(items);
     return ordered;
   }

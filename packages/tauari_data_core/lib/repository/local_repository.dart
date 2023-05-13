@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-abstract class LocalRepository<T extends SqliteStorable> {
+abstract class LocalRepository<T extends SqliteGetable> {
   Stream<Iterable<T>> onLocal([QueryArgs? queryArgs]);
   Stream<int> onLocalCount();
   Stream<T?> onByIdOnLocal(int itemId);

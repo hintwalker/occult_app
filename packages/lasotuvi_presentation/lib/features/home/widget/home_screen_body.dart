@@ -1,12 +1,56 @@
 part of lasotuvi_presentation;
 
-class HomeScreenBody extends ConsumerWidget {
+class HomeScreenBody extends ConsumerStatefulWidget {
   const HomeScreenBody({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return const Center(
-      child: Text('Home'),
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenBodyState();
+}
+
+class _HomeScreenBodyState extends ConsumerState<HomeScreenBody> {
+  StreamSubscription? _streamSubscription;
+  String? uid;
+  @override
+  void initState() {
+    super.initState();
+    startListening();
+  }
+
+  void startListening() {
+    _streamSubscription =
+        ref.read(registerOnAuthStateChangedProvider).call((user) {
+      setState(() {
+        uid = user.uidInFirestore;
+      });
+      return user.uidInFirestore;
+    }, () {
+      setState(() {
+        uid = null;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _streamSubscription?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 200.0,
+            child: HorizontalChartList(
+              controller: ref.watch(chartListControllerProvider),
+              uid: uid,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

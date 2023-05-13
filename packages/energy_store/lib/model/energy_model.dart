@@ -1,7 +1,7 @@
 part of energy_store;
 
 class EnergyModel extends CloudModel<Energy> {
-  const EnergyModel(this.value);
+  EnergyModel(this.value);
 
   final int value;
 

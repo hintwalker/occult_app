@@ -42,12 +42,12 @@ class SetOfEntity<T extends Syncable> {
     return SetOfEntity<T>(_items.union(other.items));
   }
 
-  Map<String, Object?> dump() {
-    final Map<String, Object?> result = {};
-    for (var i = 0; i < _items.length; i++) {
-      final element = this[i];
-      result.addAll({element.docId: element.dump()});
-    }
-    return result;
-  }
+  // Map<String, Object?> dump() {
+  //   final Map<String, Object?> result = {};
+  //   for (var i = 0; i < _items.length; i++) {
+  //     final element = this[i];
+  //     result.addAll({element.docId: element.dump()});
+  //   }
+  //   return result;
+  // }
 }

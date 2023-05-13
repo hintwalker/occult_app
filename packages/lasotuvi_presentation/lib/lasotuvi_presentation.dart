@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:tauari_auth/tauari_auth.dart';
 import 'package:tauari_drawer/tauari_drawer.dart';

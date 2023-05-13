@@ -10,7 +10,7 @@ class UserModel extends CloudModel<UserEntity> {
   final int? created;
   final String? banned;
 
-  const UserModel({
+  UserModel({
     this.id,
     required this.displayName,
     required this.email,

@@ -8,12 +8,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:lasotuvi_chart/lasotuvi_chart.dart';
+import 'package:lasotuvi_data/lasotuvi_data.dart';
+import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tauari_auth/tauari_auth.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_firebase/tauari_firebase.dart';
 import 'package:tauari_purchase/tauari_purchase.dart';
 import 'package:tauari_utils/tauari_utils.dart';
+
+part 'chart/dao/chart_dao_provider.dart';
+part 'chart/data_source/firebase_chart_data_source_provider.dart';
+part 'chart/data_source/sqlite_chart_data_source_provider.dart';
+part 'chart/repository/chart_repository_provider.dart';
+part 'chart/repository/cloud_chart_repository_provider.dart';
+part 'chart/repository/local_chart_repository_provider.dart';
+part 'chart/controller/chart_list_controller_provider.dart';
+part 'chart/usecase/on_charts_provider.dart';
 
 part 'database/local_database_provider.dart';
 

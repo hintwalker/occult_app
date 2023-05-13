@@ -16,6 +16,8 @@ dependencies:
     path: ../lasotuvi_domain
   lasotuvi_provider:
     path: ../lasotuvi_provider
+  lasotuvi_chart:
+    path: ../lasotuvi_chart
   tauari_auth:
     path: ../tauari_auth
   tauari_drawer:

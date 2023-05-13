@@ -1,13 +1,13 @@
 part of tauari_data_core;
 
-abstract class CloudRepositoryImpl<T extends CloudStorable,
+abstract class CloudRepositoryImpl<T extends CloudGetable,
     M extends CloudModel<T>> implements CloudRepository<T> {
   final RemoteDataSource<M> dataSource;
   final M Function(T) entityToModel;
 
   CloudRepositoryImpl(this.dataSource, {required this.entityToModel});
 
-  List<Future<void> Function(String uid, String docId)>
+  final List<Future<void> Function(String uid, String docId)>
       onCloudDeletionTriggers = [];
   @override
   void addOnCloudDeletionTrigger(

@@ -12,9 +12,17 @@ dependencies:
     sdk: flutter
   lasotuvi_domain:
     path: ../lasotuvi_domain
+  tuvi_domain:
+    path: ../tuvi_domain
   sqflite: ^2.2.8+2
+
   tauari_data_core:
     path: ../tauari_data_core
+  tauari_sqflite:
+    path: ../tauari_sqflite
+  tauari_firebase:
+    path: ../tauari_firebase
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:

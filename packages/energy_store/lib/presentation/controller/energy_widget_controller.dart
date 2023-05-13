@@ -19,10 +19,18 @@ class EnergyWidgetController extends ChangeNotifier {
       return Stream.value(const Energy(0));
     }
     _streamController = StreamController<Energy>.broadcast();
+    listen(uid);
+    return _streamController!.stream;
+  }
+
+  void listen(String? uid) {
     _subscription = onEnergy(uid).listen((event) {
       _streamController?.add(event);
     });
-    return _streamController!.stream;
+  }
+
+  Future<void> stopListening() async {
+    await _subscription?.cancel();
   }
 
   @override

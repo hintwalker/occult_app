@@ -39,10 +39,6 @@ class _AppBarTrailingState extends ConsumerState<AppBarTrailing> {
     });
   }
 
-  void stopListening() {
-    _streamSubscription?.pause();
-  }
-
   @override
   void dispose() {
     if (kDebugMode) {
@@ -55,11 +51,14 @@ class _AppBarTrailingState extends ConsumerState<AppBarTrailing> {
   @override
   Widget build(BuildContext context) {
     final controller = ref.watch(energyWidgetControllerProvider);
-    return LiveEnergyWidget(
-      iconColor: lightColorScheme.primary,
-      textStyle: TextStyle(color: lightColorScheme.primary),
-      controller: controller,
-      uid: uid,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: LiveEnergyWidget(
+        iconColor: lightColorScheme.primary,
+        textStyle: TextStyle(color: lightColorScheme.primary),
+        controller: controller,
+        uid: uid,
+      ),
     );
   }
 }
