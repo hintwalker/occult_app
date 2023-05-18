@@ -28,7 +28,7 @@ ServiceDefinitions.json
 xcuserdata/
 
 local.properties
-keystore.properties
+**/**/keystore.properties
 .gradle/
 gradlew
 gradlew.bat

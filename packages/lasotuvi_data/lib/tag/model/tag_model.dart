@@ -1,6 +1,6 @@
 part of lasotuvi_data;
 
-class TagModel extends SyncableModel<TagModel, Tag> {
+class TagModel extends SyncableModel<Tag> {
   TagModel(
     super.id, {
     required this.title,

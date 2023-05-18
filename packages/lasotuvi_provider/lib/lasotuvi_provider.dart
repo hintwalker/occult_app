@@ -11,12 +11,30 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_data/lasotuvi_data.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tauari_auth/tauari_auth.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_drawer/tauari_drawer.dart';
 import 'package:tauari_firebase/tauari_firebase.dart';
 import 'package:tauari_purchase/tauari_purchase.dart';
+import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_utils/tauari_utils.dart';
+
+part 'drawer/main_drawer_controller_provider.dart';
+part 'subscription/usecase/update_current_sub_provider.dart';
+part 'subscription/usecase/on_current_sub_provider.dart';
+part 'subscription/usecase/take_current_sub_provider.dart';
+part 'subscription/repository/current_sub_repository_provider.dart';
+part 'subscription/data_source/current_sub_data_source_provider.dart';
+part 'subscription/controller/expired_timer_controller_provider.dart';
+part 'subscription/controller/current_sub_controller_provider.dart';
+
+part 'storage_plan/usecase/take_storage_plan_by_id_provider.dart';
+part 'storage_plan/usecase/take_all_storage_plans_provider.dart';
+part 'storage_plan/repository/storage_plan_repository_provider.dart';
+part 'storage_plan/data_source/storage_plan_data_source_provider.dart';
+part 'storage_plan/controller/storage_plan_list_controller_provider.dart';
 
 part 'chart/dao/chart_dao_provider.dart';
 part 'chart/data_source/firebase_chart_data_source_provider.dart';

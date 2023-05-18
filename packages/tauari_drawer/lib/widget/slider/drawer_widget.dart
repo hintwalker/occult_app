@@ -50,7 +50,7 @@ class _MyWidgetState extends State<DrawerWidget> with TickerProviderStateMixin {
           onMenuTap: _onMenuTap,
           style: widget.style,
           selectedId: screenId,
-          animationController: animationController!,
+          // animationController: animationController!,
         ),
         animationDuration: 250,
         sliderBoxShadow: SliderBoxShadow(color: widget.style.boxShadowColor),

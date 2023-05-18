@@ -11,3 +11,9 @@ import 'package:go_router/go_router.dart';
 
 part 'tauari_app.dart';
 part 'entry_point.dart';
+part 'provider/router_provider.dart';
+part 'fade_transition_page.dart';
+part 'restorable_app.dart';
+part 'restorable_state.dart';
+part 'app_state.dart';
+part 'provider/restorable_state_provider.dart';

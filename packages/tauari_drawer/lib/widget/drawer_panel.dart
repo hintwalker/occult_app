@@ -8,14 +8,14 @@ class DrawerPanel extends StatelessWidget {
     required this.onMenuTap,
     required this.selectedId,
     required this.style,
-    required this.animationController,
+    // required this.animationController,
   });
   final Widget header;
   final Iterable<DrawerData> menus;
   final void Function(DrawerData) onMenuTap;
   final String selectedId;
   final DrawerStyle style;
-  final AnimationController animationController;
+  // final AnimationController animationController;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class DrawerPanel extends StatelessWidget {
                   style: style,
                   selected: () => selectedId == e.id,
                   onTap: () => onMenuTap(e),
-                  animationController: animationController,
+                  // animationController: animationController,
                 ))
             .toList()
       ],

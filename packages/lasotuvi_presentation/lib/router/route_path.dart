@@ -30,6 +30,10 @@ class RoutePath {
 
   static const verifyUser = '/verifyUser';
 
-  static var market = '/market';
-  static var energyMarket = '/energyMarket';
+  static const market = '/market';
+  static const energyMarket = '/energyMarket';
+
+  static const storagePlanMarket = '/storagePlanMarket';
+
+  static const home = '/home';
 }

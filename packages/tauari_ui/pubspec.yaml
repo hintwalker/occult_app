@@ -1,7 +1,7 @@
 name: tauari_ui
-description: A new Flutter package project.
+description: Base ui classes for all kinds of tauari app.
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
   sdk: '>=2.19.6 <3.0.0'

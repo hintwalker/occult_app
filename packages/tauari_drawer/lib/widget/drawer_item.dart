@@ -7,13 +7,13 @@ class DrawerItem extends StatelessWidget {
     required this.onTap,
     required this.selected,
     required this.style,
-    required this.animationController,
+    // required this.animationController,
   });
   final DrawerData data;
   final void Function() onTap;
   final bool Function() selected;
   final DrawerStyle style;
-  final AnimationController animationController;
+  // final AnimationController animationController;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class DrawerItem extends StatelessWidget {
             ),
             DrawerItemHighlight(
               visible: selected,
-              animationController: animationController,
+              // animationController: animationController,
               style: style,
             )
           ],

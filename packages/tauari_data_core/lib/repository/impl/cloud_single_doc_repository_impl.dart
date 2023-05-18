@@ -1,7 +1,7 @@
 part of tauari_data_core;
 
-class CloudSingleDocRepositoryImpl<E extends CloudStorable,
-    M extends CloudModel> implements CloudSingleDocRepository<E> {
+class CloudSingleDocRepositoryImpl<E extends CloudGetable, M extends CloudModel>
+    implements CloudSingleDocRepository<E> {
   final CloudSingleDocDataSource dataSource;
   final M Function(E) entityToModel;
 

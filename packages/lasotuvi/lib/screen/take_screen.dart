@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi/screen/energy_market_screen.dart';
-import 'package:lasotuvi/screen/home_screen.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
+import 'energy_market.dart';
+import 'home.dart';
+import 'storage_plan_market.dart';
+import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
+    show DrawerIds;
 
 Widget takeScreen(String screenId) {
   switch (screenId) {
@@ -9,6 +11,8 @@ Widget takeScreen(String screenId) {
       return const HomeScreen();
     case DrawerIds.energyMarket:
       return const EnergyMarketScreen();
+    case DrawerIds.storagePlanMarket:
+      return const StoragePlanMarketScreen();
     default:
       return const HomeScreen();
   }

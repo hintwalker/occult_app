@@ -115,3 +115,12 @@ Thêm nội dung sau vào phần android
 ## Build app bundle
 
 `flutter build appbundle`
+
+## Versions working
+```
+kotlin_version = '1.7.10'
+classpath 'com.android.tools.build:gradle:7.3.1'
+classpath 'com.google.gms:google-services:4.3.15'
+gradle-7.4-all.zip
+ndkVersion "25.2.9519653"
+``

@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-abstract class SyncableModel<M, E extends SyncableEntity>
+abstract class SyncableModel<E extends SyncableEntity>
     implements LocalModel<E>, CloudModel<E> {
   const SyncableModel(this.id, {this.syncStatus, this.storageState});
   final int id;

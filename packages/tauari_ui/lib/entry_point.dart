@@ -15,12 +15,15 @@ class EntryPoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EasyLocalization(
-      supportedLocales: supportedLocales,
-      path: translationPath,
-      fallbackLocale: const Locale('vi'),
-      startLocale: startLocale,
-      child: child,
+    return RestorationScope(
+      restorationId: 'root',
+      child: EasyLocalization(
+        supportedLocales: supportedLocales,
+        path: translationPath,
+        fallbackLocale: const Locale('vi'),
+        startLocale: startLocale,
+        child: child,
+      ),
     );
   }
 }

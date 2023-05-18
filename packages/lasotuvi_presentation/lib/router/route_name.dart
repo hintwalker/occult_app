@@ -27,4 +27,8 @@ class RouteName {
   static const checkboxTagList = 'checkboxTagList';
 
   static const market = 'market';
+
+  static const storagePlanMarket = 'storagePlanMarket';
+
+  static const home = 'home';
 }

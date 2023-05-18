@@ -1,6 +1,6 @@
 part of lasotuvi_data;
 
-class ChartModel extends SyncableModel<ChartModel, Chart> {
+class ChartModel extends SyncableModel<Chart> {
   final String name;
   final int gender;
   final int birthday;

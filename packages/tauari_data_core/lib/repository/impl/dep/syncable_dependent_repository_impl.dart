@@ -2,7 +2,7 @@ part of tauari_data_core;
 
 abstract class SyncableDependentRepositoryImpl<
         E extends SyncableEntity,
-        M extends SyncableModel<M, E>,
+        M extends SyncableModel<E>,
         O extends SyncableEntity> extends SyncableRepositoryImpl<E, M>
     implements SyncableDependentRepository<E, O> {
   SyncableDependentRepositoryImpl({

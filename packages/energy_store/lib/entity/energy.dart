@@ -1,6 +1,6 @@
 part of energy_store;
 
-class Energy implements CloudStorable {
+class Energy implements CloudStorable, Dumpable {
   final int value;
   const Energy(this.value);
 

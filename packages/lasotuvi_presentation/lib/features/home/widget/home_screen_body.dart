@@ -7,34 +7,34 @@ class HomeScreenBody extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenBodyState();
 }
 
-class _HomeScreenBodyState extends ConsumerState<HomeScreenBody> {
-  StreamSubscription? _streamSubscription;
-  String? uid;
-  @override
-  void initState() {
-    super.initState();
-    startListening();
-  }
+class _HomeScreenBodyState extends AuthDependedState<HomeScreenBody> {
+  // StreamSubscription? _streamSubscription;
+  // String? uid;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   startListening();
+  // }
 
-  void startListening() {
-    _streamSubscription =
-        ref.read(registerOnAuthStateChangedProvider).call((user) {
-      setState(() {
-        uid = user.uidInFirestore;
-      });
-      return user.uidInFirestore;
-    }, () {
-      setState(() {
-        uid = null;
-      });
-    });
-  }
+  // void startListening() {
+  //   _streamSubscription =
+  //       ref.read(registerOnAuthStateChangedProvider).call((user) {
+  //     setState(() {
+  //       uid = user.uidInFirestore;
+  //     });
+  //     return user.uidInFirestore;
+  //   }, () {
+  //     setState(() {
+  //       uid = null;
+  //     });
+  //   });
+  // }
 
-  @override
-  void dispose() {
-    _streamSubscription?.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _streamSubscription?.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,10 @@ class _HomeScreenBodyState extends ConsumerState<HomeScreenBody> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          CurrentSubWidgetContainer(
+            uid: uid,
+            translate: translate,
+          ),
           SizedBox(
             height: 200.0,
             child: HorizontalChartList(

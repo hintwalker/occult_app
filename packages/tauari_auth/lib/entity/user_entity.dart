@@ -1,6 +1,6 @@
 part of tauari_auth;
 
-class UserEntity implements CloudStorable {
+class UserEntity implements CloudStorable, Dumpable {
   final String? id;
   final String? displayName;
   final String? photoUrl;

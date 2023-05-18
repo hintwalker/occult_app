@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   energy_store:
     path: ../energy_store
+  lasotuvi_storage_plan:
+    path: ../lasotuvi_storage_plan
   lasotuvi_domain:
     path: ../lasotuvi_domain
   lasotuvi_provider:
@@ -24,6 +26,15 @@ dependencies:
     path: ../tauari_drawer
   tauari_translate:
     path: ../tauari_translate
+  tauari_subscription:
+    path: ../tauari_subscription
+  tauari_utils:
+    path: ../tauari_utils
+  tauari_ui:
+    path: ../tauari_ui
+  tuvi_style:
+    path: ../tuvi_style
+
   flutter_riverpod: ^2.3.6
   go_router: ^7.0.0
 

@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-class OnCountEveryWhere<R extends SyncableRepository> {
+abstract class OnCountEveryWhere<R extends SyncableRepository> {
   const OnCountEveryWhere(this.repository);
   final R repository;
   Stream<int> call(String? uid) {

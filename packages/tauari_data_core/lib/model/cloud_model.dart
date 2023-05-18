@@ -1,7 +1,8 @@
 part of tauari_data_core;
 
-abstract class CloudModel<T> extends Model implements CloudStorable {
-  T toEntity();
+abstract class CloudModel<E> extends Model implements CloudStorable {
+  const CloudModel();
+  E toEntity();
 
   // @override
   // bool operator ==(Object? other) =>

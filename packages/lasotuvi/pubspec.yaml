@@ -44,6 +44,10 @@ dependencies:
     path: ../tauari_sqflite
   tauari_translate:
     path: ../tauari_translate
+  tauari_drawer:
+    path: ../tauari_drawer
+  tuvi_style:
+    path: ../tuvi_style
 
 
   # The following adds the Cupertino Icons font to your application.

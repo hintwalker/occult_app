@@ -16,9 +16,13 @@ dependencies:
     path: ../lasotuvi_data
   lasotuvi_chart:
     path: ../lasotuvi_chart
+  lasotuvi_storage_plan:
+    path: ../lasotuvi_storage_plan
 
   tuvi_domain:
     path: ../tuvi_domain
+  tauari_drawer:
+    path: ../tauari_drawer
   tauari_purchase:
     path: ../tauari_purchase
   tauari_firebase:
@@ -29,6 +33,8 @@ dependencies:
     path: ../tauari_auth
   tauari_utils:
     path: ../tauari_utils
+  tauari_subscription:
+    path: ../tauari_subscription
   energy_store:
     path: ../energy_store
   in_app_purchase: ^3.1.5

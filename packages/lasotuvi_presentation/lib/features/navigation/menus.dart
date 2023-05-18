@@ -9,4 +9,8 @@ final menus = [
       id: DrawerIds.energyMarket,
       title: translate('energyMarket'),
       icon: const Icon(Icons.water_drop)),
+  DrawerData(
+      id: DrawerIds.storagePlanMarket,
+      title: translate('storagePlanMarket'),
+      icon: const Icon(Icons.subscriptions))
 ];

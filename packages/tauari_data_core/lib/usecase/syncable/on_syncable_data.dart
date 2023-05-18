@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-class OnSyncableData<T extends SyncableEntity> {
+abstract class OnSyncableData<T extends SyncableEntity> {
   final SyncableRepository<T> repository;
   const OnSyncableData(this.repository);
 

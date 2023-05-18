@@ -11,4 +11,6 @@ part 'widget/drawer_item_header.dart';
 part 'widget/drawer_panel.dart';
 part 'widget/drawer_item.dart';
 part 'widget/slider/drawer_widget.dart';
+part 'widget/slider/drawer_scaffold.dart';
 part 'drawer_data.dart';
+part 'controller/tauari_drawer_controller.dart';

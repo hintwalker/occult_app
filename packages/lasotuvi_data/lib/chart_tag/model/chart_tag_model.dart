@@ -1,6 +1,6 @@
 part of lasotuvi_data;
 
-class ChartTagModel extends SyncableModel<ChartTagModel, ChartTag> {
+class ChartTagModel extends SyncableModel<ChartTag> {
   final int chartId;
   final int tagId;
 

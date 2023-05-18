@@ -1,7 +1,7 @@
 part of lasotuvi_data;
 
 class ChartTagRepositoryImpl
-    extends RelSyncableRepositoryImpl<ChartTag, ChartTagModel, Chart, Tag>
+    extends SyncableRelRepositoryImpl<ChartTag, ChartTagModel, Chart, Tag>
     implements ChartTagRepository {
   // final ChartRepository chartRepository;
   // final TagRepository tagRepository;

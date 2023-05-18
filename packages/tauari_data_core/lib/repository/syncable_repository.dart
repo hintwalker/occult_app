@@ -1,26 +1,26 @@
 part of tauari_data_core;
 
-abstract class SyncableRepository<T extends SyncableEntity>
-    implements EntityRepository<T> {
+abstract class SyncableRepository<E extends SyncableEntity>
+    implements EntityRepository<E> {
   const SyncableRepository({
     required this.localRepository,
     required this.cloudRepository,
   });
-  final CloudRepository<T> cloudRepository;
-  final LocalRepository<T> localRepository;
-  Future<bool> upload(String uid, T item);
-  Future<int> download(String uid, T item);
-  Stream<Iterable<T>> onEveryWhere(String? uid, [QueryArgs? queryArgs]);
+  final CloudRepository<E> cloudRepository;
+  final LocalRepository<E> localRepository;
+  Future<bool> upload(String uid, E item);
+  Future<int> download(String uid, E item);
+  Stream<Iterable<E>> onEveryWhere(String? uid, [QueryArgs? queryArgs]);
   Stream<int> onCountEveryWhere(String? uid);
-  Stream<T?> onById({String? uid, required int docId});
-  Future<T?> byId({String? uid, required int docId});
-  Iterable<E> mergeCloudToLocal<E extends Syncable>({
+  Stream<E?> onById({String? uid, required int docId});
+  Future<E?> byId({String? uid, required int docId});
+  Iterable<T> mergeCloudToLocal<T extends Syncable>({
     required String uid,
-    required Iterable<E> local,
-    required Iterable<E> cloud,
+    required Iterable<T> local,
+    required Iterable<T> cloud,
   });
-  Future<Iterable<T>> dataEveryWhere(String? uid, [QueryArgs? queryArgs]);
+  Future<Iterable<E>> dataEveryWhere(String? uid, [QueryArgs? queryArgs]);
   Future<bool> sync(String? uid);
-  Future<void> update(T item, String? uid);
-  Future<void> deleteEveryWhere(String? uid, T item);
+  Future<void> update(E item, String? uid);
+  Future<void> deleteEveryWhere(String? uid, E item);
 }

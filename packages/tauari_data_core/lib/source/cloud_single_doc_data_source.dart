@@ -6,8 +6,8 @@ abstract class CloudSingleDocDataSource<T extends CloudModel>
   final T? Function(dynamic) itemMapper;
   String get docId;
 
-  const CloudSingleDocDataSource({
-    required this.service,
+  const CloudSingleDocDataSource(
+    this.service, {
     required this.itemMapper,
   });
 

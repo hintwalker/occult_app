@@ -50,7 +50,9 @@ class EnergyStoreController extends ChangeNotifier {
 
   Future<List<ProductDetails>> _loadProducts() async {
     final response = await queryProductDetails(productIds);
-    return response.productDetails;
+    final result = response.productDetails;
+    result.sort((a, b) => a.rawPrice.compareTo(b.rawPrice));
+    return result;
   }
 
   // Future<Energy> _loadCurrentEnergy() async {

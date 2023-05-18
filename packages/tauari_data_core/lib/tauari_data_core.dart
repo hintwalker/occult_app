@@ -22,12 +22,12 @@ part 'usecase/local/delete_from_local.dart';
 
 part 'entity/entity.dart';
 part 'entity/sortable.dart';
-part 'entity/cloud_storable.dart';
+part 'model/cloud_storable.dart';
 part 'entity/cloud_getable.dart';
 part 'entity/statable.dart';
 part 'entity/syncable.dart';
 part 'entity/sqlite_getable.dart';
-part 'entity/sqlite_storable.dart';
+part 'model/sqlite_storable.dart';
 part 'entity/dumpable.dart';
 part 'entity/set_of_entity.dart';
 part 'entity/syncable_entity.dart';
@@ -49,6 +49,8 @@ part 'dao/dao.dart';
 part 'service/cloud_service.dart';
 part 'constant/column_names.dart';
 part 'db/local_database.dart';
+
+part 'repository/read_only_cloud_repository.dart';
 part 'repository/entity_repository.dart';
 part 'repository/cloud_repository.dart';
 part 'repository/local_repository.dart';
@@ -61,15 +63,16 @@ part 'repository/dep/cloud_dependent_repository.dart';
 part 'repository/impl/syncable_repository_impl.dart';
 part 'repository/impl/local_repository_impl.dart';
 part 'repository/impl/cloud_repository_impl.dart';
+part 'repository/impl/read_only_cloud_repository_impl.dart';
 part 'repository/impl/cloud_single_doc_repository_impl.dart';
 part 'repository/impl/rel/local_rel_repository_impl.dart';
 part 'repository/impl/rel/cloud_rel_repository_impl.dart';
-part 'repository/impl/rel/rel_syncable_repository_impl.dart';
+part 'repository/impl/rel/syncable_rel_repository_impl.dart';
 part 'repository/impl/dep/local_dependent_repository_impl.dart';
 part 'repository/impl/dep/cloud_dependent_repository_impl.dart';
 part 'repository/impl/dep/syncable_dependent_repository_impl.dart';
 
-part 'repository/rel/rel_syncable_repository.dart';
+part 'repository/rel/syncable_rel_repository.dart';
 part 'repository/rel/local_rel_repository.dart';
 part 'repository/rel/cloud_rel_repository.dart';
 

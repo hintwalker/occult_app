@@ -9,8 +9,8 @@ class EnergyIcon extends StatelessWidget {
     return Image.asset(
       'assets/icons/water_ec.png',
       package: 'energy_store',
-      width: 24,
-      height: 24,
+      width: 20,
+      height: 20,
       color: color,
     );
   }

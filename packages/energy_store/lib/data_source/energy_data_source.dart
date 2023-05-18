@@ -1,7 +1,7 @@
 part of energy_store;
 
 class EnergyDataSource extends CloudSingleDocDataSource<EnergyModel> {
-  EnergyDataSource({required super.service})
+  EnergyDataSource(super.service)
       : super(
           itemMapper: (snapshot) => snapshotToModel(snapshot,
               fromMap: EnergyModel.fromMap, idIsString: true),

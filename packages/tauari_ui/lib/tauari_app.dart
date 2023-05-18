@@ -3,11 +3,11 @@ part of tauari_ui;
 class TauariApp extends ConsumerWidget {
   const TauariApp({
     super.key,
-    required this.routerProvider,
+    // required this.routerProvider,
     required this.title,
     required this.theme,
   });
-  final AutoDisposeProvider<GoRouter> routerProvider;
+  // final AutoDisposeProvider<GoRouter> routerProvider;
   final String title;
   final ThemeData theme;
 
@@ -25,6 +25,7 @@ class TauariApp extends ConsumerWidget {
     ));
 
     return MaterialApp.router(
+      restorationScopeId: 'app',
       routerConfig: router,
       title: title,
       debugShowCheckedModeBanner: false,

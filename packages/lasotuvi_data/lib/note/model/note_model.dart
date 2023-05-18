@@ -1,6 +1,6 @@
 part of lasotuvi_data;
 
-class NoteModel extends SyncableModel<NoteModel, Note> {
+class NoteModel extends SyncableModel<Note> {
   NoteModel(
     super.id, {
     required this.title,
