@@ -22,10 +22,16 @@ import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_utils/tauari_utils.dart';
 
 part 'drawer/main_drawer_controller_provider.dart';
+
+part 'subscription/usecase/extends_subscription_provider.dart';
+part 'subscription/usecase/unsubscribe_plan_provider.dart';
+part 'subscription/usecase/subscribe_plan_provider.dart';
 part 'subscription/usecase/update_current_sub_provider.dart';
 part 'subscription/usecase/on_current_sub_provider.dart';
 part 'subscription/usecase/take_current_sub_provider.dart';
+part 'subscription/repository/subscription_repository_provider.dart';
 part 'subscription/repository/current_sub_repository_provider.dart';
+part 'subscription/data_source/subscription_data_source_provider.dart';
 part 'subscription/data_source/current_sub_data_source_provider.dart';
 part 'subscription/controller/expired_timer_controller_provider.dart';
 part 'subscription/controller/current_sub_controller_provider.dart';
@@ -52,6 +58,7 @@ part 'user/set_user_provider.dart';
 part 'user/user_repository_provider.dart';
 part 'user/setup_init_user_provider.dart';
 
+part 'auth/usecase/take_current_user_provider.dart';
 part 'auth/auth_notifier_provider.dart';
 part 'auth/auth_data_source_provider.dart';
 part 'auth/auth_repository_provider.dart';

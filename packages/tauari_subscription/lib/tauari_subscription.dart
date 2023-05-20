@@ -25,6 +25,8 @@ part 'widget/timer_display_widget.dart';
 part 'controller/current_sub_controller.dart';
 part 'controller/expired_timer_controller.dart';
 
+part 'usecase/extends_subscription.dart';
+part 'usecase/unsubscribe_plan.dart';
 part 'usecase/subscribe_plan.dart';
 part 'usecase/on_current_sub.dart';
 part 'usecase/take_current_sub.dart';

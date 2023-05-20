@@ -42,7 +42,7 @@ class StoragePlanInfoWidget extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         decoration: BoxDecoration(
-                          color: style.infoBackgroundColor,
+                          // color: style.infoBackgroundColor,
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                         child: Row(children: [
@@ -51,7 +51,7 @@ class StoragePlanInfoWidget extends StatelessWidget {
                             width: 8.0,
                           ),
                           energyIcon,
-                          Text('${data.energy} /${translate('day')}')
+                          Text('${data.energy} /30 ${translate('day')}')
                         ]),
                       )
                     ],

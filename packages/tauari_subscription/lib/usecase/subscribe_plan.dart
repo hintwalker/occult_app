@@ -14,6 +14,7 @@ class SubscribePlan {
       return;
     }
     await subscriptionRepository.insert(uid, subscription);
-    await currentSubscriptionRepository.update(uid, subscription);
+    await currentSubscriptionRepository.update(
+        uid, subscription.copyWith(id: 0));
   }
 }

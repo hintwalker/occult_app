@@ -16,7 +16,7 @@ class RouteName {
   static const allTags = 'allTags';
 
   static const tagView = 'tagView';
-  static const energyMarket = 'energyMarket';
+  static const energyMarket = DrawerIds.energyMarket;
 
   // static const noteView = 'noteView';
 
@@ -28,7 +28,7 @@ class RouteName {
 
   static const market = 'market';
 
-  static const storagePlanMarket = 'storagePlanMarket';
+  static const storagePlanMarket = DrawerIds.storagePlanMarket;
 
-  static const home = 'home';
+  static const home = DrawerIds.home;
 }

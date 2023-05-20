@@ -25,6 +25,7 @@ class TimerDisplayContainer extends StatefulWidget {
 }
 
 class _TimerDisplayContainerState extends State<TimerDisplayContainer> {
+  int days = 0;
   int hours = 0;
   int minutes = 0;
   int seconds = 0;
@@ -37,11 +38,14 @@ class _TimerDisplayContainerState extends State<TimerDisplayContainer> {
   }
 
   void listen() {
-    setState(() {
-      hours = widget.controller.hours;
-      minutes = widget.controller.minutes;
-      seconds = widget.controller.seconds;
-    });
+    if (mounted) {
+      setState(() {
+        days = widget.controller.days;
+        hours = widget.controller.hours;
+        minutes = widget.controller.minutes;
+        seconds = widget.controller.seconds;
+      });
+    }
   }
 
   void startTimer() {
@@ -58,7 +62,7 @@ class _TimerDisplayContainerState extends State<TimerDisplayContainer> {
 
   @override
   void dispose() {
-    widget.controller.dispose();
+    widget.controller.cancelAllTimer();
     super.dispose();
   }
 
@@ -84,7 +88,8 @@ class _TimerDisplayContainerState extends State<TimerDisplayContainer> {
         : widget.subscription!.status == SubscriptionStatus.canceled
             ? CanceledPreviousAlert(widget.subscription!,
                 translate: widget.translate)
-            : ExpiredTimerWidget(
+            : TimerDisplayWidget(
+                days: days,
                 hours: hours,
                 minutes: minutes,
                 seconds: seconds,

@@ -3,17 +3,23 @@ import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
     show StoragePlanScreenBody;
 
 class StoragePlanMarketScreen extends StatelessWidget {
-  const StoragePlanMarketScreen({super.key});
+  const StoragePlanMarketScreen({
+    super.key,
+    this.restorationId,
+  });
+  final String? restorationId;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        Placeholder(
-          fallbackHeight: 50.0,
-        ),
-        Expanded(child: StoragePlanScreenBody())
-      ],
-    );
+    return RestorationScope(
+        restorationId: restorationId,
+        child: Column(
+          children: const [
+            Placeholder(
+              fallbackHeight: 50.0,
+            ),
+            Expanded(child: StoragePlanScreenBody())
+          ],
+        ));
   }
 }

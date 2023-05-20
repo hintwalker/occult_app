@@ -10,6 +10,12 @@ class StoragePlanScreenBody extends ConsumerStatefulWidget {
 
 class _StoragePlanScreenBodyState
     extends AuthDependedState<StoragePlanScreenBody> {
+  // @override
+  // void dispose() {
+  //   ref.read(expiredTimerControllerProvider).cancelAllTimer();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -27,22 +33,20 @@ class _StoragePlanScreenBodyState
                     ? StoragePlanIds.free
                     : data.packageId;
             final previousId = data?.packageId;
+            final style = StoragePlanStyleImpl();
 
             return LiveStoragePlanListWidget(
-                uid: uid,
-                activedPlanId: activedId,
-                previousPlanId: previousId,
-                controller: ref.read(storagePlanListControllerProvider),
-                translate: translate,
-                energyIcon: EnergyIcon(color: lightColorScheme.primary),
-                style: StoragePlanStyleImpl(),
-                timer: TimerDisplayContainer(
-                  data,
-                  translate: translate,
-                  style: ExpiredTimerStyle(),
-                  controller: ref.read(expiredTimerControllerProvider),
-                  uid: uid,
-                ));
+              uid: uid,
+              activedPlanId: activedId,
+              previousPlanId: previousId,
+              controller: ref.read(storagePlanListControllerProvider),
+              translate: translate,
+              energyIcon: EnergyIcon(
+                  color: lightColorScheme.primary, size: style.energyIconSize),
+              style: style,
+              expiredTimerController: ref.read(expiredTimerControllerProvider),
+              currentSubController: ref.read(currentSubControllerProvider),
+            );
           } else {
             return const Center(child: SimpleErrorWidget());
           }

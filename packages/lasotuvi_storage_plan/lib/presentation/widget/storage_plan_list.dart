@@ -10,7 +10,10 @@ class StoragePlanList extends StatelessWidget {
     required this.translate,
     required this.energyIcon,
     required this.style,
-    required this.timer,
+    required this.expiredTimerController,
+    required this.subscription,
+    required this.controller,
+    // this.uid,
   });
   final Iterable<StoragePlan> plans;
   final String? activedPlanId;
@@ -19,7 +22,11 @@ class StoragePlanList extends StatelessWidget {
   final String Function(String) translate;
   final Widget energyIcon;
   final StoragePlanStyle style;
-  final Widget timer;
+  final ExpiredTimerController expiredTimerController;
+  final StoragePlanListController controller;
+  final Subscription subscription;
+  // final String? uid;
+  // final Widget timer;
 
   bool isRegistered(String docId) => activedPlanId == docId;
   bool shouldDisplayPrevious(String docId) =>
@@ -38,8 +45,12 @@ class StoragePlanList extends StatelessWidget {
             onItemTap: onRegister,
             translate: translate,
             energyIcon: energyIcon,
-            timer: isRegistered(docId) ? timer : null,
+            timer: expiredTimerController, //isRegistered(docId) ? timer : null,
             shouldDisplayPrevious: shouldDisplayPrevious(docId),
+            style: style,
+            subscription: subscription,
+            controller: controller,
+            // uid: uid,
           );
         });
     // return FutureBuilder(

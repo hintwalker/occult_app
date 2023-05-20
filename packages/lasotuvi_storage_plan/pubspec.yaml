@@ -16,6 +16,12 @@ dependencies:
     path: ../tauari_firebase
   tauari_utils:
     path: ../tauari_utils
+  tauari_subscription:
+    path: ../tauari_subscription
+  tauari_ui:
+    path: ../tauari_ui
+  tauari_auth:
+    path: ../tauari_auth
 
 dev_dependencies:
   flutter_test:

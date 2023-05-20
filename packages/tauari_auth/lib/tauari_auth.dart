@@ -37,3 +37,4 @@ part 'usecases/set_user.dart';
 part 'usecases/setup_init_user.dart';
 part 'usecases/sign_in_with_google.dart';
 part 'usecases/sign_out.dart';
+part 'usecases/take_current_user.dart';

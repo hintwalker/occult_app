@@ -27,7 +27,7 @@ class Subscription implements CloudGetable, Dumpable {
   factory Subscription.free() {
     final begin = DateTime(2023, 1, 1);
     return Subscription(
-        id: begin.millisecondsSinceEpoch,
+        id: 0,
         packageId: '0',
         beginDate: begin,
         expiredDate: DateTime(2025, 12, 31),
@@ -104,4 +104,8 @@ class Subscription implements CloudGetable, Dumpable {
 
   @override
   int get hashCode => Object.hash(id, expiredDate);
+
+  Subscription extendExpiredDate(Duration duration) {
+    return copyWith(expiredDate: expiredDate.add(duration));
+  }
 }

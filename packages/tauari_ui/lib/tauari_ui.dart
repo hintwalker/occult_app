@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+part 'date_time_widget.dart';
+part 'duration_widget.dart';
 part 'tauari_app.dart';
 part 'entry_point.dart';
 part 'provider/router_provider.dart';

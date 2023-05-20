@@ -1,8 +1,9 @@
 part of tauari_subscription;
 
-class ExpiredTimerWidget extends StatelessWidget {
-  const ExpiredTimerWidget({
+class TimerDisplayWidget extends StatelessWidget {
+  const TimerDisplayWidget({
     super.key,
+    required this.days,
     required this.hours,
     required this.minutes,
     required this.seconds,
@@ -11,6 +12,7 @@ class ExpiredTimerWidget extends StatelessWidget {
     required this.translate,
     required this.currentSub,
   });
+  final int days;
   final int hours;
   final int minutes;
   final int seconds;
@@ -26,19 +28,24 @@ class ExpiredTimerWidget extends StatelessWidget {
           ? const CircularProgressIndicator()
           : status == SubscriptionStatus.actived
               ? ActivedWidget(
+                  days: days,
                   hours: hours,
                   minutes: minutes,
                   seconds: seconds,
                   status: status,
                   style: style,
+                  translate: translate,
                 )
               : status == SubscriptionStatus.expired
                   ? ExpiredWidget(
+                      days: days,
                       hours: hours,
                       minutes: minutes,
                       seconds: seconds,
                       status: status,
-                      style: style)
+                      style: style,
+                      translate: translate,
+                    )
                   : CanceledWidget(style: style, translate: translate),
     );
   }

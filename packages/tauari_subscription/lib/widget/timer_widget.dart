@@ -3,17 +3,21 @@ part of tauari_subscription;
 class ExpiredWidget extends StatelessWidget {
   const ExpiredWidget({
     super.key,
+    required this.days,
     required this.hours,
     required this.minutes,
     required this.seconds,
     required this.status,
     required this.style,
+    required this.translate,
   });
+  final int days;
   final int hours;
   final int minutes;
   final int seconds;
   final String? status;
   final ExpiredTimerStyle style;
+  final String Function(String) translate;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +33,7 @@ class ExpiredWidget extends StatelessWidget {
         const SizedBox(
           width: 8.0,
         ),
-        Text('$hours : $minutes : $seconds',
+        Text('$days ${translate('days')} $hours : $minutes : $seconds',
             style: TextStyle(color: style.expiredTextColor))
       ]),
     );

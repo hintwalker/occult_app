@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lasotuvi/screen/storage_plan_market.dart';
 // import 'package:lasotuvi/screen/take_screen.dart';
 // import 'package:lasotuvi/screen/chart/all_charts_screen.dart';
 // import 'package:lasotuvi/screen/chart/chart_creation_screen.dart';
@@ -53,6 +54,15 @@ class LasotuviRoutes {
               path: RoutePath.energyMarket,
               pageBuilder: (context, state) => const FadeTransitionPage(
                     child: EnergyMarketScreen(
+                      restorationId: 'energyMarket',
+                      // drawerController: mainDrawerController,
+                    ),
+                  )),
+          GoRoute(
+              name: RouteName.storagePlanMarket,
+              path: RoutePath.storagePlanMarket,
+              pageBuilder: (context, state) => const FadeTransitionPage(
+                    child: StoragePlanMarketScreen(
                       restorationId: 'energyMarket',
                       // drawerController: mainDrawerController,
                     ),

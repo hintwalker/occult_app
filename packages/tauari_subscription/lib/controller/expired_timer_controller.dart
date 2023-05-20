@@ -9,7 +9,8 @@ class ExpiredTimerController extends ChangeNotifier {
   Timer? expiredTimer;
   Timer? canceledTimer;
 
-  int get hours => duration.inHours;
+  int get days => duration.inDays;
+  int get hours => duration.inHours % 24;
   int get minutes => duration.inMinutes % 60;
   int get seconds => (duration.inSeconds % 3600) % 60;
 
