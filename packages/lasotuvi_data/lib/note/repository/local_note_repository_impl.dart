@@ -1,7 +1,8 @@
 part of lasotuvi_data;
 
 class LocalNoteRepositoryImpl
-    extends LocalDependentRepositoryImpl<Note, NoteModel, Chart> {
+    extends LocalDependentRepositoryImpl<Note, NoteModel, Chart>
+    implements LocalNoteRepository {
   LocalNoteRepositoryImpl(super.dataSource,
       {required super.ownerIdColumn,
       required super.ownerRepository,

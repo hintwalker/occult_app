@@ -7,19 +7,19 @@ class RoutePath {
   static const chartCreation = '/chart/creation/:${RouterParams.uid}';
   static const chartView =
       '/chart/view/:${RouterParams.uid}/:${RouterParams.chartId}';
-  static const allCharts = '/dashboard/chart/all/:${RouterParams.uid}';
+  static const charts = '/chart/all';
 
-  static const allChartsWithDrawer = '/chart/all/:${RouterParams.uid}';
+  static const chartsWithDrawer = '/chart/all/:${RouterParams.uid}';
 
   static const tagCreation = '/tag/creation/:${RouterParams.uid}';
   static const tagView =
       '/tag/view/:${RouterParams.uid}/:${RouterParams.tagId}';
-  static const allTags = '/tag/all/:${RouterParams.uid}';
+  static const tags = '/tag/all/:${RouterParams.uid}';
 
   // static const noteView =
   //     '/note/view/:${RouterParams.uid}/:${RouterParams.noteId}';
 
-  static const allNotes = '/note/all/:${RouterParams.uid}';
+  static const notes = '/note/all/:${RouterParams.uid}';
 
   static const noteEditor =
       '/note/editor/:${RouterParams.uid}/:${RouterParams.chartId}/:${RouterParams.noteId}';
@@ -36,4 +36,6 @@ class RoutePath {
   static const storagePlanMarket = '/storagePlanMarket';
 
   static const home = '/home';
+
+  static const library = '/library';
 }

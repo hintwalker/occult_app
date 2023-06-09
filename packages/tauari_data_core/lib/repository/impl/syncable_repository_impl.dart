@@ -9,15 +9,15 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   Future<E?> byId({String? uid, required int docId}) async {
     final localItem = await localRepository.byIdOnLocal(docId);
     if (uid == null) {
-      return localItem?.copyWithOnCloud(OnCloudValues.onlyLocal);
+      return localItem?.copyWithSyncStatus(SyncStatus.onlyLocal);
     }
     final cloudItem =
         await cloudRepository.byIdOnCloud(uid: uid, docId: docId.toString());
     if (cloudItem == null) {
-      return localItem?.copyWithOnCloud(OnCloudValues.onlyLocal);
+      return localItem?.copyWithSyncStatus(SyncStatus.onlyLocal);
     }
     if (localItem == null) {
-      return cloudItem.copyWithOnCloud(OnCloudValues.onlyCloud);
+      return cloudItem.copyWithSyncStatus(SyncStatus.onlyCloud);
     }
     return mergeCloudToLocal<E>(
         uid: uid, local: [localItem], cloud: [cloudItem]).first;
@@ -129,7 +129,7 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   Future<bool> sync(String? uid) async {
     final items = await dataEveryWhere(uid);
     final filteredItems =
-        items.where((element) => element.onCloud == OnCloudValues.onlyCloud);
+        items.where((element) => element.getSyncStatus == SyncStatus.onlyCloud);
     for (var item in filteredItems) {
       localRepository.insertToLocal(item);
     }

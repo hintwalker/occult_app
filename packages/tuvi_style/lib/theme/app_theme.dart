@@ -3,7 +3,15 @@ part of tuvi_style;
 class AppTheme {
   static const primaryColor = Color.fromARGB(255, 3, 155, 229);
   static ThemeData light() {
-    return ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: lightColorScheme,
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+        bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+      ),
+    );
     // return ThemeData(
     //     brightness: Brightness.light,
     //     primarySwatch:

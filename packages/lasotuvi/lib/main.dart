@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:lasotuvi_data/lasotuvi_data.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
@@ -22,6 +21,13 @@ import 'package:tuvi_style/tuvi_style.dart';
 import 'firebase_options.dart';
 import 'router/router_provider.dart';
 
+part 'screen/group_stars.widget.dart';
+part 'screen/library.widget.dart';
+part 'screen/charts.widget.dart';
+part 'screen/notes.widget.dart';
+part 'screen/tags.widget.dart';
+part 'screen/books.widget.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -35,7 +41,7 @@ void main() async {
   ]).then((_) => runApp(EntryPoint(
         translationPath: translationPath,
         supportedLocales: supportedLocales,
-        startLocale: Locale(window.locale.languageCode),
+        startLocale: const Locale('vi'),
         child: ProviderScope(
             overrides: [
               localDatabaseProvider.overrideWithValue(localDatabase),
@@ -57,7 +63,8 @@ void main() async {
 Future<void> initTempStorage() async {
   final Directory directory =
       await path_provider.getApplicationDocumentsDirectory();
-  Hive.init(directory.path);
+  // Hive.init(directory.path);
+  await Hive.initFlutter(directory.path);
 }
 
 Future<LocalDatabase<Database>> initLocalDatabase() async {

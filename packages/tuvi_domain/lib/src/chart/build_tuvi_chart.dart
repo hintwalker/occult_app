@@ -3,10 +3,15 @@ part of tuvi_domain;
 TuViChart buildTuViChart({
   required HumanBio humanBio,
   required Sky sky,
-  required StarIterator starIterator,
-  required Map<String, Map<String, Object>> formulas,
+  // required StarIterator starIterator,
+  // required Map<String, Map<String, Object>> formulas,
 }) {
-  final stars = navigateStars(humanBio, starIterator, formulas, sky.stars);
+  final stars = navigateStars(
+      humanBio: humanBio,
+      starIterator: sky.starIterator,
+      formulas: sky.formulas,
+      stars: sky.stars,
+      options: sky.config.options);
   final posOfMenh = navigateMenh(humanBio);
   final posOfThan = navigateThan(humanBio);
   final poses = navigateListHouse(posOfMenh);

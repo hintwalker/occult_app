@@ -62,14 +62,14 @@ class ChartTagModel extends SyncableModel<ChartTag> {
       ColumnChartTag.chartId: chartId,
       ColumnChartTag.tagId: tagId,
       columnState: storageState,
-      columnOnCloud: syncStatus,
+      columnSyncStatus: syncStatus,
     };
   }
 
   @override
   Map<String, Object?> toSqlite() {
     final map = dump();
-    map.remove(columnOnCloud);
+    map.remove(columnSyncStatus);
     map.remove(columnState);
     return map;
   }
@@ -78,7 +78,7 @@ class ChartTagModel extends SyncableModel<ChartTag> {
   Map<String, Object?> toCloud() {
     final map = dump();
     map.remove(columnId);
-    map.remove(columnOnCloud);
+    map.remove(columnSyncStatus);
     return map;
   }
 

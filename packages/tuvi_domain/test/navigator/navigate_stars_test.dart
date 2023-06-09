@@ -17,7 +17,8 @@ void main() {
 
 void testNavigate(HumanBio humanBio) {
   final stars = navigateStars(
-      humanBio, starIteratorMock, starFormulasTranDoan, skyMock.stars);
+      humanBio:humanBio,starIterator: starIteratorMock,formulas:  starFormulas,stars: skyMock.stars,
+      options: SkyConfig.basicOptions);
   for (var star in stars.values) {
     print(star.toString());
   }

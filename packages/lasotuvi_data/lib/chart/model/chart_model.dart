@@ -103,8 +103,9 @@ class ChartModel extends SyncableModel<Chart> {
           : map[ColumnChart.avatar] as String,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
-      syncStatus:
-          map[columnOnCloud] == null ? null : map[columnOnCloud] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
     );
   }
 
@@ -129,7 +130,7 @@ class ChartModel extends SyncableModel<Chart> {
       ColumnChart.lastViewed: lastViewed,
       ColumnChart.avatar: avatar,
       columnState: storageState,
-      columnOnCloud: syncStatus,
+      columnSyncStatus: syncStatus,
     };
   }
 
@@ -143,7 +144,7 @@ class ChartModel extends SyncableModel<Chart> {
   Map<String, Object?> toSqlite() {
     final map = dump();
     map.remove(columnState);
-    map.remove(columnOnCloud);
+    map.remove(columnSyncStatus);
     return map;
   }
 
@@ -151,7 +152,7 @@ class ChartModel extends SyncableModel<Chart> {
   Map<String, Object?> toCloud() {
     final result = toSqlite();
     result.remove(columnId);
-    result.remove(columnOnCloud);
+    result.remove(columnSyncStatus);
     return result;
   }
 }

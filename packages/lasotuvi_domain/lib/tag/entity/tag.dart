@@ -25,8 +25,9 @@ class Tag extends SyncableEntity<Tag> {
           : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
-      syncStatus:
-          map[columnOnCloud] == null ? null : map[columnOnCloud] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
     );
   }
 
@@ -54,12 +55,12 @@ class Tag extends SyncableEntity<Tag> {
       ColumnTag.description: subTitle,
       columnCreated: created.millisecondsSinceEpoch,
       columnState: state,
-      columnOnCloud: onCloud,
+      columnSyncStatus: getSyncStatus,
     };
   }
 
   @override
-  Tag copyWithOnCloud(String? value) {
+  Tag copyWithSyncStatus(String? value) {
     return copyWith(syncStatus: value);
   }
 

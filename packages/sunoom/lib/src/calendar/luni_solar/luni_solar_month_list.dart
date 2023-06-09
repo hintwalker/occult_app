@@ -117,10 +117,8 @@ class LuniSolarMonthList {
       List<LuniSolarMonth> months) {
     final List<LuniSolarMonth> result = [];
     result.addAll(months.sublist(1, months.length));
-    result.asMap().forEach((index, month) => {
-          result[index] = result[index]
-              .copy(index: index, value: standardizeMonthValue(month.value - 1))
-        });
+    result.asMap().forEach((index, month) => result[index] = result[index]
+        .copy(index: index, value: standardizeMonthValue(month.value - 1)));
     return result;
   }
 

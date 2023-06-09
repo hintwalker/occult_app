@@ -1,3 +1,3 @@
 import 'package:tuvi_domain/tuvi_domain.dart';
 
-final starIteratorMock = StarIterator(starIteratorTranDoan);
+final starIteratorMock = StarIterator(StarName.values);

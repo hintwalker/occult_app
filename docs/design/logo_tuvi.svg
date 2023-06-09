@@ -26,15 +26,15 @@
      showgrid="false"
      showguides="false"
      inkscape:guide-bbox="true"
-     inkscape:zoom="0.22627417"
-     inkscape:cx="395.53786"
-     inkscape:cy="841.89901"
+     inkscape:zoom="0.16"
+     inkscape:cx="-884.375"
+     inkscape:cy="1346.875"
      inkscape:window-width="1366"
      inkscape:window-height="704"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g7031-6-5-4-5-3-5-8-5-0-04-6-7" />
+     inkscape:current-layer="g7031-6-5-4-5-3-5-8-5-5" />
   <defs
      id="defs2">
     <linearGradient
@@ -1220,14 +1220,14 @@
        id="rect931-6-3-8-1"
        width="301.14899"
        height="301.14902"
-       x="2812.7588"
-       y="1615.5193"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/design/admin/logo_512_buffered.png"
+       x="3139.0586"
+       y="1900.5737"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_512_buffered.png"
        inkscape:export-xdpi="42.48167"
        inkscape:export-ydpi="42.48167" />
     <g
        id="g7031-6-5-4-5-3-5-8-5-5"
-       transform="matrix(0.89344024,-0.89344024,0.89344024,0.89344024,2191.6026,1997.6365)"
+       transform="matrix(0.89344024,-0.89344024,0.89344024,0.89344024,2517.9024,2282.6909)"
        inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/design/admin/logo_512_buffered.png"
        inkscape:export-xdpi="42.48167"
        inkscape:export-ydpi="42.48167"
@@ -1236,35 +1236,41 @@
          style="fill:#715a41;fill-opacity:1;stroke-width:0.264583"
          d="m 557.32009,351.36798 c -8.43122,-1.30173 -15.98064,-5.14568 -22.07527,-11.24011 -5.48582,-5.48567 -9.10807,-12.13341 -10.91857,-20.03833 l -0.58775,-2.56619 -0.0839,-34.59428 -0.0839,-34.59427 h 0.81244 c 1.4119,0 4.82427,0.80824 6.66872,1.57952 3.76964,1.57633 7.28035,4.81064 9.17525,8.4529 1.75226,3.36806 2.36379,6.46136 2.39731,12.12644 l 0.0113,1.91823 h 10.32209 10.32209 l -0.0695,9.45885 -0.0695,9.45885 -10.25044,0.0601 -10.25043,0.0601 -0.0357,11.44925 c -0.0196,6.29707 0.0512,11.92548 0.15731,12.50757 0.52827,2.89675 1.89704,6.32337 3.36235,8.41737 0.92521,1.32218 3.6658,4.11215 5.0064,5.09662 2.85587,2.09721 6.52526,3.47151 9.95997,3.73033 l 2.18281,0.16448 v 9.4857 9.4857 l -1.78594,-0.0256 c -0.98226,-0.0141 -2.8575,-0.19106 -4.16719,-0.39327 z"
          id="path3609-3-6-8-0-8-9-5-6-9"
-         sodipodi:nodetypes="ssscccsssscccccccscssscccsss" />
+         sodipodi:nodetypes="ssscccsssscccccccscssscccsss"
+         inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_512_buffered.png"
+         inkscape:export-xdpi="42.48167"
+         inkscape:export-ydpi="42.48167" />
       <path
          d="m 566.55248,351.41237 c -0.0612,-0.15949 -0.0799,-4.43999 -0.0416,-9.51216 l 0.0697,-9.22218 2.23229,-0.6444 c 3.78381,-1.09224 6.15045,-2.49896 9.03584,-5.37079 2.17141,-2.16118 2.71497,-2.88709 3.77293,-5.03849 1.67021,-3.39638 2.28915,-5.97184 2.28915,-9.525 0,-3.55317 -0.61894,-6.12865 -2.28915,-9.525 -1.05796,-2.15141 -1.60152,-2.87732 -3.77293,-5.03849 -2.88536,-2.87179 -5.25187,-4.27844 -9.03584,-5.37088 l -2.23229,-0.64447 v -9.48818 -9.4882 l 0.92604,0.078 c 5.66502,0.47688 12.55075,2.96504 17.6234,6.36812 8.90214,5.97221 14.40685,14.04017 17.08417,25.03932 0.56915,2.33821 0.58137,2.79149 0.67546,25.06927 l 0.0958,22.68803 -1.13684,-0.003 c -1.90616,-0.003 -5.45145,-1.00343 -7.71861,-2.17783 -1.59237,-0.82488 -2.76058,-1.71511 -4.50747,-3.43497 l -2.35802,-2.3215 -2.27219,1.47717 c -4.35326,2.83009 -9.50225,4.94809 -14.30672,5.80155 -3.33708,0.5928 -4.11469,0.48519 -4.11469,0.48519 z"
-         style="fill:#55633c;fill-opacity:1;stroke-width:0.0700042"
+         style="fill:#54633d;fill-opacity:1;stroke-width:0.0700042"
          id="path4174-8-1-1-9-5-8-6-1-8"
-         sodipodi:nodetypes="cscssssssscccssssccsscsscc" />
+         sodipodi:nodetypes="cscssssssscccssssccsscsscc"
+         inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_512_buffered.png"
+         inkscape:export-xdpi="42.48167"
+         inkscape:export-ydpi="42.48167" />
     </g>
     <path
        style="display:inline;fill:#865300;fill-opacity:1;stroke:#ffffff;stroke-width:3.70417;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 2936.812,1773.2131 18.2089,-18.4238 3.2437,-2.9025 c 0,0 18.1994,-13.7624 34.7951,3.7844 14.7545,16.3168 1.9767,32.9873 1.9767,32.9873 l -2.8323,3.0778 c 0,0 -14.0767,15.9612 -34.7378,2.4432 z"
+       d="m 3263.1118,2058.2675 18.2089,-18.4238 3.2437,-2.9025 c 0,0 18.1994,-13.7624 34.7951,3.7844 14.7545,16.3168 1.9767,32.9873 1.9767,32.9873 l -2.8323,3.0778 c 0,0 -14.0767,15.9612 -34.7378,2.4432 z"
        id="path971-9-0-6-6-4-1-1-48"
        sodipodi:nodetypes="cccccccc"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/design/admin/logo_512_buffered.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_512_buffered.png"
        inkscape:export-xdpi="42.48167"
        inkscape:export-ydpi="42.48167" />
     <path
        style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 2938.2434,1737.7633 3.067,-2.8308 15.6905,15.6322 -3.2767,2.9965 z"
+       d="m 3264.5432,2022.8177 3.067,-2.8308 15.6905,15.6322 -3.2767,2.9965 z"
        id="path1758-1"
        sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/design/admin/logo_512_buffered.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_512_buffered.png"
        inkscape:export-xdpi="42.48167"
        inkscape:export-ydpi="42.48167" />
     <path
        style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 2993.5117,1793.0514 2.8285,-3.0714 15.6053,15.6049 -2.7915,3.1012 z"
+       d="m 3319.8115,2078.1058 2.8285,-3.0714 15.6053,15.6049 -2.7915,3.1012 z"
        id="path2788-0"
        sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/design/admin/logo_512_buffered.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_512_buffered.png"
        inkscape:export-xdpi="42.48167"
        inkscape:export-ydpi="42.48167" />
     <g
@@ -1360,13 +1366,13 @@
        height="168.93159"
        x="3550.2476"
        y="1946.1144"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/laplaso/logo_1152.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_1152.png"
        inkscape:export-xdpi="173.21098"
        inkscape:export-ydpi="173.21098" />
     <g
        id="g7031-6-5-4-5-3-5-8-5-0-04-6-7"
        transform="matrix(0.89344024,-0.89344024,0.89344024,0.89344024,2863.5782,2232.6939)"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/laplaso/logo_1152.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_1152.png"
        inkscape:export-xdpi="173.21098"
        inkscape:export-ydpi="173.21098"
        style="display:inline">
@@ -1386,7 +1392,7 @@
        d="m 3608.7876,2008.2705 18.2089,-18.4238 3.2437,-2.9025 c 0,0 18.1994,-13.7624 34.7951,3.7844 14.7545,16.3168 1.9767,32.9873 1.9767,32.9873 l -2.8323,3.0778 c 0,0 -14.0767,15.9612 -34.7378,2.4432 z"
        id="path971-9-0-6-6-4-1-1-4-4-0-8"
        sodipodi:nodetypes="cccccccc"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/laplaso/logo_1152.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_1152.png"
        inkscape:export-xdpi="173.21098"
        inkscape:export-ydpi="173.21098" />
     <path
@@ -1402,7 +1408,7 @@
        d="m 3610.219,1972.8207 3.067,-2.8308 15.6905,15.6322 -3.2767,2.9965 z"
        id="path1758-4-7-4-5"
        sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/laplaso/logo_1152.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_1152.png"
        inkscape:export-xdpi="173.21098"
        inkscape:export-ydpi="173.21098" />
     <path
@@ -1410,13 +1416,16 @@
        d="m 3665.4873,2028.1088 2.8285,-3.0714 15.6053,15.6049 -2.7915,3.1012 z"
        id="path2788-4-6-6-9"
        sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="/home/hint/Lab/docs-for-dev/tuvi_app/laplaso/logo_1152.png"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_1152.png"
        inkscape:export-xdpi="173.21098"
        inkscape:export-ydpi="173.21098" />
     <g
        aria-label="Lập Lá Số Tử Vi"
        id="text2630-5-7-2-7"
-       style="font-size:23.3878px;line-height:1.25;font-family:Dyuthi;-inkscape-font-specification:'Dyuthi, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#3f2d17;stroke-width:0.730871">
+       style="font-size:23.3878px;line-height:1.25;font-family:Dyuthi;-inkscape-font-specification:'Dyuthi, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#3f2d17;stroke-width:0.730871"
+       inkscape:export-filename="/home/hint/Lab/F/occult_app/docs/design/logo/logo_1152.png"
+       inkscape:export-xdpi="173.21098"
+       inkscape:export-ydpi="173.21098">
       <path
          d="m 3561.9484,2092.5034 v 0.4678 q -0.7952,0.023 -1.2162,0.1871 -0.3976,0.1403 -0.5379,0.5613 -0.1403,0.3976 -0.1403,1.263 v 11.6003 q 0,0.842 0.1403,1.2629 0.1403,0.421 0.5379,0.5614 0.421,0.1169 1.2162,0.1169 h 1.7073 q 1.0992,0 1.7775,-0.2339 0.7016,-0.2339 1.0992,-0.725 0.421,-0.5145 0.6315,-1.3565 0.2104,-0.842 0.3274,-2.0581 h 0.5379 q -0.07,0.725 -0.07,1.9178 0,0.4443 0.023,1.2863 0.047,0.8186 0.1404,1.7073 -1.1928,-0.047 -2.6896,-0.047 -1.4969,-0.023 -2.6663,-0.023 -0.5145,0 -1.3331,0 -0.7951,0 -1.7307,0.023 -0.9355,0 -1.8944,0.023 -0.9589,0 -1.8242,0.023 v -0.4677 q 0.7952,-0.047 1.1928,-0.1871 0.4209,-0.1404 0.5613,-0.5614 0.1403,-0.4209 0.1403,-1.2629 v -11.6003 q 0,-0.8654 -0.1403,-1.263 -0.1404,-0.421 -0.5613,-0.5613 -0.3976,-0.1637 -1.1928,-0.1871 v -0.4678 q 0.4911,0.023 1.2863,0.047 0.7952,0.023 1.7073,0.023 0.8186,0 1.6138,-0.023 0.8186,-0.023 1.3565,-0.047 z"
          style="font-family:'Playfair Display';-inkscape-font-specification:'Playfair Display'"

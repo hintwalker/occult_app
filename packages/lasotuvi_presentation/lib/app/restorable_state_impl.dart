@@ -9,10 +9,10 @@ class RestorableStateImpl extends RestorableState<AppStateImpl> {
   @override
   AppStateImpl fromPrimitives(Object? data) {
     final appState = AppStateImpl();
-    final favorites = (data as List<dynamic>).cast<int>();
-    for (var id in favorites) {
-      appState.setFavorite(id, true);
-    }
+    // final favorites = (data as List<dynamic>).cast<int>();
+    // for (var id in favorites) {
+    //   appState.setFavorite(id, true);
+    // }
     return appState;
   }
 

@@ -51,6 +51,7 @@ build/
 .last_build_id
 
 # Docs
+docs/tuvi/books
 
 # Dependencies
 node_modules

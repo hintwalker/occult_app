@@ -47,9 +47,9 @@ part 'src/school/school_name.dart';
 part 'src/sky/sky.dart';
 part 'src/sky/sky_config.dart';
 
-part 'src/star/bac_phai/menh_chu.dart';
-part 'src/star/bac_phai/than_chu.dart';
-part 'src/star/default/default_star_info.dart';
+part 'src/star/menh_chu.dart';
+part 'src/star/than_chu.dart';
+part 'src/star/info/basic_star_info.dart';
 part 'src/star/star.dart';
 part 'src/star/star_brightness.dart';
 part 'src/star/star_formula_key.dart';
@@ -61,6 +61,7 @@ part 'src/star/star_name.dart';
 part 'src/star/tran_doan/star_formulas_tran_doan.dart';
 part 'src/star/tran_doan/star_info_tran_doan.dart';
 part 'src/star/tran_doan/star_iterator_tran_doan.dart';
+part 'src/star/star_formulas.dart';
 
 part 'src/tu_hoa/tran_doan/tu_hoa_tran_doan.dart';
 part 'src/utils/math.dart';

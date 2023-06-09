@@ -10,17 +10,17 @@ class RouteName {
   static const tagCreation = 'tagCreation';
 
   static const chartView = 'chartView';
-  static const allCharts = 'allCharts';
+  static const charts = DrawerIds.charts;
   static const allChartsWithDrawer = 'allChartsWithDrawer';
 
-  static const allTags = 'allTags';
+  static const tags = DrawerIds.tags;
 
   static const tagView = 'tagView';
   static const energyMarket = DrawerIds.energyMarket;
 
   // static const noteView = 'noteView';
 
-  static const allNotes = 'allNotes';
+  static const notes = DrawerIds.notes;
 
   static const noteEditor = 'noteEditor';
 
@@ -31,4 +31,7 @@ class RouteName {
   static const storagePlanMarket = DrawerIds.storagePlanMarket;
 
   static const home = DrawerIds.home;
+
+  static const library = DrawerIds.library;
+  static const groupStars = DrawerIds.groupStars;
 }

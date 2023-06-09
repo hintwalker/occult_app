@@ -1,8 +1,8 @@
 part of tauari_data_core;
 
-abstract class LocalModel<E> extends Model implements SqliteStorable {
-  // const LocalModel();
-  E toEntity();
+abstract class LocalModel<E> extends Model<E> implements SqliteStorable {
+  const LocalModel();
+  // E toEntity();
   // @override
   // bool operator ==(Object? other) =>
   //     identical(this, other) ||

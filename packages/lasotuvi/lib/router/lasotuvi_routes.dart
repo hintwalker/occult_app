@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lasotuvi/main.dart';
 import 'package:lasotuvi/screen/storage_plan_market.dart';
 // import 'package:lasotuvi/screen/take_screen.dart';
 // import 'package:lasotuvi/screen/chart/all_charts_screen.dart';
@@ -59,14 +60,55 @@ class LasotuviRoutes {
                     ),
                   )),
           GoRoute(
-              name: RouteName.storagePlanMarket,
-              path: RoutePath.storagePlanMarket,
-              pageBuilder: (context, state) => const FadeTransitionPage(
-                    child: StoragePlanMarketScreen(
-                      restorationId: 'energyMarket',
-                      // drawerController: mainDrawerController,
-                    ),
-                  ))
+            name: RouteName.storagePlanMarket,
+            path: RoutePath.storagePlanMarket,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: StoragePlanMarketScreen(
+                restorationId: RouteName.storagePlanMarket,
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
+          GoRoute(
+            name: RouteName.charts,
+            path: RoutePath.charts,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: ChartsScreen(
+                restorationId: RouteName.charts,
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
+          GoRoute(
+            name: RouteName.notes,
+            path: RoutePath.notes,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: NotesScreen(
+                restorationId: RouteName.notes,
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
+          GoRoute(
+            name: RouteName.tags,
+            path: RoutePath.tags,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: TagsScreen(
+                restorationId: RouteName.tags,
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
+          GoRoute(
+            name: RouteName.library,
+            path: RoutePath.library,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: LibraryScreen(
+                restorationId: RouteName.library,
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
         ])
   ];
   // static final routes = [

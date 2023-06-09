@@ -27,7 +27,7 @@ class TagModel extends SyncableModel<Tag> {
   Map<String, Object?> toCloud() {
     final map = dump();
     map.remove(columnId);
-    map.remove(columnOnCloud);
+    map.remove(columnSyncStatus);
     return map;
   }
 
@@ -35,7 +35,7 @@ class TagModel extends SyncableModel<Tag> {
   Map<String, Object?> toSqlite() {
     final map = dump();
     map.remove(columnState);
-    map.remove(columnOnCloud);
+    map.remove(columnSyncStatus);
     return map;
   }
 
@@ -46,7 +46,7 @@ class TagModel extends SyncableModel<Tag> {
       ColumnTag.title: title,
       ColumnTag.description: subTitle,
       columnState: storageState,
-      columnOnCloud: syncStatus,
+      columnSyncStatus: syncStatus,
       // columnCreated: created.millisecondsSinceEpoch
     };
   }
@@ -56,8 +56,9 @@ class TagModel extends SyncableModel<Tag> {
       map[columnId] as int,
       title: map[ColumnTag.title] as String,
       subTitle: map[ColumnTag.description] as String,
-      syncStatus:
-          map[columnOnCloud] == null ? null : map[columnOnCloud] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
     );

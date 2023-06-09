@@ -7,7 +7,7 @@ void main() {
       name: StarName.tuVi,
       position: HousePosition.unknown(),
       info: StarInfo.fromMap(
-        defaultStarInfo[StarName.tuVi.name]!,
+        basicStarInfo[StarName.tuVi.name]!,
       ),
     );
     expect(star.name.name, 'tuVi');

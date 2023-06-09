@@ -1,0 +1,3 @@
+# SAO BỆNH PHÙ
+
+Bệnh Phù chủ bệnh, đau yếu. Bệnh Phù tuyệt đối không nên đứng với Hóa Kị ở Mệnh cung và Tật Ách cung. Bệnh Phù gặp Đào Riêu ở Tật Ách thì suy nhược vì sắc dục quá độ. Bệnh Phù gặp Thiên Cơ Tham Lang có bệnh về gan. Bệnh Phù gặp Liêm Trinh, Hóa Kị bệnh về thận. Bệnh Phù lại có Thiên Hình thường đưa đến giải phẫu. Bệnh Phù vào Tài Bạch buôn bán ngành dược có lợi. Bệnh Phù Hình Kị phong, sang. Không Kiếp cung Tật mọi đàng huyết hư. Bệnh Phù thuộc Thổ đới Mộc.

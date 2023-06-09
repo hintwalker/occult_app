@@ -34,6 +34,12 @@ dependencies:
     path: ../tauari_ui
   tuvi_style:
     path: ../tuvi_style
+  tauari_data_core:
+    path: ../tauari_data_core
+  lasotuvi_library:
+    path: ../lasotuvi_library
+  storage_options:
+    path: ../storage_options
 
   flutter_riverpod: ^2.3.6
   go_router: ^7.0.0

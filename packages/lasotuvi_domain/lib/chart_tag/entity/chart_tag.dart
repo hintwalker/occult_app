@@ -16,8 +16,9 @@ class ChartTag extends SyncableEntity<ChartTag> {
       map[columnId] as int,
       chartId: map[ColumnChartTag.chartId] as int,
       tagId: map[ColumnChartTag.tagId] as int,
-      syncStatus:
-          map[columnOnCloud] == null ? null : map[columnOnCloud] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
     );
@@ -37,7 +38,7 @@ class ChartTag extends SyncableEntity<ChartTag> {
       columnId: id,
       ColumnChartTag.chartId: chartId,
       ColumnChartTag.tagId: tagId,
-      columnOnCloud: syncStatus,
+      columnSyncStatus: syncStatus,
       columnState: storageState
     };
   }
@@ -59,7 +60,7 @@ class ChartTag extends SyncableEntity<ChartTag> {
   }
 
   @override
-  ChartTag copyWithOnCloud(String? value) {
+  ChartTag copyWithSyncStatus(String? value) {
     return copyWith(syncStatus: value);
   }
 

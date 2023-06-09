@@ -11,17 +11,17 @@ class PoolSetOfEntity<T extends Syncable> {
 
   SetOfEntity<T> synced() {
     final intersection = localSet.intersection(cloudSet);
-    return intersection.updateOnCloud(OnCloudValues.synced);
+    return intersection.updateOnCloud(SyncStatus.synced);
   }
 
   SetOfEntity<T> justOnCloud() {
     final diffOnB = cloudSet.difference(localSet);
-    return diffOnB.updateOnCloud(OnCloudValues.onlyCloud);
+    return diffOnB.updateOnCloud(SyncStatus.onlyCloud);
   }
 
   SetOfEntity<T> justOnLocal() {
     final diffOnB = localSet.difference(cloudSet);
-    return diffOnB.updateOnCloud(OnCloudValues.onlyLocal);
+    return diffOnB.updateOnCloud(SyncStatus.onlyLocal);
   }
 
   // Map<String, Object?> dump() {

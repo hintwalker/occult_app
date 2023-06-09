@@ -1,14 +1,20 @@
 library tauari_data_core;
 
 // import 'package:equatable/equatable.dart';
+import 'dart:convert';
+
 import 'package:ordered_set/ordered_set.dart';
 import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
+import 'package:tauari_values/tauari_values.dart';
+import 'package:flutter/services.dart';
 
+part 'usecase/syncable/on_syncable_carrier_data.dart';
 part 'usecase/syncable/on_syncable_data.dart';
 part 'usecase/syncable/on_by_id.dart';
 part 'usecase/syncable/upload.dart';
+part 'usecase/syncable/download.dart';
 part 'usecase/cloud/take_by_id_on_cloud.dart';
 part 'usecase/syncable/take_by_id.dart';
 part 'usecase/local/insert_to_local.dart';
@@ -44,7 +50,6 @@ part 'query/cloud_data_order_by.dart';
 part 'query/cloud_data_where.dart';
 part 'query/query_args.dart';
 part 'query/query_entity_args.dart';
-part 'constant/on_cloud_values.dart';
 part 'dao/dao.dart';
 part 'service/cloud_service.dart';
 part 'constant/column_names.dart';
@@ -55,6 +60,7 @@ part 'repository/entity_repository.dart';
 part 'repository/cloud_repository.dart';
 part 'repository/local_repository.dart';
 part 'repository/syncable_repository.dart';
+part 'repository/json_list_repository.dart';
 part 'repository/cloud_single_doc_repository.dart';
 part 'repository/dep/syncable_dependent_repository.dart';
 part 'repository/dep/local_dependent_repository.dart';
@@ -71,6 +77,7 @@ part 'repository/impl/rel/syncable_rel_repository_impl.dart';
 part 'repository/impl/dep/local_dependent_repository_impl.dart';
 part 'repository/impl/dep/cloud_dependent_repository_impl.dart';
 part 'repository/impl/dep/syncable_dependent_repository_impl.dart';
+part 'repository/impl/json_list_repository_impl.dart';
 
 part 'repository/rel/syncable_rel_repository.dart';
 part 'repository/rel/local_rel_repository.dart';
@@ -80,3 +87,4 @@ part 'source/local_data_source.dart';
 part 'source/remote_data_source.dart';
 part 'source/cloud_single_doc_data_source.dart';
 part 'source/no_sql_data_source.dart';
+part 'source/json_list_data_source.dart';

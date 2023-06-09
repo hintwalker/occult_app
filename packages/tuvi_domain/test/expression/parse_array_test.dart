@@ -15,9 +15,33 @@ void main() {
     final expressionString = '[2, 3, 5, 6, 5, 6, 8, 9, 11, 0]';
     final expression = Expression.parse(expressionString);
     final evaluator = ExpressionEvaluator();
-    final result = evaluator.eval(expression, {}) as int;
+    final result = evaluator.eval(expression, {});
     print(result);
-    expect(result, 2);
+    expect(result[0] as int, 2);
+  });
+
+  test('should get String in array', () {
+    final expressionString =
+        "['dongHoaKhoa ? 2 : 2+3', 3, 5, 6, 5, 6, 8, 9, 11, 0]";
+    final expression = Expression.parse(expressionString);
+    final evaluator = ExpressionEvaluator();
+    final result = evaluator.eval(expression, {});
+    print(result);
+    // expect(result[0] as String, '2+3');
+    final expression2 = Expression.parse(result[0] as String);
+    final result2 = evaluator.eval(expression2, {'dongHoaKhoa': true});
+    expect(result2, 2);
+    final result3 = evaluator.eval(expression2, {'dongHoaKhoa': false});
+    expect(result3, 5);
+  });
+
+  test('should parse array with if inside', () {
+    final expressionString =
+        "[dongHoaKhoa ? 2 : 2+3, 3, 5, 6, 5, 6, 8, 9, 11, 0]";
+    final expression = Expression.parse(expressionString);
+    final evaluator = ExpressionEvaluator();
+    final result = evaluator.eval(expression, {'dongHoaKhoa': false});
+    print(result);
   });
 
   test('should use if', () {

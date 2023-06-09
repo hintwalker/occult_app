@@ -1,3 +1,31 @@
+## Kết nối với thiết bị qua wifi
+Nối thiết bị qua cab usb
+```
+adb tcpip 5555
+adb connect 192.168.1.78
+```
+Tháo dây.
+Những lần kết nối sau chỉ cần chạy dòng lệnh
+```
+adb connect 192.168.1.78
+```
+
+Nếu adb không chạy được, thì cài lại adb bằng dòng lệnh:
+```
+sudo apt-get install android-tools-adb
+```
+Nếu có lỗi khi kết nối
+```
+adb kill-server
+sudo adb start-server
+adb tcpip 5555
+```
+Sau khi khởi động lại thiết bị, phải nối dây lại và chạy lại 2 dòng lệnh:
+```
+adb tcpip 5555
+adb connect 192.168.1.78
+```
+
 ## Thứ tự config flutter app
 
 ### <ins>Tạo app</ins>

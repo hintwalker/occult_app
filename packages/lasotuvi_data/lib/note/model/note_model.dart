@@ -33,7 +33,7 @@ class NoteModel extends SyncableModel<Note> {
   Map<String, Object?> toCloud() {
     final map = dump();
     map.remove(columnId);
-    map.remove(columnOnCloud);
+    map.remove(columnSyncStatus);
     return map;
   }
 
@@ -41,7 +41,7 @@ class NoteModel extends SyncableModel<Note> {
   Map<String, Object?> toSqlite() {
     final map = dump();
     map.remove(columnState);
-    map.remove(columnOnCloud);
+    map.remove(columnSyncStatus);
     return map;
   }
 
@@ -54,7 +54,7 @@ class NoteModel extends SyncableModel<Note> {
       ColumnNote.chartId: chartId,
       ColumnNote.edited: edited.millisecondsSinceEpoch,
       columnState: storageState,
-      columnOnCloud: syncStatus,
+      columnSyncStatus: syncStatus,
     };
   }
 
@@ -68,8 +68,9 @@ class NoteModel extends SyncableModel<Note> {
           DateTime.fromMillisecondsSinceEpoch(map[ColumnNote.edited] as int),
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
-      syncStatus:
-          map[columnOnCloud] == null ? null : map[columnOnCloud] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
     );
   }
 

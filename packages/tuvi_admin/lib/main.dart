@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,7 +27,7 @@ void main() async {
     (_) => runApp(EntryPoint(
       translationPath: translationPath,
       supportedLocales: supportedLocales,
-      startLocale: Locale(window.locale.languageCode),
+      startLocale: const Locale('vi'),
       child: ProviderScope(
         overrides: [
           restorableStateProvider.overrideWith((_) => RestorableStateImpl()),

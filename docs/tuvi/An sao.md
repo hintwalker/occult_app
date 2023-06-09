@@ -1,0 +1,32 @@
+# TÙY CHỌN AN SAO
+
+- Tứ hóa tuổi Canh: 
+    - Thiên Đồng Hóa Khoa, Thái Âm Hóa Kỵ (mã: dongHoaKhoa = 0)
+    - Thái Âm Hóa Khoa, Thiên Đồng Hóa Kỵ (dongHoaKhoa = 1)
+- Tứ Hóa tuổi Tân:
+    - Thái Dương Hóa Quyền (nhatHoaQuyen = 0)
+    - Thiên Lương Hóa Quyền (nhatHoaQuyen = 1)
+- Tứ Hóa tuổi Nhâm:
+    - Thiên Phủ Hóa Khoa (phuHoaKhoa = 0)
+    - Tả Phụ Hóa Khoa (phuHoaKhoa = 1)
+- Trường Sinh: 
+    - Tuổi âm - dương thuận lý và nghịch lý: Thủy Nhị Cục và Thổ Ngũ Cục an tại Thân, Mộc Tam Cục an tại Hợi, Kim Tứ Cục an tại Tỵ, Hỏa Lục Cục an tại Dần. (truongSinhOption=0), (truongSinhOption=1, amDuongNghichLy=0)
+    - Tuổi âm - dương thuận lý thì như trên, còn âm dương nghịch lý thì: Thủy và Thổ an tại Tý, Mộc tại Mão, Kim tại Dậu, Hỏa tại Ngọ. (truongSinhOption=1, amDuongNghichLy=1)
+- Hỏa Linh:
+    - Tuổi Tỵ, Dậu, Sửu: an Hỏa Tinh khởi từ Mão, Linh Tinh khởi từ Tuất (hoaLinhOption = 0)
+    - Tuổi Tỵ, Dậu, Sửu: an Hỏa Tinh khởi từ Tuất, Linh Tinh khởi từ Mão (hoaLinhOption = 1)
+- Khôi Việt tuổi Canh:
+    - Thiên Khôi an tại Ngọ, Thiên Việt an tại Dần. (khoiVietOption = 0)
+    - Thiên Khôi an tại Sửu, Thiên Việt an tại Mùi. (khoiVietOption = 1)
+- Lưu Hà:
+    - Tuổi Đinh tại Thìn, tuổi Canh tại Thân (luuHaOption = 0)
+    - Tuổi Đinh tại Thân, tuổi Canh tại Thìn (luuHaOption = 1)
+- Đẩu Quân:
+    - Theo chi năm sinh (dauQuanOption = 0)
+    - Khởi tính từ năm Tý (dauQuanOption = 1)
+- Âm Sát:
+    - Có (amSatOption = 0)
+    - Không (amSatOption = 1)
+- Vòng tướng tinh:
+    - Có (tuongTinhOption = 0)
+    - Không (tuongTinhOption = 1)

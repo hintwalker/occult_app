@@ -14,6 +14,14 @@ dependencies:
     path: ../lasotuvi_domain
   tauari_data_core:
     path: ../tauari_data_core
+  tauari_list_view:
+    path: ../tauari_list_view
+  tauari_ui:
+    path: ../tauari_ui
+  sunoom:
+    path: ../sunoom
+  tuvi_domain:
+    path: ../tuvi_domain
   
 
 dev_dependencies:

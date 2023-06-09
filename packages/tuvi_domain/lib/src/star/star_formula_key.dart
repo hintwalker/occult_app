@@ -23,5 +23,15 @@ enum StarFormulaKey {
   cuc,
   canOfWatchingYearIndex,
   chiOfWatchingYearIndex,
-  k
+  k,
+  amDuongNghichLy,
+  dongHoaKhoa,
+  nhatHoaQuyen,
+  phuHoaKhoa,
+  hoaLinhOption,
+  khoiVietOption,
+  luuHaOption,
+  dauQuanOption,
+  amSatOption,
+  tuongTinhOption
 }

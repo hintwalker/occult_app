@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tauari_values/tauari_values.dart';
 
+part 'circle_human_avatar.dart';
+part 'storage_icon_button.dart';
+part 'list_item_has_storage_icon.dart';
 part 'date_time_widget.dart';
 part 'duration_widget.dart';
 part 'tauari_app.dart';

@@ -1,8 +1,11 @@
 part of tuvi_domain;
 
-Map<StarName, Star> navigateStars(HumanBio humanBio, StarIterator starIterator,
-    Map<String, dynamic> formulas, Map<StarName, Star> stars,
-    [Map<StarName, dynamic>? options]) {
+Map<StarName, Star> navigateStars(
+    {required HumanBio humanBio,
+    required StarIterator starIterator,
+    required Map<String, dynamic> formulas,
+    required Map<StarName, Star> stars,
+    Map<String, dynamic>? options}) {
   // List<Star> stars = [];
   final evaluator = ExpressionEvaluator();
   final posOfMenh = navigateMenh(humanBio);
@@ -14,6 +17,7 @@ Map<StarName, Star> navigateStars(HumanBio humanBio, StarIterator starIterator,
   final chiOfTime = Chi.ofTime(humanBio.birthDay.time);
   final dnan = isDuongNamAmNu(chiOfYear, humanBio.gender);
   final k = dnan ? 1 : -1;
+  final amDuongRel = findAmDuongRel(posOfMenh.toInt(), chiOfYear);
   final cuc = Cuc.from(
     canOfYearIndex: canOfYear.index,
     // chiOfYearIndex: chiOfYear.index,
@@ -34,6 +38,9 @@ Map<StarName, Star> navigateStars(HumanBio humanBio, StarIterator starIterator,
     StarFormulaKey.luniMonthIndex.name:
         humanBio.birthDay.luniSolarDate.month - 1,
     StarFormulaKey.k.name: k,
+    StarFormulaKey.amDuongNghichLy.name:
+        amDuongRel == AmDuongRel.amDuongNghichLy ? 1 : 0,
+    ...options ?? {}
   };
 
   while (starIterator.moveNext()) {

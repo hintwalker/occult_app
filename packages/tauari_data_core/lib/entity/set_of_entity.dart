@@ -25,7 +25,7 @@ class SetOfEntity<T extends Syncable> {
   SetOfEntity<T> updateOnCloud(String value) {
     final list = _items.toList();
     for (var i = 0; i < list.length; i++) {
-      list[i] = list[i].copyWithOnCloud(value);
+      list[i] = list[i].copyWithSyncStatus(value);
     }
     return SetOfEntity<T>.fromList(list);
   }

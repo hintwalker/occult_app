@@ -15,7 +15,7 @@ class Dashboard extends ConsumerWidget {
       restorationId: restorationId,
       child: Scaffold(
         body: DrawerScaffold(
-            header: const SizedBox(),
+            header: const DrawerHeader(),
             title: (id) => const Text('home'),
             menus: menus,
             style: DrawerStyleImpl(Theme.of(context).colorScheme),

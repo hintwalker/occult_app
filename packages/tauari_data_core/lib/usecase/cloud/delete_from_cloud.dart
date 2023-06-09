@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-class DeleteFromCloud<E extends CloudStorable, R extends CloudRepository> {
+class DeleteFromCloud<E extends CloudGetable, R extends CloudRepository> {
   final R repository;
 
   const DeleteFromCloud(this.repository);

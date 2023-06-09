@@ -21,6 +21,10 @@ import 'package:tauari_purchase/tauari_purchase.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_utils/tauari_utils.dart';
 
+part 'storage/downloader_provider.dart';
+part 'storage/remover_provider.dart';
+part 'storage/uploader_provider.dart';
+
 part 'drawer/main_drawer_controller_provider.dart';
 
 part 'subscription/usecase/extends_subscription_provider.dart';
@@ -50,6 +54,42 @@ part 'chart/repository/cloud_chart_repository_provider.dart';
 part 'chart/repository/local_chart_repository_provider.dart';
 part 'chart/controller/chart_list_controller_provider.dart';
 part 'chart/usecase/on_charts_provider.dart';
+part 'chart/usecase/upload_chart.dart';
+part 'chart/usecase/delete_chart_from_cloud.dart';
+part 'chart/usecase/delete_chart_from_local.dart';
+part 'chart/usecase/download_chart.dart';
+
+part 'chart_tag/controller/chart_has_tags_list_controller_provider.dart';
+part 'chart_tag/usecase/on_chart_has_tags_list.dart';
+part 'chart_tag/dao/chart_tag_dao_provider.dart';
+part 'chart_tag/data_source/firebase_chart_tag_data_source.dart';
+part 'chart_tag/data_source/sqlite_chart_tag_data_source_provider.dart';
+part 'chart_tag/repository/cloud_chart_tag_repository.dart';
+part 'chart_tag/repository/local_chart_tag_repostory_provider.dart';
+part 'chart_tag/repository/chart_tag_repository.dart';
+
+part 'tag/repository/tag_repository.dart';
+part 'tag/repository/cloud_tag_repository.dart';
+part 'tag/repository/local_tag_repository.dart';
+part 'tag/data_source/firebase_tag_data_source.dart';
+part 'tag/data_source/sqlite_tag_data_source.dart';
+part 'tag/dao/tag_dao_provider.dart';
+part 'tag/usecase/delete_tag_from_cloud.dart';
+part 'tag/usecase/delete_tag_from_local.dart';
+part 'tag/usecase/download_tag.dart';
+part 'tag/usecase/on_tags.dart';
+part 'tag/usecase/upload_tag.dart';
+
+part 'note/usecase/delete_note_from_cloud.dart';
+part 'note/usecase/delete_note_from_local.dart';
+part 'note/usecase/download_note.dart';
+part 'note/usecase/upload_note.dart';
+part 'note/dao/note_dao.dart';
+part 'note/data_source/firebase_note_data_source.dart';
+part 'note/data_source/sqlite_note_data_source.dart';
+part 'note/repository/cloud_note_repository.dart';
+part 'note/repository/local_note_repository.dart';
+part 'note/repository/note_repostiory.dart';
 
 part 'database/local_database_provider.dart';
 

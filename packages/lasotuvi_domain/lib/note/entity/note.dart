@@ -32,13 +32,14 @@ class Note extends SyncableEntity<Note> {
       chartId: map[ColumnNote.chartId] as int,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
-      syncStatus:
-          map[columnOnCloud] == null ? null : map[columnOnCloud] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
     );
   }
 
   @override
-  Note copyWithOnCloud(String? value) {
+  Note copyWithSyncStatus(String? value) {
     return copyWith(syncStatus: value);
   }
 
@@ -86,7 +87,7 @@ class Note extends SyncableEntity<Note> {
       ColumnNote.edited: edited.millisecondsSinceEpoch,
       ColumnNote.chartId: chartId,
       columnState: storageState,
-      columnOnCloud: syncStatus
+      columnSyncStatus: syncStatus
     };
   }
 }

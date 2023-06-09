@@ -13,8 +13,8 @@ class StoragePlanMarketScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return RestorationScope(
         restorationId: restorationId,
-        child: Column(
-          children: const [
+        child: const Column(
+          children: [
             Placeholder(
               fallbackHeight: 50.0,
             ),

@@ -1,6 +1,6 @@
 part of tauari_data_core;
 
-class DeleteFromLocal<E extends SqliteStorable, R extends LocalRepository> {
+class DeleteFromLocal<E extends SqliteGetable, R extends LocalRepository> {
   final R repository;
 
   const DeleteFromLocal(this.repository);

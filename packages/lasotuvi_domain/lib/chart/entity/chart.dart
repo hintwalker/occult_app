@@ -43,7 +43,7 @@ class Chart extends SyncableEntity<Chart> {
       columnCreated: created.millisecondsSinceEpoch,
       ColumnChart.lastViewed: lastViewed.millisecondsSinceEpoch,
       ColumnChart.avatar: avatar,
-      columnOnCloud: onCloud,
+      columnSyncStatus: getSyncStatus,
       columnState: state,
     };
   }
@@ -76,8 +76,9 @@ class Chart extends SyncableEntity<Chart> {
           ? DateTime.now()
           : DateTime.fromMillisecondsSinceEpoch(
               map[ColumnChart.lastViewed] as int),
-      syncStatus:
-          map[columnOnCloud] == null ? null : map[columnOnCloud] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
     );
@@ -121,7 +122,7 @@ class Chart extends SyncableEntity<Chart> {
   }
 
   @override
-  copyWithOnCloud(String? value) {
+  copyWithSyncStatus(String? value) {
     return copyWith(syncStatus: value);
   }
 

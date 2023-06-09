@@ -1,0 +1,3 @@
+# SAO TIỂU HAO
+
+Tiểu Hao chủ về hao tổn, mất mát. Tiểu Hao gây cho tâm ý điều hối hận, tiếc thương. Tiểu Hao kị gặp Văn Khúc và Hóa Kị, nếu thấy những sao này hội tụ vào Mệnh, Tài Bạch hoặc Phúc Đức thì cả cuộc đời hay mất mát những đồ vật đã mua sắm, nhất là lơ đễnh để mất những đồ vật lặt vặt. Tiểu Hao đi với Phi Liêm thì mua sắm mà chẳng suy tính, mua rồi mới hối tiếc. Khoa Tử Vi Trung Quốc đối với sao Đại Hao với cùng hai lập luận riêng biệt. Trong khi khoa Tử Vi Việt lại bàn luận Song Hao làm một thể (sẽ nói khi tới sao Đại Hao). Tiểu Hao thuộc Hỏa.

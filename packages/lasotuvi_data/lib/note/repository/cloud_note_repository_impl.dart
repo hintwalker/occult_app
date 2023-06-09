@@ -1,7 +1,8 @@
 part of lasotuvi_data;
 
 class CloudNoteRepositoryImpl
-    extends CloudDependentRepositoryImpl<Note, NoteModel, Chart> {
+    extends CloudDependentRepositoryImpl<Note, NoteModel, Chart>
+    implements CloudNoteRepository {
   CloudNoteRepositoryImpl(super.dataSource,
       {required super.ownerIdColumn,
       required super.ownerRepository,
