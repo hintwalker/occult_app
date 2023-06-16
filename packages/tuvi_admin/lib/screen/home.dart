@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const HomeScreenBody()
+        restorationId: restorationId, child: const HomeBody()
         // Center(
         //   child: FilledButton(
         //       onPressed: () => drawerController.setScreenId('energyMarket'),

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show HomeScreenBody;
+part of '../main.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -14,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const HomeScreenBody()
+        restorationId: restorationId, child: const HomeBody()
         // Center(
         //   child: FilledButton(
         //       onPressed: () => drawerController.setScreenId('energyMarket'),

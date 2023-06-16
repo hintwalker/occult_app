@@ -1,0 +1,10 @@
+- 1 ghi chú giới hạn 5000 ký tự kể cả khoảng trắng
+- 1 lá số không giới hạn ghi chú
+- 1 lá số có thể gắn 100 nhãn.
+- Tên của đương số giới hạn 30 ký tự kể cả khoảng trắng
+- Tiêu đề của ghi chú giới hạn 30 ký tự kể cả khoảng trắng
+- Tiêu đề của nhãn giới hạn 30 ký tự kể cả khoảng trắng
+- Mô tả của nhãn giới hạn 80 ký tự kể cả khoảng trắng
+- 1 user không giới hạn điểm năng lượng sở hữu
+- Khoảng cách giữa 2 lần nhận điểm năng lượng miễn phí là 24 giờ
+- 1 user không giới hạn số lần xem quảng cáo để đổi điểm năng lượng.

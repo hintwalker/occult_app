@@ -1,7 +1,7 @@
 part of '../main.dart';
 
-class GroupStarsScreen extends StatelessWidget {
-  const GroupStarsScreen({
+class AllTagsScreen extends StatelessWidget {
+  const AllTagsScreen({
     super.key,
     this.restorationId,
   });

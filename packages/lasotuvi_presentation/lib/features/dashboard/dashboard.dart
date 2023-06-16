@@ -18,7 +18,7 @@ class Dashboard extends ConsumerWidget {
             header: const DrawerHeader(),
             title: (id) => const Text('home'),
             menus: menus,
-            style: DrawerStyleImpl(Theme.of(context).colorScheme),
+            style: const DrawerStyleImpl(lightColorScheme),
             onMenuTap: (menu) => context.goNamed(menu),
             controller: ref.read(mainDrawerControllerProvider),
             child: child),

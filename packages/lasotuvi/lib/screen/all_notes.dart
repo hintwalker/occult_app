@@ -1,7 +1,7 @@
 part of '../main.dart';
 
-class TagsScreen extends StatelessWidget {
-  const TagsScreen({
+class AllNotesScreen extends StatelessWidget {
+  const AllNotesScreen({
     super.key,
     this.restorationId,
   });

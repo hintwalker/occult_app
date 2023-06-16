@@ -1,15 +1,14 @@
 part of lasotuvi_presentation;
 
-class StoragePlanScreenBody extends ConsumerStatefulWidget {
-  const StoragePlanScreenBody({super.key});
+class AllStoragePlansBody extends ConsumerStatefulWidget {
+  const AllStoragePlansBody({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _StoragePlanScreenBodyState();
+      _AllStoragePlansBodyState();
 }
 
-class _StoragePlanScreenBodyState
-    extends AuthDependedState<StoragePlanScreenBody> {
+class _AllStoragePlansBodyState extends AuthDependedState<AllStoragePlansBody> {
   // @override
   // void dispose() {
   //   ref.read(expiredTimerControllerProvider).cancelAllTimer();

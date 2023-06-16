@@ -30,13 +30,12 @@ part 'app/app_state_impl.dart';
 part 'styles/storage_plan_style_impl.dart';
 part 'features/statistics/widget/current_sub_widget_container.dart';
 
-part 'features/library/library_screen_body.dart';
+part 'features/library/library_body.dart';
 
-part 'features/chart/widget/all_chart_screen_body.dart';
+part 'features/chart/widget/all_charts_body.dart';
 
-part 'features/storage_plan/storage_plan_screen_body.dart';
+part 'features/storage_plan/all_storage_plans_body.dart';
 
-part 'features/dashboard/dashboard_screen.dart';
 part 'features/dashboard/dashboard.dart';
 
 part 'features/navigation/app_bar_trailing.dart';
@@ -45,7 +44,7 @@ part 'features/navigation/drawer_header.dart';
 part 'features/navigation/drawer_ids.dart';
 part 'features/navigation/main_navigation.dart';
 part 'features/navigation/menus.dart';
-part 'features/home/widget/home_screen_body.dart';
+part 'features/home/widget/home_body.dart';
 part 'styles/drawer_style_impl.dart';
 part 'router/route_name.dart';
 part 'router/route_path.dart';
@@ -57,4 +56,4 @@ part 'features/auth/user_auth_widget.dart';
 part 'features/auth/auth_screen_body.dart';
 part 'features/auth/auth_depended_state.dart';
 
-part 'features/energy_market/energy_market_screen_body.dart';
+part 'features/energy_market/market_body.dart';

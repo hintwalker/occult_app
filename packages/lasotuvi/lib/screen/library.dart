@@ -1,7 +1,7 @@
 part of '../main.dart';
 
-class BooksScreen extends StatelessWidget {
-  const BooksScreen({
+class LibraryScreen extends StatelessWidget {
+  const LibraryScreen({
     super.key,
     this.restorationId,
   });
@@ -10,6 +10,6 @@ class BooksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const Placeholder());
+        restorationId: restorationId, child: const LibraryBody());
   }
 }

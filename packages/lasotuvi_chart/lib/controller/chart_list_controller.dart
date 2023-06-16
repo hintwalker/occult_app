@@ -1,29 +1,30 @@
 part of lasotuvi_chart;
 
-class ChartListController extends ChangeNotifier {
-  ChartListController({required this.onCharts});
+class ChartListController extends DataListStreamController<Chart> {
+  ChartListController({required OnCharts onCharts})
+      : super(onSyncableData: onCharts);
 
-  final OnCharts onCharts;
+  // final OnCharts onCharts;
 
-  StreamSubscription<Iterable<Chart>>? _subscription;
-  StreamController<Iterable<Chart>>? _streamController;
+  // StreamSubscription<Iterable<Chart>>? _subscription;
+  // StreamController<Iterable<Chart>>? _streamController;
 
-  Stream<Iterable<Chart>> chartsStream(String? uid, [QueryArgs? queryArgs]) {
-    _streamController = StreamController<Iterable<Chart>>.broadcast();
-    listen(uid, queryArgs);
-    return _streamController!.stream;
-  }
+  // Stream<Iterable<Chart>> chartsStream(String? uid, [QueryArgs? queryArgs]) {
+  //   _streamController = StreamController<Iterable<Chart>>.broadcast();
+  //   listen(uid, queryArgs);
+  //   return _streamController!.stream;
+  // }
 
-  void listen(String? uid, [QueryArgs? queryArgs]) {
-    _subscription = onCharts(uid, queryArgs).listen((event) {
-      _streamController?.add(event);
-    });
-  }
+  // void listen(String? uid, [QueryArgs? queryArgs]) {
+  //   _subscription = onCharts(uid, queryArgs).listen((event) {
+  //     _streamController?.add(event);
+  //   });
+  // }
 
-  @override
-  void dispose() {
-    _subscription?.cancel();
-    _streamController?.close();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _subscription?.cancel();
+  //   _streamController?.close();
+  //   super.dispose();
+  // }
 }

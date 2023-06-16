@@ -1,35 +1,37 @@
-part of lasotuvi_chart;
+part of tauari_ui;
 
-class HorizontalChartList extends StatelessWidget {
-  const HorizontalChartList({
+class HorizontalDataListBuilder<T extends SyncableEntity>
+    extends StatelessWidget {
+  const HorizontalDataListBuilder({
     super.key,
+    required this.uid,
     required this.controller,
-    this.uid,
+    required this.itemWidget,
+    required this.queryArgs,
   });
 
-  final ChartListController controller;
   final String? uid;
+  final DataListStreamController<T> controller;
+  final Widget Function(T) itemWidget;
+  final QueryArgs queryArgs;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: controller.chartsStream(uid,
-            QueryArgs(uid: uid, limit: 10, orderBy: ColumnChart.lastViewed)),
+        stream: controller.stream(uid, queryArgs),
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const LoadingWidget();
           } else if (snapshot.hasData) {
             return ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (ctx, index) {
-                return Text(snapshot.requireData.elementAt(index).name);
+                return itemWidget(snapshot.requireData.elementAt(index));
               },
               itemCount: snapshot.requireData.length,
             );
           } else {
-            return const Center(
-              child: Text('!'),
-            );
+            return const ErrorTextWidget();
           }
         });
   }

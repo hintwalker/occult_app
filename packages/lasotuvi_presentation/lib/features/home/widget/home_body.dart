@@ -1,13 +1,13 @@
 part of lasotuvi_presentation;
 
-class HomeScreenBody extends ConsumerStatefulWidget {
-  const HomeScreenBody({super.key});
+class HomeBody extends ConsumerStatefulWidget {
+  const HomeBody({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenBodyState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeBodyState();
 }
 
-class _HomeScreenBodyState extends AuthDependedState<HomeScreenBody> {
+class _HomeBodyState extends AuthDependedState<HomeBody> {
   // StreamSubscription? _streamSubscription;
   // String? uid;
   // @override
@@ -46,13 +46,13 @@ class _HomeScreenBodyState extends AuthDependedState<HomeScreenBody> {
             uid: uid,
             translate: translate,
           ),
-          SizedBox(
-            height: 200.0,
-            child: HorizontalChartList(
-              controller: ref.watch(chartListControllerProvider),
-              uid: uid,
-            ),
-          )
+          // SizedBox(
+          //   height: 200.0,
+          //   child: HorizontalChartList(
+          //     controller: ref.watch(chartListControllerProvider),
+          //     uid: uid,
+          //   ),
+          // )
         ],
       ),
     );

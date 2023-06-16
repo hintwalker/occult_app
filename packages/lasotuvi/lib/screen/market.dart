@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show EnergyMarketScreenBody;
+part of '../main.dart';
 
-class EnergyMarketScreen extends StatelessWidget {
-  const EnergyMarketScreen({
+class MarketScreen extends StatelessWidget {
+  const MarketScreen({
     super.key,
     this.restorationId,
     // required this.drawerController,
@@ -14,7 +12,7 @@ class EnergyMarketScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const EnergyMarketScreenBody()
+        restorationId: restorationId, child: const MarketBody()
         // Center(
         //   child: FilledButton(
         //       onPressed: () => drawerController.setScreenId('home'),

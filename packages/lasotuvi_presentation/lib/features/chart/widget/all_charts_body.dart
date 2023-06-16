@@ -1,14 +1,13 @@
 part of lasotuvi_presentation;
 
-class AllChartScreenBody extends ConsumerStatefulWidget {
-  const AllChartScreenBody({super.key});
+class AllChartsBody extends ConsumerStatefulWidget {
+  const AllChartsBody({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AllChartScreenBodyState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AllChartsBodyState();
 }
 
-class _AllChartScreenBodyState extends AuthDependedState<AllChartScreenBody> {
+class _AllChartsBodyState extends AuthDependedState<AllChartsBody> {
   @override
   Widget build(BuildContext context) {
     // return const Placeholder();

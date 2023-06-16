@@ -1,15 +1,14 @@
 part of lasotuvi_presentation;
 
-class EnergyMarketScreenBody extends ConsumerStatefulWidget {
-  const EnergyMarketScreenBody({super.key});
+class MarketBody extends ConsumerStatefulWidget {
+  const MarketBody({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _EnergyMarketScreenBodyState();
 }
 
-class _EnergyMarketScreenBodyState
-    extends ConsumerState<EnergyMarketScreenBody> {
+class _EnergyMarketScreenBodyState extends ConsumerState<MarketBody> {
   @override
   void initState() {
     super.initState();

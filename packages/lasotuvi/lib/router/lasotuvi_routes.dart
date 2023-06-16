@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lasotuvi/main.dart';
-import 'package:lasotuvi/screen/storage_plan_market.dart';
 // import 'package:lasotuvi/screen/take_screen.dart';
 // import 'package:lasotuvi/screen/chart/all_charts_screen.dart';
 // import 'package:lasotuvi/screen/chart/chart_creation_screen.dart';
@@ -13,8 +12,6 @@ import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
     show Dashboard, RouteName, RoutePath, shellNavigatorKey;
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../screen/energy_market.dart';
-import '../screen/home.dart';
 // import '../screen/storage_plan_market_screen.dart';
 // SplashScreen,
 // WelcomeScreen,
@@ -54,7 +51,7 @@ class LasotuviRoutes {
               name: RouteName.energyMarket,
               path: RoutePath.energyMarket,
               pageBuilder: (context, state) => const FadeTransitionPage(
-                    child: EnergyMarketScreen(
+                    child: MarketScreen(
                       restorationId: 'energyMarket',
                       // drawerController: mainDrawerController,
                     ),
@@ -63,7 +60,7 @@ class LasotuviRoutes {
             name: RouteName.storagePlanMarket,
             path: RoutePath.storagePlanMarket,
             pageBuilder: (context, state) => const FadeTransitionPage(
-              child: StoragePlanMarketScreen(
+              child: AllStoragePlansScreen(
                 restorationId: RouteName.storagePlanMarket,
                 // drawerController: mainDrawerController,
               ),
@@ -83,7 +80,7 @@ class LasotuviRoutes {
             name: RouteName.notes,
             path: RoutePath.notes,
             pageBuilder: (context, state) => const FadeTransitionPage(
-              child: NotesScreen(
+              child: AllNotesScreen(
                 restorationId: RouteName.notes,
                 // drawerController: mainDrawerController,
               ),
@@ -93,7 +90,7 @@ class LasotuviRoutes {
             name: RouteName.tags,
             path: RoutePath.tags,
             pageBuilder: (context, state) => const FadeTransitionPage(
-              child: TagsScreen(
+              child: AllTagsScreen(
                 restorationId: RouteName.tags,
                 // drawerController: mainDrawerController,
               ),

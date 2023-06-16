@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show StoragePlanScreenBody;
+part of '../main.dart';
 
-class StoragePlanMarketScreen extends StatelessWidget {
-  const StoragePlanMarketScreen({
+class AllStoragePlansScreen extends StatelessWidget {
+  const AllStoragePlansScreen({
     super.key,
     this.restorationId,
   });
@@ -18,7 +16,7 @@ class StoragePlanMarketScreen extends StatelessWidget {
             Placeholder(
               fallbackHeight: 50.0,
             ),
-            Expanded(child: StoragePlanScreenBody())
+            Expanded(child: AllStoragePlansBody())
           ],
         ));
   }

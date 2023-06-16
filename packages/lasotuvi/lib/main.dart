@@ -21,12 +21,14 @@ import 'package:tuvi_style/tuvi_style.dart';
 import 'firebase_options.dart';
 import 'router/router_provider.dart';
 
-part 'screen/group_stars.widget.dart';
-part 'screen/library.widget.dart';
-part 'screen/charts.widget.dart';
-part 'screen/notes.widget.dart';
-part 'screen/tags.widget.dart';
-part 'screen/books.widget.dart';
+part 'screen/library.dart';
+part 'screen/all_charts.dart';
+part 'screen/all_notes.dart';
+part 'screen/all_tags.dart';
+part 'screen/all_commentaries.dart';
+part 'screen/home.dart';
+part 'screen/market.dart';
+part 'screen/all_storage_plans.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
