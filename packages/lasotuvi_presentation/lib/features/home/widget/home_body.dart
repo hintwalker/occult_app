@@ -46,13 +46,15 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
             uid: uid,
             translate: translate,
           ),
-          // SizedBox(
-          //   height: 200.0,
-          //   child: HorizontalChartList(
-          //     controller: ref.watch(chartListControllerProvider),
-          //     uid: uid,
-          //   ),
-          // )
+          SizedBox(
+            height: 180.0,
+            child: TopTenChartsBanner(
+              controller: ref.watch(chartListControllerProvider),
+              uid: uid,
+              translate: translate,
+              colorScheme: lightColorScheme,
+            ),
+          )
         ],
       ),
     );

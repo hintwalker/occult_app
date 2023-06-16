@@ -5,25 +5,39 @@ class TopTenChartsBanner extends StatelessWidget {
     super.key,
     required this.uid,
     required this.controller,
+    required this.translate,
+    required this.colorScheme,
   });
 
   final String? uid;
   final DataListStreamController<Chart> controller;
+  final String Function(String) translate;
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HorizontalDataListBuilder<Chart>(
-            uid: uid,
-            controller: controller,
-            itemWidget: (item) => HoriChartItemWidget(item),
-            queryArgs: QueryArgs(
-              uid: uid,
-              limit: 10,
-              orderBy: ColumnChart.lastViewed,
-            ))
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+              child: HorizontalDataListBuilder<Chart>(
+                  uid: uid,
+                  controller: controller,
+                  itemWidget: (item) => HoriChartItemWidget(
+                        item,
+                        uid: uid,
+                        translate: translate,
+                        colorScheme: colorScheme,
+                      ),
+                  queryArgs: QueryArgs(
+                    uid: uid,
+                    limit: 10,
+                    orderBy: ColumnChart.lastViewed,
+                  )))
+        ],
+      ),
     );
   }
 }

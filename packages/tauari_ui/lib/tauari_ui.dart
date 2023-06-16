@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 
-part 'widget/sync_status_widget.dart';
+part 'widget/sync_status_ribbon_widget.dart';
 part 'widget/error_text_widget.dart';
 part 'widget/loading_widget.dart';
 part 'widget/horizontal_data_list_builder.dart';

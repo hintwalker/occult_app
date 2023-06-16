@@ -10,6 +10,8 @@ import 'package:tauari_list_view/tauari_list_view.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
+part 'widget/hori_chart_birthday_widget.dart';
+part 'widget/hori_chart_name_widget.dart';
 part 'widget/hori_chart_item_widget.dart';
 part 'widget/tag_item_in_chart.widget.dart';
 part 'widget/top_ten_charts_banner.dart';

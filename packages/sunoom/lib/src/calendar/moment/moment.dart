@@ -52,8 +52,20 @@ class Moment {
         gregorian.year, gregorian.month, gregorian.day, time.hour, time.minute);
   }
 
+  String toGregorianDateString() {
+    return '${stringFormat2Digits(gregorian.day)}/${stringFormat2Digits(gregorian.month)}/${stringFormat2Digits(gregorian.year)}';
+  }
+
   String toGregorianDateTimeString() {
     return '${stringFormat2Digits(gregorian.day)}/${stringFormat2Digits(gregorian.month)}/${stringFormat2Digits(gregorian.year)}, ${stringFormat2Digits(time.hour)}:${stringFormat2Digits(time.minute)}';
+  }
+
+  String toLuniSolarDateString({
+    required String Function(Can) canName,
+    required String Function(Chi) chiName,
+  }) {
+    final luniSolar = gregorian2LuniSolar(gregorian: gregorian, time: time);
+    return '${stringFormat2Digits(luniSolar.day)}/${stringFormat2Digits(luniSolar.month)} ${canName(Can.ofLuniYear(luniSolar.year))} ${chiName(Chi.ofLuniYear(luniSolar.year))}';
   }
 
   @override

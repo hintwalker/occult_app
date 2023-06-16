@@ -1,4 +1,4 @@
-name: lasotuvi_library
+name: lasotuvi_tag
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -8,13 +8,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  firebase_storage: ^11.2.1
   flutter:
     sdk: flutter
-  hive: ^2.2.3
-  markdown_widget: ^2.2.0
-  tauari_data_core:
-    path: ../tauari_data_core
 
 dev_dependencies:
   flutter_test:

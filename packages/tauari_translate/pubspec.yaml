@@ -1,10 +1,10 @@
 name: tauari_translate
 description: A library help translating languages in ui.
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
-  sdk: '>=2.19.5 <3.0.0'
+  sdk: '>=3.0.5 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
