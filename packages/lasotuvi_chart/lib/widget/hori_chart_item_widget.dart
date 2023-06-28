@@ -47,19 +47,20 @@ class HoriChartItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                    child: Center(
-                      child: SizedBox(
-                        width: 48.0,
-                        height: 48.0,
-                        child: CircleHumanAvatar(
-                          gender: item.gender.intValue,
-                          path: item.avatar,
-                          size: 48.0,
-                        ),
-                      ),
+                  // Expanded(
+                  //   child: Center(
+                  // child:
+                  SizedBox(
+                    width: 48.0,
+                    height: 48.0,
+                    child: CircleHumanAvatar(
+                      gender: item.gender.intValue,
+                      path: item.avatar,
+                      size: 48.0,
                     ),
                   ),
+                  //   ),
+                  // ),
 
                   // const SizedBox(
                   //   height: 4.0,

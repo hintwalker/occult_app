@@ -19,6 +19,7 @@ import 'package:storage_options/storage_options.dart';
 import 'package:tauari_auth/tauari_auth.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_drawer/tauari_drawer.dart';
+import 'package:tauari_list_view/tauari_list_view.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
@@ -44,6 +45,7 @@ part 'features/note/widget/note_editor_body.dart';
 
 part 'features/library/library_body.dart';
 
+part 'features/tag/tag_edit_body.dart';
 part 'features/tag/tag_detail_body.dart';
 part 'features/tag/tag_creation_body.dart';
 

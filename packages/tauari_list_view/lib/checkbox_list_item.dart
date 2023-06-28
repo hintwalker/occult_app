@@ -21,7 +21,17 @@ class _CheckBoxListItemState extends State<CheckBoxListItem> {
   @override
   void initState() {
     super.initState();
-    checked = widget.data.selected;
+    setState(() {
+      checked = widget.data.selected;
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant CheckBoxListItem oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    setState(() {
+      checked = widget.data.selected;
+    });
   }
 
   @override
@@ -35,7 +45,8 @@ class _CheckBoxListItemState extends State<CheckBoxListItem> {
               setState(() {
                 checked = value ?? false;
               });
-            })
+            }),
+        widget.child,
       ],
     );
   }

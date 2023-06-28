@@ -39,7 +39,7 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
             ),
           ),
           SizedBox(
-            height: 148.0,
+            height: 168.0,
             child: TopTenTagsBanner(
               controller: ref.watch(tagListControllerProvider),
               uid: uid,

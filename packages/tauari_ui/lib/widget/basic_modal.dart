@@ -25,7 +25,21 @@ class BasicModal extends StatelessWidget {
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(24),
                           bottomRight: Radius.circular(24)),
-                      color: colorScheme.surfaceVariant),
+                      color: colorScheme.surfaceVariant,
+                      boxShadow: [
+                        BoxShadow(
+                          color: colorScheme.surfaceVariant,
+                          offset: const Offset(0, 0),
+                          blurRadius: 0.0,
+                          spreadRadius: 0.0,
+                        ),
+                        BoxShadow(
+                          color: colorScheme.outline,
+                          offset: const Offset(2.0, 2.0),
+                          blurRadius: 10.0,
+                          spreadRadius: 1.0,
+                        ),
+                      ]),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

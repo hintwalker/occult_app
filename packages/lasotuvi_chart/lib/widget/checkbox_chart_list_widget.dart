@@ -4,48 +4,56 @@ class CheckBoxChartListWidget extends StatelessWidget {
   const CheckBoxChartListWidget(
     this.data, {
     super.key,
+    this.uid,
+    required this.tagId,
     required this.translate,
     required this.colorScheme,
-    // required this.onItemTap,
-    this.uid,
+    required this.onItemTap,
     required this.onSubmit,
     required this.onCancel,
   });
-  final Iterable<Chart> data;
+  final int tagId;
+  final Iterable<ChartHasTags> data;
   final String Function(String) translate;
   final ColorScheme colorScheme;
   final String? uid;
-  final void Function(BuildContext context, Iterable<Chart> charts, String? uid)
-      onSubmit;
+  final void Function(BuildContext context,
+      Iterable<SelectableItem<ChartHasTags>> charts, String? uid) onSubmit;
   final void Function(BuildContext context) onCancel;
-  // final void Function(BuildContext, Chart, String? uid) onItemTap;
+  final void Function(BuildContext context, Chart chart, String? uid) onItemTap;
 
   @override
   Widget build(BuildContext context) {
-    return SelectableDataListView<Chart, SimpleTextGroup>(
+    return SelectableDataListView<ChartHasTags, SimpleTextGroup>(
       data,
       groupBy: groupBy,
       itemBuilder: (item) => ChartListItemWidget(
-        item,
+        item.source,
         uid: uid,
         translate: translate,
         colorScheme: colorScheme,
-        onTap: null,
+        onTap: onItemTap,
       ),
       groupSeperatorBuilder: (p0) => Text(p0.label),
       whereTest: whereTest,
       translate: translate,
       onCancel: onCancel,
       onSubmit: (context, charts) => onSubmit(context, charts, uid),
+      initSelected: (chartHasTags) => chartHasTags.carry
+          .where(
+            (element) => element.id == tagId,
+          )
+          .isNotEmpty,
+      itemId: (chartHasTags) => chartHasTags.source.id,
     );
   }
 
-  SimpleTextGroup groupBy(Chart item) {
-    final firstLetter = item.name.substring(0, 1);
+  SimpleTextGroup groupBy(ChartHasTags item) {
+    final firstLetter = item.source.name.substring(0, 1);
     return SimpleTextGroup(firstLetter, firstLetter.toUpperCase());
   }
 
-  bool whereTest(Chart item, String query) {
-    return item.name.toLowerCase().contains(query.trim().toLowerCase());
+  bool whereTest(ChartHasTags item, String query) {
+    return item.source.name.toLowerCase().contains(query.trim().toLowerCase());
   }
 }

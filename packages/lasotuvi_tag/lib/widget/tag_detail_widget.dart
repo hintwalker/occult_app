@@ -10,6 +10,8 @@ class TagDetailWidget extends StatelessWidget {
     required this.onChartItemTap,
     required this.tagSyncOptions,
     required this.chartSyncOptions,
+    required this.onChangeInfoTap,
+    required this.onOpenChartList,
   });
   final String? uid;
   final TagHasCharts tagHasCharts;
@@ -19,19 +21,23 @@ class TagDetailWidget extends StatelessWidget {
   final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
   final Widget Function(Chart, {String? uid, String? syncStatus})
       chartSyncOptions;
+  final void Function(BuildContext context, Tag tag) onChangeInfoTap;
+  final void Function(BuildContext context, Tag tag) onOpenChartList;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           Text(
             tagHasCharts.source.title,
             style: const TextStyle(
-              fontSize: 26,
+              fontSize: 28,
               fontWeight: FontWeight.w500,
             ),
+            textAlign: TextAlign.center,
           ),
           Text(
             tagHasCharts.source.subTitle,
@@ -39,7 +45,15 @@ class TagDetailWidget extends StatelessWidget {
               fontSize: 20,
               fontStyle: FontStyle.italic,
             ),
+            textAlign: TextAlign.center,
           ),
+          ElevatedButton.icon(
+              onPressed: () => onChangeInfoTap(
+                    context,
+                    tagHasCharts.source,
+                  ),
+              icon: const Icon(Icons.edit),
+              label: Text(translate('changeInfo'))),
           const SizedBox(
             height: 24.0,
           ),
@@ -50,7 +64,7 @@ class TagDetailWidget extends StatelessWidget {
             ),
             const SizedBox(width: 12.0),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => onOpenChartList(context, tagHasCharts.source),
               icon: const Icon(Icons.add_circle_outline),
               label: Text(
                 translate('addChart'),
@@ -59,7 +73,40 @@ class TagDetailWidget extends StatelessWidget {
           ]),
           DataGridWidget<Chart>(
             tagHasCharts.carry,
-            itemWidget: (chart) => HoriChartItemWidget(
+            itemWidget: (chart) =>
+                // Stack(
+                //       children: [
+                //         InkWell(
+                //           borderRadius: BorderRadius.circular(20),
+                //           child: Card(
+                //             child: Padding(
+                //               padding: const EdgeInsets.all(8.0),
+                //               child: Column(
+                //                 children: [
+                //                   // Expanded(
+                //                   //   child:
+                //                   // Center(
+                //                   //   child:
+                //                   SizedBox(
+                //                     width: 48.0,
+                //                     height: 48.0,
+                //                     child: CircleHumanAvatar(
+                //                       gender: chart.gender.intValue,
+                //                       path: chart.avatar,
+                //                       size: 48.0,
+                //                     ),
+                //                   ),
+                //                   // ),
+                //                   // ),
+                //                   Text(chart.name),
+                //                 ],
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       ],
+                //     )
+                HoriChartItemWidget(
               chart,
               uid: uid,
               colorScheme: colorScheme,

@@ -10,6 +10,9 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tauari_values/tauari_values.dart';
 import 'package:flutter/services.dart';
 
+part 'usecase/syncable/dis_connect_left_from_right.dart';
+part 'usecase/syncable/connect_left_to_right.dart';
+part 'usecase/syncable/update.dart';
 part 'usecase/syncable/on_depended_by_owner_id.dart';
 part 'usecase/syncable/on_syncable_data.dart';
 part 'usecase/syncable/on_syncable_one_many_data.dart';

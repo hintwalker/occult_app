@@ -3,22 +3,25 @@ part of lasotuvi_chart;
 class CheckboxChartListBuilder extends StatelessWidget {
   const CheckboxChartListBuilder({
     super.key,
+    this.uid,
+    required this.tagId,
     required this.controller,
     required this.translate,
     required this.colorScheme,
     required this.onCancel,
     required this.onSubmit,
-    this.uid,
+    required this.onItemTap,
   });
 
-  final ChartListController controller;
+  final ChartHasTagsListController controller;
   final String? uid;
-
+  final int tagId;
   final String Function(String) translate;
   final ColorScheme colorScheme;
-  final void Function(BuildContext context, Iterable<Chart> charts, String? uid)
-      onSubmit;
+  final void Function(BuildContext context,
+      Iterable<SelectableItem<ChartHasTags>> charts, String? uid) onSubmit;
   final void Function(BuildContext context) onCancel;
+  final void Function(BuildContext context, Chart chart, String? uid) onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +35,13 @@ class CheckboxChartListBuilder extends StatelessWidget {
           } else if (snapshot.hasData) {
             return CheckBoxChartListWidget(
               snapshot.requireData,
+              uid: uid,
+              tagId: tagId,
               translate: translate,
               colorScheme: colorScheme,
               onSubmit: onSubmit,
               onCancel: onCancel,
+              onItemTap: onItemTap,
             );
           } else {
             return const Center(

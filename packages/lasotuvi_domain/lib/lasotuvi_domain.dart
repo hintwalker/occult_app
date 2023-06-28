@@ -34,6 +34,9 @@ part 'chart_tag/entity/chart_has_tags.dart';
 part 'chart_tag/entity/tag_has_charts.dart';
 part 'chart_tag/column_chart_tag.dart';
 part 'chart_tag/repository/chart_tag_repository.dart';
+
+part 'chart_tag/usecase/dis_connect_charts_from_tag.dart';
+part 'chart_tag/usecase/connect_charts_to_tag.dart';
 part 'chart_tag/usecase/on_chart_has_tags_list.dart';
 part 'chart_tag/usecase/on_chart_has_tags.dart';
 part 'chart_tag/usecase/sync_chart_tags.dart';
@@ -56,6 +59,7 @@ part 'chart/repository/cloud_chart_repository.dart';
 part 'chart/repository/local_chart_repository.dart';
 part 'chart/column_chart.dart';
 
+part 'tag/usecase/update_tag.dart';
 part 'tag/usecase/insert_tag_to_local.dart';
 part 'tag/usecase/on_tag.dart';
 part 'tag/usecase/sync_tags.dart';

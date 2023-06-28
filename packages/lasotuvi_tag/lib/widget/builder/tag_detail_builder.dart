@@ -11,6 +11,8 @@ class TagDetailBuilder extends StatelessWidget {
     required this.onChartItemTap,
     required this.tagSyncOptions,
     required this.chartSyncOptions,
+    required this.onChangeInfoTap,
+    required this.onOpenChartList,
   });
   final TagDetailController controller;
   final String? uid;
@@ -21,6 +23,8 @@ class TagDetailBuilder extends StatelessWidget {
   final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
   final Widget Function(Chart, {String? uid, String? syncStatus})
       chartSyncOptions;
+  final void Function(BuildContext, Tag tag) onChangeInfoTap;
+  final void Function(BuildContext context, Tag tag) onOpenChartList;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,8 @@ class TagDetailBuilder extends StatelessWidget {
                         onChartItemTap: onChartItemTap,
                         tagSyncOptions: tagSyncOptions,
                         chartSyncOptions: chartSyncOptions,
+                        onChangeInfoTap: onChangeInfoTap,
+                        onOpenChartList: onOpenChartList,
                       );
               } else {
                 return const ErrorTextWidget();

@@ -48,4 +48,16 @@ abstract class SyncableRelRepository<
     required int rightId,
     required SyncableEntityCarrier<R, L> Function(R, Iterable<L>) onCreateItem,
   });
+
+  Future<void> connectLeftToRight({
+    String? uid,
+    required int rightId,
+    required Iterable<L> lefts,
+  });
+
+  Future<void> disConnectLeftFromRight({
+    String? uid,
+    required int rightId,
+    required Iterable<L> lefts,
+  });
 }

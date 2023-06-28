@@ -115,15 +115,6 @@ class ChartViewWidget extends StatelessWidget {
                 const SizedBox(
                   height: 12.0,
                 ),
-                Wrap(
-                  spacing: 2.0,
-                  runSpacing: 2.0,
-                  children: chartHasTags.carry
-                      .map(
-                        (e) => Card(child: Text(e.title)),
-                      )
-                      .toList(),
-                ),
                 const SizedBox(
                   height: 24.0,
                 ),
@@ -142,6 +133,15 @@ class ChartViewWidget extends StatelessWidget {
                     ),
                   ),
                 ]),
+                Wrap(
+                  spacing: 2.0,
+                  runSpacing: 2.0,
+                  children: chartHasTags.carry
+                      .map(
+                        (e) => Card(child: Text(e.title)),
+                      )
+                      .toList(),
+                ),
                 const SizedBox(
                   height: 24.0,
                 ),

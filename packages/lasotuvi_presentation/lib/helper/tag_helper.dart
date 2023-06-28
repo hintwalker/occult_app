@@ -18,4 +18,11 @@ class TagHelper {
       RouterParams.tagId: tag.docId,
     });
   }
+
+  static openTagEdit(BuildContext context, Tag tag) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => TagEditBody(tag),
+    );
+  }
 }

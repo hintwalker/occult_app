@@ -69,6 +69,9 @@ part 'chart/usecase/insert_chart_to_local.dart';
 part 'chart/usecase/sync_charts.dart';
 
 part 'chart_tag/controller/chart_has_tags_list_controller_provider.dart';
+
+part 'chart_tag/usecase/dis_connect_charts_from_tag.dart';
+part 'chart_tag/usecase/connect_charts_to_tag.dart';
 part 'chart_tag/usecase/on_tag_has_charts.dart';
 part 'chart_tag/usecase/on_chart_has_tags.dart';
 part 'chart_tag/usecase/on_chart_has_tags_list.dart';
@@ -88,6 +91,8 @@ part 'tag/repository/local_tag_repository.dart';
 part 'tag/data_source/firebase_tag_data_source.dart';
 part 'tag/data_source/sqlite_tag_data_source.dart';
 part 'tag/dao/tag_dao_provider.dart';
+
+part 'tag/usecase/update_tag.dart';
 part 'tag/usecase/delete_tag_from_cloud.dart';
 part 'tag/usecase/delete_tag_from_local.dart';
 part 'tag/usecase/download_tag.dart';

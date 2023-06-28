@@ -30,6 +30,7 @@ class ChartListItemWidget extends StatelessWidget {
         onSyncStatusTap: onSyncStatusTap,
         // storageOptionsModalBuilder: storageOptionsModalBuilder,
         child: ChartItemCardWidget(data,
+            uid: uid,
             colorScheme: colorScheme,
             translate: translate,
             onTap: onTap,

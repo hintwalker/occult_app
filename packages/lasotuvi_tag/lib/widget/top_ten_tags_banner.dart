@@ -58,7 +58,7 @@ class TopTenTagsBanner extends StatelessWidget {
   }
 
   void openStorageOptions(BuildContext context, Tag item) {
-    showBottomSheet(
+    showModalBottomSheet(
         context: context,
         builder: (_) => SingleChildScrollView(
               child: storageOptionsModalBuilder(item,

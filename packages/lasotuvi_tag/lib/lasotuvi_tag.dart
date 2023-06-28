@@ -14,8 +14,12 @@ part 'controller/tag_detail_controller.dart';
 part 'controller/tag_list_controller.dart';
 
 part 'widget/builder/tag_detail_builder.dart';
+
+part 'widget/modal/tag_edit_modal.dart';
 part 'widget/modal/tag_creation_modal.dart';
 
+part 'widget/tag_edit_widget.dart';
+part 'widget/tag_form_widget.dart';
 part 'widget/tag_detail_widget.dart';
 part 'widget/tag_creation_widget.dart';
 part 'widget/top_ten_tags_banner.dart';

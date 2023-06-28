@@ -12,4 +12,12 @@ class ChartHelper {
           ChartViewBody(chart: chart),
     );
   }
+
+  static void openCheckboxChartList(BuildContext context, Tag tag) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          Material(child: CheckBoxChartListBody(tag)),
+    );
+  }
 }

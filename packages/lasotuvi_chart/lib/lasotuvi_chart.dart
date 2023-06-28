@@ -13,6 +13,7 @@ import 'package:tuvi_chart_diagram/tuvi_chart_diagram.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 import 'package:tuvi_strings/tuvi_strings.dart';
 
+part 'widget/modal/checkbox_chart_list_modal.dart';
 part 'widget/modal/chart_edit_options_modal.dart';
 part 'widget/modal/chart_view_modal.dart';
 part 'widget/modal/single_selectable_chart_list_modal.dart';

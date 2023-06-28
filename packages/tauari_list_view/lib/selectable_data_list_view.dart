@@ -14,6 +14,8 @@ class SelectableDataListView<U, V> extends StatefulWidget {
     this.sort = false,
     required this.onCancel,
     required this.onSubmit,
+    required this.initSelected,
+    required this.itemId,
   });
 
   final Iterable<U> data;
@@ -25,8 +27,11 @@ class SelectableDataListView<U, V> extends StatefulWidget {
   final bool Function(U, String) whereTest;
   final String Function(String) translate;
   final bool sort;
-  final void Function(BuildContext context, Iterable<U> charts) onSubmit;
+  final void Function(BuildContext context, Iterable<SelectableItem<U>> charts)
+      onSubmit;
   final void Function(BuildContext context) onCancel;
+  final bool Function(U) initSelected;
+  final int Function(U) itemId;
 
   @override
   State<SelectableDataListView> createState() =>
@@ -37,12 +42,15 @@ class _SelectableDataListViewState<U, V>
     extends State<SelectableDataListView<U, V>> {
   List<SelectableItem<U>> selectableItems = [];
   List<SelectableItem<U>> foundData = [];
-  List<U> selected = [];
+  List<SelectableItem<U>> selected = [];
   late final TextEditingController controller;
   @override
   void initState() {
-    selectableItems =
-        widget.data.map((e) => SelectableItem(e, selected: false)).toList();
+    selectableItems = widget.data
+        .map((e) => SelectableItem(e,
+            initSelected: widget.initSelected(e),
+            selected: widget.initSelected(e)))
+        .toList();
     foundData = selectableItems;
     controller = TextEditingController();
     super.initState();
@@ -52,8 +60,11 @@ class _SelectableDataListViewState<U, V>
   void didUpdateWidget(covariant SelectableDataListView<U, V> oldWidget) {
     super.didUpdateWidget(oldWidget);
     setState(() {
-      selectableItems =
-          widget.data.map((e) => SelectableItem(e, selected: false)).toList();
+      selectableItems = widget.data
+          .map((e) => SelectableItem(e,
+              initSelected: widget.initSelected(e),
+              selected: widget.initSelected(e)))
+          .toList();
       foundData = selectableItems;
     });
   }
@@ -97,13 +108,19 @@ class _SelectableDataListViewState<U, V>
                 ? GroupedListOrder.ASC
                 : GroupedListOrder.DESC,
             itemBuilder: (ctx, item) {
-              return CheckBoxListItem<U>(
-                item,
-                child: widget.itemBuilder(item.data),
-                onChanged: (checked) => checked
-                    ? selected.add(item.data)
-                    : selected.remove(item.data),
-              );
+              return CheckBoxListItem<U>(item,
+                  child: widget.itemBuilder(item.data), onChanged: (checked) {
+                final old = selected.where((element) =>
+                    widget.itemId(element.data) == widget.itemId(item.data));
+                if (old.isNotEmpty) {
+                  selected.remove(old.first);
+                }
+                selected.add(item.copyWith(selected: checked));
+              }
+                  // checked
+                  //     ? selected.add(item)
+                  //     : selected.remove(item),
+                  );
             },
             physics: const ClampingScrollPhysics(),
           ),
