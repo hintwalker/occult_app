@@ -1,13 +1,14 @@
 part of storage_options;
 
-class StorageOptionsModal<T extends SyncableEntity<T>> extends StatefulWidget {
+class StorageOptionsModal<T extends SyncableEntity> extends StatefulWidget {
   const StorageOptionsModal({
     super.key,
     this.uid,
-    this.onCloud,
+    this.syncStatus,
     required this.item,
     required this.colorScheme,
     required this.translate,
+    // required this.controller,
     required this.onUpload,
     required this.onDownload,
     required this.onDeleteFromCloud,
@@ -16,10 +17,11 @@ class StorageOptionsModal<T extends SyncableEntity<T>> extends StatefulWidget {
   });
 
   final String? uid;
-  final String? onCloud;
+  final String? syncStatus;
   final T item;
   final ColorScheme colorScheme;
   final String Function(String) translate;
+  // final StorageOptionsModalController controller;
   final Future Function(String, T) onUpload;
   final Future Function(String, T) onDownload;
   final Future Function(String, T) onDeleteFromCloud;
@@ -30,14 +32,14 @@ class StorageOptionsModal<T extends SyncableEntity<T>> extends StatefulWidget {
   State<StatefulWidget> createState() => _StorageOptionsModalState<T>();
 }
 
-class _StorageOptionsModalState<T extends SyncableEntity<T>>
+class _StorageOptionsModalState<T extends SyncableEntity>
     extends State<StorageOptionsModal<T>> {
   String? onCloud;
   @override
   void initState() {
     super.initState();
     setState(() {
-      onCloud = widget.onCloud;
+      onCloud = widget.syncStatus;
     });
   }
 
@@ -45,7 +47,7 @@ class _StorageOptionsModalState<T extends SyncableEntity<T>>
   void didUpdateWidget(covariant StorageOptionsModal<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     setState(() {
-      onCloud = widget.onCloud;
+      onCloud = widget.syncStatus;
     });
   }
 

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import '../controllers/date_controller.dart';
-import 'date_field.dart';
+part of sunoom_calendar_input;
 
 class DateInput extends StatefulWidget {
   final DateController controller;

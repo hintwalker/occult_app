@@ -7,14 +7,20 @@ abstract class SyncableDependentRepository<E extends SyncableEntity,
     required super.cloudRepository,
   });
 
-  Future<O?> owner(String? uid, int dependentId);
+  Future<O?> ownerOf(String? uid, int dependentId);
   Future<Iterable<E>> byOwnerId(String? uid, int ownerId);
   Stream<Iterable<E>> onByOwnerId(String? uid, int ownerId);
   Future<int> deleteByOwner(String? uid, int ownerId);
 
-  Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerHasThese(String? uid,
-      SyncableEntityCarrier<O, E> Function(O, Iterable<E>) onCreateItem);
+  Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerHasThese({
+    String? uid,
+    QueryArgs? queryArgs,
+    required SyncableEntityCarrier<O, E> Function(O, Iterable<E>) onCreateItem,
+  });
 
-  Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerAndThis(String? uid,
-      SyncableEntityCarrier<O, E> Function(O p1, E p2) onCreateItem);
+  Stream<Iterable<SyncableEntityPair<E, O>>> onOwnerAndThis({
+    String? uid,
+    QueryArgs? queryArgs,
+    required SyncableEntityPair<E, O> Function(E p1, O p2) onCreateItem,
+  });
 }

@@ -9,6 +9,8 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_firebase/tauari_firebase.dart';
 import 'package:tauari_purchase/tauari_purchase.dart';
 
+part 'presentation/style/live_energy_style.dart';
+
 part 'data_source/energy_data_source.dart';
 part 'model/energy_model.dart';
 part 'presentation/widget/live_energy_widget.dart';

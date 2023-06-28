@@ -217,7 +217,7 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<SyncableEntityCarrier<R, L>>> onRightHasLeft(
+  Stream<Iterable<SyncableEntityCarrier<R, L>>> onRightHasLeftList(
       String? uid,
       SyncableEntityCarrier<R, L> Function(R right, Iterable<L> lefts)
           onCreateItem) {
@@ -232,7 +232,7 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<SyncableEntityCarrier<L, R>>> onLeftHasRight(
+  Stream<Iterable<SyncableEntityCarrier<L, R>>> onLeftHasRightList(
       String? uid,
       SyncableEntityCarrier<L, R> Function(L left, Iterable<R> rights)
           onCreateItem) {
@@ -253,5 +253,50 @@ class SyncableRelRepositoryImpl<
               },
             )));
     // return onCreateItem(left, rights);
+  }
+
+  @override
+  Stream<SyncableEntityCarrier<L, R>?> onLeftHasRight(
+      {String? uid,
+      required int leftId,
+      required SyncableEntityCarrier<L, R> Function(L p1, Iterable<R> p2)
+          onCreateItem}) {
+    return leftRepository
+        .onById(uid: uid, docId: leftId)
+        .asyncMap((event) async {
+      if (event == null) {
+        return Future.value(null);
+      }
+      final rights = await rightData(uid, event.id);
+      return onCreateItem(event, rights);
+    }
+//         async {
+//           Future.wait(
+// if (event == null) {
+//         return null;
+//       }
+//       final rights = await rightData(uid, event.id);
+//       return onCreateItem(event, rights);
+//           )
+
+//     }
+            );
+  }
+
+  @override
+  Stream<SyncableEntityCarrier<R, L>?> onRightHasLeft(
+      {String? uid,
+      required int rightId,
+      required SyncableEntityCarrier<R, L> Function(R p1, Iterable<L> p2)
+          onCreateItem}) {
+    return rightRepository
+        .onById(uid: uid, docId: rightId)
+        .asyncMap((event) async {
+      if (event == null) {
+        return Future.value(null);
+      }
+      final lefts = await leftData(uid, event.id);
+      return onCreateItem(event, lefts);
+    });
   }
 }

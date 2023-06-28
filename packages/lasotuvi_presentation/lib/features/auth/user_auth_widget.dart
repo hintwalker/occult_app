@@ -26,10 +26,10 @@ class _UserAuthWidgetState extends ConsumerState<UserAuthWidget> {
         await widget.syncData!();
       }
 
-      // await ref.read(syncChartsProvider)(savedUser);
-      // await ref.read(syncTagsProvider)(savedUser);
-      // await ref.read(syncNotesProvider)(savedUser);
-      // await ref.read(syncChartTagsProvider)(savedUser);
+      await ref.read(syncChartsProvider)(savedUser);
+      await ref.read(syncTagsProvider)(savedUser);
+      await ref.read(syncNotesProvider)(savedUser);
+      await ref.read(syncChartTagsProvider)(savedUser);
       return savedUser;
     }, () {
       if (kDebugMode) {

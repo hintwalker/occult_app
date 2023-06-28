@@ -6,10 +6,12 @@ class CircleHumanAvatar extends StatelessWidget {
     required this.gender,
     this.path,
     this.size = 36,
+    this.fit = BoxFit.fill,
   });
   final String? path;
   final int gender;
   final double size;
+  final BoxFit fit;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class CircleHumanAvatar extends StatelessWidget {
                       : const AssetImage('assets/icons/man.png',
                           package: 'tauari_ui')
                   : Image.file(File.fromUri(Uri.file(path!))).image,
-              fit: BoxFit.cover)),
+              fit: fit)),
     );
   }
 }

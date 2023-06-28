@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../chart_creation_notifier.dart';
+part of tuvi_chart_creation_form;
 
 class ChartNameInput extends ConsumerStatefulWidget {
   const ChartNameInput({super.key, required this.translate});
@@ -17,8 +13,8 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
   late final TextEditingController controller;
   @override
   void initState() {
-    controller = TextEditingController();
     super.initState();
+    controller = TextEditingController();
   }
 
   @override

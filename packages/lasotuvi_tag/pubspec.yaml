@@ -10,6 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  lasotuvi_domain:
+    path: ../lasotuvi_domain
+  tauari_ui:
+    path: ../tauari_ui
+  tuvi_strings:
+    path: ../tuvi_strings
+  tauari_list_view:
+    path: ../tauari_list_view
+  tauari_data_core:
+    path: ../tauari_data_core
+  lasotuvi_chart:
+    path: ../lasotuvi_chart
 
 dev_dependencies:
   flutter_test:

@@ -34,4 +34,11 @@ class RouteName {
 
   static const library = DrawerIds.library;
   static const groupStars = DrawerIds.groupStars;
+
+  static const allTags = DrawerIds.tags;
+  static const allNotes = DrawerIds.notes;
+
+  static const chartDetail = 'chartDetail';
+
+  static const tagDetail = 'tagDetail';
 }

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+part of sunoom_calendar_input;
 
 class DateField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -21,9 +20,12 @@ class DateField extends StatelessWidget {
       controller: textEditingController,
       validator: validator,
       textInputAction: TextInputAction.done,
-      keyboardType: TextInputType.datetime,
+      keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
-      inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(maxLength),
+        FilteringTextInputFormatter.digitsOnly
+      ],
       onChanged: (value) => onChanged(value),
       onTap: () => textEditingController.selection = TextSelection(
         baseOffset: 0,

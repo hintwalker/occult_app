@@ -1,22 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sunoom/sunoom.dart';
-import 'package:sunoom_calendar_input/validators/hour_validator.dart';
-import 'package:sunoom_calendar_input/validators/minute_validator.dart';
-import 'package:sunoom_calendar_input/widgets/time_input.dart';
-
-import '../controllers/calendar_editor_controller.dart';
-import '../controllers/date_name_group_controller.dart';
-import '../controllers/gregorian_date_controller.dart';
-import '../controllers/leap_month_options_controller.dart';
-import '../controllers/luni_date_controller.dart';
-import '../controllers/time_controller.dart';
-import '../validators/gregorian_day_validator.dart';
-import '../validators/luni_day_validator.dart';
-import '../validators/month_validator.dart';
-import '../validators/year_validator.dart';
-import 'date_input.dart';
-import 'date_name_group.dart';
-import 'leap_month_options_input.dart';
+part of sunoom_calendar_input;
 
 class CalendarInput extends StatefulWidget {
   const CalendarInput({

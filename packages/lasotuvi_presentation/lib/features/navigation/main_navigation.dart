@@ -15,7 +15,7 @@ class MainNavigation extends StatelessWidget {
       title: takeScreenTitle,
       menus: menus,
       style: const DrawerStyleImpl(lightColorScheme),
-      appBarTrailing: const AppBarTrailing(),
+      appBarTrailing: const EnergyPointAppBarAction(),
     );
   }
 }

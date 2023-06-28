@@ -1,5 +1,4 @@
-import '../validators/gregorian_day_validator.dart';
-import 'date_controller.dart';
+part of sunoom_calendar_input;
 
 class GregorianDateController extends DateController {
   final GregorianDayValidator dayValidator;

@@ -11,7 +11,7 @@ class HorizontalDataListBuilder<T extends SyncableEntity>
   });
 
   final String? uid;
-  final DataListStreamController<T> controller;
+  final SyncableDataListStreamController<T> controller;
   final Widget Function(T) itemWidget;
   final QueryArgs queryArgs;
 

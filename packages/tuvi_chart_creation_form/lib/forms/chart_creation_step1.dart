@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'chart_avatar_input.dart';
-import 'chart_gender_input.dart';
-import 'chart_name_input.dart';
+part of tuvi_chart_creation_form;
 
 class ChartCreationStep1 extends StatelessWidget {
   const ChartCreationStep1({

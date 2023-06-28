@@ -8,7 +8,10 @@ class HoriChartNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+      style: const TextStyle(
+          fontSize: 16.0, fontWeight: FontWeight.w500, letterSpacing: 1.2),
+      overflow: TextOverflow.fade,
+      maxLines: 1,
     );
   }
 }

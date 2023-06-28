@@ -10,8 +10,15 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tauari_values/tauari_values.dart';
 import 'package:flutter/services.dart';
 
-part 'usecase/syncable/on_syncable_carrier_data.dart';
+part 'usecase/syncable/on_depended_by_owner_id.dart';
 part 'usecase/syncable/on_syncable_data.dart';
+part 'usecase/syncable/on_syncable_one_many_data.dart';
+part 'usecase/syncable/on_syncable_pair_data.dart';
+part 'usecase/syncable/new_data.dart';
+part 'usecase/syncable/on_syncable_right_has_left.dart';
+part 'usecase/syncable/on_syncable_left_has_right.dart';
+part 'usecase/syncable/on_syncable_left_has_right_list.dart';
+part 'usecase/syncable/on_syncable_data_list.dart';
 part 'usecase/syncable/on_by_id.dart';
 part 'usecase/syncable/upload.dart';
 part 'usecase/syncable/download.dart';

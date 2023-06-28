@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'chart_watching_year_input.dart';
+part of tuvi_chart_creation_form;
 
 class ChartCreationStep3 extends StatelessWidget {
   const ChartCreationStep3({super.key});

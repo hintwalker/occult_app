@@ -11,7 +11,9 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_data/lasotuvi_data.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+import 'package:lasotuvi_note/lasotuvi_note.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
+import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tauari_auth/tauari_auth.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
@@ -52,15 +54,25 @@ part 'chart/data_source/sqlite_chart_data_source_provider.dart';
 part 'chart/repository/chart_repository_provider.dart';
 part 'chart/repository/cloud_chart_repository_provider.dart';
 part 'chart/repository/local_chart_repository_provider.dart';
+
+part 'chart/controller/chart_detail_controller.dart';
+part 'chart/controller/chart_view_controller.dart';
 part 'chart/controller/chart_list_controller_provider.dart';
+
+part 'chart/usecase/on_chart.dart';
 part 'chart/usecase/on_charts_provider.dart';
 part 'chart/usecase/upload_chart.dart';
 part 'chart/usecase/delete_chart_from_cloud.dart';
 part 'chart/usecase/delete_chart_from_local.dart';
 part 'chart/usecase/download_chart.dart';
+part 'chart/usecase/insert_chart_to_local.dart';
+part 'chart/usecase/sync_charts.dart';
 
 part 'chart_tag/controller/chart_has_tags_list_controller_provider.dart';
+part 'chart_tag/usecase/on_tag_has_charts.dart';
+part 'chart_tag/usecase/on_chart_has_tags.dart';
 part 'chart_tag/usecase/on_chart_has_tags_list.dart';
+part 'chart_tag/usecase/sync_chart_tags.dart';
 part 'chart_tag/dao/chart_tag_dao_provider.dart';
 part 'chart_tag/data_source/firebase_chart_tag_data_source.dart';
 part 'chart_tag/data_source/sqlite_chart_tag_data_source_provider.dart';
@@ -68,6 +80,8 @@ part 'chart_tag/repository/cloud_chart_tag_repository.dart';
 part 'chart_tag/repository/local_chart_tag_repostory_provider.dart';
 part 'chart_tag/repository/chart_tag_repository.dart';
 
+part 'tag/controller/tag_detail_controller.dart';
+part 'tag/controller/tag_list_controller_provider.dart';
 part 'tag/repository/tag_repository.dart';
 part 'tag/repository/cloud_tag_repository.dart';
 part 'tag/repository/local_tag_repository.dart';
@@ -79,7 +93,16 @@ part 'tag/usecase/delete_tag_from_local.dart';
 part 'tag/usecase/download_tag.dart';
 part 'tag/usecase/on_tags.dart';
 part 'tag/usecase/upload_tag.dart';
+part 'tag/usecase/sync_tags.dart';
+part 'tag/usecase/insert_tag_to_local.dart';
 
+part 'note/usecase/on_notes.dart';
+part 'note/usecase/on_note_by_chart_id.dart';
+part 'note/usecase/insert_note_to_local.dart';
+part 'note/controller/note_list_controller.dart';
+part 'note/controller/note_and_chart_list_controller.dart';
+part 'note/usecase/sync_notes.dart';
+part 'note/usecase/on_note_and_chart.dart';
 part 'note/usecase/delete_note_from_cloud.dart';
 part 'note/usecase/delete_note_from_local.dart';
 part 'note/usecase/download_note.dart';
@@ -90,6 +113,10 @@ part 'note/data_source/sqlite_note_data_source.dart';
 part 'note/repository/cloud_note_repository.dart';
 part 'note/repository/local_note_repository.dart';
 part 'note/repository/note_repostiory.dart';
+
+part 'note/repository/note_and_chart/cloud_note_and_chart_repository.dart';
+part 'note/repository/note_and_chart/local_note_and_chart_repository.dart';
+part 'note/repository/note_and_chart/note_and_chart_repository.dart';
 
 part 'database/local_database_provider.dart';
 

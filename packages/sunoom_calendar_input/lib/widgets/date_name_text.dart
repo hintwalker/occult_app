@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of sunoom_calendar_input;
 
 class DateNameText extends StatelessWidget {
   const DateNameText(

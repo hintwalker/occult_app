@@ -18,7 +18,7 @@ class HoriChartBirthdayWidget extends StatelessWidget {
       children: [
         Text(
           moment.toGregorianDateString(),
-          style: const TextStyle(fontSize: 14.0),
+          style: const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
         ),
         Text(
           moment.toLuniSolarDateString(canName: canName, chiName: chiName),

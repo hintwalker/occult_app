@@ -1,6 +1,6 @@
 part of lasotuvi_chart;
 
-class ChartListController extends DataListStreamController<Chart> {
+class ChartListController extends SyncableDataListStreamController<Chart> {
   ChartListController({required OnCharts onCharts})
       : super(onSyncableData: onCharts);
 

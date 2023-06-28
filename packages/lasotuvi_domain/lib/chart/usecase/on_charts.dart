@@ -1,5 +1,5 @@
 part of lasotuvi_domain;
 
-class OnCharts extends OnSyncableData<Chart> {
+class OnCharts extends OnSyncableDataList<Chart> {
   const OnCharts(super.repository);
 }

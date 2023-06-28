@@ -33,8 +33,19 @@ abstract class SyncableRelRepository<
   Future<int> deleteByLeftId(String? uid, int leftId);
   Future<int> deleteByRightId(String? uid, int rightId);
 
-  Stream<Iterable<SyncableEntityCarrier<R, L>>> onRightHasLeft(String? uid,
+  Stream<Iterable<SyncableEntityCarrier<R, L>>> onRightHasLeftList(String? uid,
       SyncableEntityCarrier<R, L> Function(R, Iterable<L>) onCreateItem);
-  Stream<Iterable<SyncableEntityCarrier<L, R>>> onLeftHasRight(String? uid,
+  Stream<Iterable<SyncableEntityCarrier<L, R>>> onLeftHasRightList(String? uid,
       SyncableEntityCarrier<L, R> Function(L, Iterable<R>) onCreateItem);
+  Stream<SyncableEntityCarrier<L, R>?> onLeftHasRight({
+    String? uid,
+    required int leftId,
+    required SyncableEntityCarrier<L, R> Function(L, Iterable<R>) onCreateItem,
+  });
+
+  Stream<SyncableEntityCarrier<R, L>?> onRightHasLeft({
+    String? uid,
+    required int rightId,
+    required SyncableEntityCarrier<R, L> Function(R, Iterable<L>) onCreateItem,
+  });
 }

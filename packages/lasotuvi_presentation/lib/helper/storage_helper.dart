@@ -1,12 +1,12 @@
 part of lasotuvi_presentation;
 
 class StorageHelper {
-  static Widget storageOptionsModalBuilder<T extends SyncableEntity<T>>(T item,
-      {String? uid, required WidgetRef ref, String? onCloud}) {
+  static Widget storageOptionsModalBuilder<T extends SyncableEntity>(T item,
+      {String? uid, required WidgetRef ref, String? syncStatus}) {
     return StorageOptionsModal<T>(
       uid: uid,
       item: item,
-      onCloud: onCloud,
+      syncStatus: syncStatus,
       colorScheme: lightColorScheme,
       translate: translate,
       onUpload: (uid, item) => onUpload(uid, item, ref),

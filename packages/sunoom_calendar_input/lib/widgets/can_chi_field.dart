@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sunoom/sunoom.dart' show Cans, Chies;
-
-import '../controllers/date_name_controller.dart';
-import '../validators/can_chi_validator.dart';
-import 'date_name_field.dart';
+part of sunoom_calendar_input;
 
 class CanChiField extends StatefulWidget {
   const CanChiField({

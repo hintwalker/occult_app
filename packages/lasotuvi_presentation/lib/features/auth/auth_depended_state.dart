@@ -4,6 +4,7 @@ abstract class AuthDependedState<T extends ConsumerStatefulWidget>
     extends ConsumerState<T> {
   StreamSubscription? _streamSubscription;
   String? uid;
+  bool findingUid = true;
   @override
   void initState() {
     super.initState();
@@ -15,11 +16,13 @@ abstract class AuthDependedState<T extends ConsumerStatefulWidget>
         ref.read(registerOnAuthStateChangedProvider).call((user) {
       setState(() {
         uid = user.uidInFirestore;
+        findingUid = false;
       });
       return user.uidInFirestore;
     }, () {
       setState(() {
         uid = null;
+        findingUid = false;
       });
     });
   }

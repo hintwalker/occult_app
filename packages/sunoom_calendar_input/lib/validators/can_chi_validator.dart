@@ -1,4 +1,4 @@
-import 'package:sunoom/sunoom.dart' show Cans, Chies;
+part of sunoom_calendar_input;
 
 class CanChiValidator {
   final errorMessage = '!';

@@ -1,4 +1,4 @@
-import 'package:sunoom/sunoom.dart' show countDaysInGregorianMonth;
+part of sunoom_calendar_input;
 
 class GregorianDayValidator {
   final String errorMessage = '!';

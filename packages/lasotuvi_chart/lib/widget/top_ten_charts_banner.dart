@@ -7,12 +7,22 @@ class TopTenChartsBanner extends StatelessWidget {
     required this.controller,
     required this.translate,
     required this.colorScheme,
+    required this.onAddData,
+    required this.onShowAll,
+    required this.storageOptionsModalBuilder,
+    required this.onItemTap,
   });
 
   final String? uid;
-  final DataListStreamController<Chart> controller;
+  final SyncableDataListStreamController<Chart> controller;
   final String Function(String) translate;
   final ColorScheme colorScheme;
+  final void Function() onAddData;
+  final void Function() onShowAll;
+  final Widget Function(Chart, {String? uid, String? syncStatus})
+      storageOptionsModalBuilder;
+  final void Function(BuildContext context, Chart chart) onItemTap;
+  // final Widget Function(String chartId) chartView;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +31,11 @@ class TopTenChartsBanner extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          TopTenHeadlineWidget(translate(TuviStrings.laSo),
+              showAllText: translate(TuviStrings.showAll),
+              colorScheme: colorScheme,
+              onAddData: onAddData,
+              onShowAll: onShowAll),
           Expanded(
               child: HorizontalDataListBuilder<Chart>(
                   uid: uid,
@@ -30,6 +45,10 @@ class TopTenChartsBanner extends StatelessWidget {
                         uid: uid,
                         translate: translate,
                         colorScheme: colorScheme,
+                        // chartView: chartView,
+                        onTap: onItemTap,
+                        onSyncStatusTap: () =>
+                            openStorageOptions(context, item),
                       ),
                   queryArgs: QueryArgs(
                     uid: uid,
@@ -38,6 +57,18 @@ class TopTenChartsBanner extends StatelessWidget {
                   )))
         ],
       ),
+    );
+  }
+
+  void openStorageOptions(BuildContext context, Chart item) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) =>
+          // SingleChildScrollView(
+          //       child:
+          storageOptionsModalBuilder(item,
+              syncStatus: item.syncStatus, uid: uid),
+      // )
     );
   }
 }
@@ -51,7 +82,6 @@ class TopTenChartsBanner extends StatelessWidget {
 
 //   final ChartListController controller;
 //   final String? uid;
-  
 
 //   @override
 //   Widget build(BuildContext context) {

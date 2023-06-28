@@ -21,6 +21,7 @@ class Dashboard extends ConsumerWidget {
             style: const DrawerStyleImpl(lightColorScheme),
             onMenuTap: (menu) => context.goNamed(menu),
             controller: ref.read(mainDrawerControllerProvider),
+            appBarTrailing: const EnergyPointAppBarAction(),
             child: child),
       ),
     );

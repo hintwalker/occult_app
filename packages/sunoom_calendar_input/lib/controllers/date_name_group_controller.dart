@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sunoom/sunoom.dart';
+part of sunoom_calendar_input;
 
 class DateNameGroupController extends ChangeNotifier {
   Cans? dayCan;

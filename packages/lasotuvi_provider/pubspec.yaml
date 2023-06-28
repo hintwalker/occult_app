@@ -16,6 +16,10 @@ dependencies:
     path: ../lasotuvi_data
   lasotuvi_chart:
     path: ../lasotuvi_chart
+  lasotuvi_tag:
+    path: ../lasotuvi_tag
+  lasotuvi_note:
+    path: ../lasotuvi_note
   lasotuvi_storage_plan:
     path: ../lasotuvi_storage_plan
 

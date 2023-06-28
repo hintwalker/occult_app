@@ -1,5 +1,5 @@
 part of lasotuvi_provider;
 
 final energyWidgetControllerProvider =
-    ChangeNotifierProvider.autoDispose<EnergyWidgetController>(
+    ChangeNotifierProvider<EnergyWidgetController>(
         (ref) => EnergyWidgetController(onEnergy: ref.read(onEnergyProvider)));

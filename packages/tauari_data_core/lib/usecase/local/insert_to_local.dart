@@ -4,7 +4,7 @@ class InsertToLocal<E extends SqliteGetable, R extends LocalRepository> {
   final R repository;
 
   const InsertToLocal(this.repository);
-  Future<void> call(E entity) async {
-    await repository.insertToLocal(entity);
+  Future<int> call(E entity) async {
+    return await repository.insertToLocal(entity);
   }
 }

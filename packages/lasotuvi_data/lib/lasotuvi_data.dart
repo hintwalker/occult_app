@@ -33,6 +33,9 @@ part 'tag/repository/local_tag_repository_impl.dart';
 part 'tag/source/local/sqlite_tag_data_source.dart';
 part 'tag/source/remote/firebase_tag_data_source.dart';
 
+part 'note/repository/note_and_chart/note_and_chart_repository_impl.dart';
+part 'note/repository/note_and_chart/cloud_note_and_chart_repository_impl.dart';
+part 'note/repository/note_and_chart/local_note_and_chart_repository_impl.dart';
 part 'note/dao/note_dao.dart';
 part 'note/model/note_model.dart';
 part 'note/repository/note_repository_impl.dart';

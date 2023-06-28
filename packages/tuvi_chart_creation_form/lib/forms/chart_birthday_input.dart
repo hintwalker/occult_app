@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sunoom/sunoom.dart';
-import 'package:sunoom_calendar_input/sunoom_calendar_input.dart'
-    show CalendarInput;
-import 'package:tuvi_chart_creation_form/initial_moment.dart';
-
-import '../chart_creation_notifier.dart';
+part of tuvi_chart_creation_form;
 
 class ChartBirthdayInput extends ConsumerWidget {
   const ChartBirthdayInput({

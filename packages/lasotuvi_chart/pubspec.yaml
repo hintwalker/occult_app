@@ -22,6 +22,12 @@ dependencies:
     path: ../sunoom
   tuvi_domain:
     path: ../tuvi_domain
+  tuvi_strings:
+    path: ../tuvi_strings
+  tuvi_chart_diagram:
+    path: ../tuvi_chart_diagram
+  lasotuvi_note:
+    path: ../lasotuvi_note
   
 
 dev_dependencies:

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of sunoom_calendar_input;
 
 class DateNameController<T extends Enum> extends ChangeNotifier {
   T? selected;

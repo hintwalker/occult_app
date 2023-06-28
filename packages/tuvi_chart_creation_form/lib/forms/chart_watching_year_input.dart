@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../chart_creation_notifier.dart';
+part of tuvi_chart_creation_form;
 
 class ChartWatchingYearInput extends ConsumerStatefulWidget {
   const ChartWatchingYearInput({super.key});

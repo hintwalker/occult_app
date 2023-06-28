@@ -6,7 +6,7 @@ class StorageIconButton<T> extends StatelessWidget {
       this.uid,
       this.onCloud,
       required this.item,
-      required this.storageOptionsModalBuilder,
+      this.storageOptionsModalBuilder,
       required this.colorScheme,
       this.padding = const EdgeInsets.all(4.0)});
   final String? onCloud;
@@ -14,7 +14,7 @@ class StorageIconButton<T> extends StatelessWidget {
   final T item;
   final ColorScheme colorScheme;
   final EdgeInsetsGeometry padding;
-  final Widget Function(T, {String? uid, String? onCloud})
+  final Widget Function(T, {String? uid, String? onCloud})?
       storageOptionsModalBuilder;
 
   Icon getIcon(String? uid, String? onCloud) {
@@ -44,13 +44,15 @@ class StorageIconButton<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () => showModalBottomSheet(
-            context: context,
-            builder: (ctx) => storageOptionsModalBuilder(
-                  item,
-                  uid: uid,
-                  onCloud: onCloud,
-                )),
+        onPressed: storageOptionsModalBuilder == null
+            ? null
+            : () => showModalBottomSheet(
+                context: context,
+                builder: (ctx) => storageOptionsModalBuilder!(
+                      item,
+                      uid: uid,
+                      onCloud: onCloud,
+                    )),
         style: ElevatedButton.styleFrom(
             // shape: const CircleBorder(),
             visualDensity: VisualDensity.standard,

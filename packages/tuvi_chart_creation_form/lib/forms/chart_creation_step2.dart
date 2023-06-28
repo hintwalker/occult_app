@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'chart_birthday_input.dart';
+part of tuvi_chart_creation_form;
 
 class ChartCreationStep2 extends StatelessWidget {
   const ChartCreationStep2({

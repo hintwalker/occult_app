@@ -20,9 +20,9 @@ class _AllChartsBodyState extends AuthDependedState<AllChartsBody> {
         onOpenNote: onOpenNote,
         onOpenMore: onOpenMore,
         onItemTap: onItemTap,
-        storageOptionsModalBuilder: (item, {onCloud, uid}) =>
+        storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
             StorageHelper.storageOptionsModalBuilder<Chart>(item,
-                onCloud: onCloud, uid: uid, ref: ref));
+                syncStatus: syncStatus, uid: uid, ref: ref));
   }
 
   void onOpenTag(BuildContext context, Chart chart, String? uid) {

@@ -23,7 +23,7 @@ class AllChartListWidget extends StatelessWidget {
   final void Function(BuildContext, Chart, String? uid) onItemTap;
   final bool slidable;
   final String? uid;
-  final Widget Function(Chart, {String? uid, String? onCloud})
+  final Widget Function(Chart, {String? uid, String? syncStatus})
       storageOptionsModalBuilder;
 
   SimpleTextGroup groupBy(ChartHasTags item) {
@@ -61,19 +61,31 @@ class AllChartListWidget extends StatelessWidget {
     return DataListView<ChartHasTags, SimpleTextGroup>(
       data,
       groupBy: groupBy,
-      itemBuilder: (item) => ChartListItem(
+      itemBuilder: (item) => ChartHasTagsListItem(
         item,
         uid: uid,
         translate: translate,
         colorScheme: colorScheme,
         onTap: onItemTap,
-        storageOptionsModalBuilder: storageOptionsModalBuilder,
+        onSyncStatusTap: () => openStorageOptions(context, item.source),
       ),
       groupSeperatorBuilder: (p0) => Text(p0.label),
       buttons: buttons(),
       whereTest: whereTest,
       translate: translate,
       slidable: slidable,
+    );
+  }
+
+  void openStorageOptions(BuildContext context, Chart item) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) =>
+          // SingleChildScrollView(
+          //       child:
+          storageOptionsModalBuilder(item,
+              syncStatus: item.syncStatus, uid: uid),
+      // )
     );
   }
 }

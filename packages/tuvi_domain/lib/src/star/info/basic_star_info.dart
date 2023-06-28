@@ -170,7 +170,7 @@ final basicStarInfo = {
       10: "vuong",
       11: "ham",
     },
-    "nguHanh": "am_thuy"
+    "nguHanh": "moc"
   },
   "cuMon": {
     "isMajor": true,

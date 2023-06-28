@@ -11,6 +11,8 @@ class DrawerScaffold extends StatefulWidget {
     this.appBarTrailing,
     required this.onMenuTap,
     required this.controller,
+    this.appBarHeight = 84.0,
+    this.appBarPadding = const EdgeInsets.only(top: 36.0),
   });
 
   final TauariDrawerController controller;
@@ -21,6 +23,8 @@ class DrawerScaffold extends StatefulWidget {
   final DrawerStyle style;
   final Widget? appBarTrailing;
   final void Function(String id) onMenuTap;
+  final double appBarHeight;
+  final EdgeInsets appBarPadding;
 
   @override
   State<DrawerScaffold> createState() => _DrawerScaffoldState();
@@ -50,6 +54,8 @@ class _DrawerScaffoldState extends State<DrawerScaffold> {
     return SliderDrawer(
         key: _sliderDrawerKey,
         appBar: SliderAppBar(
+          appBarPadding: widget.appBarPadding,
+          appBarHeight: widget.appBarHeight,
           title: widget.title(screenId),
           drawerIconColor: widget.style.menuIconColor,
           trailing: widget.appBarTrailing,

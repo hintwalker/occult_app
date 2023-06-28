@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:tauari_ui/tauari_ui.dart';
-// import 'package:tuvi_chart_avatar/tuvi_chart_avatar.dart' show ChartAvatar;
-import '../chart_creation_notifier.dart';
+part of tuvi_chart_creation_form;
 
 class ChartAvatarChosenModal extends ConsumerWidget {
   final imagePicker = ImagePicker();

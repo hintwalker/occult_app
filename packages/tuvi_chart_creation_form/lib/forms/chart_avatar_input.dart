@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:tauari_ui/tauari_ui.dart';
-// import 'package:tuvi_chart_avatar/chart_avatar.dart';
-
-import '../chart_creation_notifier.dart';
-import '../modals/chart_avatar_chosen_modal.dart';
+part of tuvi_chart_creation_form;
 
 class ChartAvatarInput extends ConsumerWidget {
   ChartAvatarInput({super.key});

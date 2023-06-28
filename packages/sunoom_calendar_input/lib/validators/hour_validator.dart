@@ -1,3 +1,5 @@
+part of sunoom_calendar_input;
+
 class HourValidator {
   final String errorMessage = '!';
   String? validate(String? value) {

@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sunoom_calendar_input/validators/hour_validator.dart';
-
-import '../validators/minute_validator.dart';
+part of sunoom_calendar_input;
 
 class TimeController extends ChangeNotifier {
   int? hour;

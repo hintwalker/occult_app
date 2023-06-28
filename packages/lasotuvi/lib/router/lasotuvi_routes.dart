@@ -9,7 +9,13 @@ import 'package:lasotuvi/main.dart';
 // import 'package:lasotuvi/screen/home/home_screen.dart';
 // import 'package:lasotuvi/screen/tag/checkbox_tag_list_screen.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show Dashboard, RouteName, RoutePath, shellNavigatorKey;
+    show
+        Dashboard,
+        RouteName,
+        RoutePath,
+        RouterParams,
+        rootNavigatorKey,
+        shellNavigatorKey;
 import 'package:tauari_ui/tauari_ui.dart';
 
 // import '../screen/storage_plan_market_screen.dart';
@@ -41,6 +47,7 @@ class LasotuviRoutes {
           GoRoute(
             name: RouteName.home,
             path: RoutePath.home,
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder: (context, state) => const FadeTransitionPage(
                 child: HomeScreen(
               restorationId: 'home',
@@ -48,17 +55,20 @@ class LasotuviRoutes {
             )),
           ),
           GoRoute(
-              name: RouteName.energyMarket,
-              path: RoutePath.energyMarket,
-              pageBuilder: (context, state) => const FadeTransitionPage(
-                    child: MarketScreen(
-                      restorationId: 'energyMarket',
-                      // drawerController: mainDrawerController,
-                    ),
-                  )),
+            name: RouteName.energyMarket,
+            path: RoutePath.energyMarket,
+            parentNavigatorKey: shellNavigatorKey,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: MarketScreen(
+                restorationId: 'energyMarket',
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
           GoRoute(
             name: RouteName.storagePlanMarket,
             path: RoutePath.storagePlanMarket,
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder: (context, state) => const FadeTransitionPage(
               child: AllStoragePlansScreen(
                 restorationId: RouteName.storagePlanMarket,
@@ -69,6 +79,7 @@ class LasotuviRoutes {
           GoRoute(
             name: RouteName.charts,
             path: RoutePath.charts,
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder: (context, state) => const FadeTransitionPage(
               child: ChartsScreen(
                 restorationId: RouteName.charts,
@@ -79,6 +90,7 @@ class LasotuviRoutes {
           GoRoute(
             name: RouteName.notes,
             path: RoutePath.notes,
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder: (context, state) => const FadeTransitionPage(
               child: AllNotesScreen(
                 restorationId: RouteName.notes,
@@ -89,6 +101,7 @@ class LasotuviRoutes {
           GoRoute(
             name: RouteName.tags,
             path: RoutePath.tags,
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder: (context, state) => const FadeTransitionPage(
               child: AllTagsScreen(
                 restorationId: RouteName.tags,
@@ -99,6 +112,7 @@ class LasotuviRoutes {
           GoRoute(
             name: RouteName.library,
             path: RoutePath.library,
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder: (context, state) => const FadeTransitionPage(
               child: LibraryScreen(
                 restorationId: RouteName.library,
@@ -106,7 +120,56 @@ class LasotuviRoutes {
               ),
             ),
           ),
-        ])
+        ]),
+    GoRoute(
+      path: RoutePath.chartCreation,
+      name: RouteName.chartCreation,
+      parentNavigatorKey: rootNavigatorKey,
+      // builder: (context, state) => const ChartCreationScreen(
+      //   restorationId: RouteName.chartCreation,
+      // ),
+      pageBuilder: (context, state) => const FadeTransitionPage(
+          child: ChartCreationScreen(
+        restorationId: RouteName.chartCreation,
+      )),
+    ),
+    GoRoute(
+      path: RoutePath.chartView,
+      name: RouteName.chartView,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (context, state) => ChartScreen(
+        restorationId: RouteName.chartView,
+        // uid: state.pathParameters[RouterParams.uid]!,
+        chartId: state.pathParameters[RouterParams.chartId]!,
+      ),
+    ),
+    GoRoute(
+      path: RoutePath.chartDetail,
+      name: RouteName.chartDetail,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (context, state) => ChartDetailScreen(
+        restorationId: RouteName.chartView,
+        chartId: state.pathParameters[RouterParams.chartId]!,
+      ),
+    ),
+    GoRoute(
+      path: RoutePath.noteEditor,
+      name: RouteName.noteEditor,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (context, state) => NoteEditorScreen(
+        restorationId: RouteName.noteEditor,
+        noteId: state.pathParameters[RouterParams.noteId]!,
+      ),
+    ),
+    GoRoute(
+      path: RoutePath.tagDetail,
+      name: RouteName.tagDetail,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (context, state) => TagDetailScreen(
+        restorationId: RouteName.tagDetail,
+        tagId: state.pathParameters[RouterParams.tagId]!,
+      ),
+    ),
   ];
   // static final routes = [
   //   // GoRoute(

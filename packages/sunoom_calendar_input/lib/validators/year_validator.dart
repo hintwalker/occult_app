@@ -1,3 +1,5 @@
+part of sunoom_calendar_input;
+
 class YearValidator {
   final errorMessage = '!';
   String? validate(String? value) {

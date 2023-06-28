@@ -6,4 +6,4 @@ import 'package:flutter/material.dart';
 part 'supported_locales.dart';
 part 'translate.dart';
 part 'text_case.dart';
-part 'translation_path.dart';
+// part 'translation_path.dart';

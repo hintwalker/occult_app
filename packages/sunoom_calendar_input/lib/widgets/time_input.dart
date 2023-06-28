@@ -1,7 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:sunoom_calendar_input/controllers/time_controller.dart';
-
-import 'date_field.dart';
+part of sunoom_calendar_input;
 
 class TimeInput extends StatefulWidget {
   const TimeInput(this.controller, {super.key});

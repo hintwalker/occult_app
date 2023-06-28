@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sunoom/sunoom.dart' show Cans, Chies;
-
-import 'date_name_text.dart';
+part of sunoom_calendar_input;
 
 class CanChiGroup extends StatelessWidget {
   const CanChiGroup({

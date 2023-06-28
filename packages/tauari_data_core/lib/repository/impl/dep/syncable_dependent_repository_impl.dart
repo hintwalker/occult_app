@@ -54,7 +54,7 @@ abstract class SyncableDependentRepositoryImpl<
   }
 
   @override
-  Future<O?> owner(String? uid, int dependentId) async {
+  Future<O?> ownerOf(String? uid, int dependentId) async {
     final local = await localDependentRepository.ownerLocal(dependentId);
     if (uid == null) {
       return local;
@@ -70,10 +70,14 @@ abstract class SyncableDependentRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerHasThese(String? uid,
-      SyncableEntityCarrier<O, E> Function(O p1, Iterable<E> p2) onCreateItem) {
+  Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerHasThese({
+    String? uid,
+    QueryArgs? queryArgs,
+    required SyncableEntityCarrier<O, E> Function(O p1, Iterable<E> p2)
+        onCreateItem,
+  }) {
     return ownerRepository
-        .onEveryWhere(uid)
+        .onEveryWhere(uid, queryArgs)
         .asyncMap((event) async => await Future.wait(event.map(
               (owner) async {
                 final these = await byOwnerId(uid, owner.id);
@@ -83,15 +87,17 @@ abstract class SyncableDependentRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerAndThis(String? uid,
-      SyncableEntityCarrier<O, E> Function(O p1, E p2) onCreateItem) {
-    return onEveryWhere(uid)
+  Stream<Iterable<SyncableEntityPair<E, O>>> onOwnerAndThis(
+      {String? uid,
+      QueryArgs? queryArgs,
+      required SyncableEntityPair<E, O> Function(E p1, O p2) onCreateItem}) {
+    return onEveryWhere(uid, queryArgs)
         .asyncMap((event) async => await Future.wait(event.map((e) async {
-              final own = await owner(uid, e.id);
+              final owner = await ownerOf(uid, e.id);
               // if (own == null) {
               //   return null;
               // }
-              return onCreateItem(own!, e);
+              return onCreateItem(e, owner!);
             })));
   }
 }

@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sunoom/sunoom.dart' show Cans, Chies;
-
-import 'date_name_controller.dart';
+part of sunoom_calendar_input;
 
 class CanChiController extends ChangeNotifier {
   bool changedByOutside = false;

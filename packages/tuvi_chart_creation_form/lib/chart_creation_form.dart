@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lasotuvi_domain/lasotuvi_domain.dart' show Chart;
-import 'package:sunoom/sunoom.dart';
-import 'chart_creation_notifier.dart';
-import 'forms/chart_creation_step1.dart';
-import 'forms/chart_creation_step2.dart';
-import 'forms/chart_creation_step3.dart';
+part of tuvi_chart_creation_form;
 
 class ChartCreationForm extends ConsumerStatefulWidget {
   const ChartCreationForm({

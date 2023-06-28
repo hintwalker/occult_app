@@ -20,6 +20,10 @@ dependencies:
     path: ../lasotuvi_provider
   lasotuvi_chart:
     path: ../lasotuvi_chart
+  lasotuvi_tag:
+    path: ../lasotuvi_tag
+  lasotuvi_note:
+    path: ../lasotuvi_note
   tauari_auth:
     path: ../tauari_auth
   tauari_drawer:
@@ -40,9 +44,11 @@ dependencies:
     path: ../lasotuvi_library
   storage_options:
     path: ../storage_options
+  tuvi_chart_creation_form:
+    path: ../tuvi_chart_creation_form
 
   flutter_riverpod: ^2.3.6
-  go_router: ^7.0.0
+  go_router: ^8.0.5
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sunoom/sunoom.dart';
-
-import '../controllers/date_name_group_controller.dart';
-import 'can_chi_group.dart';
+part of sunoom_calendar_input;
 
 class DateNameGroup extends StatefulWidget {
   const DateNameGroup(

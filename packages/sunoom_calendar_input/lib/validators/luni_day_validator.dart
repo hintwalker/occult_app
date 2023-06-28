@@ -1,4 +1,4 @@
-import 'package:sunoom/sunoom.dart' show countDaysInLuniSolarMonth;
+part of sunoom_calendar_input;
 
 class LuniDayValidator {
   final String errorMessage = '!';

@@ -1,10 +1,4 @@
-import 'package:sunoom/sunoom.dart';
-
-import 'date_name_group_controller.dart';
-import 'gregorian_date_controller.dart';
-import 'leap_month_options_controller.dart';
-import 'luni_date_controller.dart';
-import 'time_controller.dart';
+part of sunoom_calendar_input;
 
 class CalendarEditorController {
   final GregorianDateController gregController;

@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:group_button/group_button.dart';
-import 'package:tuvi_domain/tuvi_domain.dart';
-
-import '../chart_creation_notifier.dart';
+part of tuvi_chart_creation_form;
 
 class ChartGenderInput extends ConsumerWidget {
   ChartGenderInput(
