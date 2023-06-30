@@ -8,23 +8,25 @@ class TagDetailBuilder extends StatelessWidget {
     required this.controller,
     required this.colorScheme,
     required this.translate,
-    required this.onChartItemTap,
+    // required this.onChartItemTap,
     required this.tagSyncOptions,
-    required this.chartSyncOptions,
+    // required this.chartSyncOptions,
     required this.onChangeInfoTap,
     required this.onOpenChartList,
+    required this.chartItem,
   });
   final TagDetailController controller;
   final String? uid;
   final String tagId;
   final ColorScheme colorScheme;
   final String Function(String) translate;
-  final void Function(BuildContext context, Chart chart) onChartItemTap;
+  // final void Function(BuildContext context, Chart chart) onChartItemTap;
   final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
-  final Widget Function(Chart, {String? uid, String? syncStatus})
-      chartSyncOptions;
+  // final Widget Function(Chart, {String? uid, String? syncStatus})
+  //     chartSyncOptions;
   final void Function(BuildContext, Tag tag) onChangeInfoTap;
   final void Function(BuildContext context, Tag tag) onOpenChartList;
+  final Widget Function(Chart chart) chartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +47,12 @@ class TagDetailBuilder extends StatelessWidget {
                         tagHasCharts: tag,
                         colorScheme: colorScheme,
                         translate: translate,
-                        onChartItemTap: onChartItemTap,
+                        // onChartItemTap: onChartItemTap,
                         tagSyncOptions: tagSyncOptions,
-                        chartSyncOptions: chartSyncOptions,
+                        // chartSyncOptions: chartSyncOptions,
                         onChangeInfoTap: onChangeInfoTap,
                         onOpenChartList: onOpenChartList,
+                        chartItem: chartItem,
                       );
               } else {
                 return const ErrorTextWidget();

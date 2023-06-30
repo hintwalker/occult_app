@@ -46,7 +46,7 @@ class _CheckBoxListItemState extends State<CheckBoxListItem> {
                 checked = value ?? false;
               });
             }),
-        widget.child,
+        Expanded(child: widget.child),
       ],
     );
   }

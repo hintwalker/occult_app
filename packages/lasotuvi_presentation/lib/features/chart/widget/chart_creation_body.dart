@@ -20,11 +20,9 @@ class _ChartCreationBodyState extends AuthDependedState<ChartCreationBody> {
 
   Future<void> onCreateChart(Chart chart) async {
     await ref.read(insertChartToLocalProvider)(chart);
-    if (mounted) {
-      context.pushReplacementNamed(RouteName.chartView, pathParameters: {
-        // RouterParams.uid: uid ?? RouterParams.uidNullValue,
-        RouterParams.chartId: chart.docId
-      });
-    }
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.pop();
+      ChartHelper.openChartView(context: context, chart: chart);
+    });
   }
 }

@@ -1,9 +1,9 @@
-part of lasotuvi_chart;
+part of lasotuvi_tag;
 
-class CheckboxChartListModal extends StatelessWidget {
-  const CheckboxChartListModal({
+class CheckboxTagListModal extends StatelessWidget {
+  const CheckboxTagListModal({
     super.key,
-    required this.tagId,
+    required this.chartId,
     required this.controller,
     required this.translate,
     required this.colorScheme,
@@ -13,24 +13,24 @@ class CheckboxChartListModal extends StatelessWidget {
     this.uid,
   });
 
-  final ChartHasTagsListController controller;
+  final TagHasChartsListController controller;
   final String? uid;
-  final int tagId;
+  final int chartId;
   final String Function(String) translate;
   final ColorScheme colorScheme;
   final void Function(BuildContext context) onCancel;
   final void Function(BuildContext context,
-      Iterable<SelectableItem<ChartHasTags>> charts, String? uid) onSubmit;
-  final void Function(BuildContext context, Chart chart, String? uid) onItemTap;
+      Iterable<SelectableItem<TagHasCharts>> tags, String? uid) onSubmit;
+  final void Function(BuildContext context, Tag tag, String? uid) onItemTap;
 
   @override
   Widget build(BuildContext context) {
     return BasicModal(
-      title: translate('selectChart'),
+      title: translate('selectTag'),
       colorScheme: colorScheme,
-      child: CheckboxChartListBuilder(
+      child: CheckboxTagListBuilder(
         uid: uid,
-        tagId: tagId,
+        chartId: chartId,
         controller: controller,
         translate: translate,
         colorScheme: colorScheme,

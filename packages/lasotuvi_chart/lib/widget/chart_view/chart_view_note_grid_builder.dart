@@ -7,13 +7,17 @@ class ChartViewNoteGridBuilder extends StatelessWidget {
     required this.translate,
     required this.colorScheme,
     required this.notes,
-    required this.openSyncOptions,
+    required this.onOpenSyncOptions,
+    required this.onOpenNoteCreation,
+    required this.onOpenNoteEditor,
   });
   final String? uid;
   final ColorScheme colorScheme;
   final String Function(String) translate;
   final Stream<Iterable<Note>> Function() notes;
-  final void Function(BuildContext context, Note note) openSyncOptions;
+  final void Function(BuildContext context, Note note) onOpenSyncOptions;
+  final void Function(BuildContext context) onOpenNoteCreation;
+  final void Function(BuildContext context, Note note) onOpenNoteEditor;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,7 @@ class ChartViewNoteGridBuilder extends StatelessWidget {
                   ),
                   const SizedBox(width: 12.0),
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => onOpenNoteCreation(context),
                     icon: const Icon(Icons.add_circle_outline),
                     label: Text(
                       translate('addNote'),
@@ -42,12 +46,11 @@ class ChartViewNoteGridBuilder extends StatelessWidget {
                 ]),
                 DataGridWidget<Note>(
                   snapshot.requireData,
-                  itemWidget: (note) => NoteItemWidget(
-                    note,
-                    uid: uid,
-                    colorScheme: colorScheme,
-                    onSyncStatusTap: () => openSyncOptions(context, note),
-                  ),
+                  itemWidget: (note) => NoteItemWidget(note,
+                      uid: uid,
+                      colorScheme: colorScheme,
+                      onSyncStatusTap: () => onOpenSyncOptions(context, note),
+                      onTap: onOpenNoteEditor),
                 ),
               ],
             );

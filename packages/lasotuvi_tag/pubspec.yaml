@@ -20,8 +20,8 @@ dependencies:
     path: ../tauari_list_view
   tauari_data_core:
     path: ../tauari_data_core
-  lasotuvi_chart:
-    path: ../lasotuvi_chart
+  # lasotuvi_chart:
+  #   path: ../lasotuvi_chart
 
 dev_dependencies:
   flutter_test:

@@ -8,7 +8,7 @@ class ListItemHasStorageIcon<T> extends StatelessWidget {
     required this.syncData,
     required this.colorScheme,
     // this.storageOptionsModalBuilder,
-    this.itemPadding = const EdgeInsets.only(top: 8.0),
+    this.itemPadding = const EdgeInsets.only(left: 8.0, top: 8.0),
     required this.child,
     this.onSyncStatusTap,
   });

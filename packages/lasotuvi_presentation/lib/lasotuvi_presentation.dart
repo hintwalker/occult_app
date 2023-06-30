@@ -45,10 +45,12 @@ part 'features/note/widget/note_editor_body.dart';
 
 part 'features/library/library_body.dart';
 
+part 'features/tag/checkbox_tag_list_body.dart';
 part 'features/tag/tag_edit_body.dart';
 part 'features/tag/tag_detail_body.dart';
 part 'features/tag/tag_creation_body.dart';
 
+part 'features/chart/widget/chart_edit_options_body.dart';
 part 'features/chart/widget/chart_detail_body.dart';
 part 'features/chart/widget/single_selectable_chart_list_body.dart';
 part 'features/chart/widget/checkbox_chart_list_body.dart';

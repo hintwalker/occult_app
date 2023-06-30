@@ -12,6 +12,10 @@ class ChartViewWidget extends StatelessWidget {
     required this.chartSyncOptions,
     required this.noteSyncOptions,
     required this.tagSyncOptions,
+    required this.onOpenCheckboxTagList,
+    required this.onOpenChartEditOptions,
+    required this.onOpenNoteCreation,
+    required this.onOpenNoteEditor,
   });
   final String? uid;
   final ChartHasTags chartHasTags;
@@ -25,46 +29,13 @@ class ChartViewWidget extends StatelessWidget {
 
   final String Function(String) translate;
   final void Function(BuildContext context, Chart chart) onGoToDetail;
-
-  // String canName(Can can) => translate(can.name);
-  // String chiName(Chi chi) => translate(chi.name);
+  final void Function(BuildContext context, Chart chart) onOpenCheckboxTagList;
+  final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
+  final void Function(BuildContext context, Chart chart) onOpenNoteCreation;
+  final void Function(BuildContext context, Note note) onOpenNoteEditor;
 
   @override
   Widget build(BuildContext context) {
-    // final birthday = chartHasTags.source.birthday
-    //     .toMoment(TimeZone(offsetInHour: chartHasTags.source.timeZoneOffset));
-    // final humanBio = HumanBio(
-    //     name: chartHasTags.source.name,
-    //     gender: chartHasTags.source.gender,
-    //     birthDay: birthday,
-    //     watchingYear: chartHasTags.source.watchingYear);
-    // // final chiOfBornYear = Chi.ofLuniYear(birthday.luniSolarDate.year);
-    // // final canOfBornYear = Can.ofLuniYear(birthday.luniSolarDate.year);
-
-    // final canDay = Can.ofDay(birthday);
-    // final chiDay =
-    //     Chi.ofGregorianDay(date: birthday.gregorian, time: birthday.time);
-    // final canMonth = Can.ofLuniMonth(
-    //     year: birthday.luniSolarDate.year, month: birthday.luniSolarDate.month);
-    // final chiMonth = Chi.ofLuniMonth(birthday.luniSolarDate.month);
-
-    // final canTime = Can.ofTime(canOfDay: canDay, time: birthday.time);
-    // final chiTime = Chi.ofTime(birthday.time);
-    // // final canChiOfBornYear =
-    // //     '${translate(canOfBornYear.name)} ${translate(chiOfBornYear.name)}';
-    // final canChiMonth =
-    //     '${translate(canMonth.name)} ${translate(chiMonth.name)}';
-    // final canChiDay = '${translate(canDay.name)} ${translate(chiDay.name)}';
-    // final canChiTime = '${translate(canTime.name)} ${translate(chiTime.name)}';
-    // final canWatching = Can.ofLuniYear(chartHasTags.source.watchingYear);
-    // final chiWatching = Chi.ofLuniYear(chartHasTags.source.watchingYear);
-    // final canChiWatching =
-    //     '${translate(canWatching.name)} ${translate(chiWatching.name)}';
-    // final yearOldInt = yearOld(
-    //     birthday: birthday,
-    //     now: DateTime(chartHasTags.source.watchingYear)
-    //         .toMoment(birthday.timeZone));
-    // final yearOldText = '$yearOldInt ${translate("tuoi")}';
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -102,7 +73,8 @@ class ChartViewWidget extends StatelessWidget {
                               openSyncOptions: openChartSyncOptions,
                             ),
                             ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () => onOpenChartEditOptions(
+                                  context, chartHasTags.source),
                               icon: const Icon(Icons.edit),
                               label: Text(
                                 translate('changeInfo'),
@@ -126,7 +98,8 @@ class ChartViewWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 12.0),
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () =>
+                        onOpenCheckboxTagList(context, chartHasTags.source),
                     icon: const Icon(Icons.add_circle_outline),
                     label: Text(
                       translate('addTag'),
@@ -151,49 +124,67 @@ class ChartViewWidget extends StatelessWidget {
                   translate: translate,
                   notes: () =>
                       controller.noteStream(uid, chartHasTags.source.id),
-                  openSyncOptions: openNoteSyncOptions,
+                  onOpenSyncOptions: openNoteSyncOptions,
+                  onOpenNoteCreation: (context) => onOpenNoteCreation(context, chartHasTags.source),
+                  onOpenNoteEditor: onOpenNoteEditor,
                 ),
                 const SizedBox(
                   height: 192.0,
-                ),
-                const Divider(
-                  height: 1.0,
-                  thickness: 1.0,
-                ),
-                const SizedBox(
-                  height: 2.0,
-                ),
-                const Divider(
-                  height: 1.0,
-                  thickness: 1.0,
                 ),
               ],
             ),
           ),
         ),
         Positioned(
-            bottom: 24.0,
-            right: 12.0,
-            left: 12.0,
-            child: Row(
-              children: [
-                FilledButton(
-                    style: FilledButton.styleFrom(
-                        backgroundColor: colorScheme.tertiary),
-                    onPressed: () {},
-                    child: Text(translate('sendCommentaryRequest'),
-                        style: TextStyle(
-                          color: colorScheme.onTertiary,
-                        ))),
-                const Spacer(),
-                FilledButton(
-                  onPressed: () => onGoToDetail(context, chartHasTags.source),
-                  child: Text(
-                    translate('watchChartDetail'),
+          bottom: 0.0,
+          right: 0.0,
+          left: 0.0,
+          child: Container(
+            // padding: const EdgeInsets.all(0.0),
+            decoration: BoxDecoration(
+                color: colorScheme.background,
+                // border: Border(
+                //   top: BorderSide(color: colorScheme.outline),
+                // ),
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.outline,
+                    offset: const Offset(0, 0),
+                    spreadRadius: 12.0,
+                    blurRadius: 5.0,
                   ),
-                ),
-              ],
-            ))
+                  BoxShadow(
+                    color: colorScheme.background,
+                    offset: const Offset(0, 0),
+                    spreadRadius: 10.0,
+                    blurRadius: 0.0,
+                  )
+                ]),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 0.0, right: 12.0, left: 12.0, bottom: 12.0),
+              child: Row(
+                children: [
+                  FilledButton(
+                      style: FilledButton.styleFrom(
+                          backgroundColor: colorScheme.tertiary),
+                      onPressed: () {},
+                      child: Text(translate('sendCommentaryRequest'),
+                          style: TextStyle(
+                            color: colorScheme.onTertiary,
+                          ))),
+                  const Spacer(),
+                  FilledButton(
+                    onPressed: () => onGoToDetail(context, chartHasTags.source),
+                    child: Text(
+                      translate('watchChartDetail'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

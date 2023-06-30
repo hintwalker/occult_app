@@ -12,6 +12,10 @@ class ChartViewModal extends StatelessWidget {
     required this.chartSyncOptions,
     required this.noteSyncOptions,
     required this.tagSyncOptions,
+    required this.onOpenCheckboxTagList,
+    required this.onOpenChartEditOptions,
+    required this.onOpenNoteCreation,
+    required this.onOpenNoteEditor,
   });
   final String? uid;
   final ColorScheme colorScheme;
@@ -24,6 +28,10 @@ class ChartViewModal extends StatelessWidget {
   final Widget Function(Note, {String? uid, String? syncStatus})
       noteSyncOptions;
   final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
+  final void Function(BuildContext context, Chart chart) onOpenCheckboxTagList;
+  final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
+  final void Function(BuildContext context, Chart chart) onOpenNoteCreation;
+  final void Function(BuildContext context, Note note) onOpenNoteEditor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +48,10 @@ class ChartViewModal extends StatelessWidget {
         chartSyncOptions: chartSyncOptions,
         noteSyncOptions: noteSyncOptions,
         tagSyncOptions: tagSyncOptions,
+        onOpenChartEditOptions: onOpenChartEditOptions,
+        onOpenCheckboxTagList: onOpenCheckboxTagList,
+        onOpenNoteCreation: onOpenNoteCreation,
+        onOpenNoteEditor: onOpenNoteEditor,
       ),
     );
   }

@@ -36,6 +36,15 @@ class _ChartViewBodyState extends AuthDependedState<ChartViewBody> {
             tagSyncOptions: (item, {syncStatus, uid}) =>
                 StorageHelper.storageOptionsModalBuilder<Tag>(item,
                     uid: uid, syncStatus: syncStatus, ref: ref),
+            onOpenChartEditOptions: (context, chart) =>
+                ChartHelper.openChartEditOptions(context, chart),
+            onOpenCheckboxTagList: (context, chart) =>
+                TagHelper.openCheckboxTagList(context, chart),
+            onOpenNoteCreation: (context, chart) =>
+                NoteHelper.openNewNoteEditorScreen(
+                    context: context, uid: uid, chart: chart, ref: ref),
+            onOpenNoteEditor: (context, note) =>
+                NoteHelper.openNoteEditorScreen(context, note),
           );
   }
 

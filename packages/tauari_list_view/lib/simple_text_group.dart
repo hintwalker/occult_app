@@ -10,10 +10,11 @@ class SimpleTextGroup {
 
   @override
   bool operator ==(Object? other) {
+    bool result = false;
     if (other is SimpleTextGroup) {
-      return other.data.trim().toLowerCase() == data.trim().toLowerCase();
+      result = other.data.trim().toLowerCase() == data.trim().toLowerCase();
     }
-    return false;
+    return result;
   }
 
   @override

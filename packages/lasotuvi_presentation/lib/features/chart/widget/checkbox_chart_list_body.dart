@@ -1,7 +1,7 @@
 part of lasotuvi_presentation;
 
-class CheckBoxChartListBody extends ConsumerStatefulWidget {
-  const CheckBoxChartListBody(
+class CheckboxChartListBody extends ConsumerStatefulWidget {
+  const CheckboxChartListBody(
     this.tag, {
     super.key,
     // required this.onSubmit,
@@ -17,12 +17,12 @@ class CheckBoxChartListBody extends ConsumerStatefulWidget {
 }
 
 class _CheckBoxChartListBodyState
-    extends AuthDependedState<CheckBoxChartListBody> {
+    extends AuthDependedState<CheckboxChartListBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid
         ? const LoadingWidget()
-        : CheckboxChartListBuilder(
+        : CheckboxChartListModal(
             controller: ref.read(chartHasTagsListControllerProvider),
             uid: uid,
             tagId: widget.tag.id,

@@ -60,4 +60,16 @@ abstract class SyncableRelRepository<
     required int rightId,
     required Iterable<L> lefts,
   });
+
+  Future<void> connectRightToLeft({
+    String? uid,
+    required int leftId,
+    required Iterable<R> rights,
+  });
+
+  Future<void> disConnectRightFromLeft({
+    String? uid,
+    required int leftId,
+    required Iterable<R> rights,
+  });
 }

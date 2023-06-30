@@ -25,4 +25,12 @@ class TagHelper {
       builder: (context) => TagEditBody(tag),
     );
   }
+
+  static void openCheckboxTagList(BuildContext context, Chart chart) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          Material(child: CheckboxTagListBody(chart)),
+    );
+  }
 }

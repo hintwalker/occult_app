@@ -23,6 +23,7 @@ part 'widget/chart_view/chart_view_bio_widget.dart';
 part 'widget/chart_view/chart_view_avatar_widget.dart';
 part 'widget/chart_view/chart_view_widget.dart';
 
+part 'widget/chart_edit_options_widget.dart';
 part 'widget/chart_detail_widget.dart';
 part 'widget/single_selectable_chart_list_widget.dart';
 part 'widget/chart_item_card_widget.dart';

@@ -21,7 +21,8 @@ class NoteHelper {
               //     child:
               SingleSelectableChartListBody(
             onSelect: (_, chart, uid) {
-              openNoteEditorScreen(
+              context.pop();
+              openNewNoteEditorScreen(
                 context: context,
                 chart: chart,
                 uid: uid,
@@ -35,18 +36,27 @@ class NoteHelper {
         });
   }
 
-  static Future<void> openNoteEditorScreen(
+  static Future<void> openNewNoteEditorScreen(
       {required BuildContext context,
       required Chart chart,
       required String? uid,
       required WidgetRef ref}) async {
     final noteId = await createNewNote(chart: chart, ref: ref);
-    if (context.mounted) {
-      context.pop();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      // context.pop();
       context.pushNamed(RouteName.noteEditor, pathParameters: {
         RouterParams.noteId: noteId.toString(),
       });
-    }
+    });
+  }
+
+  static void openNoteEditorScreen(
+    BuildContext context,
+    Note note,
+  ) {
+    context.pushNamed(RouteName.noteEditor, pathParameters: {
+      RouterParams.noteId: note.id.toString(),
+    });
   }
 
   static Future<int> createNewNote({

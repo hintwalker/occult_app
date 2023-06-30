@@ -318,4 +318,26 @@ class SyncableRelRepositoryImpl<
       await disConnect(uid: uid, leftId: left.id, rightId: rightId);
     }
   }
+
+  @override
+  Future<void> connectRightToLeft({
+    String? uid,
+    required int leftId,
+    required Iterable<R> rights,
+  }) async {
+    for (var right in rights) {
+      await connect(uid: uid, leftId: leftId, rightId: right.id);
+    }
+  }
+
+  @override
+  Future<void> disConnectRightFromLeft({
+    String? uid,
+    required int leftId,
+    required Iterable<R> rights,
+  }) async {
+    for (var right in rights) {
+      await disConnect(uid: uid, leftId: leftId, rightId: right.id);
+    }
+  }
 }

@@ -1,7 +1,7 @@
-part of lasotuvi_chart;
+part of lasotuvi_tag;
 
-class ChartListItemWidget extends StatelessWidget {
-  const ChartListItemWidget(
+class TagListItemWidget extends StatelessWidget {
+  const TagListItemWidget(
     this.data, {
     super.key,
     required this.colorScheme,
@@ -11,10 +11,10 @@ class ChartListItemWidget extends StatelessWidget {
     this.onSyncStatusTap,
   });
 
-  final Chart data;
+  final Tag data;
   final String Function(String) translate;
   final ColorScheme colorScheme;
-  final void Function(BuildContext, Chart, String? uid)? onTap;
+  final void Function(BuildContext, Tag, String? uid)? onTap;
   final String? uid;
   final void Function()? onSyncStatusTap;
   // final Widget Function(Chart, {String? uid, String? onCloud})?
@@ -22,20 +22,20 @@ class ChartListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListItemHasStorageIcon<Chart>(
+    return ListItemHasStorageIcon<Tag>(
       uid: uid,
       syncData: data,
       syncStatus: data.syncStatus,
       colorScheme: colorScheme,
       onSyncStatusTap: onSyncStatusTap,
       // storageOptionsModalBuilder: storageOptionsModalBuilder,
-      child: ChartItemCardWidget(
+      child: TagItemCardWidget(
         data,
         uid: uid,
         colorScheme: colorScheme,
         translate: translate,
         onTap: onTap,
-        tags: const [],
+        // tags: const [],
       ),
     );
   }

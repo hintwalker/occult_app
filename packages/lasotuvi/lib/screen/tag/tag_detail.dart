@@ -16,12 +16,14 @@ class TagDetailScreen extends StatelessWidget {
         // child: ChartDetailBody(chartId: chartId),
         child: Scaffold(
           appBar: AppBar(
-            title: Text(translate('tag')),
+            title: Text(translate('tag'),
+                style: const TextStyle(
+                    fontSize: 20.0, fontStyle: FontStyle.normal)),
             titleSpacing: 0,
-            titleTextStyle: const TextStyle(
-              fontSize: 20.0,
-              fontStyle: FontStyle.normal,
-            ),
+            // titleTextStyle: const TextStyle(
+            //   fontSize: 20.0,
+            //   fontStyle: FontStyle.normal,
+            // ),
           ),
           body: TagDetailBody(tagId: tagId),
         ));

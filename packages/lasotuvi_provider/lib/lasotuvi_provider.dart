@@ -68,12 +68,16 @@ part 'chart/usecase/download_chart.dart';
 part 'chart/usecase/insert_chart_to_local.dart';
 part 'chart/usecase/sync_charts.dart';
 
+part 'chart_tag/controller/tag_has_charts_list_controller.dart';
 part 'chart_tag/controller/chart_has_tags_list_controller_provider.dart';
 
+part 'chart_tag/usecase/dis_connect_tags_from_chart.dart';
+part 'chart_tag/usecase/connect_tags_to_chart.dart';
 part 'chart_tag/usecase/dis_connect_charts_from_tag.dart';
 part 'chart_tag/usecase/connect_charts_to_tag.dart';
 part 'chart_tag/usecase/on_tag_has_charts.dart';
 part 'chart_tag/usecase/on_chart_has_tags.dart';
+part 'chart_tag/usecase/on_tag_has_chart_list.dart';
 part 'chart_tag/usecase/on_chart_has_tags_list.dart';
 part 'chart_tag/usecase/sync_chart_tags.dart';
 part 'chart_tag/dao/chart_tag_dao_provider.dart';

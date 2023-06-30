@@ -17,7 +17,14 @@ class ChartHelper {
     showGeneralDialog(
       context: context,
       pageBuilder: (context, animation, secondaryAnimation) =>
-          Material(child: CheckBoxChartListBody(tag)),
+          Material(child: CheckboxChartListBody(tag)),
+    );
+  }
+
+  static void openChartEditOptions(BuildContext context, Chart chart) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => ChartEditOptionsBody(chart),
     );
   }
 }

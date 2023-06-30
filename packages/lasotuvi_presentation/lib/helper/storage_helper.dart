@@ -17,6 +17,23 @@ class StorageHelper {
     );
   }
 
+  static void showOptionsModal<T extends SyncableEntity>(
+    T item, {
+    required BuildContext context,
+    String? uid,
+    required WidgetRef ref,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => storageOptionsModalBuilder<T>(
+        item,
+        syncStatus: item.syncStatus,
+        uid: uid,
+        ref: ref,
+      ),
+    );
+  }
+
   static Future<void> onUpload<T>(String uid, T item, WidgetRef ref) =>
       ref.read(uploaderProvider).upload(uid: uid, items: [item]);
 
