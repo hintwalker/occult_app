@@ -11,7 +11,8 @@ class CalendarEditorController {
   SimpleTime? time;
   Moment? moment;
   TimeZone timeZone;
-  void Function(Moment) onDateChanged;
+  final void Function(Moment moment) onDateChanged;
+  final void Function(bool valid) onValidate;
   // final CanChiController canChiController;
   CalendarEditorController({
     required this.gregController,
@@ -21,7 +22,7 @@ class CalendarEditorController {
     required this.dateNameGroupController,
     required this.onDateChanged,
     required this.timeZone,
-
+    required this.onValidate,
     // required this.canChiController,
   });
 
@@ -92,11 +93,13 @@ class CalendarEditorController {
       setLeapMonthInput();
       setDateNameGroup();
       onDateChanged(moment!);
+      onValidate(true);
     } else {
       clearLuniSolarInput();
       clearLeapMonthInput();
       clearDateNameGroup();
       clearCache();
+      onValidate(false);
     }
   }
 
@@ -110,11 +113,13 @@ class CalendarEditorController {
       setLeapMonthInput();
       setDateNameGroup();
       onDateChanged(moment!);
+      onValidate(true);
     } else {
       clearLuniSolarInput();
       clearLeapMonthInput();
       clearDateNameGroup();
       clearCache();
+      onValidate(false);
     }
   }
 
@@ -191,11 +196,13 @@ class CalendarEditorController {
       setLeapMonthInput();
       setDateNameGroup();
       onDateChanged(moment!);
+      onValidate(true);
     } else {
       clearGregorianInput();
       clearLeapMonthInput();
       clearDateNameGroup();
       clearCache();
+      onValidate(false);
     }
   }
 

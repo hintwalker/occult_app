@@ -27,6 +27,7 @@ class ChartModel extends SyncableModel<Chart> {
     return Chart(
       id,
       name: name,
+      avatar: avatar,
       gender: Gender.fromInt(gender),
       birthday: DateTime.fromMillisecondsSinceEpoch(birthday),
       watchingYear: watchingYear,

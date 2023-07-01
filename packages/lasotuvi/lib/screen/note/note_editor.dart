@@ -14,8 +14,10 @@ class NoteEditorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-      restorationId: restorationId,
-      child: const NoteEditorBody(),
-    );
+        restorationId: restorationId,
+        child: Scaffold(
+          appBar: AppBar(),
+          body: NoteEditorBody(noteId),
+        ));
   }
 }

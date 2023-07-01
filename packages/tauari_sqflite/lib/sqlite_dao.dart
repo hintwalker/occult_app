@@ -12,7 +12,7 @@ abstract class SqliteDao extends Dao {
 
   @override
   Future<Iterable<Map<String, Object?>>> data([QueryArgs? queryArgs]) async {
-    return await database.db!.query(
+    final result = await database.db!.query(
       tableName,
       orderBy: queryArgs?.orderBy, //?? '${ColumnChart.lastViewed} DESC',
       limit: queryArgs?.limit,
@@ -23,6 +23,11 @@ abstract class SqliteDao extends Dao {
       offset: queryArgs?.offset,
       distinct: queryArgs?.distinct,
     );
+    if (queryArgs?.limitDisplay != null) {
+      return result.getRange(0, queryArgs!.limitDisplay!);
+    } else {
+      return result;
+    }
   }
 
   @override

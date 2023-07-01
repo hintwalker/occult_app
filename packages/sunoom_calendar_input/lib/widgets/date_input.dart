@@ -2,7 +2,13 @@ part of sunoom_calendar_input;
 
 class DateInput extends StatefulWidget {
   final DateController controller;
-  const DateInput(this.controller, {super.key});
+  // final void Function(bool) onValidateWhenChange;
+  const DateInput(
+    this.controller, {
+    super.key,
+    // required this.onValidateWhenChange,
+  });
+
   @override
   State<StatefulWidget> createState() => _DateInputState();
 }
@@ -37,8 +43,9 @@ class _DateInputState extends State<DateInput> {
                 children: [
                   Expanded(
                       child: DateField(
-                    onChanged: (value) => widget.controller
-                        .updateDay(value, _formKey.currentState),
+                    onChanged: (value) {
+                      widget.controller.updateDay(value, _formKey.currentState);
+                    },
                     validator: widget.controller.validateDay,
                     textEditingController: _dayController,
                     maxLength: 2,

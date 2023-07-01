@@ -3,25 +3,27 @@ part of lasotuvi_chart;
 class CheckboxChartListModal extends StatelessWidget {
   const CheckboxChartListModal({
     super.key,
-    required this.tagId,
+    this.uid,
+    // required this.tagId,
     required this.controller,
     required this.translate,
     required this.colorScheme,
-    required this.onCancel,
-    required this.onSubmit,
-    required this.onItemTap,
-    this.uid,
+    required this.child,
+    // required this.onCancel,
+    // required this.onSubmit,
+    // required this.onItemTap,
   });
 
   final ChartHasTagsListController controller;
   final String? uid;
-  final int tagId;
+  // final int tagId;
   final String Function(String) translate;
+  final Widget Function(Iterable<ChartHasTags> chartHasTags) child;
   final ColorScheme colorScheme;
-  final void Function(BuildContext context) onCancel;
-  final void Function(BuildContext context,
-      Iterable<SelectableItem<ChartHasTags>> charts, String? uid) onSubmit;
-  final void Function(BuildContext context, Chart chart, String? uid) onItemTap;
+  // final void Function(BuildContext context) onCancel;
+  // final void Function(BuildContext context,
+  //     Iterable<SelectableItem<ChartHasTags>> charts, String? uid) onSubmit;
+  // final void Function(BuildContext context, Chart chart, String? uid) onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,14 @@ class CheckboxChartListModal extends StatelessWidget {
       colorScheme: colorScheme,
       child: CheckboxChartListBuilder(
         uid: uid,
-        tagId: tagId,
+        // tagId: tagId,
         controller: controller,
-        translate: translate,
-        colorScheme: colorScheme,
-        onCancel: onCancel,
-        onSubmit: onSubmit,
-        onItemTap: onItemTap,
+        child: child,
+        // translate: translate,
+        // colorScheme: colorScheme,
+        // onCancel: onCancel,
+        // onSubmit: onSubmit,
+        // onItemTap: onItemTap,
       ),
     );
   }

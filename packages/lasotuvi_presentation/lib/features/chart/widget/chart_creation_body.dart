@@ -21,8 +21,10 @@ class _ChartCreationBodyState extends AuthDependedState<ChartCreationBody> {
   Future<void> onCreateChart(Chart chart) async {
     await ref.read(insertChartToLocalProvider)(chart);
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.pop();
-      ChartHelper.openChartView(context: context, chart: chart);
+      if (context.mounted) {
+        context.pop();
+        ChartHelper.openChartView(context: context, chart: chart);
+      }
     });
   }
 }

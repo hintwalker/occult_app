@@ -49,8 +49,8 @@ class TopTenTagsBanner extends StatelessWidget {
                       ),
                   queryArgs: QueryArgs(
                     uid: uid,
-                    limit: 10,
-                    orderBy: columnId,
+                    limit: 9,
+                    orderBy: '$columnId DESC',
                   )))
         ],
       ),

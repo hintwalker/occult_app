@@ -11,7 +11,8 @@ class NoteItemOwnerWidget extends StatelessWidget {
       child: Row(children: [
         CircleHumanAvatar(
           gender: owner.gender.intValue,
-          size: 22.0,
+          size: 24.0,
+          path: owner.avatar,
         ),
         const SizedBox(
           width: 8.0,

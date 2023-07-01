@@ -8,6 +8,7 @@ part 'storage/downloader.dart';
 part 'storage/remover.dart';
 part 'storage/uploader.dart';
 
+part 'note/usecase/on_note_by_id.dart';
 part 'note/usecase/on_note_by_chart_id.dart';
 part 'note/usecase/insert_note_to_local.dart';
 part 'note/usecase/sync_notes.dart';

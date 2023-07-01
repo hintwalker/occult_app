@@ -6,8 +6,7 @@ class ConnectRightToLeft<E extends SyncableEntity, L extends SyncableEntity,
   final SyncableRelRepository<E, L, R> repository;
 
   Future<void> call(
-      {String? uid, required int leftId, required Iterable<R> rights}) async {
-    await repository.connectRightToLeft(
-        uid: uid, leftId: leftId, rights: rights);
+      {String? uid, required L left, required Iterable<R> rights}) async {
+    await repository.connectRightToLeft(uid: uid, left: left, rights: rights);
   }
 }

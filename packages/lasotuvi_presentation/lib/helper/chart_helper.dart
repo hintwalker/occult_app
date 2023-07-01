@@ -1,6 +1,10 @@
 part of lasotuvi_presentation;
 
 class ChartHelper {
+  static void openChartCreationScreen(BuildContext context) {
+    context.pushNamed(RouteName.chartCreation);
+  }
+
   static void openChartView({
     required BuildContext context,
     // required WidgetRef ref,

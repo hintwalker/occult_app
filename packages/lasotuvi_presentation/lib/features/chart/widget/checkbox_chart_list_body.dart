@@ -25,14 +25,32 @@ class _CheckBoxChartListBodyState
         : CheckboxChartListModal(
             controller: ref.read(chartHasTagsListControllerProvider),
             uid: uid,
-            tagId: widget.tag.id,
+            // tagId: widget.tag.id,
             translate: translate,
             colorScheme: lightColorScheme,
-            onCancel: onCancel,
-            onSubmit: onSubmit,
-            onItemTap: (context, chart, _) =>
-                ChartHelper.openChartView(context: context, chart: chart),
-          );
+            child: (chartHasTags) =>
+                // CheckBoxChartListWidget(
+                //   snapshot.requireData,
+                //   uid: uid,
+                //   tagId: tagId,
+                //   translate: translate,
+                //   colorScheme: colorScheme,
+                //   onSubmit: onSubmit,
+                //   onCancel: onCancel,
+                //   onItemTap: onItemTap,
+                // );
+
+                CheckBoxChartListWidget(
+                  chartHasTags,
+                  uid: uid,
+                  tagId: widget.tag.id,
+                  translate: translate,
+                  colorScheme: lightColorScheme,
+                  onCancel: onCancel,
+                  onSubmit: onSubmit,
+                  onItemTap: (context, chart, _) =>
+                      ChartHelper.openChartView(context: context, chart: chart),
+                ));
   }
 
   void onCancel(BuildContext context) {
@@ -52,15 +70,21 @@ class _CheckBoxChartListBodyState
           (element) => element.initSelected && !element.selected,
         )
         .map((e) => e.data.source);
-    await ref
-        .read(connectChartsToTagProvider)
-        .call(uid: uid, rightId: widget.tag.id, lefts: connectedCharts);
+    if (connectedCharts.isNotEmpty) {
+      await ref
+          .read(connectChartsToTagProvider)
+          .call(uid: uid, right: widget.tag, lefts: connectedCharts);
+    }
 
-    await ref
-        .read(disConnectChartsFromTagProvider)
-        .call(uid: uid, rightId: widget.tag.id, lefts: disConnectedCharts);
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      context.pop();
+    if (disConnectedCharts.isNotEmpty) {
+      await ref
+          .read(disConnectChartsFromTagProvider)
+          .call(uid: uid, right: widget.tag, lefts: disConnectedCharts);
+    }
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (context.mounted) {
+        context.pop();
+      }
     });
   }
 }

@@ -14,7 +14,7 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    controller = TextEditingController(text: widget.translate('noName'));
   }
 
   @override
@@ -23,6 +23,7 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
       key: _formKey,
       autovalidateMode: AutovalidateMode.always,
       child: TextFormField(
+          controller: controller,
           decoration:
               InputDecoration(labelText: widget.translate('tenDuongSo')),
           inputFormatters: [LengthLimitingTextInputFormatter(30)],
@@ -34,6 +35,9 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
             return null;
           },
           onChanged: (value) {
+            ref
+                .read(chartCreationNotifierProvider.notifier)
+                .updateValid(_formKey.currentState!.validate());
             if (_formKey.currentState!.validate()) {
               ref
                   .read(chartCreationNotifierProvider.notifier)

@@ -9,6 +9,7 @@ class TopTenNotesBanner extends StatelessWidget {
     required this.colorScheme,
     required this.onAddData,
     required this.onShowAll,
+    required this.onItemTap,
     required this.storageOptionsModalBuilder,
   });
   final String? uid;
@@ -17,6 +18,7 @@ class TopTenNotesBanner extends StatelessWidget {
   final ColorScheme colorScheme;
   final void Function() onAddData;
   final void Function() onShowAll;
+  final void Function(Note note) onItemTap;
   final Widget Function(Note, {String? uid, String? syncStatus})
       storageOptionsModalBuilder;
 
@@ -40,11 +42,12 @@ class TopTenNotesBanner extends StatelessWidget {
               uid: uid,
               colorScheme: colorScheme,
               onSyncStatusTap: () => openStorageOptions(context, item.entity1),
+              onTap: onItemTap,
             ),
             queryArgs: QueryArgs(
               uid: uid,
-              limit: 10,
-              orderBy: ColumnNote.edited,
+              limit: 9,
+              orderBy: '${ColumnNote.edited} DESC',
             ),
           ),
           // )

@@ -59,6 +59,7 @@ part 'model/syncable_model.dart';
 part 'model/local_model.dart';
 part 'model/cloud_model.dart';
 
+part 'query/sqlite_query_args.dart';
 part 'query/cloud_data_order_by.dart';
 part 'query/cloud_data_where.dart';
 part 'query/query_args.dart';

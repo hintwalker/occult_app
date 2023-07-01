@@ -14,38 +14,43 @@ class ChartViewBody extends ConsumerStatefulWidget {
 class _ChartViewBodyState extends AuthDependedState<ChartViewBody> {
   @override
   Widget build(BuildContext context) {
+    final controller = ref.watch(chartViewControllerProvider);
     return findingUid
         ? const LoadingWidget()
         : ChartViewModal(
             uid: uid,
             chart: widget.chart,
             colorScheme: lightColorScheme,
-            controller: ref.read(chartViewControllerProvider),
-            translate: translate,
-            onGoToDetail: (context, chart) {
-              context.pushNamed(RouteName.chartDetail, pathParameters: {
-                RouterParams.chartId: chart.docId,
-              });
-            },
-            chartSyncOptions: (item, {syncStatus, uid}) =>
-                StorageHelper.storageOptionsModalBuilder<Chart>(item,
-                    uid: uid, syncStatus: syncStatus, ref: ref),
-            noteSyncOptions: (item, {syncStatus, uid}) =>
-                StorageHelper.storageOptionsModalBuilder<Note>(item,
-                    uid: uid, syncStatus: syncStatus, ref: ref),
-            tagSyncOptions: (item, {syncStatus, uid}) =>
-                StorageHelper.storageOptionsModalBuilder<Tag>(item,
-                    uid: uid, syncStatus: syncStatus, ref: ref),
-            onOpenChartEditOptions: (context, chart) =>
-                ChartHelper.openChartEditOptions(context, chart),
-            onOpenCheckboxTagList: (context, chart) =>
-                TagHelper.openCheckboxTagList(context, chart),
-            onOpenNoteCreation: (context, chart) =>
-                NoteHelper.openNewNoteEditorScreen(
-                    context: context, uid: uid, chart: chart, ref: ref),
-            onOpenNoteEditor: (context, note) =>
-                NoteHelper.openNoteEditorScreen(context, note),
-          );
+            controller: controller,
+            child: (chartHasTags) => ChartViewWidget(
+                  chartHasTags,
+                  controller: controller,
+                  translate: translate,
+                  colorScheme: lightColorScheme,
+                  onGoToDetail: (context, chart) {
+                    context.pushNamed(RouteName.chartDetail, pathParameters: {
+                      RouterParams.chartId: chart.docId,
+                    });
+                  },
+                  chartSyncOptions: (item, {syncStatus, uid}) =>
+                      StorageHelper.storageOptionsModalBuilder<Chart>(item,
+                          uid: uid, syncStatus: syncStatus, ref: ref),
+                  noteSyncOptions: (item, {syncStatus, uid}) =>
+                      StorageHelper.storageOptionsModalBuilder<Note>(item,
+                          uid: uid, syncStatus: syncStatus, ref: ref),
+                  tagSyncOptions: (item, {syncStatus, uid}) =>
+                      StorageHelper.storageOptionsModalBuilder<Tag>(item,
+                          uid: uid, syncStatus: syncStatus, ref: ref),
+                  onOpenChartEditOptions: (context, chart) =>
+                      ChartHelper.openChartEditOptions(context, chart),
+                  onOpenCheckboxTagList: (context, chart) =>
+                      TagHelper.openCheckboxTagList(context, chart),
+                  onOpenNoteCreation: (context, chart) =>
+                      NoteHelper.openNewNoteEditorScreen(
+                          context: context, uid: uid, chart: chart, ref: ref),
+                  onOpenNoteEditor: (context, note) =>
+                      NoteHelper.openNoteEditorScreen(context, note),
+                ));
   }
 
   @override

@@ -8,7 +8,7 @@ class ChartCreationStep1 extends StatelessWidget {
   });
   final ColorScheme colorScheme;
   final String Function(String) translate;
-  final double space = 18;
+  final double space = 20;
 
   @override
   Widget build(BuildContext context) {

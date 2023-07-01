@@ -11,87 +11,144 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
   final controller = HomeController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CurrentSubWidgetContainer(
-            uid: uid,
-            translate: translate,
-          ),
-          SizedBox(
-            height: GeneralStyle.topTenBannerHeight,
-            child: TopTenChartsBanner(
-              controller: ref.watch(chartListControllerProvider),
-              uid: uid,
-              translate: translate,
-              colorScheme: lightColorScheme,
-              onAddData: openChartCreationScreen,
-              onShowAll: openAllChartsScreen,
-              onItemTap: (context, chart) => ChartHelper.openChartView(
-                context: context,
-                chart: chart,
-              ),
-              // chartView: (chartId) => ChartViewBody(chartId: chartId),
-              storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
-                  StorageHelper.storageOptionsModalBuilder(item,
-                      uid: uid, syncStatus: item.syncStatus, ref: ref),
-            ),
-          ),
-          SizedBox(
-            height: 168.0,
-            child: TopTenTagsBanner(
-              controller: ref.watch(tagListControllerProvider),
-              uid: uid,
-              translate: translate,
-              colorScheme: lightColorScheme,
-              onAddData: openTagCreationScreen,
-              onShowAll: openAllTagsScreen,
-              onItemTap: (context, tag) =>
-                  TagHelper.openTagDetail(context: context, tag: tag),
-              storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
-                  StorageHelper.storageOptionsModalBuilder(item,
-                      uid: uid, syncStatus: item.syncStatus, ref: ref),
-            ),
-          ),
-          // Expanded(
-          // child:
-          TopTenNotesBanner(
-            uid: uid,
-            controller: ref.watch(noteAndChartListControllerProvider),
-            translate: translate,
-            colorScheme: lightColorScheme,
-            onAddData: () => NoteHelper.openChartSelectionScreen(context, ref),
-            onShowAll: openAllNotesScreen,
-            storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
-                StorageHelper.storageOptionsModalBuilder(item,
-                    uid: uid, syncStatus: item.syncStatus, ref: ref),
-          ),
-          const SizedBox(
-            height: 192.0,
-          ),
-          const Divider(
-            height: 1.0,
-            thickness: 1.0,
-          ),
-          const SizedBox(
-            height: 2.0,
-          ),
-          const Divider(
-            height: 1.0,
-            thickness: 1.0,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                '---',
+              CurrentSubWidgetContainer(
+                uid: uid,
+                translate: translate,
+              ),
+              SizedBox(
+                height: GeneralStyle.topTenBannerHeight,
+                child: TopTenChartsBanner(
+                  controller: ref.watch(chartListControllerProvider),
+                  uid: uid,
+                  translate: translate,
+                  colorScheme: lightColorScheme,
+                  onAddData: () => ChartHelper.openChartCreationScreen(context),
+                  onShowAll: openAllChartsScreen,
+                  onItemTap: (context, chart) => ChartHelper.openChartView(
+                    context: context,
+                    chart: chart,
+                  ),
+                  // chartView: (chartId) => ChartViewBody(chartId: chartId),
+                  storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
+                      StorageHelper.storageOptionsModalBuilder(item,
+                          uid: uid, syncStatus: item.syncStatus, ref: ref),
+                ),
+              ),
+              SizedBox(
+                height: 168.0,
+                child: TopTenTagsBanner(
+                  controller: ref.watch(tagListControllerProvider),
+                  uid: uid,
+                  translate: translate,
+                  colorScheme: lightColorScheme,
+                  onAddData: () => TagHelper.openTagCreationScreen(context),
+                  onShowAll: openAllTagsScreen,
+                  onItemTap: (context, tag) =>
+                      TagHelper.openTagDetail(context: context, tag: tag),
+                  storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
+                      StorageHelper.storageOptionsModalBuilder(item,
+                          uid: uid, syncStatus: item.syncStatus, ref: ref),
+                ),
+              ),
+              // Expanded(
+              // child:
+              TopTenNotesBanner(
+                uid: uid,
+                controller: ref.watch(noteAndChartListControllerProvider),
+                translate: translate,
+                colorScheme: lightColorScheme,
+                onAddData: () =>
+                    NoteHelper.openChartSelectionScreen(context, ref),
+                onShowAll: openAllNotesScreen,
+                onItemTap: (note) =>
+                    NoteHelper.openNoteEditorScreen(context, note),
+                storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
+                    StorageHelper.storageOptionsModalBuilder(item,
+                        uid: uid, syncStatus: item.syncStatus, ref: ref),
+              ),
+              const SizedBox(
+                height: 48.0,
+              ),
+              ElevatedButton(
+                  onPressed: openAllNotesScreen,
+                  child: Text(translate('showAllNotes'))),
+              const SizedBox(
+                height: 192.0,
+              ),
+              const Divider(
+                height: 1.0,
+                thickness: 1.0,
+              ),
+              const SizedBox(
+                height: 2.0,
+              ),
+              const Divider(
+                height: 1.0,
+                thickness: 1.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('---', style: TextStyle(color: lightColorScheme.primary))
+                ],
               )
+              // )
             ],
-          )
-          // )
-        ],
-      ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            decoration: BoxDecoration(
+                color: lightColorScheme.primaryContainer,
+                shape: BoxShape.rectangle,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(44.0),
+                  bottomRight: Radius.circular(44.0),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: lightColorScheme.outline,
+                    offset: const Offset(2.0, 2.0),
+                    spreadRadius: 1.0,
+                    blurRadius: 2.0,
+                  ),
+                  BoxShadow(
+                    color: lightColorScheme.primaryContainer,
+                    // offset: const Offset(2.0, 2.0),
+                    // spreadRadius: 2.0,
+                    // blurRadius: 2.0,
+                  )
+                ]),
+            child: InkWell(
+              onTap: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => const DataCreationOptionsModal()),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(44.0),
+                bottomRight: Radius.circular(44.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: IconButton(
+                  onPressed: null,
+                  disabledColor: lightColorScheme.primary,
+                  icon: const Icon(
+                    Icons.add,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -109,33 +166,28 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
   //   });
   // }
 
-  void openChartCreationScreen() {
-    context.pushNamed(RouteName.chartCreation);
-    // showGeneralDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   transitionDuration: const Duration(seconds: 1),
-    //   transitionBuilder: (context, animation, secondaryAnimation, child) =>
-    //       FadeTransition(
-    //           opacity: animation,
-    //           child: ScaleTransition(scale: animation, child: child)),
-    //   pageBuilder: (context, animation, secondaryAnimation) => SafeArea(
-    //       child: Container(
-    //     width: MediaQuery.of(context).size.width,
-    //     height: MediaQuery.of(context).size.height,
-    //     padding: const EdgeInsets.all(16.0),
-    //     child: ChartCreationForm(
-    //         colorScheme: lightColorScheme,
-    //         translate: translate,
-    //         onCreateChart: onCreateChart),
-    //   )),
-    // );
-  }
-
-  void openTagCreationScreen() {
-    TagHelper.openTagCreation(context: context);
-    // context.pushNamed(RouteName.tagCreation);
-  }
+  // void openChartCreationScreen() {
+  //   context.pushNamed(RouteName.chartCreation);
+  //   // showGeneralDialog(
+  //   //   context: context,
+  //   //   barrierDismissible: false,
+  //   //   transitionDuration: const Duration(seconds: 1),
+  //   //   transitionBuilder: (context, animation, secondaryAnimation, child) =>
+  //   //       FadeTransition(
+  //   //           opacity: animation,
+  //   //           child: ScaleTransition(scale: animation, child: child)),
+  //   //   pageBuilder: (context, animation, secondaryAnimation) => SafeArea(
+  //   //       child: Container(
+  //   //     width: MediaQuery.of(context).size.width,
+  //   //     height: MediaQuery.of(context).size.height,
+  //   //     padding: const EdgeInsets.all(16.0),
+  //   //     child: ChartCreationForm(
+  //   //         colorScheme: lightColorScheme,
+  //   //         translate: translate,
+  //   //         onCreateChart: onCreateChart),
+  //   //   )),
+  //   // );
+  // }
 
   void openAllChartsScreen() {
     // context.goNamed(RouteName.charts);

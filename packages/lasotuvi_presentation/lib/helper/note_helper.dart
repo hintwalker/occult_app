@@ -8,18 +8,7 @@ class NoteHelper {
     showGeneralDialog(
         context: context,
         pageBuilder: (context, animation, secondaryAnimation) {
-          return
-              // Material(
-              //   child:
-              // SingleChildScrollView(
-              //     child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.start,
-              //         mainAxisSize: MainAxisSize.min,
-              //         children: [
-              //   SizedBox(
-              //     height: MediaQuery.sizeOf(context).height * 4 / 5,
-              //     child:
-              SingleSelectableChartListBody(
+          return SingleSelectableChartListBody(
             onSelect: (_, chart, uid) {
               context.pop();
               openNewNoteEditorScreen(
@@ -29,9 +18,6 @@ class NoteHelper {
                 ref: ref,
               );
             },
-            // ),
-            //   ),
-            // ]))
           );
         });
   }

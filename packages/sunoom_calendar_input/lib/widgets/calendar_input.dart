@@ -6,14 +6,16 @@ class CalendarInput extends StatefulWidget {
     this.translate,
     this.colorScheme,
     required this.onDateChanged,
+    required this.onValidate,
     this.initValue,
   });
 
   final String Function(String)? translate;
   final ColorScheme? colorScheme;
 
-  final void Function(Moment) onDateChanged;
+  final void Function(Moment moment) onDateChanged;
   final Moment? initValue;
+  final void Function(bool valid) onValidate;
 
   @override
   State<StatefulWidget> createState() => _CalendarInputState();
@@ -80,6 +82,7 @@ class _CalendarInputState extends State<CalendarInput> {
         leapMonthOptionsController: _leapMonthOptionsController,
         dateNameGroupController: _dateNameGroupController,
         onDateChanged: widget.onDateChanged,
+        onValidate: widget.onValidate,
         timeZone: moment.timeZone);
     _calendarEditorController.listen();
   }

@@ -15,6 +15,8 @@ part 'chart_creation_form.dart';
 part 'chart_creation_notifier.dart';
 part 'initial_moment.dart';
 
+part 'state/chart_creation_state.dart';
+
 part 'forms/chart_avatar_input.dart';
 part 'forms/chart_birthday_input.dart';
 part 'forms/chart_creation_step1.dart';

@@ -23,6 +23,8 @@ class ChartBirthdayInput extends ConsumerWidget {
       colorScheme: colorScheme,
       translate: translate,
       onDateChanged: (moment) => onDateChanged(moment, ref),
+      onValidate: (valid) =>
+          ref.read(chartCreationNotifierProvider.notifier).updateValid(valid),
       initValue: moment,
     );
   }

@@ -18,18 +18,28 @@ class CircleHumanAvatar extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: ShapeDecoration(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12))),
-          image: DecorationImage(
-              image: path == null
-                  ? gender == 0
-                      ? const AssetImage('assets/icons/girl.png',
-                          package: 'tauari_ui')
-                      : const AssetImage('assets/icons/man.png',
-                          package: 'tauari_ui')
-                  : Image.file(File.fromUri(Uri.file(path!))).image,
-              fit: fit)),
+      decoration: const ShapeDecoration(
+        shape: CircleBorder(),
+        // image: DecorationImage(
+        //     image: path == null
+        //         ? gender == 0
+        //             ? const AssetImage('assets/icons/girl.png',
+        //                 package: 'tauari_ui')
+        //             : const AssetImage('assets/icons/man.png',
+        //                 package: 'tauari_ui')
+        //         : Image.file(File.fromUri(Uri.file(path!))).image,
+        //     fit: fit)
+      ),
+      child: path == null || path!.isEmpty
+          ? gender == 0
+              ? SvgPicture.asset('assets/icons/female.svg',
+                  package: 'tauari_ui')
+              : SvgPicture.asset('assets/icons/male.svg', package: 'tauari_ui')
+          : ClipOval(
+              child: Image.file(
+              File.fromUri(Uri.file(path!)),
+              fit: BoxFit.cover,
+            )),
     );
   }
 }

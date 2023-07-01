@@ -12,41 +12,56 @@ class ChartAvatarChosenModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chart = ref.watch(chartCreationNotifierProvider);
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(18),
-              onTap: () => pickImage(context, ref),
-              child: Card(
-                child: CircleHumanAvatar(
-                  gender: chart.gender.intValue,
-                  path: chart.avatar,
-                ),
+    final state = ref.watch(chartCreationNotifierProvider);
+    return SimpleDialog(children: [
+      Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            SizedBox(
+              width: 100,
+              height: 100,
+              child:
+                  // InkWell(
+                  //   borderRadius: BorderRadius.circular(18),
+                  //   onTap: () => pickImage(context, ref),
+                  //   child: Card(
+                  //     child:
+                  CircleHumanAvatar(
+                gender: state.chart.gender.intValue,
+                path: state.chart.avatar,
               ),
+              //   ),
+              // ),
             ),
-          ),
-          const SizedBox(
-            height: 18,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                ref
-                    .read(chartCreationNotifierProvider.notifier)
-                    .updateAvatar(null);
-              },
-              child: const Text('Mac dinh')),
-          const SizedBox(
-            height: 24,
-          ),
-        ],
-      ),
-    );
+            const SizedBox(
+              height: 18,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      ref
+                          .read(chartCreationNotifierProvider.notifier)
+                          .updateAvatar('');
+                    },
+                    child: const Text('Mac dinh')),
+                ElevatedButton(
+                  onPressed: () => pickImage(context, ref),
+                  child: const Text('browse...'),
+                ),
+              ],
+            ),
+
+            // const SizedBox(
+            //   height: 24,
+            // ),
+          ],
+        ),
+      )
+    ]);
   }
 }

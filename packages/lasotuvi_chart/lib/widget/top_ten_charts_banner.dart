@@ -52,8 +52,8 @@ class TopTenChartsBanner extends StatelessWidget {
                       ),
                   queryArgs: QueryArgs(
                     uid: uid,
-                    limit: 10,
-                    orderBy: ColumnChart.lastViewed,
+                    limit: 9,
+                    orderBy: '${ColumnChart.lastViewed} DESC',
                   )))
         ],
       ),

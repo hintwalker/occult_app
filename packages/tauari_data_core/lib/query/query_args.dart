@@ -7,6 +7,7 @@ class QueryArgs {
     this.groupBy,
     this.having,
     this.orderBy,
+    this.limitDisplay,
     this.limit,
     this.offset,
     this.distinct,
@@ -15,6 +16,7 @@ class QueryArgs {
     this.firestoreOrderBy,
     this.firestoreWhere,
   });
+  final int? limitDisplay;
   final bool? distinct;
   final List<String>? columns;
   final String? where;
@@ -39,6 +41,7 @@ class QueryArgs {
             other.firestoreWhere == firestoreWhere &&
             other.groupBy == groupBy &&
             other.having == having &&
+            other.limitDisplay == limitDisplay &&
             other.limit == limit &&
             other.offset == offset &&
             other.orderBy == orderBy &&
@@ -57,6 +60,7 @@ class QueryArgs {
         firestoreWhere,
         groupBy,
         having,
+        limitDisplay,
         limit,
         offset,
         uid,

@@ -1,13 +1,17 @@
 part of lasotuvi_presentation;
 
 class TagHelper {
-  static void openTagCreation({
-    required BuildContext context,
-  }) {
-    showModalBottomSheet(
+  static void openTagCreationScreen(
+    BuildContext context,
+  ) {
+    showDialog(
       context: context,
       builder: (context) => const TagCreationBody(),
     );
+    // showModalBottomSheet(
+    //   context: context,
+    //   builder: (context) => const TagCreationBody(),
+    // );
   }
 
   static void openTagDetail({

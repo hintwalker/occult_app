@@ -71,6 +71,7 @@ part 'features/navigation/main_navigation.dart';
 part 'features/navigation/menus.dart';
 
 part 'features/home/controller/home_controller.dart';
+part 'features/home/widget/data_creation_options_modal.dart';
 part 'features/home/widget/home_body.dart';
 
 part 'styles/general_style.dart';

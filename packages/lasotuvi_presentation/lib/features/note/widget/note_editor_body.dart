@@ -1,7 +1,8 @@
 part of lasotuvi_presentation;
 
 class NoteEditorBody extends ConsumerStatefulWidget {
-  const NoteEditorBody({super.key});
+  const NoteEditorBody(this.noteId, {super.key});
+  final String noteId;
 
   @override
   ConsumerState<NoteEditorBody> createState() => _NoteEditorBodyState();
@@ -10,6 +11,20 @@ class NoteEditorBody extends ConsumerStatefulWidget {
 class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
   @override
   Widget build(BuildContext context) {
-    return NoteEditorBuilder(onWillPop: (note) => {});
+    return findingUid
+        ? const LoadingWidget()
+        : NoteEditorBuilder(
+            uid: uid,
+            noteId: widget.noteId,
+            controller: ref.read(noteEditorControllerProvider),
+            onWillPop: (note) => {},
+            child: (note) => NoteEditorWidget(
+                translate: translate,
+                colorScheme: lightColorScheme,
+                note: note,
+                onChanged: (note, uid) async {},
+                onSave: (note, uid) async {},
+                toggleEditMode: (value) {},
+                onHitMaxLength: (value) {}));
   }
 }

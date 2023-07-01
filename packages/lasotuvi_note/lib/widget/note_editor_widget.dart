@@ -42,7 +42,7 @@ class _NoteEditorState extends State<NoteEditorWidget> {
           document: Document.fromJson(content),
           selection: const TextSelection.collapsed(offset: 0));
       // _contentController = QuillController.basic();
-      contentLenght = _contentController!.document.toPlainText().length;
+      contentLenght = _contentController!.document.length - 1;
       _contentController!.addListener(onContentChanged);
       _titleController = TextEditingController(text: widget.note.title);
       _titleController.addListener(onTitleChanged);
@@ -79,7 +79,7 @@ class _NoteEditorState extends State<NoteEditorWidget> {
       widget.uid,
     );
     setState(() {
-      contentLenght = documentLength;
+      contentLenght = documentLength - 1;
     });
   }
 
@@ -134,6 +134,27 @@ class _NoteEditorState extends State<NoteEditorWidget> {
                   // inputFormatters: [LengthLimitingTextInputFormatter(30)],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        decoration: BoxDecoration(
+                            color: widget.colorScheme.surfaceVariant,
+                            borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(8.0),
+                                bottomRight: Radius.circular(8.0))),
+                        child: Text(
+                          '$contentLenght/${widget.maxLength}',
+                          style: TextStyle(
+                              color: widget.colorScheme.onSurfaceVariant,
+                              fontSize: 16.0),
+                        )),
+                  ],
+                ),
+              ),
               Expanded(
                 child: Container(
                   // color: Colors.white,
@@ -159,24 +180,7 @@ class _NoteEditorState extends State<NoteEditorWidget> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        decoration: BoxDecoration(
-                            color: widget.colorScheme.surfaceVariant,
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: Text(
-                          contentLenght.toString(),
-                          style: TextStyle(
-                              color: widget.colorScheme.onSurfaceVariant),
-                        )),
-                  ],
-                ),
-              ),
+
               // ignore: avoid_unnecessary_containers
               Container(
                   child: Visibility(

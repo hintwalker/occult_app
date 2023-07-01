@@ -6,8 +6,8 @@ class DisConnectLeftFromRight<E extends SyncableEntity,
   final SyncableRelRepository<E, L, R> repository;
 
   Future<void> call(
-      {String? uid, required int rightId, required Iterable<L> lefts}) async {
+      {String? uid, required R right, required Iterable<L> lefts}) async {
     await repository.disConnectLeftFromRight(
-        uid: uid, rightId: rightId, lefts: lefts);
+        uid: uid, right: right, lefts: lefts);
   }
 }

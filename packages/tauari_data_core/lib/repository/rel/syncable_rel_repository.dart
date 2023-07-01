@@ -21,17 +21,17 @@ abstract class SyncableRelRepository<
   Stream<Iterable<R>> onRightData(String? uid, int leftId);
   Future connect({
     String? uid,
-    required int leftId,
-    required int rightId,
+    required L left,
+    required R right,
   });
   Future disConnect({
     String? uid,
-    required int leftId,
-    required int rightId,
+    required L left,
+    required R right,
   });
   // Future<int> deleteRel(String? uid, int id);
-  Future<int> deleteByLeftId(String? uid, int leftId);
-  Future<int> deleteByRightId(String? uid, int rightId);
+  Future<int> deleteByLeftId(String? uid, int leftId, String syncStatus);
+  Future<int> deleteByRightId(String? uid, int rightId, String syncStatus);
 
   Stream<Iterable<SyncableEntityCarrier<R, L>>> onRightHasLeftList(String? uid,
       SyncableEntityCarrier<R, L> Function(R, Iterable<L>) onCreateItem);
@@ -51,25 +51,25 @@ abstract class SyncableRelRepository<
 
   Future<void> connectLeftToRight({
     String? uid,
-    required int rightId,
+    required R right,
     required Iterable<L> lefts,
   });
 
   Future<void> disConnectLeftFromRight({
     String? uid,
-    required int rightId,
+    required R right,
     required Iterable<L> lefts,
   });
 
   Future<void> connectRightToLeft({
     String? uid,
-    required int leftId,
+    required L left,
     required Iterable<R> rights,
   });
 
   Future<void> disConnectRightFromLeft({
     String? uid,
-    required int leftId,
+    required L left,
     required Iterable<R> rights,
   });
 }

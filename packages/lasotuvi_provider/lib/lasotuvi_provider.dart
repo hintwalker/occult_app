@@ -105,11 +105,15 @@ part 'tag/usecase/upload_tag.dart';
 part 'tag/usecase/sync_tags.dart';
 part 'tag/usecase/insert_tag_to_local.dart';
 
+part 'note/controller/note_editor_controller.dart';
+part 'note/controller/note_list_controller.dart';
+part 'note/controller/note_and_chart_list_controller.dart';
+
 part 'note/usecase/on_notes.dart';
 part 'note/usecase/on_note_by_chart_id.dart';
 part 'note/usecase/insert_note_to_local.dart';
-part 'note/controller/note_list_controller.dart';
-part 'note/controller/note_and_chart_list_controller.dart';
+
+part 'note/usecase/on_note_by_id.dart';
 part 'note/usecase/sync_notes.dart';
 part 'note/usecase/on_note_and_chart.dart';
 part 'note/usecase/delete_note_from_cloud.dart';

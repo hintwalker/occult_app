@@ -47,7 +47,7 @@ class _SelectableDataListViewState<U, V>
   List<SelectableItem<U>> selectableItems = [];
   List<SelectableItem<U>> foundData = [];
   List<SelectableItem<U>> selected = [];
-  late final TextEditingController controller;
+  TextEditingController controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -59,22 +59,22 @@ class _SelectableDataListViewState<U, V>
           .toList();
       foundData = selectableItems;
     });
-    controller = TextEditingController();
+    // controller = TextEditingController();
   }
 
-  @override
-  void didUpdateWidget(covariant SelectableDataListView<U, V> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    setState(() {
-      selectableItems = widget.data
-          .map((e) => SelectableItem(e,
-              initSelected: widget.initSelected(e),
-              selected: widget.initSelected(e)))
-          .toList();
-      foundData = selectableItems;
-    });
-    controller = TextEditingController();
-  }
+  // @override
+  // void didUpdateWidget(covariant SelectableDataListView<U, V> oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   setState(() {
+  //     selectableItems = widget.data
+  //         .map((e) => SelectableItem(e,
+  //             initSelected: widget.initSelected(e),
+  //             selected: widget.initSelected(e)))
+  //         .toList();
+  //     foundData = selectableItems;
+  //   });
+  //   // controller = TextEditingController();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -129,12 +129,12 @@ class _SelectableDataListViewState<U, V>
                         selected.remove(old.first);
                       }
                       selected.add(item.copyWith(selected: checked));
-                      // setState(() {
-                      selectableItems.removeWhere((element) =>
-                          widget.itemId(element.data) ==
-                          widget.itemId(item.data));
-                      selectableItems.add(item.copyWith(selected: checked));
-                      // });
+                      setState(() {
+                        selectableItems.removeWhere((element) =>
+                            widget.itemId(element.data) ==
+                            widget.itemId(item.data));
+                        selectableItems.add(item.copyWith(selected: checked));
+                      });
                     }
                         // checked
                         //     ? selected.add(item)

@@ -17,7 +17,7 @@ class _ChartWatchingYearInputState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
-        initValue = ref.read(chartCreationNotifierProvider).watchingYear;
+        initValue = ref.read(chartCreationNotifierProvider).chart.watchingYear;
       });
     });
   }
@@ -38,6 +38,9 @@ class _ChartWatchingYearInputState
           return null;
         },
         onChanged: (value) {
+          ref
+              .read(chartCreationNotifierProvider.notifier)
+              .updateValid(_formKey.currentState!.validate());
           if (_formKey.currentState!.validate()) {
             ref
                 .read(chartCreationNotifierProvider.notifier)

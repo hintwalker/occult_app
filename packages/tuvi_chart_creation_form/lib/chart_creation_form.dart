@@ -40,7 +40,7 @@ class _ChartCreationFormState extends ConsumerState<ChartCreationForm> {
   }
 
   void createChart() async {
-    await widget.onCreateChart(ref.read(chartCreationNotifierProvider));
+    await widget.onCreateChart(ref.read(chartCreationNotifierProvider).chart);
     // final id = await ref.read(insertChartToLocalProvider)(
     //     ref.watch(chartCreationNotifierProvider));
     // if (context.mounted) {
@@ -51,7 +51,7 @@ class _ChartCreationFormState extends ConsumerState<ChartCreationForm> {
 
   @override
   Widget build(BuildContext context) {
-    final chart = ref.watch(chartCreationNotifierProvider);
+    final state = ref.watch(chartCreationNotifierProvider);
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stepper(
@@ -60,28 +60,37 @@ class _ChartCreationFormState extends ConsumerState<ChartCreationForm> {
           onStepContinue: nextStep,
           onStepTapped: goToStep,
           physics: const ClampingScrollPhysics(),
-          steps: getSteps(chart),
+          steps: getSteps(state.chart),
           controlsBuilder: (context, details) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(
-                  iconSize: 24,
-                  onPressed: previousStep,
-                  icon: const Icon(Icons.arrow_back),
-                ),
+                if (currentStep > 0)
+                  IconButton(
+                    iconSize: 24,
+                    onPressed: previousStep,
+                    icon: const Icon(Icons.arrow_back),
+                  ),
                 const SizedBox(
                   width: 48,
                 ),
                 currentStep == upperBound
                     ? ElevatedButton.icon(
-                        onPressed: createChart,
-                        label: Text(widget.translate('lapSo')),
-                        icon: const Icon(Icons.done_all),
+                        onPressed: state.valid ? createChart : null,
+                        label: Text(
+                          widget.translate('createChart'),
+                          style: TextStyle(color: widget.colorScheme.onPrimary),
+                        ),
+                        icon: Icon(
+                          Icons.done_all,
+                          color: widget.colorScheme.onPrimary,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: widget.colorScheme.primary),
                       )
                     : ElevatedButton.icon(
-                        onPressed: nextStep,
-                        label: Text(widget.translate('tiepTuc')),
+                        onPressed: state.valid ? nextStep : null,
+                        label: Text(widget.translate('tiepTheo')),
                         icon: const Icon(Icons.arrow_forward),
                       ),
               ],
@@ -93,11 +102,19 @@ class _ChartCreationFormState extends ConsumerState<ChartCreationForm> {
   List<Step> getSteps(Chart chart) {
     return <Step>[
       Step(
-        title: ListTile(
-          title: Text(widget.translate('duongSo')),
-          subtitle:
-              Text('${chart.name}, ${widget.translate(chart.gender.name)}'),
-        ),
+        title: Text(widget.translate('duongSo'),
+            style: TextStyle(color: widget.colorScheme.primary)),
+        subtitle: Row(children: [
+          CircleHumanAvatar(
+            gender: chart.gender.intValue,
+            path: chart.avatar,
+            size: 24,
+          ),
+          const SizedBox(
+            width: 8.0,
+          ),
+          Text('${chart.name}, ${widget.translate(chart.gender.name)}')
+        ]),
         content: ChartCreationStep1(
           colorScheme: widget.colorScheme,
           translate: widget.translate,
@@ -106,7 +123,8 @@ class _ChartCreationFormState extends ConsumerState<ChartCreationForm> {
         isActive: isStepActive(0),
       ),
       Step(
-        title: Text(widget.translate('ngaySinh')),
+        title: Text(widget.translate('ngaySinh'),
+            style: TextStyle(color: widget.colorScheme.primary)),
         subtitle: Text(chart.birthday.toStringVn()),
         content: ChartCreationStep2(
           colorScheme: widget.colorScheme,
@@ -116,7 +134,8 @@ class _ChartCreationFormState extends ConsumerState<ChartCreationForm> {
         isActive: isStepActive(1),
       ),
       Step(
-        title: Text(widget.translate('namXem')),
+        title: Text(widget.translate('namXem'),
+            style: TextStyle(color: widget.colorScheme.primary)),
         subtitle: Text('${chart.watchingYear}'),
         content: const ChartCreationStep3(),
         state: getStepState(2),

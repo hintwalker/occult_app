@@ -10,11 +10,11 @@ class ChartGenderInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller
-          .selectIndex(ref.read(chartCreationNotifierProvider).gender.index);
+      controller.selectIndex(
+          ref.read(chartCreationNotifierProvider).chart.gender.index);
     });
     ref.listen(chartCreationNotifierProvider, (prev, next) {
-      controller.selectIndex(next.gender.index);
+      controller.selectIndex(next.chart.gender.index);
     });
     return GroupButton(
       controller: controller,
