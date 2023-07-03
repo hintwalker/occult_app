@@ -9,14 +9,19 @@ class SyncableDataStreamController<T extends SyncableEntity>
 
   SyncableDataStreamController({required this.onSyncableData});
 
-  Stream<T?> stream({required String? uid, required int docId}) {
+  Stream<T?> stream(
+      {required String? uid, required int docId, required String? syncStatus}) {
     _streamController = StreamController<T>.broadcast();
-    listen(uid, docId);
+    listen(uid, docId, syncStatus);
     return _streamController!.stream;
   }
 
-  void listen(String? uid, int docId) {
-    _subscription = onSyncableData(uid: uid, docId: docId).listen((event) {
+  void listen(String? uid, int docId, String? syncStatus) {
+    _subscription = onSyncableData(
+      uid: uid,
+      docId: docId,
+      syncStatus: syncStatus,
+    ).listen((event) {
       _streamController?.add(event);
     });
   }

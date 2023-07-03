@@ -56,7 +56,7 @@ part 'features/chart/widget/single_selectable_chart_list_body.dart';
 part 'features/chart/widget/checkbox_chart_list_body.dart';
 part 'features/chart/widget/chart_view_body.dart';
 part 'features/chart/widget/chart_screen_app_bar.dart';
-part 'features/chart/widget/all_charts_body.dart';
+part 'features/chart/widget/all_chart_list_body.dart';
 part 'features/chart/widget/chart_creation_body.dart';
 
 part 'features/storage_plan/all_storage_plans_body.dart';

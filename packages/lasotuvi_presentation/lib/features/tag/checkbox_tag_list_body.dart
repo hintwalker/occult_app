@@ -45,13 +45,18 @@ class _CheckboxTagListBodyState extends AuthDependedState<CheckboxTagListBody> {
           (element) => element.initSelected && !element.selected,
         )
         .map((e) => e.data.source);
-    await ref
-        .read(connectTagsToChartProvider)
-        .call(uid: uid, left: widget.chart, rights: connectedTags);
+    if (connectedTags.isNotEmpty) {
+      await ref
+          .read(connectTagsToChartProvider)
+          .call(uid: uid, left: widget.chart, rights: connectedTags);
+    }
 
-    await ref
-        .read(disConnectTagsFromChartProvider)
-        .call(uid: uid, left: widget.chart, rights: disConnectedTags);
+    if (disConnectedTags.isNotEmpty) {
+      await ref
+          .read(disConnectTagsFromChartProvider)
+          .call(uid: uid, left: widget.chart, rights: disConnectedTags);
+    }
+
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (context.mounted) {
         context.pop();

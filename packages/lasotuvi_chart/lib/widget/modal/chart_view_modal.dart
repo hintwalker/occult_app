@@ -43,7 +43,7 @@ class ChartViewModal extends StatelessWidget {
       child: ChartViewBuilder(
         uid: uid,
         controller: controller,
-        chartId: chart.docId,
+        chart: chart,
         child: child,
         // colorScheme: colorScheme,
         // translate: translate,

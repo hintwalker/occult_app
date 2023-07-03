@@ -3,13 +3,15 @@ part of '../../main.dart';
 class NoteEditorScreen extends StatelessWidget {
   const NoteEditorScreen({
     super.key,
-    this.restorationId,
+    required this.restorationId,
     required this.noteId,
+    required this.syncStatus,
   });
 
   final String? restorationId;
   // final String chartId;
   final String noteId;
+  final String syncStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,10 @@ class NoteEditorScreen extends StatelessWidget {
         restorationId: restorationId,
         child: Scaffold(
           appBar: AppBar(),
-          body: NoteEditorBody(noteId),
+          body: NoteEditorBody(
+            noteId,
+            syncStatus: syncStatus,
+          ),
         ));
   }
 }

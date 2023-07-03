@@ -10,7 +10,7 @@ abstract class OnSyncableRightHasLeft<
   const OnSyncableRightHasLeft(
       {required this.repository, required this.onCreateItem});
 
-  Stream<Q?> call(String? uid, int leftId) => repository
-      .onRightHasLeft(uid: uid, rightId: leftId, onCreateItem: onCreateItem)
+  Stream<Q?> call(String? uid, R right) => repository
+      .onRightHasLeft(uid: uid, right: right, onCreateItem: onCreateItem)
       .map((event) => event == null ? null : event as Q);
 }

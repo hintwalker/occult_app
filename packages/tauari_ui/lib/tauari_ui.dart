@@ -13,11 +13,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
-import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart'
-    as inset;
 
+part 'widget/basic_dialog.dart';
+part 'widget/simple_dialog_header.dart';
 part 'widget/basic_bottom_sheet.dart';
-part 'widget/inset_shadow_container.dart';
 part 'widget/data_grid_widget.dart';
 part 'widget/data_grid_builder.dart';
 part 'widget/basic_modal.dart';

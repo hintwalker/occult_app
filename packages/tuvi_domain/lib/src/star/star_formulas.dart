@@ -143,7 +143,7 @@ final starFormulas = {
   },
   "dauQuan": {
     "expression":
-        "dauQuanOption ==0 ? chiOfYearIndex: 0 - luniMonthIndex + hourIndex"
+        "(dauQuanOption ==0 ? chiOfYearIndex: 0) - luniMonthIndex + hourIndex"
   },
   "thienThuong": {"expression": "2 + luniMonthIndex - hourIndex + 5"},
   "thienSu": {"expression": "2 + luniMonthIndex - hourIndex + 7"},

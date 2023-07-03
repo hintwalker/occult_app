@@ -15,14 +15,14 @@ class ChartViewController extends ChangeNotifier {
   StreamSubscription<Iterable<Note>>? _notesSubscription;
   StreamController<Iterable<Note>>? _notesStreamController;
 
-  Stream<ChartHasTags?> stream(String? uid, int chartId) {
+  Stream<ChartHasTags?> stream(String? uid, Chart chart) {
     _streamController = StreamController<ChartHasTags?>.broadcast();
-    listen(uid, chartId);
+    listen(uid, chart);
     return _streamController!.stream;
   }
 
-  void listen(String? uid, int chartId) {
-    _subscription = onData(uid, chartId).listen((event) {
+  void listen(String? uid, Chart chart) {
+    _subscription = onData(uid, chart).listen((event) {
       _streamController?.add(event);
     });
   }

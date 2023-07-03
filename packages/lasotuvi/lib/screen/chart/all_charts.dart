@@ -10,6 +10,6 @@ class ChartsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const Placeholder());
+        restorationId: restorationId, child: const AllChartListBody());
   }
 }

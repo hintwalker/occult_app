@@ -6,14 +6,14 @@ class TagDetailController extends ChangeNotifier {
   StreamSubscription<TagHasCharts?>? _subscription;
   StreamController<TagHasCharts?>? _streamController;
 
-  Stream<TagHasCharts?> stream(String? uid, int chartId) {
+  Stream<TagHasCharts?> stream(String? uid, Tag tag) {
     _streamController = StreamController<TagHasCharts?>.broadcast();
-    listen(uid, chartId);
+    listen(uid, tag);
     return _streamController!.stream;
   }
 
-  void listen(String? uid, int chartId) {
-    _subscription = onData(uid, chartId).listen((event) {
+  void listen(String? uid, Tag tag) {
+    _subscription = onData(uid, tag).listen((event) {
       _streamController?.add(event);
     });
   }

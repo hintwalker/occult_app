@@ -15,12 +15,17 @@ class TagEditModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasicBottomSheet(
-        title: translate('editTagInfo'),
-        colorScheme: colorScheme,
-        child: TagEditWidget(tag,
-            colorScheme: colorScheme,
-            translate: translate,
-            onSubmit: onSubmit));
+    return BasicDialog(
+      title: translate('editTagInfo'),
+      // colorScheme: colorScheme,
+      children: [
+        TagEditWidget(
+          tag,
+          colorScheme: colorScheme,
+          translate: translate,
+          onSubmit: onSubmit,
+        ),
+      ],
+    );
   }
 }

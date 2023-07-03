@@ -4,8 +4,8 @@ class ChartViewBuilder extends StatelessWidget {
   const ChartViewBuilder({
     super.key,
     required this.controller,
-    required this.chartId,
-    this.uid,
+    required this.chart,
+    required this.uid,
     required this.child,
     // required this.colorScheme,
     // required this.translate,
@@ -20,7 +20,7 @@ class ChartViewBuilder extends StatelessWidget {
   });
   final ChartViewController controller;
   final String? uid;
-  final String chartId;
+  final Chart chart;
   final Widget Function(ChartHasTags chartHasTags) child;
   // final ColorScheme colorScheme;
   // final String Function(String) translate;
@@ -37,38 +37,36 @@ class ChartViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final docId = int.tryParse(chartId);
-    return docId == null
-        ? const ErrorTextWidget()
-        : StreamBuilder<ChartHasTags?>(
-            stream: controller.stream(
-              uid,
-              docId,
-            ),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget();
-              } else if (snapshot.hasData) {
-                final chart = snapshot.requireData;
-                return chart == null ? const ErrorTextWidget() : child(chart);
-                // ChartViewWidget(
-                //     chart,
-                //     uid: uid,
-                //     controller: controller,
-                //     colorScheme: colorScheme,
-                //     translate: translate,
-                //     onGoToDetail: onGoToDetail,
-                //     chartSyncOptions: chartSyncOptions,
-                //     noteSyncOptions: noteSyncOptions,
-                //     tagSyncOptions: tagSyncOptions,
-                //     onOpenChartEditOptions: onOpenChartEditOptions,
-                //     onOpenCheckboxTagList: onOpenCheckboxTagList,
-                //     onOpenNoteCreation: onOpenNoteCreation,
-                //     onOpenNoteEditor: onOpenNoteEditor,
-                //   );
-              } else {
-                return const ErrorTextWidget();
-              }
-            });
+    // final docId = int.tryParse(chartId);
+    return StreamBuilder<ChartHasTags?>(
+        stream: controller.stream(
+          uid,
+          chart,
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingWidget();
+          } else if (snapshot.hasData) {
+            final chart = snapshot.requireData;
+            return chart == null ? const ErrorTextWidget() : child(chart);
+            // ChartViewWidget(
+            //     chart,
+            //     uid: uid,
+            //     controller: controller,
+            //     colorScheme: colorScheme,
+            //     translate: translate,
+            //     onGoToDetail: onGoToDetail,
+            //     chartSyncOptions: chartSyncOptions,
+            //     noteSyncOptions: noteSyncOptions,
+            //     tagSyncOptions: tagSyncOptions,
+            //     onOpenChartEditOptions: onOpenChartEditOptions,
+            //     onOpenCheckboxTagList: onOpenCheckboxTagList,
+            //     onOpenNoteCreation: onOpenNoteCreation,
+            //     onOpenNoteEditor: onOpenNoteEditor,
+            //   );
+          } else {
+            return const ErrorTextWidget();
+          }
+        });
   }
 }

@@ -1,19 +1,21 @@
 part of lasotuvi_presentation;
 
-class AllChartsBody extends ConsumerStatefulWidget {
-  const AllChartsBody({super.key});
+class AllChartListBody extends ConsumerStatefulWidget {
+  const AllChartListBody({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AllChartsBodyState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AllChartBodyState();
 }
 
-class _AllChartsBodyState extends AuthDependedState<AllChartsBody> {
+class _AllChartBodyState extends AuthDependedState<AllChartListBody> {
   @override
   Widget build(BuildContext context) {
     // return const Placeholder();
     return AllChartListBuilder(
-        controller: ref.read(chartHasTagsListControllerProvider),
-        uid: uid,
+      controller: ref.read(chartHasTagsListControllerProvider),
+      uid: uid,
+      child: (chartHasTags) => AllChartListWidget(
+        chartHasTags,
         translate: translate,
         colorScheme: lightColorScheme,
         onOpenTag: onOpenTag,
@@ -22,13 +24,15 @@ class _AllChartsBodyState extends AuthDependedState<AllChartsBody> {
         onItemTap: onItemTap,
         storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
             StorageHelper.storageOptionsModalBuilder<Chart>(item,
-                syncStatus: syncStatus, uid: uid, ref: ref));
+                syncStatus: syncStatus, uid: uid, ref: ref),
+      ),
+    );
   }
 
   void onOpenTag(BuildContext context, Chart chart, String? uid) {
     context.pushNamed(RouteName.checkboxTagList, pathParameters: {
       RouterParams.chartId: chart.id.toString(),
-      RouterParams.uid: uid ?? RouterParams.uidNullValue
+      RouterParams.uid: uid ?? RouterParams.nullValue
     });
   }
 
@@ -37,7 +41,7 @@ class _AllChartsBodyState extends AuthDependedState<AllChartsBody> {
   void onItemTap(BuildContext context, Chart chart, String? uid) {
     context.pushNamed(RouteName.chartView, pathParameters: {
       RouterParams.chartId: chart.id.toString(),
-      RouterParams.uid: uid ?? RouterParams.uidNullValue
+      RouterParams.uid: uid ?? RouterParams.nullValue
     });
   }
 }

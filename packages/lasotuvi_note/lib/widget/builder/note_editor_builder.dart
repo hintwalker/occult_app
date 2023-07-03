@@ -3,14 +3,16 @@ part of lasotuvi_note;
 class NoteEditorBuilder extends StatelessWidget {
   const NoteEditorBuilder({
     super.key,
-    this.uid,
+    required this.uid,
     required this.noteId,
+    required this.syncStatus,
     required this.controller,
     required this.onWillPop,
     required this.child,
   });
   final String? uid;
   final String noteId;
+  final String? syncStatus;
   final NoteEditorController controller;
   final void Function(Note note) onWillPop;
   final Widget Function(Note note) child;
@@ -21,7 +23,11 @@ class NoteEditorBuilder extends StatelessWidget {
     return docId == null
         ? const ErrorTextWidget()
         : StreamBuilder(
-            stream: controller.stream(uid: uid, docId: docId),
+            stream: controller.stream(
+              uid: uid,
+              docId: docId,
+              syncStatus: syncStatus,
+            ),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const LoadingWidget();

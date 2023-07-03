@@ -150,6 +150,7 @@ class LasotuviRoutes {
       builder: (context, state) => ChartDetailScreen(
         restorationId: RouteName.chartView,
         chartId: state.pathParameters[RouterParams.chartId]!,
+        syncStatus: state.pathParameters[RouterParams.syncStatus]!,
       ),
     ),
     GoRoute(
@@ -159,17 +160,18 @@ class LasotuviRoutes {
       builder: (context, state) => NoteEditorScreen(
         restorationId: RouteName.noteEditor,
         noteId: state.pathParameters[RouterParams.noteId]!,
+        syncStatus: state.pathParameters[RouterParams.syncStatus]!,
       ),
     ),
-    GoRoute(
-      path: RoutePath.tagDetail,
-      name: RouteName.tagDetail,
-      parentNavigatorKey: rootNavigatorKey,
-      builder: (context, state) => TagDetailScreen(
-        restorationId: RouteName.tagDetail,
-        tagId: state.pathParameters[RouterParams.tagId]!,
-      ),
-    ),
+    // GoRoute(
+    //   path: RoutePath.tagDetail,
+    //   name: RouteName.tagDetail,
+    //   parentNavigatorKey: rootNavigatorKey,
+    //   builder: (context, state) => TagDetailScreen(
+    //     restorationId: RouteName.tagDetail,
+    //     tagId: state.pathParameters[RouterParams.tagId]!,
+    //   ),
+    // ),
   ];
   // static final routes = [
   //   // GoRoute(

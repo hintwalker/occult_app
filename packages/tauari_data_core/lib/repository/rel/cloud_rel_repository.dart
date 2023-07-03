@@ -16,10 +16,32 @@ abstract class CloudRelRepository<E extends CloudGetable,
     required int leftId,
     required int rightId,
   });
+  Future<bool> connectManyRightToLeft({
+    required String uid,
+    required Iterable<int> ids,
+    required L left,
+    required Iterable<R> rights,
+  });
+  Future<bool> connectManyLeftToRight({
+    required String uid,
+    required Iterable<int> ids,
+    required R right,
+    required Iterable<L> lefts,
+  });
   Future<bool> disConnectOnCloud({
     required String uid,
     required int leftId,
     required int rightId,
+  });
+  Future<bool> disConnectManyRightFromLeft({
+    required String uid,
+    required L left,
+    required Iterable<R> rights,
+  });
+  Future<bool> disConnectManyLeftFromRight({
+    required String uid,
+    required R right,
+    required Iterable<L> lefts,
   });
   Future<int> deleteOnCloud(String uid, int id);
   Future<int> deleteByLeftIdOnCloud(String uid, int leftId);

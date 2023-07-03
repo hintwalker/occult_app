@@ -12,8 +12,12 @@ abstract class LocalRelRepository<
   Stream<Iterable<E>> onByRightIdOnLocal(int rightId);
   Stream<Iterable<L?>> onLeftDataOnLocal(int rightId);
   Stream<Iterable<R?>> onRightDataOnLocal(int leftId);
-  Future<int> connectOnLocal(int id, int leftId, int rightId);
+  Future<int> connectOnLocal(int leftId, int rightId);
+  Future<List<int>> connectManyRightToLeft(L left, Iterable<R> rights);
+  Future<List<int>> connectManyLeftToRight(R right, Iterable<L> lefts);
   Future<int> disConnectOnLocal(int leftId, int rightId);
+  Future<bool> disConnectManyRightFromLeft(L left, Iterable<R> rights);
+  Future<bool> disConnectManyLeftFromRight(R right, Iterable<L> lefts);
   Future<int> deleteByLeftIdOnLocal(int leftId);
   Future<int> deleteByRightIdOnLocal(int rightId);
   Future<E?> findByLeftAndRightIdOnLocal(int leftId, int rightId);

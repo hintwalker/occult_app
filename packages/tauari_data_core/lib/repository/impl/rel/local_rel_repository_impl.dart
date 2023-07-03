@@ -97,7 +97,8 @@ abstract class LocalRelRepositoryImpl<
   }
 
   @override
-  Future<int> connectOnLocal(int id, int leftId, int rightId) async {
+  Future<int> connectOnLocal(int leftId, int rightId) async {
+    final id = DateTime.now().millisecondsSinceEpoch;
     return await insertToLocal(entityFromIds(id, leftId, rightId));
   }
 
@@ -126,5 +127,45 @@ abstract class LocalRelRepositoryImpl<
         where: '$leftIdColumn = ? AND $rightIdColumn = ?',
         whereArgs: [leftId, rightId]));
     return item.isEmpty ? null : item.first;
+  }
+
+  @override
+  Future<List<int>> connectManyRightToLeft(L left, Iterable<R> rights) async {
+    final List<int> ids = [];
+    for (var right in rights) {
+      final id = await connectOnLocal(left.primaryKey, right.primaryKey);
+      ids.add(id);
+    }
+    return ids;
+  }
+
+  @override
+  Future<List<int>> connectManyLeftToRight(R right, Iterable<L> lefts) async {
+    final List<int> ids = [];
+    for (var left in lefts) {
+      final id = await connectOnLocal(left.primaryKey, right.primaryKey);
+      ids.add(id);
+    }
+    return ids;
+  }
+
+  @override
+  Future<bool> disConnectManyRightFromLeft(L left, Iterable<R> rights) async {
+    // final List<int> ids = [];
+    for (var right in rights) {
+      await disConnectOnLocal(left.primaryKey, right.primaryKey);
+      // ids.add(id);
+    }
+    return true;
+  }
+
+  @override
+  Future<bool> disConnectManyLeftFromRight(R right, Iterable<L> lefts) async {
+    // final List<int> ids = [];
+    for (var left in lefts) {
+      await disConnectOnLocal(left.primaryKey, right.primaryKey);
+      // ids.add(id);
+    }
+    return true;
   }
 }

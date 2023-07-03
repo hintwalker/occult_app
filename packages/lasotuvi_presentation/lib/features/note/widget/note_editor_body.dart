@@ -1,8 +1,13 @@
 part of lasotuvi_presentation;
 
 class NoteEditorBody extends ConsumerStatefulWidget {
-  const NoteEditorBody(this.noteId, {super.key});
+  const NoteEditorBody(
+    this.noteId, {
+    super.key,
+    required this.syncStatus,
+  });
   final String noteId;
+  final String syncStatus;
 
   @override
   ConsumerState<NoteEditorBody> createState() => _NoteEditorBodyState();
@@ -16,6 +21,7 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
         : NoteEditorBuilder(
             uid: uid,
             noteId: widget.noteId,
+            syncStatus: RouterParams.getPathParamValue(widget.syncStatus),
             controller: ref.read(noteEditorControllerProvider),
             onWillPop: (note) => {},
             child: (note) => NoteEditorWidget(

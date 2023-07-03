@@ -32,6 +32,7 @@ class NoteHelper {
       // context.pop();
       context.pushNamed(RouteName.noteEditor, pathParameters: {
         RouterParams.noteId: noteId.toString(),
+        RouterParams.syncStatus: RouterParams.nullValue,
       });
     });
   }
@@ -42,6 +43,7 @@ class NoteHelper {
   ) {
     context.pushNamed(RouteName.noteEditor, pathParameters: {
       RouterParams.noteId: note.id.toString(),
+      RouterParams.syncStatus: note.syncStatus ?? RouterParams.nullValue,
     });
   }
 

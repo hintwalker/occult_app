@@ -3,28 +3,31 @@ part of lasotuvi_chart;
 class AllChartListBuilder extends StatelessWidget {
   const AllChartListBuilder({
     super.key,
+    required this.uid,
     required this.controller,
-    this.uid,
-    required this.translate,
-    required this.colorScheme,
-    required this.onOpenTag,
-    required this.onOpenNote,
-    required this.onOpenMore,
-    required this.onItemTap,
-    required this.storageOptionsModalBuilder,
+    required this.child,
+
+    // required this.translate,
+    // required this.colorScheme,
+    // required this.onOpenTag,
+    // required this.onOpenNote,
+    // required this.onOpenMore,
+    // required this.onItemTap,
+    // required this.storageOptionsModalBuilder,
   });
 
   final ChartHasTagsListController controller;
   final String? uid;
+  final Widget Function(Iterable<ChartHasTags> chartHasTags) child;
 
-  final String Function(String) translate;
-  final ColorScheme colorScheme;
-  final void Function(BuildContext, Chart, String? uid) onOpenTag;
-  final void Function(BuildContext, Chart, String? uid) onOpenNote;
-  final void Function(BuildContext, Chart, String? uid) onOpenMore;
-  final void Function(BuildContext, Chart, String? uid) onItemTap;
-  final Widget Function(Chart, {String? uid, String? syncStatus})
-      storageOptionsModalBuilder;
+  // final String Function(String) translate;
+  // final ColorScheme colorScheme;
+  // final void Function(BuildContext, Chart, String? uid) onOpenTag;
+  // final void Function(BuildContext, Chart, String? uid) onOpenNote;
+  // final void Function(BuildContext, Chart, String? uid) onOpenMore;
+  // final void Function(BuildContext, Chart, String? uid) onItemTap;
+  // final Widget Function(Chart, {String? uid, String? syncStatus})
+  //     storageOptionsModalBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +39,15 @@ class AllChartListBuilder extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            return AllChartListWidget(snapshot.requireData,
-                translate: translate,
-                colorScheme: colorScheme,
-                onOpenTag: onOpenTag,
-                onOpenNote: onOpenNote,
-                onOpenMore: onOpenMore,
-                onItemTap: onItemTap,
-                storageOptionsModalBuilder: storageOptionsModalBuilder);
+            return child(snapshot.requireData);
+            // return AllChartListWidget(snapshot.requireData,
+            //     translate: translate,
+            //     colorScheme: colorScheme,
+            //     onOpenTag: onOpenTag,
+            //     onOpenNote: onOpenNote,
+            //     onOpenMore: onOpenMore,
+            //     onItemTap: onItemTap,
+            //     storageOptionsModalBuilder: storageOptionsModalBuilder);
           } else {
             return const Center(
               child: ErrorTextWidget(),

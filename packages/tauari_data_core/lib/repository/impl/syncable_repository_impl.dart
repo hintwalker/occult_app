@@ -94,14 +94,21 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   }
 
   @override
-  Stream<E?> onById({String? uid, required int docId}) {
+  Stream<E?> onById({
+    required String? uid,
+    required int docId,
+    required String? syncStatus,
+  }) {
     final Stream<E?> localStream = localRepository
         .onByIdOnLocal(docId); //.map((event) => event?.toEntity());
-    if (uid == null) {
+    if (onlyOnLocal(
+      uid: uid,
+      syncStatus: syncStatus,
+    )) {
       return localStream;
     }
     final Stream<E?> cloudStream =
-        cloudRepository.onByIdOnCloud(uid: uid, docId: docId.toString());
+        cloudRepository.onByIdOnCloud(uid: uid!, docId: docId.toString());
     // .map((event) => event?.toEntity());
 
     final result = Rx.combineLatest2(
@@ -130,24 +137,36 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
     final items = await dataEveryWhere(uid);
     final filteredItems =
         items.where((element) => element.getSyncStatus == SyncStatus.onlyCloud);
+
     for (var item in filteredItems) {
-      localRepository.insertToLocal(item);
+      if (item.syncStatus == SyncStatus.onlyCloud) {
+        localRepository.insertToLocal(item);
+      }
     }
+
     return Future.value(true);
   }
 
   @override
   Future<void> update(E item, String? uid) async {
     await localRepository.updateOnLocal(item);
-    if (uid != null) {
-      await cloudRepository.updateOnCloud(item, uid);
+    if (onlyOnLocal(
+      uid: uid,
+      syncStatus: item.syncStatus,
+    )) {
+      return;
+    } else {
+      await cloudRepository.updateOnCloud(item, uid!);
     }
   }
 
   @override
   Future<void> deleteEveryWhere(String? uid, E item) async {
-    if (uid != null) {
-      await cloudRepository.deleteFromCloud(uid: uid, docId: item.docId);
+    if (!onlyOnLocal(
+      uid: uid,
+      syncStatus: item.syncStatus,
+    )) {
+      await cloudRepository.deleteFromCloud(uid: uid!, docId: item.docId);
     }
     await localRepository.deleteFromLocal(item.primaryKey);
   }

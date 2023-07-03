@@ -1,11 +1,11 @@
 part of lasotuvi_presentation;
 
 class TagDetailBody extends ConsumerStatefulWidget {
-  const TagDetailBody({
+  const TagDetailBody(
+    this.tag, {
     super.key,
-    required this.tagId,
   });
-  final String tagId;
+  final Tag tag;
 
   @override
   ConsumerState<TagDetailBody> createState() => _TagDetailBodyState();
@@ -18,32 +18,42 @@ class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
         ? const LoadingWidget()
         : TagDetailBuilder(
             uid: uid,
-            tagId: widget.tagId,
+            tag: widget.tag,
             controller: ref.read(tagDetailControllerProvider),
             colorScheme: lightColorScheme,
             translate: translate,
-            // onChartItemTap: (context, chart) =>
-            //     ChartHelper.openChartView(context: context, chart: chart),
-            onChangeInfoTap: (context, tag) =>
-                TagHelper.openTagEdit(context, tag),
-            tagSyncOptions: (tag, {syncStatus, uid}) =>
-                StorageHelper.storageOptionsModalBuilder<Tag>(tag, ref: ref),
-            // chartSyncOptions: (chart, {syncStatus, uid}) =>
-            //     StorageHelper.storageOptionsModalBuilder<Chart>(chart,
-            //         ref: ref),
-            onOpenChartList: (context, tag) =>
-                ChartHelper.openCheckboxChartList(context, tag),
-            chartItem: (chart) => HoriChartItemWidget(
-              chart,
-              uid: uid,
+            child: (tagHasCharts) => TagDetailModal(
+              title: translate('tag'),
               colorScheme: lightColorScheme,
-              translate: translate,
-              onTap: (context, chart) =>
-                  ChartHelper.openChartView(context: context, chart: chart),
-              onSyncStatusTap: () => StorageHelper.showOptionsModal<Chart>(
+              child: TagDetailWidget(
+                tagHasCharts: tagHasCharts,
+                colorScheme: lightColorScheme,
+                translate: translate,
+                // onChartItemTap: (context, chart) =>
+                //     ChartHelper.openChartView(context: context, chart: chart),
+                onChangeInfoTap: (context, tag) =>
+                    TagHelper.openTagEdit(context, tag),
+                tagSyncOptions: (tag, {syncStatus, uid}) =>
+                    StorageHelper.storageOptionsModalBuilder<Tag>(tag,
+                        ref: ref),
+                // chartSyncOptions: (chart, {syncStatus, uid}) =>
+                //     StorageHelper.storageOptionsModalBuilder<Chart>(chart,
+                //         ref: ref),
+                onOpenChartList: (context, tag) =>
+                    ChartHelper.openCheckboxChartList(context, tag),
+                chartItem: (chart) => HoriChartItemWidget(
                   chart,
-                  context: context,
-                  ref: ref),
+                  uid: uid,
+                  colorScheme: lightColorScheme,
+                  translate: translate,
+                  onTap: (context, chart) =>
+                      ChartHelper.openChartView(context: context, chart: chart),
+                  onSyncStatusTap: () => StorageHelper.showOptionsModal<Chart>(
+                      chart,
+                      context: context,
+                      ref: ref),
+                ),
+              ),
             ),
           );
   }

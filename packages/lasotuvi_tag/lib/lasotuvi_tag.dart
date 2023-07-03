@@ -18,6 +18,7 @@ part 'controller/tag_list_controller.dart';
 part 'widget/builder/checkbox_tag_list_builder.dart';
 part 'widget/builder/tag_detail_builder.dart';
 
+part 'widget/modal/tag_detail_modal.dart';
 part 'widget/modal/checkbox_tag_list_modal.dart';
 part 'widget/modal/tag_edit_modal.dart';
 part 'widget/modal/tag_creation_modal.dart';

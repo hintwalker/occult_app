@@ -12,8 +12,12 @@ abstract class SyncableRepository<E extends SyncableEntity>
   Future<int> download(String uid, E item);
   Stream<Iterable<E>> onEveryWhere(String? uid, [QueryArgs? queryArgs]);
   Stream<int> onCountEveryWhere(String? uid);
-  Stream<E?> onById({String? uid, required int docId});
-  Future<E?> byId({String? uid, required int docId});
+  Stream<E?> onById({
+    required String? uid,
+    required int docId,
+    required String? syncStatus,
+  });
+  Future<E?> byId({required String? uid, required int docId});
   Iterable<T> mergeCloudToLocal<T extends Syncable>({
     required String uid,
     required Iterable<T> local,

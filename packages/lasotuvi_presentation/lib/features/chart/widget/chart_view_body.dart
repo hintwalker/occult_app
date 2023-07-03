@@ -30,6 +30,8 @@ class _ChartViewBodyState extends AuthDependedState<ChartViewBody> {
                   onGoToDetail: (context, chart) {
                     context.pushNamed(RouteName.chartDetail, pathParameters: {
                       RouterParams.chartId: chart.docId,
+                      RouterParams.syncStatus:
+                          chart.syncStatus ?? RouterParams.nullValue,
                     });
                   },
                   chartSyncOptions: (item, {syncStatus, uid}) =>

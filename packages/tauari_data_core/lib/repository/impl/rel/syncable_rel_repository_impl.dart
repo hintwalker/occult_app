@@ -19,48 +19,58 @@ class SyncableRelRepositoryImpl<
             localRepository: localRelRepository,
             cloudRepository: cloudRelRepository);
 
+  /// Thực hiện kết nối giữa [L] và [R]
+  ///
+  /// Nếu [L] hoặc [R] chỉ có trên local thì không thực hiện kết nối trên cloud.
   @override
   Future connect({String? uid, required L left, required R right}) async {
-    final id = DateTime.now().millisecondsSinceEpoch;
-    await localRelRepository.connectOnLocal(id, left.id, right.id);
-    if (uid != null) {
-      if (left.syncStatus == SyncStatus.onlyLocal ||
-          right.syncStatus == SyncStatus.onlyLocal) {
-        return;
-      }
-      await cloudRelRepository.connectOnCloud(
-          uid: uid, id: id, leftId: left.id, rightId: right.id);
+    final id = await localRelRepository.connectOnLocal(left.id, right.id);
+    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus) ||
+        onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
+      return;
     }
+    await cloudRelRepository.connectOnCloud(
+      uid: uid!,
+      id: id,
+      leftId: left.id,
+      rightId: right.id,
+    );
   }
 
-  // @override
-  // Future<int> deleteRel(String? uid, int id) async {
-  //   final rows = await localRelRepository.deleteOnLocal(id);
-  //   if (uid != null) {
-  //     await deleteOnCloud(uid, id);
-  //   }
-  //   return rows;
-  // }
-
+  /// Xóa dữ liệu của bảng quan hệ theo id của [L]
+  ///
+  /// - Việc xóa dữ liệu đầu tiên thực hiện trên local,
+  /// Nếu user đã đăng nhập (uid != null) thì xóa dữ liệu trên cloud.
+  /// - Vì Firebase có sử dụng chế độ offline, nên việc xóa dữ liệu trên cloud
+  /// có thể thực hiện được khi không có kết nối internet.
+  /// Việc xóa thực sự trên cloud sẽ được thực hiện khi có kết nối internet lại.
   @override
-  Future<int> deleteByLeftId(String? uid, int leftId, String syncStatus) async {
+  Future<int> deleteByLeftId({
+    required String? uid,
+    required int leftId,
+  }) async {
     final rows = await localRelRepository.deleteByLeftIdOnLocal(leftId);
     if (uid != null) {
-      if (syncStatus != SyncStatus.onlyLocal) {
-        await cloudRelRepository.deleteByLeftIdOnCloud(uid, leftId);
-      }
+      await cloudRelRepository.deleteByLeftIdOnCloud(uid, leftId);
     }
     return rows;
   }
 
+  /// Xóa dữ liệu của bảng quan hệ theo id của [R]
+  ///
+  /// - Việc xóa dữ liệu đầu tiên thực hiện trên local,
+  /// Nếu user đã đăng nhập (uid != null) thì xóa dữ liệu trên cloud.
+  /// - Vì Firebase có sử dụng chế độ offline, nên việc xóa dữ liệu trên cloud
+  /// có thể thực hiện được khi không có kết nối internet.
+  /// Việc xóa thực sự trên cloud sẽ được thực hiện khi có kết nối internet lại.
   @override
-  Future<int> deleteByRightId(
-      String? uid, int rightId, String syncStatus) async {
+  Future<int> deleteByRightId({
+    required String? uid,
+    required int rightId,
+  }) async {
     final rows = await localRelRepository.deleteByRightIdOnLocal(rightId);
     if (uid != null) {
-      if (syncStatus != SyncStatus.onlyLocal) {
-        await cloudRelRepository.deleteByRightIdOnCloud(uid, rightId);
-      }
+      await cloudRelRepository.deleteByRightIdOnCloud(uid, rightId);
     }
     return rows;
   }
@@ -86,15 +96,15 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Future<Iterable<L>> leftData(String? uid, int rightId) async {
+  Future<Iterable<L>> leftData(String? uid, R right) async {
     if (uid == null) {
-      final result = await localRelRepository.leftDataOnLocal(rightId);
+      final result = await localRelRepository.leftDataOnLocal(right.id);
       return result.whereType();
     }
-    final relsLocal = await localRelRepository.byRightIdOnLocal(rightId);
+    final relsLocal = await localRelRepository.byRightIdOnLocal(right.id);
     final leftIdsLocal = relsLocal.map((e) => localRelRepository.getLeftId(e));
 
-    final relsCloud = await cloudRelRepository.byRightIdOnCloud(uid, rightId);
+    final relsCloud = await cloudRelRepository.byRightIdOnCloud(uid, right.id);
     final leftIdsCloud = relsCloud.map((e) => cloudRelRepository.getLeftId(e));
 
     final unionIds = leftIdsLocal.toSet().union(leftIdsCloud.toSet());
@@ -185,15 +195,15 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Future<Iterable<R>> rightData(String? uid, int leftId) async {
+  Future<Iterable<R>> rightData(String? uid, L left) async {
     if (uid == null) {
-      return await localRelRepository.rightDataOnLocal(leftId);
+      return await localRelRepository.rightDataOnLocal(left.id);
     }
-    final relsLocal = await localRelRepository.byLeftIdOnLocal(leftId);
+    final relsLocal = await localRelRepository.byLeftIdOnLocal(left.id);
     final rightIdsLocal =
         relsLocal.map((e) => localRelRepository.getRightId(e));
 
-    final relsCloud = await cloudRelRepository.byLeftIdOnCloud(uid, leftId);
+    final relsCloud = await cloudRelRepository.byLeftIdOnCloud(uid, left.id);
     final rightIdsCloud =
         relsCloud.map((e) => cloudRelRepository.getRightId(e));
 
@@ -206,25 +216,20 @@ class SyncableRelRepositoryImpl<
       }
     }
     return result;
-    // final local = await rightDataOnLocal(leftId);
-    // if (uid == null) {
-    //   return local;
-    // }
-    // final cloud = await rightDataOnCloud(uid, leftId);
-    // return mergeCloudToLocal<R>(uid: uid, local: local, cloud: cloud);
   }
 
+  /// Thực hiện ngắt kết nối giữa [L] và [R]
+  ///
+  /// Nếu [L] hoặc [R] chỉ có trên local thì không thực hiện ngắt kết nối trên cloud
   @override
   Future disConnect({String? uid, required L left, required R right}) async {
     await localRelRepository.disConnectOnLocal(left.id, right.id);
-    if (uid != null) {
-      if (left.syncStatus == SyncStatus.onlyLocal ||
-          right.syncStatus == SyncStatus.onlyLocal) {
-        return;
-      }
-      await cloudRelRepository.disConnectOnCloud(
-          uid: uid, leftId: left.id, rightId: right.id);
+    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus) ||
+        onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
+      return;
     }
+    await cloudRelRepository.disConnectOnCloud(
+        uid: uid!, leftId: left.id, rightId: right.id);
   }
 
   @override
@@ -236,7 +241,7 @@ class SyncableRelRepositoryImpl<
         .onEveryWhere(uid)
         .asyncMap((event) async => await Future.wait(event.map(
               (right) async {
-                final lefts = await leftData(uid, right.id);
+                final lefts = await leftData(uid, right);
                 return onCreateItem(right, lefts);
               },
             )));
@@ -259,7 +264,7 @@ class SyncableRelRepositoryImpl<
         // });
         .asyncMap((event) async => await Future.wait(event.map(
               (left) async {
-                final rights = await rightData(uid, left.id);
+                final rights = await rightData(uid, left);
                 return onCreateItem(left, rights);
               },
             )));
@@ -268,87 +273,122 @@ class SyncableRelRepositoryImpl<
 
   @override
   Stream<SyncableEntityCarrier<L, R>?> onLeftHasRight(
-      {String? uid,
-      required int leftId,
+      {required String? uid,
+      required L left,
       required SyncableEntityCarrier<L, R> Function(L p1, Iterable<R> p2)
           onCreateItem}) {
     return leftRepository
-        .onById(uid: uid, docId: leftId)
+        .onById(
+      uid: uid,
+      docId: left.id,
+      syncStatus: left.syncStatus,
+    )
         .asyncMap((event) async {
       if (event == null) {
         return Future.value(null);
       }
-      final rights = await rightData(uid, event.id);
+      final rights = await rightData(uid, event);
       return onCreateItem(event, rights);
-    }
-//         async {
-//           Future.wait(
-// if (event == null) {
-//         return null;
-//       }
-//       final rights = await rightData(uid, event.id);
-//       return onCreateItem(event, rights);
-//           )
-
-//     }
-            );
+    });
   }
 
+  /// Tìm đối tượng gồm [R] cho trước chứa theo tất các [L]
+  ///
+  /// Nếu [R] chỉ có trên local thì chỉ tìm đối tượng trên local,
+  /// các [L] thì tìm cả trên local và cloud.
   @override
   Stream<SyncableEntityCarrier<R, L>?> onRightHasLeft(
-      {String? uid,
-      required int rightId,
+      {required String? uid,
+      required R right,
       required SyncableEntityCarrier<R, L> Function(R p1, Iterable<L> p2)
           onCreateItem}) {
     return rightRepository
-        .onById(uid: uid, docId: rightId)
+        .onById(
+      uid: uid,
+      docId: right.id,
+      syncStatus: right.syncStatus,
+    )
         .asyncMap((event) async {
       if (event == null) {
         return Future.value(null);
       }
-      final lefts = await leftData(uid, event.id);
+      final lefts = await leftData(uid, event);
       return onCreateItem(event, lefts);
     });
   }
 
   @override
   Future<void> connectLeftToRight({
-    String? uid,
+    required String? uid,
     required R right,
     required Iterable<L> lefts,
   }) async {
-    for (var left in lefts) {
-      await connect(uid: uid, left: left, right: right);
+    List<int> ids = [];
+    if (onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
+      ids = await localRelRepository.connectManyLeftToRight(right, lefts);
+    } else {
+      await cloudRelRepository.connectManyLeftToRight(
+        uid: uid!,
+        ids: ids,
+        right: right,
+        lefts: lefts,
+      );
     }
   }
 
   @override
-  Future<void> disConnectLeftFromRight(
-      {String? uid, required R right, required Iterable<L> lefts}) async {
-    for (var left in lefts) {
-      await disConnect(uid: uid, left: left, right: right);
+  Future<void> disConnectLeftFromRight({
+    required String? uid,
+    required R right,
+    required Iterable<L> lefts,
+  }) async {
+    if (onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
+      await localRelRepository.disConnectManyLeftFromRight(right, lefts);
+    } else {
+      await cloudRelRepository.disConnectManyLeftFromRight(
+        uid: uid!,
+        right: right,
+        lefts: lefts,
+      );
     }
   }
 
+  /// Thực hiện kết nối nhiều [R] vào 1 [L]
+  ///
+  /// Nếu L chỉ có trên local thì chỉ thực hiện kết nối trên local
   @override
   Future<void> connectRightToLeft({
-    String? uid,
+    required String? uid,
     required L left,
     required Iterable<R> rights,
   }) async {
-    for (var right in rights) {
-      await connect(uid: uid, left: left, right: right);
+    List<int> ids = [];
+    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
+      ids = await localRelRepository.connectManyRightToLeft(left, rights);
+    } else {
+      await cloudRelRepository.connectManyRightToLeft(
+        uid: uid!,
+        ids: ids,
+        left: left,
+        rights: rights,
+      );
     }
   }
 
   @override
   Future<void> disConnectRightFromLeft({
-    String? uid,
+    required String? uid,
     required L left,
     required Iterable<R> rights,
   }) async {
-    for (var right in rights) {
-      await disConnect(uid: uid, left: left, right: right);
+    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
+      await localRelRepository.disConnectManyRightFromLeft(left, rights);
+    } else {
+      await cloudRelRepository.disConnectManyRightFromLeft(
+        uid: uid!,
+        left: left,
+        rights: rights,
+      );
     }
   }
 }

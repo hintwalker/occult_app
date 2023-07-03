@@ -18,13 +18,17 @@ class TagHelper {
     required BuildContext context,
     required Tag tag,
   }) {
-    context.pushNamed(RouteName.tagDetail, pathParameters: {
-      RouterParams.tagId: tag.docId,
-    });
+    showDialog(
+      context: context,
+      builder: (context) => TagDetailBody(tag),
+    );
+    // context.pushNamed(RouteName.tagDetail, pathParameters: {
+    //   RouterParams.tagId: tag.docId,
+    // });
   }
 
   static openTagEdit(BuildContext context, Tag tag) {
-    showModalBottomSheet(
+    showDialog(
       context: context,
       builder: (context) => TagEditBody(tag),
     );

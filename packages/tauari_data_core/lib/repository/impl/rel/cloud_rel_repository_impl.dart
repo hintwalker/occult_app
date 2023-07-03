@@ -185,4 +185,74 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
     final leftVsRight = left.where((element) => getRightId(element) == rightId);
     return leftVsRight.isEmpty ? null : leftVsRight.first;
   }
+
+  @override
+  Future<bool> connectManyRightToLeft({
+    required String uid,
+    required Iterable<int> ids,
+    required L left,
+    required Iterable<R> rights,
+  }) async {
+    int i = 0;
+    for (var right in rights) {
+      await connectOnCloud(
+        uid: uid,
+        id: ids.elementAt(i),
+        leftId: int.parse(left.docId),
+        rightId: int.parse(right.docId),
+      );
+    }
+    return true;
+  }
+
+  @override
+  Future<bool> connectManyLeftToRight({
+    required String uid,
+    required Iterable<int> ids,
+    required R right,
+    required Iterable<L> lefts,
+  }) async {
+    int i = 0;
+    for (var left in lefts) {
+      await connectOnCloud(
+        uid: uid,
+        id: ids.elementAt(i),
+        leftId: int.parse(left.docId),
+        rightId: int.parse(right.docId),
+      );
+    }
+    return true;
+  }
+
+  @override
+  Future<bool> disConnectManyRightFromLeft({
+    required String uid,
+    required L left,
+    required Iterable<R> rights,
+  }) async {
+    for (var right in rights) {
+      await disConnectOnCloud(
+        uid: uid,
+        leftId: int.parse(left.docId),
+        rightId: int.parse(right.docId),
+      );
+    }
+    return true;
+  }
+
+  @override
+  Future<bool> disConnectManyLeftFromRight({
+    required String uid,
+    required R right,
+    required Iterable<L> lefts,
+  }) async {
+    for (var left in lefts) {
+      await disConnectOnCloud(
+        uid: uid,
+        leftId: int.parse(left.docId),
+        rightId: int.parse(right.docId),
+      );
+    }
+    return true;
+  }
 }

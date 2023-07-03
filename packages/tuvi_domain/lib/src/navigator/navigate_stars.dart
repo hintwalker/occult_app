@@ -49,6 +49,9 @@ Map<StarName, Star> navigateStars(
     final oldStar = stars[currentStarName];
     if (formula != null || oldStar != null) {
       final expr = formula[StarFormulaKey.expression.name] as String;
+      if (currentStarName.name == 'dauQuan') {
+        print(expr);
+      }
       // final dataValue = formula[StarFormulaKey.data.name];
       // List data = dataValue == null ? [] : dataValue as List;
       List data = [];

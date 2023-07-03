@@ -20,7 +20,8 @@ class RoutePath {
   //     '/note/view/:${RouterParams.uid}/:${RouterParams.noteId}';
 
   static const notes = '/note/all';
-  static const noteEditor = '/note/editor/:${RouterParams.noteId}';
+  static const noteEditor =
+      '/note/editor/:${RouterParams.noteId}/:${RouterParams.syncStatus}';
 
   // static const noteEditor =
   //     '/note/editor/:${RouterParams.uid}/:${RouterParams.chartId}/:${RouterParams.noteId}';
@@ -40,7 +41,9 @@ class RoutePath {
 
   static const library = '/library';
 
-  static const chartDetail = '/chart/:${RouterParams.chartId}';
+  static const chartDetail =
+      '/chart/:${RouterParams.chartId}/:${RouterParams.syncStatus}';
 
-  static const tagDetail = '/tag/:${RouterParams.tagId}';
+  static const tagDetail =
+      '/tag/:${RouterParams.tagId}/:${RouterParams.syncStatus}';
 }

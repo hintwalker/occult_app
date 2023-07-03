@@ -35,7 +35,7 @@ part 'widget/hori_chart_name_widget.dart';
 part 'widget/hori_chart_item_widget.dart';
 part 'widget/tag_item_in_chart.widget.dart';
 part 'widget/top_ten_charts_banner.dart';
-part 'widget/all_chart_list.widget.dart';
+part 'widget/all_chart_list_widget.dart';
 part 'widget/chart_has_tags_list_item.widget.dart';
 part 'widget/chart_list_item_widget.dart';
 

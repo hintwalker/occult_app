@@ -86,11 +86,19 @@ class _SelectableDataListViewState<U, V>
               controller: controller,
               onChanged: _runFilter,
               decoration: InputDecoration(
-                  labelText: widget.translate('search'),
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: controller.text.trim().isEmpty
-                      ? null
-                      : const Icon(Icons.close)),
+                labelText: widget.translate('search'),
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: controller.text.isEmpty
+                    ? null
+                    : IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          controller.clear();
+
+                          _runFilter('');
+                        },
+                      ),
+              ),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.search,
             ),
@@ -130,10 +138,17 @@ class _SelectableDataListViewState<U, V>
                       }
                       selected.add(item.copyWith(selected: checked));
                       setState(() {
-                        selectableItems.removeWhere((element) =>
-                            widget.itemId(element.data) ==
-                            widget.itemId(item.data));
-                        selectableItems.add(item.copyWith(selected: checked));
+                        final index = selectableItems.indexWhere(
+                          (element) =>
+                              widget.itemId(element.data) ==
+                              widget.itemId(item.data),
+                        );
+                        selectableItems.removeAt(index);
+                        // selectableItems.removeWhere((element) =>
+                        //     widget.itemId(element.data) ==
+                        //     widget.itemId(item.data));
+                        selectableItems.insert(
+                            index, item.copyWith(selected: checked));
                       });
                     }
                         // checked
