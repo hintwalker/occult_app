@@ -16,6 +16,7 @@ class _AllChartBodyState extends AuthDependedState<AllChartListBody> {
       uid: uid,
       child: (chartHasTags) => AllChartListWidget(
         chartHasTags,
+        slidable: false,
         translate: translate,
         colorScheme: lightColorScheme,
         onOpenTag: onOpenTag,

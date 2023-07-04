@@ -10,6 +10,11 @@ class ChartsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const AllChartListBody());
+        restorationId: restorationId,
+        child: Container(
+            decoration: BoxDecoration(
+              color: LasotuviAppStyle.colorScheme.background,
+            ),
+            child: const AllChartListBody()));
   }
 }

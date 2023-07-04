@@ -1,6 +1,6 @@
 part of tuvi_chart_creation_form;
 
-class ChartCreationStep1 extends StatelessWidget {
+class ChartCreationStep1 extends ConsumerWidget {
   const ChartCreationStep1({
     super.key,
     required this.colorScheme,
@@ -11,20 +11,39 @@ class ChartCreationStep1 extends StatelessWidget {
   final double space = 20;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        ChartAvatarInput(),
+        ChartAvatarInput(
+          translate: translate,
+        ),
         ChartNameInput(
           translate: translate,
+          controller: ChartNameController(
+            value: translate('noName'),
+            updateValid: (value) => ref
+                .read(chartCreationNotifierProvider.notifier)
+                .updateValid(value),
+            updateValue: (value) => ref
+                .read(chartCreationNotifierProvider.notifier)
+                .updateName(value),
+          ),
         ),
         SizedBox(
           height: space,
         ),
         ChartGenderInput(
-          colorScheme: colorScheme,
-          translate: translate,
-        ),
+            colorScheme: colorScheme,
+            translate: translate,
+            controller: GenderController(
+              value: ref.read(chartCreationNotifierProvider).chart.gender,
+              updateValid: (value) => ref
+                  .read(chartCreationNotifierProvider.notifier)
+                  .updateValid(value),
+              updateValue: (value) => ref
+                  .read(chartCreationNotifierProvider.notifier)
+                  .updateGender(value),
+            )),
         SizedBox(
           height: space,
         ),

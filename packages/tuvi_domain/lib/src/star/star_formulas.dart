@@ -64,12 +64,12 @@ final starFormulas = {
   "hoaKhoa": {
     "expression": "data[canOfYearIndex]",
     "data":
-        "[8+tuVi,tuVi,10-hourIndex,11+tuVi,10-luniMonthIndex,5+thienPhu,dongHoaKhoa ==0 ? 7+tuVi : 1+thienPhu,4+hourIndex,phuHoaKhoa ==0 ? thienPhu : 4+luniMonthIndex,1+thienPhu]"
+        "[8+tuVi,tuVi,10-hourIndex,11+tuVi,10-luniMonthIndex,5+thienPhu,dongHoaKhoa ==0 ? 1+thienPhu : 7+tuVi,4+hourIndex,phuHoaKhoa ==0 ? thienPhu : 4+luniMonthIndex,1+thienPhu]"
   },
   "hoaKy": {
     "expression": "data[canOfYearIndex]",
     "data":
-        "[9+tuVi,1+thienPhu,4+tuVi,3+thienPhu,11+tuVi,4+hourIndex,dongHoaKhoa ==0 ? 1+thienPhu : 7+tuVi,10-hourIndex,8+tuVi,2+thienPhu]"
+        "[9+tuVi,1+thienPhu,4+tuVi,3+thienPhu,11+tuVi,4+hourIndex,dongHoaKy ==0 ? 1+thienPhu : 7+tuVi,10-hourIndex,8+tuVi,2+thienPhu]"
   },
   "daiHao": {"expression": "locTon + k * 9"},
   "tieuHao": {"expression": "locTon + k * 3"},

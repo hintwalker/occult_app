@@ -30,16 +30,23 @@ class CircleHumanAvatar extends StatelessWidget {
         //         : Image.file(File.fromUri(Uri.file(path!))).image,
         //     fit: fit)
       ),
-      child: path == null || path!.isEmpty
-          ? gender == 0
-              ? SvgPicture.asset('assets/icons/female.svg',
-                  package: 'tauari_ui')
-              : SvgPicture.asset('assets/icons/male.svg', package: 'tauari_ui')
-          : ClipOval(
-              child: Image.file(
-              File.fromUri(Uri.file(path!)),
-              fit: BoxFit.cover,
-            )),
+      child: getAvatar(path, gender),
     );
+  }
+
+  Widget getAvatar(String? path, int gender) {
+    return path == null || path.isEmpty
+        ? gender == 0
+            ? const FemaleAvatarWidget()
+            : const MaleAvatarWidget()
+        : ClipOval(
+            child: Image.file(
+              File.fromUri(Uri.file(path)),
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => gender == 0
+                  ? const FemaleAvatarWidget()
+                  : const MaleAvatarWidget(),
+            ),
+          );
   }
 }

@@ -16,16 +16,19 @@ class ChartDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorableStatelessWidget(
-      restorationId: restorationId,
-      child: ChartDetailBody(
-        chartId: chartId,
-        syncStatus: syncStatus,
-      ),
-      // child: Scaffold(
-      //   appBar: const PreferredSize(
-      //       preferredSize: Size.fromHeight(48), child: ChartScreenAppBar()),
-      //   body: ChartDetailBody(chartId: chartId),
-      // )
-    );
+        restorationId: restorationId,
+        child: Container(
+          color: LasotuviAppStyle.colorScheme.background,
+          child: ChartDetailBody(
+            chartId: chartId,
+            syncStatus: syncStatus,
+          ),
+        )
+        // child: Scaffold(
+        //   appBar: const PreferredSize(
+        //       preferredSize: Size.fromHeight(48), child: ChartScreenAppBar()),
+        //   body: ChartDetailBody(chartId: chartId),
+        // )
+        );
   }
 }

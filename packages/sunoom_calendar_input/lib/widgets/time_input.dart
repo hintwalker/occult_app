@@ -30,9 +30,16 @@ class _TimeInputState extends State<TimeInput> {
         padding: const EdgeInsets.all(2),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(
+              width: 48.0,
+              child: Icon(Icons.access_time),
+            ),
+            const SizedBox(
+              width: 8.0,
+            ),
             Expanded(
                 child: DateField(
               onChanged: (value) =>
@@ -43,8 +50,11 @@ class _TimeInputState extends State<TimeInput> {
               // formState: _formKey.currentState,
             )),
             const SizedBox(
-              width: 16,
-              child: Text(':'),
+              width: 32,
+              child: Text(
+                ':',
+                textAlign: TextAlign.center,
+              ),
             ),
             Expanded(
                 child: DateField(

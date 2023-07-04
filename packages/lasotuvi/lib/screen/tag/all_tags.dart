@@ -10,6 +10,10 @@ class AllTagsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const Placeholder());
+        restorationId: restorationId,
+        child: Container(
+          color: LasotuviAppStyle.colorScheme.background,
+          child: const Placeholder(),
+        ));
   }
 }

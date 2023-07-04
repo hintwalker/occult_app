@@ -12,9 +12,12 @@ class ChartCreationScreen extends StatelessWidget {
     return RestorationScope(
         restorationId: restorationId,
         child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Chart creation'),
-            ),
-            body: const ChartCreationBody()));
+          appBar: AppBar(
+            title: const Text('Chart creation'),
+            backgroundColor: LasotuviAppStyle.colorScheme.background,
+          ),
+          body: const ChartCreationBody(),
+          backgroundColor: LasotuviAppStyle.colorScheme.background,
+        ));
   }
 }

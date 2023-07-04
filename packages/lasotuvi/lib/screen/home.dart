@@ -12,13 +12,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const HomeBody()
-        // Center(
-        //   child: FilledButton(
-        //       onPressed: () => drawerController.setScreenId('energyMarket'),
-        //       child: const Text('Go to Energy market')),
-        // )
-        );
+      restorationId: restorationId,
+      child: Container(
+          decoration: BoxDecoration(
+            color: LasotuviAppStyle.colorScheme.background,
+          ),
+          child: const HomeBody()),
+      // Center(
+      //   child: FilledButton(
+      //       onPressed: () => drawerController.setScreenId('energyMarket'),
+      //       child: const Text('Go to Energy market')),
+      // )
+    );
   }
   // const HomeScreen({super.key});
 

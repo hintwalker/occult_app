@@ -59,6 +59,7 @@ class _DrawerScaffoldState extends State<DrawerScaffold> {
           title: widget.title(screenId),
           drawerIconColor: widget.style.menuIconColor,
           trailing: widget.appBarTrailing,
+          appBarColor: widget.style.appBarColor,
         ),
         slider: DrawerPanel(
           header: widget.header,

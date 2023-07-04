@@ -5,9 +5,11 @@ class ChartBirthdayInput extends ConsumerWidget {
     super.key,
     required this.colorScheme,
     required this.translate,
+    required this.controller,
   });
   final ColorScheme colorScheme;
   final String Function(String) translate;
+  final BirthdayController controller;
 
   void onDateChanged(
     Moment moment,
@@ -18,13 +20,15 @@ class ChartBirthdayInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final moment = initialMoment(const TimeZone(offsetInHour: 7));
+    final moment = controller.value;
+    //initialMoment(const TimeZone(offsetInHour: 7));
     return CalendarInput(
       colorScheme: colorScheme,
       translate: translate,
-      onDateChanged: (moment) => onDateChanged(moment, ref),
-      onValidate: (valid) =>
-          ref.read(chartCreationNotifierProvider.notifier).updateValid(valid),
+      onDateChanged: (moment, {required valid}) =>
+          controller.onChanged(moment, valid),
+      // onValidate: (valid) =>
+      //     ref.read(chartCreationNotifierProvider.notifier).updateValid(valid),
       initValue: moment,
     );
   }

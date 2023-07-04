@@ -85,6 +85,9 @@ class _DataListViewState<U, V> extends State<DataListView<U, V>> {
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.search,
       ),
+      const SizedBox(
+        height: 2.0,
+      ),
       Expanded(
         //     child: ListView.builder(
         //   itemBuilder: (ctx, index) {

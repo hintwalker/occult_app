@@ -22,6 +22,8 @@ dependencies:
     path: ../lasotuvi_note
   lasotuvi_storage_plan:
     path: ../lasotuvi_storage_plan
+  lasotuvi_style:
+    path: ../lasotuvi_style
 
   tuvi_domain:
     path: ../tuvi_domain

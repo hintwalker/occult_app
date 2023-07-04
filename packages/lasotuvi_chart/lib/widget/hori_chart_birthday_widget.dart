@@ -22,7 +22,11 @@ class HoriChartBirthdayWidget extends StatelessWidget {
         ),
         Text(
           moment.toLuniSolarDateString(canName: canName, chiName: chiName),
-          style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 14.0),
+          style: const TextStyle(
+            fontSize: 13.0,
+            fontWeight: FontWeight.w500,
+          ),
+          overflow: TextOverflow.fade,
         ),
       ],
     );

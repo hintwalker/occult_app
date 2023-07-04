@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   energy_store:
     path: ../energy_store
+  lasotuvi_style:
+    path: ../lasotuvi_style
   lasotuvi_storage_plan:
     path: ../lasotuvi_storage_plan
   lasotuvi_domain:

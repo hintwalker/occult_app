@@ -35,7 +35,7 @@ class DataListItem<T> extends StatelessWidget {
       enabled: slidable,
       key: ValueKey(data),
       endActionPane: ActionPane(
-        motion: const BehindMotion(),
+        motion: const DrawerMotion(),
         // dismissible: DismissiblePane(onDismissed: () {}),
 
         children: buttons

@@ -14,6 +14,8 @@ import 'package:go_router/go_router.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 
+part 'widget/female_avatar_widget.dart';
+part 'widget/male_avatar_widget.dart';
 part 'widget/basic_dialog.dart';
 part 'widget/simple_dialog_header.dart';
 part 'widget/basic_bottom_sheet.dart';

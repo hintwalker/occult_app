@@ -16,7 +16,7 @@ class Dashboard extends ConsumerWidget {
       child: Scaffold(
         body: DrawerScaffold(
             header: const DrawerHeader(),
-            title: (id) => const Text('home'),
+            title: (id) => Text(getScreenTitle(id)),
             menus: menus,
             style: const DrawerStyleImpl(lightColorScheme),
             onMenuTap: (menu) => context.goNamed(menu),
@@ -25,5 +25,26 @@ class Dashboard extends ConsumerWidget {
             child: child),
       ),
     );
+  }
+
+  String getScreenTitle(String id) {
+    switch (id) {
+      case DrawerIds.home:
+        return translate('home');
+      case DrawerIds.charts:
+        return translate('charts');
+      case DrawerIds.energyMarket:
+        return translate('energyMarket');
+      case DrawerIds.library:
+        return translate('library');
+      case DrawerIds.notes:
+        return translate('notes');
+      case DrawerIds.tags:
+        return translate('tags');
+      case DrawerIds.storagePlanMarket:
+        return translate('storagePlanMarket');
+      default:
+        return '';
+    }
   }
 }

@@ -45,6 +45,7 @@ part 'chart_tag/usecase/on_chart_has_tags.dart';
 part 'chart_tag/usecase/sync_chart_tags.dart';
 part 'chart_tag/usecase/on_tag_has_charts.dart';
 
+part 'chart/usecase/update_chart.dart';
 part 'chart/usecase/on_chart.dart';
 part 'chart/usecase/sync_charts.dart';
 part 'chart/usecase/insert_chart_to_local.dart';

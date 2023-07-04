@@ -38,4 +38,7 @@ class DrawerStyleImpl implements DrawerStyle {
 
   @override
   double get shadowBlurRadius => 24.0;
+
+  @override
+  Color get appBarColor => colorScheme.background;
 }

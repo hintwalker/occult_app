@@ -1,9 +1,10 @@
 part of lasotuvi_chart;
 
 class ChartEditOptionsModal extends StatelessWidget {
-  const ChartEditOptionsModal(
-    this.chart, {
+  const ChartEditOptionsModal({
     super.key,
+    required this.chartId,
+    required this.syncStatus,
     required this.colorScheme,
     required this.translate,
     required this.onOpenChangeAvatar,
@@ -14,12 +15,14 @@ class ChartEditOptionsModal extends StatelessWidget {
   });
   final ColorScheme colorScheme;
   final String Function(String) translate;
-  final Chart chart;
-  final void Function(Chart) onOpenChangeAvatar;
-  final void Function(Chart) onOpenChangeName;
-  final void Function(Chart) onOpenChangeGender;
-  final void Function(Chart) onOpenChangeBirthday;
-  final void Function(Chart) onOpenChangeWatchingYear;
+  final int chartId;
+  final String? syncStatus;
+  // final Chart chart;
+  final void Function(int chartId, String? syncStatus) onOpenChangeAvatar;
+  final void Function(int chartId, String? syncStatus) onOpenChangeName;
+  final void Function(int chartId, String? syncStatus) onOpenChangeGender;
+  final void Function(int chartId, String? syncStatus) onOpenChangeBirthday;
+  final void Function(int chartId, String? syncStatus) onOpenChangeWatchingYear;
 
   @override
   Widget build(BuildContext context) {
@@ -35,27 +38,27 @@ class ChartEditOptionsModal extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.account_box_outlined),
                   title: Text(translate('changeAvatar')),
-                  onTap: () => onOpenChangeAvatar(chart),
+                  onTap: () => onOpenChangeAvatar(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.text_fields),
                   title: Text(translate('changeName')),
-                  onTap: () => onOpenChangeName(chart),
+                  onTap: () => onOpenChangeName(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.transgender),
                   title: Text(translate('changeGender')),
-                  onTap: () => onOpenChangeGender(chart),
+                  onTap: () => onOpenChangeGender(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.today_outlined),
                   title: Text(translate('changeBirthday')),
-                  onTap: () => onOpenChangeBirthday(chart),
+                  onTap: () => onOpenChangeBirthday(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.visibility_outlined),
                   title: Text(translate('changeWatchingYear')),
-                  onTap: () => onOpenChangeWatchingYear(chart),
+                  onTap: () => onOpenChangeWatchingYear(chartId, syncStatus),
                 ),
                 // ListTile(
                 //   leading: const Icon(Icons.label_outline),

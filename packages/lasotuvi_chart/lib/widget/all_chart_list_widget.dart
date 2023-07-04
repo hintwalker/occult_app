@@ -31,26 +31,26 @@ class AllChartListWidget extends StatelessWidget {
     return SimpleTextGroup(firstLetter, firstLetter.toUpperCase());
   }
 
-  Iterable<ActionButton<ChartHasTags>> buttons() => [
-        ActionButton<ChartHasTags>(
-          onPressed: (context, item) => onOpenTag(context, item.source, uid),
-          background: colorScheme.background,
-          foreground: colorScheme.onBackground,
-          icon: Icons.label_outline,
-        ),
-        ActionButton<ChartHasTags>(
-          onPressed: (context, item) => onOpenNote(context, item.source, uid),
-          background: colorScheme.background,
-          foreground: colorScheme.onBackground,
-          icon: Icons.sticky_note_2_outlined,
-        ),
-        ActionButton<ChartHasTags>(
-          onPressed: (context, item) => onOpenMore(context, item.source, uid),
-          background: colorScheme.background,
-          foreground: colorScheme.onBackground,
-          icon: Icons.more_vert,
-        )
-      ];
+  // Iterable<ActionButton<ChartHasTags>> buttons() => [
+  //       ActionButton<ChartHasTags>(
+  //         onPressed: (context, item) => onOpenTag(context, item.source, uid),
+  //         background: colorScheme.background,
+  //         foreground: colorScheme.onBackground,
+  //         icon: Icons.label_outline,
+  //       ),
+  //       ActionButton<ChartHasTags>(
+  //         onPressed: (context, item) => onOpenNote(context, item.source, uid),
+  //         background: colorScheme.background,
+  //         foreground: colorScheme.onBackground,
+  //         icon: Icons.sticky_note_2_outlined,
+  //       ),
+  //       ActionButton<ChartHasTags>(
+  //         onPressed: (context, item) => onOpenMore(context, item.source, uid),
+  //         background: colorScheme.background,
+  //         foreground: colorScheme.onBackground,
+  //         icon: Icons.more_vert,
+  //       )
+  //     ];
 
   bool whereTest(ChartHasTags item, String query) {
     return item.source.name.toLowerCase().contains(query.trim().toLowerCase());
@@ -70,7 +70,7 @@ class AllChartListWidget extends StatelessWidget {
         onSyncStatusTap: () => openStorageOptions(context, item.source),
       ),
       groupSeperatorBuilder: (p0) => Text(p0.label),
-      buttons: buttons(),
+      buttons: const [],
       whereTest: whereTest,
       translate: translate,
       slidable: slidable,

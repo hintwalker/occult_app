@@ -14,6 +14,7 @@ import 'package:lasotuvi_library/lasotuvi_library.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
+import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:storage_options/storage_options.dart';
 import 'package:tauari_auth/tauari_auth.dart';
@@ -50,7 +51,13 @@ part 'features/tag/tag_edit_body.dart';
 part 'features/tag/tag_detail_body.dart';
 part 'features/tag/tag_creation_body.dart';
 
-part 'features/chart/widget/chart_edit_options_body.dart';
+part 'features/chart/widget/modify_bio/controller/modify_chart_controller.dart';
+part 'features/chart/widget/modify_bio/modify_chart_avatar_body.dart';
+part 'features/chart/widget/modify_bio/modify_gender_body.dart';
+part 'features/chart/widget/modify_bio/modify_birthday_body.dart';
+part 'features/chart/widget/modify_bio/modify_chart_name_body.dart';
+
+part 'features/chart/widget/chart_modification_options_body.dart';
 part 'features/chart/widget/chart_detail_body.dart';
 part 'features/chart/widget/single_selectable_chart_list_body.dart';
 part 'features/chart/widget/checkbox_chart_list_body.dart';

@@ -10,7 +10,9 @@ class AllStoragePlansScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId,
+      restorationId: restorationId,
+      child: Container(
+        color: LasotuviAppStyle.colorScheme.background,
         child: const Column(
           children: [
             Placeholder(
@@ -18,6 +20,8 @@ class AllStoragePlansScreen extends StatelessWidget {
             ),
             Expanded(child: AllStoragePlansBody())
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

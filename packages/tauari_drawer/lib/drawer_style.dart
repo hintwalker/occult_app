@@ -19,5 +19,7 @@ abstract class DrawerStyle {
 
   FontWeight get itemFontWeight; // FontWeight.w500;
 
-  double get minHeaderHeight; // 100;
+  double get minHeaderHeight;
+
+  Color get appBarColor; // 100;
 }

@@ -11,12 +11,19 @@ import 'package:sunoom_calendar_input/sunoom_calendar_input.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
+part 'controller/chart_avatar_controller.dart';
+part 'controller/gender_controller.dart';
+part 'controller/birthday_controller.dart';
+part 'controller/chart_name_controller.dart';
+part 'controller/form_field_controller.dart';
+
 part 'chart_creation_form.dart';
 part 'chart_creation_notifier.dart';
 part 'initial_moment.dart';
 
 part 'state/chart_creation_state.dart';
 
+part 'forms/chart_avatar_chosen_widget.dart';
 part 'forms/chart_avatar_input.dart';
 part 'forms/chart_birthday_input.dart';
 part 'forms/chart_creation_step1.dart';

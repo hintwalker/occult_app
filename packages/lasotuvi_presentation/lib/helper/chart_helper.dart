@@ -28,7 +28,66 @@ class ChartHelper {
   static void openChartEditOptions(BuildContext context, Chart chart) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => ChartEditOptionsBody(chart),
+      builder: (context) => ChartEditOptionsBody(
+        chartId: chart.id,
+        syncStatus: chart.syncStatus,
+      ),
+    );
+  }
+
+  static void openModifyChartNameModal({
+    required BuildContext context,
+    required int chartId,
+    required String? syncStatus,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => ModifyChartNameBody(
+        chartId: chartId,
+        syncStatus: syncStatus,
+      ),
+    );
+  }
+
+  static void openModifyBirthdayModal({
+    required BuildContext context,
+    required int chartId,
+    required String? syncStatus,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => ModifyBirthdayBody(
+        chartId: chartId,
+        syncStatus: syncStatus,
+      ),
+    );
+  }
+
+  static void openModifyGenderModal({
+    required BuildContext context,
+    required int chartId,
+    required String? syncStatus,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => ModifyGenderBody(
+        chartId: chartId,
+        syncStatus: syncStatus,
+      ),
+    );
+  }
+
+  static void openModifyAvatarModal({
+    required BuildContext context,
+    required int chartId,
+    required String? syncStatus,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => ModifyChartAvatarBody(
+        chartId: chartId,
+        syncStatus: syncStatus,
+      ),
     );
   }
 }

@@ -11,8 +11,8 @@ class CalendarEditorController {
   SimpleTime? time;
   Moment? moment;
   TimeZone timeZone;
-  final void Function(Moment moment) onDateChanged;
-  final void Function(bool valid) onValidate;
+  final void Function(Moment? moment, {required bool valid}) onDateChanged;
+  // final void Function(bool valid) onValidate;
   // final CanChiController canChiController;
   CalendarEditorController({
     required this.gregController,
@@ -22,7 +22,7 @@ class CalendarEditorController {
     required this.dateNameGroupController,
     required this.onDateChanged,
     required this.timeZone,
-    required this.onValidate,
+    // required this.onValidate,
     // required this.canChiController,
   });
 
@@ -92,14 +92,15 @@ class CalendarEditorController {
       setLuniSolarInput();
       setLeapMonthInput();
       setDateNameGroup();
-      onDateChanged(moment!);
-      onValidate(true);
+      onDateChanged(moment, valid: true);
+      // onValidate(true);
     } else {
       clearLuniSolarInput();
       clearLeapMonthInput();
       clearDateNameGroup();
       clearCache();
-      onValidate(false);
+      onDateChanged(null, valid: false);
+      // onValidate(false);
     }
   }
 
@@ -112,14 +113,15 @@ class CalendarEditorController {
       setLuniSolarInput();
       setLeapMonthInput();
       setDateNameGroup();
-      onDateChanged(moment!);
-      onValidate(true);
+      onDateChanged(moment, valid: true);
+      // onValidate(true);
     } else {
       clearLuniSolarInput();
       clearLeapMonthInput();
       clearDateNameGroup();
       clearCache();
-      onValidate(false);
+      onDateChanged(null, valid: false);
+      // onValidate(false);
     }
   }
 
@@ -195,14 +197,15 @@ class CalendarEditorController {
       setGregorianInput();
       setLeapMonthInput();
       setDateNameGroup();
-      onDateChanged(moment!);
-      onValidate(true);
+      onDateChanged(moment, valid: true);
+      // onValidate(true);
     } else {
       clearGregorianInput();
       clearLeapMonthInput();
       clearDateNameGroup();
       clearCache();
-      onValidate(false);
+      onDateChanged(null, valid: false);
+      // onValidate(false);
     }
   }
 
@@ -223,7 +226,7 @@ class CalendarEditorController {
       initWithLuniSolar(leapMonthOptionsController.isLeapMonth);
       setGregorianInput();
       setDateNameGroup();
-      onDateChanged(moment!);
+      onDateChanged(moment, valid: true);
     }
   }
 }

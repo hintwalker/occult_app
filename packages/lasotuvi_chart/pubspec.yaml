@@ -28,6 +28,8 @@ dependencies:
     path: ../tuvi_chart_diagram
   lasotuvi_note:
     path: ../lasotuvi_note
+  tuvi_chart_creation_form:
+    path: ../tuvi_chart_creation_form
   
 
 dev_dependencies:

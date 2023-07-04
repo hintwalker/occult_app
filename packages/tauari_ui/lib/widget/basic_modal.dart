@@ -46,6 +46,12 @@ class BasicModal extends StatelessWidget {
                       const SizedBox(
                         width: 8,
                       ),
+                      IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.arrow_back)),
+                      const SizedBox(
+                        width: 8,
+                      ),
                       Expanded(
                         child: Text(
                           title,
@@ -53,11 +59,9 @@ class BasicModal extends StatelessWidget {
                               color: colorScheme.primary,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: const Icon(Icons.close))
                     ],
                   )),
               Expanded(child: child),

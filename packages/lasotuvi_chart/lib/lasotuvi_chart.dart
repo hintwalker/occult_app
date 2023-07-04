@@ -9,9 +9,23 @@ import 'package:sunoom/sunoom.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_list_view/tauari_list_view.dart';
 import 'package:tauari_ui/tauari_ui.dart';
+import 'package:tuvi_chart_creation_form/tuvi_chart_creation_form.dart';
 import 'package:tuvi_chart_diagram/tuvi_chart_diagram.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 import 'package:tuvi_strings/tuvi_strings.dart';
+
+part 'widget/modify_bio/scaffold/modify_scaffold.dart';
+part 'widget/modify_bio/modify_state.dart';
+part 'widget/modify_bio/modify_birthday_widget.dart';
+part 'widget/modify_bio/modify_chart_avatar_widget.dart';
+part 'widget/modify_bio/modify_chart_name_widget.dart';
+part 'widget/modify_bio/modify_gender_widget.dart';
+part 'widget/modify_bio/modify_watching_year_widget.dart';
+
+part 'widget/modal/modify_bio/modify_chart_avatar_modal.dart';
+part 'widget/modal/modify_bio/modify_gender_modal.dart';
+part 'widget/modal/modify_bio/modify_birthday_modal.dart';
+part 'widget/modal/modify_bio/modify_chart_name_modal.dart';
 
 part 'widget/modal/checkbox_chart_list_modal.dart';
 part 'widget/modal/chart_edit_options_modal.dart';
@@ -39,6 +53,7 @@ part 'widget/all_chart_list_widget.dart';
 part 'widget/chart_has_tags_list_item.widget.dart';
 part 'widget/chart_list_item_widget.dart';
 
+part 'widget/builder/chart_modification_options_builder.dart';
 part 'widget/builder/chart_detail_builder.dart';
 part 'widget/builder/chart_view_builder.dart';
 part 'widget/builder/all_chart_list_builder.dart';

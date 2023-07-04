@@ -1,15 +1,35 @@
 part of tuvi_chart_creation_form;
 
 class ChartAvatarInput extends ConsumerWidget {
-  ChartAvatarInput({super.key});
+  ChartAvatarInput({
+    super.key,
+    required this.translate,
+  });
+  final String Function(String) translate;
   final imagePicker = ImagePicker();
 
-  void showModal(BuildContext context) {
+  void showModal({
+    required BuildContext context,
+    required String? initAvatar,
+    required Gender initGender,
+    required WidgetRef ref,
+  }) {
     showDialog(
         context: context,
         builder: (ctx) =>
             // Material(child:
-            ChartAvatarChosenModal()
+            ChartAvatarChosenModal(
+              translate: translate,
+              controller: ChartAvatarController(
+                  value: initAvatar,
+                  updateValid: (value) => ref
+                      .read(chartCreationNotifierProvider.notifier)
+                      .updateValid(value),
+                  updateValue: (value) => ref
+                      .read(chartCreationNotifierProvider.notifier)
+                      .updateAvatar(value),
+                  initGender: initGender),
+            )
         // )
         );
     // showModalBottomSheet(
@@ -25,7 +45,12 @@ class ChartAvatarInput extends ConsumerWidget {
       child: Card(
         child: InkWell(
           borderRadius: BorderRadius.circular(12.0),
-          onTap: () => showModal(context),
+          onTap: () => showModal(
+            context: context,
+            initAvatar: state.chart.avatar,
+            initGender: state.chart.gender,
+            ref: ref,
+          ),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: CircleHumanAvatar(

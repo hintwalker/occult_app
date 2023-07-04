@@ -37,14 +37,14 @@ class ChartViewModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasicModal(
-      title: chart.name,
-      colorScheme: colorScheme,
-      child: ChartViewBuilder(
-        uid: uid,
-        controller: controller,
-        chart: chart,
-        child: child,
+    return ChartViewBuilder(
+      uid: uid,
+      controller: controller,
+      chart: chart,
+      child: (chartHasTags) => BasicModal(
+        title: chartHasTags.source.name,
+        colorScheme: colorScheme,
+        child: child(chartHasTags),
         // colorScheme: colorScheme,
         // translate: translate,
         // onGoToDetail: onGoToDetail,

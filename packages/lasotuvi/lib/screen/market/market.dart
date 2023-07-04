@@ -12,7 +12,10 @@ class MarketScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId, child: const MarketBody()
+        restorationId: restorationId,
+        child: Container(
+            color: LasotuviAppStyle.colorScheme.background,
+            child: const MarketBody())
         // Center(
         //   child: FilledButton(
         //       onPressed: () => drawerController.setScreenId('home'),

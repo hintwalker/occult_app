@@ -3,19 +3,19 @@ part of sunoom_calendar_input;
 class CalendarInput extends StatefulWidget {
   const CalendarInput({
     super.key,
-    this.translate,
+    required this.translate,
     this.colorScheme,
     required this.onDateChanged,
-    required this.onValidate,
+    // required this.onValidate,
     this.initValue,
   });
 
-  final String Function(String)? translate;
+  final String Function(String) translate;
   final ColorScheme? colorScheme;
 
-  final void Function(Moment moment) onDateChanged;
+  final void Function(Moment? moment, {required bool valid}) onDateChanged;
   final Moment? initValue;
-  final void Function(bool valid) onValidate;
+  // final void Function(bool valid) onValidate;
 
   @override
   State<StatefulWidget> createState() => _CalendarInputState();
@@ -82,7 +82,7 @@ class _CalendarInputState extends State<CalendarInput> {
         leapMonthOptionsController: _leapMonthOptionsController,
         dateNameGroupController: _dateNameGroupController,
         onDateChanged: widget.onDateChanged,
-        onValidate: widget.onValidate,
+        // onValidate: widget.onValidate,
         timeZone: moment.timeZone);
     _calendarEditorController.listen();
   }
@@ -97,6 +97,14 @@ class _CalendarInputState extends State<CalendarInput> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Row(
+          children: [
+            const Icon(Icons.today),
+            const SizedBox(width: 16.0),
+            WeekdayName(
+                controller: _gregController, translate: widget.translate),
+          ],
+        ),
         DateInput(_gregController),
         const SizedBox(
           height: 12,

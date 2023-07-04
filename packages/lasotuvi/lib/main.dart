@@ -9,6 +9,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:lasotuvi_data/lasotuvi_data.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_drawer/tauari_drawer.dart';

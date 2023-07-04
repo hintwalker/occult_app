@@ -1,23 +1,28 @@
 part of tuvi_chart_creation_form;
 
 class ChartGenderInput extends ConsumerWidget {
-  ChartGenderInput(
-      {super.key, required this.colorScheme, required this.translate});
-  final controller = GroupButtonController();
+  ChartGenderInput({
+    super.key,
+    required this.colorScheme,
+    required this.translate,
+    required this.controller,
+  });
+  final GenderController controller;
+  final groupButtonController = GroupButtonController();
   final ColorScheme colorScheme;
   final String Function(String) translate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.selectIndex(
-          ref.read(chartCreationNotifierProvider).chart.gender.index);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      groupButtonController.selectIndex(controller.value.index);
+      // ref.read(chartCreationNotifierProvider).chart.gender.index);
     });
     ref.listen(chartCreationNotifierProvider, (prev, next) {
-      controller.selectIndex(next.chart.gender.index);
+      groupButtonController.selectIndex(next.chart.gender.index);
     });
     return GroupButton(
-      controller: controller,
+      controller: groupButtonController,
       isRadio: true,
       // onSelected: (value, index, isSelected) {
       //   ref.read(chartCreationNotifierProvider.notifier).updateGender(value);
@@ -29,10 +34,11 @@ class ChartGenderInput extends ConsumerWidget {
       buttonBuilder: (selected, value, context) => selected
           ? ElevatedButton(
               onPressed: () {
-                // controller.selectIndex(value.index);
-                ref
-                    .read(chartCreationNotifierProvider.notifier)
-                    .updateGender(value);
+                controller.onChanged(value, true);
+
+                // ref
+                //     .read(chartCreationNotifierProvider.notifier)
+                //     .updateGender(value);
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: colorScheme.primaryContainer),
@@ -43,10 +49,10 @@ class ChartGenderInput extends ConsumerWidget {
             )
           : TextButton(
               onPressed: () {
-                // controller.selectIndex(value.index);
-                ref
-                    .read(chartCreationNotifierProvider.notifier)
-                    .updateGender(value);
+                controller.onChanged(value, true);
+                // ref
+                //     .read(chartCreationNotifierProvider.notifier)
+                //     .updateGender(value);
               },
               child: Text(translate(value.name))),
       // options: GroupButtonOptions(borderRadius: BorderRadius.circular(24)),

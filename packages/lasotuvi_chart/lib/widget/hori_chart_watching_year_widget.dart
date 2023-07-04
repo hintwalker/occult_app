@@ -17,8 +17,9 @@ class HoriChartWatchingYearWidget extends StatelessWidget {
     final can = Can.ofLuniYear(value);
     final chi = Chi.ofLuniYear(value);
     return Text(
-      '$value - ${canName(can)} ${chiName(chi)}',
-      style: const TextStyle(fontSize: 14, letterSpacing: 1.2),
+      '$value ${canName(can)} ${chiName(chi)}',
+      style: const TextStyle(fontSize: 12, letterSpacing: 1.2),
+      overflow: TextOverflow.fade,
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:group_button/group_button.dart';
 import 'package:sunoom/sunoom.dart';
 
+part 'widgets/weekday_name.dart';
 part 'widgets/calendar_input.dart';
 part 'widgets/can_chi_date_input.dart';
 part 'widgets/can_chi_field.dart';

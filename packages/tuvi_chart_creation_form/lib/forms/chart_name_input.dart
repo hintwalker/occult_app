@@ -1,8 +1,13 @@
 part of tuvi_chart_creation_form;
 
 class ChartNameInput extends ConsumerStatefulWidget {
-  const ChartNameInput({super.key, required this.translate});
+  const ChartNameInput({
+    super.key,
+    required this.translate,
+    required this.controller,
+  });
   final String Function(String) translate;
+  final ChartNameController controller;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChartNameInputState();
@@ -14,7 +19,7 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: widget.translate('noName'));
+    controller = TextEditingController(text: widget.controller.value);
   }
 
   @override
@@ -35,14 +40,16 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
             return null;
           },
           onChanged: (value) {
-            ref
-                .read(chartCreationNotifierProvider.notifier)
-                .updateValid(_formKey.currentState!.validate());
-            if (_formKey.currentState!.validate()) {
-              ref
-                  .read(chartCreationNotifierProvider.notifier)
-                  .updateName(value);
-            }
+            widget.controller
+                .onChanged(value, _formKey.currentState!.validate());
+            // ref
+            //     .read(chartCreationNotifierProvider.notifier)
+            //     .updateValid(_formKey.currentState!.validate());
+            // if (_formKey.currentState!.validate()) {
+            //   ref
+            //       .read(chartCreationNotifierProvider.notifier)
+            //       .updateName(value);
+            // }
           },
           onTap: () => controller.selection = TextSelection(
                 baseOffset: 0,

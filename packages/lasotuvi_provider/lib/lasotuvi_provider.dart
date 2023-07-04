@@ -59,6 +59,7 @@ part 'chart/controller/chart_detail_controller.dart';
 part 'chart/controller/chart_view_controller.dart';
 part 'chart/controller/chart_list_controller_provider.dart';
 
+part 'chart/usecase/update_chart.dart';
 part 'chart/usecase/on_chart.dart';
 part 'chart/usecase/on_charts_provider.dart';
 part 'chart/usecase/upload_chart.dart';
