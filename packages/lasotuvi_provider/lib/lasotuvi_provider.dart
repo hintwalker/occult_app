@@ -7,6 +7,7 @@ import 'package:energy_store/energy_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive/hive.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_data/lasotuvi_data.dart';
@@ -106,10 +107,14 @@ part 'tag/usecase/upload_tag.dart';
 part 'tag/usecase/sync_tags.dart';
 part 'tag/usecase/insert_tag_to_local.dart';
 
+part 'note/note_editor_cache.dart';
+
+part 'note/state/note_editing_state.dart';
 part 'note/controller/note_editor_controller.dart';
 part 'note/controller/note_list_controller.dart';
 part 'note/controller/note_and_chart_list_controller.dart';
 
+part 'note/usecase/update_note.dart';
 part 'note/usecase/on_notes.dart';
 part 'note/usecase/on_note_by_chart_id.dart';
 part 'note/usecase/insert_note_to_local.dart';

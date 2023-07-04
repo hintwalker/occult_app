@@ -1,7 +1,7 @@
 library lasotuvi_data;
 
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
+// import 'package:hive/hive.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
@@ -43,7 +43,7 @@ part 'note/repository/cloud_note_repository_impl.dart';
 part 'note/repository/local_note_repository_impl.dart';
 part 'note/source/local/sqlite_note_data_source.dart';
 part 'note/source/remote/firebase_note_data_source.dart';
-part 'note/editor/note_editor_cache.dart';
+// part 'note/editor/note_editor_cache.dart';
 
 part 'db/sql_templates.dart';
 part 'db/table_names.dart';

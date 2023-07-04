@@ -1,4 +1,4 @@
-part of lasotuvi_data;
+part of lasotuvi_note;
 
 class NoteEditorCache {
   final Box box;

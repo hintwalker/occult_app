@@ -42,6 +42,7 @@ part 'app/app_state_impl.dart';
 part 'styles/storage_plan_style_impl.dart';
 part 'features/statistics/widget/current_sub_widget_container.dart';
 
+part 'features/note/controller/note_editor_body_controller.dart';
 part 'features/note/widget/note_editor_body.dart';
 
 part 'features/library/library_body.dart';

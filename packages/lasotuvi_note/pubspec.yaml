@@ -21,6 +21,7 @@ dependencies:
   tauari_data_core:
     path: ../tauari_data_core
   flutter_quill: ^7.2.8
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:

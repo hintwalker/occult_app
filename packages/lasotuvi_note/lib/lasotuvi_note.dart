@@ -5,13 +5,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart'
     show Document, QuillController, QuillEditor, QuillToolbar;
+import 'package:hive/hive.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_strings/tuvi_strings.dart';
 
+part 'box_name_note_cache.dart';
+part 'note_editor_cache.dart';
+
 part 'widget/builder/note_editor_builder.dart';
 
+part 'widget/note_save_confirm_widget.dart';
 part 'widget/note_item_widget.dart';
 part 'widget/note_editor_widget.dart';
 part 'widget/note_item_owner_widget.dart';
