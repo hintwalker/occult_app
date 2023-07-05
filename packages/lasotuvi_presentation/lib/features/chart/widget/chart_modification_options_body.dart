@@ -40,7 +40,12 @@ class ChartEditOptionsBody extends ConsumerWidget {
         chartId: chartId,
         syncStatus: syncStatus,
       ),
-      onOpenChangeWatchingYear: (chartId, syncStatus) {},
+      onOpenChangeWatchingYear: (chartId, syncStatus) =>
+          ChartHelper.openModifyWatchingYearModal(
+        context: context,
+        chartId: chartId,
+        syncStatus: syncStatus,
+      ),
     );
   }
 

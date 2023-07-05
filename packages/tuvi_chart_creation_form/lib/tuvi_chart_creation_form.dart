@@ -11,6 +11,7 @@ import 'package:sunoom_calendar_input/sunoom_calendar_input.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
+part 'controller/watching_year_controller.dart';
 part 'controller/chart_avatar_controller.dart';
 part 'controller/gender_controller.dart';
 part 'controller/birthday_controller.dart';

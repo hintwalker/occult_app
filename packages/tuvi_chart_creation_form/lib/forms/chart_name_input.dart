@@ -28,33 +28,32 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
       key: _formKey,
       autovalidateMode: AutovalidateMode.always,
       child: TextFormField(
-          controller: controller,
-          decoration:
-              InputDecoration(labelText: widget.translate('tenDuongSo')),
-          inputFormatters: [LengthLimitingTextInputFormatter(30)],
-          keyboardType: TextInputType.name,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '!';
-            }
-            return null;
-          },
-          onChanged: (value) {
-            widget.controller
-                .onChanged(value, _formKey.currentState!.validate());
-            // ref
-            //     .read(chartCreationNotifierProvider.notifier)
-            //     .updateValid(_formKey.currentState!.validate());
-            // if (_formKey.currentState!.validate()) {
-            //   ref
-            //       .read(chartCreationNotifierProvider.notifier)
-            //       .updateName(value);
-            // }
-          },
-          onTap: () => controller.selection = TextSelection(
-                baseOffset: 0,
-                extentOffset: controller.value.text.length,
-              )),
+        controller: controller,
+        decoration: InputDecoration(labelText: widget.translate('tenDuongSo')),
+        inputFormatters: [LengthLimitingTextInputFormatter(30)],
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '!';
+          }
+          return null;
+        },
+        onChanged: (value) {
+          widget.controller.onChanged(value, _formKey.currentState!.validate());
+          // ref
+          //     .read(chartCreationNotifierProvider.notifier)
+          //     .updateValid(_formKey.currentState!.validate());
+          // if (_formKey.currentState!.validate()) {
+          //   ref
+          //       .read(chartCreationNotifierProvider.notifier)
+          //       .updateName(value);
+          // }
+        },
+        // onTap: () => controller.selection = TextSelection(
+        //       baseOffset: 0,
+        //       extentOffset: controller.value.text.length,
+        //     ),
+      ),
     );
   }
 }

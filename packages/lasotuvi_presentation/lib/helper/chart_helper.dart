@@ -10,11 +10,13 @@ class ChartHelper {
     // required WidgetRef ref,
     required Chart chart,
   }) {
-    showGeneralDialog(
-      context: context,
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          ChartViewBody(chart: chart),
-    );
+    showDialog(
+        context: context,
+        builder: (context) => ChartViewBody(chart: chart),
+        routeSettings: const RouteSettings(name: 'chartView'));
+    // pageBuilder: (context, animation, secondaryAnimation) =>
+    //     ChartViewBody(chart: chart),
+    // routeSettings: const RouteSettings(name: 'chartView'));
   }
 
   static void openCheckboxChartList(BuildContext context, Tag tag) {
@@ -85,6 +87,20 @@ class ChartHelper {
     showDialog(
       context: context,
       builder: (context) => ModifyChartAvatarBody(
+        chartId: chartId,
+        syncStatus: syncStatus,
+      ),
+    );
+  }
+
+  static void openModifyWatchingYearModal({
+    required BuildContext context,
+    required int chartId,
+    required String? syncStatus,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => ModifyWatchingYearBody(
         chartId: chartId,
         syncStatus: syncStatus,
       ),

@@ -7,6 +7,7 @@ class ChartViewBuilder extends StatelessWidget {
     required this.chart,
     required this.uid,
     required this.child,
+    required this.colorScheme,
     // required this.colorScheme,
     // required this.translate,
     // required this.onGoToDetail,
@@ -21,34 +22,22 @@ class ChartViewBuilder extends StatelessWidget {
   final ChartViewController controller;
   final String? uid;
   final Chart chart;
+  final ColorScheme colorScheme;
   final Widget Function(ChartHasTags chartHasTags) child;
-  // final ColorScheme colorScheme;
-  // final String Function(String) translate;
-  // final void Function(BuildContext context, Chart chart) onGoToDetail;
-  // final Widget Function(Chart, {String? uid, String? syncStatus})
-  //     chartSyncOptions;
-  // final Widget Function(Note, {String? uid, String? syncStatus})
-  //     noteSyncOptions;
-  // final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
-  // final void Function(BuildContext context, Chart chart) onOpenCheckboxTagList;
-  // final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
-  // final void Function(BuildContext context, Chart chart) onOpenNoteCreation;
-  // final void Function(BuildContext context, Note note) onOpenNoteEditor;
 
   @override
   Widget build(BuildContext context) {
-    // final docId = int.tryParse(chartId);
     return StreamBuilder<ChartHasTags?>(
-        stream: controller.stream(
-          uid,
-          chart,
-        ),
+        stream: controller.stream(uid, chart),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LoadingWidget();
-          } else if (snapshot.hasData) {
+          if (snapshot.hasData) {
             final chart = snapshot.requireData;
-            return chart == null ? const ErrorTextWidget() : child(chart);
+            // if (chart == null) {
+            //   Navigator.pop(context);
+            // }
+            return chart == null
+                ? const BasicDialog(title: '', children: [ErrorTextWidget()])
+                : child(chart);
             // ChartViewWidget(
             //     chart,
             //     uid: uid,
@@ -65,8 +54,26 @@ class ChartViewBuilder extends StatelessWidget {
             //     onOpenNoteEditor: onOpenNoteEditor,
             //   );
           } else {
-            return const ErrorTextWidget();
+            return BasicModal(
+              title: '',
+              colorScheme: colorScheme,
+              child: const Center(
+                child: Text('chart_view_builder: else'),
+              ),
+            );
           }
         });
   }
+  // final ColorScheme colorScheme;
+  // final String Function(String) translate;
+  // final void Function(BuildContext context, Chart chart) onGoToDetail;
+  // final Widget Function(Chart, {String? uid, String? syncStatus})
+  //     chartSyncOptions;
+  // final Widget Function(Note, {String? uid, String? syncStatus})
+  //     noteSyncOptions;
+  // final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
+  // final void Function(BuildContext context, Chart chart) onOpenCheckboxTagList;
+  // final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
+  // final void Function(BuildContext context, Chart chart) onOpenNoteCreation;
+  // final void Function(BuildContext context, Note note) onOpenNoteEditor;
 }

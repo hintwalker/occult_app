@@ -52,6 +52,7 @@ part 'features/tag/tag_edit_body.dart';
 part 'features/tag/tag_detail_body.dart';
 part 'features/tag/tag_creation_body.dart';
 
+part 'features/chart/widget/modify_bio/modify_watching_year_body.dart';
 part 'features/chart/widget/modify_bio/controller/modify_chart_controller.dart';
 part 'features/chart/widget/modify_bio/modify_chart_avatar_body.dart';
 part 'features/chart/widget/modify_bio/modify_gender_body.dart';

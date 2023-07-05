@@ -41,6 +41,7 @@ class ChartViewModal extends StatelessWidget {
       uid: uid,
       controller: controller,
       chart: chart,
+      colorScheme: colorScheme,
       child: (chartHasTags) => BasicModal(
         title: chartHasTags.source.name,
         colorScheme: colorScheme,

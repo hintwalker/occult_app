@@ -36,7 +36,13 @@ class _ChartViewBodyState extends AuthDependedState<ChartViewBody> {
                   },
                   chartSyncOptions: (item, {syncStatus, uid}) =>
                       StorageHelper.storageOptionsModalBuilder<Chart>(item,
-                          uid: uid, syncStatus: syncStatus, ref: ref),
+                          uid: uid,
+                          syncStatus: syncStatus,
+                          ref: ref, doBeforeDeleteForever: () {
+                    Navigator.popUntil(context, (route) {
+                      return route.settings.name != 'chartView';
+                    });
+                  }),
                   noteSyncOptions: (item, {syncStatus, uid}) =>
                       StorageHelper.storageOptionsModalBuilder<Note>(item,
                           uid: uid, syncStatus: syncStatus, ref: ref),

@@ -25,10 +25,10 @@ class BasicModal extends StatelessWidget {
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(24),
                           bottomRight: Radius.circular(24)),
-                      color: colorScheme.surfaceVariant,
+                      color: colorScheme.background,
                       boxShadow: [
                         BoxShadow(
-                          color: colorScheme.surfaceVariant,
+                          color: colorScheme.background,
                           offset: const Offset(0, 0),
                           blurRadius: 0.0,
                           spreadRadius: 0.0,
@@ -36,8 +36,8 @@ class BasicModal extends StatelessWidget {
                         BoxShadow(
                           color: colorScheme.outline,
                           offset: const Offset(2.0, 2.0),
-                          blurRadius: 10.0,
-                          spreadRadius: 1.0,
+                          blurRadius: 1.0,
+                          spreadRadius: 0.2,
                         ),
                       ]),
                   child: Row(

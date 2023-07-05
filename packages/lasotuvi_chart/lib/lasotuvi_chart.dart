@@ -22,6 +22,7 @@ part 'widget/modify_bio/modify_chart_name_widget.dart';
 part 'widget/modify_bio/modify_gender_widget.dart';
 part 'widget/modify_bio/modify_watching_year_widget.dart';
 
+part 'widget/modal/modify_bio/modify_watching_year_modal.dart';
 part 'widget/modal/modify_bio/modify_chart_avatar_modal.dart';
 part 'widget/modal/modify_bio/modify_gender_modal.dart';
 part 'widget/modal/modify_bio/modify_birthday_modal.dart';

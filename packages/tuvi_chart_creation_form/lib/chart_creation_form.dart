@@ -137,7 +137,10 @@ class _ChartCreationFormState extends ConsumerState<ChartCreationForm> {
         title: Text(widget.translate('namXem'),
             style: TextStyle(color: widget.colorScheme.primary)),
         subtitle: Text('${chart.watchingYear}'),
-        content: const ChartCreationStep3(),
+        content: ChartCreationStep3(
+          colorScheme: widget.colorScheme,
+          translate: widget.translate,
+        ),
         state: getStepState(2),
         isActive: isStepActive(2),
       ),

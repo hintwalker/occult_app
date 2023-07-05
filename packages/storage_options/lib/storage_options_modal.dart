@@ -14,6 +14,7 @@ class StorageOptionsModal<T extends SyncableEntity> extends StatefulWidget {
     required this.onDeleteFromCloud,
     required this.onDeleteFromLocal,
     required this.onDeleteForever,
+    this.doBeforeDeleteForever,
   });
 
   final String? uid;
@@ -27,6 +28,7 @@ class StorageOptionsModal<T extends SyncableEntity> extends StatefulWidget {
   final Future Function(String, T) onDeleteFromCloud;
   final Future Function(T) onDeleteFromLocal;
   final Future Function(String, T) onDeleteForever;
+  final void Function()? doBeforeDeleteForever;
 
   @override
   State<StatefulWidget> createState() => _StorageOptionsModalState<T>();
@@ -110,8 +112,12 @@ class _StorageOptionsModalState<T extends SyncableEntity>
     } else {
       await deleteFromLocal();
     }
+
     if (context.mounted) {
       close(context);
+    }
+    if (widget.doBeforeDeleteForever != null) {
+      widget.doBeforeDeleteForever!();
     }
   }
 

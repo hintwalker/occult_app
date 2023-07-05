@@ -1,8 +1,13 @@
 part of lasotuvi_presentation;
 
 class StorageHelper {
-  static Widget storageOptionsModalBuilder<T extends SyncableEntity>(T item,
-      {String? uid, required WidgetRef ref, String? syncStatus}) {
+  static Widget storageOptionsModalBuilder<T extends SyncableEntity>(
+    T item, {
+    String? uid,
+    required WidgetRef ref,
+    String? syncStatus,
+    void Function()? doBeforeDeleteForever,
+  }) {
     return StorageOptionsModal<T>(
       uid: uid,
       item: item,
@@ -14,6 +19,11 @@ class StorageHelper {
       onDeleteFromCloud: (uid, item) => onDeleteFromCloud(uid, item, ref),
       onDeleteFromLocal: (item) => onDeleteFromLocal(item, ref),
       onDeleteForever: (uid, item) => onDeleteForever(uid, item, ref),
+      doBeforeDeleteForever: () {
+        if (doBeforeDeleteForever != null) {
+          doBeforeDeleteForever();
+        }
+      },
     );
   }
 
