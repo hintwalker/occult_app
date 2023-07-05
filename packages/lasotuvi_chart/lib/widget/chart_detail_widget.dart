@@ -13,25 +13,32 @@ class ChartDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(40.0),
-        child: AppBar(
-            titleSpacing: 0,
-            title: Text(data.name,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: colorScheme.primary,
-                  fontStyle: FontStyle.normal,
-                  letterSpacing: 1.4,
-                )),
-            actions: [
-              IconButton(icon: const Icon(Icons.search), onPressed: () {})
-            ]),
-      ),
-      body: TuviChartContainer(data,
+    return BasicModal(
+      title: data.name,
+      colorScheme: colorScheme,
+      borderRadius: BorderRadius.circular(0),
+      child: TuviChartContainer(data,
           translate: translate, colorScheme: colorScheme),
     );
+    // return Scaffold(
+    //   appBar: PreferredSize(
+    //     preferredSize: const Size.fromHeight(40.0),
+    //     child: AppBar(
+    //         titleSpacing: 0,
+    //         title: Text(data.name,
+    //             style: TextStyle(
+    //               fontSize: 18,
+    //               fontWeight: FontWeight.w500,
+    //               color: colorScheme.primary,
+    //               fontStyle: FontStyle.normal,
+    //               letterSpacing: 1.4,
+    //             )),
+    //         actions: [
+    //           IconButton(icon: const Icon(Icons.search), onPressed: () {})
+    //         ]),
+    //   ),
+    //   body: TuviChartContainer(data,
+    //       translate: translate, colorScheme: colorScheme),
+    // );
   }
 }

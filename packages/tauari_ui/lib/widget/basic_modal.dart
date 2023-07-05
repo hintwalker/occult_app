@@ -6,10 +6,15 @@ class BasicModal extends StatelessWidget {
     required this.title,
     required this.colorScheme,
     required this.child,
+    this.borderRadius = const BorderRadius.only(
+      bottomLeft: Radius.circular(24),
+      bottomRight: Radius.circular(24),
+    ),
   });
   final Widget child;
   final String title;
   final ColorScheme colorScheme;
+  final BorderRadiusGeometry borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +27,7 @@ class BasicModal extends StatelessWidget {
             children: [
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(24),
-                          bottomRight: Radius.circular(24)),
+                      borderRadius: borderRadius,
                       color: colorScheme.background,
                       boxShadow: [
                         BoxShadow(

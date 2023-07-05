@@ -5,6 +5,17 @@ class ChartHelper {
     context.pushNamed(RouteName.chartCreation);
   }
 
+  static void openChartDetail({
+    required BuildContext context,
+    required String chartId,
+    required String? syncStatus,
+  }) {
+    showDialog(
+        context: context,
+        builder: (_) =>
+            ChartDetailBody(chartId: chartId, syncStatus: syncStatus));
+  }
+
   static void openChartView({
     required BuildContext context,
     // required WidgetRef ref,

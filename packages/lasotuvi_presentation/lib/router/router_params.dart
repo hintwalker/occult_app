@@ -10,7 +10,7 @@ class RouterParams {
 
   static const syncStatus = 'syncStatus';
 
-  static String? getPathParamValue(String pathParam) {
-    return pathParam == nullValue ? null : pathParam;
+  static String? getPathParamValue(String? pathParam) {
+    return (pathParam == null || pathParam == nullValue) ? null : pathParam;
   }
 }

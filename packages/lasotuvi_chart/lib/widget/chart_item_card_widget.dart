@@ -33,12 +33,12 @@ class ChartItemCardWidget extends StatelessWidget {
         now: DateTime(data.watchingYear, 12, 31, 23, 59, 59)
             .toMoment(TimeZone(offsetInHour: now.timeZoneOffset.inHours)));
     return Card(
-        child: InkWell(
-      onTap: onTap != null ? () => onTap!(context, data, uid) : null,
-      borderRadius: BorderRadius.circular(12.0),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-        child: Row(
+      child: InkWell(
+        onTap: onTap != null ? () => onTap!(context, data, uid) : null,
+        borderRadius: BorderRadius.circular(12.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             // onTap: onTap != null ? () => onTap!(context, data, uid) : null,
@@ -72,60 +72,69 @@ class ChartItemCardWidget extends StatelessWidget {
               const SizedBox(
                 width: 24.0,
               ),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                HoriChartNameWidget(data.name),
-                Text(
-                  birthday.toGregorianDateTimeString(),
-                  style: const TextStyle(fontSize: 14),
-                ),
-                Text(
-                  birthday.toLuniSolarDateString(
-                      canName: canName, chiName: chiName),
-                  style: const TextStyle(fontSize: 14),
-                ),
-                Row(
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    HoriChartNameWidget(data.name),
                     Text(
-                      '${translate('watchingYear')}: ',
+                      birthday.toGregorianDateTimeString(),
                       style: const TextStyle(fontSize: 14),
                     ),
                     Text(
-                      '${data.watchingYear}',
+                      birthday.toLuniSolarDateString(
+                          canName: canName, chiName: chiName),
                       style: const TextStyle(fontSize: 14),
                     ),
-                    const SizedBox(
-                      width: 8.0,
+                    Row(
+                      children: [
+                        Text(
+                          '${translate('watchingYear')}: ',
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        Text(
+                          '${data.watchingYear}',
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        const SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          '($yearsOldFromWatchingYear ${translate('yearsOldSuffix')})',
+                          style: const TextStyle(fontSize: 14),
+                          overflow: TextOverflow.fade,
+                        )
+                      ],
                     ),
-                    Text(
-                      '($yearsOldFromWatchingYear ${translate('yearsOldSuffix')})',
-                      style: const TextStyle(fontSize: 14),
-                      overflow: TextOverflow.fade,
-                    )
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${translate("created")}: ${data.created.toStringVn()}',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontStyle: FontStyle.italic,
+                              color: colorScheme.outline),
+                        )
+                      ],
+                    ),
+                    Wrap(
+                      spacing: 2.0,
+                      runSpacing: 2.0,
+                      children: [
+                        for (var tag in tags) TagItemInChart(tag.title)
+                      ],
+                    ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${translate("created")}: ${data.created.toStringVn()}',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontStyle: FontStyle.italic,
-                          color: colorScheme.outline),
-                    )
-                  ],
-                ),
-                Wrap(
-                  spacing: 2.0,
-                  runSpacing: 2.0,
-                  children: [for (var tag in tags) TagItemInChart(tag.title)],
-                )
-              ]),
-              // trailing: IconButton(
-              //     onPressed: () => onTap(data.source, uid),
-              //     icon: const Icon(Icons.keyboard_arrow_right)),
-            ]),
+                // trailing: IconButton(
+                //     onPressed: () => onTap(data.source, uid),
+                //     icon: const Icon(Icons.keyboard_arrow_right)),
+              ),
+            ],
+          ),
+        ),
       ),
-    ));
+    );
   }
 }

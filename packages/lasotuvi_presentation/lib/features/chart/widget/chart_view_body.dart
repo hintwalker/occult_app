@@ -28,11 +28,15 @@ class _ChartViewBodyState extends AuthDependedState<ChartViewBody> {
                   translate: translate,
                   colorScheme: lightColorScheme,
                   onGoToDetail: (context, chart) {
-                    context.pushNamed(RouteName.chartDetail, pathParameters: {
-                      RouterParams.chartId: chart.docId,
-                      RouterParams.syncStatus:
-                          chart.syncStatus ?? RouterParams.nullValue,
-                    });
+                    ChartHelper.openChartDetail(
+                        context: context,
+                        chartId: chart.docId,
+                        syncStatus: chart.syncStatus);
+                    // context.pushNamed(RouteName.chartDetail, pathParameters: {
+                    //   RouterParams.chartId: chart.docId,
+                    //   RouterParams.syncStatus:
+                    //       chart.syncStatus ?? RouterParams.nullValue,
+                    // });
                   },
                   chartSyncOptions: (item, {syncStatus, uid}) =>
                       StorageHelper.storageOptionsModalBuilder<Chart>(item,
