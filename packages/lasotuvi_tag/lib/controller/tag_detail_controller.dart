@@ -14,7 +14,9 @@ class TagDetailController extends ChangeNotifier {
 
   void listen(String? uid, Tag tag) {
     _subscription = onData(uid, tag).listen((event) {
-      _streamController?.add(event);
+      if (!(_streamController == null || _streamController!.isClosed)) {
+        _streamController?.add(event);
+      }
     });
   }
 

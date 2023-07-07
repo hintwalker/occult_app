@@ -16,7 +16,9 @@ class TagHasChartsListController extends ChangeNotifier {
 
   void listen(String? uid, [QueryArgs? queryArgs]) {
     _subscription = onData(uid, queryArgs).listen((event) {
-      _streamController?.add(event);
+      if (!(_streamController == null || _streamController!.isClosed)) {
+        _streamController?.add(event);
+      }
     });
   }
 

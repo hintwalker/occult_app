@@ -1,5 +1,6 @@
 part of lasotuvi_provider;
 
-final tagDetailControllerProvider = Provider<TagDetailController>(
+final tagDetailControllerProvider =
+    ChangeNotifierProvider.autoDispose<TagDetailController>(
   (ref) => TagDetailController(onData: ref.read(onTagHasChartsProvider)),
 );

@@ -24,6 +24,7 @@ class _ChartViewBodyState extends AuthDependedState<ChartViewBody> {
             controller: controller,
             child: (chartHasTags) => ChartViewWidget(
                   chartHasTags,
+                  uid: uid,
                   controller: controller,
                   translate: translate,
                   colorScheme: lightColorScheme,

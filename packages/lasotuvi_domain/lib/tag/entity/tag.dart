@@ -35,7 +35,7 @@ class Tag extends SyncableEntity<Tag> {
   bool operator ==(Object? other) =>
       identical(other, this) ||
       other.runtimeType == runtimeType ||
-      other is Tag && other.id == id;
+      other is Tag && other.id == id && syncStatus == other.syncStatus;
 
   @override
   int get hashCode => id.hashCode;

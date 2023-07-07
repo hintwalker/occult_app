@@ -18,31 +18,43 @@ abstract class SyncableDependentRepositoryImpl<
   final CloudDependentRepository<E, O> cloudDependentRepository;
 
   @override
-  Future<Iterable<E>> byOwnerId(String? uid, int ownerId) async {
+  Future<Iterable<E>> byOwnerId(
+    String? uid,
+    int ownerId,
+    String? syncStatus,
+  ) async {
     final local = await localDependentRepository.byOwnerIdLocal(ownerId);
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
       return local;
     }
-    final cloud = await cloudDependentRepository.byOwnerIdCloud(uid, ownerId);
+    final cloud = await cloudDependentRepository.byOwnerIdCloud(uid!, ownerId);
     return mergeCloudToLocal(uid: uid, local: local, cloud: cloud);
   }
 
   @override
-  Future<int> deleteByOwner(String? uid, int ownerId) async {
+  Future<int> deleteByOwner(
+    String? uid,
+    int ownerId,
+    String? syncStatus,
+  ) async {
     final rows = await localDependentRepository.deleteByOwnerLocal(ownerId);
-    if (uid != null) {
-      await cloudDependentRepository.deleteByOwnerCloud(uid, ownerId);
+    if (!onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
+      await cloudDependentRepository.deleteByOwnerCloud(uid!, ownerId);
     }
     return rows;
   }
 
   @override
-  Stream<Iterable<E>> onByOwnerId(String? uid, int ownerId) {
+  Stream<Iterable<E>> onByOwnerId(
+    String? uid,
+    int ownerId,
+    String? syncStatus,
+  ) {
     final local = localDependentRepository.onByOwnerIdLocal(ownerId);
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
       return local;
     }
-    final cloud = cloudDependentRepository.onByOwnerIdCloud(uid, ownerId);
+    final cloud = cloudDependentRepository.onByOwnerIdCloud(uid!, ownerId);
     final result = Rx.combineLatest2(
       local,
       cloud,
@@ -80,7 +92,7 @@ abstract class SyncableDependentRepositoryImpl<
         .onEveryWhere(uid, queryArgs)
         .asyncMap((event) async => await Future.wait(event.map(
               (owner) async {
-                final these = await byOwnerId(uid, owner.id);
+                final these = await byOwnerId(uid, owner.id, owner.syncStatus);
                 return onCreateItem(owner, these);
               },
             )));

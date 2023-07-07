@@ -1,4 +1,4 @@
-part of lasotuvi_chart;
+part of lasotuvi_chart_tag;
 
 class HoriChartDivider extends StatelessWidget {
   const HoriChartDivider({super.key});

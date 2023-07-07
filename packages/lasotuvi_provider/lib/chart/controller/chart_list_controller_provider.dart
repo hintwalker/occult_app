@@ -1,4 +1,5 @@
 part of lasotuvi_provider;
 
-final chartListControllerProvider = ChangeNotifierProvider<ChartListController>(
-    (ref) => ChartListController(onCharts: ref.read(onChartsProvider)));
+final chartListControllerProvider =
+    ChangeNotifierProvider.autoDispose<ChartListController>(
+        (ref) => ChartListController(onCharts: ref.read(onChartsProvider)));

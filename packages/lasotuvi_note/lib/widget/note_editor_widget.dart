@@ -124,15 +124,20 @@ class _NoteEditorState extends State<NoteEditorWidget> {
                   right: 8,
                 ),
                 child: TextFormField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(labelText: 'title'),
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                  maxLength: 30,
-                  readOnly: readOnly,
-                  // inputFormatters: [LengthLimitingTextInputFormatter(30)],
-                ),
+                    controller: _titleController,
+                    decoration:
+                        InputDecoration(labelText: widget.translate('title')),
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                    maxLines: 1,
+                    maxLength: 30,
+                    readOnly: readOnly,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    )
+                    // inputFormatters: [LengthLimitingTextInputFormatter(30)],
+                    ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 0),
@@ -158,7 +163,8 @@ class _NoteEditorState extends State<NoteEditorWidget> {
               Expanded(
                 child: Container(
                   // color: Colors.white,
-                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  padding:
+                      const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
                   child: MouseRegion(
                     cursor: SystemMouseCursors.text,
                     child: SingleChildScrollView(
@@ -174,7 +180,7 @@ class _NoteEditorState extends State<NoteEditorWidget> {
                         readOnly: readOnly,
                         enableSelectionToolbar: true,
                         expands: false,
-                        placeholder: 'yourNoteHere',
+                        placeholder: widget.translate('yourNoteHere'),
                       ),
                     ),
                   ),

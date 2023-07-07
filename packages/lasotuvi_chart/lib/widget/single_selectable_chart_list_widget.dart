@@ -28,7 +28,10 @@ class SingleSelectableChartListWidget extends StatelessWidget {
         colorScheme: colorScheme,
         onTap: onItemTap,
       ),
-      groupSeperatorBuilder: (p0) => Text(p0.label),
+      groupSeperatorBuilder: (p0) => BasicGroupSeperatorWidget(
+        p0,
+        colorScheme: colorScheme,
+      ),
       buttons: const [],
       whereTest: whereTest,
       translate: translate,

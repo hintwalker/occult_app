@@ -16,16 +16,42 @@ class _CheckboxTagListBodyState extends AuthDependedState<CheckboxTagListBody> {
     return findingUid
         ? const LoadingWidget()
         : CheckboxTagListModal(
-            controller: ref.read(tagHasChartsListControllerProvider),
-            uid: uid,
-            chartId: widget.chart.id,
             translate: translate,
-            colorScheme: lightColorScheme,
-            onCancel: onCancel,
-            onSubmit: onSubmit,
-            onItemTap: (context, tag, _) =>
-                TagHelper.openTagDetail(context: context, tag: tag),
-          );
+            colorScheme: LasotuviAppStyle.colorScheme,
+            child: CheckboxTagListBuilder(
+                uid: uid,
+                controller: ref.watch(tagHasChartsListControllerProvider),
+                child: (tagHasCharts) => CheckBoxTagListWidget(
+                      tagHasCharts,
+                      uid: uid,
+                      translate: translate,
+                      colorScheme: LasotuviAppStyle.colorScheme,
+                      chartId: widget.chart.id,
+                      onCancel: onCancel,
+                      onSubmit: onSubmit,
+                      onItemTap: (context, tag, _) =>
+                          TagHelper.openTagDetail(context: context, tag: tag),
+                      onOpenTagCreation: (context) =>
+                          TagHelper.openTagCreationScreen(
+                        context,
+                        (tag) => doAfterCreation(tag, widget.chart),
+                      ),
+                      openSyncOptions: (uid, tag) =>
+                          StorageHelper.showOptionsModal<Tag>(
+                        tag,
+                        uid: uid,
+                        context: context,
+                        ref: ref,
+                      ),
+                    )));
+  }
+
+  Future<void> doAfterCreation(Tag tag, Chart chart) async {
+    await ref.read(connectChartsToTagProvider).call(
+      uid: uid,
+      right: tag,
+      lefts: [chart],
+    );
   }
 
   void onCancel(BuildContext context) {

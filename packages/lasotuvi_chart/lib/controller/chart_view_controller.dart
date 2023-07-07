@@ -23,19 +23,31 @@ class ChartViewController extends ChangeNotifier {
 
   void listen(String? uid, Chart chart) {
     _subscription = onData(uid, chart).listen((event) {
-      _streamController?.add(event);
+      if (!(_streamController == null || _streamController!.isClosed)) {
+        _streamController?.add(event);
+      }
     });
   }
 
-  Stream<Iterable<Note>> noteStream(String? uid, int chartId) {
+  Stream<Iterable<Note>> noteStream(
+    String? uid,
+    Chart chart,
+  ) {
     _notesStreamController = StreamController<Iterable<Note>>.broadcast();
-    listenNotes(uid, chartId);
+    listenNotes(uid, chart);
     return _notesStreamController!.stream;
   }
 
-  void listenNotes(String? uid, int chartId) {
-    _notesSubscription = onNotes(uid, chartId).listen((event) {
-      _notesStreamController?.add(event);
+  void listenNotes(String? uid, Chart chart) {
+    _notesSubscription = onNotes(
+      uid,
+      chart.id,
+      chart.syncStatus,
+    ).listen((event) {
+      if (!(_notesStreamController == null ||
+          _notesStreamController!.isClosed)) {
+        _notesStreamController?.add(event);
+      }
     });
   }
 

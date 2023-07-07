@@ -14,6 +14,8 @@ import 'package:tuvi_strings/tuvi_strings.dart';
 part 'box_name_note_cache.dart';
 part 'note_editor_cache.dart';
 
+part 'modal/note_editor_modal.dart';
+
 part 'widget/builder/note_editor_builder.dart';
 
 part 'widget/note_save_confirm_widget.dart';

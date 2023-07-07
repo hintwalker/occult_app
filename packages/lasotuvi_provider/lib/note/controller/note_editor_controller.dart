@@ -1,6 +1,7 @@
 part of lasotuvi_provider;
 
-final noteEditorControllerProvider = Provider<NoteEditorController>(
+final noteEditorControllerProvider =
+    ChangeNotifierProvider.autoDispose<NoteEditorController>(
   (ref) => NoteEditorController(
     onSyncableData: ref.read(onNoteByIdProvider),
   ),

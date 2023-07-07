@@ -3,25 +3,27 @@ part of lasotuvi_tag;
 class CheckboxTagListBuilder extends StatelessWidget {
   const CheckboxTagListBuilder({
     super.key,
-    this.uid,
-    required this.chartId,
+    required this.uid,
     required this.controller,
-    required this.translate,
-    required this.colorScheme,
-    required this.onCancel,
-    required this.onSubmit,
-    required this.onItemTap,
+    required this.child,
+    // required this.chartId,
+    // required this.translate,
+    // required this.colorScheme,
+    // required this.onCancel,
+    // required this.onSubmit,
+    // required this.onItemTap,
   });
 
   final TagHasChartsListController controller;
   final String? uid;
-  final int chartId;
-  final String Function(String) translate;
-  final ColorScheme colorScheme;
-  final void Function(BuildContext context,
-      Iterable<SelectableItem<TagHasCharts>> tags, String? uid) onSubmit;
-  final void Function(BuildContext context) onCancel;
-  final void Function(BuildContext context, Tag tag, String? uid) onItemTap;
+  final Widget Function(Iterable<TagHasCharts>) child;
+  // final int chartId;
+  // final String Function(String) translate;
+  // final ColorScheme colorScheme;
+  // final void Function(BuildContext context,
+  //     Iterable<SelectableItem<TagHasCharts>> tags, String? uid) onSubmit;
+  // final void Function(BuildContext context) onCancel;
+  // final void Function(BuildContext context, Tag tag, String? uid) onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +35,17 @@ class CheckboxTagListBuilder extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            return CheckBoxTagListWidget(
-              snapshot.requireData,
-              uid: uid,
-              chartId: chartId,
-              translate: translate,
-              colorScheme: colorScheme,
-              onSubmit: onSubmit,
-              onCancel: onCancel,
-              onItemTap: onItemTap,
-            );
+            return child(snapshot.requireData);
+            // CheckBoxTagListWidget(
+            //   snapshot.requireData,
+            //   uid: uid,
+            //   chartId: chartId,
+            //   translate: translate,
+            //   colorScheme: colorScheme,
+            //   onSubmit: onSubmit,
+            //   onCancel: onCancel,
+            //   onItemTap: onItemTap,
+            // );
           } else {
             return const Center(
               child: ErrorTextWidget(),

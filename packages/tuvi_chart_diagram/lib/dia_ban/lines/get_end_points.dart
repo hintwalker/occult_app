@@ -14,7 +14,7 @@ Iterable<EndPoint> getEndPoints(int menhPos, double width, double height) {
       final startX = width / 4.0;
       final startY = height;
       pointList.add(EndPoint(startX, startY, 0.0, 0.0));
-      pointList.add(EndPoint(startX, startY, width / 4.0, 0.0));
+      pointList.add(EndPoint(startX, startY, width * 3 / 4.0, 0.0));
       pointList.add(EndPoint(startX, startY, width, height / 4.0));
       break;
     case 2:

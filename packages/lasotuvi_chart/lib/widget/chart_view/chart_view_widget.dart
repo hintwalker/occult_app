@@ -110,9 +110,22 @@ class ChartViewWidget extends StatelessWidget {
                   spacing: 2.0,
                   runSpacing: 2.0,
                   children: chartHasTags.carry
-                      .map(
-                        (e) => Card(child: Text(e.title)),
-                      )
+                      .map((e) => HoriTagItemWidget(e,
+                              uid: uid,
+                              colorScheme: colorScheme,
+                              onSyncStatusTap: () =>
+                                  openTagSyncOptions(context, e),
+                              onTap: (context, tag) {})
+                          // (e) => Card(
+                          //   child: InkWell(
+                          //     child: Padding(
+                          //         padding: const EdgeInsets.all(
+                          //           2.0,
+                          //         ),
+                          //         child: Text(e.title)),
+                          //   ),
+                          // ),
+                          )
                       .toList(),
                 ),
                 const SizedBox(
@@ -122,10 +135,10 @@ class ChartViewWidget extends StatelessWidget {
                   uid: uid,
                   colorScheme: colorScheme,
                   translate: translate,
-                  notes: () =>
-                      controller.noteStream(uid, chartHasTags.source.id),
+                  notes: () => controller.noteStream(uid, chartHasTags.source),
                   onOpenSyncOptions: openNoteSyncOptions,
-                  onOpenNoteCreation: (context) => onOpenNoteCreation(context, chartHasTags.source),
+                  onOpenNoteCreation: (context) =>
+                      onOpenNoteCreation(context, chartHasTags.source),
                   onOpenNoteEditor: onOpenNoteEditor,
                 ),
                 const SizedBox(

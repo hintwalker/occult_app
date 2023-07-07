@@ -152,3 +152,7 @@ classpath 'com.google.gms:google-services:4.3.15'
 gradle-7.4-all.zip
 ndkVersion "25.2.9519653"
 ``
+
+## Cập nhật widget khi dữ liệu đầu vào của StatefulWidget thay đổi
+
+Sử dụng hàm override didUpdateWidget

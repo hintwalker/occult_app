@@ -1,4 +1,4 @@
-part of lasotuvi_chart;
+part of lasotuvi_chart_tag;
 
 class HoriChartWatchingYearWidget extends StatelessWidget {
   const HoriChartWatchingYearWidget(

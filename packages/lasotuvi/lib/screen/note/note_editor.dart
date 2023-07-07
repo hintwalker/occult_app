@@ -18,9 +18,9 @@ class NoteEditorScreen extends StatelessWidget {
     return RestorationScope(
         restorationId: restorationId,
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: LasotuviAppStyle.colorScheme.background,
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: LasotuviAppStyle.colorScheme.background,
+          // ),
           body: NoteEditorBody(
             noteId,
             syncStatus: syncStatus,

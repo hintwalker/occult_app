@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grouped_list/grouped_list.dart';
 
+part 'basic_group_seperator_widget.dart';
 part 'action_button.dart';
 part 'data_list_item.dart';
 part 'data_list_view.dart';

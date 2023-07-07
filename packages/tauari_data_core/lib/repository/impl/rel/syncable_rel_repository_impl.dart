@@ -76,41 +76,50 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Future<Iterable<E>> byLeftId(String? uid, int leftId) async {
+  Future<Iterable<E>> byLeftId(
+      String? uid, int leftId, String? syncStatus) async {
     final local = await localRelRepository.byLeftIdOnLocal(leftId);
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
       return local.whereType();
     }
-    final cloud = await cloudRelRepository.byLeftIdOnCloud(uid, leftId);
+    final cloud = await cloudRelRepository.byLeftIdOnCloud(uid!, leftId);
     return mergeCloudToLocal(uid: uid, local: local, cloud: cloud);
   }
 
   @override
-  Future<Iterable<E>> byRightId(String? uid, int rightId) async {
+  Future<Iterable<E>> byRightId(
+      String? uid, int rightId, String? syncStatus) async {
     final local = await localRelRepository.byRightIdOnLocal(rightId);
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
       return local.whereType();
     }
-    final cloud = await cloudRelRepository.byRightIdOnCloud(uid, rightId);
+    final cloud = await cloudRelRepository.byRightIdOnCloud(uid!, rightId);
     return mergeCloudToLocal(uid: uid, local: local, cloud: cloud);
   }
 
   @override
   Future<Iterable<L>> leftData(String? uid, R right) async {
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
       final result = await localRelRepository.leftDataOnLocal(right.id);
       return result.whereType();
     }
     final relsLocal = await localRelRepository.byRightIdOnLocal(right.id);
     final leftIdsLocal = relsLocal.map((e) => localRelRepository.getLeftId(e));
 
-    final relsCloud = await cloudRelRepository.byRightIdOnCloud(uid, right.id);
+    final relsCloud = await cloudRelRepository.byRightIdOnCloud(uid!, right.id);
     final leftIdsCloud = relsCloud.map((e) => cloudRelRepository.getLeftId(e));
 
-    final unionIds = leftIdsLocal.toSet().union(leftIdsCloud.toSet());
+    // final union =
+    //     mergeCloudToLocal(uid: uid, local: relsLocal, cloud: relsCloud);
+
     final List<L> result = [];
+    final unionIds = leftIdsLocal.toSet().union(leftIdsCloud.toSet());
     for (var id in unionIds) {
-      final entity = await leftRepository.byId(uid: uid, docId: id);
+      final entity = await leftRepository.byId(
+        uid: uid,
+        docId: id,
+        syncStatus: SyncStatus.synced,
+      );
       if (entity != null) {
         result.add(entity);
       }
@@ -119,12 +128,12 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<E>> onByLeftId(String? uid, int leftId) {
+  Stream<Iterable<E>> onByLeftId(String? uid, int leftId, String? syncStatus) {
     final local = localRelRepository.onByLeftIdOnLocal(leftId);
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
       return local;
     }
-    final cloud = cloudRelRepository.onByLeftIdOnCloud(uid, leftId);
+    final cloud = cloudRelRepository.onByLeftIdOnCloud(uid!, leftId);
     final result = Rx.combineLatest2(
       local,
       cloud,
@@ -136,12 +145,13 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<E>> onByRightId(String? uid, int rightId) {
+  Stream<Iterable<E>> onByRightId(
+      String? uid, int rightId, String? syncStatus) {
     final local = localRelRepository.onByRightIdOnLocal(rightId);
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
       return local;
     }
-    final cloud = cloudRelRepository.onByRightIdOnCloud(uid, rightId);
+    final cloud = cloudRelRepository.onByRightIdOnCloud(uid!, rightId);
     final result = Rx.combineLatest2(
       local,
       cloud,
@@ -153,15 +163,15 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<L>> onLeftData(String? uid, int rightId) {
+  Stream<Iterable<L>> onLeftData(String? uid, R right) {
     final local = localRelRepository
-        .onLeftDataOnLocal(rightId)
+        .onLeftDataOnLocal(right.id)
         .map((event) => event.whereType<L>());
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
       return local;
     }
     final cloud = cloudRelRepository
-        .onLeftDataOnCloud(uid, rightId)
+        .onLeftDataOnCloud(uid!, right.id)
         .map((event) => event.whereType<L>());
     final result = Rx.combineLatest2(
       local,
@@ -174,15 +184,15 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Stream<Iterable<R>> onRightData(String? uid, int leftId) {
+  Stream<Iterable<R>> onRightData(String? uid, L left) {
     final local = localRelRepository
-        .onRightDataOnLocal(leftId)
+        .onRightDataOnLocal(left.id)
         .map((event) => event.whereType<R>());
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
       return local;
     }
     final cloud = cloudRelRepository
-        .onRightDataOnCloud(uid, leftId)
+        .onRightDataOnCloud(uid!, left.id)
         .map((event) => event.whereType<R>());
     final result = Rx.combineLatest2(
       local,
@@ -196,21 +206,25 @@ class SyncableRelRepositoryImpl<
 
   @override
   Future<Iterable<R>> rightData(String? uid, L left) async {
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
       return await localRelRepository.rightDataOnLocal(left.id);
     }
     final relsLocal = await localRelRepository.byLeftIdOnLocal(left.id);
     final rightIdsLocal =
         relsLocal.map((e) => localRelRepository.getRightId(e));
 
-    final relsCloud = await cloudRelRepository.byLeftIdOnCloud(uid, left.id);
+    final relsCloud = await cloudRelRepository.byLeftIdOnCloud(uid!, left.id);
     final rightIdsCloud =
         relsCloud.map((e) => cloudRelRepository.getRightId(e));
 
     final unionIds = rightIdsLocal.toSet().union(rightIdsCloud.toSet());
     final List<R> result = [];
     for (var id in unionIds) {
-      final entity = await rightRepository.byId(uid: uid, docId: id);
+      final entity = await rightRepository.byId(
+        uid: uid,
+        docId: id,
+        syncStatus: SyncStatus.synced,
+      );
       if (entity != null) {
         result.add(entity);
       }
@@ -247,6 +261,12 @@ class SyncableRelRepositoryImpl<
             )));
   }
 
+  ///
+  /// Kết quả trả về là danh sách gồm 1 đối tượng [L] và nhiều đối tượng [R]
+  /// Đối tượng [L] được lấy từ stream, nên mọi thay đổi trên [L] sẽ được cập nhật.
+  /// Trong khi mỗi đối tượng [R] được lấy từ Future, nên những thay đổi trên [R]
+  /// sẽ không được cập nhật.
+  ///
   @override
   Stream<Iterable<SyncableEntityCarrier<L, R>>> onLeftHasRightList(
       String? uid,
@@ -324,9 +344,8 @@ class SyncableRelRepositoryImpl<
     required Iterable<L> lefts,
   }) async {
     List<int> ids = [];
-    if (onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
-      ids = await localRelRepository.connectManyLeftToRight(right, lefts);
-    } else {
+    ids = await localRelRepository.connectManyLeftToRight(right, lefts);
+    if (!onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
       await cloudRelRepository.connectManyLeftToRight(
         uid: uid!,
         ids: ids,
@@ -342,9 +361,9 @@ class SyncableRelRepositoryImpl<
     required R right,
     required Iterable<L> lefts,
   }) async {
-    if (onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
-      await localRelRepository.disConnectManyLeftFromRight(right, lefts);
-    } else {
+    await localRelRepository.disConnectManyLeftFromRight(right, lefts);
+
+    if (!onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
       await cloudRelRepository.disConnectManyLeftFromRight(
         uid: uid!,
         right: right,
@@ -363,9 +382,9 @@ class SyncableRelRepositoryImpl<
     required Iterable<R> rights,
   }) async {
     List<int> ids = [];
-    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
-      ids = await localRelRepository.connectManyRightToLeft(left, rights);
-    } else {
+
+    ids = await localRelRepository.connectManyRightToLeft(left, rights);
+    if (!onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
       await cloudRelRepository.connectManyRightToLeft(
         uid: uid!,
         ids: ids,
@@ -381,9 +400,8 @@ class SyncableRelRepositoryImpl<
     required L left,
     required Iterable<R> rights,
   }) async {
-    if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
-      await localRelRepository.disConnectManyRightFromLeft(left, rights);
-    } else {
+    await localRelRepository.disConnectManyRightFromLeft(left, rights);
+    if (!onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
       await cloudRelRepository.disConnectManyRightFromLeft(
         uid: uid!,
         left: left,

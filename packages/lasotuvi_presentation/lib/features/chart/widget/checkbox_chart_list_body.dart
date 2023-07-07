@@ -23,7 +23,7 @@ class _CheckBoxChartListBodyState
     return findingUid
         ? const LoadingWidget()
         : CheckboxChartListModal(
-            controller: ref.read(chartHasTagsListControllerProvider),
+            controller: ref.watch(chartHasTagsListControllerProvider),
             uid: uid,
             // tagId: widget.tag.id,
             translate: translate,

@@ -8,9 +8,21 @@ abstract class SyncableDependentRepository<E extends SyncableEntity,
   });
 
   Future<O?> ownerOf(String? uid, int dependentId);
-  Future<Iterable<E>> byOwnerId(String? uid, int ownerId);
-  Stream<Iterable<E>> onByOwnerId(String? uid, int ownerId);
-  Future<int> deleteByOwner(String? uid, int ownerId);
+  Future<Iterable<E>> byOwnerId(
+    String? uid,
+    int ownerId,
+    String? syncStatus,
+  );
+  Stream<Iterable<E>> onByOwnerId(
+    String? uid,
+    int ownerId,
+    String? syncStatus,
+  );
+  Future<int> deleteByOwner(
+    String? uid,
+    int ownerId,
+    String? syncStatus,
+  );
 
   Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerHasThese({
     String? uid,

@@ -12,7 +12,7 @@ class AllChartListWidget extends StatelessWidget {
     required this.onItemTap,
     required this.storageOptionsModalBuilder,
     this.slidable = true,
-    this.uid,
+    required this.uid,
   });
   final Iterable<ChartHasTags> data;
   final String Function(String) translate;
@@ -69,7 +69,10 @@ class AllChartListWidget extends StatelessWidget {
         onTap: onItemTap,
         onSyncStatusTap: () => openStorageOptions(context, item.source),
       ),
-      groupSeperatorBuilder: (p0) => Text(p0.label),
+      groupSeperatorBuilder: (p0) => BasicGroupSeperatorWidget(
+        p0,
+        colorScheme: colorScheme,
+      ),
       buttons: const [],
       whereTest: whereTest,
       translate: translate,

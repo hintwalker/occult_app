@@ -30,7 +30,7 @@ class StorageHelper {
   static void showOptionsModal<T extends SyncableEntity>(
     T item, {
     required BuildContext context,
-    String? uid,
+    required String? uid,
     required WidgetRef ref,
   }) {
     showModalBottomSheet(

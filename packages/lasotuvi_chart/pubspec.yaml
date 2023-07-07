@@ -30,6 +30,8 @@ dependencies:
     path: ../lasotuvi_note
   tuvi_chart_creation_form:
     path: ../tuvi_chart_creation_form
+  lasotuvi_chart_tag:
+    path: ../lasotuvi_chart_tag
   
 
 dev_dependencies:

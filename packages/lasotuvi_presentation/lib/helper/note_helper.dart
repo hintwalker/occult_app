@@ -28,8 +28,15 @@ class NoteHelper {
       required String? uid,
       required WidgetRef ref}) async {
     final noteId = await createNewNote(chart: chart, ref: ref);
+
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      // context.pop();
+      // showDialog(
+      //     context: context,
+      //     builder: (_) => NoteEditorBody(
+      //           noteId.toString(),
+      //           syncStatus: null,
+      //         ));
+      //   // context.pop();
       context.pushNamed(RouteName.noteEditor, pathParameters: {
         RouterParams.noteId: noteId.toString(),
         RouterParams.syncStatus: RouterParams.nullValue,
@@ -41,6 +48,12 @@ class NoteHelper {
     BuildContext context,
     Note note,
   ) {
+    // showDialog(
+    //     context: context,
+    //     builder: (_) => NoteEditorBody(
+    //           note.docId,
+    //           syncStatus: note.syncStatus,
+    //         ));
     context.pushNamed(RouteName.noteEditor, pathParameters: {
       RouterParams.noteId: note.id.toString(),
       RouterParams.syncStatus: note.syncStatus ?? RouterParams.nullValue,
@@ -54,7 +67,7 @@ class NoteHelper {
     final now = DateTime.now();
     return await ref.read(insertNoteToLocalProvider)(Note(
         now.millisecondsSinceEpoch,
-        title: 'No title',
+        title: '...',
         content: '[{"insert":"...\\n"}]',
         created: now,
         edited: now,

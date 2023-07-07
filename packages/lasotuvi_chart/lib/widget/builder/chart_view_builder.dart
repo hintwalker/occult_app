@@ -58,7 +58,8 @@ class ChartViewBuilder extends StatelessWidget {
               title: '',
               colorScheme: colorScheme,
               child: const Center(
-                child: Text('chart_view_builder: else'),
+                child: CircularProgressIndicator(),
+                // Text('chart_view_builder: else'),
               ),
             );
           }

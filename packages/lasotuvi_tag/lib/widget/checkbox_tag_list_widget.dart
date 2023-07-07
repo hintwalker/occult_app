@@ -4,13 +4,15 @@ class CheckBoxTagListWidget extends StatelessWidget {
   const CheckBoxTagListWidget(
     this.data, {
     super.key,
-    this.uid,
+    required this.uid,
     required this.chartId,
     required this.translate,
     required this.colorScheme,
     required this.onItemTap,
     required this.onSubmit,
     required this.onCancel,
+    required this.onOpenTagCreation,
+    required this.openSyncOptions,
   });
   final int chartId;
   final Iterable<TagHasCharts> data;
@@ -21,33 +23,56 @@ class CheckBoxTagListWidget extends StatelessWidget {
       Iterable<SelectableItem<TagHasCharts>> tags, String? uid) onSubmit;
   final void Function(BuildContext context) onCancel;
   final void Function(BuildContext context, Tag tag, String? uid) onItemTap;
+  final void Function(BuildContext context) onOpenTagCreation;
+  final void Function(String? uid, Tag tag) openSyncOptions;
 
   @override
   Widget build(BuildContext context) {
-    return SelectableDataListView<TagHasCharts, SimpleTextGroup>(
-      data,
-      groupBy: groupBy,
-      groupComparator: groupComparator,
-      itemBuilder: (item) => TagListItemWidget(
-        item.source,
-        uid: uid,
-        translate: translate,
-        colorScheme: colorScheme,
-        onTap: onItemTap,
-      ),
-      groupSeperatorBuilder: (p0) => Text(p0.label),
-      whereTest: whereTest,
-      colorScheme: colorScheme,
-      translate: translate,
-      onCancel: onCancel,
-      onSubmit: (context, charts) => onSubmit(context, charts, uid),
-      initSelected: (tagHasCharts) => tagHasCharts.carry
-          .where(
-            (element) => element.id == chartId,
-          )
-          .isNotEmpty,
-      itemId: (tagHasCharts) => tagHasCharts.source.id,
-      sort: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton.icon(
+          onPressed: () => onOpenTagCreation(context),
+          icon: const Icon(Icons.add),
+          label: Text(
+            translate('createTag'),
+          ),
+        ),
+        Expanded(
+          child: SelectableDataListView<TagHasCharts, SimpleTextGroup>(
+            data,
+            groupBy: groupBy,
+            groupComparator: groupComparator,
+            itemBuilder: (item) => TagListItemWidget(
+              item.source,
+              uid: uid,
+              translate: translate,
+              colorScheme: colorScheme,
+              onTap: onItemTap,
+              onSyncStatusTap: () => openSyncOptions(
+                uid,
+                item.source,
+              ),
+            ),
+            groupSeperatorBuilder: (p0) => BasicGroupSeperatorWidget(
+              p0,
+              colorScheme: colorScheme,
+            ),
+            whereTest: whereTest,
+            colorScheme: colorScheme,
+            translate: translate,
+            onCancel: onCancel,
+            onSubmit: (context, charts) => onSubmit(context, charts, uid),
+            initSelected: (tagHasCharts) => tagHasCharts.carry
+                .where(
+                  (element) => element.id == chartId,
+                )
+                .isNotEmpty,
+            itemId: (tagHasCharts) => tagHasCharts.source.id,
+            sort: true,
+          ),
+        ),
+      ],
     );
   }
 

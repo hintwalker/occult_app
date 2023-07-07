@@ -12,6 +12,12 @@ class TagDetailBody extends ConsumerStatefulWidget {
 }
 
 class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
+  // @override
+  // void dispose() {
+  //   ref.invalidate(tagDetailControllerProvider);
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return findingUid
@@ -19,7 +25,7 @@ class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
         : TagDetailBuilder(
             uid: uid,
             tag: widget.tag,
-            controller: ref.read(tagDetailControllerProvider),
+            controller: ref.watch(tagDetailControllerProvider),
             colorScheme: lightColorScheme,
             translate: translate,
             child: (tagHasCharts) => TagDetailModal(
@@ -49,9 +55,7 @@ class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
                   onTap: (context, chart) =>
                       ChartHelper.openChartView(context: context, chart: chart),
                   onSyncStatusTap: () => StorageHelper.showOptionsModal<Chart>(
-                      chart,
-                      context: context,
-                      ref: ref),
+                      uid: uid, chart, context: context, ref: ref),
                 ),
               ),
             ),

@@ -17,7 +17,11 @@ abstract class SyncableRepository<E extends SyncableEntity>
     required int docId,
     required String? syncStatus,
   });
-  Future<E?> byId({required String? uid, required int docId});
+  Future<E?> byId({
+    required String? uid,
+    required int docId,
+    required String? syncStatus,
+  });
   Iterable<T> mergeCloudToLocal<T extends Syncable>({
     required String uid,
     required Iterable<T> local,

@@ -1,7 +1,8 @@
 part of lasotuvi_presentation;
 
 class TagCreationBody extends ConsumerWidget {
-  const TagCreationBody({super.key});
+  const TagCreationBody({super.key, required this.doAfterCreation});
+  final void Function(Tag tag)? doAfterCreation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,16 +20,22 @@ class TagCreationBody extends ConsumerWidget {
     required WidgetRef ref,
   }) async {
     final now = DateTime.now();
-    final tagId = await ref.read(insertTagToLocalProvider).call(Tag(
-        now.millisecondsSinceEpoch,
-        title: title,
-        subTitle: subTitle,
-        created: now));
+    final tag = Tag(now.millisecondsSinceEpoch,
+        title: title, subTitle: subTitle, created: now);
+    await ref.read(insertTagToLocalProvider).call(tag);
+    if (doAfterCreation != null) {
+      doAfterCreation!(tag);
+    }
+
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.pop();
-      context.pushNamed(RouteName.tagDetail, pathParameters: {
-        RouterParams.tagId: tagId.toString(),
-      });
+      if (context.mounted) {
+        context.pop();
+      }
+
+      // TagHelper.openTagDetail(context: context, tag: tag);
+      // context.pushNamed(RouteName.tagDetail, pathParameters: {
+      //   RouterParams.tagId: tagId.toString(),
+      // });
     });
   }
 }

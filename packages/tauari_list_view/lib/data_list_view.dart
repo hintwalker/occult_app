@@ -65,25 +65,38 @@ class _DataListViewState<U, V> extends State<DataListView<U, V>> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      TextField(
-        controller: controller,
-        onChanged: _runFilter,
-        decoration: InputDecoration(
-          labelText: widget.translate('search'),
-          prefixIcon: const Icon(Icons.search),
-          suffixIcon: controller.text.isEmpty
-              ? null
-              : IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    controller.clear();
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: TextField(
+              controller: controller,
+              onChanged: _runFilter,
+              decoration: InputDecoration(
+                labelText: widget.translate('search'),
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: controller.text.isEmpty
+                    ? null
+                    : IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          controller.clear();
 
-                    _runFilter('');
-                  },
-                ),
-        ),
-        keyboardType: TextInputType.text,
-        textInputAction: TextInputAction.search,
+                          _runFilter('');
+                        },
+                      ),
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.search,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.sort,
+            ),
+          )
+        ],
       ),
       const SizedBox(
         height: 2.0,

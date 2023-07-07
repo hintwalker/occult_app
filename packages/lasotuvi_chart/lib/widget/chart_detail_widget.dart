@@ -13,13 +13,15 @@ class ChartDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasicModal(
-      title: data.name,
-      colorScheme: colorScheme,
-      borderRadius: BorderRadius.circular(0),
-      child: TuviChartContainer(data,
-          translate: translate, colorScheme: colorScheme),
-    );
+    return TuviChartContainer(data,
+        translate: translate, colorScheme: colorScheme);
+    // BasicModal(
+    //   title: data.name,
+    //   colorScheme: colorScheme,
+    //   borderRadius: BorderRadius.circular(0),
+    //   child: TuviChartContainer(data,
+    //       translate: translate, colorScheme: colorScheme),
+    // );
     // return Scaffold(
     //   appBar: PreferredSize(
     //     preferredSize: const Size.fromHeight(40.0),

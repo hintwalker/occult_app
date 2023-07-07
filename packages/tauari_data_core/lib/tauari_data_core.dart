@@ -11,6 +11,8 @@ import 'package:tauari_values/tauari_values.dart';
 import 'package:flutter/services.dart';
 
 part 'utils/only_on_local.dart';
+
+part 'usecase/syncable/owner_by_depended_id.dart';
 part 'usecase/syncable/dis_connect_right_from_left.dart';
 part 'usecase/syncable/connect_right_to_left.dart';
 part 'usecase/syncable/dis_connect_left_from_right.dart';

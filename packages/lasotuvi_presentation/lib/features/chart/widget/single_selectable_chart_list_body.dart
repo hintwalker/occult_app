@@ -18,7 +18,7 @@ class _SingleSelectableChartListBodyState
   @override
   Widget build(BuildContext context) {
     return SingleSelectableChartListModal(
-        controller: ref.read(chartListControllerProvider),
+        controller: ref.watch(chartListControllerProvider),
         translate: translate,
         colorScheme: lightColorScheme,
         onItemTap: widget.onSelect,

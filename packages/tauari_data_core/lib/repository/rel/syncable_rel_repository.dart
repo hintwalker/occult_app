@@ -11,14 +11,14 @@ abstract class SyncableRelRepository<
             localRepository: localRelRepository,
             cloudRepository: cloudRelRepository);
 
-  Future<Iterable<E>> byLeftId(String? uid, int leftId);
-  Future<Iterable<E>> byRightId(String? uid, int rightId);
+  Future<Iterable<E>> byLeftId(String? uid, int leftId, String? syncStatus);
+  Future<Iterable<E>> byRightId(String? uid, int rightId, String? syncStatus);
   Future<Iterable<L>> leftData(String? uid, R right);
   Future<Iterable<R>> rightData(String? uid, L left);
-  Stream<Iterable<E>> onByLeftId(String? uid, int leftId);
-  Stream<Iterable<E>> onByRightId(String? uid, int rightId);
-  Stream<Iterable<L>> onLeftData(String? uid, int rightId);
-  Stream<Iterable<R>> onRightData(String? uid, int leftId);
+  Stream<Iterable<E>> onByLeftId(String? uid, int leftId, String? syncStatus);
+  Stream<Iterable<E>> onByRightId(String? uid, int rightId, String? syncStatus);
+  Stream<Iterable<L>> onLeftData(String? uid, R right);
+  Stream<Iterable<R>> onRightData(String? uid, L left);
   Future connect({
     String? uid,
     required L left,

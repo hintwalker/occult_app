@@ -44,7 +44,7 @@ class BasicModal extends StatelessWidget {
                         ),
                       ]),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const SizedBox(
                         width: 8,
@@ -67,6 +67,9 @@ class BasicModal extends StatelessWidget {
                       ),
                     ],
                   )),
+              const SizedBox(
+                height: 2.0,
+              ),
               Expanded(child: child),
             ]),
       ),

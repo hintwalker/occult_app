@@ -27,7 +27,11 @@ class DataCreationOptionsModal extends ConsumerWidget {
                   title: Text(translate('addNewTag')),
                   onTap: () {
                     context.pop();
-                    TagHelper.openTagCreationScreen(context);
+                    TagHelper.openTagCreationScreen(
+                      context,
+                      (tag) =>
+                          TagHelper.openTagDetail(context: context, tag: tag),
+                    );
                   },
                 ),
                 ListTile(

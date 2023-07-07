@@ -1,5 +1,16 @@
 part of sunoom;
 
+///
+/// [rels] là json object, key là id của ngũ hành, value là mảng 5 phần tử.
+///
+/// Trong mảng 5 phần tử này, index là index của [items],
+/// Giá trị của phần tử là index của ngũ hành: (0: Thủy, 1: Mộc, 2: Kim, 3: Thổ, 4: Hỏa)
+///
+/// Để lấy thông tin quan hệ giữa 2 ngũ hành (vd: ngũ hành 1 và ngũ hành 2):
+/// - Tìm mảng 5 phần tử tương ứng với ngũ hành 1: array = nguHanhRelData['rels'][nguHanh1.index]
+/// - Tìm index trong mảng 5 phần tử có giá trị là ngũ hành 2: indexRel = array.indexOf(nguHanh2.index)
+/// - Tìm quan hệ: nguHanhRelData['items'][indexRel]
+///
 final nguHanhRelData = {
   'rels': {
     0: [0, 1, 4, 2, 3],

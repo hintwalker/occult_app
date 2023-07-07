@@ -47,7 +47,11 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                   uid: uid,
                   translate: translate,
                   colorScheme: lightColorScheme,
-                  onAddData: () => TagHelper.openTagCreationScreen(context),
+                  onAddData: () => TagHelper.openTagCreationScreen(
+                    context,
+                    (tag) =>
+                        TagHelper.openTagDetail(context: context, tag: tag),
+                  ),
                   onShowAll: openAllTagsScreen,
                   onItemTap: (context, tag) =>
                       TagHelper.openTagDetail(context: context, tag: tag),

@@ -24,6 +24,7 @@ class NoteItemWidget extends StatelessWidget {
           Card(
             margin: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
             child: InkWell(
+              onTap: () => onTap(context, item),
               borderRadius: BorderRadius.circular(12.0),
               child: Container(
                 padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),

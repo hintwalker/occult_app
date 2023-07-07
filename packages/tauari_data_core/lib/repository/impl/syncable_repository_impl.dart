@@ -6,13 +6,17 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
       {required super.localRepository, required super.cloudRepository});
 
   @override
-  Future<E?> byId({String? uid, required int docId}) async {
+  Future<E?> byId({
+    String? uid,
+    required int docId,
+    required String? syncStatus,
+  }) async {
     final localItem = await localRepository.byIdOnLocal(docId);
-    if (uid == null) {
+    if (onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
       return localItem?.copyWithSyncStatus(SyncStatus.onlyLocal);
     }
     final cloudItem =
-        await cloudRepository.byIdOnCloud(uid: uid, docId: docId.toString());
+        await cloudRepository.byIdOnCloud(uid: uid!, docId: docId.toString());
     if (cloudItem == null) {
       return localItem?.copyWithSyncStatus(SyncStatus.onlyLocal);
     }

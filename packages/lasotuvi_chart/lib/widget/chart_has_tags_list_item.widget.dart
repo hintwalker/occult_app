@@ -7,7 +7,7 @@ class ChartHasTagsListItem extends StatelessWidget {
     required this.colorScheme,
     required this.translate,
     required this.onTap,
-    this.uid,
+    required this.uid,
     required this.onSyncStatusTap,
   });
   final ChartHasTags data;
@@ -33,7 +33,7 @@ class ChartHasTagsListItem extends StatelessWidget {
     //         .toMoment(TimeZone(offsetInHour: now.timeZoneOffset.inHours)));
     return ListItemHasStorageIcon<Chart>(
         uid: uid,
-        syncStatus: data.source.getSyncStatus,
+        syncStatus: data.source.syncStatus,
         syncData: data.source,
         colorScheme: colorScheme,
         onSyncStatusTap: onSyncStatusTap,

@@ -26,10 +26,14 @@ class _ChartDetailBodyState extends AuthDependedState<ChartDetailBody> {
             chartId: widget.chartId,
             syncStatus: RouterParams.getPathParamValue(widget.syncStatus),
             controller: ref.watch(chartDetailControllerProvider),
-            child: (chart) => ChartDetailWidget(
+            child: (chart) => ChartDetailModal(
               chart,
-              translate: translate,
-              colorScheme: lightColorScheme,
+              colorScheme: LasotuviAppStyle.colorScheme,
+              child: ChartDetailWidget(
+                chart,
+                translate: translate,
+                colorScheme: lightColorScheme,
+              ),
             ),
           );
   }

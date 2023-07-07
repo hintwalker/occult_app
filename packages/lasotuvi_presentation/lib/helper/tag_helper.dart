@@ -3,10 +3,11 @@ part of lasotuvi_presentation;
 class TagHelper {
   static void openTagCreationScreen(
     BuildContext context,
+    void Function(Tag tag)? doAfterCreation,
   ) {
     showDialog(
       context: context,
-      builder: (context) => const TagCreationBody(),
+      builder: (context) => TagCreationBody(doAfterCreation: doAfterCreation),
     );
     // showModalBottomSheet(
     //   context: context,

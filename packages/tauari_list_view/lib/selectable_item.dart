@@ -18,4 +18,13 @@ class SelectableItem<T> {
       selected: selected ?? this.selected,
     );
   }
+
+  @override
+  bool operator ==(Object? other) =>
+      identical(other, this) ||
+      other.runtimeType == runtimeType ||
+      other is SelectableItem && other.data == data;
+
+  @override
+  int get hashCode => data.hashCode;
 }

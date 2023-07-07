@@ -1,4 +1,5 @@
 part of lasotuvi_provider;
 
-final chartHasTagsListControllerProvider = ChangeNotifierProvider((ref) =>
-    ChartHasTagsListController(onData: ref.read(onChartHasTagsListProvider)));
+final chartHasTagsListControllerProvider = ChangeNotifierProvider.autoDispose(
+    (ref) => ChartHasTagsListController(
+        onData: ref.read(onChartHasTagsListProvider)));

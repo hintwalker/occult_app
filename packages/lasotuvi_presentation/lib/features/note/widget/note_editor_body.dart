@@ -7,7 +7,7 @@ class NoteEditorBody extends ConsumerStatefulWidget {
     required this.syncStatus,
   });
   final String noteId;
-  final String syncStatus;
+  final String? syncStatus;
 
   @override
   ConsumerState<NoteEditorBody> createState() => _NoteEditorBodyState();
@@ -41,23 +41,7 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
                         if (note == null) {
                           return getEditor();
                         } else {
-                          return WillPopScope(
-                            onWillPop: () => onWillPop(note, context, ref),
-                            child: NoteEditorWidget(
-                              translate: translate,
-                              colorScheme: lightColorScheme,
-                              note: note,
-                              onChanged: (note, uid) =>
-                                  controller!.onChanged(note, ref, uid),
-                              onSave: (note, uid) =>
-                                  controller!.save(note: note, uid: uid),
-                              toggleEditMode: (value) => ref
-                                  .read(noteEditingStateProvider.notifier)
-                                  .state = value,
-                              onHitMaxLength: (value) =>
-                                  onHitMaxLength(context, value),
-                            ),
-                          );
+                          return getEditorWidget(note);
                         }
                       } else {
                         return getEditor();
@@ -75,9 +59,18 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
       uid: uid,
       noteId: widget.noteId,
       syncStatus: RouterParams.getPathParamValue(widget.syncStatus),
-      controller: ref.read(noteEditorControllerProvider),
-      child: (note) => WillPopScope(
-        onWillPop: () => onWillPop(note, context, ref),
+      controller: ref.watch(noteEditorControllerProvider),
+      child: (note) => getEditorWidget(note),
+    );
+  }
+
+  Widget getEditorWidget(Note note) {
+    return WillPopScope(
+      onWillPop: () => onWillPop(note, context, ref),
+      child: NoteEditorModal(
+        note: note,
+        colorScheme: LasotuviAppStyle.colorScheme,
+        translate: translate,
         child: NoteEditorWidget(
           translate: translate,
           colorScheme: lightColorScheme,
@@ -88,8 +81,81 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
               ref.read(noteEditingStateProvider.notifier).state = value,
           onHitMaxLength: (value) => onHitMaxLength(context, value),
         ),
+        chartAvatar: (note) => chartAvatar(note),
       ),
     );
+  }
+
+  Widget chartAvatar(Note note) {
+    return FutureBuilder(
+        future: ref.read(chartByNoteIdProvider).call(uid, note.id),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final chart = snapshot.requireData;
+
+            if (chart == null) {
+              return const Text('');
+            }
+            final birthday = chart.birthday
+                .toMoment(TimeZone(offsetInHour: chart.timeZoneOffset));
+            final canWatchingYear = Can.ofLuniYear(chart.watchingYear);
+            final chiWatchingYear = Chi.ofLuniYear(chart.watchingYear);
+            return Padding(
+              padding: const EdgeInsets.only(
+                left: 8,
+                right: 8,
+              ),
+              child: Card(
+                child: InkWell(
+                  onTap: () {},
+                  // ChartHelper.openChartView(context: context, chart: chart),
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleHumanAvatar(
+                          gender: chart.gender.intValue,
+                          path: chart.avatar,
+                        ),
+                        const SizedBox(width: 8.0),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              chart.name,
+                            ),
+                            Row(
+                              children: [
+                                Text(birthday.toGregorianDateTimeString()),
+                                Text(
+                                  ' (${birthday.toLuniSolarDateString(
+                                    canName: (can) => translate(can.name),
+                                    chiName: (chi) => translate(chi.name),
+                                  )})',
+                                ),
+                              ],
+                            ),
+                            Text(
+                                '${translate('watchingYear')}: ${chart.watchingYear} ${translate(canWatchingYear.name)} ${translate(chiWatchingYear.name)}'),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+            // return CircleHumanAvatar(
+            //   gender: chart.gender.intValue,
+            //   path: chart.avatar,
+            // );
+          } else {
+            return const Text('');
+          }
+        });
   }
 
   void onHitMaxLength(BuildContext context, int limit) {
@@ -155,16 +221,19 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
         });
     if (result != null) {
       if (result.no) {
+        ref.read(noteEditingStateProvider.notifier).update((state) => false);
+        final cache = await ref.read(noteEditorCacheProvider.future);
+        await cache.clear(note.docId);
         if (context.mounted) {
           Navigator.of(context).pop(true);
         }
       } else if (result.yes) {
         final cache = await ref.read(noteEditorCacheProvider.future);
-        final noteCached = await cache.get(note.id.toString());
+        final noteCached = await cache.get(note.docId);
         if (noteCached != null) {
           await controller!.save(note: noteCached, uid: uid);
         }
-        await cache.clearAll();
+        await cache.clear(note.docId);
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           if (context.mounted) {
             Navigator.of(context).pop(true);

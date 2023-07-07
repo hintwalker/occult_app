@@ -24,11 +24,11 @@ import 'package:tauari_purchase/tauari_purchase.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_utils/tauari_utils.dart';
 
-part 'storage/downloader_provider.dart';
-part 'storage/remover_provider.dart';
-part 'storage/uploader_provider.dart';
+part 'storage/downloader.dart';
+part 'storage/remover.dart';
+part 'storage/uploader.dart';
 
-part 'drawer/main_drawer_controller_provider.dart';
+part 'drawer/main_drawer_controller.dart';
 
 part 'subscription/usecase/extends_subscription_provider.dart';
 part 'subscription/usecase/unsubscribe_plan_provider.dart';
@@ -60,6 +60,7 @@ part 'chart/controller/chart_detail_controller.dart';
 part 'chart/controller/chart_view_controller.dart';
 part 'chart/controller/chart_list_controller_provider.dart';
 
+part 'chart/usecase/chart_by_note_id.dart';
 part 'chart/usecase/update_chart.dart';
 part 'chart/usecase/on_chart.dart';
 part 'chart/usecase/on_charts_provider.dart';

@@ -35,7 +35,11 @@ class ListItemHasStorageIcon<T> extends StatelessWidget {
                 uid: uid,
                 syncStatus: syncStatus,
                 colorScheme: colorScheme,
-                onTap: () => onSyncStatusTap ?? ())
+                onTap: () {
+                  if (onSyncStatusTap != null) {
+                    onSyncStatusTap!();
+                  }
+                })
             // StorageIconButton(
             //   item: syncData,
             //   onCloud: onCloud,

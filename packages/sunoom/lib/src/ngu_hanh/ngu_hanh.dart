@@ -17,7 +17,7 @@ class NguHanh {
 
   NguHanhRel compareTo(NguHanh other) {
     final item = nguHanhRelData['rels']![index]! as List<int>;
-    final relIndex = item[other.index];
+    final relIndex = item.indexOf(other.index);
     return NguHanhRel.fromIndex(relIndex);
   }
 

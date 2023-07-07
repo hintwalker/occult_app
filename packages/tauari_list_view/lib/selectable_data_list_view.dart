@@ -63,6 +63,38 @@ class _SelectableDataListViewState<U, V>
   }
 
   // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  // }
+
+  @override
+  void didUpdateWidget(covariant SelectableDataListView<U, V> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final inputData = widget.data
+        .map((e) => SelectableItem(e,
+            initSelected: widget.initSelected(e),
+            selected: widget.initSelected(e)))
+        .toList();
+    final inputLen = inputData.length;
+    for (var i = 0; i < inputLen; i++) {
+      final inputi = inputData.elementAt(i);
+      final oldi =
+          selectableItems.where((element) => element.data == inputi.data);
+      if (oldi.isNotEmpty) {
+        inputData.removeAt(i);
+        inputData.insert(i, oldi.first);
+      }
+    }
+    selectableItems = inputData;
+    // final setOfSelectableItems = selectableItems.toSet();
+    // final newOnes = inputData.difference(setOfSelectableItems);
+
+    // selectableItems =
+    //     setOfSelectableItems.union(newOnes).intersection(inputData).toList();
+    foundData = selectableItems;
+  }
+
+  // @override
   // void didUpdateWidget(covariant SelectableDataListView<U, V> oldWidget) {
   //   super.didUpdateWidget(oldWidget);
   //   setState(() {
