@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'cuc.freezed.dart';
 
 @freezed
 abstract class Cuc with _$Cuc {

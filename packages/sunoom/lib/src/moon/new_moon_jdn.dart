@@ -1,5 +1,3 @@
-part of sunoom;
-
 class NewMoonJdn {
   final int monthOffset;
   final double jdn;

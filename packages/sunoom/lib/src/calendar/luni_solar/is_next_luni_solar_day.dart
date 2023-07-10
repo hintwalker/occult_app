@@ -1,4 +1,4 @@
-part of sunoom;
+import '../moment/moment.dart';
 
 extension IsNextLuniSolarDay on Moment {
   bool isNextLuniDay() {

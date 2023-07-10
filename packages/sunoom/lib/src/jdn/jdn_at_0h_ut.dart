@@ -1,4 +1,4 @@
-part of sunoom;
+import '../constants/time_constants.dart';
 
 double jdnAt0hUt(int year, int month, int day) {
   double jd = 0;

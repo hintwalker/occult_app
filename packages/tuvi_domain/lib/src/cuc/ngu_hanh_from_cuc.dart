@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'cuc.dart';
 
 extension NguHanhFromCuc on Cuc {
   NguHanh get nguHanh {

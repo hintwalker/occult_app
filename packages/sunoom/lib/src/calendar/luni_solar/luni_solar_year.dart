@@ -1,4 +1,14 @@
-part of sunoom;
+import '../../exception/luni_solar_month_not_found.dart';
+import '../../jdn/first_jdn_per_month_list.dart';
+import '../../sun/is_major_term_inside.dart';
+import '../../sun/sun_longitude_from_jdn.dart';
+import '../../utils/mod.dart';
+import '../../zone/time_zone.dart';
+import '../gregorian/pair_of_first_jdn_nov.dart';
+import '../moment/moment.dart';
+import 'luni_solar_date.dart';
+import 'luni_solar_month.dart';
+import 'luni_solar_month_list.dart';
 
 class LuniSolarYear {
   final List<LuniSolarMonth> months;

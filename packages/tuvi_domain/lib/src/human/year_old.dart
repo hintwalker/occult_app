@@ -1,4 +1,4 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
 
 int yearOld({required Moment birthday, required Moment now}) {
   // final duration = now.difference(birthday);

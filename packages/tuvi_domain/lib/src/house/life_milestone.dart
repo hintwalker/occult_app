@@ -1,4 +1,4 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
 
 class LifeMilestone {
   final int month;

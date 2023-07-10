@@ -1,4 +1,9 @@
-part of sunoom;
+import '../can/can.dart';
+import '../chi/chi.dart';
+import '../ngu_hanh/ngu_hanh.dart';
+import 'hoa_giap_data.dart';
+import 'hoa_giap_enum.dart';
+import 'hoa_giap_index_data.dart';
 
 class HoaGiap {
   final int index;

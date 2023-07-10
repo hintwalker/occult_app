@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import '../house/house_position.dart';
+import '../human/human_bio.dart';
+import 'navigate_house.dart';
 
 final String menhExpression = "2 + luniMonthIndex - hourIndex";
 

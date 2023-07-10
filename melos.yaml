@@ -6,14 +6,18 @@ packages:
 scripts:
   analyze:
     exec: dart analyze .
+
   fix:
     exec: dart fix . --apply
+
   pub:get:
     run: melos exec -- flutter pub get
     description: Runs pub get in all Flutter packages.
+
   pub:upgrade:
     run: melos exec -- flutter pub upgrade
     description: Runs pub upgrade in all Flutter packages.
+    
   pub:upgradeMajor:
     run: melos exec -- flutter pub upgrade --major-versions
     description: Runs pub upgrade --major-versions in all Flutter packages.

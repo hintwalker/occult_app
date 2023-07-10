@@ -1,5 +1,3 @@
-part of sunoom;
-
 final canData = {
   -1: {'index': -1, 'name': '-', 'short': '_', 'amDuongNguHanh': -1},
   0: {'index': 0, 'name': 'giap', 'short': 'G', 'amDuongNguHanh': 0},

@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'gender.dart';
 
 enum DuongNamAmNu { duongNam, amNu, duongNu, amNam }
 

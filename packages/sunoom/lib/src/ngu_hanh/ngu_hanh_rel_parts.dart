@@ -1,4 +1,4 @@
-part of sunoom;
+import 'ngu_hanh_rel_names.dart';
 
 ///
 /// [rels] là json object, key là id của ngũ hành, value là mảng 5 phần tử.

@@ -1,3 +1,3 @@
 library tauari_values;
 
-part 'sync_status.dart';
+export 'src/sync_status.dart';

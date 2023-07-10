@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 enum Gender {
   female(0),
   male(1);

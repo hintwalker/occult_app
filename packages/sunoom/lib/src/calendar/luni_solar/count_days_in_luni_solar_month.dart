@@ -1,4 +1,8 @@
-part of sunoom;
+import '../../conversion/gregorian_2_luni_solar.dart';
+import '../../conversion/luni_solar_2_gregorian.dart';
+import '../../zone/time_zone.dart';
+import '../simple_time.dart';
+import 'luni_solar_date.dart';
 
 int countDaysInLuniSolarMonth(
     int year, int month, bool isLeapMonth, int timeZoneOffset) {

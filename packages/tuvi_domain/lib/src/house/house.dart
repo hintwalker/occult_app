@@ -1,4 +1,12 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+import 'fit_to_house_position.dart';
+
+import '../star/star.dart';
+import 'house_name.dart';
+import 'house_pair.dart';
+import 'house_position.dart';
+import 'house_triad.dart';
+import 'life_milestone.dart';
 
 class House {
   HouseName name;

@@ -1,4 +1,4 @@
-part of sunoom;
+import 'sun_longitude_from_jdn.dart';
 
 List<double> sunLongitudeList(List<double> firstJdnPerMonths) {
   final List<double> result = [];

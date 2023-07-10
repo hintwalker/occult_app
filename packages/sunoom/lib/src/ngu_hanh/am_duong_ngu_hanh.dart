@@ -1,4 +1,6 @@
-part of sunoom;
+import '../am_duong/am_duong.dart';
+import 'am_duong_ngu_hanh_parts.dart';
+import 'ngu_hanh.dart';
 
 class AmDuongNguHanh {
   final int index;

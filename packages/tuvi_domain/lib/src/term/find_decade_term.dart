@@ -1,4 +1,5 @@
-part of tuvi_domain;
+import '../cuc/cuc.dart';
+import '../house/house_position.dart';
 
 int findDecadeTerm(
     {required HousePosition position,

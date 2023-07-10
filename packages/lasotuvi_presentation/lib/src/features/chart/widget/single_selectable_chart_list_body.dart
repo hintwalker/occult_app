@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_chart/lasotuvi_chart.dart';
+import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:lasotuvi_style/lasotuvi_style.dart';
+import 'package:tauari_translate/tauari_translate.dart';
+import '../../auth/auth_depended_state.dart';
+
+class SingleSelectableChartListBody extends ConsumerStatefulWidget {
+  const SingleSelectableChartListBody({
+    super.key,
+    required this.onSelect,
+  });
+
+  final void Function(BuildContext context, Chart chart, String? uid) onSelect;
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SingleSelectableChartListBodyState();
+}
+
+class _SingleSelectableChartListBodyState
+    extends AuthDependedState<SingleSelectableChartListBody> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleSelectableChartListModal(
+        controller: ref.watch(chartListControllerProvider),
+        translate: translate,
+        colorScheme: LasotuviAppStyle.colorScheme,
+        onItemTap: widget.onSelect,
+        uid: uid);
+  }
+
+  // void onItemTap(BuildContext context, Chart chart, String? uid) {
+  //   context.pushNamed(RouteName.chartView, pathParameters: {
+  //     RouterParams.chartId: chart.id.toString(),
+  //     RouterParams.uid: uid ?? RouterParams.uidNullValue
+  //   });
+  // }
+}

@@ -1,4 +1,5 @@
-part of sunoom;
+import 'am_duong_enum.dart';
+import 'am_duong_parts.dart';
 
 class AmDuong {
   final int index;

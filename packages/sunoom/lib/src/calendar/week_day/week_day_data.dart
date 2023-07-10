@@ -1,5 +1,3 @@
-part of sunoom;
-
 final weekDayData = {
   0: {
     'index': 0,

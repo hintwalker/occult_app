@@ -1,4 +1,6 @@
-part of sunoom;
+import '../../jdn/first_jdn_in_nov.dart';
+import '../../jdn/shift_jdn_to_0h_local.dart';
+import '../../zone/time_zone.dart';
 
 class PairOfFirstJdnNov {
   final double previous;

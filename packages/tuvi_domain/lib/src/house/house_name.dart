@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 enum HouseName {
   menh(0, 'menh'),
   phuMau(1, 'phuMau'),

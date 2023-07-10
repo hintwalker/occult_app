@@ -1,4 +1,4 @@
-part of tuvi_domain;
+import 'house_position.dart';
 
 class HouseTriad {
   final HousePosition source;

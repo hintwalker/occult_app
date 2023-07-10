@@ -1,4 +1,6 @@
-part of sunoom;
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'simple_time.freezed.dart';
 
 @freezed
 class SimpleTime with _$SimpleTime {

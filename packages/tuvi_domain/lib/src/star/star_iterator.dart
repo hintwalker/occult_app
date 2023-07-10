@@ -1,4 +1,4 @@
-part of tuvi_domain;
+import 'star_name.dart';
 
 class StarIterator implements Iterator<StarName> {
   final List<StarName> _priorityList;

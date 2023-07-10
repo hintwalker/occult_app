@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 class StarBrightness {
   final String name;
   final String short;

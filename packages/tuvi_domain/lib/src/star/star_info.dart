@@ -1,4 +1,7 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'star_brightness.dart';
+import 'star_info_key.dart';
 
 class StarInfo {
   final bool isMajor;

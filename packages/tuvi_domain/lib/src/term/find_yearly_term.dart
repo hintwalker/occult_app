@@ -1,4 +1,8 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+import '../house/fit_to_house_position.dart';
+
+import '../house/house_position.dart';
+import '../human/gender.dart';
 
 Chi findYearlyTerm(HousePosition position, Chi chiOfBornYear, Gender gender) {
   final data = [10, 7, 4, 1, 10, 7, 4, 1, 10, 7, 4, 1];

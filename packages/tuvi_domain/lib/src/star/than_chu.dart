@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'star_name.dart';
 
 StarName thanChu(Chi chiOfBornYear) {
   final data = [

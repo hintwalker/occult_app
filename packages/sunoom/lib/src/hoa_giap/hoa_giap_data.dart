@@ -1,5 +1,3 @@
-part of sunoom;
-
 final hoaGiapData = {
   0: {'index': 0, 'name': 'haiTrungKim', 'nguHanh': 'kim'},
   1: {'index': 1, 'name': 'loTrungHoa', 'nguHanh': 'hoa'},

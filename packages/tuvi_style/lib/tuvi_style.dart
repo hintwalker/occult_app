@@ -1,6 +1,4 @@
 library tuvi_style;
 
-import 'package:flutter/material.dart';
-
-part 'theme/app_theme.dart';
-part 'theme/color_schemes.dart';
+export 'src/theme/app_theme.dart';
+export 'src/theme/color_schemes.dart';

@@ -1,4 +1,8 @@
-part of tuvi_domain;
+import '../house/house_position.dart';
+import 'star_brightness.dart';
+import 'star_info.dart';
+import 'star_key.dart';
+import 'star_name.dart';
 
 class Star {
   final StarName name;

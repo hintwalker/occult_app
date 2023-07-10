@@ -1,4 +1,4 @@
-part of sunoom;
+import 'dart:math';
 
 double jdnOnNewMoonDay(int monthOffset) {
   final t = monthOffset / 1236.85;

@@ -1,4 +1,4 @@
-part of sunoom;
+import 'dart:math';
 
 bool isMajorTermInside(double current, double prev) {
   final majorTerms = [

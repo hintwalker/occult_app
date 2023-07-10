@@ -1,6 +1,18 @@
-part of sunoom;
-
 // @freezed
+import '../../calendar/moment/moment_from_date_time.dart';
+
+import '../../can/can.dart';
+import '../../chi/chi.dart';
+import '../../conversion/gregorian_2_luni_solar.dart';
+import '../../conversion/luni_solar_2_gregorian.dart';
+import '../../utils/string_format_2_digits.dart';
+import '../../zone/time_zone.dart';
+import '../gregorian/gregorian_date.dart';
+import '../gregorian/gregorian_from_jdn_local.dart';
+import '../luni_solar/luni_solar_date.dart';
+import '../simple_time.dart';
+import '../time/time_from_jdn.dart';
+
 class Moment {
   final GregorianDate gregorian;
   final SimpleTime time;

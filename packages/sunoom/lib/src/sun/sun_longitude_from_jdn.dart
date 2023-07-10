@@ -1,4 +1,4 @@
-part of sunoom;
+import 'dart:math';
 
 double sunLongitudeFromJdn(double jdn) {
   final t = (jdn - 2451545.0) / 36525;

@@ -1,5 +1,3 @@
-part of sunoom;
-
 int standardlizeTo24h(int hour) {
   if (hour == 24) {
     return 0;

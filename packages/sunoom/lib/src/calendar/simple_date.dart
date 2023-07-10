@@ -1,4 +1,5 @@
-part of sunoom;
+import '../utils/string_format_2_digits.dart';
+import '../zone/time_zone.dart';
 
 abstract class SimpleDate {
   final int year, month, day;

@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'house_position.dart';
 
 Can canOfHouse(HousePosition position, Can canOfBornYear) {
   final data = [

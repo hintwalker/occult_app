@@ -1,4 +1,21 @@
-part of tuvi_domain;
+import 'package:expressions/expressions.dart';
+import 'package:sunoom/sunoom.dart';
+import '../utils/to_bool.dart';
+import '../house/fit_to_house_position.dart';
+
+import '../am_duong/am_duong_rel.dart';
+import '../am_duong/find_am_duong_rel.dart';
+import '../cuc/cuc.dart';
+import '../house/house_position.dart';
+import '../human/duong_nam_am_nu.dart';
+import '../human/human_bio.dart';
+import '../star/star.dart';
+import '../star/star_formula_key.dart';
+import '../star/star_iterator.dart';
+import '../star/star_name.dart';
+import '../utils/math.dart';
+import 'navigate_menh.dart';
+import 'navigate_than.dart';
 
 Map<StarName, Star> navigateStars(
     {required HumanBio humanBio,

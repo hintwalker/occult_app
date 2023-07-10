@@ -1,4 +1,8 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'duong_nam_am_nu.dart';
+import 'gender.dart';
+import 'human_bio_key.dart';
 
 class HumanBio {
   final String name;

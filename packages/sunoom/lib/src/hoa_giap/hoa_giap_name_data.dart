@@ -1,5 +1,3 @@
-part of sunoom;
-
 final hoaGiapNameData = [
   "Hải Trung Kim",
   "Lô Trung Hỏa",

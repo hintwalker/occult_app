@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 extension SplitToListOfListExtension on String {
   List<List<int>> splitToListOfList(String spliterMajor, String spliterMinor) {
     return split(',')

@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 final tuHoaTranDoan = {
   "hoaLoc": [
     "liemTrinh",

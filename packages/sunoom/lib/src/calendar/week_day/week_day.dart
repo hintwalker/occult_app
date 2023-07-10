@@ -1,4 +1,5 @@
-part of sunoom;
+import 'week_day_data.dart';
+import 'week_day_enum.dart';
 
 class WeekDay {
   final int index;

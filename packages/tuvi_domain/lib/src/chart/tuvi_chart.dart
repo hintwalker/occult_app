@@ -1,4 +1,10 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import '../cuc/cuc.dart';
+import '../house/house.dart';
+import '../house/house_position.dart';
+import '../house/tuan_triet_position.dart';
+import '../human/human_bio.dart';
 
 class TuViChart {
   final Map<HousePosition, House> houses;

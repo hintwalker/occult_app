@@ -1,4 +1,12 @@
-part of sunoom;
+import '../calendar/luni_solar/is_next_luni_solar_day.dart';
+
+import '../calendar/moment/moment.dart';
+import '../calendar/simple_time.dart';
+import '../chi/chi.dart';
+import '../jdn/jdn_at_12h_ut.dart';
+import '../ngu_hanh/am_duong_ngu_hanh.dart';
+import 'can_data.dart';
+import 'can_enum.dart';
 
 class Can {
   final int index;

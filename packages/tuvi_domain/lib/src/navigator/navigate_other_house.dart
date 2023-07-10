@@ -1,4 +1,5 @@
-part of tuvi_domain;
+import '../house/house_name.dart';
+import '../house/house_position.dart';
 
 Map<HousePosition, HouseName> navigateListHouse(HousePosition menhPosition) {
   final Map<HousePosition, HouseName> result = {};

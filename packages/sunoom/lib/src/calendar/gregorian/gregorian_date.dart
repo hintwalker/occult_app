@@ -1,4 +1,5 @@
-part of sunoom;
+import '../../zone/time_zone.dart';
+import '../simple_date.dart';
 
 class GregorianDate extends SimpleDate {
   GregorianDate(

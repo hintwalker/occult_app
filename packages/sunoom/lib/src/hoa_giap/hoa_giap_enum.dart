@@ -1,5 +1,3 @@
-part of sunoom;
-
 enum HoaGiaps {
   haiTrungKim,
   loTrungHoa,

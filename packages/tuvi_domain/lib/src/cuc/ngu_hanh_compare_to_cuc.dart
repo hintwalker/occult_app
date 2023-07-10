@@ -1,4 +1,8 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'cuc.dart';
+import 'menh_cuc_rel.dart';
+import 'ngu_hanh_from_cuc.dart';
 
 extension NguHanhCompareToCuc on NguHanh {
   MenhCucRel compareToCuc(Cuc cuc) {

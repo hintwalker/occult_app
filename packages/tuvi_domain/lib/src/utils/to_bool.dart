@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 extension StringExtension on String {
   bool toBoolean([bool strict = false]) {
     if (strict == true) {

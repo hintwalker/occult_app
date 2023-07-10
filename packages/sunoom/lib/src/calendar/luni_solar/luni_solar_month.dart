@@ -1,4 +1,5 @@
-part of sunoom;
+import '../../sun/is_major_term_inside.dart';
+import '../moment/moment.dart';
 
 class LuniSolarMonth {
   final int index;

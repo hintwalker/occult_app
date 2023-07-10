@@ -1,4 +1,23 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import '../cuc/cuc.dart';
+import '../house/can_of_house.dart';
+import '../house/house.dart';
+import '../house/house_position.dart';
+import '../house/life_milestone.dart';
+import '../human/duong_nam_am_nu.dart';
+import '../human/human_bio.dart';
+import '../navigator/navigate_menh.dart';
+import '../navigator/navigate_other_house.dart';
+import '../navigator/navigate_stars.dart';
+import '../navigator/navigate_than.dart';
+import '../navigator/navigate_triet.dart';
+import '../navigator/navigate_tuan.dart';
+import '../sky/sky.dart';
+import '../term/find_decade_term.dart';
+import '../term/find_monthly_term.dart';
+import '../term/find_yearly_term.dart';
+import 'tuvi_chart.dart';
 
 TuViChart buildTuViChart({
   required HumanBio humanBio,
@@ -28,14 +47,20 @@ TuViChart buildTuViChart({
   final decadeTerm =
       findListDecadeTerm(menhPosition: posOfMenh, dnan: dnan, cuc: cuc);
   final yearlyTerm = findListYearlyTerm(chiOfBornYear, humanBio.gender);
-  final yearlyTermOfWatchingYear = findYearlyTerm(
-      HousePosition(Chi.ofLuniYear(humanBio.watchingYear)),
-      chiOfBornYear,
-      humanBio.gender);
+  // Tìm cung có lưu niên tiểu hạn trùng với năm xem (xét theo chi)
+  final watchingYearHouse = yearlyTerm.entries
+      .where(
+          (element) => element.value == Chi.ofLuniYear(humanBio.watchingYear))
+      .first;
+
+  // final yearlyTermOfWatchingYear = findYearlyTerm(
+  //     HousePosition(Chi.ofLuniYear(humanBio.watchingYear)),
+  //     chiOfBornYear,
+  //     humanBio.gender);
   final monthlyTerm = findListMonthlyTerm(
       chiOfBornTime: chiOfBornTime,
       bornMonth: humanBio.birthDay.luniSolarDate.month,
-      yearlyTermOfWatchingYear: yearlyTermOfWatchingYear);
+      yearlyTermOfWatchingYear: watchingYearHouse.key.chi);
 
   final Map<HousePosition, House> houses = poses.map((key, value) => MapEntry(
       key,

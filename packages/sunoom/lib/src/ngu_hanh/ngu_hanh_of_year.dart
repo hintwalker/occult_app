@@ -1,4 +1,6 @@
-part of sunoom;
+import '../can/can.dart';
+import '../chi/chi.dart';
+import 'ngu_hanh.dart';
 
 NguHanh nguHanhOfYear(int year) {
   final canOfYear = Can.ofLuniYear(year);

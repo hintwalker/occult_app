@@ -1,4 +1,5 @@
-part of sunoom;
+import '../chi/chi_enum.dart';
+import 'hoa_giap_enum.dart';
 
 final hoaGiapIndexData = {
   0: {

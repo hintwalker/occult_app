@@ -1,4 +1,5 @@
-part of sunoom;
+import '../../zone/time_zone.dart';
+import 'gregorian_date.dart';
 
 extension GregorianFromDateTime on DateTime {
   GregorianDate toGregorian(TimeZone timeZone) {

@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import '../star/star_name.dart';
+
+import '../house/house_position.dart';
 
 StarName menhChu(HousePosition posOfMenh) {
   final data = [

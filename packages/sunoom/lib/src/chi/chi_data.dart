@@ -1,5 +1,3 @@
-part of sunoom;
-
 final chiData = {
   -1: {'index': -1, 'name': '-', 'nguHanh': -1},
   0: {'index': 0, 'name': 'tys', 'nguHanh': 0},

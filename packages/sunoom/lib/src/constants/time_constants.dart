@@ -1,4 +1,4 @@
-part of sunoom;
+import 'dart:math';
 
 const jdnAt13h50m5269On1Jan1990Ut = 2415021.076998695;
 const daysPerLunarMonth = 29.530588853;

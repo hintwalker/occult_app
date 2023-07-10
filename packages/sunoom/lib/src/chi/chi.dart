@@ -1,4 +1,12 @@
-part of sunoom;
+import '../calendar/luni_solar/luni_solar_date.dart';
+import '../calendar/simple_date.dart';
+import '../calendar/simple_time.dart';
+import '../calendar/time/standardlize_to_24h.dart';
+import '../conversion/luni_solar_2_gregorian.dart';
+import '../jdn/jdn_at_12h_ut.dart';
+import '../ngu_hanh/ngu_hanh.dart';
+import 'chi_data.dart';
+import 'chi_enum.dart';
 
 class Chi {
   final int index;

@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 enum HumanBioKey {
   name,
   gregDay,

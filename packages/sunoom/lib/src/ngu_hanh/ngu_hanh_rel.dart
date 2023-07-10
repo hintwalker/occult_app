@@ -1,4 +1,4 @@
-part of sunoom;
+import 'ngu_hanh_rel_parts.dart';
 
 class NguHanhRel {
   final int index;

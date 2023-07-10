@@ -1,8 +1,5 @@
 library tauari_utils;
 
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
-
-part 'datetime_to_string.dart';
-part 'available_network.dart';
-part 'simple_error_widget.dart';
+export 'src/datetime_to_string.dart';
+export 'src/available_network.dart';
+export 'src/simple_error_widget.dart';

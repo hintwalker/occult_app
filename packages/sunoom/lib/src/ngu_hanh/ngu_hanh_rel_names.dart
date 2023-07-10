@@ -1,5 +1,3 @@
-part of sunoom;
-
 class NguHanhRelNames {
   static const sinh = 'sinh';
   static const khac = 'khac';

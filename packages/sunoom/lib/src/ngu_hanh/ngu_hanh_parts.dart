@@ -1,5 +1,3 @@
-part of sunoom;
-
 final nguHanhData = {
   -1: {
     'index': -1,

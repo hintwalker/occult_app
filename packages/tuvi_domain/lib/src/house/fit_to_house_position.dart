@@ -1,5 +1,3 @@
-part of tuvi_domain;
-
 extension FitToHousePosition on int {
   int fitToHousePosition() {
     if (_isRightAlready()) {

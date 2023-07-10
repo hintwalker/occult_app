@@ -1,4 +1,5 @@
-part of sunoom;
+import '../../zone/time_zone.dart';
+import 'gregorian_date.dart';
 
 GregorianDate gregorianFromJdnUt(double jdn) {
   int a, alpha, c, e, dd, mm, yyyy;

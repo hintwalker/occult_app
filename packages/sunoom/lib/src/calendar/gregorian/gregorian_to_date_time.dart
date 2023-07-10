@@ -1,4 +1,4 @@
-part of sunoom;
+import 'gregorian_date.dart';
 
 extension GregorianToDateTime on GregorianDate {
   DateTime toDateTime() {

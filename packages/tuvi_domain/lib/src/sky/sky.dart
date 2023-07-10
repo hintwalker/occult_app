@@ -1,4 +1,13 @@
-part of tuvi_domain;
+import '../house/house_position.dart';
+import '../school/school_name.dart';
+import '../sky/sky_config.dart';
+
+import '../star/info/basic_star_info.dart';
+import '../star/star.dart';
+import '../star/star_formulas.dart';
+import '../star/star_info.dart';
+import '../star/star_iterator.dart';
+import '../star/star_name.dart';
 
 class Sky {
   late Map<StarName, Star> stars;

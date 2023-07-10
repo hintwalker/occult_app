@@ -1,4 +1,6 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+
+import 'am_duong_rel.dart';
 
 AmDuongRel findAmDuongRel(int posOfMenh, Chi chiOfBornYear) {
   final rPos = posOfMenh % 2;

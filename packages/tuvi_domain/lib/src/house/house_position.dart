@@ -1,4 +1,5 @@
-part of tuvi_domain;
+import 'package:sunoom/sunoom.dart';
+import 'fit_to_house_position.dart';
 
 class HousePosition {
   final Chi chi;

@@ -1,4 +1,4 @@
-part of sunoom;
+import 'is_gregorian_year_leap.dart';
 
 int countDaysInGregorianMonth(int year, int month) {
   final isLeapYear = isGregorianYearLeap(year);

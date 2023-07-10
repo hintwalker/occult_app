@@ -1,4 +1,5 @@
-part of tuvi_domain;
+import '../school/school_name.dart';
+import '../star/star_formula_key.dart';
 
 class SkyConfig {
   final SchoolName school;
