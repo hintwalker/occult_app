@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sunoom/sunoom.dart';
+import 'package:tuvi_chart_diagram/src/element_colors.dart';
 
 class HouseCanChi extends StatelessWidget {
   final Can can;
   final Chi chi;
+  final NguHanh nguHanh;
   final AutoSizeGroup? sizeGroup;
   final String Function(String) translate;
 
@@ -12,6 +14,7 @@ class HouseCanChi extends StatelessWidget {
     super.key,
     required this.can,
     required this.chi,
+    required this.nguHanh,
     required this.translate,
     this.sizeGroup,
   });
@@ -21,7 +24,10 @@ class HouseCanChi extends StatelessWidget {
       '${can.short}.${translate(chi.name)}',
       group: sizeGroup,
       // translate: translate,
-      style: const TextStyle(fontSize: 7, fontWeight: FontWeight.w600),
+      style: TextStyle(
+          fontSize: 7,
+          fontWeight: FontWeight.w600,
+          color: ElementColors.ofNguHanh(nguHanh)),
       minFontSize: 7,
     );
   }

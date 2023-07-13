@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 
 class AllTagsScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class AllTagsScreen extends StatelessWidget {
         restorationId: restorationId,
         child: Container(
           color: LasotuviAppStyle.colorScheme.background,
-          child: const Placeholder(),
+          child: const AllTagListBody(),
         ));
   }
 }

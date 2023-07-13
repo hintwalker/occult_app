@@ -1,0 +1,1 @@
+const chartSortKey = 'chartSortKey';

@@ -28,15 +28,13 @@ class _ModifyBirthdayBodyState extends AuthDependedState<ModifyBirthdayBody> {
     final processing = ref.watch(modifyChartControllerProvider);
     return findingUid || processing
         ? const LoadingWidget()
-        : ChartModificationOptionsBuilder(
-            uid: uid,
-            docId: widget.chartId,
-            syncStatus: widget.syncStatus,
-            controller: ref.read(chartDetailControllerProvider),
-            child: (chart) => ModifyBirthdayModal(
+        : BasicStreamBuilder(
+            stream: ref.watch(chartDetailControllerProvider).stream(
+                uid: uid, docId: widget.chartId, syncStatus: widget.syncStatus),
+            child: (data) => ModifyBirthdayModal(
               title: translate('modifyBirthday'),
               child: ModifyBirthdayWidget(
-                chart,
+                data,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 translate: translate,
                 onUpdate: (chart) => ref

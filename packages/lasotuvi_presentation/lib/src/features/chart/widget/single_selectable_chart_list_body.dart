@@ -5,6 +5,8 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
+import 'package:tauari_ui/tauari_ui.dart';
+import '../../../helper/sort_helper.dart';
 import '../../auth/auth_depended_state.dart';
 
 class SingleSelectableChartListBody extends ConsumerStatefulWidget {
@@ -24,12 +26,24 @@ class _SingleSelectableChartListBodyState
     extends AuthDependedState<SingleSelectableChartListBody> {
   @override
   Widget build(BuildContext context) {
-    return SingleSelectableChartListModal(
-        controller: ref.watch(chartListControllerProvider),
-        translate: translate,
-        colorScheme: LasotuviAppStyle.colorScheme,
-        onItemTap: widget.onSelect,
-        uid: uid);
+    return findingUid
+        ? const Center(child: LoadingWidget())
+        : SingleSelectableChartListModal(
+            translate: translate,
+            colorScheme: LasotuviAppStyle.colorScheme,
+            child: BasicStreamBuilder(
+              stream: ref.watch(chartListControllerProvider).stream(uid),
+              child: (data) => SingleSelectableChartListWidget(
+                data,
+                uid: uid,
+                translate: translate,
+                colorScheme: LasotuviAppStyle.colorScheme,
+                onItemTap: widget.onSelect,
+                onSaveSortOption: (key, value) =>
+                    SortHelper.saveSortOption(key, value),
+              ),
+            ),
+          );
   }
 
   // void onItemTap(BuildContext context, Chart chart, String? uid) {

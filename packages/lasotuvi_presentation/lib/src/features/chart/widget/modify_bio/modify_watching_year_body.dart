@@ -30,15 +30,16 @@ class _ModifyWatchingYearBodyState
     final processing = ref.watch(modifyChartControllerProvider);
     return findingUid || processing
         ? const LoadingWidget()
-        : ChartModificationOptionsBuilder(
-            uid: uid,
-            docId: widget.chartId,
-            syncStatus: widget.syncStatus,
-            controller: ref.read(chartDetailControllerProvider),
-            child: (chart) => ModifyWatchingYearModal(
+        : BasicStreamBuilder(
+            stream: ref.read(chartDetailControllerProvider).stream(
+                  uid: uid,
+                  docId: widget.chartId,
+                  syncStatus: widget.syncStatus,
+                ),
+            child: (data) => ModifyWatchingYearModal(
               title: translate('modifyWatchingYear'),
               child: ModifyWatchingYearWidget(
-                chart: chart,
+                data,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 translate: translate,
                 onUpdate: (chart) => ref

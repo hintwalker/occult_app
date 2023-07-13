@@ -74,8 +74,8 @@ class ChartTag extends SyncableEntity<ChartTag> {
   @override
   operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is ChartTag &&
+      other.runtimeType == runtimeType &&
+          other is ChartTag &&
           other.chartId == chartId &&
           other.tagId == tagId &&
           other.id == id;

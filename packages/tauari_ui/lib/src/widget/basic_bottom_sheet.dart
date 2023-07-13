@@ -49,8 +49,8 @@ class BasicBottomSheet extends StatelessWidget {
                       icon: const Icon(Icons.close))
                 ],
               )),
-          child
-          // Expanded(child: child),
+          // child
+          Expanded(child: child),
         ]
             // ),
             // ),

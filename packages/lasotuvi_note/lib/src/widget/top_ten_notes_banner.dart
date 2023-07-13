@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_chart_note/lasotuvi_chart_note.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_strings/tuvi_strings.dart';
 
 import '../controller/note_and_chart_list_controller.dart';
-import 'note_and_chart_item_widget.dart';
 
 class TopTenNotesBanner extends StatelessWidget {
   const TopTenNotesBanner({
@@ -17,7 +17,7 @@ class TopTenNotesBanner extends StatelessWidget {
     required this.onAddData,
     required this.onShowAll,
     required this.onItemTap,
-    required this.storageOptionsModalBuilder,
+    required this.onOpenSyncOptions,
   });
   final String? uid;
   final NoteAndChartListController controller;
@@ -26,8 +26,9 @@ class TopTenNotesBanner extends StatelessWidget {
   final void Function() onAddData;
   final void Function() onShowAll;
   final void Function(Note note) onItemTap;
-  final Widget Function(Note, {String? uid, String? syncStatus})
-      storageOptionsModalBuilder;
+  final void Function(Note note) onOpenSyncOptions;
+  // final Widget Function(Note, {String? uid, String? syncStatus})
+  //     storageOptionsModalBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class TopTenNotesBanner extends StatelessWidget {
               item,
               uid: uid,
               colorScheme: colorScheme,
-              onSyncStatusTap: () => openStorageOptions(context, item.entity1),
+              onSyncStatusTap: () => onOpenSyncOptions(item.entity1!),
               onTap: onItemTap,
             ),
             queryArgs: QueryArgs(
@@ -61,15 +62,15 @@ class TopTenNotesBanner extends StatelessWidget {
         ]));
   }
 
-  void openStorageOptions(BuildContext context, Note? item) {
-    if (item == null) {
-      return;
-    }
-    showModalBottomSheet(
-        context: context,
-        builder: (_) => SingleChildScrollView(
-              child: storageOptionsModalBuilder(item,
-                  syncStatus: item.syncStatus, uid: uid),
-            ));
-  }
+  // void openStorageOptions(BuildContext context, Note? item) {
+  //   if (item == null) {
+  //     return;
+  //   }
+  //   showModalBottomSheet(
+  //       context: context,
+  //       builder: (_) => SingleChildScrollView(
+  //             child: storageOptionsModalBuilder(item,
+  //                 syncStatus: item.syncStatus, uid: uid),
+  //           ));
+  // }
 }

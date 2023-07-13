@@ -12,6 +12,10 @@ dependencies:
     sdk: flutter
   flutter_slidable: ^3.0.0
   grouped_list: ^5.1.2
+  tauari_ui:
+    path: ../tauari_ui
+  sunoom:
+    path: ../sunoom
 
 dev_dependencies:
   flutter_test:

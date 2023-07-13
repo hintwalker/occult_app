@@ -133,8 +133,7 @@ class Chart extends SyncableEntity<Chart> {
   @override
   bool operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is Chart && other.id == id;
+      other.runtimeType == runtimeType && other is Chart && other.id == id;
 
   @override
   int get hashCode => id.hashCode;

@@ -28,15 +28,16 @@ class _ModifyChartNameBodyState extends AuthDependedState<ModifyChartNameBody> {
     final processing = ref.watch(modifyChartControllerProvider);
     return findingUid || processing
         ? const LoadingWidget()
-        : ChartModificationOptionsBuilder(
-            uid: uid,
-            docId: widget.chartId,
-            syncStatus: widget.syncStatus,
-            controller: ref.read(chartDetailControllerProvider),
-            child: (chart) => ModifyChartNameModal(
+        : BasicStreamBuilder(
+            stream: ref.watch(chartDetailControllerProvider).stream(
+                  uid: uid,
+                  docId: widget.chartId,
+                  syncStatus: widget.syncStatus,
+                ),
+            child: (data) => ModifyChartNameModal(
               title: translate('modifyChartName'),
               child: ModifyChartNameWidget(
-                chart: chart,
+                data,
                 translate: translate,
                 onUpdate: (chart) => ref
                     .read(modifyChartControllerProvider.notifier)

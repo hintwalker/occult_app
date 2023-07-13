@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-
-import '../../controller/chart_view_controller.dart';
-import '../builder/chart_view_builder.dart';
 
 class ChartViewModal extends StatelessWidget {
   const ChartViewModal({
     super.key,
-    this.uid,
-    required this.chart,
+    required this.title,
+    // this.uid,
+    // required this.chart,
     required this.colorScheme,
-    required this.controller,
+    // required this.controller,
     required this.child,
     // required this.translate,
     // required this.onGoToDetail,
@@ -23,11 +20,12 @@ class ChartViewModal extends StatelessWidget {
     // required this.onOpenNoteCreation,
     // required this.onOpenNoteEditor,
   });
-  final String? uid;
+  // final String? uid;
   final ColorScheme colorScheme;
-  final Chart chart;
-  final ChartViewController controller;
-  final Widget Function(ChartHasTags chartHasTags) child;
+  final String title;
+  final Widget child;
+  // final ChartViewController controller;
+  // final Widget Function(ChartHasTags chartHasTags) child;
   // final String Function(String) translate;
   // final void Function(BuildContext context, Chart chart) onGoToDetail;
   // final Widget Function(Chart, {String? uid, String? syncStatus})
@@ -42,26 +40,28 @@ class ChartViewModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChartViewBuilder(
-      uid: uid,
-      controller: controller,
-      chart: chart,
+    return
+        // ChartViewBuilder(
+        //   uid: uid,
+        //   controller: controller,
+        //   chart: chart,
+        //   colorScheme: colorScheme,
+        //   child: (chartHasTags) =>
+        BasicModal(
+      title: title,
       colorScheme: colorScheme,
-      child: (chartHasTags) => BasicModal(
-        title: chartHasTags.source.name,
-        colorScheme: colorScheme,
-        child: child(chartHasTags),
-        // colorScheme: colorScheme,
-        // translate: translate,
-        // onGoToDetail: onGoToDetail,
-        // chartSyncOptions: chartSyncOptions,
-        // noteSyncOptions: noteSyncOptions,
-        // tagSyncOptions: tagSyncOptions,
-        // onOpenChartEditOptions: onOpenChartEditOptions,
-        // onOpenCheckboxTagList: onOpenCheckboxTagList,
-        // onOpenNoteCreation: onOpenNoteCreation,
-        // onOpenNoteEditor: onOpenNoteEditor,
-      ),
+      child: child,
+      // colorScheme: colorScheme,
+      // translate: translate,
+      // onGoToDetail: onGoToDetail,
+      // chartSyncOptions: chartSyncOptions,
+      // noteSyncOptions: noteSyncOptions,
+      // tagSyncOptions: tagSyncOptions,
+      // onOpenChartEditOptions: onOpenChartEditOptions,
+      // onOpenCheckboxTagList: onOpenCheckboxTagList,
+      // onOpenNoteCreation: onOpenNoteCreation,
+      // onOpenNoteEditor: onOpenNoteEditor,
+      // ),
     );
   }
 }

@@ -10,7 +10,7 @@ class TagDetailWidget extends StatelessWidget {
     required this.colorScheme,
     required this.translate,
     // required this.onChartItemTap,
-    required this.tagSyncOptions,
+    required this.onOpenTagSyncOptions,
     // required this.chartSyncOptions,
     required this.onChangeInfoTap,
     required this.onOpenChartList,
@@ -20,8 +20,9 @@ class TagDetailWidget extends StatelessWidget {
   final TagHasCharts tagHasCharts;
   final ColorScheme colorScheme;
   final String Function(String) translate;
+  final void Function(Tag tag) onOpenTagSyncOptions;
   // final void Function(BuildContext context, Chart chart) onChartItemTap;
-  final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
+  // final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
   // final Widget Function(Chart, {String? uid, String? syncStatus})
   //     chartSyncOptions;
   final void Function(BuildContext context, Tag tag) onChangeInfoTap;
@@ -104,10 +105,10 @@ class TagDetailWidget extends StatelessWidget {
   //           chartSyncOptions(item, syncStatus: item.syncStatus, uid: uid));
   // }
 
-  void openTagSyncOptions(BuildContext context, Tag item) {
-    showModalBottomSheet(
-        context: context,
-        builder: (_) =>
-            tagSyncOptions(item, syncStatus: item.syncStatus, uid: uid));
-  }
+  // void openTagSyncOptions(BuildContext context, Tag item) {
+  //   showModalBottomSheet(
+  //       context: context,
+  //       builder: (_) =>
+  //           tagSyncOptions(item, syncStatus: item.syncStatus, uid: uid));
+  // }
 }

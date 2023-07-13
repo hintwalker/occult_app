@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-
-import '../../controller/chart_has_tags_list_controller.dart';
-import '../builder/checkbox_chart_list_builder.dart';
 
 class CheckboxChartListModal extends StatelessWidget {
   const CheckboxChartListModal({
     super.key,
-    this.uid,
+    // this.uid,
     // required this.tagId,
-    required this.controller,
+    // required this.controller,
     required this.translate,
     required this.colorScheme,
     required this.child,
@@ -19,11 +15,12 @@ class CheckboxChartListModal extends StatelessWidget {
     // required this.onItemTap,
   });
 
-  final ChartHasTagsListController controller;
-  final String? uid;
+  // final ChartHasTagsListController controller;
+  // final String? uid;
   // final int tagId;
   final String Function(String) translate;
-  final Widget Function(Iterable<ChartHasTags> chartHasTags) child;
+  final Widget child;
+  // final Widget Function(Iterable<ChartHasTags> chartHasTags) child;
   final ColorScheme colorScheme;
   // final void Function(BuildContext context) onCancel;
   // final void Function(BuildContext context,
@@ -35,17 +32,18 @@ class CheckboxChartListModal extends StatelessWidget {
     return BasicModal(
       title: translate('selectChart'),
       colorScheme: colorScheme,
-      child: CheckboxChartListBuilder(
-        uid: uid,
-        // tagId: tagId,
-        controller: controller,
-        child: child,
-        // translate: translate,
-        // colorScheme: colorScheme,
-        // onCancel: onCancel,
-        // onSubmit: onSubmit,
-        // onItemTap: onItemTap,
-      ),
+      child: child,
+      // child: CheckboxChartListBuilder(
+      //   uid: uid,
+      //   // tagId: tagId,
+      //   controller: controller,
+      //   child: child,
+      //   // translate: translate,
+      //   // colorScheme: colorScheme,
+      //   // onCancel: onCancel,
+      //   // onSubmit: onSubmit,
+      //   // onItemTap: onItemTap,
+      // ),
     );
   }
 }

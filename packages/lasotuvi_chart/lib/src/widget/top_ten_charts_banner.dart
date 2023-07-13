@@ -14,7 +14,7 @@ class TopTenChartsBanner extends StatelessWidget {
     required this.colorScheme,
     required this.onAddData,
     required this.onShowAll,
-    required this.storageOptionsModalBuilder,
+    required this.onOpenSyncOptions,
     required this.onItemTap,
   });
 
@@ -24,8 +24,9 @@ class TopTenChartsBanner extends StatelessWidget {
   final ColorScheme colorScheme;
   final void Function() onAddData;
   final void Function() onShowAll;
-  final Widget Function(Chart, {String? uid, String? syncStatus})
-      storageOptionsModalBuilder;
+  final void Function(Chart) onOpenSyncOptions;
+  // final Widget Function(Chart, {String? uid, String? syncStatus})
+  //     storageOptionsModalBuilder;
   final void Function(BuildContext context, Chart chart) onItemTap;
   // final Widget Function(String chartId) chartView;
 
@@ -52,8 +53,7 @@ class TopTenChartsBanner extends StatelessWidget {
                         colorScheme: colorScheme,
                         // chartView: chartView,
                         onTap: onItemTap,
-                        onSyncStatusTap: () =>
-                            openStorageOptions(context, item),
+                        onSyncStatusTap: () => onOpenSyncOptions(item),
                       ),
                   queryArgs: QueryArgs(
                     uid: uid,
@@ -65,17 +65,17 @@ class TopTenChartsBanner extends StatelessWidget {
     );
   }
 
-  void openStorageOptions(BuildContext context, Chart item) {
-    showModalBottomSheet(
-      context: context,
-      builder: (_) =>
-          // SingleChildScrollView(
-          //       child:
-          storageOptionsModalBuilder(item,
-              syncStatus: item.syncStatus, uid: uid),
-      // )
-    );
-  }
+  // void openStorageOptions(BuildContext context, Chart item) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (_) =>
+  //         // SingleChildScrollView(
+  //         //       child:
+  //         storageOptionsModalBuilder(item,
+  //             syncStatus: item.syncStatus, uid: uid),
+  //     // )
+  //   );
+  // }
 }
 
 // class HorizontalChartList extends StatelessWidget {

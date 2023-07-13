@@ -9,8 +9,8 @@ class ChartAndNote extends SyncableEntityPair<Chart, Note> {
   @override
   operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is ChartAndNote &&
+      other.runtimeType == runtimeType &&
+          other is ChartAndNote &&
           other.entity1 == entity1 &&
           other.entity2 == entity2;
 

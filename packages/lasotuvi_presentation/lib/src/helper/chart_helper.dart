@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 
+import '../features/chart/widget/chart_creation_body.dart';
 import '../features/chart/widget/chart_detail_body.dart';
 import '../features/chart/widget/chart_modification_options_body.dart';
 import '../features/chart/widget/chart_view_body.dart';
@@ -11,11 +11,11 @@ import '../features/chart/widget/modify_bio/modify_chart_avatar_body.dart';
 import '../features/chart/widget/modify_bio/modify_chart_name_body.dart';
 import '../features/chart/widget/modify_bio/modify_gender_body.dart';
 import '../features/chart/widget/modify_bio/modify_watching_year_body.dart';
-import '../router/route_name.dart';
 
 class ChartHelper {
   static void openChartCreationScreen(BuildContext context) {
-    context.pushNamed(RouteName.chartCreation);
+    showDialog(context: context, builder: (_) => const ChartCreationBody());
+    // context.pushNamed(RouteName.chartCreation);
   }
 
   static void openChartDetail({

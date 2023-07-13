@@ -10,6 +10,7 @@ import 'package:tauari_list_view/tauari_list_view.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../helper/sort_helper.dart';
 import '../../helper/storage_helper.dart';
 import '../../helper/tag_helper.dart';
 import '../auth/auth_depended_state.dart';
@@ -32,32 +33,39 @@ class _CheckboxTagListBodyState extends AuthDependedState<CheckboxTagListBody> {
         : CheckboxTagListModal(
             translate: translate,
             colorScheme: LasotuviAppStyle.colorScheme,
-            child: CheckboxTagListBuilder(
-                uid: uid,
-                controller: ref.watch(tagHasChartsListControllerProvider),
-                child: (tagHasCharts) => CheckBoxTagListWidget(
-                      tagHasCharts,
-                      uid: uid,
-                      translate: translate,
-                      colorScheme: LasotuviAppStyle.colorScheme,
-                      chartId: widget.chart.id,
-                      onCancel: onCancel,
-                      onSubmit: onSubmit,
-                      onItemTap: (context, tag, _) =>
-                          TagHelper.openTagDetail(context: context, tag: tag),
-                      onOpenTagCreation: (context) =>
-                          TagHelper.openTagCreationScreen(
-                        context,
-                        (tag) => doAfterCreation(tag, widget.chart),
-                      ),
-                      openSyncOptions: (uid, tag) =>
-                          StorageHelper.showOptionsModal<Tag>(
-                        tag,
-                        uid: uid,
-                        context: context,
-                        ref: ref,
-                      ),
-                    )));
+            child: BasicStreamBuilder(
+              stream: ref.watch(tagHasChartsListControllerProvider).stream(uid),
+              child: (tagHasCharts) => BasicFutureBuilder(
+                future: SortHelper.getSortOption(tagSortKey),
+                child: (sortValue) => CheckBoxTagListWidget(
+                  tagHasCharts,
+                  uid: uid,
+                  initSortValue: sortValue,
+                  translate: translate,
+                  colorScheme: LasotuviAppStyle.colorScheme,
+                  chartId: widget.chart.id,
+                  onCancel: onCancel,
+                  onSubmit: onSubmit,
+                  onItemTap: (context, tag, _) =>
+                      TagHelper.openTagDetail(context: context, tag: tag),
+                  onOpenTagCreation: (context) =>
+                      TagHelper.openTagCreationScreen(
+                    context,
+                    (tag) => doAfterCreation(tag, widget.chart),
+                  ),
+                  openSyncOptions: (uid, tag) =>
+                      StorageHelper.showOptionsModal<Tag>(
+                    tag,
+                    uid: uid,
+                    context: context,
+                    ref: ref,
+                  ),
+                  onSaveSortOption: (key, value) =>
+                      SortHelper.saveSortOption(key, value),
+                ),
+              ),
+            ),
+          );
   }
 
   Future<void> doAfterCreation(Tag tag, Chart chart) async {
@@ -66,6 +74,7 @@ class _CheckboxTagListBodyState extends AuthDependedState<CheckboxTagListBody> {
       right: tag,
       lefts: [chart],
     );
+    setState(() {});
   }
 
   void onCancel(BuildContext context) {

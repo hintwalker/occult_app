@@ -38,6 +38,7 @@ class HouseHeaderSection extends StatelessWidget {
           HouseCanChi(
             can: can,
             chi: position.chi,
+            nguHanh: position.nguHanh,
             sizeGroup: sizeGroup,
             translate: translate,
           ),

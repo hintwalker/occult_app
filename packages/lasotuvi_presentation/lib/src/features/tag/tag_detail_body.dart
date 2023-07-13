@@ -53,9 +53,13 @@ class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
                 //     ChartHelper.openChartView(context: context, chart: chart),
                 onChangeInfoTap: (context, tag) =>
                     TagHelper.openTagEdit(context, tag),
-                tagSyncOptions: (tag, {syncStatus, uid}) =>
-                    StorageHelper.storageOptionsModalBuilder<Tag>(tag,
-                        uid: uid, syncStatus: syncStatus, ref: ref),
+                onOpenTagSyncOptions: (tag) =>
+                    StorageHelper.showOptionsModal<Tag>(
+                  tag,
+                  context: context,
+                  uid: uid,
+                  ref: ref,
+                ),
                 // chartSyncOptions: (chart, {syncStatus, uid}) =>
                 //     StorageHelper.storageOptionsModalBuilder<Chart>(chart,
                 //         ref: ref),

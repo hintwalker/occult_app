@@ -10,7 +10,7 @@ class ChartDetailModal extends StatelessWidget {
     required this.child,
   });
   final ColorScheme colorScheme;
-  final Chart chart;
+  final Chart? chart;
   final Widget child;
 
   @override
@@ -18,51 +18,55 @@ class ChartDetailModal extends StatelessWidget {
     return Material(
       // child: SingleChildScrollView(
       child: SafeArea(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    color: colorScheme.background,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: const Icon(Icons.arrow_back)),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      CircleHumanAvatar(
-                        gender: chart.gender.intValue,
-                        path: chart.avatar,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Expanded(
-                        child: Text(
-                          chart.name,
-                          style: TextStyle(
-                              color: colorScheme.primary,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                          overflow: TextOverflow.ellipsis,
+        child: chart == null
+            ? const Center(
+                child: ErrorTextWidget(),
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          color: colorScheme.background,
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: () {},
-                      ),
-                    ],
-                  )),
-              Expanded(child: child),
-            ]),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            IconButton(
+                                onPressed: () => Navigator.pop(context),
+                                icon: const Icon(Icons.arrow_back)),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            CircleHumanAvatar(
+                              gender: chart!.gender.intValue,
+                              path: chart!.avatar,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Expanded(
+                              child: Text(
+                                chart!.name,
+                                style: TextStyle(
+                                    color: colorScheme.primary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.search),
+                              onPressed: () {},
+                            ),
+                          ],
+                        )),
+                    Expanded(child: child),
+                  ]),
       ),
     );
   }

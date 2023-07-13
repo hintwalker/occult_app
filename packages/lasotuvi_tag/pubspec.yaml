@@ -22,6 +22,8 @@ dependencies:
     path: ../tauari_data_core
   lasotuvi_chart_tag:
     path: ../lasotuvi_chart_tag
+  sunoom:
+    path: ../sunoom
   # lasotuvi_chart:
   #   path: ../lasotuvi_chart
 

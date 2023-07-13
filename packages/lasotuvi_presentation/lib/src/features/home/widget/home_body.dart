@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
@@ -12,7 +11,6 @@ import '../../../helper/chart_helper.dart';
 import '../../../helper/note_helper.dart';
 import '../../../helper/storage_helper.dart';
 import '../../../helper/tag_helper.dart';
-import '../../../router/route_name.dart';
 import '../../../styles/general_style.dart';
 import '../../auth/auth_depended_state.dart';
 import '../../navigation/drawer_ids.dart';
@@ -55,9 +53,12 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                     chart: chart,
                   ),
                   // chartView: (chartId) => ChartViewBody(chartId: chartId),
-                  storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
-                      StorageHelper.storageOptionsModalBuilder(item,
-                          uid: uid, syncStatus: item.syncStatus, ref: ref),
+                  onOpenSyncOptions: (chart) => StorageHelper.showOptionsModal(
+                    chart,
+                    context: context,
+                    uid: uid,
+                    ref: ref,
+                  ),
                 ),
               ),
               SizedBox(
@@ -75,9 +76,12 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                   onShowAll: openAllTagsScreen,
                   onItemTap: (context, tag) =>
                       TagHelper.openTagDetail(context: context, tag: tag),
-                  storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
-                      StorageHelper.storageOptionsModalBuilder(item,
-                          uid: uid, syncStatus: item.syncStatus, ref: ref),
+                  onOpenSyncOptions: (tag) => StorageHelper.showOptionsModal(
+                    tag,
+                    context: context,
+                    uid: uid,
+                    ref: ref,
+                  ),
                 ),
               ),
               // Expanded(
@@ -92,9 +96,12 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                 onShowAll: openAllNotesScreen,
                 onItemTap: (note) =>
                     NoteHelper.openNoteEditorScreen(context, note),
-                storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
-                    StorageHelper.storageOptionsModalBuilder(item,
-                        uid: uid, syncStatus: item.syncStatus, ref: ref),
+                onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
+                  item,
+                  context: context,
+                  uid: uid,
+                  ref: ref,
+                ),
               ),
               const SizedBox(
                 height: 48.0,
@@ -221,7 +228,7 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
   }
 
   void openAllTagsScreen() {
-    context.goNamed(RouteName.allTags);
+    ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.tags);
   }
 
   // void openChartSelectionScreen() {
@@ -263,6 +270,6 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
   // }
 
   void openAllNotesScreen() {
-    context.goNamed(RouteName.allNotes);
+    ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.notes);
   }
 }

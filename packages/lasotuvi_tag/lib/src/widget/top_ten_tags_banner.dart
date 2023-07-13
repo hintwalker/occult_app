@@ -15,7 +15,7 @@ class TopTenTagsBanner extends StatelessWidget {
     required this.onAddData,
     required this.onShowAll,
     required this.onItemTap,
-    required this.storageOptionsModalBuilder,
+    required this.onOpenSyncOptions,
   });
 
   final String? uid;
@@ -25,8 +25,9 @@ class TopTenTagsBanner extends StatelessWidget {
   final void Function() onAddData;
   final void Function() onShowAll;
   final void Function(BuildContext context, Tag tag) onItemTap;
-  final Widget Function(Tag, {String? uid, String? syncStatus})
-      storageOptionsModalBuilder;
+  final void Function(Tag tag) onOpenSyncOptions;
+  // final Widget Function(Tag, {String? uid, String? syncStatus})
+  //     storageOptionsModalBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +50,7 @@ class TopTenTagsBanner extends StatelessWidget {
                         uid: uid,
                         onTap: onItemTap,
                         colorScheme: colorScheme,
-                        onSyncStatusTap: () =>
-                            openStorageOptions(context, item),
+                        onSyncStatusTap: () => onOpenSyncOptions(item),
                       ),
                   queryArgs: QueryArgs(
                     uid: uid,
@@ -62,12 +62,12 @@ class TopTenTagsBanner extends StatelessWidget {
     );
   }
 
-  void openStorageOptions(BuildContext context, Tag item) {
-    showModalBottomSheet(
-        context: context,
-        builder: (_) => SingleChildScrollView(
-              child: storageOptionsModalBuilder(item,
-                  syncStatus: item.syncStatus, uid: uid),
-            ));
-  }
+  // void openStorageOptions(BuildContext context, Tag item) {
+  //   showModalBottomSheet(
+  //       context: context,
+  //       builder: (_) => SingleChildScrollView(
+  //             child: storageOptionsModalBuilder(item,
+  //                 syncStatus: item.syncStatus, uid: uid),
+  //           ));
+  // }
 }

@@ -22,6 +22,10 @@ dependencies:
     path: ../tauari_data_core
   flutter_quill: ^7.2.8
   hive: ^2.2.3
+  sunoom:
+    path: ../sunoom
+  lasotuvi_chart_note:
+    path: ../lasotuvi_chart_note
 
 dev_dependencies:
   flutter_test:

@@ -49,13 +49,14 @@ class _ModifyChartAvatarBodyState
       title: translate('modifyAvatar'),
       child: findingUid || processing
           ? const LoadingWidget()
-          : ChartModificationOptionsBuilder(
-              uid: uid,
-              docId: widget.chartId,
-              syncStatus: widget.syncStatus,
-              controller: ref.read(chartDetailControllerProvider),
-              child: (chart) => ModifyChartAvatarWidget(
-                chart: chart,
+          : BasicStreamBuilder(
+              stream: ref.watch(chartDetailControllerProvider).stream(
+                    uid: uid,
+                    docId: widget.chartId,
+                    syncStatus: widget.syncStatus,
+                  ),
+              child: (data) => ModifyChartAvatarWidget(
+                data,
                 translate: translate,
                 onUpdate: (chart) => ref
                     .read(modifyChartControllerProvider.notifier)

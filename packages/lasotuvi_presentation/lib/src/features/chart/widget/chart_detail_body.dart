@@ -5,8 +5,6 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-
-import '../../../router/router_params.dart';
 import '../../auth/auth_depended_state.dart';
 
 class ChartDetailBody extends ConsumerStatefulWidget {
@@ -26,20 +24,20 @@ class _ChartDetailBodyState extends AuthDependedState<ChartDetailBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid
-        ? const BasicModal(
-            title: '',
+        ? const BasicLoadingModal(
             colorScheme: LasotuviAppStyle.colorScheme,
-            child: Center(child: LoadingWidget()))
-        : ChartDetailBuilder(
-            uid: uid,
-            chartId: widget.chartId,
-            syncStatus: RouterParams.getPathParamValue(widget.syncStatus),
-            controller: ref.watch(chartDetailControllerProvider),
-            child: (chart) => ChartDetailModal(
-              chart,
+          )
+        : BasicStreamBuilder(
+            stream: ref.watch(chartDetailControllerProvider).stream(
+                  uid: uid,
+                  docId: int.parse(widget.chartId),
+                  syncStatus: widget.syncStatus,
+                ),
+            child: (data) => ChartDetailModal(
+              data,
               colorScheme: LasotuviAppStyle.colorScheme,
               child: ChartDetailWidget(
-                chart,
+                data,
                 translate: translate,
                 colorScheme: LasotuviAppStyle.colorScheme,
               ),

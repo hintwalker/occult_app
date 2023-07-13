@@ -1,5 +1,12 @@
 library tauari_ui;
 
+export 'src/widget/builder/basic_future_builder.dart';
+export 'src/widget/builder/basic_stream_builder.dart';
+
+export 'src/widget/need_sign_in_alert_dialog.dart';
+export 'src/widget/network_not_connected_alert_dialog.dart';
+export 'src/widget/basic_loading_modal.dart';
+export 'src/widget/data_selection_scaffold.dart';
 export 'src/widget/basic_confirm_dialog.dart';
 export 'src/widget/female_avatar_widget.dart';
 export 'src/widget/male_avatar_widget.dart';

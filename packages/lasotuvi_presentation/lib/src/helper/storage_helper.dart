@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:storage_options/storage_options.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_translate/tauari_translate.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_style/tuvi_style.dart';
 
 class StorageHelper {
   static Widget storageOptionsModalBuilder<T extends SyncableEntity>(
     T item, {
+    required BuildContext context,
     required String? uid,
     required WidgetRef ref,
     required String? syncStatus,
@@ -21,7 +24,12 @@ class StorageHelper {
       syncStatus: syncStatus,
       colorScheme: lightColorScheme,
       translate: translate,
-      onUpload: (uid, item) => onUpload(uid, item, ref),
+      onUpload: (uid, item) => onUpload(
+        context: context,
+        uid: uid,
+        item: item,
+        ref: ref,
+      ),
       onDownload: (uid, item) => onDownload(uid, item, ref),
       onDeleteFromCloud: (uid, item) => onDeleteFromCloud(uid, item, ref),
       onDeleteFromLocal: (item) => onDeleteFromLocal(item, ref),
@@ -41,8 +49,9 @@ class StorageHelper {
   }) {
     showModalBottomSheet(
       context: context,
-      builder: (_) => storageOptionsModalBuilder<T>(
+      builder: (ctx) => storageOptionsModalBuilder<T>(
         item,
+        context: ctx,
         syncStatus: item.syncStatus,
         uid: uid,
         ref: ref,
@@ -52,8 +61,34 @@ class StorageHelper {
     );
   }
 
-  static Future<void> onUpload<T>(String uid, T item, WidgetRef ref) =>
-      ref.read(uploaderProvider).upload(uid: uid, items: [item]);
+  static Future<void> onUpload<T>({
+    required BuildContext context,
+    required String uid,
+    required T item,
+    required WidgetRef ref,
+  }) async {
+    await ref.read(guardProvider).review().then((value) async {
+      if (!value.connected) {
+        await showDialog(
+          context: context,
+          builder: (_) => const NetworkNotConnectedAlertDialog(
+            colorScheme: LasotuviAppStyle.colorScheme,
+            translate: translate,
+          ),
+        );
+      } else if (!value.signedIn) {
+        await showDialog(
+          context: context,
+          builder: (_) => const NeedSignInAlertDialog(
+            colorScheme: LasotuviAppStyle.colorScheme,
+            translate: translate,
+          ),
+        );
+      } else {
+        await ref.read(uploaderProvider).upload(uid: uid, items: [item]);
+      }
+    });
+  }
 
   static Future<void> onDownload<T>(String uid, T item, WidgetRef ref) =>
       ref.read(downloaderProvider).download(uid: uid, items: [item]);

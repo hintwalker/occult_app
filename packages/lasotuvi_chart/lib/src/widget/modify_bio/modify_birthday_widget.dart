@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sunoom/sunoom.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_chart_creation_form/tuvi_chart_creation_form.dart';
 
 import 'modify_state.dart';
@@ -14,7 +15,7 @@ class ModifyBirthdayWidget extends StatefulWidget {
     required this.translate,
     required this.onUpdate,
   });
-  final Chart chart;
+  final Chart? chart;
   final ColorScheme colorScheme;
   final String Function(String) translate;
   final void Function(Chart chart) onUpdate;
@@ -27,9 +28,12 @@ class _ModifyBirthdayWidgetState
     extends ModifyState<Moment, ModifyBirthdayWidget> {
   @override
   Widget build(BuildContext context) {
+    if (widget.chart == null) {
+      return const Center(child: ErrorTextWidget());
+    }
     final controller = BirthdayController(
-      value: widget.chart.birthday.toMoment(
-        TimeZone(offsetInHour: widget.chart.timeZoneOffset),
+      value: widget.chart!.birthday.toMoment(
+        TimeZone(offsetInHour: widget.chart!.timeZoneOffset),
       ),
       updateValid: (p0) => setState(() {
         valid = p0;
@@ -47,7 +51,7 @@ class _ModifyBirthdayWidgetState
       ),
       onSubmit: valid
           ? () => widget.onUpdate(
-                widget.chart.copyWith(
+                widget.chart!.copyWith(
                   birthday: value?.toDateTime(),
                 ),
               )

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_chart/src/sort/chart_sort_key.dart';
+import '../group/group_chart_has_tags_by.dart';
+import '../query/chart_where_clause.dart';
+import '../sort/chart_has_tags_comparator.dart';
+import '../sort/chart_sort_options.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_list_view/tauari_list_view.dart';
 import 'chart_has_tags_list_item.widget.dart';
@@ -13,27 +18,29 @@ class AllChartListWidget extends StatelessWidget {
     required this.onOpenNote,
     required this.onOpenMore,
     required this.onItemTap,
-    required this.storageOptionsModalBuilder,
+    required this.onOpenSyncStatus,
+    // required this.storageOptionsModalBuilder,
     this.slidable = true,
     required this.uid,
+    required this.onSaveSortOption,
+    required this.initSortValue,
   });
+  final String? uid;
   final Iterable<ChartHasTags> data;
+  final SortValue? initSortValue;
   final String Function(String) translate;
   final ColorScheme colorScheme;
+  final void Function(String key, SortValue sortOption) onSaveSortOption;
   final void Function(BuildContext, Chart, String? uid) onOpenTag;
   final void Function(BuildContext, Chart, String? uid) onOpenNote;
   final void Function(BuildContext, Chart, String? uid) onOpenMore;
   final void Function(BuildContext, Chart, String? uid) onItemTap;
   final bool slidable;
-  final String? uid;
-  final Widget Function(Chart, {String? uid, String? syncStatus})
-      storageOptionsModalBuilder;
 
-  SimpleTextGroup groupBy(ChartHasTags item) {
-    final firstLetter = item.source.name.substring(0, 1);
-    return SimpleTextGroup(firstLetter, firstLetter.toUpperCase());
-  }
-
+  final void Function({
+    required Chart chart,
+    required String? uid,
+  }) onOpenSyncStatus;
   // Iterable<ActionButton<ChartHasTags>> buttons() => [
   //       ActionButton<ChartHasTags>(
   //         onPressed: (context, item) => onOpenTag(context, item.source, uid),
@@ -55,43 +62,50 @@ class AllChartListWidget extends StatelessWidget {
   //       )
   //     ];
 
-  bool whereTest(ChartHasTags item, String query) {
-    return item.source.name.toLowerCase().contains(query.trim().toLowerCase());
-  }
-
   @override
   Widget build(BuildContext context) {
-    return DataListView<ChartHasTags, SimpleTextGroup>(
-      data,
-      groupBy: groupBy,
-      itemBuilder: (item) => ChartHasTagsListItem(
-        item,
-        uid: uid,
-        translate: translate,
-        colorScheme: colorScheme,
-        onTap: onItemTap,
-        onSyncStatusTap: () => openStorageOptions(context, item.source),
-      ),
-      groupSeperatorBuilder: (p0) => BasicGroupSeperatorWidget(
-        p0,
-        colorScheme: colorScheme,
-      ),
-      buttons: const [],
-      whereTest: whereTest,
+    final DataListController<ChartHasTags> controller = DataListController(
+        whereTest: (item, query) => chartWhereClause(item.source, query),
+        sortOption: initSortValue,
+        itemComparator: chartHasTagsComparator,
+        onSaveSortOption: (event) => onSaveSortOption(chartSortKey, event));
+    return FilterableWidget(
+      colorScheme: colorScheme,
       translate: translate,
-      slidable: slidable,
-    );
-  }
-
-  void openStorageOptions(BuildContext context, Chart item) {
-    showModalBottomSheet(
-      context: context,
-      builder: (_) =>
-          // SingleChildScrollView(
-          //       child:
-          storageOptionsModalBuilder(item,
-              syncStatus: item.syncStatus, uid: uid),
-      // )
+      sortOptions: chartSortOptions(translate),
+      onSortOptionSelected: controller.setSortOption,
+      onSearch: controller.runFilter,
+      child: DataListContainer<ChartHasTags, SimpleTextGroup>(
+        data: data,
+        // order: controller.sortOption?.order ?? ListOrder.asc,
+        controller: controller,
+        groupBy: (e) => groupChartHasTagsBy(
+          e,
+          controller.sortOption,
+          translate,
+        ),
+        itemBuilder: (item) => ChartHasTagsListItem(
+          item,
+          uid: uid,
+          translate: translate,
+          colorScheme: colorScheme,
+          onTap: onItemTap,
+          onSyncStatusTap: () => onOpenSyncStatus(
+            chart: item.source,
+            uid: uid,
+          ),
+        ),
+        groupComparator: (p0, p1) => simpleGroupComparator(
+          p0,
+          p1,
+          controller.sortOption,
+        ),
+        groupSeperatorBuilder: (p0) => BasicGroupSeperatorWidget(
+          p0,
+          colorScheme: colorScheme,
+        ),
+        actionButtons: const [],
+      ),
     );
   }
 }

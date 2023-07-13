@@ -9,8 +9,9 @@ class ChartHasTags extends SyncableEntityCarrier<Chart, Tag> {
   @override
   operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is ChartHasTags && other.source == source;
+      other.runtimeType == runtimeType &&
+          other is ChartHasTags &&
+          other.source == source;
 
   @override
   int get hashCode => source.hashCode;

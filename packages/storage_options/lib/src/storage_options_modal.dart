@@ -128,10 +128,13 @@ class _StorageOptionsModalState<T extends SyncableEntity>
     } else {
       await deleteFromLocal();
     }
+
     doCallback();
-    if (context.mounted) {
-      close(context);
-    }
+    try {
+      if (context.mounted) {
+        close(context);
+      }
+    } catch (_) {}
   }
 
   @override
@@ -196,8 +199,8 @@ class _StorageOptionsModalState<T extends SyncableEntity>
             //     translate: widget.translate,
             //   ),
             ListTileDeleteForever(
-              onTap: () async {
-                await deleteForever();
+              onTap: () {
+                deleteForever();
               },
               colorScheme: widget.colorScheme,
               translate: widget.translate,

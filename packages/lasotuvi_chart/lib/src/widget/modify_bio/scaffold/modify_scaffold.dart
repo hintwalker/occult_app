@@ -23,12 +23,19 @@ class ModifyScaffold extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-                child: TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text(translate('cancel')))),
+              child: TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  translate('cancel'),
+                ),
+              ),
+            ),
             Expanded(
-                child:
-                    TextButton(onPressed: onSubmit, child: const Text('Ok'))),
+              child: TextButton(
+                onPressed: onSubmit,
+                child: const Text('Ok'),
+              ),
+            ),
           ],
         ),
       ),

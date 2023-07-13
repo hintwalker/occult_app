@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
-import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
@@ -31,15 +28,16 @@ class _ModifyGenderBodyState extends AuthDependedState<ModifyGenderBody> {
     final processing = ref.watch(modifyChartControllerProvider);
     return findingUid || processing
         ? const LoadingWidget()
-        : ChartModificationOptionsBuilder(
-            uid: uid,
-            docId: widget.chartId,
-            syncStatus: widget.syncStatus,
-            controller: ref.read(chartDetailControllerProvider),
-            child: (chart) => ModifyGenderModal(
+        : BasicStreamBuilder(
+            stream: ref.read(chartDetailControllerProvider).stream(
+                  uid: uid,
+                  docId: widget.chartId,
+                  syncStatus: widget.syncStatus,
+                ),
+            child: (data) => ModifyGenderModal(
               title: translate('modifyGender'),
               child: ModifyGenderWidget(
-                chart: chart,
+                data,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 translate: translate,
                 onUpdate: (chart) => ref
@@ -55,12 +53,12 @@ class _ModifyGenderBodyState extends AuthDependedState<ModifyGenderBody> {
           );
   }
 
-  Future<void> updateChart(Chart chart) async {
-    await ref.read(updateChartProvider).call(uid, chart);
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (context.mounted) {
-        context.pop();
-      }
-    });
-  }
+  // Future<void> updateChart(Chart chart) async {
+  //   await ref.read(updateChartProvider).call(uid, chart);
+  //   SchedulerBinding.instance.addPostFrameCallback((_) {
+  //     if (context.mounted) {
+  //       context.pop();
+  //     }
+  //   });
+  // }
 }

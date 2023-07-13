@@ -1,5 +1,7 @@
 library lasotuvi_tag;
 
+export 'src/sort/tag_sort_key.dart';
+
 export 'src/controller/tag_has_charts_list_controller.dart';
 export 'src/controller/tag_detail_controller.dart';
 export 'src/controller/tag_list_controller.dart';
@@ -12,6 +14,7 @@ export 'src/widget/modal/checkbox_tag_list_modal.dart';
 export 'src/widget/modal/tag_edit_modal.dart';
 export 'src/widget/modal/tag_creation_modal.dart';
 
+export 'src/widget/all_tag_list_widget.dart';
 export 'src/widget/checkbox_tag_list_widget.dart';
 export 'src/widget/tag_item_card_widget.dart';
 export 'src/widget/tag_list_item_widget.dart';

@@ -25,7 +25,9 @@ class SyncableDataStreamController<T extends SyncableEntity>
       docId: docId,
       syncStatus: syncStatus,
     ).listen((event) {
-      _streamController?.add(event);
+      if (!(_streamController == null || _streamController!.isClosed)) {
+        _streamController?.add(event);
+      }
     });
   }
 

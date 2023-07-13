@@ -1,5 +1,5 @@
 import 'package:sunoom/sunoom.dart';
-import '../house/fit_to_house_position.dart';
+import 'package:tuvi_domain/src/house/fit_to_month_value.dart';
 
 import '../house/house_position.dart';
 
@@ -11,8 +11,8 @@ int findMonthlyTerm({
 }) {
   final startPos =
       yearlyTermOfWatchingYear.index - (bornMonth - 1) + chiOfBornTime.index;
-  final index = (position.toInt() - startPos.toInt() + 1).fitToHousePosition();
-  return index;
+  final index = (position.toInt() - startPos.toInt() + 1);
+  return index.fitMonthValue();
 }
 
 Map<HousePosition, int> findListMonthlyTerm({

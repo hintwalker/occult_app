@@ -11,6 +11,7 @@ import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
 import '../../../helper/chart_helper.dart';
+import '../../../helper/sort_helper.dart';
 import '../../auth/auth_depended_state.dart';
 
 class CheckboxChartListBody extends ConsumerStatefulWidget {
@@ -34,26 +35,15 @@ class _CheckBoxChartListBodyState
   @override
   Widget build(BuildContext context) {
     return findingUid
-        ? const LoadingWidget()
+        ? const Center(child: LoadingWidget())
         : CheckboxChartListModal(
-            controller: ref.watch(chartHasTagsListControllerProvider),
-            uid: uid,
-            // tagId: widget.tag.id,
-            translate: translate,
             colorScheme: LasotuviAppStyle.colorScheme,
-            child: (chartHasTags) =>
-                // CheckBoxChartListWidget(
-                //   snapshot.requireData,
-                //   uid: uid,
-                //   tagId: tagId,
-                //   translate: translate,
-                //   colorScheme: colorScheme,
-                //   onSubmit: onSubmit,
-                //   onCancel: onCancel,
-                //   onItemTap: onItemTap,
-                // );
-
-                CheckBoxChartListWidget(
+            translate: translate,
+            child: BasicStreamBuilder(
+              stream: ref.watch(chartHasTagsListControllerProvider).stream(uid),
+              child: (chartHasTags) => BasicFutureBuilder(
+                future: SortHelper.getSortOption(chartSortKey),
+                child: (sortValue) => CheckBoxChartListWidget(
                   chartHasTags,
                   uid: uid,
                   tagId: widget.tag.id,
@@ -63,7 +53,13 @@ class _CheckBoxChartListBodyState
                   onSubmit: onSubmit,
                   onItemTap: (context, chart, _) =>
                       ChartHelper.openChartView(context: context, chart: chart),
-                ));
+                  onSaveSortOption: (key, value) =>
+                      SortHelper.saveSortOption(key, value),
+                  initSortValue: sortValue,
+                ),
+              ),
+            ),
+          );
   }
 
   void onCancel(BuildContext context) {

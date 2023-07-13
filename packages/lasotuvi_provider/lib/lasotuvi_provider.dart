@@ -1,5 +1,6 @@
 library lasotuvi_provider;
 
+export 'src/guard/guard.dart';
 export 'src/storage/downloader.dart';
 export 'src/storage/remover.dart';
 export 'src/storage/uploader.dart';

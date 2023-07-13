@@ -14,7 +14,7 @@ class RoutePath {
   static const tagCreation = '/tag/creation/:${RouterParams.uid}';
   static const tagView =
       '/tag/view/:${RouterParams.uid}/:${RouterParams.tagId}';
-  static const tags = '/tag/all/:${RouterParams.uid}';
+  static const tags = '/tag/all';
 
   // static const noteView =
   //     '/note/view/:${RouterParams.uid}/:${RouterParams.noteId}';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
+import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
@@ -25,66 +26,79 @@ class ChartViewBody extends ConsumerStatefulWidget {
 }
 
 class _ChartViewBodyState extends AuthDependedState<ChartViewBody> {
+  final tagListController = WrapTagListControler();
+  @override
+  void initState() {
+    super.initState();
+    tagListController.addListener(listenToController);
+  }
+
+  void listenToController() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = ref.watch(chartViewControllerProvider);
     return findingUid
-        ? const LoadingWidget()
-        : ChartViewModal(
-            uid: uid,
-            chart: widget.chart,
-            colorScheme: LasotuviAppStyle.colorScheme,
-            controller: controller,
-            child: (chartHasTags) => ChartViewWidget(
-                  chartHasTags,
-                  uid: uid,
-                  controller: controller,
-                  translate: translate,
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  onGoToDetail: (context, chart) {
-                    ChartHelper.openChartDetail(
+        ? const Center(child: LoadingWidget())
+        : BasicStreamBuilder(
+            stream: controller.stream(uid, widget.chart),
+            child: (data) => ChartViewModal(
+              title: data?.source.name ?? '',
+              colorScheme: LasotuviAppStyle.colorScheme,
+              child: ChartViewWidget(
+                data,
+                uid: uid,
+                controller: controller,
+                translate: translate,
+                colorScheme: LasotuviAppStyle.colorScheme,
+                onGoToDetail: (context, chart) {
+                  ChartHelper.openChartDetail(
+                      context: context,
+                      chartId: chart.docId,
+                      syncStatus: chart.syncStatus);
+                  // context.pushNamed(RouteName.chartDetail, pathParameters: {
+                  //   RouterParams.chartId: chart.docId,
+                  //   RouterParams.syncStatus:
+                  //       chart.syncStatus ?? RouterParams.nullValue,
+                  // });
+                },
+                onOpenChartSyncOptions: (chart) =>
+                    StorageHelper.showOptionsModal<Chart>(chart,
                         context: context,
-                        chartId: chart.docId,
-                        syncStatus: chart.syncStatus);
-                    // context.pushNamed(RouteName.chartDetail, pathParameters: {
-                    //   RouterParams.chartId: chart.docId,
-                    //   RouterParams.syncStatus:
-                    //       chart.syncStatus ?? RouterParams.nullValue,
-                    // });
-                  },
-                  chartSyncOptions: (item, {syncStatus, uid}) =>
-                      StorageHelper.storageOptionsModalBuilder<Chart>(item,
-                          uid: uid,
-                          syncStatus: syncStatus,
-                          ref: ref, doBeforeDeleteForever: () {
-                    Navigator.popUntil(context, (route) {
-                      return route.settings.name != 'chartView';
-                    });
-                  }),
-                  noteSyncOptions: (item, {syncStatus, uid}) =>
-                      StorageHelper.storageOptionsModalBuilder<Note>(item,
-                          uid: uid, syncStatus: syncStatus, ref: ref),
-                  openTagSyncOptions: (tag,
-                          {required context, required callback}) =>
-                      StorageHelper.showOptionsModal(tag,
-                          context: context, uid: uid, ref: ref),
-                  // (item, {required context, required callBack}) =>
-                  //     StorageHelper.showOptionsModal(item, context: context, uid: uid, ref: ref),
-                  onOpenChartEditOptions: (context, chart) =>
-                      ChartHelper.openChartEditOptions(context, chart),
-                  onOpenCheckboxTagList: (context, chart) =>
-                      TagHelper.openCheckboxTagList(context, chart),
-                  onOpenNoteCreation: (context, chart) =>
-                      NoteHelper.openNewNoteEditorScreen(
-                          context: context, uid: uid, chart: chart, ref: ref),
-                  onOpenNoteEditor: (context, note) =>
-                      NoteHelper.openNoteEditorScreen(context, note),
-                ));
-  }
-
-  @override
-  void dispose() {
-    // ref.read(chartViewControllerProvider).dispose();
-    super.dispose();
+                        uid: uid,
+                        ref: ref, doBeforeDeleteForever: () {
+                  Navigator.popUntil(context, (route) {
+                    return !(route.settings.name == null ||
+                        route.settings.name == 'chartView');
+                  });
+                }),
+                onOpenNoteSyncOptions: (note) =>
+                    StorageHelper.showOptionsModal<Note>(note,
+                        context: context, uid: uid, ref: ref),
+                openTagSyncOptions: (tag,
+                        {required context, required callback}) =>
+                    StorageHelper.showOptionsModal(
+                  tag,
+                  context: context,
+                  uid: uid,
+                  ref: ref,
+                  callback: tagListController.onSyncStatusChange,
+                ),
+                // (item, {required context, required callBack}) =>
+                //     StorageHelper.showOptionsModal(item, context: context, uid: uid, ref: ref),
+                onOpenChartEditOptions: (context, chart) =>
+                    ChartHelper.openChartEditOptions(context, chart),
+                onOpenCheckboxTagList: (context, chart) =>
+                    TagHelper.openCheckboxTagList(context, chart),
+                onOpenNoteCreation: (context, chart) =>
+                    NoteHelper.openNewNoteEditorScreen(
+                        context: context, uid: uid, chart: chart, ref: ref),
+                onOpenNoteEditor: (context, note) =>
+                    NoteHelper.openNoteEditorScreen(context, note),
+              ),
+            ),
+          );
   }
 }

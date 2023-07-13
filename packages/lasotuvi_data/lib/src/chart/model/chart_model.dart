@@ -153,7 +153,7 @@ class ChartModel extends SyncableModel<Chart> {
 
   @override
   Map<String, Object?> toCloud() {
-    final result = toSqlite();
+    final result = dump();
     result.remove(columnId);
     result.remove(columnSyncStatus);
     return result;

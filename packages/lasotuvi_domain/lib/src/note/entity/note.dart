@@ -48,8 +48,7 @@ class Note extends SyncableEntity<Note> {
   @override
   bool operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is Note && other.id == id;
+      other.runtimeType == runtimeType && other is Note && other.id == id;
 
   @override
   int get hashCode => id.hashCode;

@@ -6,6 +6,7 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_chart_creation_form/tuvi_chart_creation_form.dart';
 
 import '../../../helper/chart_helper.dart';
@@ -22,11 +23,17 @@ class ChartCreationBody extends ConsumerStatefulWidget {
 class _ChartCreationBodyState extends AuthDependedState<ChartCreationBody> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: ChartCreationForm(
+    return findingUid
+        ? const Center(
+            child: LoadingWidget(),
+          )
+        : BasicModal(
+            title: translate('createChart'),
             colorScheme: LasotuviAppStyle.colorScheme,
-            translate: translate,
-            onCreateChart: onCreateChart));
+            child: ChartCreationForm(
+                colorScheme: LasotuviAppStyle.colorScheme,
+                translate: translate,
+                onCreateChart: onCreateChart));
   }
 
   Future<void> onCreateChart(Chart chart) async {

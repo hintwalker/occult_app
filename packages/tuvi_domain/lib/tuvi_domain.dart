@@ -13,6 +13,7 @@ export 'src/cuc/menh_cuc_rel.dart';
 export 'src/cuc/ngu_hanh_compare_to_cuc.dart';
 export 'src/cuc/ngu_hanh_from_cuc.dart';
 
+export 'src/house/fit_to_month_value.dart';
 export 'src/house/can_of_house.dart';
 export 'src/house/fit_to_house_position.dart';
 export 'src/house/house.dart';
@@ -59,6 +60,8 @@ export 'src/star/tran_doan/star_iterator_tran_doan.dart';
 export 'src/star/star_formulas.dart';
 
 export 'src/tu_hoa/tran_doan/tu_hoa_tran_doan.dart';
+
+export 'src/utils/scale_to_range.dart';
 export 'src/utils/math.dart';
 export 'src/utils/split_to_list_of_list.dart';
 export 'src/utils/to_bool.dart';

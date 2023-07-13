@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:tauari_list_view/src/search_box_widget.dart';
 
 import 'checkbox_list_item.dart';
 import 'list_order.dart';
@@ -19,7 +20,7 @@ class SelectableDataListView<U, V> extends StatefulWidget {
     required this.whereTest,
     required this.colorScheme,
     required this.translate,
-    this.sort = false,
+    this.sort = true,
     required this.onCancel,
     required this.onSubmit,
     required this.initSelected,
@@ -125,26 +126,30 @@ class _SelectableDataListViewState<U, V>
       child: Stack(
         children: [
           Column(children: [
-            TextField(
-              controller: controller,
-              onChanged: _runFilter,
-              decoration: InputDecoration(
-                labelText: widget.translate('search'),
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: controller.text.isEmpty
-                    ? null
-                    : IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () {
-                          controller.clear();
+            SearchBoxWidget(
+                colorScheme: widget.colorScheme,
+                translate: widget.translate,
+                onSearch: _runFilter),
+            // TextField(
+            //   controller: controller,
+            //   onChanged: _runFilter,
+            //   decoration: InputDecoration(
+            //     labelText: widget.translate('search'),
+            //     prefixIcon: const Icon(Icons.search),
+            //     suffixIcon: controller.text.isEmpty
+            //         ? null
+            //         : IconButton(
+            //             icon: const Icon(Icons.close),
+            //             onPressed: () {
+            //               controller.clear();
 
-                          _runFilter('');
-                        },
-                      ),
-              ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.search,
-            ),
+            //               _runFilter('');
+            //             },
+            //           ),
+            //   ),
+            //   keyboardType: TextInputType.text,
+            //   textInputAction: TextInputAction.search,
+            // ),
             const SizedBox(
               height: 2.0,
             ),

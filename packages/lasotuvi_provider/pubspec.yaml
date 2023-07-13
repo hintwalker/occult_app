@@ -25,6 +25,8 @@ dependencies:
   lasotuvi_style:
     path: ../lasotuvi_style
 
+  tauari_guard:
+    path: ../tauari_guard
   tuvi_domain:
     path: ../tuvi_domain
   tauari_drawer:

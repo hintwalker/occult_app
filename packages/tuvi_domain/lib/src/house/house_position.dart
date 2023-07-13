@@ -45,6 +45,25 @@ class HousePosition {
     return chi.index;
   }
 
+  NguHanh get nguHanh {
+    final data = [
+      NguHanhs.thuy,
+      NguHanhs.tho,
+      NguHanhs.moc,
+      NguHanhs.moc,
+      NguHanhs.tho,
+      NguHanhs.hoa,
+      NguHanhs.hoa,
+      NguHanhs.tho,
+      NguHanhs.kim,
+      NguHanhs.kim,
+      NguHanhs.tho,
+      NguHanhs.thuy
+    ];
+    final index = data[chi.index].index;
+    return NguHanh.fromIndex(index);
+  }
+
   factory HousePosition.fromIndex(int position) {
     final chiOfthisPos = Chi.fromIndex(position);
     return HousePosition(chiOfthisPos);
@@ -61,12 +80,11 @@ class HousePosition {
   }
 
   @override
-  bool operator ==(Object? other) {
-    if (other is HousePosition) {
-      return other.chi.name == chi.name;
-    }
-    return false;
-  }
+  bool operator ==(Object? other) =>
+      identical(this, other) ||
+      other.runtimeType == runtimeType &&
+          other is HousePosition &&
+          other.chi.name == chi.name;
 
   @override
   int get hashCode => chi.name.hashCode;
