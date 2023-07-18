@@ -19,11 +19,11 @@ class StarInfoBody extends ConsumerStatefulWidget {
 class _StarInfoBodyState extends AuthDependedState<StarInfoBody> {
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return StarInfoModal(
+      title: translate(widget.item.label),
+      colorScheme: LasotuviAppStyle.colorScheme,
       child: findingUid
-          ? const Center(
-              child: LoadingWidget(),
-            )
+          ? const LoadingWidget()
           : uid == null
               ? const Center(
                   child: NeedSignInAlertDialog(

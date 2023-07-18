@@ -15,6 +15,7 @@ class DataListContainer<U, V> extends StatefulWidget {
     this.useStickyGroupSeparators = false,
     // this.order = ListOrder.asc,
     this.sort = true,
+    this.seperator,
   });
   final Iterable<U> data;
   final DataListController<U> controller;
@@ -26,6 +27,7 @@ class DataListContainer<U, V> extends StatefulWidget {
   final bool useStickyGroupSeparators;
   // final ListOrder order;
   final bool sort;
+  final Widget? seperator;
 
   @override
   State<DataListContainer<U, V>> createState() =>
@@ -77,6 +79,7 @@ class _DataListContainerState<U, V> extends State<DataListContainer<U, V>> {
       sort: widget.sort,
       // order: order,
       useStickyGroupSeparators: widget.useStickyGroupSeparators,
+      seperator: widget.seperator,
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../helper/sort_helper.dart';
+
 class StarListModalScreen extends ConsumerWidget {
   const StarListModalScreen({super.key});
 
@@ -17,11 +19,17 @@ class StarListModalScreen extends ConsumerWidget {
       translate: translate,
       child: BasicFutureBuilder(
         future: ref.watch(starListControllerProvider).allData(),
-        child: (data) => StarListWidget(
-          data: data,
-          onItemTap: (item) =>
-              LibraryNavigation.showStarInfoViewer(context, item),
-          translate: translate,
+        child: (data) => BasicFutureBuilder(
+          future: SortHelper.getSortOption(starSortKey),
+          child: (sortValue) => StarListWidget(
+            data: data,
+            onItemTap: (item) =>
+                LibraryNavigation.showStarInfoViewer(context, item),
+            translate: translate,
+            colorScheme: LasotuviAppStyle.colorScheme,
+            onSaveSortOption: SortHelper.saveSortOption,
+            initSortValue: sortValue,
+          ),
         ),
       ),
     );

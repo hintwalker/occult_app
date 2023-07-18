@@ -1,5 +1,7 @@
 library lasotuvi_library;
 
+export 'src/sort/star_sort_key.dart';
+
 export 'src/controller/book_list_controller.dart';
 export 'src/controller/book_reader_controller.dart';
 export 'src/controller/star_list_controller.dart';
@@ -19,6 +21,7 @@ export 'src/widget/book/book_list_widget.dart';
 export 'src/widget/book/book_reader.dart';
 export 'src/widget/book/book_list_modal.dart';
 
+export 'src/widget/star/star_info_modal.dart';
 export 'src/widget/star/star_list_modal.dart';
 export 'src/widget/star/star_info_viewer.dart';
 

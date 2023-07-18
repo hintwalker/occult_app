@@ -1,99 +1,100 @@
-name	label
-tu_vi	tuVi
-thien_co	thienCo
-thai_duong	thaiDuong
-vu_khuc	vuKhuc
-thien_dong	thienDong
-liem_trinh	liemTrinh
-thien_phu	thienPhu
-thai_am	thaiAm
-tham_lang	thamLang
-cu_mon	cuMon
-thien_tuong	thienTuong
-thien_luong	thienLuong
-that_sat	thatSat
-pha_quan	phaQuan
-van_xuong	vanXuong
-van_khuc	vanKhuc
-ta_phu_huu_bat	taPhuHuuBat
-thien_khoi_thien_viet	thienKhoiThienViet
-tam_thai_bat_toa	tamThaiBatToa
-loc_ma	locMa
-hoa_tinh_linh_tinh	hoaTinhLinhTinh
-kinh_duong_da_la	kinhDuongDaLa
-dia_khong_dia_kiep	diaKhongDiaKiep
-thien_khong	thienKhong
-tuan_triet	tuanTriet
-long_tri_phuong_cac	longTriPhuongCac
-an_quang_thien_quy	anQuangThienQuy
-thai_phu_phong_cao	thaiPhuPhongCao
-thien_quan_thien_phuc	thienQuanThienPhuc
-thien_tho_thien_tai	thienThoThienTai
-thien_duc_nguyet_duc	thienDucNguyetDuc
-thien_khoc_thien_hu	thienKhocThienHu
-thien_hinh	thienHinh
-thien_rieu	thienRieu
-kiep_sat	kiepSat
-co_than_qua_tu	coThanQuaTu
-pha_toai	phaToai
-luu_ha	luuHa
-thien_tru	thienTru
-quoc_an	quocAn
-giai_than_thien_kho	giaiThanThienKho
-hong_loan_thien_hi	hongLoanThienHi
-dao_hoa	daoHoa
-hoa_cai	hoaCai
-vong_tuong_tinh	vongTuongTinh
-phan_an	phanAn
-tue_dich	tueDich
-tuc_than	tucThan
-tai_sat	taiSat
-thien_sat	thienSat
-chi_boi	chiBoi
-nguyet_sat	nguyetSat
-vong_than	vongThan
-vong_truong_sinh	vongTruongSinh
-truong_sinh	truongSinh
-moc_duc	mocDuc
-quan_doi	quanDoi
-lam_quan	lamQuan
-de_vuong	deVuong
-suy	suy
-benh	benh
-tu	tu
-mo	mo
-tuyet	tuyet
-thai	thai
-duong	duong
-vong_bac_si	vongBacSi
-luc_si	lucSi
-thanh_long	thanhLong
-tieu_hao	tieuHao
-tuong_quan	tuongQuan
-tau_thu	tauThu
-phi_liem	phiLiem
-hi_than	hiThan
-benh_phu	benhPhu
-dai_hao	daiHao
-song_hao	songHao
-phuc_binh	phucBinh
-quan_phur	quanPhur
-vong_thai_tue	vongThaiTue
-thai_tue	thaiTue
-thieu_duong	thieuDuong
-tang_mon	tangMon
-bach_ho	bachHo
-thieu_am	thieuAm
-quan_phuf	quanPhuf
-tu_phu	tuPhu
-tue_pha	tuePha
-long_duc_phuc_duc	longDucPhucDuc
-dieu_khach	dieuKhach
-truc_phu	trucPhu
-am_sat	amSat
-tu_hoa	tuHoa
-hoa_loc	hoaLoc
-hoa_quyen	hoaQuyen
-hoa_khoa	hoaKhoa
-hoa_ky	hoaKy
-bac_si	bacSi
+id	name	label
+1	tu_vi	tuVi
+2	thien_co	thienCo
+3	thai_duong	thaiDuong
+4	vu_khuc	vuKhuc
+5	thien_dong	thienDong
+6	liem_trinh	liemTrinh
+7	thien_phu	thienPhu
+8	thai_am	thaiAm
+9	tham_lang	thamLang
+10	cu_mon	cuMon
+11	thien_tuong	thienTuong
+12	thien_luong	thienLuong
+13	that_sat	thatSat
+14	pha_quan	phaQuan
+15	xuong_khuc	xuongKhuc
+16	van_xuong	vanXuong
+17	van_khuc	vanKhuc
+18	ta_phu_huu_bat	taPhuHuuBat
+19	thien_khoi_thien_viet	thienKhoiThienViet
+20	tam_thai_bat_toa	tamThaiBatToa
+21	loc_ma	locMa
+22	hoa_tinh_linh_tinh	hoaTinhLinhTinh
+23	kinh_duong_da_la	kinhDuongDaLa
+24	dia_khong_dia_kiep	diaKhongDiaKiep
+25	thien_khong	thienKhong
+26	tuan_triet	tuanTriet
+27	long_tri_phuong_cac	longTriPhuongCac
+28	an_quang_thien_quy	anQuangThienQuy
+29	thai_phu_phong_cao	thaiPhuPhongCao
+30	thien_quan_thien_phuc	thienQuanThienPhuc
+31	thien_tho_thien_tai	thienThoThienTai
+32	thien_duc_nguyet_duc	thienDucNguyetDuc
+33	thien_khoc_thien_hu	thienKhocThienHu
+34	thien_hinh	thienHinh
+35	thien_rieu	thienRieu
+36	kiep_sat	kiepSat
+37	co_than_qua_tu	coThanQuaTu
+38	pha_toai	phaToai
+39	luu_ha	luuHa
+40	thien_tru	thienTru
+41	quoc_an	quocAn
+42	giai_than_thien_kho	giaiThanThienKho
+43	hong_loan_thien_hi	hongLoanThienHi
+44	dao_hoa	daoHoa
+45	hoa_cai	hoaCai
+46	vong_tuong_tinh	vongTuongTinh
+47	phan_an	phanAn
+48	tue_dich	tueDich
+49	tuc_than	tucThan
+50	tai_sat	taiSat
+51	thien_sat	thienSat
+52	chi_boi	chiBoi
+53	nguyet_sat	nguyetSat
+54	vong_than	vongThan
+55	vong_truong_sinh	vongTruongSinh
+56	truong_sinh	truongSinh
+57	moc_duc	mocDuc
+58	quan_doi	quanDoi
+59	lam_quan	lamQuan
+60	de_vuong	deVuong
+61	suy	suy
+62	benh	benh
+63	tu	tu
+64	mo	mo
+65	tuyet	tuyet
+66	thai	thai
+67	duong	duong
+68	vong_bac_si	vongBacSi
+69	luc_si	lucSi
+70	thanh_long	thanhLong
+71	tieu_hao	tieuHao
+72	tuong_quan	tuongQuan
+73	tau_thu	tauThu
+74	phi_liem	phiLiem
+75	hi_than	hiThan
+76	benh_phu	benhPhu
+77	dai_hao	daiHao
+78	song_hao	songHao
+79	phuc_binh	phucBinh
+80	quan_phur	quanPhur
+81	vong_thai_tue	vongThaiTue
+82	thai_tue	thaiTue
+83	thieu_duong	thieuDuong
+84	tang_mon	tangMon
+85	bach_ho	bachHo
+86	thieu_am	thieuAm
+87	quan_phuf	quanPhuf
+88	tu_phu	tuPhu
+89	tue_pha	tuePha
+90	long_duc_phuc_duc	longDucPhucDuc
+91	dieu_khach	dieuKhach
+92	truc_phu	trucPhu
+93	am_sat	amSat
+94	tu_hoa	tuHoa
+95	hoa_loc	hoaLoc
+96	hoa_quyen	hoaQuyen
+97	hoa_khoa	hoaKhoa
+98	hoa_ky	hoaKy
+99	bac_si	bacSi

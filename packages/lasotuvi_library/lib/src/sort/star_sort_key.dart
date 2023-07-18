@@ -1,0 +1,1 @@
+const starSortKey = 'starSortKey';

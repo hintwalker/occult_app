@@ -10,11 +10,18 @@ class DownloadMarkdownFile {
     required String remoteFileName,
     int maxSize = 1048576,
   }) async {
-    final data = await repository.download(
-      uid: uid,
-      remoteFileName: remoteFileName,
-      maxSize: maxSize,
-    );
-    return convertUint8ListToString(data);
+    final existFile = await tempFile(uid: uid, name: remoteFileName);
+    if (await existFile.exists()) {
+      return await existFile.readAsString();
+    } else {
+      final data = await repository.download(
+        uid: uid,
+        remoteFileName: remoteFileName,
+        maxSize: maxSize,
+      );
+      final stringData = convertUint8ListToString(data);
+      await existFile.writeAsString(stringData);
+      return stringData;
+    }
   }
 }

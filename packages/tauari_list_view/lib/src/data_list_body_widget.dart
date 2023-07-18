@@ -15,6 +15,7 @@ class DataListBodyWidget<U, V, W> extends StatelessWidget {
     this.order = ListOrder.asc,
     this.sort = true,
     this.useStickyGroupSeparators = false,
+    this.seperator,
   });
 
   final List<W> data;
@@ -25,6 +26,7 @@ class DataListBodyWidget<U, V, W> extends StatelessWidget {
   final bool useStickyGroupSeparators;
   final ListOrder order;
   final bool sort;
+  final Widget? seperator;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class DataListBodyWidget<U, V, W> extends StatelessWidget {
             ? GroupedListOrder.ASC
             : GroupedListOrder.DESC,
         itemBuilder: itemBuilder,
+        separator: seperator ?? const SizedBox.shrink(),
 
         // {
         //   return CheckBoxListItem<U>(item,

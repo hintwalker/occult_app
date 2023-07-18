@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'local_path.dart';
+import 'temp_path.dart';
 
-Future<File> localFile({
+Future<File> tempFile({
   required String? uid,
   required String name,
 }) async {
-  final path = await localPath();
+  final path = await tempPath();
   return File(uid == null ? '$path/$name' : '$path/$uid/$name');
 }
