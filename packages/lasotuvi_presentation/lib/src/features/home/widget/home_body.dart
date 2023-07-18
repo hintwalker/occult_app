@@ -7,10 +7,10 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 
-import '../../../helper/chart_helper.dart';
-import '../../../helper/note_helper.dart';
+import '../../chart/navigation/chart_navigation.dart';
+import '../../note/navigation/note_navigation.dart';
 import '../../../helper/storage_helper.dart';
-import '../../../helper/tag_helper.dart';
+import '../../tag/navigation/tag_navigation.dart';
 import '../../../styles/general_style.dart';
 import '../../auth/auth_depended_state.dart';
 import '../../navigation/drawer_ids.dart';
@@ -46,9 +46,10 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                   uid: uid,
                   translate: translate,
                   colorScheme: LasotuviAppStyle.colorScheme,
-                  onAddData: () => ChartHelper.openChartCreationScreen(context),
+                  onAddData: () =>
+                      ChartNavigation.openChartCreationScreen(context),
                   onShowAll: openAllChartsScreen,
-                  onItemTap: (context, chart) => ChartHelper.openChartView(
+                  onItemTap: (context, chart) => ChartNavigation.openChartView(
                     context: context,
                     chart: chart,
                   ),
@@ -68,14 +69,14 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                   uid: uid,
                   translate: translate,
                   colorScheme: LasotuviAppStyle.colorScheme,
-                  onAddData: () => TagHelper.openTagCreationScreen(
+                  onAddData: () => TagNavigation.openTagCreationScreen(
                     context,
                     (tag) =>
-                        TagHelper.openTagDetail(context: context, tag: tag),
+                        TagNavigation.openTagDetail(context: context, tag: tag),
                   ),
                   onShowAll: openAllTagsScreen,
                   onItemTap: (context, tag) =>
-                      TagHelper.openTagDetail(context: context, tag: tag),
+                      TagNavigation.openTagDetail(context: context, tag: tag),
                   onOpenSyncOptions: (tag) => StorageHelper.showOptionsModal(
                     tag,
                     context: context,
@@ -92,10 +93,10 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                 translate: translate,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 onAddData: () =>
-                    NoteHelper.openChartSelectionScreen(context, ref),
+                    NoteNavigation.openChartSelectionScreen(context, ref),
                 onShowAll: openAllNotesScreen,
                 onItemTap: (note) =>
-                    NoteHelper.openNoteEditorScreen(context, note),
+                    NoteNavigation.openNoteEditorScreen(context, note),
                 onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
                   item,
                   context: context,

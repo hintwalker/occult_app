@@ -10,7 +10,7 @@ import 'package:tauari_list_view/tauari_list_view.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../../../helper/chart_helper.dart';
+import '../navigation/chart_navigation.dart';
 import '../../../helper/sort_helper.dart';
 import '../../auth/auth_depended_state.dart';
 
@@ -52,7 +52,8 @@ class _CheckBoxChartListBodyState
                   onCancel: onCancel,
                   onSubmit: onSubmit,
                   onItemTap: (context, chart, _) =>
-                      ChartHelper.openChartView(context: context, chart: chart),
+                      ChartNavigation.openChartView(
+                          context: context, chart: chart),
                   onSaveSortOption: (key, value) =>
                       SortHelper.saveSortOption(key, value),
                   initSortValue: sortValue,

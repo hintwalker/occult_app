@@ -1,3 +1,3 @@
 abstract class JsonListRepository<T> {
-  Iterable<T> allData();
+  Future<Iterable<T>> allData();
 }

@@ -23,9 +23,7 @@ class BasicStreamBuilder<T> extends StatelessWidget {
               return child(data);
             }
           } else {
-            return const Center(
-              child: LoadingWidget(),
-            );
+            return const LoadingWidget();
           }
         });
   }

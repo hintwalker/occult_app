@@ -21,6 +21,7 @@ final router = GoRouter(
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           pageBuilder: (context, state, child) => MaterialPage(
+              name: 'dashboard',
               restorationId: 'router.shell',
               child: Dashboard(
                 restorationId: 'dashboard',

@@ -5,6 +5,7 @@ class BasicModal extends StatelessWidget {
     super.key,
     required this.title,
     required this.colorScheme,
+    this.actions,
     required this.child,
     this.borderRadius = const BorderRadius.only(
       bottomLeft: Radius.circular(24),
@@ -15,6 +16,7 @@ class BasicModal extends StatelessWidget {
   final String title;
   final ColorScheme colorScheme;
   final BorderRadiusGeometry borderRadius;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,15 @@ class BasicModal extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      if (actions != null)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          children: actions!,
+                        )
                     ],
                   )),
               const SizedBox(

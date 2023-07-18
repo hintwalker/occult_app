@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show LibraryBody;
+    show LibraryScreenBody;
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 
 class LibraryScreen extends StatelessWidget {
@@ -16,7 +16,7 @@ class LibraryScreen extends StatelessWidget {
       restorationId: restorationId,
       child: Container(
         color: LasotuviAppStyle.colorScheme.background,
-        child: const LibraryBody(),
+        child: const LibraryScreenBody(),
       ),
     );
   }

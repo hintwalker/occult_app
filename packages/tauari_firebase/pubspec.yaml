@@ -9,8 +9,11 @@ environment:
 
 dependencies:
   cloud_firestore: ^4.6.0
+  dio: ^5.2.1+1
+  firebase_storage: ^11.2.4
   flutter:
     sdk: flutter
+  path_provider: ^2.0.15
   tauari_data_core:
     path: ../tauari_data_core
 

@@ -3,10 +3,10 @@ library lasotuvi_presentation;
 export 'src/shared/translation_path.dart';
 export 'src/shared/screen_app_bar.dart';
 
-export 'src/helper/tag_helper.dart';
-export 'src/helper/chart_helper.dart';
+export 'src/features/tag/navigation/tag_navigation.dart';
+export 'src/features/chart/navigation/chart_navigation.dart';
 export 'src/helper/storage_helper.dart';
-export 'src/helper/note_helper.dart';
+export 'src/features/note/navigation/note_navigation.dart';
 
 export 'src/key/global_key.dart';
 export 'src/app/restorable_state_impl.dart';
@@ -18,7 +18,7 @@ export 'src/features/note/controller/note_editor_body_controller.dart';
 export 'src/features/note/widget/all_note_list_body.dart';
 export 'src/features/note/widget/note_editor_body.dart';
 
-export 'src/features/library/library_body.dart';
+export 'src/features/library/library_screen_body.dart';
 
 export 'src/features/tag/all_tag_list_body.dart';
 export 'src/features/tag/checkbox_tag_list_body.dart';
@@ -33,14 +33,14 @@ export 'src/features/chart/widget/modify_bio/modify_gender_body.dart';
 export 'src/features/chart/widget/modify_bio/modify_birthday_body.dart';
 export 'src/features/chart/widget/modify_bio/modify_chart_name_body.dart';
 
-export 'src/features/chart/widget/chart_modification_options_body.dart';
-export 'src/features/chart/widget/chart_detail_body.dart';
+export 'src/features/chart/widget/chart_modification_options_modal_screen.dart';
+export 'src/features/chart/widget/chart_detail_modal_screen.dart';
 export 'src/features/chart/widget/single_selectable_chart_list_body.dart';
 export 'src/features/chart/widget/checkbox_chart_list_body.dart';
-export 'src/features/chart/widget/chart_view_body.dart';
+export 'src/features/chart/widget/chart_view_modal_screen.dart';
 export 'src/features/chart/widget/chart_screen_app_bar.dart';
-export 'src/features/chart/widget/screen_body/all_chart_list_body.dart';
-export 'src/features/chart/widget/chart_creation_body.dart';
+export 'src/features/chart/widget/screen_body/all_chart_list_screen_body.dart';
+export 'src/features/chart/widget/chart_creation_modal_screen.dart';
 
 export 'src/features/storage_plan/all_storage_plans_body.dart';
 

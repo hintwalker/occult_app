@@ -50,6 +50,7 @@ dependencies:
     path: ../lasotuvi_presentation
   lasotuvi_provider:
     path: ../lasotuvi_provider
+  firebase_core: ^2.15.0
 
 dev_dependencies:
   flutter_test:

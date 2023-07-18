@@ -8,9 +8,9 @@ import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_style/tuvi_style.dart';
 
-import '../../helper/chart_helper.dart';
+import '../chart/navigation/chart_navigation.dart';
 import '../../helper/storage_helper.dart';
-import '../../helper/tag_helper.dart';
+import 'navigation/tag_navigation.dart';
 import '../auth/auth_depended_state.dart';
 
 class TagDetailBody extends ConsumerStatefulWidget {
@@ -52,7 +52,7 @@ class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
                 // onChartItemTap: (context, chart) =>
                 //     ChartHelper.openChartView(context: context, chart: chart),
                 onChangeInfoTap: (context, tag) =>
-                    TagHelper.openTagEdit(context, tag),
+                    TagNavigation.openTagEdit(context, tag),
                 onOpenTagSyncOptions: (tag) =>
                     StorageHelper.showOptionsModal<Tag>(
                   tag,
@@ -64,14 +64,14 @@ class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
                 //     StorageHelper.storageOptionsModalBuilder<Chart>(chart,
                 //         ref: ref),
                 onOpenChartList: (context, tag) =>
-                    ChartHelper.openCheckboxChartList(context, tag),
+                    ChartNavigation.openCheckboxChartList(context, tag),
                 chartItem: (chart) => HoriChartItemWidget(
                   chart,
                   uid: uid,
                   colorScheme: lightColorScheme,
                   translate: translate,
-                  onTap: (context, chart) =>
-                      ChartHelper.openChartView(context: context, chart: chart),
+                  onTap: (context, chart) => ChartNavigation.openChartView(
+                      context: context, chart: chart),
                   onSyncStatusTap: () => StorageHelper.showOptionsModal<Chart>(
                       chart,
                       uid: uid,

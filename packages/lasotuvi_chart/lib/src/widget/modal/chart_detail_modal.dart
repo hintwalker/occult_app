@@ -7,11 +7,15 @@ class ChartDetailModal extends StatelessWidget {
     this.chart, {
     super.key,
     required this.colorScheme,
+    required this.onOpenStarsModal,
+    required this.onOpenBooksModal,
     required this.child,
   });
   final ColorScheme colorScheme;
   final Chart? chart;
   final Widget child;
+  final void Function() onOpenStarsModal;
+  final void Function() onOpenBooksModal;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +64,12 @@ class ChartDetailModal extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.search),
-                              onPressed: () {},
+                              icon: const Icon(Icons.auto_awesome),
+                              onPressed: onOpenStarsModal,
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.book),
+                              onPressed: onOpenBooksModal,
                             ),
                           ],
                         )),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show ChartCreationBody;
+    show ChartCreationModalScreen;
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 
 class ChartCreationScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class ChartCreationScreen extends StatelessWidget {
             title: const Text('Chart creation'),
             backgroundColor: LasotuviAppStyle.colorScheme.background,
           ),
-          body: const ChartCreationBody(),
+          body: const ChartCreationModalScreen(),
           backgroundColor: LasotuviAppStyle.colorScheme.background,
         ));
   }

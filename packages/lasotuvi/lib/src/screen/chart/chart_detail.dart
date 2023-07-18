@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show ChartDetailBody;
+    show ChartDetailModalScreen;
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
@@ -23,7 +23,7 @@ class ChartDetailScreen extends StatelessWidget {
         restorationId: restorationId,
         child: Container(
           color: LasotuviAppStyle.colorScheme.background,
-          child: ChartDetailBody(
+          child: ChartDetailModalScreen(
             chartId: chartId,
             syncStatus: syncStatus,
           ),

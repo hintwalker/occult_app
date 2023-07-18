@@ -2,6 +2,11 @@ library tauari_data_core;
 
 export 'src/utils/only_on_local.dart';
 
+export 'src/usecase/remote_storage/download_file_to_temp.dart';
+export 'src/usecase/remote_storage/download_pdf_file.dart';
+export 'src/usecase/remote_storage/download_file_to_local.dart';
+export 'src/usecase/remote_storage/download_markdown_file.dart';
+
 export 'src/usecase/syncable/owner_by_depended_id.dart';
 export 'src/usecase/syncable/dis_connect_right_from_left.dart';
 export 'src/usecase/syncable/connect_right_to_left.dart';
@@ -31,6 +36,7 @@ export 'src/usecase/syncable/sync_data.dart';
 export 'src/usecase/cloud/delete_from_cloud.dart';
 export 'src/usecase/local/delete_from_local.dart';
 
+export 'src/entity/must_buy_entity.dart';
 export 'src/entity/entity.dart';
 export 'src/entity/sortable.dart';
 export 'src/model/cloud_storable.dart';
@@ -56,11 +62,18 @@ export 'src/query/cloud_data_order_by.dart';
 export 'src/query/cloud_data_where.dart';
 export 'src/query/query_args.dart';
 export 'src/query/query_entity_args.dart';
+
 export 'src/dao/dao.dart';
+
+export 'src/service/remote_file_service.dart';
 export 'src/service/cloud_service.dart';
+
+export 'src/constant/paid_value.dart';
 export 'src/constant/column_names.dart';
+
 export 'src/db/local_database.dart';
 
+export 'src/repository/remote_file_repository.dart';
 export 'src/repository/read_only_cloud_repository.dart';
 export 'src/repository/entity_repository.dart';
 export 'src/repository/cloud_repository.dart';
@@ -72,6 +85,7 @@ export 'src/repository/dep/syncable_dependent_repository.dart';
 export 'src/repository/dep/local_dependent_repository.dart';
 export 'src/repository/dep/cloud_dependent_repository.dart';
 
+export 'src/repository/impl/remote_file_repository_impl.dart';
 export 'src/repository/impl/syncable_repository_impl.dart';
 export 'src/repository/impl/local_repository_impl.dart';
 export 'src/repository/impl/cloud_repository_impl.dart';
@@ -89,6 +103,7 @@ export 'src/repository/rel/syncable_rel_repository.dart';
 export 'src/repository/rel/local_rel_repository.dart';
 export 'src/repository/rel/cloud_rel_repository.dart';
 
+export 'src/source/remote_file_data_source.dart';
 export 'src/source/local_data_source.dart';
 export 'src/source/remote_data_source.dart';
 export 'src/source/cloud_single_doc_data_source.dart';

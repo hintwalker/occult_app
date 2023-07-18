@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show AllChartListBody;
+    show AllChartListScreenBody;
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 
 class ChartsScreen extends StatelessWidget {
@@ -18,6 +18,6 @@ class ChartsScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: LasotuviAppStyle.colorScheme.background,
             ),
-            child: const AllChartListBody()));
+            child: const AllChartListScreenBody()));
   }
 }

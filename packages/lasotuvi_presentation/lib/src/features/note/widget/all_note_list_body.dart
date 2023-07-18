@@ -47,7 +47,7 @@ class _AllNoteListBodyState extends AuthDependedState<AllNoteListBody> {
   }
 
   void onItemTap(BuildContext context, Note note, String? uid) {
-    NoteHelper.openNoteEditorScreen(context, note);
+    NoteNavigation.openNoteEditorScreen(context, note);
   }
 
   void onOpenSyncStatus({

@@ -5,5 +5,5 @@ abstract class JsonListRepositoryImpl<T> implements JsonListRepository<T> {
   const JsonListRepositoryImpl(this.dataSource);
   final JsonListDataSource<T> dataSource;
   @override
-  Iterable<T> allData() => dataSource.data;
+  Future<Iterable<T>> allData() => dataSource.loadData();
 }

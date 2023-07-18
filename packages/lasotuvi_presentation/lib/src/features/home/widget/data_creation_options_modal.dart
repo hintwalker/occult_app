@@ -5,9 +5,9 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../../../helper/chart_helper.dart';
-import '../../../helper/note_helper.dart';
-import '../../../helper/tag_helper.dart';
+import '../../chart/navigation/chart_navigation.dart';
+import '../../note/navigation/note_navigation.dart';
+import '../../tag/navigation/tag_navigation.dart';
 
 class DataCreationOptionsModal extends ConsumerWidget {
   const DataCreationOptionsModal({super.key});
@@ -28,7 +28,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
                   title: Text(translate('addNewChart')),
                   onTap: () {
                     context.pop();
-                    ChartHelper.openChartCreationScreen(context);
+                    ChartNavigation.openChartCreationScreen(context);
                   },
                 ),
                 ListTile(
@@ -36,10 +36,10 @@ class DataCreationOptionsModal extends ConsumerWidget {
                   title: Text(translate('addNewTag')),
                   onTap: () {
                     context.pop();
-                    TagHelper.openTagCreationScreen(
+                    TagNavigation.openTagCreationScreen(
                       context,
-                      (tag) =>
-                          TagHelper.openTagDetail(context: context, tag: tag),
+                      (tag) => TagNavigation.openTagDetail(
+                          context: context, tag: tag),
                     );
                   },
                 ),
@@ -48,7 +48,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
                   title: Text(translate('addNewNote')),
                   onTap: () {
                     context.pop();
-                    NoteHelper.openChartSelectionScreen(context, ref);
+                    NoteNavigation.openChartSelectionScreen(context, ref);
                   },
                 ),
               ],

@@ -48,7 +48,7 @@ class _AllTagListBodyState extends AuthDependedState<AllTagListBody> {
   }
 
   void onItemTap(BuildContext context, Tag tag, String? uid) {
-    TagHelper.openTagDetail(context: context, tag: tag);
+    TagNavigation.openTagDetail(context: context, tag: tag);
     // context.pushNamed(RouteName.chartView, pathParameters: {
     //   RouterParams.chartId: chart.id.toString(),
     //   RouterParams.uid: uid ?? RouterParams.nullValue

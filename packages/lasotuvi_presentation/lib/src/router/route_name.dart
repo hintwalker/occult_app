@@ -33,7 +33,7 @@ class RouteName {
   static const home = DrawerIds.home;
 
   static const library = DrawerIds.library;
-  static const groupStars = DrawerIds.groupStars;
+  // static const groupStars = DrawerIds.groupStars;
 
   static const allTags = DrawerIds.tags;
   static const allNotes = DrawerIds.notes;

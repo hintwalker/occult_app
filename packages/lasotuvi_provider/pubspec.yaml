@@ -24,6 +24,8 @@ dependencies:
     path: ../lasotuvi_storage_plan
   lasotuvi_style:
     path: ../lasotuvi_style
+  lasotuvi_library:
+    path: ../lasotuvi_library
 
   tauari_guard:
     path: ../tauari_guard
@@ -52,6 +54,7 @@ dependencies:
   firebase_auth: ^4.5.0
   sqflite: ^2.2.8+2
   hive: ^2.2.3
+  firebase_storage: ^11.2.4
   
 
 dev_dependencies:

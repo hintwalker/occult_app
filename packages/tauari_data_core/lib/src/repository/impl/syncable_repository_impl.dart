@@ -1,5 +1,6 @@
 import 'package:ordered_set/ordered_set.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 import 'package:tauari_values/tauari_values.dart';
 
 import '../../entity/pool_set_of_entity.dart';
@@ -47,13 +48,14 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   }
 
   @override
-  Stream<Iterable<E>> onEveryWhere(String? uid, [QueryArgs? queryArgs]) {
+  Stream<Iterable<E>> onEveryWhere(String? uid, [QueryArgs? queryArgs]) async* {
     final Stream<Iterable<E>> localStream = localRepository.onLocal(queryArgs);
     // .map((list) => list.map((e) => e.toEntity()));
-    if (uid == null) {
-      return localStream;
+    final hasNetwork = await availableNetwork();
+    if (uid == null || !hasNetwork) {
+      yield* localStream;
     }
-    final Stream<Iterable<E>> cloudStream = cloudRepository.onCloud(uid);
+    final Stream<Iterable<E>> cloudStream = cloudRepository.onCloud(uid!);
     // .map((list) => list.map((e) => e.toEntity()));
 
     final result = Rx.combineLatest2(
@@ -67,7 +69,7 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
     ).asBroadcastStream(
         onCancel: (subscription) => subscription.pause(),
         onListen: (subscription) => subscription.resume());
-    return result;
+    yield* result;
   }
 
   @override

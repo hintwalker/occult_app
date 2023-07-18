@@ -12,7 +12,7 @@ import 'package:tauari_ui/tauari_ui.dart';
 
 import '../../helper/sort_helper.dart';
 import '../../helper/storage_helper.dart';
-import '../../helper/tag_helper.dart';
+import 'navigation/tag_navigation.dart';
 import '../auth/auth_depended_state.dart';
 
 class CheckboxTagListBody extends ConsumerStatefulWidget {
@@ -47,9 +47,9 @@ class _CheckboxTagListBodyState extends AuthDependedState<CheckboxTagListBody> {
                   onCancel: onCancel,
                   onSubmit: onSubmit,
                   onItemTap: (context, tag, _) =>
-                      TagHelper.openTagDetail(context: context, tag: tag),
+                      TagNavigation.openTagDetail(context: context, tag: tag),
                   onOpenTagCreation: (context) =>
-                      TagHelper.openTagCreationScreen(
+                      TagNavigation.openTagCreationScreen(
                     context,
                     (tag) => doAfterCreation(tag, widget.chart),
                   ),
