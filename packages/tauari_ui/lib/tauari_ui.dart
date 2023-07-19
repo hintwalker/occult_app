@@ -3,6 +3,7 @@ library tauari_ui;
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 
+export 'src/widget/syncable_card_item_scaffold.dart';
 export 'src/widget/need_sign_in_alert_dialog.dart';
 export 'src/widget/network_not_connected_alert_dialog.dart';
 export 'src/widget/basic_loading_modal.dart';
@@ -35,7 +36,7 @@ export 'src/controller/syncable_pair_data_list_stream_controller.dart';
 
 export 'src/widget/circle_human_avatar.dart';
 export 'src/widget/storage_icon_button.dart';
-export 'src/widget/list_item_has_storage_icon.dart';
+export 'src/widget/syncable_item_scaffold.dart';
 export 'src/widget/date_time_widget.dart';
 export 'src/widget/duration_widget.dart';
 export 'src/tauari_app.dart';

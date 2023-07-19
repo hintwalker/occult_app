@@ -26,9 +26,9 @@ class TagListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListItemHasStorageIcon<Tag>(
+    return SyncableItemScaffold(
       uid: uid,
-      syncData: data,
+      // syncData: data,
       syncStatus: data.syncStatus,
       colorScheme: colorScheme,
       onSyncStatusTap: onSyncStatusTap,

@@ -27,29 +27,32 @@ class NoteEditorBuilder extends StatelessWidget {
 
     return docId == null
         ? const ErrorTextWidget()
-        : StreamBuilder(
+        : BasicStreamBuilder(
             stream: controller.stream(
               uid: uid,
               docId: docId,
               syncStatus: syncStatus,
             ),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget();
-              } else if (snapshot.hasData) {
-                final note = snapshot.requireData;
-                if (note == null) {
-                  return const ErrorTextWidget();
-                } else {
-                  return child(note);
-                  // WillPopScope(
-                  //   onWillPop: () => onWillPop(note),
-                  //   child: child(note),
-                  // );
-                }
-              } else {
-                return const ErrorTextWidget();
-              }
-            });
+            child: (note) =>
+                note == null ? const ErrorTextWidget() : child(note),
+            // builder: (context, snapshot) {
+            //   if (snapshot.connectionState == ConnectionState.waiting) {
+            //     return const LoadingWidget();
+            //   } else if (snapshot.hasData) {
+            //     final note = snapshot.requireData;
+            //     if (note == null) {
+            //       return const ErrorTextWidget();
+            //     } else {
+            //       return child(note);
+            //       // WillPopScope(
+            //       //   onWillPop: () => onWillPop(note),
+            //       //   child: child(note),
+            //       // );
+            //     }
+            //   } else {
+            //     return const ErrorTextWidget();
+            //   }
+            // }
+          );
   }
 }

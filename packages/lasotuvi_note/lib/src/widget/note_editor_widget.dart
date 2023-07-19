@@ -6,17 +6,18 @@ import 'package:flutter_quill/flutter_quill.dart'
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 
 class NoteEditorWidget extends StatefulWidget {
-  const NoteEditorWidget(
-      {super.key,
-      required this.translate,
-      required this.colorScheme,
-      this.uid,
-      required this.note,
-      required this.onChanged,
-      required this.onSave,
-      required this.toggleEditMode,
-      required this.onHitMaxLength,
-      this.maxLength = 235});
+  const NoteEditorWidget({
+    super.key,
+    required this.translate,
+    required this.colorScheme,
+    this.uid,
+    required this.note,
+    required this.onChanged,
+    required this.onSave,
+    required this.toggleEditMode,
+    required this.onHitMaxLength,
+    this.maxLength = 235,
+  });
   final String Function(String) translate;
   final ColorScheme colorScheme;
   final String? uid;

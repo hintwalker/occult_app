@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
+import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
@@ -8,6 +9,7 @@ import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 
 import '../../chart/navigation/chart_navigation.dart';
+import '../../commentary/navigation/commentary_navigation.dart';
 import '../../note/navigation/note_navigation.dart';
 import '../../../helper/storage_helper.dart';
 import '../../tag/navigation/tag_navigation.dart';
@@ -83,6 +85,24 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                     uid: uid,
                     ref: ref,
                   ),
+                ),
+              ),
+              TopTenCommentaryBanner(
+                uid: uid,
+                controller: ref.watch(commentaryAndChartListControllerProvider),
+                translate: translate,
+                colorScheme: LasotuviAppStyle.colorScheme,
+                // onAddData: () =>
+                //     CommentaryNavigation.openChartSelectionScreen(context, ref),
+                onShowAll: openAllCommentaryScreen,
+                onItemTap: (commentary) =>
+                    CommentaryNavigation.openCommentaryReaderScreen(
+                        context, commentary),
+                onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
+                  item,
+                  context: context,
+                  uid: uid,
+                  ref: ref,
                 ),
               ),
               // Expanded(
@@ -272,5 +292,9 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
 
   void openAllNotesScreen() {
     ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.notes);
+  }
+
+  void openAllCommentaryScreen() {
+    ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.commentaries);
   }
 }

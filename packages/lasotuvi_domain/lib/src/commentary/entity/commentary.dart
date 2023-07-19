@@ -8,7 +8,7 @@ class Commentary extends MustBuyEntity<Commentary> {
     required this.title,
     required this.content,
     required this.created,
-    required this.edited,
+    required this.lastViewed,
     required this.chartId,
     super.storageState,
     super.syncStatus,
@@ -18,7 +18,7 @@ class Commentary extends MustBuyEntity<Commentary> {
   final String title;
   final String content;
   final DateTime created;
-  final DateTime edited;
+  final DateTime lastViewed;
   final int chartId;
 
   @override
@@ -34,7 +34,7 @@ class Commentary extends MustBuyEntity<Commentary> {
       ColumnCommentary.title: title,
       ColumnCommentary.content: content,
       columnCreated: created.millisecondsSinceEpoch,
-      ColumnCommentary.edited: edited.millisecondsSinceEpoch,
+      ColumnCommentary.lastViewed: lastViewed.millisecondsSinceEpoch,
       ColumnCommentary.chartId: chartId,
       columnState: storageState,
       columnSyncStatus: syncStatus,
@@ -53,10 +53,10 @@ class Commentary extends MustBuyEntity<Commentary> {
       created: map[columnCreated] == null
           ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
           : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-      edited: map[ColumnCommentary.edited] == null
+      lastViewed: map[ColumnCommentary.lastViewed] == null
           ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
           : DateTime.fromMillisecondsSinceEpoch(
-              map[ColumnCommentary.edited] as int),
+              map[ColumnCommentary.lastViewed] as int),
       chartId: map[ColumnCommentary.chartId] as int,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
@@ -73,7 +73,7 @@ class Commentary extends MustBuyEntity<Commentary> {
     String? title,
     String? content,
     DateTime? created,
-    DateTime? edited,
+    DateTime? lastViewed,
     String? syncStatus,
     int? chartId,
     String? storageState,
@@ -85,7 +85,7 @@ class Commentary extends MustBuyEntity<Commentary> {
       title: title ?? this.title,
       content: content ?? this.content,
       created: created ?? this.created,
-      edited: edited ?? this.edited,
+      lastViewed: lastViewed ?? this.lastViewed,
       chartId: chartId ?? this.chartId,
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,

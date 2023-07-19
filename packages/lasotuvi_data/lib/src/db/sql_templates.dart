@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:lasotuvi_data/src/db/table_names.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
-import 'package:tauari_data_core/tauari_data_core.dart' show columnId;
+import 'package:tauari_data_core/tauari_data_core.dart'
+    show columnId, columnPaid, columnPrice;
 
 class SqlTemplates {
   static const tableCharts =
@@ -11,6 +12,8 @@ class SqlTemplates {
       kDebugMode ? TableNames.notesTest : TableNames.notes;
   static const tableChartTags =
       kDebugMode ? TableNames.chartTagsTest : TableNames.chartTags;
+  static const tableCommentaries =
+      kDebugMode ? TableNames.commentariesTest : TableNames.commentaries;
 
   static String turnOnForeignKey = 'PRAGMA foreign_keys = ON;';
   static String dropTable(String name) => 'DROP TABLE IF EXISTS $name';
@@ -59,10 +62,24 @@ CREATE INDEX idx_last_viewed_chart ON $tableCharts (${ColumnChart.lastViewed})
   static String createTableNote() =>
       '''CREATE TABLE $tableNotes($columnId INTEGER PRIMARY KEY, 
         ${ColumnNote.title} TEXT, 
-        ${ColumnNote.content} INTEGER, 
+        ${ColumnNote.content} TEXT, 
         ${ColumnNote.edited} INTEGER, 
         ${ColumnNote.chartId} INTEGER,
         FOREIGN KEY (${ColumnNote.chartId}) REFERENCES $tableCharts($columnId)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        )''';
+
+  static String dropTableCommentary() => dropTable(tableCommentaries);
+  static String createTableCommentary() =>
+      '''CREATE TABLE $tableCommentaries($columnId INTEGER PRIMARY KEY, 
+        ${ColumnCommentary.title} TEXT, 
+        ${ColumnCommentary.content} TEXT,
+        ${ColumnCommentary.chartId} INTEGER,
+        ${ColumnCommentary.lastViewed} INTEGER,
+        $columnPrice INTEGER, 
+        $columnPaid INTEGER,
+        FOREIGN KEY (${ColumnNote.chartId}) REFERENCES $tableCommentaries($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE
         )''';

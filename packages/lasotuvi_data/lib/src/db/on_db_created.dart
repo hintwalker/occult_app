@@ -7,6 +7,7 @@ Future<void> onDbCreated(Database db) async {
   await db.execute(SqlTemplates.dropTableTag());
   await db.execute(SqlTemplates.dropTableChartTag());
   await db.execute(SqlTemplates.dropTableNote());
+  await db.execute(SqlTemplates.dropTableCommentary());
 
   await db.execute(SqlTemplates.createTableChart());
   await db.execute(SqlTemplates.createIndexLastViewedOnChart());
@@ -14,6 +15,7 @@ Future<void> onDbCreated(Database db) async {
 
   await db.execute(SqlTemplates.createTableTag());
   await db.execute(SqlTemplates.createTableNote());
+  await db.execute(SqlTemplates.createTableCommentary());
 
   await db.execute(SqlTemplates.createTableChartTag());
   await db.execute(SqlTemplates.createIndexOnChartTag());

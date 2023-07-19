@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 
-class NoteEditorModal extends StatelessWidget {
-  const NoteEditorModal({
+class NoteEditorScaffold extends StatelessWidget {
+  const NoteEditorScaffold({
     super.key,
     required this.note,
     required this.colorScheme,

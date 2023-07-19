@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart' show Note;
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../../lasotuvi_chart_note.dart';
+import 'note_item_widget.dart';
 
 class NoteGridWidget extends StatelessWidget {
   const NoteGridWidget({

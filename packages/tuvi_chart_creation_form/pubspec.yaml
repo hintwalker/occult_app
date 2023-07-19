@@ -22,7 +22,7 @@ dependencies:
     path: ../tauari_ui
   group_button: ^5.3.0
   flutter_riverpod: ^2.3.6
-  image_picker: ^0.8.7+5
+  image_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:

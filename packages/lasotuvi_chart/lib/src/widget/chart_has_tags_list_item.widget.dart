@@ -35,10 +35,10 @@ class ChartHasTagsListItem extends StatelessWidget {
     //     birthday: birthday,
     //     now: DateTime(data.source.watchingYear)
     //         .toMoment(TimeZone(offsetInHour: now.timeZoneOffset.inHours)));
-    return ListItemHasStorageIcon<Chart>(
+    return SyncableItemScaffold(
         uid: uid,
         syncStatus: data.source.syncStatus,
-        syncData: data.source,
+        // syncData: data.source,
         colorScheme: colorScheme,
         onSyncStatusTap: onSyncStatusTap,
         child: ChartItemCardWidget(data.source,

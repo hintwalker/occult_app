@@ -20,6 +20,8 @@ dependencies:
     path: ../lasotuvi_tag
   lasotuvi_note:
     path: ../lasotuvi_note
+  lasotuvi_commentary:
+    path: ../lasotuvi_commentary
   lasotuvi_storage_plan:
     path: ../lasotuvi_storage_plan
   lasotuvi_style:

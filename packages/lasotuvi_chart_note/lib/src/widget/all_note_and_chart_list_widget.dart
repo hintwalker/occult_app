@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_chart_note/src/widget/note_and_chart_item_widget.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart' show Note, NoteAndChart;
 import 'package:tauari_list_view/tauari_list_view.dart';
 
+import 'note_and_chart_item_widget.dart';
 import '../group/group_note_and_chart_by.dart';
 import '../query/note_and_chart_where_clause.dart';
 import '../sort/note_and_chart_comparator.dart';

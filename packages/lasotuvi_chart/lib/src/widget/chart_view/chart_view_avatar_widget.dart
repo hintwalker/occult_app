@@ -18,25 +18,36 @@ class ChartViewAvatarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 192.0,
-      height: 192.0,
-      child: Stack(
-        children: [
-          CircleHumanAvatar(
+        width: 192.0,
+        height: 192.0,
+        child: SyncableItemScaffold(
+          colorScheme: colorScheme,
+          onSyncStatusTap: () => openSyncOptions(context, chart),
+          syncStatus: chart.syncStatus,
+          uid: uid,
+          child: CircleHumanAvatar(
             gender: chart.gender.intValue,
             path: chart.avatar,
             size: 168,
           ),
-          Positioned(
-            child: SyncStatusRibbonWidget(
-              uid: uid,
-              colorScheme: colorScheme,
-              syncStatus: chart.syncStatus,
-              onTap: () => openSyncOptions(context, chart),
-            ),
-          ),
-        ],
-      ),
-    );
+        )
+        // Stack(
+        //   children: [
+        //     CircleHumanAvatar(
+        //       gender: chart.gender.intValue,
+        //       path: chart.avatar,
+        //       size: 168,
+        //     ),
+        //     Positioned(
+        //       child: SyncStatusRibbonWidget(
+        //         uid: uid,
+        //         colorScheme: colorScheme,
+        //         syncStatus: chart.syncStatus,
+        //         onTap: () => openSyncOptions(context, chart),
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        );
   }
 }

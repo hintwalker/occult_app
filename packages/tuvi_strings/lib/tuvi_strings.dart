@@ -9,4 +9,6 @@ class TuviStrings {
   static const String tag = 'tag';
 
   static const String note = 'note';
+
+  static const String commentary = 'commentary';
 }

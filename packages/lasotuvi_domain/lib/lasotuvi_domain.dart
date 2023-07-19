@@ -4,6 +4,29 @@ export 'src/storage/downloader.dart';
 export 'src/storage/remover.dart';
 export 'src/storage/uploader.dart';
 
+export 'src/commentary/usecase/update_commentary.dart';
+export 'src/commentary/usecase/on_commentary_by_id.dart';
+export 'src/commentary/usecase/on_commentary_by_chart_id.dart';
+export 'src/commentary/usecase/insert_commentary_to_local.dart';
+export 'src/commentary/usecase/sync_commentaries.dart';
+export 'src/commentary/usecase/on_commentary_and_chart.dart';
+export 'src/commentary/usecase/download_commentary.dart';
+export 'src/commentary/usecase/upload_commentary.dart';
+export 'src/commentary/usecase/on_commentary_count.dart';
+export 'src/commentary/usecase/on_commentaries.dart';
+export 'src/commentary/usecase/delete_commentary_from_cloud.dart';
+export 'src/commentary/usecase/delete_commentary_from_local.dart';
+
+export 'src/commentary/entity/commentary.dart';
+export 'src/commentary/entity/commentary_and_chart.dart';
+export 'src/commentary/column_commentary.dart';
+export 'src/commentary/repository/commentary_repository.dart';
+export 'src/commentary/repository/cloud_commentary_repository.dart';
+export 'src/commentary/repository/local_commentary_repository.dart';
+export 'src/commentary/repository/commentary_and_chart/local_commentary_and_chart_repository.dart';
+export 'src/commentary/repository/commentary_and_chart/cloud_commentary_and_chart_repository.dart';
+export 'src/commentary/repository/commentary_and_chart/commentary_and_chart_repository.dart';
+
 export 'src/note/usecase/update_note.dart';
 export 'src/note/usecase/on_note_by_id.dart';
 export 'src/note/usecase/on_note_by_chart_id.dart';
@@ -42,6 +65,7 @@ export 'src/chart_tag/usecase/on_chart_has_tags.dart';
 export 'src/chart_tag/usecase/sync_chart_tags.dart';
 export 'src/chart_tag/usecase/on_tag_has_charts.dart';
 
+export 'src/chart/usecase/chart_by_commentary_id.dart';
 export 'src/chart/usecase/chart_by_note_id.dart';
 export 'src/chart/usecase/update_chart.dart';
 export 'src/chart/usecase/on_chart.dart';

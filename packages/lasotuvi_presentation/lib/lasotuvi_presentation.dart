@@ -14,6 +14,8 @@ export 'src/app/app_state_impl.dart';
 export 'src/styles/storage_plan_style_impl.dart';
 export 'src/features/statistics/widget/current_sub_widget_container.dart';
 
+export 'src/features/commentary/widget/all_commentary_list_body.dart';
+
 export 'src/features/note/controller/note_editor_body_controller.dart';
 export 'src/features/note/widget/all_note_list_body.dart';
 export 'src/features/note/widget/note_editor_body.dart';

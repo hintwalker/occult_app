@@ -7,4 +7,8 @@ class TableNames {
   static const notesTest = 'notes_test';
   static const chartTags = 'chart_tags';
   static const chartTagsTest = 'chart_tags_test';
+
+  static const commentaries = 'commentaries';
+
+  static const commentariesTest = 'commentariesTest';
 }

@@ -41,4 +41,8 @@ class RouteName {
   static const chartDetail = 'chartDetail';
 
   static const tagDetail = 'tagDetail';
+
+  // static const commentaryReader = 'commentaryReader';
+
+  static const commentaries = 'commentaries';
 }

@@ -8,6 +8,8 @@ class RouterParams {
 
   static const syncStatus = 'syncStatus';
 
+  static const commentaryId = 'commentaryId';
+
   static String? getPathParamValue(String? pathParam) {
     return (pathParam == null || pathParam == nullValue) ? null : pathParam;
   }

@@ -22,6 +22,10 @@ final menus = [
       title: translate('charts'),
       icon: const Icon(Icons.people_alt)),
   DrawerData(
+      id: DrawerIds.commentaries,
+      title: translate('commentary'),
+      icon: const Icon(Icons.self_improvement)),
+  DrawerData(
       id: DrawerIds.notes,
       title: translate('notes'),
       icon: const Icon(Icons.sticky_note_2)),

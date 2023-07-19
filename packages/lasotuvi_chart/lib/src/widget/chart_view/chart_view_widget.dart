@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_chart_note/lasotuvi_chart_note.dart';
 import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import '../../controller/chart_view_controller.dart';
@@ -19,10 +20,12 @@ class ChartViewWidget extends StatelessWidget {
     required this.onOpenChartSyncOptions,
     required this.onOpenNoteSyncOptions,
     required this.openTagSyncOptions,
+    required this.onOpenCommentarySyncOptions,
     required this.onOpenCheckboxTagList,
     required this.onOpenChartEditOptions,
     required this.onOpenNoteCreation,
     required this.onOpenNoteEditor,
+    required this.onOpenCommentaryReader,
   });
   final String? uid;
   final ChartHasTags? chartHasTags;
@@ -30,6 +33,7 @@ class ChartViewWidget extends StatelessWidget {
   final ColorScheme colorScheme;
   final void Function(Chart chart) onOpenChartSyncOptions;
   final void Function(Note note) onOpenNoteSyncOptions;
+  final void Function(Commentary commentary) onOpenCommentarySyncOptions;
   // final Widget Function(Chart, {String? uid, String? syncStatus})
   //     chartSyncOptions;
   // final Widget Function(Note, {String? uid, String? syncStatus})
@@ -44,6 +48,8 @@ class ChartViewWidget extends StatelessWidget {
   final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
   final void Function(BuildContext context, Chart chart) onOpenNoteCreation;
   final void Function(BuildContext context, Note note) onOpenNoteEditor;
+  final void Function(BuildContext context, Commentary commentary)
+      onOpenCommentaryReader;
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +161,24 @@ class ChartViewWidget extends StatelessWidget {
                       //           )
                       //       .toList(),
                       // ),
+                      const SizedBox(
+                        height: 24.0,
+                      ),
+                      BasicStreamBuilder(
+                        stream: controller.commentaryStream(
+                            uid, chartHasTags!.source),
+                        child: (data) => CommentaryGridWidget(
+                          uid: uid,
+                          colorScheme: colorScheme,
+                          translate: translate,
+                          data: data,
+                          onOpenSyncOptions: (_, commentary) =>
+                              onOpenCommentarySyncOptions(commentary),
+                          // onOpenCommentaryCreation: (context) =>
+                          //     onOpenNoteCreation(context, chartHasTags!.source),
+                          onOpenCommentaryReader: onOpenCommentaryReader,
+                        ),
+                      ),
                       const SizedBox(
                         height: 24.0,
                       ),

@@ -57,6 +57,7 @@ export 'src/chart/controller/chart_detail_controller.dart';
 export 'src/chart/controller/chart_view_controller.dart';
 export 'src/chart/controller/chart_list_controller_provider.dart';
 
+export 'src/chart/usecase/chart_by_commentary_id.dart';
 export 'src/chart/usecase/chart_by_note_id.dart';
 export 'src/chart/usecase/update_chart.dart';
 export 'src/chart/usecase/on_chart.dart';
@@ -134,6 +135,33 @@ export 'src/note/repository/note_repostiory.dart';
 export 'src/note/repository/note_and_chart/cloud_note_and_chart_repository.dart';
 export 'src/note/repository/note_and_chart/local_note_and_chart_repository.dart';
 export 'src/note/repository/note_and_chart/note_and_chart_repository.dart';
+
+export 'src/commentary/controller/commentary_reader_controller.dart';
+export 'src/commentary/controller/commentary_list_controller.dart';
+export 'src/commentary/controller/commentary_and_chart_list_controller.dart';
+
+export 'src/commentary/usecase/update_commentary.dart';
+export 'src/commentary/usecase/on_commentaries.dart';
+export 'src/commentary/usecase/on_commentary_by_chart_id.dart';
+export 'src/commentary/usecase/insert_commentary_to_local.dart';
+
+export 'src/commentary/usecase/on_commentary_by_id.dart';
+export 'src/commentary/usecase/sync_commentaries.dart';
+export 'src/commentary/usecase/on_commentary_and_chart.dart';
+export 'src/commentary/usecase/delete_commentary_from_cloud.dart';
+export 'src/commentary/usecase/delete_commentary_from_local.dart';
+export 'src/commentary/usecase/download_commentary.dart';
+export 'src/commentary/usecase/upload_commentary.dart';
+export 'src/commentary/dao/commentary_dao.dart';
+export 'src/commentary/data_source/firebase_commentary_data_source.dart';
+export 'src/commentary/data_source/sqlite_commentary_data_source.dart';
+export 'src/commentary/repository/cloud_commentary_repository.dart';
+export 'src/commentary/repository/local_commentary_repository.dart';
+export 'src/commentary/repository/commentary_repostiory.dart';
+
+export 'src/commentary/repository/commentary_and_chart/cloud_commentary_and_chart_repository.dart';
+export 'src/commentary/repository/commentary_and_chart/local_commentary_and_chart_repository.dart';
+export 'src/commentary/repository/commentary_and_chart/commentary_and_chart_repository.dart';
 
 export 'src/database/local_database_provider.dart';
 

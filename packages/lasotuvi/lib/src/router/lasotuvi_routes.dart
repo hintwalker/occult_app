@@ -21,6 +21,7 @@ import '../screen/chart/all_charts.dart';
 import '../screen/chart/chart.dart';
 import '../screen/chart/chart_creation.dart';
 import '../screen/chart/chart_detail.dart';
+import '../screen/commentary/all_commentaries.dart';
 import '../screen/home.dart';
 import '../screen/library/library.dart';
 import '../screen/market/market.dart';
@@ -95,6 +96,17 @@ class LasotuviRoutes {
             pageBuilder: (context, state) => const FadeTransitionPage(
               child: ChartsScreen(
                 restorationId: RouteName.charts,
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
+          GoRoute(
+            name: RouteName.commentaries,
+            path: RoutePath.commentaries,
+            parentNavigatorKey: shellNavigatorKey,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: AllCommentariesScreen(
+                restorationId: RouteName.commentaries,
                 // drawerController: mainDrawerController,
               ),
             ),

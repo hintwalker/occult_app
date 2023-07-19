@@ -8,5 +8,7 @@ class DrawerIds {
   static const tags = 'tags';
   static const books = 'books';
   static const library = 'library';
+
+  static const commentaries = 'commentaries';
   // static const groupStars = 'groupStars';
 }

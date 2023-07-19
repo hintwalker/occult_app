@@ -3,15 +3,16 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
+import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:sunoom/sunoom.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../../../router/router_params.dart';
-import '../../auth/auth_depended_state.dart';
-import '../controller/note_editor_body_controller.dart';
+// import '../../../router/router_params.dart';
+// import '../../auth/auth_depended_state.dart';
+// import '../controller/note_editor_body_controller.dart';
 
 class NoteEditorBody extends ConsumerStatefulWidget {
   const NoteEditorBody(
@@ -80,7 +81,7 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
   Widget getEditorWidget(Note note) {
     return WillPopScope(
       onWillPop: () => onWillPop(note, context, ref),
-      child: NoteEditorModal(
+      child: NoteEditorScaffold(
         note: note,
         colorScheme: LasotuviAppStyle.colorScheme,
         translate: translate,
@@ -120,7 +121,10 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
               ),
               child: Card(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () => ChartNavigation.openChartView(
+                    context: context,
+                    chart: chart,
+                  ),
                   // ChartHelper.openChartView(context: context, chart: chart),
                   borderRadius: BorderRadius.circular(12.0),
                   child: Padding(

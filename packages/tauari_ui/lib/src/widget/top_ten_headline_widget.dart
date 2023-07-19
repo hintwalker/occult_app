@@ -16,7 +16,7 @@ class TopTenHeadlineWidget extends StatelessWidget {
 
   final String title;
   final ColorScheme colorScheme;
-  final void Function() onAddData;
+  final void Function()? onAddData;
   final void Function() onShowAll;
   final String showAllText;
   @override
@@ -27,7 +27,8 @@ class TopTenHeadlineWidget extends StatelessWidget {
         const SizedBox(
           width: 12.0,
         ),
-        TopTenAddDataButton(colorScheme: colorScheme, onTap: onAddData),
+        if (onAddData != null)
+          TopTenAddDataButton(colorScheme: colorScheme, onTap: onAddData!),
         const Spacer(),
         TopTenShowAllButton(showAllText,
             onTap: onShowAll, colorScheme: colorScheme)

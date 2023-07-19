@@ -24,36 +24,56 @@ class NoteItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(right: 12.0),
-        child: Stack(children: [
-          Card(
-            margin: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
-            child: InkWell(
-              onTap: () => onTap(context, item),
-              borderRadius: BorderRadius.circular(12.0),
-              child: Container(
-                padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
-                constraints:
-                    const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      NoteTitleWidget(item.title),
-                      const NoteItemDividerWidget(),
-                      NoteItemContentWidget(item.content),
-                    ]),
-              ),
-            ),
-          ),
-          Positioned(
-              child: SyncStatusRibbonWidget<Note>(
-            uid: uid,
-            syncStatus: item.syncStatus,
-            colorScheme: colorScheme,
-            onTap: onSyncStatusTap,
-          ))
-        ]));
+    return SyncableCardItemScaffold(
+      padding: const EdgeInsets.only(right: 12.0),
+      uid: uid,
+      colorScheme: colorScheme,
+      onItemTap: () => onTap(context, item),
+      syncStatus: item.syncStatus,
+      onSyncStatusTap: onSyncStatusTap,
+      child: Container(
+        padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+        constraints: const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              NoteTitleWidget(item.title),
+              const NoteItemDividerWidget(),
+              NoteItemContentWidget(item.content),
+            ]),
+      ),
+    );
+    // Padding(
+    //     padding: const EdgeInsets.only(right: 12.0),
+    //     child: Stack(children: [
+    //       Card(
+    //         margin: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
+    //         child: InkWell(
+    //           onTap: () => onTap(context, item),
+    //           borderRadius: BorderRadius.circular(12.0),
+    //           child: Container(
+    //             padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+    //             constraints:
+    //                 const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
+    //             child: Column(
+    //                 crossAxisAlignment: CrossAxisAlignment.start,
+    //                 mainAxisSize: MainAxisSize.min,
+    //                 children: [
+    //                   NoteTitleWidget(item.title),
+    //                   const NoteItemDividerWidget(),
+    //                   NoteItemContentWidget(item.content),
+    //                 ]),
+    //           ),
+    //         ),
+    //       ),
+    //       Positioned(
+    //           child: SyncStatusRibbonWidget(
+    //         uid: uid,
+    //         syncStatus: item.syncStatus,
+    //         colorScheme: colorScheme,
+    //         onTap: onSyncStatusTap,
+    //       ))
+    //     ]));
   }
 }

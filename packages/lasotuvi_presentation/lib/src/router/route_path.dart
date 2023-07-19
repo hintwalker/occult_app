@@ -46,4 +46,6 @@ class RoutePath {
 
   static const tagDetail =
       '/tag/:${RouterParams.tagId}/:${RouterParams.syncStatus}';
+
+  static const commentaries = '/commentary/all';
 }

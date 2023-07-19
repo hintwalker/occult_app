@@ -39,12 +39,12 @@ export 'src/usecase/local/delete_from_local.dart';
 export 'src/entity/must_buy_entity.dart';
 export 'src/entity/entity.dart';
 export 'src/entity/sortable.dart';
-export 'src/model/cloud_storable.dart';
+
 export 'src/entity/cloud_getable.dart';
 export 'src/entity/statable.dart';
 export 'src/entity/syncable.dart';
 export 'src/entity/sqlite_getable.dart';
-export 'src/model/sqlite_storable.dart';
+
 export 'src/entity/dumpable.dart';
 export 'src/entity/set_of_entity.dart';
 export 'src/entity/syncable_entity.dart';
@@ -52,6 +52,9 @@ export 'src/entity/pool_set_of_entity.dart';
 export 'src/entity/syncable_entity_carrier.dart';
 export 'src/entity/syncable_entity_pair.dart';
 
+export 'src/model/must_buy_model.dart';
+export 'src/model/sqlite_storable.dart';
+export 'src/model/cloud_storable.dart';
 export 'src/model/model.dart';
 export 'src/model/syncable_model.dart';
 export 'src/model/local_model.dart';

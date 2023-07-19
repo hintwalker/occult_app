@@ -25,47 +25,77 @@ class NoteAndChartItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(right: 12.0),
-        child: Stack(children: [
-          Center(
-            child: Card(
-              margin: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(12.0),
-                onTap: () => onTap(item.entity1!),
-                child: Container(
-                  padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
-                  // constraints:
-                  //     const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            NoteTitleWidget(item.entity1!.title),
-                            const NoteItemDividerWidget(),
-                            NoteItemOwnerWidget(item.entity2!),
-                            const NoteItemDividerWidget(),
-                            NoteItemContentWidget(item.entity1!.content),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+    return SyncableCardItemScaffold(
+      padding: const EdgeInsets.only(right: 12.0),
+      uid: uid,
+      colorScheme: colorScheme,
+      onItemTap: () => onTap(item.entity1!),
+      syncStatus: item.entity1!.syncStatus,
+      onSyncStatusTap: onSyncStatusTap,
+      child: Container(
+        padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+        // constraints:
+        //     const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  NoteTitleWidget(item.entity1!.title),
+                  const NoteItemDividerWidget(),
+                  NoteItemOwnerWidget(item.entity2!),
+                  const NoteItemDividerWidget(),
+                  NoteItemContentWidget(item.entity1!.content),
+                ],
               ),
             ),
-          ),
-          Positioned(
-              child: SyncStatusRibbonWidget<Note>(
-            uid: uid,
-            syncStatus: item.entity1!.syncStatus,
-            colorScheme: colorScheme,
-            onTap: onSyncStatusTap,
-          ))
-        ]));
+          ],
+        ),
+      ),
+    );
+    // Padding(
+    //     padding: const EdgeInsets.only(right: 12.0),
+    //     child: Stack(children: [
+    //       Center(
+    //         child: Card(
+    //           margin: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
+    //           child: InkWell(
+    //             borderRadius: BorderRadius.circular(12.0),
+    //             onTap: () => onTap(item.entity1!),
+    //             child: Container(
+    //               padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+    //               // constraints:
+    //               //     const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
+    //               child: Row(
+    //                 children: [
+    //                   Expanded(
+    //                     child: Column(
+    //                       crossAxisAlignment: CrossAxisAlignment.center,
+    //                       mainAxisSize: MainAxisSize.min,
+    //                       children: [
+    //                         NoteTitleWidget(item.entity1!.title),
+    //                         const NoteItemDividerWidget(),
+    //                         NoteItemOwnerWidget(item.entity2!),
+    //                         const NoteItemDividerWidget(),
+    //                         NoteItemContentWidget(item.entity1!.content),
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 ],
+    //               ),
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+    //       Positioned(
+    //           child: SyncStatusRibbonWidget(
+    //         uid: uid,
+    //         syncStatus: item.entity1!.syncStatus,
+    //         colorScheme: colorScheme,
+    //         onTap: onSyncStatusTap,
+    //       ))
+    //     ]));
   }
 }

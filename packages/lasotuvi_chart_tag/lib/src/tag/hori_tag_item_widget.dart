@@ -23,39 +23,60 @@ class HoriTagItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 12.0),
-      child: Stack(
-        children: [
-          InkWell(
-            onTap: () => onTap(context, item),
-            child: Card(
-              margin: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
-              child: Container(
-                padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
-                constraints: const BoxConstraints(
-                  minWidth: 84.0,
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      HoriTagTitleWidget(item.title),
-                      HoriTagSubTitleWidget(item.subTitle)
-                    ]),
-              ),
-            ),
-          ),
-          Positioned(
-            child: SyncStatusRibbonWidget<Tag>(
-              uid: uid,
-              syncStatus: item.syncStatus,
-              colorScheme: colorScheme,
-              onTap: onSyncStatusTap,
-            ),
-          ),
-        ],
+    return SyncableCardItemScaffold(
+      uid: uid,
+      colorScheme: colorScheme,
+      onItemTap: () => onTap(context, item),
+      syncStatus: item.syncStatus,
+      onSyncStatusTap: onSyncStatusTap,
+      child: Container(
+        padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+        constraints: const BoxConstraints(
+          minWidth: 84.0,
+        ),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              HoriTagTitleWidget(item.title),
+              HoriTagSubTitleWidget(item.subTitle)
+            ]),
       ),
     );
+
+    // Padding(
+    //   padding: const EdgeInsets.only(right: 12.0),
+    //   child: Stack(
+    //     children: [
+    //       InkWell(
+    //         onTap: () => onTap(context, item),
+    //         child: Card(
+    //           margin: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
+    //           child: Container(
+    //             padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+    //             constraints: const BoxConstraints(
+    //               minWidth: 84.0,
+    //             ),
+    //             child: Column(
+    //                 crossAxisAlignment: CrossAxisAlignment.start,
+    //                 mainAxisSize: MainAxisSize.min,
+    //                 children: [
+    //                   HoriTagTitleWidget(item.title),
+    //                   HoriTagSubTitleWidget(item.subTitle)
+    //                 ]),
+    //           ),
+    //         ),
+    //       ),
+    //       Positioned(
+    //         child: SyncStatusRibbonWidget<Tag>(
+    //           uid: uid,
+    //           syncStatus: item.syncStatus,
+    //           colorScheme: colorScheme,
+    //           onTap: onSyncStatusTap,
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }

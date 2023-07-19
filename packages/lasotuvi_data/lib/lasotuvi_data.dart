@@ -35,6 +35,17 @@ export 'src/note/repository/local_note_repository_impl.dart';
 export 'src/note/source/local/sqlite_note_data_source.dart';
 export 'src/note/source/remote/firebase_note_data_source.dart';
 
+export 'src/commentary/repository/commentary_and_chart/commentary_and_chart_repository_impl.dart';
+export 'src/commentary/repository/commentary_and_chart/cloud_commentary_and_chart_repository_impl.dart';
+export 'src/commentary/repository/commentary_and_chart/local_commentary_and_chart_repository_impl.dart';
+export 'src/commentary/dao/commentary_dao.dart';
+export 'src/commentary/model/commentary_model.dart';
+export 'src/commentary/repository/commentary_repository_impl.dart';
+export 'src/commentary/repository/cloud_commentary_repository_impl.dart';
+export 'src/commentary/repository/local_commentary_repository_impl.dart';
+export 'src/commentary/source/local/sqlite_commentary_data_source.dart';
+export 'src/commentary/source/remote/firebase_commentary_data_source.dart';
+
 export 'src/db/sql_templates.dart';
 export 'src/db/table_names.dart';
 export 'src/db/on_db_created.dart';

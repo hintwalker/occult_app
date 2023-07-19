@@ -3,7 +3,7 @@ library lasotuvi_note;
 export 'src/box_name_note_cache.dart';
 export 'src/note_editor_cache.dart';
 
-export 'src/modal/note_editor_modal.dart';
+export 'src/scaffold/note_editor_scaffold.dart';
 
 export 'src/widget/builder/note_editor_builder.dart';
 

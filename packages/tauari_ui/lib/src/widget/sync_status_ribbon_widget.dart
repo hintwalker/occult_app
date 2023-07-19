@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tauari_values/tauari_values.dart';
 
-class SyncStatusRibbonWidget<T> extends StatelessWidget {
+class SyncStatusRibbonWidget extends StatelessWidget {
   const SyncStatusRibbonWidget({
     super.key,
     this.uid,

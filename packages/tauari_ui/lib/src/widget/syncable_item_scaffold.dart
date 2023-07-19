@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-
 import 'sync_status_ribbon_widget.dart';
 
-class ListItemHasStorageIcon<T> extends StatelessWidget {
-  const ListItemHasStorageIcon({
+class SyncableItemScaffold extends StatelessWidget {
+  const SyncableItemScaffold({
     super.key,
-    this.uid,
-    this.syncStatus,
-    required this.syncData,
+    required this.uid,
+    required this.syncStatus,
+    // required this.syncData,
     required this.colorScheme,
     // this.storageOptionsModalBuilder,
-    this.itemPadding = const EdgeInsets.only(left: 8.0, top: 8.0),
+    this.padding = const EdgeInsets.only(),
     required this.child,
-    this.onSyncStatusTap,
+    required this.onSyncStatusTap,
+    // required this.onItemTap,
   });
   final String? uid;
-  final T syncData;
+  // final T syncData;
   final String? syncStatus;
   final void Function()? onSyncStatusTap;
   // final Widget Function(T, {String? uid, String? onCloud})?
   //     storageOptionsModalBuilder;
   final ColorScheme colorScheme;
-  final EdgeInsetsGeometry itemPadding;
+  final EdgeInsetsGeometry padding;
+  // final void Function() onItemTap;
   final Widget child;
 
   @override
@@ -29,7 +30,7 @@ class ListItemHasStorageIcon<T> extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-          padding: itemPadding,
+          padding: padding,
           child: child,
         ),
         Positioned(

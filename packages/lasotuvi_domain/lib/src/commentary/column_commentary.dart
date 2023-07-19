@@ -1,6 +1,7 @@
 class ColumnCommentary {
   static const title = 't';
   static const content = 'c';
-  static const edited = 'e';
+  static const lastViewed = 'l';
+  // static const edited = 'e';
   static const chartId = 'ci';
 }
