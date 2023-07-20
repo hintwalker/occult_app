@@ -12,5 +12,5 @@ class FirebaseRequestDataSource extends RemoteDataSource<RequestModel> {
               snapshotToModelList(snapshot, fromMap: RequestModel.fromMap),
         );
   @override
-  String dataCollectionPath(String uid) => 'tuvi/$uid/c';
+  String dataCollectionPath(String uid) => 'tuvi/$uid/r';
 }

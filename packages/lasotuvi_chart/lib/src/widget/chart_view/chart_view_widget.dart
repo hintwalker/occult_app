@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_chart_note/lasotuvi_chart_note.dart';
 import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
-import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import '../../controller/chart_view_controller.dart';

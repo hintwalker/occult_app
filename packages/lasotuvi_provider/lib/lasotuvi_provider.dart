@@ -184,6 +184,27 @@ export 'src/request/usecase/download_request.dart';
 export 'src/request/usecase/insert_request_to_local.dart';
 export 'src/request/usecase/sync_requests.dart';
 
+export 'src/notification/dao/notification_dao.dart';
+export 'src/notification/data_source/firebase_notification_data_source.dart';
+export 'src/notification/data_source/sqlite_notification_data_source.dart';
+export 'src/notification/repository/notification_repository.dart';
+export 'src/notification/repository/cloud_notification_repository.dart';
+export 'src/notification/repository/local_notification_repository.dart';
+
+// export 'src/notification/controller/notification_detail_controller.dart';
+// export 'src/notification/controller/notification_view_controller.dart';
+// export 'src/notification/controller/notification_list_controller.dart';
+
+export 'src/notification/usecase/update_notification.dart';
+export 'src/notification/usecase/on_notification.dart';
+export 'src/notification/usecase/on_notifications.dart';
+export 'src/notification/usecase/upload_notification.dart';
+export 'src/notification/usecase/delete_notification_from_cloud.dart';
+export 'src/notification/usecase/delete_notification_from_local.dart';
+export 'src/notification/usecase/download_notification.dart';
+export 'src/notification/usecase/insert_notification_to_local.dart';
+export 'src/notification/usecase/sync_notifications.dart';
+
 export 'src/database/local_database_provider.dart';
 
 export 'src/user/user_data_source_provider.dart';
