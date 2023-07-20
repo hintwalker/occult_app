@@ -43,9 +43,9 @@ export 'src/note/repository/local_note_repository_impl.dart';
 export 'src/note/source/local/sqlite_note_data_source.dart';
 export 'src/note/source/remote/firebase_note_data_source.dart';
 
-export 'src/commentary/repository/commentary_and_chart/commentary_and_chart_repository_impl.dart';
-export 'src/commentary/repository/commentary_and_chart/cloud_commentary_and_chart_repository_impl.dart';
-export 'src/commentary/repository/commentary_and_chart/local_commentary_and_chart_repository_impl.dart';
+export 'src/commentary/repository/commentary_and_request/commentary_and_request_repository_impl.dart';
+export 'src/commentary/repository/commentary_and_request/cloud_commentary_and_request_repository_impl.dart';
+export 'src/commentary/repository/commentary_and_request/local_commentary_and_request_repository_impl.dart';
 export 'src/commentary/dao/commentary_dao.dart';
 export 'src/commentary/model/commentary_model.dart';
 export 'src/commentary/repository/commentary_repository_impl.dart';

@@ -9,7 +9,7 @@ class Commentary extends MustBuyEntity<Commentary> {
     required this.content,
     required this.created,
     required this.lastViewed,
-    required this.chartId,
+    required this.requestId,
     super.storageState,
     super.syncStatus,
     required super.price,
@@ -19,7 +19,7 @@ class Commentary extends MustBuyEntity<Commentary> {
   final String content;
   final DateTime created;
   final DateTime lastViewed;
-  final int chartId;
+  final int requestId;
 
   @override
   Commentary copyWithState(String? state) => copyWith(storageState: state);
@@ -35,7 +35,7 @@ class Commentary extends MustBuyEntity<Commentary> {
       ColumnCommentary.content: content,
       columnCreated: created.millisecondsSinceEpoch,
       ColumnCommentary.lastViewed: lastViewed.millisecondsSinceEpoch,
-      ColumnCommentary.requestId: chartId,
+      ColumnCommentary.requestId: requestId,
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnPrice: price,
@@ -57,7 +57,7 @@ class Commentary extends MustBuyEntity<Commentary> {
           ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
           : DateTime.fromMillisecondsSinceEpoch(
               map[ColumnCommentary.lastViewed] as int),
-      chartId: map[ColumnCommentary.requestId] as int,
+      requestId: map[ColumnCommentary.requestId] as int,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
       syncStatus: map[columnSyncStatus] == null
@@ -75,7 +75,7 @@ class Commentary extends MustBuyEntity<Commentary> {
     DateTime? created,
     DateTime? lastViewed,
     String? syncStatus,
-    int? chartId,
+    int? requestId,
     String? storageState,
     int? price,
     int? paid,
@@ -86,7 +86,7 @@ class Commentary extends MustBuyEntity<Commentary> {
       content: content ?? this.content,
       created: created ?? this.created,
       lastViewed: lastViewed ?? this.lastViewed,
-      chartId: chartId ?? this.chartId,
+      requestId: requestId ?? this.requestId,
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
       price: price ?? this.price,

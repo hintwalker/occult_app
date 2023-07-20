@@ -4,7 +4,7 @@ import 'package:tauari_ui/tauari_ui.dart';
 
 class CommentaryItemOwnerWidget extends StatelessWidget {
   const CommentaryItemOwnerWidget(this.owner, {super.key});
-  final Chart owner;
+  final Request owner;
 
   @override
   Widget build(BuildContext context) {

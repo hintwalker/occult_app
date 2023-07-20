@@ -89,7 +89,8 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
               ),
               TopTenCommentaryBanner(
                 uid: uid,
-                controller: ref.watch(commentaryAndChartListControllerProvider),
+                controller:
+                    ref.watch(commentaryAndRequestListControllerProvider),
                 translate: translate,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 // onAddData: () =>

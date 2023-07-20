@@ -12,5 +12,5 @@ class LocalCommentaryRepositoryImpl
       required super.entityToModel});
 
   @override
-  int getOwnerId(Commentary entity) => entity.chartId;
+  int getOwnerId(Commentary entity) => entity.requestId;
 }

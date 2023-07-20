@@ -7,7 +7,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
     required this.title,
     required this.content,
     required this.lastViewed,
-    required this.chartId,
+    required this.requestId,
     super.storageState,
     super.syncStatus,
     required super.price,
@@ -16,7 +16,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
   final String title;
   final String content;
   final DateTime lastViewed;
-  final int chartId;
+  final int requestId;
 
   @override
   Commentary toEntity() {
@@ -25,7 +25,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       title: title,
       content: content,
       lastViewed: lastViewed,
-      chartId: chartId,
+      requestId: requestId,
       created: DateTime.fromMillisecondsSinceEpoch(id),
       storageState: storageState,
       syncStatus: syncStatus,
@@ -56,7 +56,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       columnId: id,
       ColumnCommentary.title: title,
       ColumnCommentary.content: content,
-      ColumnCommentary.requestId: chartId,
+      ColumnCommentary.requestId: requestId,
       ColumnCommentary.lastViewed: lastViewed.millisecondsSinceEpoch,
       columnState: storageState,
       columnSyncStatus: syncStatus,
@@ -70,7 +70,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       map[columnId] as int,
       title: map[ColumnCommentary.title] as String,
       content: map[ColumnCommentary.content] as String,
-      chartId: map[ColumnCommentary.requestId] as int,
+      requestId: map[ColumnCommentary.requestId] as int,
       lastViewed: DateTime.fromMillisecondsSinceEpoch(
           map[ColumnCommentary.lastViewed] as int),
       storageState:
@@ -89,7 +89,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       title: entity.title,
       content: entity.content,
       lastViewed: entity.lastViewed,
-      chartId: entity.chartId,
+      requestId: entity.requestId,
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
       price: entity.price,

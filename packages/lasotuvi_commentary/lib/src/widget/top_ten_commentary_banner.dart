@@ -4,8 +4,8 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_strings/tuvi_strings.dart';
 
-import '../controller/commentary_and_chart_list_controller.dart';
-import 'commentary_and_chart_list_item_widget.dart';
+import '../controller/commentary_and_request_list_controller.dart';
+import 'commentary_and_request_list_item_widget.dart';
 
 class TopTenCommentaryBanner extends StatelessWidget {
   const TopTenCommentaryBanner({
@@ -20,7 +20,7 @@ class TopTenCommentaryBanner extends StatelessWidget {
     required this.onOpenSyncOptions,
   });
   final String? uid;
-  final CommentaryAndChartListController controller;
+  final CommentaryAndRequestListController controller;
   final String Function(String) translate;
   final ColorScheme colorScheme;
   // final void Function() onAddData;
@@ -42,10 +42,10 @@ class TopTenCommentaryBanner extends StatelessWidget {
               onShowAll: onShowAll),
           // Expanded(
           //     child:
-          PairDataGridBuilder<Commentary, Chart, CommentaryAndChart>(
+          PairDataGridBuilder<Commentary, Request, CommentaryAndRequest>(
             uid: uid,
             controller: controller,
-            itemWidget: (item) => CommentaryAndChartListItemWidget(
+            itemWidget: (item) => CommentaryAndRequestListItemWidget(
               item,
               uid: uid,
               colorScheme: colorScheme,

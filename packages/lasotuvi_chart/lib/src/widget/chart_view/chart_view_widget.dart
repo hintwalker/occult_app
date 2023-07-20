@@ -161,24 +161,24 @@ class ChartViewWidget extends StatelessWidget {
                       //           )
                       //       .toList(),
                       // ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                      BasicStreamBuilder(
-                        stream: controller.commentaryStream(
-                            uid, chartHasTags!.source),
-                        child: (data) => CommentaryGridWidget(
-                          uid: uid,
-                          colorScheme: colorScheme,
-                          translate: translate,
-                          data: data,
-                          onOpenSyncOptions: (_, commentary) =>
-                              onOpenCommentarySyncOptions(commentary),
-                          // onOpenCommentaryCreation: (context) =>
-                          //     onOpenNoteCreation(context, chartHasTags!.source),
-                          onOpenCommentaryReader: onOpenCommentaryReader,
-                        ),
-                      ),
+                      // const SizedBox(
+                      //   height: 24.0,
+                      // ),
+                      // BasicStreamBuilder(
+                      //   stream: controller.commentaryStream(
+                      //       uid, chartHasTags!.source),
+                      //   child: (data) => CommentaryGridWidget(
+                      //     uid: uid,
+                      //     colorScheme: colorScheme,
+                      //     translate: translate,
+                      //     data: data,
+                      //     onOpenSyncOptions: (_, commentary) =>
+                      //         onOpenCommentarySyncOptions(commentary),
+                      //     // onOpenCommentaryCreation: (context) =>
+                      //     //     onOpenNoteCreation(context, chartHasTags!.source),
+                      //     onOpenCommentaryReader: onOpenCommentaryReader,
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 24.0,
                       ),

@@ -1,2 +1,2 @@
 const commentarySortKey = 'commentarySortKey';
-const commentaryAndChartSortKey = 'commentaryAndChartSortKey';
+const commentaryAndRequestSortKey = 'commentaryAndRequestSortKey';

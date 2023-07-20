@@ -7,12 +7,12 @@ class ChartViewController extends ChangeNotifier {
   ChartViewController({
     required this.onData,
     required this.onNotes,
-    required this.onCommentaries,
+    // required this.onCommentaries,
   });
 
   final OnChartHasTags onData;
   final OnNoteByChartId onNotes;
-  final OnCommentaryByChartId onCommentaries;
+  // final OnCommentaryByRequestId onCommentaries;
 
   StreamSubscription<ChartHasTags?>? _subscription;
   StreamController<ChartHasTags?>? _streamController;
@@ -20,8 +20,8 @@ class ChartViewController extends ChangeNotifier {
   StreamSubscription<Iterable<Note>>? _notesSubscription;
   StreamController<Iterable<Note>>? _notesStreamController;
 
-  StreamSubscription<Iterable<Commentary>>? _commentarySubscription;
-  StreamController<Iterable<Commentary>>? _commentaryStreamController;
+  // StreamSubscription<Iterable<Commentary>>? _commentarySubscription;
+  // StreamController<Iterable<Commentary>>? _commentaryStreamController;
 
   Stream<ChartHasTags?> stream(String? uid, Chart chart) {
     _streamController = StreamController<ChartHasTags?>.broadcast();
@@ -59,28 +59,28 @@ class ChartViewController extends ChangeNotifier {
     });
   }
 
-  Stream<Iterable<Commentary>> commentaryStream(
-    String? uid,
-    Chart chart,
-  ) {
-    _commentaryStreamController =
-        StreamController<Iterable<Commentary>>.broadcast();
-    listenCommentaries(uid, chart);
-    return _commentaryStreamController!.stream;
-  }
+  // Stream<Iterable<Commentary>> commentaryStream(
+  //   String? uid,
+  //   Chart chart,
+  // ) {
+  //   _commentaryStreamController =
+  //       StreamController<Iterable<Commentary>>.broadcast();
+  //   listenCommentaries(uid, chart);
+  //   return _commentaryStreamController!.stream;
+  // }
 
-  void listenCommentaries(String? uid, Chart chart) {
-    _commentarySubscription = onCommentaries(
-      uid,
-      chart.id,
-      chart.syncStatus,
-    ).listen((event) {
-      if (!(_commentaryStreamController == null ||
-          _commentaryStreamController!.isClosed)) {
-        _commentaryStreamController?.add(event);
-      }
-    });
-  }
+  // void listenCommentaries(String? uid, Chart chart) {
+  //   _commentarySubscription = onCommentaries(
+  //     uid,
+  //     chart.id,
+  //     chart.syncStatus,
+  //   ).listen((event) {
+  //     if (!(_commentaryStreamController == null ||
+  //         _commentaryStreamController!.isClosed)) {
+  //       _commentaryStreamController?.add(event);
+  //     }
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -88,8 +88,8 @@ class ChartViewController extends ChangeNotifier {
     _streamController?.close();
     _notesSubscription?.cancel();
     _notesStreamController?.close();
-    _commentarySubscription?.cancel();
-    _commentaryStreamController?.close();
+    // _commentarySubscription?.cancel();
+    // _commentaryStreamController?.close();
     super.dispose();
   }
 }

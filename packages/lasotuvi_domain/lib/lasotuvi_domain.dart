@@ -6,10 +6,10 @@ export 'src/storage/uploader.dart';
 
 export 'src/commentary/usecase/update_commentary.dart';
 export 'src/commentary/usecase/on_commentary_by_id.dart';
-export 'src/commentary/usecase/on_commentary_by_chart_id.dart';
+export 'src/commentary/usecase/on_commentary_by_request_id.dart';
 export 'src/commentary/usecase/insert_commentary_to_local.dart';
 export 'src/commentary/usecase/sync_commentaries.dart';
-export 'src/commentary/usecase/on_commentary_and_chart.dart';
+export 'src/commentary/usecase/on_commentary_and_request.dart';
 export 'src/commentary/usecase/download_commentary.dart';
 export 'src/commentary/usecase/upload_commentary.dart';
 export 'src/commentary/usecase/on_commentary_count.dart';
@@ -18,14 +18,14 @@ export 'src/commentary/usecase/delete_commentary_from_cloud.dart';
 export 'src/commentary/usecase/delete_commentary_from_local.dart';
 
 export 'src/commentary/entity/commentary.dart';
-export 'src/commentary/entity/commentary_and_chart.dart';
+export 'src/commentary/entity/commentary_and_request.dart';
 export 'src/commentary/column_commentary.dart';
 export 'src/commentary/repository/commentary_repository.dart';
 export 'src/commentary/repository/cloud_commentary_repository.dart';
 export 'src/commentary/repository/local_commentary_repository.dart';
-export 'src/commentary/repository/commentary_and_chart/local_commentary_and_chart_repository.dart';
-export 'src/commentary/repository/commentary_and_chart/cloud_commentary_and_chart_repository.dart';
-export 'src/commentary/repository/commentary_and_chart/commentary_and_chart_repository.dart';
+export 'src/commentary/repository/commentary_and_request/local_commentary_and_request_repository.dart';
+export 'src/commentary/repository/commentary_and_request/cloud_commentary_and_request_repository.dart';
+export 'src/commentary/repository/commentary_and_request/commentary_and_request_repository.dart';
 
 export 'src/note/usecase/update_note.dart';
 export 'src/note/usecase/on_note_by_id.dart';
@@ -52,7 +52,7 @@ export 'src/note/repository/note_and_chart/note_and_chart_repository.dart';
 
 export 'src/request/usecase/update_request.dart';
 export 'src/request/usecase/on_request_by_id.dart';
-// export 'src/request/usecase/on_request_by_commentary_id.dart';
+export 'src/request/usecase/request_by_commentary_id.dart';
 export 'src/request/usecase/insert_request_to_local.dart';
 export 'src/request/usecase/sync_requests.dart';
 // export 'src/request/usecase/on_request_and_chart.dart';

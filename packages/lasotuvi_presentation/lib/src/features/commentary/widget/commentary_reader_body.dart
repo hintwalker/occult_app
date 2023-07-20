@@ -9,6 +9,7 @@ import 'package:sunoom/sunoom.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../request/navigation/request_navigation.dart';
 import '../controller/commentary_reader_body_controller.dart';
 
 // import '../../../router/router_params.dart';
@@ -107,18 +108,19 @@ class _CommentaryReaderBodyState
 
   Widget chartAvatar(Commentary commentary) {
     return FutureBuilder(
-        future: ref.read(chartByCommentaryIdProvider).call(uid, commentary.id),
+        future:
+            ref.read(requestByCommentaryIdProvider).call(uid, commentary.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final chart = snapshot.requireData;
+            final request = snapshot.requireData;
 
-            if (chart == null) {
+            if (request == null) {
               return const Text('');
             }
-            final birthday = chart.birthday
-                .toMoment(TimeZone(offsetInHour: chart.timeZoneOffset));
-            final canWatchingYear = Can.ofLuniYear(chart.watchingYear);
-            final chiWatchingYear = Chi.ofLuniYear(chart.watchingYear);
+            final birthday = request.birthday
+                .toMoment(TimeZone(offsetInHour: request.timeZoneOffset));
+            final canWatchingYear = Can.ofLuniYear(request.watchingYear);
+            final chiWatchingYear = Chi.ofLuniYear(request.watchingYear);
             return Padding(
               padding: const EdgeInsets.only(
                 left: 8,
@@ -126,11 +128,11 @@ class _CommentaryReaderBodyState
               ),
               child: Card(
                 child: InkWell(
-                  onTap: () => ChartNavigation.openChartView(
+                  onTap: () => RequestNavigation.openRequestView(
                     context: context,
-                    chart: chart,
+                    request: request,
                   ),
-                  // ChartHelper.openChartView(context: context, chart: chart),
+                  // RequestHelper.openRequestView(context: context, chart: chart),
                   borderRadius: BorderRadius.circular(12.0),
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
@@ -138,8 +140,8 @@ class _CommentaryReaderBodyState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CircleHumanAvatar(
-                          gender: chart.gender.intValue,
-                          path: chart.avatar,
+                          gender: request.gender.intValue,
+                          path: request.avatar,
                         ),
                         const SizedBox(width: 8.0),
                         Column(
@@ -147,7 +149,7 @@ class _CommentaryReaderBodyState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              chart.name,
+                              request.name,
                             ),
                             Row(
                               children: [
@@ -161,7 +163,7 @@ class _CommentaryReaderBodyState
                               ],
                             ),
                             Text(
-                                '${translate('watchingYear')}: ${chart.watchingYear} ${translate(canWatchingYear.name)} ${translate(chiWatchingYear.name)}'),
+                                '${translate('watchingYear')}: ${request.watchingYear} ${translate(canWatchingYear.name)} ${translate(chiWatchingYear.name)}'),
                           ],
                         )
                       ],

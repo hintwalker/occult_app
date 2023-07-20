@@ -26,11 +26,12 @@ class _AllCommentaryListBodyState
     return findingUid
         ? const LoadingWidget()
         : BasicStreamBuilder(
-            stream:
-                ref.watch(commentaryAndChartListControllerProvider).stream(uid),
+            stream: ref
+                .watch(commentaryAndRequestListControllerProvider)
+                .stream(uid),
             child: (data) => BasicFutureBuilder(
-              future: SortHelper.getSortOption(commentaryAndChartSortKey),
-              child: (sortValue) => AllCommentaryAndChartListWidget(
+              future: SortHelper.getSortOption(commentaryAndRequestSortKey),
+              child: (sortValue) => AllCommentaryAndRequestListWidget(
                 uid: uid,
                 data: data,
                 translate: translate,
