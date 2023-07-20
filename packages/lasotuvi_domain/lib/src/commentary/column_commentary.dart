@@ -3,5 +3,5 @@ class ColumnCommentary {
   static const content = 'c';
   static const lastViewed = 'l';
   // static const edited = 'e';
-  static const chartId = 'ci';
+  static const requestId = 'ri';
 }

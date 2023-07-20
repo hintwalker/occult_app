@@ -56,7 +56,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       columnId: id,
       ColumnCommentary.title: title,
       ColumnCommentary.content: content,
-      ColumnCommentary.chartId: chartId,
+      ColumnCommentary.requestId: chartId,
       ColumnCommentary.lastViewed: lastViewed.millisecondsSinceEpoch,
       columnState: storageState,
       columnSyncStatus: syncStatus,
@@ -70,7 +70,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       map[columnId] as int,
       title: map[ColumnCommentary.title] as String,
       content: map[ColumnCommentary.content] as String,
-      chartId: map[ColumnCommentary.chartId] as int,
+      chartId: map[ColumnCommentary.requestId] as int,
       lastViewed: DateTime.fromMillisecondsSinceEpoch(
           map[ColumnCommentary.lastViewed] as int),
       storageState:

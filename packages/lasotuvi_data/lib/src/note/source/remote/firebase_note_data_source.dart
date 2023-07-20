@@ -12,7 +12,7 @@ class FirebaseNoteDataSource extends RemoteDataSource<NoteModel> {
               snapshotToModelList(snapshot, fromMap: NoteModel.fromMap),
         );
   @override
-  String dataCollectionPath(String uid) => 'tuvi/$uid/notes';
+  String dataCollectionPath(String uid) => 'tuvi/$uid/n';
 
-  String ownerCollectionPath(String uid) => 'tuvi/$uid/charts';
+  String ownerCollectionPath(String uid) => 'tuvi/$uid/c';
 }

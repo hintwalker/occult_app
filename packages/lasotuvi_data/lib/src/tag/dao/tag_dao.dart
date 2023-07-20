@@ -9,5 +9,5 @@ class TagDao extends SqliteDao {
   TagDao(LocalDatabase<Database> database)
       : super(
             database: database,
-            tableName: kDebugMode ? TableNames.tagsTest : TableNames.tags);
+            tableName: kDebugMode ? TableNames.tagTest : TableNames.tag);
 }

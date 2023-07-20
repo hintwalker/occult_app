@@ -9,7 +9,6 @@ class ChartTagDao extends SqliteDao {
   ChartTagDao(LocalDatabase<Database> database)
       : super(
           database: database,
-          tableName:
-              kDebugMode ? TableNames.chartTagsTest : TableNames.chartTags,
+          tableName: kDebugMode ? TableNames.chartTagTest : TableNames.chartTag,
         );
 }

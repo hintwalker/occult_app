@@ -12,7 +12,7 @@ class FirebaseCommentaryDataSource extends RemoteDataSource<CommentaryModel> {
               snapshotToModelList(snapshot, fromMap: CommentaryModel.fromMap),
         );
   @override
-  String dataCollectionPath(String uid) => 'tuvi/$uid/coms';
+  String dataCollectionPath(String uid) => 'tuvi/$uid/cm';
 
-  String ownerCollectionPath(String uid) => 'tuvi/$uid/charts';
+  String ownerCollectionPath(String uid) => 'tuvi/$uid/c';
 }

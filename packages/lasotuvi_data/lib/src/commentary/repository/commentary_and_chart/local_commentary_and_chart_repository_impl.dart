@@ -10,7 +10,7 @@ class LocalCommentaryAndChartRepositoryImpl
     super.dataSource, {
     required super.ownerRepository,
   }) : super(
-          ownerIdColumn: ColumnCommentary.chartId,
+          ownerIdColumn: ColumnCommentary.requestId,
           entityToModel: (entity) => CommentaryModel.fromEntity(entity),
         );
 

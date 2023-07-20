@@ -8,6 +8,14 @@ export 'src/chart/repository/cloud_chart_repository_impl.dart';
 export 'src/chart/source/local/sqlite_chart_data_source.dart';
 export 'src/chart/source/remote/firebase_chart_data_source.dart';
 
+export 'src/request/dao/request_dao.dart';
+export 'src/request/model/request_model.dart';
+export 'src/request/repository/request_repository_impl.dart';
+export 'src/request/repository/local_request_repository_impl.dart';
+export 'src/request/repository/cloud_request_repository_impl.dart';
+export 'src/request/source/local/sqlite_request_data_source.dart';
+export 'src/request/source/remote/firebase_request_data_source.dart';
+
 export 'src/chart_tag/dao/chart_tag_dao.dart';
 export 'src/chart_tag/model/chart_tag_model.dart';
 export 'src/chart_tag/repository/chart_tag_repository_impl.dart';

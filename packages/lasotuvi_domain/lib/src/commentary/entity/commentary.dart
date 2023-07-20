@@ -35,7 +35,7 @@ class Commentary extends MustBuyEntity<Commentary> {
       ColumnCommentary.content: content,
       columnCreated: created.millisecondsSinceEpoch,
       ColumnCommentary.lastViewed: lastViewed.millisecondsSinceEpoch,
-      ColumnCommentary.chartId: chartId,
+      ColumnCommentary.requestId: chartId,
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnPrice: price,
@@ -57,7 +57,7 @@ class Commentary extends MustBuyEntity<Commentary> {
           ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
           : DateTime.fromMillisecondsSinceEpoch(
               map[ColumnCommentary.lastViewed] as int),
-      chartId: map[ColumnCommentary.chartId] as int,
+      chartId: map[ColumnCommentary.requestId] as int,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
       syncStatus: map[columnSyncStatus] == null

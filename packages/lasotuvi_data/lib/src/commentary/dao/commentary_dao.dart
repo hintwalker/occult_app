@@ -9,7 +9,6 @@ class CommentaryDao extends SqliteDao {
   CommentaryDao(LocalDatabase<Database> database)
       : super(
             database: database,
-            tableName: kDebugMode
-                ? TableNames.commentariesTest
-                : TableNames.commentaries);
+            tableName:
+                kDebugMode ? TableNames.commentaryTest : TableNames.commentary);
 }

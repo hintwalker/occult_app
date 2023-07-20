@@ -9,7 +9,7 @@ final localCommentaryRepositoryProvider =
     Provider.autoDispose<LocalCommentaryRepositoryImpl>(
   (ref) => LocalCommentaryRepositoryImpl(
       ref.read(sqliteCommentaryDataSourceProvider),
-      ownerIdColumn: ColumnCommentary.chartId,
+      ownerIdColumn: ColumnCommentary.requestId,
       ownerRepository: ref.read(localChartRepositoryProvider),
       entityToModel: (commentary) => CommentaryModel.fromEntity(commentary)),
 );

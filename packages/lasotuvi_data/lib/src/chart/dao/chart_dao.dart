@@ -9,5 +9,5 @@ class ChartDao extends SqliteDao {
   ChartDao(LocalDatabase<Database> database)
       : super(
             database: database,
-            tableName: kDebugMode ? TableNames.chartsTest : TableNames.charts);
+            tableName: kDebugMode ? TableNames.chartTest : TableNames.chart);
 }

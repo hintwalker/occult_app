@@ -9,7 +9,7 @@ final cloudCommentaryRepositoryProvider =
     Provider.autoDispose<CloudCommentaryRepositoryImpl>(
   (ref) => CloudCommentaryRepositoryImpl(
       ref.read(firebaseCommentaryDataSourceProvider),
-      ownerIdColumn: ColumnCommentary.chartId,
+      ownerIdColumn: ColumnCommentary.requestId,
       ownerRepository: ref.read(cloudChartRepositoryProvider),
       entityToModel: (commentary) => CommentaryModel.fromEntity(commentary)),
 );

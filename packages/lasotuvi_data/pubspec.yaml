@@ -14,6 +14,8 @@ dependencies:
     path: ../lasotuvi_domain
   tuvi_domain:
     path: ../tuvi_domain
+  tauari_values:
+    path: ../tauari_values
   sqflite: ^2.2.8+2
 
   tauari_data_core:

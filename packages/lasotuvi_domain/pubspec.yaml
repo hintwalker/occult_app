@@ -16,6 +16,8 @@ dependencies:
     path: ../tuvi_domain
   tauari_data_core:
     path: ../tauari_data_core
+  tauari_values:
+    path: ../tauari_values
 
 dev_dependencies:
   flutter_test:

@@ -5,20 +5,26 @@ import 'package:tauari_data_core/tauari_data_core.dart'
     show columnId, columnPaid, columnPrice;
 
 class SqlTemplates {
-  static const tableCharts =
-      kDebugMode ? TableNames.chartsTest : TableNames.charts;
-  static const tableTags = kDebugMode ? TableNames.tagsTest : TableNames.tags;
-  static const tableNotes =
-      kDebugMode ? TableNames.notesTest : TableNames.notes;
-  static const tableChartTags =
-      kDebugMode ? TableNames.chartTagsTest : TableNames.chartTags;
-  static const tableCommentaries =
-      kDebugMode ? TableNames.commentariesTest : TableNames.commentaries;
+  static const tableChart =
+      kDebugMode ? TableNames.chartTest : TableNames.chart;
+  static const tableTag = kDebugMode ? TableNames.tagTest : TableNames.tag;
+  static const tableNote = kDebugMode ? TableNames.noteTest : TableNames.note;
+  static const tableChartTag =
+      kDebugMode ? TableNames.chartTagTest : TableNames.chartTag;
+  static const tableCommentary =
+      kDebugMode ? TableNames.commentaryTest : TableNames.commentary;
+  static const tableRequest =
+      kDebugMode ? TableNames.requestTest : TableNames.request;
+  static const tableNotification =
+      kDebugMode ? TableNames.notificationTest : TableNames.notification;
 
   static String turnOnForeignKey = 'PRAGMA foreign_keys = ON;';
   static String dropTable(String name) => 'DROP TABLE IF EXISTS $name';
-  static String dropTableChart() => dropTable(tableCharts);
-  static String createTableChart() => '''CREATE TABLE $tableCharts(
+
+  // Chart
+
+  static String dropTableChart() => dropTable(tableChart);
+  static String createTableChart() => '''CREATE TABLE $tableChart(
         $columnId INTEGER PRIMARY KEY, 
         ${ColumnChart.name} TEXT, 
         ${ColumnChart.gender} INTEGER, 
@@ -29,58 +35,98 @@ class SqlTemplates {
         ${ColumnChart.avatar} TEXT
         )''';
   static String createIndexNameOnChart() => '''
-CREATE INDEX idx_name_chart ON $tableCharts (${ColumnChart.name})
+CREATE INDEX idx_name_chart ON $tableChart (${ColumnChart.name})
 ''';
 
   static String createIndexLastViewedOnChart() => '''
-CREATE INDEX idx_last_viewed_chart ON $tableCharts (${ColumnChart.lastViewed})
+CREATE INDEX idx_last_viewed_chart ON $tableChart (${ColumnChart.lastViewed})
 ''';
 
-  static String dropTableTag() => dropTable(tableTags);
+// Tag
+
+  static String dropTableTag() => dropTable(tableTag);
   static String createTableTag() =>
-      '''CREATE TABLE $tableTags($columnId INTEGER PRIMARY KEY, 
+      '''CREATE TABLE $tableTag($columnId INTEGER PRIMARY KEY, 
         ${ColumnTag.title} TEXT, 
         ${ColumnTag.description} TEXT 
         )''';
-  static String dropTableChartTag() => dropTable(tableChartTags);
+  static String createIndexTitleOnTag() => '''
+CREATE INDEX idx_title_tag ON $tableTag (${ColumnTag.title})
+''';
+
+// ChartTag
+  static String dropTableChartTag() => dropTable(tableChartTag);
   static String createTableChartTag() =>
-      '''CREATE TABLE $tableChartTags($columnId INTEGER PRIMARY KEY, 
+      '''CREATE TABLE $tableChartTag($columnId INTEGER PRIMARY KEY, 
         ${ColumnChartTag.tagId} INTEGER NOT NULL, 
         ${ColumnChartTag.chartId} INTEGER NOT NULL,
-        FOREIGN KEY (${ColumnChartTag.tagId}) REFERENCES $tableTags($columnId)
+        FOREIGN KEY (${ColumnChartTag.tagId}) REFERENCES $tableTag($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-        FOREIGN KEY (${ColumnChartTag.chartId}) REFERENCES $tableCharts($columnId)
+        FOREIGN KEY (${ColumnChartTag.chartId}) REFERENCES $tableChart($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
         UNIQUE (${ColumnChartTag.tagId},${ColumnChartTag.chartId}) ON CONFLICT REPLACE
         )''';
   static String createIndexOnChartTag() =>
-      '''CREATE INDEX idx_chart_tag ON $tableChartTags (${ColumnChartTag.chartId},${ColumnChartTag.tagId})''';
+      '''CREATE INDEX idx_chart_tag ON $tableChartTag (${ColumnChartTag.chartId},${ColumnChartTag.tagId})''';
 
-  static String dropTableNote() => dropTable(tableNotes);
+  static String dropTableNote() => dropTable(tableNote);
   static String createTableNote() =>
-      '''CREATE TABLE $tableNotes($columnId INTEGER PRIMARY KEY, 
+      '''CREATE TABLE $tableNote($columnId INTEGER PRIMARY KEY, 
         ${ColumnNote.title} TEXT, 
         ${ColumnNote.content} TEXT, 
         ${ColumnNote.edited} INTEGER, 
         ${ColumnNote.chartId} INTEGER,
-        FOREIGN KEY (${ColumnNote.chartId}) REFERENCES $tableCharts($columnId)
+        FOREIGN KEY (${ColumnNote.chartId}) REFERENCES $tableChart($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE
         )''';
 
-  static String dropTableCommentary() => dropTable(tableCommentaries);
+  static String dropTableCommentary() => dropTable(tableCommentary);
   static String createTableCommentary() =>
-      '''CREATE TABLE $tableCommentaries($columnId INTEGER PRIMARY KEY, 
+      '''CREATE TABLE $tableCommentary($columnId INTEGER PRIMARY KEY, 
         ${ColumnCommentary.title} TEXT, 
         ${ColumnCommentary.content} TEXT,
-        ${ColumnCommentary.chartId} INTEGER,
+        ${ColumnCommentary.requestId} INTEGER,
         ${ColumnCommentary.lastViewed} INTEGER,
         $columnPrice INTEGER, 
         $columnPaid INTEGER,
-        FOREIGN KEY (${ColumnNote.chartId}) REFERENCES $tableCommentaries($columnId)
+        FOREIGN KEY (${ColumnCommentary.requestId}) REFERENCES $tableRequest($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE
+        )''';
+
+  // Request
+  static String dropTableRequest() => dropTable(tableRequest);
+  static String createTableRequest() => '''CREATE TABLE $tableRequest(
+        $columnId INTEGER PRIMARY KEY, 
+        ${ColumnRequest.name} TEXT, 
+        ${ColumnRequest.gender} INTEGER, 
+        ${ColumnRequest.birthday} INTEGER, 
+        ${ColumnRequest.watchingYear} INTEGER, 
+        ${ColumnRequest.timeZoneOffset} INTEGER, 
+        ${ColumnRequest.lastViewed} INTEGER, 
+        ${ColumnRequest.avatar} TEXT,
+        ${ColumnRequest.solved} INTEGER
+        )''';
+  static String createIndexNameOnRequest() => '''
+CREATE INDEX idx_name_request ON $tableRequest (${ColumnRequest.name})
+''';
+
+  static String createIndexLastViewedOnRequest() => '''
+CREATE INDEX idx_last_viewed_request ON $tableRequest (${ColumnRequest.lastViewed})
+''';
+
+// Notification
+
+  static String dropTableNotification() => dropTable(tableNotification);
+  static String createTableNotification() => '''CREATE TABLE $tableNotification(
+        $columnId INTEGER PRIMARY KEY, 
+        ${ColumnNotification.title} TEXT, 
+        ${ColumnNotification.content} TEXT, 
+        ${ColumnNotification.type} TEXT, 
+        ${ColumnNotification.url} INTEGER, 
+        ${ColumnNotification.seen} INTEGER
         )''';
 }
