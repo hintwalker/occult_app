@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
-import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_presentation/src/features/request/navigation/request_navigation.dart';
+import 'package:lasotuvi_tag_shared/lasotuvi_tag_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
-import 'package:lasotuvi_presentation/src/features/commentary/navigation/commentary_navigation.dart';
+// import 'package:lasotuvi_presentation/src/features/commentary/navigation/commentary_navigation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
@@ -100,13 +101,22 @@ class _ChartViewModalScreenState
                         context: context, uid: uid, chart: chart, ref: ref),
                 onOpenNoteEditor: (context, note) =>
                     NoteNavigation.openNoteEditorScreen(context, note),
-                onOpenCommentaryReader:
-                    (BuildContext context, Commentary commentary) =>
-                        CommentaryNavigation.openCommentaryReaderScreen(
-                            context, commentary),
-                onOpenCommentarySyncOptions: (Commentary item) =>
-                    StorageHelper.showOptionsModal<Commentary>(item,
-                        context: context, uid: uid, ref: ref),
+                onOpenRequestView: (request) =>
+                    RequestNavigation.openRequestView(
+                  context: context,
+                  request: request,
+                ),
+                onSendRequest: (chart) => ref.read(uploadRequestProvider).call(
+                      uid!,
+                      Request.fromChart(chart),
+                    ),
+                // onOpenCommentaryReader:
+                //     (BuildContext context, Commentary commentary) =>
+                //         CommentaryNavigation.openCommentaryReaderScreen(
+                //             context, commentary),
+                // onOpenCommentarySyncOptions: (Commentary item) =>
+                //     StorageHelper.showOptionsModal<Commentary>(item,
+                //         context: context, uid: uid, ref: ref),
               ),
             ),
           );

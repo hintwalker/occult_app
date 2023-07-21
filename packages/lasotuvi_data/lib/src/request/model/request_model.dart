@@ -12,6 +12,7 @@ class RequestModel extends SyncableModel<Request> {
   final int lastViewed;
   final String? avatar;
   final int solved;
+  final int chartId;
 
   RequestModel(
     super.id, {
@@ -25,6 +26,7 @@ class RequestModel extends SyncableModel<Request> {
     super.storageState,
     super.syncStatus,
     required this.solved,
+    required this.chartId,
   });
 
   @override
@@ -42,6 +44,7 @@ class RequestModel extends SyncableModel<Request> {
       syncStatus: syncStatus,
       storageState: storageState,
       solved: solved,
+      chartId: chartId,
     );
   }
 
@@ -58,6 +61,7 @@ class RequestModel extends SyncableModel<Request> {
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
       solved: entity.solved,
+      chartId: entity.chartId,
     );
   }
 
@@ -73,6 +77,7 @@ class RequestModel extends SyncableModel<Request> {
     String? storageState,
     String? syncStatus,
     int? solved,
+    int? chartId,
   }) {
     return RequestModel(
       id ?? this.id,
@@ -86,6 +91,7 @@ class RequestModel extends SyncableModel<Request> {
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
       solved: solved ?? this.solved,
+      chartId: chartId ?? this.chartId,
     );
   }
 
@@ -121,6 +127,9 @@ class RequestModel extends SyncableModel<Request> {
       solved: map[ColumnRequest.solved] == null
           ? RequestSolved.unSolved
           : map[ColumnRequest.solved] as int,
+      chartId: map[ColumnRequest.chartId] == null
+          ? 0
+          : map[ColumnRequest.chartId] as int,
     );
   }
 
@@ -146,6 +155,8 @@ class RequestModel extends SyncableModel<Request> {
       ColumnRequest.avatar: avatar,
       columnState: storageState,
       columnSyncStatus: syncStatus,
+      ColumnRequest.solved: solved,
+      ColumnRequest.chartId: chartId,
     };
   }
 

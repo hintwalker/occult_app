@@ -4,6 +4,6 @@ import '../entity/notification.dart';
 import '../repository/cloud_notification_repository.dart';
 
 class DeleteNotificationFromCloud
-    extends DeleteFromCloud<Notification, CloudNotificationRepository> {
+    extends DeleteFromCloud<TuviNotification, CloudNotificationRepository> {
   DeleteNotificationFromCloud(super.repository);
 }

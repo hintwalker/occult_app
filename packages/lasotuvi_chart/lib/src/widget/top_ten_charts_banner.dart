@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_chart_shared/lasotuvi_chart_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_ui/tauari_ui.dart';
@@ -16,6 +16,7 @@ class TopTenChartsBanner extends StatelessWidget {
     required this.onShowAll,
     required this.onOpenSyncOptions,
     required this.onItemTap,
+    required this.countController,
   });
 
   final String? uid;
@@ -28,6 +29,8 @@ class TopTenChartsBanner extends StatelessWidget {
   // final Widget Function(Chart, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
   final void Function(BuildContext context, Chart chart) onItemTap;
+  // final OnCountChart onChartCount;
+  final CountChartEveryWhereController countController;
   // final Widget Function(String chartId) chartView;
 
   @override
@@ -37,11 +40,18 @@ class TopTenChartsBanner extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          TopTenHeadlineWidget(translate(TuviStrings.laSo),
-              showAllText: translate(TuviStrings.showAll),
-              colorScheme: colorScheme,
-              onAddData: onAddData,
-              onShowAll: onShowAll),
+          TopTenHeadlineWidget(
+            translate(TuviStrings.laSo),
+            uid: uid,
+            showAllText: translate(TuviStrings.showAll),
+            colorScheme: colorScheme,
+            onAddData: onAddData,
+            onShowAll: onShowAll,
+            dataCount: DataCountWidget(
+              uid: uid,
+              controller: countController,
+            ),
+          ),
           Expanded(
               child: HorizontalDataListBuilder<Chart>(
                   uid: uid,

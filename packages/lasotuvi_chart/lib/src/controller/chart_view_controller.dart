@@ -7,11 +7,13 @@ class ChartViewController extends ChangeNotifier {
   ChartViewController({
     required this.onData,
     required this.onNotes,
+    required this.onRequestByChartId,
     // required this.onCommentaries,
   });
 
   final OnChartHasTags onData;
   final OnNoteByChartId onNotes;
+  final OnRequestByChartId onRequestByChartId;
   // final OnCommentaryByRequestId onCommentaries;
 
   StreamSubscription<ChartHasTags?>? _subscription;
@@ -19,6 +21,9 @@ class ChartViewController extends ChangeNotifier {
 
   StreamSubscription<Iterable<Note>>? _notesSubscription;
   StreamController<Iterable<Note>>? _notesStreamController;
+
+  StreamSubscription<Iterable<Request>>? _requestSubscription;
+  StreamController<Iterable<Request>>? _requestStreamController;
 
   // StreamSubscription<Iterable<Commentary>>? _commentarySubscription;
   // StreamController<Iterable<Commentary>>? _commentaryStreamController;
@@ -59,6 +64,28 @@ class ChartViewController extends ChangeNotifier {
     });
   }
 
+  Stream<Iterable<Request>> requestStream(
+    String? uid,
+    Chart chart,
+  ) {
+    _requestStreamController = StreamController<Iterable<Request>>.broadcast();
+    listenRequest(uid, chart);
+    return _requestStreamController!.stream;
+  }
+
+  void listenRequest(String? uid, Chart chart) {
+    _requestSubscription = onRequestByChartId(
+      uid,
+      chart.id,
+      chart.syncStatus,
+    ).listen((event) {
+      if (!(_requestStreamController == null ||
+          _requestStreamController!.isClosed)) {
+        _requestStreamController?.add(event);
+      }
+    });
+  }
+
   // Stream<Iterable<Commentary>> commentaryStream(
   //   String? uid,
   //   Chart chart,
@@ -88,6 +115,8 @@ class ChartViewController extends ChangeNotifier {
     _streamController?.close();
     _notesSubscription?.cancel();
     _notesStreamController?.close();
+    _requestSubscription?.cancel();
+    _requestStreamController?.close();
     // _commentarySubscription?.cancel();
     // _commentaryStreamController?.close();
     super.dispose();

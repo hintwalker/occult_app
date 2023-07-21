@@ -11,4 +11,6 @@ class TuviStrings {
   static const String note = 'note';
 
   static const String commentary = 'commentary';
+
+  static const String request = 'request';
 }

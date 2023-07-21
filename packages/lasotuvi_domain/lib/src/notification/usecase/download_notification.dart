@@ -4,6 +4,6 @@ import '../entity/notification.dart';
 import '../repository/notification_repository.dart';
 
 class DownloadNotification
-    extends Download<Notification, NotificationRepository> {
+    extends Download<TuviNotification, NotificationRepository> {
   DownloadNotification(super.repository);
 }

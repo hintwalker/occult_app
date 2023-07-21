@@ -26,12 +26,14 @@ dependencies:
     path: ../tuvi_strings
   tuvi_chart_diagram:
     path: ../tuvi_chart_diagram
-  lasotuvi_chart_note:
-    path: ../lasotuvi_chart_note
+  lasotuvi_note_shared:
+    path: ../lasotuvi_note_shared
   tuvi_chart_creation_form:
     path: ../tuvi_chart_creation_form
-  lasotuvi_chart_tag:
-    path: ../lasotuvi_chart_tag
+  lasotuvi_chart_shared:
+    path: ../lasotuvi_chart_shared
+  lasotuvi_tag_shared:
+    path: ../lasotuvi_tag_shared
   lasotuvi_commentary:
     path: ../lasotuvi_commentary
   

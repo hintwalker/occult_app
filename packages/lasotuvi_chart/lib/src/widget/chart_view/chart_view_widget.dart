@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_chart_note/lasotuvi_chart_note.dart';
-import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_note_shared/lasotuvi_note_shared.dart';
+import 'package:lasotuvi_tag_shared/lasotuvi_tag_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import '../../controller/chart_view_controller.dart';
@@ -19,12 +19,14 @@ class ChartViewWidget extends StatelessWidget {
     required this.onOpenChartSyncOptions,
     required this.onOpenNoteSyncOptions,
     required this.openTagSyncOptions,
-    required this.onOpenCommentarySyncOptions,
+    // required this.onOpenCommentarySyncOptions,
     required this.onOpenCheckboxTagList,
     required this.onOpenChartEditOptions,
     required this.onOpenNoteCreation,
     required this.onOpenNoteEditor,
-    required this.onOpenCommentaryReader,
+    required this.onOpenRequestView,
+    required this.onSendRequest,
+    // required this.onOpenCommentaryReader,
   });
   final String? uid;
   final ChartHasTags? chartHasTags;
@@ -32,7 +34,8 @@ class ChartViewWidget extends StatelessWidget {
   final ColorScheme colorScheme;
   final void Function(Chart chart) onOpenChartSyncOptions;
   final void Function(Note note) onOpenNoteSyncOptions;
-  final void Function(Commentary commentary) onOpenCommentarySyncOptions;
+  final void Function(Request request) onOpenRequestView;
+  // final void Function(Commentary commentary) onOpenCommentarySyncOptions;
   // final Widget Function(Chart, {String? uid, String? syncStatus})
   //     chartSyncOptions;
   // final Widget Function(Note, {String? uid, String? syncStatus})
@@ -47,8 +50,9 @@ class ChartViewWidget extends StatelessWidget {
   final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
   final void Function(BuildContext context, Chart chart) onOpenNoteCreation;
   final void Function(BuildContext context, Note note) onOpenNoteEditor;
-  final void Function(BuildContext context, Commentary commentary)
-      onOpenCommentaryReader;
+  final void Function(Chart chart) onSendRequest;
+  // final void Function(BuildContext context, Commentary commentary)
+  //     onOpenCommentaryReader;
 
   @override
   Widget build(BuildContext context) {
@@ -138,28 +142,10 @@ class ChartViewWidget extends StatelessWidget {
                                       wrapTagListController.onSyncStatusChange),
                               onTap: (context, tag) {}),
                           controller: wrapTagListController),
-                      // Wrap(
-                      //   spacing: 2.0,
-                      //   runSpacing: 2.0,
-                      //   children: chartHasTags.carry
-                      //       .map((e) => HoriTagItemWidget(e,
-                      //               uid: uid,
-                      //               colorScheme: colorScheme,
-                      //               onSyncStatusTap: () =>
-                      //                   openTagSyncOptions(e, context:context, callback: wrapTagListController.onSyncStatusChange),
-                      //               onTap: (context, tag) {})
-                      //           // (e) => Card(
-                      //           //   child: InkWell(
-                      //           //     child: Padding(
-                      //           //         padding: const EdgeInsets.all(
-                      //           //           2.0,
-                      //           //         ),
-                      //           //         child: Text(e.title)),
-                      //           //   ),
-                      //           // ),
-                      //           )
-                      //       .toList(),
-                      // ),
+                      const SizedBox(
+                        height: 24.0,
+                      ),
+
                       // const SizedBox(
                       //   height: 24.0,
                       // ),
@@ -236,7 +222,8 @@ class ChartViewWidget extends StatelessWidget {
                         FilledButton(
                             style: FilledButton.styleFrom(
                                 backgroundColor: colorScheme.tertiary),
-                            onPressed: () {},
+                            onPressed: () =>
+                                onSendRequest(chartHasTags!.source),
                             child: Text(translate('sendCommentaryRequest'),
                                 style: TextStyle(
                                   color: colorScheme.onTertiary,

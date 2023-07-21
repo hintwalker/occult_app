@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_chart_shared/lasotuvi_chart_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';

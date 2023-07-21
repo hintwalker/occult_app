@@ -3,6 +3,7 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
+import '../../chart/entity/chart.dart';
 import '../column_request.dart';
 
 class Request extends SyncableEntity<Request> {
@@ -16,6 +17,7 @@ class Request extends SyncableEntity<Request> {
     required this.created,
     required this.lastViewed,
     required this.solved,
+    required this.chartId,
     super.storageState,
     this.avatar,
     super.syncStatus,
@@ -29,20 +31,22 @@ class Request extends SyncableEntity<Request> {
   final DateTime lastViewed;
   final String? avatar;
   final int solved;
+  final int chartId;
 
-  static Request empty() {
-    return Request(
-      DateTime.now().millisecondsSinceEpoch,
-      name: '',
-      gender: Gender.female,
-      birthday: DateTime.now(),
-      watchingYear: 2023,
-      timeZoneOffset: 7,
-      created: DateTime.now(),
-      lastViewed: DateTime.now(),
-      solved: 0,
-    );
-  }
+  // static Request empty() {
+  //   return Request(
+  //     DateTime.now().millisecondsSinceEpoch,
+  //     name: '',
+  //     gender: Gender.female,
+  //     birthday: DateTime.now(),
+  //     watchingYear: 2023,
+  //     timeZoneOffset: 7,
+  //     created: DateTime.now(),
+  //     lastViewed: DateTime.now(),
+  //     solved: 0,
+  //     chartId: 0,
+  //   );
+  // }
 
   @override
   Map<String, Object?> dump() {
@@ -99,6 +103,28 @@ class Request extends SyncableEntity<Request> {
       solved: map[ColumnRequest.solved] == null
           ? RequestSolved.unSolved
           : map[ColumnRequest.solved] as int,
+      chartId: map[ColumnRequest.chartId] == null
+          ? 0
+          : map[ColumnRequest.chartId] as int,
+    );
+  }
+
+  static Request fromChart(Chart chart) {
+    final newId = DateTime.now();
+    return Request(
+      newId.millisecondsSinceEpoch,
+      name: chart.name,
+      gender: chart.gender,
+      birthday: chart.birthday,
+      watchingYear: chart.watchingYear,
+      timeZoneOffset: chart.timeZoneOffset,
+      lastViewed: chart.lastViewed,
+      avatar: chart.avatar,
+      storageState: chart.storageState,
+      syncStatus: chart.syncStatus,
+      solved: RequestSolved.unSolved,
+      chartId: chart.id,
+      created: newId,
     );
   }
 
@@ -115,6 +141,7 @@ class Request extends SyncableEntity<Request> {
     String? syncStatus,
     String? storageState,
     int? solved,
+    int? chartId,
   }) {
     return Request(
       id ?? this.id,
@@ -129,6 +156,7 @@ class Request extends SyncableEntity<Request> {
       syncStatus: syncStatus ?? this.syncStatus,
       storageState: storageState ?? this.storageState,
       solved: solved ?? this.solved,
+      chartId: chartId ?? this.chartId,
     );
   }
 

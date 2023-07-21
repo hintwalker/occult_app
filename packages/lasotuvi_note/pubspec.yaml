@@ -24,8 +24,8 @@ dependencies:
   hive: ^2.2.3
   sunoom:
     path: ../sunoom
-  lasotuvi_chart_note:
-    path: ../lasotuvi_chart_note
+  lasotuvi_note_shared:
+    path: ../lasotuvi_note_shared
 
 dev_dependencies:
   flutter_test:

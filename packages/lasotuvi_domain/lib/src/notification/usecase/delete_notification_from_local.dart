@@ -4,6 +4,6 @@ import '../entity/notification.dart';
 import '../repository/local_notification_repository.dart';
 
 class DeleteNotificationFromLocal
-    extends DeleteFromLocal<Notification, LocalNotificationRepository> {
+    extends DeleteFromLocal<TuviNotification, LocalNotificationRepository> {
   DeleteNotificationFromLocal(super.repository);
 }

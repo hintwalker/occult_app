@@ -7,4 +7,5 @@ class ColumnRequest {
   static const lastViewed = 'l';
   static const avatar = 'a';
   static const solved = 's';
+  static const chartId = 'ci';
 }

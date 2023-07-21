@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_commentary_shared/lasotuvi_commentary_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_ui/tauari_ui.dart';
@@ -18,6 +19,7 @@ class TopTenCommentaryBanner extends StatelessWidget {
     required this.onShowAll,
     required this.onItemTap,
     required this.onOpenSyncOptions,
+    required this.countController,
   });
   final String? uid;
   final CommentaryAndRequestListController controller;
@@ -27,6 +29,8 @@ class TopTenCommentaryBanner extends StatelessWidget {
   final void Function() onShowAll;
   final void Function(Commentary commentary) onItemTap;
   final void Function(Commentary commentary) onOpenSyncOptions;
+  final CountCommentaryEveryWhereController countController;
+  // final OnCountCommentary onCommentaryCount;
   // final Widget Function(Commentary, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
 
@@ -35,11 +39,18 @@ class TopTenCommentaryBanner extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: Column(mainAxisSize: MainAxisSize.max, children: [
-          TopTenHeadlineWidget(translate(TuviStrings.commentary),
-              showAllText: translate(TuviStrings.showAll),
-              colorScheme: colorScheme,
-              onAddData: null,
-              onShowAll: onShowAll),
+          TopTenHeadlineWidget(
+            translate(TuviStrings.commentary),
+            uid: uid,
+            showAllText: translate(TuviStrings.showAll),
+            colorScheme: colorScheme,
+            onAddData: null,
+            onShowAll: onShowAll,
+            dataCount: DataCountWidget(
+              uid: uid,
+              controller: countController,
+            ),
+          ),
           // Expanded(
           //     child:
           PairDataGridBuilder<Commentary, Request, CommentaryAndRequest>(

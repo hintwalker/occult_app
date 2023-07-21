@@ -4,6 +4,6 @@ import '../entity/notification.dart';
 import '../repository/local_notification_repository.dart';
 
 class InsertNotificationToLocal
-    extends InsertToLocal<Notification, LocalNotificationRepository> {
+    extends InsertToLocal<TuviNotification, LocalNotificationRepository> {
   InsertNotificationToLocal(super.repository);
 }

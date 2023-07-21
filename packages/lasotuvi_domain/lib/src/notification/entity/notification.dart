@@ -3,8 +3,8 @@ import 'package:tauari_values/tauari_values.dart';
 
 import '../column_notification.dart';
 
-class Notification extends SyncableEntity<Notification> {
-  Notification(
+class TuviNotification extends SyncableEntity<TuviNotification> {
+  TuviNotification(
     super.id, {
     required this.title,
     required this.content,
@@ -48,8 +48,8 @@ class Notification extends SyncableEntity<Notification> {
     };
   }
 
-  static Notification fromMap(Map<String, Object?> map) {
-    return Notification(
+  static TuviNotification fromMap(Map<String, Object?> map) {
+    return TuviNotification(
       map[columnId] as int,
       title: map[ColumnNotification.title] == null
           ? ''
@@ -77,7 +77,7 @@ class Notification extends SyncableEntity<Notification> {
     );
   }
 
-  Notification copyWith({
+  TuviNotification copyWith({
     int? id,
     String? title,
     String? content,
@@ -88,7 +88,7 @@ class Notification extends SyncableEntity<Notification> {
     String? syncStatus,
     String? storageState,
   }) {
-    return Notification(
+    return TuviNotification(
       id ?? this.id,
       title: title ?? this.title,
       content: content ?? this.content,
@@ -110,14 +110,14 @@ class Notification extends SyncableEntity<Notification> {
   bool operator ==(Object? other) =>
       identical(other, this) ||
       other.runtimeType == runtimeType &&
-          other is Notification &&
+          other is TuviNotification &&
           other.id == id;
 
   @override
   int get hashCode => id.hashCode;
 
   @override
-  Notification copyWithState(String? state) {
+  TuviNotification copyWithState(String? state) {
     return copyWith(storageState: state);
   }
 }

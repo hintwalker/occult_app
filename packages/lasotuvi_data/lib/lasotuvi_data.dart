@@ -10,6 +10,9 @@ export 'src/chart/source/remote/firebase_chart_data_source.dart';
 
 export 'src/request/dao/request_dao.dart';
 export 'src/request/model/request_model.dart';
+export 'src/request/repository/request_and_chart/request_and_chart_repository_impl.dart';
+export 'src/request/repository/request_and_chart/cloud_request_and_chart_repository_impl.dart';
+export 'src/request/repository/request_and_chart/local_request_and_chart_repository_impl.dart';
 export 'src/request/repository/request_repository_impl.dart';
 export 'src/request/repository/local_request_repository_impl.dart';
 export 'src/request/repository/cloud_request_repository_impl.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_chart_shared/lasotuvi_chart_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sunoom/sunoom.dart';
 import 'package:tauari_ui/tauari_ui.dart';

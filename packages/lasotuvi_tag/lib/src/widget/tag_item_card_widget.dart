@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_tag_shared/lasotuvi_tag_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 
 class TagItemCardWidget extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 
-class NotificationModel extends SyncableModel<Notification> {
+class NotificationModel extends SyncableModel<TuviNotification> {
   final String title;
   final String content;
   final String type;
@@ -21,8 +21,8 @@ class NotificationModel extends SyncableModel<Notification> {
   });
 
   @override
-  Notification toEntity() {
-    return Notification(
+  TuviNotification toEntity() {
+    return TuviNotification(
       id,
       title: title,
       content: content,
@@ -35,7 +35,7 @@ class NotificationModel extends SyncableModel<Notification> {
     );
   }
 
-  static NotificationModel fromEntity(Notification entity) {
+  static NotificationModel fromEntity(TuviNotification entity) {
     return NotificationModel(
       entity.id,
       title: entity.title,

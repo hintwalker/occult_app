@@ -16,18 +16,30 @@ dependencies:
     path: ../lasotuvi_data
   lasotuvi_chart:
     path: ../lasotuvi_chart
+  lasotuvi_chart_shared:
+    path: ../lasotuvi_chart_shared
   lasotuvi_tag:
     path: ../lasotuvi_tag
+  lasotuvi_tag_shared:
+    path: ../lasotuvi_tag_shared
   lasotuvi_note:
     path: ../lasotuvi_note
+  lasotuvi_note_shared:
+    path: ../lasotuvi_note_shared
   lasotuvi_commentary:
     path: ../lasotuvi_commentary
+  lasotuvi_commentary_shared:
+    path: ../lasotuvi_commentary_shared
   lasotuvi_storage_plan:
     path: ../lasotuvi_storage_plan
   lasotuvi_style:
     path: ../lasotuvi_style
   lasotuvi_library:
     path: ../lasotuvi_library
+  lasotuvi_request:
+    path: ../lasotuvi_request
+  lasotuvi_request_shared:
+    path: ../lasotuvi_request_shared
 
   tauari_guard:
     path: ../tauari_guard

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
+import 'package:lasotuvi_tag_shared/lasotuvi_tag_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_ui/tauari_ui.dart';
@@ -16,6 +16,7 @@ class TopTenTagsBanner extends StatelessWidget {
     required this.onShowAll,
     required this.onItemTap,
     required this.onOpenSyncOptions,
+    required this.countController,
   });
 
   final String? uid;
@@ -26,6 +27,7 @@ class TopTenTagsBanner extends StatelessWidget {
   final void Function() onShowAll;
   final void Function(BuildContext context, Tag tag) onItemTap;
   final void Function(Tag tag) onOpenSyncOptions;
+  final CountEveryWhereController countController;
   // final Widget Function(Tag, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
 
@@ -36,11 +38,19 @@ class TopTenTagsBanner extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          TopTenHeadlineWidget(translate(TuviStrings.tag),
-              showAllText: translate(TuviStrings.showAll),
-              colorScheme: colorScheme,
-              onAddData: onAddData,
-              onShowAll: onShowAll),
+          TopTenHeadlineWidget(
+            translate(TuviStrings.tag),
+            uid: uid,
+            showAllText: translate(TuviStrings.showAll),
+            colorScheme: colorScheme,
+            onAddData: onAddData,
+            onShowAll: onShowAll,
+            dataCount: DataCountWidget(
+              uid: uid,
+              controller: countController,
+            ),
+            // countEveryWhereController: countEveryWhereController,
+          ),
           Expanded(
               child: HorizontalDataListBuilder<Tag>(
                   uid: uid,

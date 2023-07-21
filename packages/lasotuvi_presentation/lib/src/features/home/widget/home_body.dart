@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
-import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
+// import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:lasotuvi_request/lasotuvi_request.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 
 import '../../chart/navigation/chart_navigation.dart';
-import '../../commentary/navigation/commentary_navigation.dart';
+// import '../../commentary/navigation/commentary_navigation.dart';
 import '../../note/navigation/note_navigation.dart';
 import '../../../helper/storage_helper.dart';
+import '../../request/navigation/request_navigation.dart';
 import '../../tag/navigation/tag_navigation.dart';
 import '../../../styles/general_style.dart';
 import '../../auth/auth_depended_state.dart';
@@ -62,6 +64,31 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                     uid: uid,
                     ref: ref,
                   ),
+                  countController:
+                      ref.watch(countChartEveryWhereControllerProvider),
+                ),
+              ),
+              SizedBox(
+                height: GeneralStyle.topTenBannerHeight,
+                child: TopTenRequestBanner(
+                  uid: uid,
+                  controller: ref.watch(requestListControllerProvider),
+                  translate: translate,
+                  colorScheme: LasotuviAppStyle.colorScheme,
+                  // onAddData: () =>
+                  //     CommentaryNavigation.openChartSelectionScreen(context, ref),
+                  onShowAll: openAllCommentaryScreen,
+                  onItemTap: (context, item) =>
+                      RequestNavigation.openRequestView(
+                          context: context, request: item),
+                  onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
+                    item,
+                    context: context,
+                    uid: uid,
+                    ref: ref,
+                  ),
+                  countController:
+                      ref.watch(countRequestEveryWhereControllerProvider),
                 ),
               ),
               SizedBox(
@@ -85,27 +112,11 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                     uid: uid,
                     ref: ref,
                   ),
+                  countController:
+                      ref.watch(countTagEveryWhereControllerProvider),
                 ),
               ),
-              TopTenCommentaryBanner(
-                uid: uid,
-                controller:
-                    ref.watch(commentaryAndRequestListControllerProvider),
-                translate: translate,
-                colorScheme: LasotuviAppStyle.colorScheme,
-                // onAddData: () =>
-                //     CommentaryNavigation.openChartSelectionScreen(context, ref),
-                onShowAll: openAllCommentaryScreen,
-                onItemTap: (commentary) =>
-                    CommentaryNavigation.openCommentaryReaderScreen(
-                        context, commentary),
-                onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
-                  item,
-                  context: context,
-                  uid: uid,
-                  ref: ref,
-                ),
-              ),
+
               // Expanded(
               // child:
               TopTenNotesBanner(
@@ -124,6 +135,8 @@ class _HomeBodyState extends AuthDependedState<HomeBody> {
                   uid: uid,
                   ref: ref,
                 ),
+                countController:
+                    ref.watch(countNoteEveryWhereControllerProvider),
               ),
               const SizedBox(
                 height: 48.0,

@@ -4,8 +4,13 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 import '../model/request_model.dart';
 
 class LocalRequestRepositoryImpl
-    extends LocalRepositoryImpl<Request, RequestModel>
+    extends LocalDependentRepositoryImpl<Request, RequestModel, Chart>
     implements LocalRequestRepository {
-  LocalRequestRepositoryImpl(super.dataSource)
-      : super(entityToModel: (entity) => RequestModel.fromEntity(entity));
+  LocalRequestRepositoryImpl(super.dataSource,
+      {required super.ownerIdColumn,
+      required super.ownerRepository,
+      required super.entityToModel});
+
+  @override
+  int getOwnerId(Request entity) => entity.chartId;
 }

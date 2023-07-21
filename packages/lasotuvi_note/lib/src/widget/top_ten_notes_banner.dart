@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_chart_note/lasotuvi_chart_note.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+import 'package:lasotuvi_note_shared/lasotuvi_note_shared.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_strings/tuvi_strings.dart';
@@ -18,6 +18,7 @@ class TopTenNotesBanner extends StatelessWidget {
     required this.onShowAll,
     required this.onItemTap,
     required this.onOpenSyncOptions,
+    required this.countController,
   });
   final String? uid;
   final NoteAndChartListController controller;
@@ -27,6 +28,7 @@ class TopTenNotesBanner extends StatelessWidget {
   final void Function() onShowAll;
   final void Function(Note note) onItemTap;
   final void Function(Note note) onOpenSyncOptions;
+  final CountNoteEveryWhereController countController;
   // final Widget Function(Note, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
 
@@ -35,11 +37,18 @@ class TopTenNotesBanner extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: Column(mainAxisSize: MainAxisSize.max, children: [
-          TopTenHeadlineWidget(translate(TuviStrings.note),
-              showAllText: translate(TuviStrings.showAll),
-              colorScheme: colorScheme,
-              onAddData: onAddData,
-              onShowAll: onShowAll),
+          TopTenHeadlineWidget(
+            translate(TuviStrings.note),
+            uid: uid,
+            showAllText: translate(TuviStrings.showAll),
+            colorScheme: colorScheme,
+            onAddData: onAddData,
+            onShowAll: onShowAll,
+            dataCount: DataCountWidget(
+              uid: uid,
+              controller: countController,
+            ),
+          ),
           // Expanded(
           //     child:
           PairDataGridBuilder<Note, Chart, NoteAndChart>(

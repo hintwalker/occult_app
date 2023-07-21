@@ -4,8 +4,13 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 import '../model/request_model.dart';
 
 class CloudRequestRepositoryImpl
-    extends CloudRepositoryImpl<Request, RequestModel>
+    extends CloudDependentRepositoryImpl<Request, RequestModel, Chart>
     implements CloudRequestRepository {
-  CloudRequestRepositoryImpl(super.dataSource)
-      : super(entityToModel: (entity) => RequestModel.fromEntity(entity));
+  CloudRequestRepositoryImpl(super.dataSource,
+      {required super.ownerIdColumn,
+      required super.ownerRepository,
+      required super.entityToModel});
+
+  @override
+  int getOwnerId(Request entity) => entity.chartId;
 }

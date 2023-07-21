@@ -20,8 +20,8 @@ dependencies:
     path: ../tauari_list_view
   tauari_data_core:
     path: ../tauari_data_core
-  lasotuvi_chart_tag:
-    path: ../lasotuvi_chart_tag
+  lasotuvi_tag_shared:
+    path: ../lasotuvi_tag_shared
   sunoom:
     path: ../sunoom
   # lasotuvi_chart:

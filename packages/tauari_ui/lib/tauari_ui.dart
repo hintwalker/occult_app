@@ -3,6 +3,7 @@ library tauari_ui;
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 
+export 'src/widget/data_count_widget.dart';
 export 'src/widget/syncable_card_item_scaffold.dart';
 export 'src/widget/need_sign_in_alert_dialog.dart';
 export 'src/widget/network_not_connected_alert_dialog.dart';
@@ -29,6 +30,7 @@ export 'src/widget/loading_widget.dart';
 export 'src/widget/horizontal_data_list_builder.dart';
 export 'src/widget/horizontal_pair_data_list_builder.dart';
 
+export 'src/controller/count_everywhere_controller.dart';
 export 'src/controller/syncable_data_stream_controller.dart';
 export 'src/controller/syncable_data_manipulate_controller.dart';
 export 'src/controller/syncable_data_list_stream_controller.dart';

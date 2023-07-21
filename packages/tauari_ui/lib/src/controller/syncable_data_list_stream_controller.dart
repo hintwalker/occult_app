@@ -6,6 +6,7 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 class SyncableDataListStreamController<T extends SyncableEntity>
     extends ChangeNotifier {
   final OnSyncableDataList<T> onSyncableData;
+  // final OnCountEveryWhere<T> onCount;
 
   StreamSubscription<Iterable<T>>? _subscription;
   StreamController<Iterable<T>>? _streamController;

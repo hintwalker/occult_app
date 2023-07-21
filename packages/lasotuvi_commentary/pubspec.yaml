@@ -23,6 +23,8 @@ dependencies:
     path: ../tauari_list_view
   sunoom:
     path: ../sunoom
+  lasotuvi_commentary_shared:
+    path: ../lasotuvi_commentary_shared
 
 dev_dependencies:
   flutter_test:
