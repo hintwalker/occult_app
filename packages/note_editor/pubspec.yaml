@@ -1,31 +1,23 @@
-name: lasotuvi_commentary
-description: A new Flutter package project.
+name: note_editor
+description: Note editor ui.
 version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: '>=3.0.6 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_quill: ^7.2.13
+  flutter_quill: ^7.2.16
+  hive: ^2.2.3
   lasotuvi_domain:
     path: ../lasotuvi_domain
   tauari_ui:
     path: ../tauari_ui
-  tuvi_strings:
-    path: ../tuvi_strings
   tauari_data_core:
     path: ../tauari_data_core
-  tauari_list_view:
-    path: ../tauari_list_view
-  sunoom:
-    path: ../sunoom
-  lasotuvi_commentary_shared:
-    path: ../lasotuvi_commentary_shared
-  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:

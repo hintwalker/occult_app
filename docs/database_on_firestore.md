@@ -34,7 +34,7 @@ root
 
 ------ charts (collection) ----> change to c
 -------- [created date] (document)
----------- _s (Storage state): String (o: overload | null: allowed)
+---------- _s (Storage state): String (h: hidden | null: show)
 ---------- a (avatar): String
 ---------- b (birthday): number
 ---------- g (gender): number
@@ -91,4 +91,25 @@ root
 ---------- t (Title): String
 ---------- _v (Price): number
 ---------- _p (Paid): number (0: unpaid | 1: paid)
+
+------ r (request) (collection)
+-------- [created date] (document)
+---------- _s (Storage state): String (h: hidden | null: show)
+---------- a (avatar): String
+---------- b (birthday): number
+---------- g (gender): number
+---------- l (last viewed): number
+---------- n (name): String
+---------- w (watching year): number
+---------- z (timezone): number
+---------- s (solved): number (0: unsolved | 1: solved)
+---------- ci (chart id): number
+
+------ no (notification) (collection)
+-------- [created date] (document)
+---------- t (title): String
+---------- c (content): String
+---------- k (type): String
+---------- u (url): String
+---------- s (seen): String
 ```

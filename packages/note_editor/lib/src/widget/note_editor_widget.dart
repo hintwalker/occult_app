@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart'
     show Document, QuillController, QuillEditor, QuillToolbar;
-import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+// import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+import 'package:tauari_data_core/tauari_data_core.dart';
 
-class NoteEditorWidget extends StatefulWidget {
+class NoteEditorWidget<T> extends StatefulWidget {
   const NoteEditorWidget({
     super.key,
     required this.translate,
@@ -21,18 +22,18 @@ class NoteEditorWidget extends StatefulWidget {
   final String Function(String) translate;
   final ColorScheme colorScheme;
   final String? uid;
-  final Note note;
-  final Future<void> Function(Note note, String? uid) onChanged;
-  final Future<void> Function(Note note, String? uid) onSave;
+  final NoteLike<T> note;
+  final Future<void> Function(T note, String? uid) onChanged;
+  final Future<void> Function(T note, String? uid) onSave;
   final void Function(bool) toggleEditMode;
   final void Function(int limit) onHitMaxLength;
   final int maxLength;
 
   @override
-  State<StatefulWidget> createState() => _NoteEditorState();
+  State<StatefulWidget> createState() => _NoteEditorState<T>();
 }
 
-class _NoteEditorState extends State<NoteEditorWidget> {
+class _NoteEditorState<T> extends State<NoteEditorWidget<T>> {
   QuillController? _contentController;
   late final TextEditingController _titleController;
   final FocusNode _focusNode = FocusNode();
@@ -42,7 +43,7 @@ class _NoteEditorState extends State<NoteEditorWidget> {
   void initState() {
     super.initState();
     setState(() {
-      final content = jsonDecode(widget.note.content);
+      final content = jsonDecode(widget.note.noteContent);
       // final content = jsonDecode(r'[{"insert":"hello\n"}]');
       _contentController = QuillController(
           document: Document.fromJson(content),
@@ -50,14 +51,14 @@ class _NoteEditorState extends State<NoteEditorWidget> {
       // _contentController = QuillController.basic();
       contentLenght = _contentController!.document.length - 1;
       _contentController!.addListener(onContentChanged);
-      _titleController = TextEditingController(text: widget.note.title);
+      _titleController = TextEditingController(text: widget.note.noteTitle);
       _titleController.addListener(onTitleChanged);
     });
   }
 
   void onTitleChanged() async {
     await widget.onChanged(
-        widget.note.copyWith(title: _titleController.text), widget.uid);
+        widget.note.copyWithTitle(_titleController.text), widget.uid);
   }
 
   void onContentChanged() async {
@@ -79,8 +80,8 @@ class _NoteEditorState extends State<NoteEditorWidget> {
     }
 
     await widget.onChanged(
-      widget.note.copyWith(
-        content: stringData,
+      widget.note.copyWithContent(
+        stringData,
       ),
       widget.uid,
     );
@@ -94,7 +95,7 @@ class _NoteEditorState extends State<NoteEditorWidget> {
 
     final stringData = jsonEncode(data);
     await widget.onSave(
-      widget.note.copyWith(
+      widget.note.coppyWithTitleAndContent(
         title: _titleController.text,
         content: stringData,
       ),

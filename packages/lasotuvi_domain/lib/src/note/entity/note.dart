@@ -2,7 +2,7 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 
 import '../column_note.dart';
 
-class Note extends SyncableEntity<Note> {
+class Note extends SyncableEntity<Note> implements NoteLike<Note> {
   Note(
     super.id, {
     required this.title,
@@ -91,4 +91,32 @@ class Note extends SyncableEntity<Note> {
       columnSyncStatus: syncStatus
     };
   }
+
+  @override
+  Note copyWithContent(String content) => copyWith(content: content);
+
+  @override
+  Note copyWithTitle(String title) => copyWith(title: title);
+
+  @override
+  int get noteId => id;
+
+  @override
+  String get noteContent => content;
+
+  @override
+  String get noteTitle => title;
+
+  @override
+  Note coppyWithTitleAndContent({
+    required String title,
+    required String content,
+  }) =>
+      copyWith(
+        title: title,
+        content: content,
+      );
+
+  @override
+  Note get data => this;
 }

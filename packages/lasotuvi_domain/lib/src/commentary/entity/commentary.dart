@@ -2,7 +2,8 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 
 import '../column_commentary.dart';
 
-class Commentary extends MustBuyEntity<Commentary> {
+class Commentary extends MustBuyEntity<Commentary>
+    implements NoteLike<Commentary> {
   Commentary(
     super.id, {
     required this.title,
@@ -107,4 +108,32 @@ class Commentary extends MustBuyEntity<Commentary> {
 
   @override
   int get hashCode => id.hashCode;
+
+  @override
+  Commentary copyWithContent(String content) => copyWith(content: content);
+
+  @override
+  Commentary copyWithTitle(String title) => copyWith(title: title);
+
+  @override
+  int get noteId => id;
+
+  @override
+  Commentary coppyWithTitleAndContent({
+    required String title,
+    required String content,
+  }) =>
+      copyWith(
+        title: title,
+        content: content,
+      );
+
+  @override
+  String get noteContent => content;
+
+  @override
+  String get noteTitle => title;
+
+  @override
+  Commentary get data => this;
 }

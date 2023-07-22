@@ -36,6 +36,8 @@ export 'src/usecase/syncable/sync_data.dart';
 export 'src/usecase/cloud/delete_from_cloud.dart';
 export 'src/usecase/local/delete_from_local.dart';
 
+export 'src/entity/note_like.dart';
+
 export 'src/entity/must_buy_entity.dart';
 export 'src/entity/entity.dart';
 export 'src/entity/sortable.dart';

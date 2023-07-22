@@ -47,6 +47,7 @@ class TopTenNotesBanner extends StatelessWidget {
             dataCount: DataCountWidget(
               uid: uid,
               controller: countController,
+              colorScheme: colorScheme,
             ),
           ),
           // Expanded(

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
-import 'package:lasotuvi_note/lasotuvi_note.dart';
+import 'package:lasotuvi_note/lasotuvi_note.dart' show NoteEditorBuilder;
+import 'package:note_editor/note_editor.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:sunoom/sunoom.dart';
+import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
@@ -81,11 +83,11 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
   Widget getEditorWidget(Note note) {
     return WillPopScope(
       onWillPop: () => onWillPop(note, context, ref),
-      child: NoteEditorScaffold(
+      child: NoteEditorScaffold<Note>(
         note: note,
         colorScheme: LasotuviAppStyle.colorScheme,
         translate: translate,
-        child: NoteEditorWidget(
+        child: NoteEditorWidget<Note>(
           translate: translate,
           colorScheme: LasotuviAppStyle.colorScheme,
           note: note,
@@ -100,9 +102,9 @@ class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
     );
   }
 
-  Widget chartAvatar(Note note) {
+  Widget chartAvatar(NoteLike note) {
     return FutureBuilder(
-        future: ref.read(chartByNoteIdProvider).call(uid, note.id),
+        future: ref.read(chartByNoteIdProvider).call(uid, note.noteId),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final chart = snapshot.requireData;
