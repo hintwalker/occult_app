@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
-import 'package:lasotuvi_presentation/src/features/auth/auth_depended_state.dart';
+import 'package:lasotuvi_presentation/src/features/auth/user_auth_depended_state.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
@@ -17,7 +17,7 @@ class BookReaderModalScreen extends ConsumerStatefulWidget {
 }
 
 class _BookReaderModalScreenState
-    extends AuthDependedState<BookReaderModalScreen> {
+    extends UserAuthDependedState<BookReaderModalScreen> {
   @override
   Widget build(BuildContext context) {
     return BookReaderModal(

@@ -8,7 +8,7 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 
-import '../auth/auth_depended_state.dart';
+import '../auth/user_auth_depended_state.dart';
 
 class TagEditBody extends ConsumerStatefulWidget {
   const TagEditBody(this.tag, {super.key});
@@ -18,7 +18,7 @@ class TagEditBody extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _TagEditBodyState();
 }
 
-class _TagEditBodyState extends AuthDependedState<TagEditBody> {
+class _TagEditBodyState extends UserAuthDependedState<TagEditBody> {
   @override
   Widget build(BuildContext context) {
     return TagEditModal(widget.tag,

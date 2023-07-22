@@ -29,7 +29,7 @@ class NoteEditorBody extends ConsumerStatefulWidget {
   ConsumerState<NoteEditorBody> createState() => _NoteEditorBodyState();
 }
 
-class _NoteEditorBodyState extends AuthDependedState<NoteEditorBody> {
+class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
   NoteEditorBodyController? controller;
   @override
   void initState() {

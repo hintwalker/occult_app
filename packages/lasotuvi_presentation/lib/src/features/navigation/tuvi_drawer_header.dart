@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../auth/user_auth_widget.dart';
+import '../auth/auth_section.dart';
+// import '../auth/user_auth_widget.dart';
 
 class TuviDrawerHeader extends StatelessWidget {
   const TuviDrawerHeader({super.key});
@@ -12,7 +13,7 @@ class TuviDrawerHeader extends StatelessWidget {
         SizedBox(
           height: 30,
         ),
-        UserAuthWidget()
+        AuthSection()
       ],
     );
   }

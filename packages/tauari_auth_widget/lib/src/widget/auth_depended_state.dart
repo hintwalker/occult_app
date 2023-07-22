@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:tauari_auth/tauari_auth.dart';
+// import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 
 abstract class AuthDependedState<T extends ConsumerStatefulWidget>
     extends ConsumerState<T> {
   StreamSubscription? _streamSubscription;
   String? uid;
   bool findingUid = true;
+  RegisterOnAuthStateChanged get registerOnAuthStateChanged;
   @override
   void initState() {
     super.initState();
@@ -15,8 +17,7 @@ abstract class AuthDependedState<T extends ConsumerStatefulWidget>
   }
 
   void startListening() {
-    _streamSubscription =
-        ref.read(registerOnAuthStateChangedProvider).call((user) {
+    _streamSubscription = registerOnAuthStateChanged.call((user) {
       setState(() {
         uid = user.uidInFirestore;
         findingUid = false;

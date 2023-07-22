@@ -6,22 +6,28 @@ class BasicStreamBuilder<T> extends StatelessWidget {
     super.key,
     required this.stream,
     required this.child,
+    this.childIfNull = const Text(''),
   });
   final Stream<T> stream;
   final Widget Function(T) child;
+  final Widget childIfNull;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<T>(
         stream: stream,
         builder: (_, snapshot) {
-          if (snapshot.hasData) {
-            final data = snapshot.requireData;
-            if (data == null) {
-              return const ErrorTextWidget();
+          if (snapshot.connectionState == ConnectionState.active) {
+            // final data = snapshot.requireData;
+            // if (data == null) {
+            //   return const ErrorTextWidget();
+            // } else {
+            if (snapshot.hasData) {
+              return child(snapshot.requireData);
             } else {
-              return child(data);
+              return childIfNull;
             }
+            // }
           } else {
             return const LoadingWidget();
           }

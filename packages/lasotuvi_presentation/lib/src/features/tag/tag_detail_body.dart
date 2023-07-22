@@ -11,7 +11,7 @@ import 'package:tuvi_style/tuvi_style.dart';
 import '../chart/navigation/chart_navigation.dart';
 import '../../helper/storage_helper.dart';
 import 'navigation/tag_navigation.dart';
-import '../auth/auth_depended_state.dart';
+import '../auth/user_auth_depended_state.dart';
 
 class TagDetailBody extends ConsumerStatefulWidget {
   const TagDetailBody(
@@ -24,7 +24,7 @@ class TagDetailBody extends ConsumerStatefulWidget {
   ConsumerState<TagDetailBody> createState() => _TagDetailBodyState();
 }
 
-class _TagDetailBodyState extends AuthDependedState<TagDetailBody> {
+class _TagDetailBodyState extends UserAuthDependedState<TagDetailBody> {
   // @override
   // void dispose() {
   //   ref.invalidate(tagDetailControllerProvider);

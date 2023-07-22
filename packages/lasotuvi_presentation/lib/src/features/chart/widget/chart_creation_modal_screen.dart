@@ -10,7 +10,7 @@ import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_chart_creation_form/tuvi_chart_creation_form.dart';
 
 import '../navigation/chart_navigation.dart';
-import '../../auth/auth_depended_state.dart';
+import '../../auth/user_auth_depended_state.dart';
 
 class ChartCreationModalScreen extends ConsumerStatefulWidget {
   const ChartCreationModalScreen({super.key});
@@ -21,7 +21,7 @@ class ChartCreationModalScreen extends ConsumerStatefulWidget {
 }
 
 class _ChartCreationModalScreenState
-    extends AuthDependedState<ChartCreationModalScreen> {
+    extends UserAuthDependedState<ChartCreationModalScreen> {
   @override
   Widget build(BuildContext context) {
     return findingUid

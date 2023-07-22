@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 
 import '../../styles/live_energy_style_impl.dart';
-import '../auth/auth_depended_state.dart';
+import '../auth/user_auth_depended_state.dart';
 
 class EnergyPointAppBarAction extends ConsumerStatefulWidget {
   const EnergyPointAppBarAction({super.key});
@@ -13,7 +13,8 @@ class EnergyPointAppBarAction extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _AppBarTrailingState();
 }
 
-class _AppBarTrailingState extends AuthDependedState<EnergyPointAppBarAction> {
+class _AppBarTrailingState
+    extends UserAuthDependedState<EnergyPointAppBarAction> {
   // StreamSubscription? _streamSubscription;
   // String? uid;
   // @override

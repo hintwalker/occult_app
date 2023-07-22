@@ -5,7 +5,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../../../auth/auth_depended_state.dart';
+import '../../../auth/user_auth_depended_state.dart';
 import 'controller/modify_chart_controller.dart';
 
 class ModifyChartAvatarBody extends ConsumerStatefulWidget {
@@ -24,7 +24,7 @@ class ModifyChartAvatarBody extends ConsumerStatefulWidget {
 }
 
 class _ModifyChartAvatarBodyState
-    extends AuthDependedState<ModifyChartAvatarBody> {
+    extends UserAuthDependedState<ModifyChartAvatarBody> {
   // Chart? chart;
   // @override
   // void initState() {

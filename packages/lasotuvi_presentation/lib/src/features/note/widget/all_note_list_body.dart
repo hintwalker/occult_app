@@ -17,7 +17,7 @@ class AllNoteListBody extends ConsumerStatefulWidget {
   ConsumerState<AllNoteListBody> createState() => _AllNoteListBodyState();
 }
 
-class _AllNoteListBodyState extends AuthDependedState<AllNoteListBody> {
+class _AllNoteListBodyState extends UserAuthDependedState<AllNoteListBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid

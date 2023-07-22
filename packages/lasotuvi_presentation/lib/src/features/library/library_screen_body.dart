@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
 import 'navigation/library_navigation.dart';
 
-import '../auth/auth_depended_state.dart';
+import '../auth/user_auth_depended_state.dart';
 
 class LibraryScreenBody extends ConsumerStatefulWidget {
   const LibraryScreenBody({super.key});
@@ -12,7 +12,7 @@ class LibraryScreenBody extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _LibraryBodyState();
 }
 
-class _LibraryBodyState extends AuthDependedState<LibraryScreenBody> {
+class _LibraryBodyState extends UserAuthDependedState<LibraryScreenBody> {
   @override
   Widget build(BuildContext context) {
     return LibraryWidget(

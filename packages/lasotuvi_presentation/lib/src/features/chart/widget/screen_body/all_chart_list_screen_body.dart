@@ -13,7 +13,7 @@ import '../../../../helper/sort_helper.dart';
 import '../../../../helper/storage_helper.dart';
 import '../../../../router/route_name.dart';
 import '../../../../router/router_params.dart';
-import '../../../auth/auth_depended_state.dart';
+import '../../../auth/user_auth_depended_state.dart';
 
 class AllChartListScreenBody extends ConsumerStatefulWidget {
   const AllChartListScreenBody({super.key});
@@ -22,7 +22,7 @@ class AllChartListScreenBody extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _AllChartBodyState();
 }
 
-class _AllChartBodyState extends AuthDependedState<AllChartListScreenBody> {
+class _AllChartBodyState extends UserAuthDependedState<AllChartListScreenBody> {
   @override
   Widget build(BuildContext context) {
     // return const Placeholder();

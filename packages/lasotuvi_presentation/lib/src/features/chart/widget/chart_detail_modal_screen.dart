@@ -6,7 +6,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-import '../../auth/auth_depended_state.dart';
+import '../../auth/user_auth_depended_state.dart';
 
 class ChartDetailModalScreen extends ConsumerStatefulWidget {
   const ChartDetailModalScreen({
@@ -23,7 +23,7 @@ class ChartDetailModalScreen extends ConsumerStatefulWidget {
 }
 
 class _ChartDetailModalScreenState
-    extends AuthDependedState<ChartDetailModalScreen> {
+    extends UserAuthDependedState<ChartDetailModalScreen> {
   @override
   Widget build(BuildContext context) {
     return findingUid

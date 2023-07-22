@@ -14,7 +14,7 @@ import '../navigation/chart_navigation.dart';
 import '../../note/navigation/note_navigation.dart';
 import '../../../helper/storage_helper.dart';
 import '../../tag/navigation/tag_navigation.dart';
-import '../../auth/auth_depended_state.dart';
+import '../../auth/user_auth_depended_state.dart';
 
 class ChartViewModalScreen extends ConsumerStatefulWidget {
   const ChartViewModalScreen({
@@ -29,7 +29,7 @@ class ChartViewModalScreen extends ConsumerStatefulWidget {
 }
 
 class _ChartViewModalScreenState
-    extends AuthDependedState<ChartViewModalScreen> {
+    extends UserAuthDependedState<ChartViewModalScreen> {
   final tagListController = WrapTagListControler();
   @override
   void initState() {

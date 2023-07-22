@@ -16,7 +16,7 @@ import '../../../helper/storage_helper.dart';
 import '../../request/navigation/request_navigation.dart';
 import '../../tag/navigation/tag_navigation.dart';
 import '../../../styles/general_style.dart';
-import '../../auth/auth_depended_state.dart';
+import '../../auth/user_auth_depended_state.dart';
 import '../../navigation/drawer_ids.dart';
 import '../../statistics/widget/current_sub_widget_container.dart';
 import '../controller/home_controller.dart';
@@ -29,7 +29,7 @@ class HomeBody extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeBodyState();
 }
 
-class _HomeBodyState extends AuthDependedState<HomeBody> {
+class _HomeBodyState extends UserAuthDependedState<HomeBody> {
   final controller = HomeController();
   @override
   Widget build(BuildContext context) {

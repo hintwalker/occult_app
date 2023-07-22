@@ -31,7 +31,7 @@ class CommentaryReaderBody extends ConsumerStatefulWidget {
 }
 
 class _CommentaryReaderBodyState
-    extends AuthDependedState<CommentaryReaderBody> {
+    extends UserAuthDependedState<CommentaryReaderBody> {
   CommentaryReaderBodyController? controller;
   @override
   void initState() {

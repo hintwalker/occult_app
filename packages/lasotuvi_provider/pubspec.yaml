@@ -55,6 +55,8 @@ dependencies:
     path: ../tauari_data_core
   tauari_auth:
     path: ../tauari_auth
+  tauari_auth_widget:
+    path: ../tauari_auth_widget
   tauari_utils:
     path: ../tauari_utils
   tauari_subscription:

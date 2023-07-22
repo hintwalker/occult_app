@@ -6,7 +6,7 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../auth/auth_depended_state.dart';
+import '../auth/user_auth_depended_state.dart';
 
 class StarInfoBody extends ConsumerStatefulWidget {
   const StarInfoBody(this.item, {super.key});
@@ -16,7 +16,7 @@ class StarInfoBody extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _StarInfoBodyState();
 }
 
-class _StarInfoBodyState extends AuthDependedState<StarInfoBody> {
+class _StarInfoBodyState extends UserAuthDependedState<StarInfoBody> {
   @override
   Widget build(BuildContext context) {
     return StarInfoModal(

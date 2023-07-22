@@ -21,6 +21,7 @@ export 'src/source/auth_data_source.dart';
 export 'src/source/firebase_auth_data_source.dart';
 export 'src/source/user_data_source.dart';
 
+export 'src/usecases/on_current_user.dart';
 export 'src/usecases/register_on_auth_state_changed.dart';
 export 'src/usecases/set_user.dart';
 export 'src/usecases/setup_init_user.dart';

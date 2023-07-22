@@ -12,7 +12,7 @@ import 'package:tauari_ui/tauari_ui.dart';
 
 import '../navigation/chart_navigation.dart';
 import '../../../helper/sort_helper.dart';
-import '../../auth/auth_depended_state.dart';
+import '../../auth/user_auth_depended_state.dart';
 
 class CheckboxChartListBody extends ConsumerStatefulWidget {
   const CheckboxChartListBody(
@@ -31,7 +31,7 @@ class CheckboxChartListBody extends ConsumerStatefulWidget {
 }
 
 class _CheckBoxChartListBodyState
-    extends AuthDependedState<CheckboxChartListBody> {
+    extends UserAuthDependedState<CheckboxChartListBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid

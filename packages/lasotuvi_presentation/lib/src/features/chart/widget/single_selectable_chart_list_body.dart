@@ -7,7 +7,7 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import '../../../helper/sort_helper.dart';
-import '../../auth/auth_depended_state.dart';
+import '../../auth/user_auth_depended_state.dart';
 
 class SingleSelectableChartListBody extends ConsumerStatefulWidget {
   const SingleSelectableChartListBody({
@@ -23,7 +23,7 @@ class SingleSelectableChartListBody extends ConsumerStatefulWidget {
 }
 
 class _SingleSelectableChartListBodyState
-    extends AuthDependedState<SingleSelectableChartListBody> {
+    extends UserAuthDependedState<SingleSelectableChartListBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid

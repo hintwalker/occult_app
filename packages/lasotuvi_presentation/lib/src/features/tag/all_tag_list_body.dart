@@ -17,7 +17,7 @@ class AllTagListBody extends ConsumerStatefulWidget {
   ConsumerState<AllTagListBody> createState() => _AllTagListBodyState();
 }
 
-class _AllTagListBodyState extends AuthDependedState<AllTagListBody> {
+class _AllTagListBodyState extends UserAuthDependedState<AllTagListBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid

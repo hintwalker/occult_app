@@ -9,7 +9,7 @@ import 'package:tauari_utils/tauari_utils.dart';
 import 'package:tuvi_style/tuvi_style.dart';
 
 import '../../styles/storage_plan_style_impl.dart';
-import '../auth/auth_depended_state.dart';
+import '../auth/user_auth_depended_state.dart';
 
 class AllStoragePlansBody extends ConsumerStatefulWidget {
   const AllStoragePlansBody({super.key});
@@ -19,7 +19,8 @@ class AllStoragePlansBody extends ConsumerStatefulWidget {
       _AllStoragePlansBodyState();
 }
 
-class _AllStoragePlansBodyState extends AuthDependedState<AllStoragePlansBody> {
+class _AllStoragePlansBodyState
+    extends UserAuthDependedState<AllStoragePlansBody> {
   // @override
   // void dispose() {
   //   ref.read(expiredTimerControllerProvider).cancelAllTimer();

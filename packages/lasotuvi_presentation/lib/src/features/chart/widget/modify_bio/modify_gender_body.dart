@@ -6,7 +6,7 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../../../auth/auth_depended_state.dart';
+import '../../../auth/user_auth_depended_state.dart';
 import 'controller/modify_chart_controller.dart';
 
 class ModifyGenderBody extends ConsumerStatefulWidget {
@@ -22,7 +22,7 @@ class ModifyGenderBody extends ConsumerStatefulWidget {
   ConsumerState<ModifyGenderBody> createState() => _ModifyGenderBodyState();
 }
 
-class _ModifyGenderBodyState extends AuthDependedState<ModifyGenderBody> {
+class _ModifyGenderBodyState extends UserAuthDependedState<ModifyGenderBody> {
   @override
   Widget build(BuildContext context) {
     final processing = ref.watch(modifyChartControllerProvider);

@@ -223,6 +223,7 @@ export 'src/user/set_user_provider.dart';
 export 'src/user/user_repository_provider.dart';
 export 'src/user/setup_init_user_provider.dart';
 
+export 'src/auth/controller/auth_controller.dart';
 export 'src/auth/usecase/take_current_user_provider.dart';
 export 'src/auth/auth_notifier_provider.dart';
 export 'src/auth/auth_data_source_provider.dart';
@@ -232,7 +233,7 @@ export 'src/auth/auth_state_changes_provider.dart';
 export 'src/auth/current_user_provider.dart';
 export 'src/auth/current_user_stream_provider.dart';
 export 'src/auth/firebase_auth_provider.dart';
-export 'src/auth/register_on_auth_state_changed_provider.dart';
+export 'src/auth/usecase/register_on_auth_state_changed.dart';
 export 'src/auth/sign_in_with_google_provider.dart';
 export 'src/auth/sign_out_provider.dart';
 

@@ -13,7 +13,7 @@ import 'package:tauari_ui/tauari_ui.dart';
 import '../../helper/sort_helper.dart';
 import '../../helper/storage_helper.dart';
 import 'navigation/tag_navigation.dart';
-import '../auth/auth_depended_state.dart';
+import '../auth/user_auth_depended_state.dart';
 
 class CheckboxTagListBody extends ConsumerStatefulWidget {
   const CheckboxTagListBody(this.chart, {super.key});
@@ -25,7 +25,8 @@ class CheckboxTagListBody extends ConsumerStatefulWidget {
       _CheckboxTagListBodyState();
 }
 
-class _CheckboxTagListBodyState extends AuthDependedState<CheckboxTagListBody> {
+class _CheckboxTagListBodyState
+    extends UserAuthDependedState<CheckboxTagListBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid

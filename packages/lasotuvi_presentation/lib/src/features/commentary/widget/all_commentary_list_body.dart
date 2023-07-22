@@ -20,7 +20,7 @@ class AllCommentaryListBody extends ConsumerStatefulWidget {
 }
 
 class _AllCommentaryListBodyState
-    extends AuthDependedState<AllCommentaryListBody> {
+    extends UserAuthDependedState<AllCommentaryListBody> {
   @override
   Widget build(BuildContext context) {
     return findingUid

@@ -69,8 +69,7 @@ export 'src/router/router_notifier.dart';
 export 'src/router/router_notifier_provider.dart';
 export 'src/router/router_params.dart';
 
-export 'src/features/auth/user_auth_widget.dart';
-export 'src/features/auth/auth_screen_body.dart';
-export 'src/features/auth/auth_depended_state.dart';
+export 'src/features/auth/auth_section.dart';
+export 'src/features/auth/user_auth_depended_state.dart';
 
 export 'src/features/energy_market/market_body.dart';
