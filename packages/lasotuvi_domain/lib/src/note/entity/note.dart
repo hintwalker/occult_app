@@ -1,4 +1,5 @@
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 
 import '../column_note.dart';
 
@@ -12,6 +13,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
     required this.chartId,
     super.storageState,
     super.syncStatus,
+    required super.modified,
   });
   final String title;
   final String content;
@@ -20,24 +22,27 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
   final int chartId;
 
   factory Note.fromMap(Map<String, dynamic> map) {
-    return Note(
-      map[columnId] as int,
-      title:
-          map[ColumnNote.title] == null ? '' : map[ColumnNote.title] as String,
-      content: map[ColumnNote.content] as String,
-      created: map[columnCreated] == null
-          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-      edited: map[ColumnNote.edited] == null
-          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-          : DateTime.fromMillisecondsSinceEpoch(map[ColumnNote.edited] as int),
-      chartId: map[ColumnNote.chartId] as int,
-      storageState:
-          map[columnState] == null ? null : map[columnState] as String,
-      syncStatus: map[columnSyncStatus] == null
-          ? null
-          : map[columnSyncStatus] as String,
-    );
+    return Note(map[columnId] as int,
+        title: map[ColumnNote.title] == null
+            ? ''
+            : map[ColumnNote.title] as String,
+        content: map[ColumnNote.content] as String,
+        created: map[columnCreated] == null
+            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+        edited: map[ColumnNote.edited] == null
+            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+            : DateTime.fromMillisecondsSinceEpoch(
+                map[ColumnNote.edited] as int),
+        chartId: map[ColumnNote.chartId] as int,
+        storageState:
+            map[columnState] == null ? null : map[columnState] as String,
+        syncStatus: map[columnSyncStatus] == null
+            ? null
+            : map[columnSyncStatus] as String,
+        modified: map[columnModified] == null
+            ? LocalLocked.unlocked
+            : map[columnModified] as int);
   }
 
   @override
@@ -62,6 +67,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
     String? syncStatus,
     int? chartId,
     String? storageState,
+    int? modified,
   }) {
     return Note(
       id ?? this.id,
@@ -72,6 +78,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
       chartId: chartId ?? this.chartId,
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
+      modified: modified ?? this.modified,
     );
   }
 
@@ -88,7 +95,8 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
       ColumnNote.edited: edited.millisecondsSinceEpoch,
       ColumnNote.chartId: chartId,
       columnState: storageState,
-      columnSyncStatus: syncStatus
+      columnSyncStatus: syncStatus,
+      columnModified: modified,
     };
   }
 
@@ -119,4 +127,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
 
   @override
   Note get data => this;
+
+  @override
+  Note copyWithModified(int value) => copyWith(modified: value);
 }

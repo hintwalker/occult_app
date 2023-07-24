@@ -18,6 +18,8 @@ dependencies:
     path: ../tauari_list_view
   tauari_ui:
     path: ../tauari_ui
+  tauari_sort:
+    path: ../tauari_sort
   lasotuvi_request_shared:
     path: ../lasotuvi_request_shared
   tuvi_domain:

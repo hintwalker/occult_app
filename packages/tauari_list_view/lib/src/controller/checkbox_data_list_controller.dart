@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../entity/sort_value.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import '../selectable_item.dart';
 
 class CheckboxDataListController<U> extends ChangeNotifier {
@@ -83,7 +83,7 @@ class CheckboxDataListController<U> extends ChangeNotifier {
       final inputi = inputData.elementAt(i);
 
       final oldi = selectableItems.where((element) {
-        final isEquals = element.data.hashCode == inputi.data.hashCode;
+        final isEquals = element.data == inputi.data;
         return isEquals;
       });
       if (oldi.isNotEmpty) {

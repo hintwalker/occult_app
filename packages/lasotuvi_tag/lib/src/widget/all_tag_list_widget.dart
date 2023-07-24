@@ -3,6 +3,7 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:lasotuvi_tag/src/query/tag_where_clause.dart';
 import 'package:tauari_list_view/tauari_list_view.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import '../group/group_tags_by.dart';
 import '../sort/tag_item_comparator.dart';

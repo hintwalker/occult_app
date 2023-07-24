@@ -6,5 +6,5 @@ class ChartSortValue {
   static const sortByBirthdayAsc = 'sortByBirthdayAsc';
   static const sortByBirthdayDesc = 'sortByBirthdayDesc';
   static const sortByLastViewAsc = 'sortByLastViewAsc';
-  static const sortByLastViewDesc = 'sortLastViewDesc';
+  static const sortByLastViewDesc = 'sortByLastViewDesc';
 }

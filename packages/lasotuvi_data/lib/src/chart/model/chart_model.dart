@@ -1,5 +1,6 @@
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
 class ChartModel extends SyncableModel<Chart> {
@@ -22,6 +23,7 @@ class ChartModel extends SyncableModel<Chart> {
     this.avatar,
     super.storageState,
     super.syncStatus,
+    required super.modified,
   });
 
   @override
@@ -38,6 +40,7 @@ class ChartModel extends SyncableModel<Chart> {
       lastViewed: DateTime.fromMillisecondsSinceEpoch(lastViewed),
       syncStatus: syncStatus,
       storageState: storageState,
+      modified: modified,
     );
   }
 
@@ -53,6 +56,7 @@ class ChartModel extends SyncableModel<Chart> {
       avatar: entity.avatar,
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
+      modified: entity.modified,
     );
   }
 
@@ -67,6 +71,7 @@ class ChartModel extends SyncableModel<Chart> {
     String? avatar,
     String? storageState,
     String? syncStatus,
+    int? modified,
   }) {
     return ChartModel(
       id ?? this.id,
@@ -79,44 +84,47 @@ class ChartModel extends SyncableModel<Chart> {
       avatar: avatar ?? this.avatar,
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
+      modified: modified ?? this.modified,
     );
   }
 
   static ChartModel fromMap(Map<String, Object?> map) {
-    return ChartModel(
-      map[columnId] as int,
-      name:
-          map[ColumnChart.name] == null ? '' : map[ColumnChart.name] as String,
-      gender:
-          map[ColumnChart.gender] == null ? 0 : map[ColumnChart.gender] as int,
-      birthday: map[ColumnChart.birthday] == null
-          ? DateTime(1990, 1, 1, 0, 1).millisecondsSinceEpoch
-          : map[ColumnChart.birthday] as int,
-      watchingYear: map[ColumnChart.watchingYear] == null
-          ? 2023
-          : map[ColumnChart.watchingYear] as int,
-      timeZoneOffset: map[ColumnChart.timeZoneOffset] == null
-          ? 7
-          : map[ColumnChart.timeZoneOffset] as int,
-      lastViewed: map[ColumnChart.lastViewed] == null
-          ? DateTime.now().millisecond
-          : map[ColumnChart.lastViewed] as int,
-      avatar: map[ColumnChart.avatar] == null
-          ? null
-          : map[ColumnChart.avatar] as String,
-      storageState:
-          map[columnState] == null ? null : map[columnState] as String,
-      syncStatus: map[columnSyncStatus] == null
-          ? null
-          : map[columnSyncStatus] as String,
-    );
+    return ChartModel(map[columnId] as int,
+        name: map[ColumnChart.name] == null
+            ? ''
+            : map[ColumnChart.name] as String,
+        gender: map[ColumnChart.gender] == null
+            ? 0
+            : map[ColumnChart.gender] as int,
+        birthday: map[ColumnChart.birthday] == null
+            ? DateTime(1990, 1, 1, 0, 1).millisecondsSinceEpoch
+            : map[ColumnChart.birthday] as int,
+        watchingYear: map[ColumnChart.watchingYear] == null
+            ? 2023
+            : map[ColumnChart.watchingYear] as int,
+        timeZoneOffset: map[ColumnChart.timeZoneOffset] == null
+            ? 7
+            : map[ColumnChart.timeZoneOffset] as int,
+        lastViewed: map[ColumnChart.lastViewed] == null
+            ? DateTime.now().millisecond
+            : map[ColumnChart.lastViewed] as int,
+        avatar: map[ColumnChart.avatar] == null
+            ? null
+            : map[ColumnChart.avatar] as String,
+        storageState:
+            map[columnState] == null ? null : map[columnState] as String,
+        syncStatus: map[columnSyncStatus] == null
+            ? null
+            : map[columnSyncStatus] as String,
+        modified: map[columnModified] == null
+            ? LocalLocked.unlocked
+            : map[columnModified] as int);
   }
 
   @override
   bool operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is ChartModel && other.id == id;
+      other.runtimeType == runtimeType && other is ChartModel && other.id == id;
 
   @override
   int get hashCode => id.hashCode;
@@ -134,6 +142,7 @@ class ChartModel extends SyncableModel<Chart> {
       ColumnChart.avatar: avatar,
       columnState: storageState,
       columnSyncStatus: syncStatus,
+      columnModified: modified,
     };
   }
 

@@ -69,4 +69,28 @@ abstract class LocalDataSource<T extends LocalModel> {
   Stream<T?> onById(int itemId) {
     return dao.onById(itemId).map((e) => e == null ? null : fromMap(e));
   }
+
+  Future<void> insertManyToLocal(
+    Iterable<T> items, {
+    bool refreshDb = true,
+  }) =>
+      dao.insertMany(
+        items.map(
+          (e) => e.toSqlite(),
+        ),
+        refreshDb: refreshDb,
+      );
+
+  void refreshDatabase() => dao.refreshDatabase();
+
+  Future<void> updateManyOnLocal(
+    Iterable<T> items, {
+    bool refreshDb = true,
+  }) =>
+      dao.updateManyOnLocal(
+        items.map(
+          (e) => e.toSqlite(),
+        ),
+        refreshDb: refreshDb,
+      );
 }

@@ -8,21 +8,42 @@ class PoolSetOfEntity<T extends Syncable> {
   final SetOfEntity<T> cloudSet;
   const PoolSetOfEntity(this.localSet, this.cloudSet);
 
-  SetOfEntity<T> solve() {
-    return justOnLocal().union(synced()).union(justOnCloud());
+  SetOfEntity<T> solveKeepLocal() {
+    final result = <T>[];
+    for (var localItem in localSet.items) {
+      try {
+        final cloudItem = cloudSet.items.firstWhere(
+          (element) => element.syncId == localItem.syncId,
+        );
+        if (localItem.getModified > cloudItem.getModified) {
+          result.add(localItem.copyWithSyncStatus(SyncStatus.synced));
+        } else {
+          result.add(cloudItem.copyWithSyncStatus(SyncStatus.synced));
+        }
+      } on StateError catch (_) {
+        result.add(localItem.copyWithSyncStatus(SyncStatus.onlyLocal));
+      }
+    }
+    result.addAll(_justOnCloud().toList());
+    return SetOfEntity<T>.fromList(result);
+    // return _justOnLocal().union(_synced()).union(_justOnCloud());
   }
 
-  SetOfEntity<T> synced() {
+  SetOfEntity<T> solveKeepCloud() {
+    return _justOnCloud().union(_synced()).union(_justOnLocal());
+  }
+
+  SetOfEntity<T> _synced() {
     final intersection = localSet.intersection(cloudSet);
     return intersection.updateOnCloud(SyncStatus.synced);
   }
 
-  SetOfEntity<T> justOnCloud() {
+  SetOfEntity<T> _justOnCloud() {
     final diffOnB = cloudSet.difference(localSet);
     return diffOnB.updateOnCloud(SyncStatus.onlyCloud);
   }
 
-  SetOfEntity<T> justOnLocal() {
+  SetOfEntity<T> _justOnLocal() {
     final diffOnB = localSet.difference(cloudSet);
     return diffOnB.updateOnCloud(SyncStatus.onlyLocal);
   }

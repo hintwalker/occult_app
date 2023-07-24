@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import 'entity/sort_option.dart';
-import 'entity/sort_value.dart';
 import 'search_box_widget.dart';
 import 'sort_option_list_container.dart';
 import 'sort_options_button.dart';

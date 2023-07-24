@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart' show Note, NoteAndChart;
 import 'package:tauari_list_view/tauari_list_view.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import 'note_and_chart_item_widget.dart';
 import '../group/group_note_and_chart_by.dart';

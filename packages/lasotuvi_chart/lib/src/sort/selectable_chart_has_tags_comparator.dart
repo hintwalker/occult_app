@@ -1,3 +1,5 @@
+import 'package:tauari_sort/tauari_sort.dart';
+
 import 'chart_item_comparator.dart';
 
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';

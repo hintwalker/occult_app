@@ -69,7 +69,7 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                 ),
               ),
               SizedBox(
-                height: GeneralStyle.topTenBannerHeight,
+                height: 264.0,
                 child: TopTenRequestBanner(
                   uid: uid,
                   controller: ref.watch(requestListControllerProvider),

@@ -78,6 +78,10 @@ class _ChartViewModalScreenState
                         route.settings.name == 'chartView');
                   });
                 }),
+                onOpenTagDetail: (tag) => TagNavigation.openTagDetail(
+                  context: context,
+                  tag: tag,
+                ),
                 onOpenNoteSyncOptions: (note) =>
                     StorageHelper.showOptionsModal<Note>(note,
                         context: context, uid: uid, ref: ref),

@@ -13,7 +13,7 @@ import '../../syncable_repository.dart';
 import '../syncable_repository_impl.dart';
 
 abstract class SyncableDependentRepositoryImpl<
-        E extends SyncableEntity,
+        E extends SyncableEntity<E>,
         M extends SyncableModel<E>,
         O extends SyncableEntity> extends SyncableRepositoryImpl<E, M>
     implements SyncableDependentRepository<E, O> {

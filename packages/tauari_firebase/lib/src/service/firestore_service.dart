@@ -16,7 +16,7 @@ class FirestoreService implements CloudService {
 
   Future<void> createEmptyCollection({required String collectionPath}) async {
     final collection = firestore.collection(collectionPath);
-    await collection.doc().set({});
+    collection.doc().set({});
   }
 
   @override
@@ -24,7 +24,7 @@ class FirestoreService implements CloudService {
       {required String key,
       required Map<String, dynamic> data,
       required String collectionPath}) async {
-    return await firestore.collection(collectionPath).doc(key).set(data);
+    firestore.collection(collectionPath).doc(key).set(data);
   }
 
   Query<Map<String, dynamic>> _buildQuery(
@@ -137,27 +137,23 @@ class FirestoreService implements CloudService {
 
   @override
   Stream<DocumentSnapshot<Map<String, dynamic>>> getSnapshotStreamFromDocument(
-      {required String collectionPath, required String docId}) {
-    return firestore.collection(collectionPath).doc(docId).snapshots();
-  }
+          {required String collectionPath, required String docId}) =>
+      firestore.collection(collectionPath).doc(docId).snapshots();
 
   @override
   Future<void> updateDataOnDocument(
-      {required Map<String, dynamic> data,
-      required String collectionPath,
-      required String docId}) {
-    return firestore.collection(collectionPath).doc(docId).update(data);
-  }
+          {required Map<String, dynamic> data,
+          required String collectionPath,
+          required String docId}) =>
+      firestore.collection(collectionPath).doc(docId).update(data);
 
   @override
-  Stream<int> countDocuments(String collectionPath) {
-    return firestore
-        .collection(collectionPath)
-        .count()
-        .get()
-        .asStream()
-        .map((event) => event.count);
-  }
+  Stream<int> countDocuments(String collectionPath) => firestore
+      .collection(collectionPath)
+      .count()
+      .get()
+      .asStream()
+      .map((event) => event.count);
 
   @override
   Future<bool> exists(

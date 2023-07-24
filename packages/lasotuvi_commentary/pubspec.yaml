@@ -21,6 +21,8 @@ dependencies:
     path: ../tauari_data_core
   tauari_list_view:
     path: ../tauari_list_view
+  tauari_sort:
+    path: ../tauari_sort
   sunoom:
     path: ../sunoom
   lasotuvi_commentary_shared:

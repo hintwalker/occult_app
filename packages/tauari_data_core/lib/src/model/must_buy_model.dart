@@ -7,6 +7,7 @@ abstract class MustBuyModel<E extends MustBuyEntity> extends SyncableModel<E> {
     super.syncStatus,
     required this.price,
     required this.paid,
+    required super.modified,
   });
   final int price;
   final int paid;

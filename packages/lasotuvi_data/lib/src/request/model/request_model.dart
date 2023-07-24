@@ -27,6 +27,7 @@ class RequestModel extends SyncableModel<Request> {
     super.syncStatus,
     required this.solved,
     required this.chartId,
+    super.modified = LocalLocked.unlocked,
   });
 
   @override
@@ -45,6 +46,7 @@ class RequestModel extends SyncableModel<Request> {
       storageState: storageState,
       solved: solved,
       chartId: chartId,
+      modified: modified,
     );
   }
 
@@ -62,6 +64,7 @@ class RequestModel extends SyncableModel<Request> {
       syncStatus: entity.syncStatus,
       solved: entity.solved,
       chartId: entity.chartId,
+      modified: entity.modified,
     );
   }
 
@@ -78,6 +81,7 @@ class RequestModel extends SyncableModel<Request> {
     String? syncStatus,
     int? solved,
     int? chartId,
+    int? modified,
   }) {
     return RequestModel(
       id ?? this.id,
@@ -92,6 +96,7 @@ class RequestModel extends SyncableModel<Request> {
       syncStatus: syncStatus ?? this.syncStatus,
       solved: solved ?? this.solved,
       chartId: chartId ?? this.chartId,
+      modified: modified ?? this.modified,
     );
   }
 
@@ -130,14 +135,18 @@ class RequestModel extends SyncableModel<Request> {
       chartId: map[ColumnRequest.chartId] == null
           ? 0
           : map[ColumnRequest.chartId] as int,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
     );
   }
 
   @override
   bool operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is RequestModel && other.id == id;
+      other.runtimeType == runtimeType &&
+          other is RequestModel &&
+          other.id == id;
 
   @override
   int get hashCode => id.hashCode;
@@ -157,6 +166,7 @@ class RequestModel extends SyncableModel<Request> {
       columnSyncStatus: syncStatus,
       ColumnRequest.solved: solved,
       ColumnRequest.chartId: chartId,
+      columnModified: modified,
     };
   }
 

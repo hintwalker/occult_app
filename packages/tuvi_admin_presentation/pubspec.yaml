@@ -1,7 +1,7 @@
 name: tuvi_admin_presentation
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -10,6 +10,37 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  storage_options:
+    path: ../storage_options
+  tauari_data_core:
+    path: ../tauari_data_core
+  tauari_auth:
+    path: ../tauari_auth
+  tauari_auth_widget:
+    path: ../tauari_auth_widget
+  tauari_translate:
+    path: ../tauari_translate
+  tauari_ui:
+    path: ../tauari_ui
+  tauari_list_view:
+    path: ../tauari_list_view
+  tauari_sort:
+    path: ../tauari_sort
+  
+  tuvi_style:
+    path: ../tuvi_style
+  
+  lasotuvi_style:
+    path: ../lasotuvi_style
+  lasotuvi_domain:
+    path: ../lasotuvi_domain
+  lasotuvi_request:
+    path: ../lasotuvi_request
+  lasotuvi_commentary:
+    path: ../lasotuvi_commentary
+  lasotuvi_provider:
+    path: ../lasotuvi_provider
+  flutter_riverpod: ^2.3.6
 
 dev_dependencies:
   flutter_test:

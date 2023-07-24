@@ -1,5 +1,5 @@
-import '../entity/sort_value.dart';
-import '../list_order.dart';
+import 'package:tauari_sort/tauari_sort.dart';
+
 import '../simple_text_group.dart';
 
 int simpleGroupComparator(

@@ -14,7 +14,8 @@ class AuthController extends ChangeNotifier {
   final RegisterOnAuthStateChanged registerOnAuthStateChanged;
   final SetupInitUser setupInitUser;
 
-  StreamController<UserEntity?>? _streamController;
+  final StreamController<UserEntity?> _streamController =
+      StreamController<UserEntity?>.broadcast();
   StreamSubscription<UserEntity?>? _subscription;
 
   StreamSubscription<UserEntity?>? _onChangedSubscription;
@@ -25,7 +26,6 @@ class AuthController extends ChangeNotifier {
       if (kDebugMode) {
         print('Signed in: ${user.displayName} with uid = $savedUser');
       }
-
       if (syncData != null) {
         await syncData(savedUser);
       }
@@ -43,24 +43,28 @@ class AuthController extends ChangeNotifier {
   }
 
   Stream<UserEntity?> stream() {
-    _streamController = StreamController<UserEntity?>.broadcast();
+    // _streamController = StreamController<UserEntity?>.broadcast();
     listen();
-    return _streamController!.stream;
+    return _streamController.stream;
   }
 
   void listen() {
     _subscription = onCurrentUser().listen((event) {
-      if (!(_streamController == null || _streamController!.isClosed)) {
-        _streamController?.add(event);
+      if (!_streamController.isClosed) {
+        _streamController.add(event);
       }
     });
   }
 
   @override
   void dispose() {
-    _subscription?.cancel();
-    _streamController?.close();
-    _onChangedSubscription?.cancel();
+    unregister();
     super.dispose();
+  }
+
+  void unregister() {
+    _subscription?.cancel();
+    _streamController.close();
+    _onChangedSubscription?.cancel();
   }
 }

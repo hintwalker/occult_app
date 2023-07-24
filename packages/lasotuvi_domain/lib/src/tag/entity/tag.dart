@@ -1,4 +1,5 @@
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 
 import '../column_tag.dart';
 
@@ -10,36 +11,38 @@ class Tag extends SyncableEntity<Tag> {
     required this.created,
     super.syncStatus,
     super.storageState,
+    required super.modified,
   });
   final String title;
   final String subTitle;
   final DateTime created;
 
   factory Tag.fromMap(Map<String, Object?> map) {
-    return Tag(
-      map[columnId] as int,
-      title: map[ColumnTag.title] == null ? '' : map[ColumnTag.title] as String,
-      subTitle: map[ColumnTag.description] == null
-          ? ''
-          : map[ColumnTag.description] as String,
-      created: map[columnCreated] == null
-          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-      storageState:
-          map[columnState] == null ? null : map[columnState] as String,
-      syncStatus: map[columnSyncStatus] == null
-          ? null
-          : map[columnSyncStatus] as String,
-    );
+    return Tag(map[columnId] as int,
+        title:
+            map[ColumnTag.title] == null ? '' : map[ColumnTag.title] as String,
+        subTitle: map[ColumnTag.description] == null
+            ? ''
+            : map[ColumnTag.description] as String,
+        created: map[columnCreated] == null
+            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+        storageState:
+            map[columnState] == null ? null : map[columnState] as String,
+        syncStatus: map[columnSyncStatus] == null
+            ? null
+            : map[columnSyncStatus] as String,
+        modified: map[columnModified] == null
+            ? LocalLocked.unlocked
+            : map[columnModified] as int);
   }
 
   @override
   bool operator ==(Object? other) {
     final result = identical(other, this) ||
-        other.runtimeType == runtimeType &&
-            other is Tag &&
-            other.id == id &&
-            other.syncStatus == syncStatus;
+        other.runtimeType == runtimeType && other is Tag && other.id == id;
+    // &&
+    // other.syncStatus == syncStatus;
     return result;
   }
 
@@ -62,6 +65,7 @@ class Tag extends SyncableEntity<Tag> {
       columnCreated: created.millisecondsSinceEpoch,
       columnState: state,
       columnSyncStatus: getSyncStatus,
+      columnModified: modified,
     };
   }
 
@@ -77,6 +81,7 @@ class Tag extends SyncableEntity<Tag> {
     DateTime? created,
     String? syncStatus,
     String? storageState,
+    int? modified,
   }) {
     return Tag(
       id ?? this.id,
@@ -85,9 +90,13 @@ class Tag extends SyncableEntity<Tag> {
       created: created ?? this.created,
       syncStatus: syncStatus ?? this.syncStatus,
       storageState: storageState ?? this.storageState,
+      modified: modified ?? this.modified,
     );
   }
 
   @override
   Tag copyWithState(String? state) => copyWith(storageState: state);
+
+  @override
+  Tag copyWithModified(int value) => copyWith(modified: value);
 }

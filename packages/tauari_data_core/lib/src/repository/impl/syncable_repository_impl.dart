@@ -1,4 +1,4 @@
-import 'package:ordered_set/ordered_set.dart';
+// import 'package:ordered_set/ordered_set.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tauari_utils/tauari_utils.dart';
 import 'package:tauari_values/tauari_values.dart';
@@ -87,10 +87,10 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
       SetOfEntity.fromList(localNonNull),
       SetOfEntity.fromList(cloudNonNull),
     );
-    final items = pool.solve().items;
-    final ordered = OrderedSet<T>((a, b) => b.sortId.compareTo(a.sortId));
-    ordered.addAll(items);
-    return ordered;
+    final items = pool.solveKeepLocal().items;
+    // final ordered = OrderedSet<T>((a, b) => b.sortId.compareTo(a.sortId));
+    // ordered.addAll(items);
+    return items;
   }
 
   @override
@@ -152,29 +152,63 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   @override
   Future<bool> sync(String? uid) async {
     final items = await dataEveryWhere(uid);
-    final filteredItems =
+    final cloudItems =
         items.where((element) => element.getSyncStatus == SyncStatus.onlyCloud);
-
-    for (var item in filteredItems) {
-      if (item.syncStatus == SyncStatus.onlyCloud) {
-        localRepository.insertToLocal(item);
-      }
+    if (cloudItems.isNotEmpty) {
+      await localRepository.insertManyToLocal(
+        cloudItems,
+        refreshDb: false,
+      );
     }
+    final syncItems = items.where(
+      (element) => element.getSyncStatus == SyncStatus.synced,
+    );
+    if (syncItems.isNotEmpty) {
+      await localRepository.updateManyOnLocal(
+        syncItems,
+        refreshDb: false,
+      );
+    }
+
+    // for (var item in filteredItems) {
+    //   // if (item.modified == LocalLocked.unlocked) {
+    //   await localRepository.insertToLocal(item);
+    //   // }
+    // }
 
     return Future.value(true);
   }
 
   @override
   Future<void> update(E item, String? uid) async {
-    await localRepository.updateOnLocal(item);
-    if (onlyOnLocal(
+    // final hasNetwork = await availableNetwork();
+
+    // await localRepository.updateOnLocal(
+    //   hasNetwork ? item : item.copyWithLocalLocked(LocalLocked.locked),
+    // );
+    final now = DateTime.now().millisecondsSinceEpoch;
+    await localRepository.updateOnLocal(
+      item.copyWithModified(
+        now,
+      ),
+    );
+    if (!onlyOnLocal(
       uid: uid,
       syncStatus: item.syncStatus,
     )) {
-      return;
-    } else {
-      await cloudRepository.updateOnCloud(item, uid!);
+      await cloudRepository.updateOnCloud(
+        item.copyWithModified(
+          now,
+        ),
+        uid!,
+      );
     }
+    // else {
+    // await localRepository.updateOnLocal(
+    //   hasNetwork ? item : item.copyWithLocalLocked(LocalLocked.locked),
+    // );
+
+    // }
   }
 
   @override

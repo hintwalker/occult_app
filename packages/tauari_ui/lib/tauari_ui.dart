@@ -3,6 +3,7 @@ library tauari_ui;
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 
+export 'src/widget/circle_container.dart';
 export 'src/widget/data_count_widget.dart';
 export 'src/widget/syncable_card_item_scaffold.dart';
 export 'src/widget/need_sign_in_alert_dialog.dart';

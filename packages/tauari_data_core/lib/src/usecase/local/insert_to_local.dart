@@ -1,7 +1,8 @@
 import '../../entity/sqlite_getable.dart';
 import '../../repository/local_repository.dart';
 
-class InsertToLocal<E extends SqliteGetable, R extends LocalRepository> {
+abstract class InsertToLocal<E extends SqliteGetable,
+    R extends LocalRepository> {
   final R repository;
 
   const InsertToLocal(this.repository);

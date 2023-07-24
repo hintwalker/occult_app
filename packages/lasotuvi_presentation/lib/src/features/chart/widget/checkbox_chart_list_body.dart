@@ -7,11 +7,11 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_list_view/tauari_list_view.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
 import '../navigation/chart_navigation.dart';
-import '../../../helper/sort_helper.dart';
 import '../../auth/user_auth_depended_state.dart';
 
 class CheckboxChartListBody extends ConsumerStatefulWidget {

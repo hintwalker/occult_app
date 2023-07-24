@@ -1,5 +1,5 @@
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
-import 'package:tauari_list_view/tauari_list_view.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import 'commentary_item_comparator.dart';
 import 'commentary_sort_value.dart';

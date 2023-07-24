@@ -14,6 +14,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
     required this.seen,
     super.storageState,
     super.syncStatus,
+    required super.modified,
   });
   final String title;
   final String content;
@@ -45,6 +46,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
       columnCreated: created.millisecondsSinceEpoch,
       columnSyncStatus: getSyncStatus,
       columnState: state,
+      columnModified: modified
     };
   }
 
@@ -74,6 +76,9 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
           : map[columnSyncStatus] as String,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
     );
   }
 
@@ -87,6 +92,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
     DateTime? created,
     String? syncStatus,
     String? storageState,
+    int? modified,
   }) {
     return TuviNotification(
       id ?? this.id,
@@ -98,6 +104,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
       created: created ?? this.created,
       syncStatus: syncStatus ?? this.syncStatus,
       storageState: storageState ?? this.storageState,
+      modified: modified ?? this.modified,
     );
   }
 
@@ -120,4 +127,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
   TuviNotification copyWithState(String? state) {
     return copyWith(storageState: state);
   }
+
+  @override
+  TuviNotification copyWithModified(int value) => copyWith(modified: value);
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import 'commentary_sort_options.dart';
-import 'package:tauari_list_view/tauari_list_view.dart';
 
 import 'commentary_sort_value.dart';
 

@@ -1,5 +1,6 @@
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 
 class TagModel extends SyncableModel<Tag> {
   TagModel(
@@ -8,6 +9,7 @@ class TagModel extends SyncableModel<Tag> {
     required this.subTitle,
     super.storageState,
     super.syncStatus,
+    super.modified = LocalLocked.unlocked,
   });
   final String title;
   final String subTitle;
@@ -21,6 +23,7 @@ class TagModel extends SyncableModel<Tag> {
       created: DateTime.fromMillisecondsSinceEpoch(id),
       storageState: storageState,
       syncStatus: syncStatus,
+      modified: modified,
     );
   }
 
@@ -48,6 +51,7 @@ class TagModel extends SyncableModel<Tag> {
       ColumnTag.description: subTitle,
       columnState: storageState,
       columnSyncStatus: syncStatus,
+      columnModified: modified,
       // columnCreated: created.millisecondsSinceEpoch
     };
   }
@@ -62,6 +66,9 @@ class TagModel extends SyncableModel<Tag> {
           : map[columnSyncStatus] as String,
       storageState:
           map[columnState] == null ? null : map[columnState] as String,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
     );
   }
 
@@ -72,6 +79,7 @@ class TagModel extends SyncableModel<Tag> {
       subTitle: entity.subTitle,
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
+      modified: entity.modified,
     );
   }
 
@@ -84,8 +92,7 @@ class TagModel extends SyncableModel<Tag> {
   @override
   bool operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is TagModel && other.id == id;
+      other.runtimeType == runtimeType && other is TagModel && other.id == id;
 
   @override
   int get hashCode => id.hashCode;

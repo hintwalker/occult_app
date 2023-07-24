@@ -20,6 +20,8 @@ dependencies:
     path: ../tauari_list_view
   tauari_data_core:
     path: ../tauari_data_core
+  tauari_sort:
+    path: ../tauari_sort
   lasotuvi_tag_shared:
     path: ../lasotuvi_tag_shared
   sunoom:

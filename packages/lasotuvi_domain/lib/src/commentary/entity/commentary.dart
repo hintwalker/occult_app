@@ -1,4 +1,5 @@
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 
 import '../column_commentary.dart';
 
@@ -15,6 +16,7 @@ class Commentary extends MustBuyEntity<Commentary>
     super.syncStatus,
     required super.price,
     required super.paid,
+    required super.modified,
   });
   final String title;
   final String content;
@@ -41,46 +43,49 @@ class Commentary extends MustBuyEntity<Commentary>
       columnSyncStatus: syncStatus,
       columnPrice: price,
       columnPaid: paid,
+      columnModified: modified,
     };
   }
 
   factory Commentary.fromMap(Map<String, dynamic> map) {
-    return Commentary(
-      map[columnId] as int,
-      title: map[ColumnCommentary.title] == null
-          ? ''
-          : map[ColumnCommentary.title] as String,
-      content: map[ColumnCommentary.content] as String,
-      created: map[columnCreated] == null
-          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-      lastViewed: map[ColumnCommentary.lastViewed] == null
-          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-          : DateTime.fromMillisecondsSinceEpoch(
-              map[ColumnCommentary.lastViewed] as int),
-      requestId: map[ColumnCommentary.requestId] as int,
-      storageState:
-          map[columnState] == null ? null : map[columnState] as String,
-      syncStatus: map[columnSyncStatus] == null
-          ? null
-          : map[columnSyncStatus] as String,
-      price: map[columnPrice] == null ? 0 : map[columnPrice] as int,
-      paid: map[columnPaid] == null ? PaidValue.unPaid : map[columnPaid] as int,
-    );
+    return Commentary(map[columnId] as int,
+        title: map[ColumnCommentary.title] == null
+            ? ''
+            : map[ColumnCommentary.title] as String,
+        content: map[ColumnCommentary.content] as String,
+        created: map[columnCreated] == null
+            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+        lastViewed: map[ColumnCommentary.lastViewed] == null
+            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+            : DateTime.fromMillisecondsSinceEpoch(
+                map[ColumnCommentary.lastViewed] as int),
+        requestId: map[ColumnCommentary.requestId] as int,
+        storageState:
+            map[columnState] == null ? null : map[columnState] as String,
+        syncStatus: map[columnSyncStatus] == null
+            ? null
+            : map[columnSyncStatus] as String,
+        price: map[columnPrice] == null ? 0 : map[columnPrice] as int,
+        paid:
+            map[columnPaid] == null ? PaidValue.unPaid : map[columnPaid] as int,
+        modified: map[columnModified] == null
+            ? LocalLocked.unlocked
+            : map[columnModified] as int);
   }
 
-  Commentary copyWith({
-    int? id,
-    String? title,
-    String? content,
-    DateTime? created,
-    DateTime? lastViewed,
-    String? syncStatus,
-    int? requestId,
-    String? storageState,
-    int? price,
-    int? paid,
-  }) {
+  Commentary copyWith(
+      {int? id,
+      String? title,
+      String? content,
+      DateTime? created,
+      DateTime? lastViewed,
+      String? syncStatus,
+      int? requestId,
+      String? storageState,
+      int? price,
+      int? paid,
+      int? modified}) {
     return Commentary(
       id ?? this.id,
       title: title ?? this.title,
@@ -92,6 +97,7 @@ class Commentary extends MustBuyEntity<Commentary>
       syncStatus: syncStatus ?? this.syncStatus,
       price: price ?? this.price,
       paid: paid ?? this.paid,
+      modified: modified ?? this.modified,
     );
   }
 
@@ -136,4 +142,7 @@ class Commentary extends MustBuyEntity<Commentary>
 
   @override
   Commentary get data => this;
+
+  @override
+  Commentary copyWithModified(int value) => copyWith(modified: value);
 }

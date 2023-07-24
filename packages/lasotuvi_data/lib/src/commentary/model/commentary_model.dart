@@ -1,5 +1,6 @@
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 
 class CommentaryModel extends MustBuyModel<Commentary> {
   CommentaryModel(
@@ -12,6 +13,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
     super.syncStatus,
     required super.price,
     required super.paid,
+    super.modified = LocalLocked.unlocked,
   });
   final String title;
   final String content;
@@ -31,6 +33,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       syncStatus: syncStatus,
       price: price,
       paid: paid,
+      modified: modified,
     );
   }
 
@@ -62,6 +65,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       columnSyncStatus: syncStatus,
       columnPrice: price,
       columnPaid: paid,
+      columnModified: modified,
     };
   }
 
@@ -80,6 +84,9 @@ class CommentaryModel extends MustBuyModel<Commentary> {
           : map[columnSyncStatus] as String,
       price: map[columnPrice] == null ? 0 : map[columnPrice] as int,
       paid: map[columnPaid] == null ? PaidValue.unPaid : map[columnPaid] as int,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
     );
   }
 
@@ -94,6 +101,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       syncStatus: entity.syncStatus,
       price: entity.price,
       paid: entity.paid,
+      modified: entity.modified,
     );
   }
 
@@ -102,4 +110,14 @@ class CommentaryModel extends MustBuyModel<Commentary> {
 
   @override
   int get primaryKey => id;
+
+  @override
+  bool operator ==(Object? other) =>
+      identical(other, this) ||
+      other.runtimeType == runtimeType &&
+          other is CommentaryModel &&
+          other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

@@ -54,6 +54,12 @@ class _UserAuthWidgetState extends ConsumerState<UserAuthWidget> {
     // });
   }
 
+  @override
+  void dispose() {
+    widget.controller.unregister();
+    super.dispose();
+  }
+
   // @override
   // void dispose() {
   //   subscription.cancel();

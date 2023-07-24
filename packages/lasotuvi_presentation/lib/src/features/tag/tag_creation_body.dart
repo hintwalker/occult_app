@@ -29,7 +29,10 @@ class TagCreationBody extends ConsumerWidget {
   }) async {
     final now = DateTime.now();
     final tag = Tag(now.millisecondsSinceEpoch,
-        title: title, subTitle: subTitle, created: now);
+        title: title,
+        subTitle: subTitle,
+        created: now,
+        modified: now.millisecondsSinceEpoch);
     await ref.read(insertTagToLocalProvider).call(tag);
     if (doAfterCreation != null) {
       doAfterCreation!(tag);

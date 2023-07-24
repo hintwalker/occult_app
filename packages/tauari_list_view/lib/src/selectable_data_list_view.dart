@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:tauari_list_view/src/search_box_widget.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import 'checkbox_list_item.dart';
-import 'list_order.dart';
 import 'selectable_item.dart';
 
 class SelectableDataListView<U, V> extends StatefulWidget {

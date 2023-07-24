@@ -50,6 +50,8 @@ dependencies:
     path: ../tauari_ui
   tuvi_style:
     path: ../tuvi_style
+  tauari_sort:
+    path: ../tauari_sort
   tauari_data_core:
     path: ../tauari_data_core
   lasotuvi_library:

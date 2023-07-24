@@ -4,12 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_style/tuvi_style.dart';
 
 import '../../navigation/chart_navigation.dart';
-import '../../../../helper/sort_helper.dart';
 import '../../../../helper/storage_helper.dart';
 import '../../../../router/route_name.dart';
 import '../../../../router/router_params.dart';
@@ -30,7 +30,7 @@ class _AllChartBodyState extends UserAuthDependedState<AllChartListScreenBody> {
         ? const LoadingWidget()
         : BasicStreamBuilder(
             stream: ref.watch(chartHasTagsListControllerProvider).stream(uid),
-            child: (data) => BasicFutureBuilder(
+            child: (data) => BasicFutureBuilder<SortValue?>(
               future: SortHelper.getSortOption(chartSortKey),
               child: (sortValue) => AllChartListWidget(
                 data,

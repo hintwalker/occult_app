@@ -16,6 +16,10 @@ abstract class Dao {
       Future<Iterable<Map<String, Object?>>> Function() data);
 
   Future<int> insert(Map<String, Object?> item);
+  Future<void> insertMany(
+    Iterable<Map<String, Object?>> items, {
+    bool refreshDb = true,
+  });
 
   // Future<int> doInsert(DatabaseExecutor db, Map<String, Object?> item);
   Future<int> delete(int itemId);
@@ -33,4 +37,11 @@ abstract class Dao {
   Stream<Map<String, Object?>?> onById(int itemId);
   Stream<Map<String, Object?>?> onItemFromFuture(
       Future<Map<String, Object?>?> Function() data);
+
+  void refreshDatabase();
+
+  Future<void> updateManyOnLocal(
+    Iterable<Map<String, Object?>> items, {
+    bool refreshDb = true,
+  });
 }

@@ -1,5 +1,6 @@
 import 'package:sunoom/sunoom.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
 import '../column_chart.dart';
@@ -13,6 +14,7 @@ class Chart extends SyncableEntity<Chart> {
       required this.timeZoneOffset,
       required this.created,
       required this.lastViewed,
+      required super.modified,
       super.storageState,
       this.avatar,
       super.syncStatus});
@@ -25,14 +27,16 @@ class Chart extends SyncableEntity<Chart> {
   final DateTime lastViewed;
   final String? avatar;
   static Chart empty() {
-    return Chart(DateTime.now().millisecondsSinceEpoch,
+    final now = DateTime.now();
+    return Chart(now.millisecondsSinceEpoch,
         name: '',
         gender: Gender.female,
-        birthday: DateTime.now(),
+        birthday: now,
         watchingYear: 2023,
         timeZoneOffset: 7,
-        created: DateTime.now(),
-        lastViewed: DateTime.now());
+        created: now,
+        lastViewed: now,
+        modified: now.millisecondsSinceEpoch);
   }
 
   @override
@@ -49,43 +53,46 @@ class Chart extends SyncableEntity<Chart> {
       ColumnChart.avatar: avatar,
       columnSyncStatus: getSyncStatus,
       columnState: state,
+      columnModified: modified,
     };
   }
 
   static Chart fromMap(Map<String, Object?> map) {
-    return Chart(
-      map[columnId] as int,
-      name:
-          map[ColumnChart.name] == null ? '' : map[ColumnChart.name] as String,
-      gender: map[ColumnChart.gender] == null
-          ? Gender.female
-          : Gender.fromInt(map[ColumnChart.gender] as int),
-      watchingYear: map[ColumnChart.watchingYear] == null
-          ? 2023
-          : map[ColumnChart.watchingYear] as int,
-      timeZoneOffset: map[ColumnChart.timeZoneOffset] == null
-          ? 7
-          : map[ColumnChart.timeZoneOffset] as int,
-      avatar: map[ColumnChart.avatar] == null
-          ? null
-          : map[ColumnChart.avatar] as String,
-      birthday: map[ColumnChart.birthday] == null
-          ? DateTime(1990, 1, 1, 0, 1)
-          : DateTime.fromMillisecondsSinceEpoch(
-              map[ColumnChart.birthday] as int),
-      created: map[columnCreated] == null
-          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-      lastViewed: map[ColumnChart.lastViewed] == null
-          ? DateTime.now()
-          : DateTime.fromMillisecondsSinceEpoch(
-              map[ColumnChart.lastViewed] as int),
-      syncStatus: map[columnSyncStatus] == null
-          ? null
-          : map[columnSyncStatus] as String,
-      storageState:
-          map[columnState] == null ? null : map[columnState] as String,
-    );
+    return Chart(map[columnId] as int,
+        name: map[ColumnChart.name] == null
+            ? ''
+            : map[ColumnChart.name] as String,
+        gender: map[ColumnChart.gender] == null
+            ? Gender.female
+            : Gender.fromInt(map[ColumnChart.gender] as int),
+        watchingYear: map[ColumnChart.watchingYear] == null
+            ? 2023
+            : map[ColumnChart.watchingYear] as int,
+        timeZoneOffset: map[ColumnChart.timeZoneOffset] == null
+            ? 7
+            : map[ColumnChart.timeZoneOffset] as int,
+        avatar: map[ColumnChart.avatar] == null
+            ? null
+            : map[ColumnChart.avatar] as String,
+        birthday: map[ColumnChart.birthday] == null
+            ? DateTime(1990, 1, 1, 0, 1)
+            : DateTime.fromMillisecondsSinceEpoch(
+                map[ColumnChart.birthday] as int),
+        created: map[columnCreated] == null
+            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+        lastViewed: map[ColumnChart.lastViewed] == null
+            ? DateTime.now()
+            : DateTime.fromMillisecondsSinceEpoch(
+                map[ColumnChart.lastViewed] as int),
+        syncStatus: map[columnSyncStatus] == null
+            ? null
+            : map[columnSyncStatus] as String,
+        storageState:
+            map[columnState] == null ? null : map[columnState] as String,
+        modified: map[columnModified] == null
+            ? LocalLocked.unlocked
+            : map[columnModified] as int);
   }
 
   Chart copyWith({
@@ -100,6 +107,7 @@ class Chart extends SyncableEntity<Chart> {
     String? avatar,
     String? syncStatus,
     String? storageState,
+    int? modified,
   }) {
     return Chart(
       id ?? this.id,
@@ -113,6 +121,7 @@ class Chart extends SyncableEntity<Chart> {
       avatar: avatar ?? this.avatar,
       syncStatus: syncStatus ?? this.syncStatus,
       storageState: storageState ?? this.storageState,
+      modified: modified ?? this.modified,
     );
   }
 
@@ -134,12 +143,30 @@ class Chart extends SyncableEntity<Chart> {
   bool operator ==(Object? other) =>
       identical(other, this) ||
       other.runtimeType == runtimeType && other is Chart && other.id == id;
+  // &&
+  // other.avatar == avatar &&
+  // other.birthday.compareTo(birthday) == 0 &&
+  // other.gender == gender &&
+  // other.name == name &&
+  // other.timeZoneOffset == timeZoneOffset &&
+  // other.watchingYear == watchingYear;
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode => Object.hashAll([
+        id,
+        // avatar,
+        // birthday,
+        // gender,
+        // name,
+        // timeZoneOffset,
+        // watchingYear,
+      ]);
 
   @override
   Chart copyWithState(String? state) {
     return copyWith(storageState: state);
   }
+
+  @override
+  Chart copyWithModified(int value) => copyWith(modified: value);
 }

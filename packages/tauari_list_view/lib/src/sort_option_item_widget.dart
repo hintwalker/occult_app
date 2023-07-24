@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'entity/sort_option.dart';
-import 'entity/sort_value.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 class SortOptionItemWidget extends StatelessWidget {
   const SortOptionItemWidget({

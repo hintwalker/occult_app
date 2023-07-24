@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tauari_list_view/tauari_list_view.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import 'request_sort_value.dart';
 

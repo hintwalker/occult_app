@@ -26,6 +26,8 @@ class ChartViewWidget extends StatelessWidget {
     required this.onOpenNoteEditor,
     required this.onOpenRequestView,
     required this.onSendRequest,
+    required this.onOpenTagDetail,
+
     // required this.onOpenCommentaryReader,
   });
   final String? uid;
@@ -35,6 +37,7 @@ class ChartViewWidget extends StatelessWidget {
   final void Function(Chart chart) onOpenChartSyncOptions;
   final void Function(Note note) onOpenNoteSyncOptions;
   final void Function(Request request) onOpenRequestView;
+  final void Function(Tag tag) onOpenTagDetail;
   // final void Function(Commentary commentary) onOpenCommentarySyncOptions;
   // final Widget Function(Chart, {String? uid, String? syncStatus})
   //     chartSyncOptions;
@@ -133,14 +136,16 @@ class ChartViewWidget extends StatelessWidget {
 
                       WrapTagListWidget(
                           tags: chartHasTags!.carry,
-                          itemBuilder: (e) => HoriTagItemWidget(e,
-                              uid: uid,
-                              colorScheme: colorScheme,
-                              onSyncStatusTap: () => openTagSyncOptions(e,
-                                  context: context,
-                                  callback:
-                                      wrapTagListController.onSyncStatusChange),
-                              onTap: (context, tag) {}),
+                          itemBuilder: (e) => HoriTagItemWidget(
+                                e,
+                                uid: uid,
+                                colorScheme: colorScheme,
+                                onSyncStatusTap: () => openTagSyncOptions(e,
+                                    context: context,
+                                    callback: wrapTagListController
+                                        .onSyncStatusChange),
+                                onTap: (context, tag) => onOpenTagDetail(tag),
+                              ),
                           controller: wrapTagListController),
                       const SizedBox(
                         height: 24.0,

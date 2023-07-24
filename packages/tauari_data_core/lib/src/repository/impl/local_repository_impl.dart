@@ -15,6 +15,22 @@ abstract class LocalRepositoryImpl<T extends SqliteGetable,
   Future<int> insertToLocal(T item) => dataSource.insert(entityToModel(item));
 
   @override
+  Future<void> insertManyToLocal(
+    Iterable<T> items, {
+    bool refreshDb = true,
+  }) =>
+      dataSource.insertManyToLocal(items.map((e) => entityToModel(e)),
+          refreshDb: refreshDb);
+
+  @override
+  Future<void> updateManyOnLocal(
+    Iterable<T> items, {
+    bool refreshDb = true,
+  }) =>
+      dataSource.updateManyOnLocal(items.map((e) => entityToModel(e)),
+          refreshDb: refreshDb);
+
+  @override
   Future<T?> byIdOnLocal(int itemId) async {
     final model = await dataSource.byId(itemId);
     return model?.toEntity();
@@ -47,4 +63,7 @@ abstract class LocalRepositoryImpl<T extends SqliteGetable,
   Future<void> updateOnLocal(T item) async {
     await dataSource.update(entityToModel(item));
   }
+
+  @override
+  void refreshDatabase() => dataSource.refreshDatabase();
 }

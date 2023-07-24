@@ -10,4 +10,13 @@ abstract class LocalRepository<T extends SqliteGetable> {
   Future<int> insertToLocal(T item);
   Future<Iterable<T>> dataLocal([QueryArgs? queryArgs]);
   Future<void> updateOnLocal(T item);
+  Future<void> updateManyOnLocal(
+    Iterable<T> items, {
+    bool refreshDb = true,
+  });
+  Future<void> insertManyToLocal(
+    Iterable<T> items, {
+    bool refreshDb = true,
+  });
+  void refreshDatabase();
 }

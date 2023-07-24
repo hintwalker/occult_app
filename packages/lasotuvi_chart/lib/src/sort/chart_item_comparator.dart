@@ -1,6 +1,7 @@
+import 'package:tauari_sort/tauari_sort.dart';
+
 import 'chart_sort_value.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
-import 'package:tauari_list_view/tauari_list_view.dart';
 
 int chartItemComparator(
   Chart item1,

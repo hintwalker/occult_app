@@ -4,5 +4,9 @@ import '../../model/chart_tag_model.dart';
 
 class SqliteChartTagDataSource extends LocalDataSource<ChartTagModel> {
   SqliteChartTagDataSource(super.dao)
-      : super(fromMap: (map) => ChartTagModel.fromMap(map));
+      : super(
+          fromMap: (map) => ChartTagModel.fromMap(map).copyWith(
+            modified: DateTime.now().millisecondsSinceEpoch,
+          ),
+        );
 }

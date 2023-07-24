@@ -7,6 +7,7 @@ abstract class MustBuyEntity<T> extends SyncableEntity<T> {
     required this.paid,
     super.storageState,
     super.syncStatus,
+    required super.modified,
   });
   final int price;
   final int paid;

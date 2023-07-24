@@ -26,5 +26,5 @@ class ModifyChartController extends StateNotifier<bool> {
 }
 
 final modifyChartControllerProvider =
-    StateNotifierProvider<ModifyChartController, bool>(
+    StateNotifierProvider.autoDispose<ModifyChartController, bool>(
         (ref) => ModifyChartController(false));

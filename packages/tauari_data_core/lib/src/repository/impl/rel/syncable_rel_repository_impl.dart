@@ -12,7 +12,7 @@ import '../../syncable_repository.dart';
 import '../syncable_repository_impl.dart';
 
 class SyncableRelRepositoryImpl<
-        E extends SyncableEntity,
+        E extends SyncableEntity<E>,
         M extends SyncableModel<E>,
         L extends SyncableEntity,
         R extends SyncableEntity> extends SyncableRepositoryImpl<E, M>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import '../sort/chart_sort_key.dart';
 import '../sort/chart_sort_options.dart';
 import '../sort/selectable_chart_has_tags_comparator.dart';

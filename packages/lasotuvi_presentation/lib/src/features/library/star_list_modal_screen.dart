@@ -4,10 +4,9 @@ import 'package:lasotuvi_library/lasotuvi_library.dart';
 import 'package:lasotuvi_presentation/src/features/library/navigation/library_navigation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-
-import '../../helper/sort_helper.dart';
 
 class StarListModalScreen extends ConsumerWidget {
   const StarListModalScreen({super.key});

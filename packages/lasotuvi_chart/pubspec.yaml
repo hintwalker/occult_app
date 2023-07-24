@@ -26,6 +26,8 @@ dependencies:
     path: ../tuvi_strings
   tuvi_chart_diagram:
     path: ../tuvi_chart_diagram
+  tauari_sort:
+    path: ../tauari_sort
   lasotuvi_note_shared:
     path: ../lasotuvi_note_shared
   tuvi_chart_creation_form:

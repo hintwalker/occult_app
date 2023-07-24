@@ -19,6 +19,8 @@ dependencies:
   flutter_quill: ^7.2.11
   tauari_ui:
     path: ../tauari_ui
+  tauari_sort:
+    path: ../tauari_sort
 
 dev_dependencies:
   flutter_test:

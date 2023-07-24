@@ -5,9 +5,9 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
-import 'package:tauari_utils/tauari_utils.dart';
-
+import 'package:tauari_ui/tauari_ui.dart';
 import '../../../styles/storage_plan_style_impl.dart';
+import '../../auth/user_auth_depended_state.dart';
 
 class CurrentSubWidgetContainer extends ConsumerStatefulWidget {
   const CurrentSubWidgetContainer({
@@ -22,50 +22,93 @@ class CurrentSubWidgetContainer extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _CurrentSubState();
 }
 
-class _CurrentSubState extends ConsumerState<CurrentSubWidgetContainer> {
+class _CurrentSubState
+    extends UserAuthDependedState<CurrentSubWidgetContainer> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: ref.watch(currentSubControllerProvider).dataStream(widget.uid),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasData) {
-            final data = snapshot.requireData;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (data != null)
-                  StoragePlanInfoWidget(
-                    uid: widget.uid,
-                    planId: data.status == SubscriptionStatus.canceled
-                        ? StoragePlanIds.free
-                        : data.packageId,
-                    style: StoragePlanStyleImpl(),
-                    translate: widget.translate,
-                    energyIcon:
-                        EnergyIcon(color: LasotuviAppStyle.colorScheme.primary),
-                    takeStoragePlanById: ref.read(takeStoragePlanByIdProvider),
-                  ),
-                if (data != null && data.status != SubscriptionStatus.canceled)
-                  TimerDisplayContainer(data,
-                      translate: widget.translate,
-                      style: ExpiredTimerStyle(),
-                      controller: ref.read(expiredTimerControllerProvider),
-                      uid: widget.uid),
-                if (data != null && data.status == SubscriptionStatus.canceled)
-                  CanceledPreviousAlert(
-                    data,
-                    translate: widget.translate,
-                  )
-              ],
-            );
-          } else {
-            return const Center(child: SimpleErrorWidget());
-          }
-        });
+    return findingUid
+        ? const LoadingWidget()
+        : uid == null
+            ? const SizedBox.shrink()
+            : BasicStreamBuilder(
+                stream: ref
+                    .watch(currentSubControllerProvider)
+                    .dataStream(widget.uid),
+                child: (data) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (data != null)
+                        StoragePlanInfoWidget(
+                          uid: widget.uid,
+                          planId: data.status == SubscriptionStatus.canceled
+                              ? StoragePlanIds.free
+                              : data.packageId,
+                          style: StoragePlanStyleImpl(),
+                          translate: widget.translate,
+                          energyIcon: EnergyIcon(
+                              color: LasotuviAppStyle.colorScheme.primary),
+                          takeStoragePlanById:
+                              ref.read(takeStoragePlanByIdProvider),
+                        ),
+                      if (data != null &&
+                          data.status != SubscriptionStatus.canceled)
+                        TimerDisplayContainer(data,
+                            translate: widget.translate,
+                            style: ExpiredTimerStyle(),
+                            controller:
+                                ref.read(expiredTimerControllerProvider),
+                            uid: widget.uid),
+                      if (data != null &&
+                          data.status == SubscriptionStatus.canceled)
+                        CanceledPreviousAlert(
+                          data,
+                          translate: widget.translate,
+                        )
+                    ],
+                  );
+                });
+    // StreamBuilder(
+    //     stream: ref.watch(currentSubControllerProvider).dataStream(widget.uid),
+    //     builder: (ctx, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.waiting) {
+    //         return const Center(
+    //           child: CircularProgressIndicator(),
+    //         );
+    //       } else if (snapshot.hasData) {
+    //         final data = snapshot.requireData;
+    //         return Column(
+    //           crossAxisAlignment: CrossAxisAlignment.center,
+    //           children: [
+    //             if (data != null)
+    //               StoragePlanInfoWidget(
+    //                 uid: widget.uid,
+    //                 planId: data.status == SubscriptionStatus.canceled
+    //                     ? StoragePlanIds.free
+    //                     : data.packageId,
+    //                 style: StoragePlanStyleImpl(),
+    //                 translate: widget.translate,
+    //                 energyIcon:
+    //                     EnergyIcon(color: LasotuviAppStyle.colorScheme.primary),
+    //                 takeStoragePlanById: ref.read(takeStoragePlanByIdProvider),
+    //               ),
+    //             if (data != null && data.status != SubscriptionStatus.canceled)
+    //               TimerDisplayContainer(data,
+    //                   translate: widget.translate,
+    //                   style: ExpiredTimerStyle(),
+    //                   controller: ref.read(expiredTimerControllerProvider),
+    //                   uid: widget.uid),
+    //             if (data != null && data.status == SubscriptionStatus.canceled)
+    //               CanceledPreviousAlert(
+    //                 data,
+    //                 translate: widget.translate,
+    //               )
+    //           ],
+    //         );
+    //       } else {
+    //         return const Center(child: SimpleErrorWidget());
+    //       }
+    //     });
   }
 
   // Future<void> onExpired(Subscription subscription) async {

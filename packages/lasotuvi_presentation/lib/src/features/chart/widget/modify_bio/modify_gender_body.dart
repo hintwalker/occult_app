@@ -26,31 +26,33 @@ class _ModifyGenderBodyState extends UserAuthDependedState<ModifyGenderBody> {
   @override
   Widget build(BuildContext context) {
     final processing = ref.watch(modifyChartControllerProvider);
-    return findingUid || processing
-        ? const LoadingWidget()
-        : BasicStreamBuilder(
-            stream: ref.read(chartDetailControllerProvider).stream(
-                  uid: uid,
-                  docId: widget.chartId,
-                  syncStatus: widget.syncStatus,
-                ),
-            child: (data) => ModifyGenderModal(
-              title: translate('modifyGender'),
-              child: ModifyGenderWidget(
+    return ModifyGenderModal(
+      title: translate('modifyGender'),
+      child: findingUid || processing
+          ? const LoadingWidget()
+          : BasicStreamBuilder(
+              stream: ref.watch(chartDetailControllerProvider).stream(
+                    uid: uid,
+                    docId: widget.chartId,
+                    syncStatus: widget.syncStatus,
+                  ),
+              child: (data) => ModifyGenderWidget(
                 data,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 translate: translate,
-                onUpdate: (chart) => ref
-                    .read(modifyChartControllerProvider.notifier)
-                    .updateChart(
-                      context: context,
-                      uid: uid,
-                      chart: chart,
-                      ref: ref,
-                    ),
+                onUpdate: (chart) async {
+                  await ref
+                      .read(modifyChartControllerProvider.notifier)
+                      .updateChart(
+                        context: context,
+                        uid: uid,
+                        chart: chart,
+                        ref: ref,
+                      );
+                },
               ),
             ),
-          );
+    );
   }
 
   // Future<void> updateChart(Chart chart) async {

@@ -55,5 +55,6 @@ class AuthSection extends ConsumerWidget {
     await ref.read(syncChartTagsProvider)(uid);
     await ref.read(syncRequestsProvider)(uid);
     await ref.read(syncNotificationsProvider)(uid);
+    ref.read(chartDaoProvider).refreshDatabase();
   }
 }

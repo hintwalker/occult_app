@@ -27,7 +27,10 @@ abstract class SqliteDao extends Dao {
       distinct: queryArgs?.distinct,
     );
     if (queryArgs?.limitDisplay != null) {
-      return result.getRange(0, queryArgs!.limitDisplay!);
+      final limitAllowed = queryArgs!.limitDisplay! > result.length
+          ? result.length
+          : queryArgs.limitDisplay!;
+      return result.getRange(0, limitAllowed);
     } else {
       return result;
     }
@@ -99,8 +102,42 @@ abstract class SqliteDao extends Dao {
   }
 
   @override
+  Future<void> insertMany(
+    Iterable<Map<String, Object?>> items, {
+    bool refreshDb = true,
+  }) async {
+    await database.db!.transaction((txn) async {
+      final batch = txn.batch();
+      for (var item in items) {
+        batch.insert(
+          tableName,
+          item,
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      }
+      try {
+        await batch.commit(continueOnError: true);
+      } catch (_) {}
+    });
+    if (refreshDb) {
+      database.triggerUpdate();
+    }
+  }
+
+  @override
   Future<int> insert(Map<String, Object?> item) async {
-    final id = await database.db!.insert(tableName, item);
+    final id = await database.db!.transaction<int>((txn) async {
+      return await txn.insert(
+        tableName,
+        item,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
+    // final id = await database.db!.insert(
+    //   tableName,
+    //   item,
+    //   conflictAlgorithm: ConflictAlgorithm.replace,
+    // );
     database.triggerUpdate();
     return id;
   }
@@ -191,5 +228,31 @@ abstract class SqliteDao extends Dao {
       onCancel: ((subscription) => subscription.pause()),
       onListen: (subscription) => subscription.resume(),
     );
+  }
+
+  @override
+  void refreshDatabase() => database.triggerUpdate();
+
+  @override
+  Future<void> updateManyOnLocal(Iterable<Map<String, Object?>> items,
+      {bool refreshDb = true}) async {
+    await database.db!.transaction((txn) async {
+      final batch = txn.batch();
+      for (var item in items) {
+        batch.update(
+          tableName,
+          item,
+          where: '$columnId=?',
+          whereArgs: [item[columnId]],
+          conflictAlgorithm: ConflictAlgorithm.ignore,
+        );
+      }
+      try {
+        await batch.commit(continueOnError: true);
+      } catch (_) {}
+    });
+    if (refreshDb) {
+      database.triggerUpdate();
+    }
   }
 }

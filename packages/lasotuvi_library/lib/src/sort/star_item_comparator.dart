@@ -1,7 +1,7 @@
 import 'package:lasotuvi_library/src/entity/star_item.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import 'star_sort_value.dart';
-import 'package:tauari_list_view/tauari_list_view.dart';
 
 int starItemComparator(
   StarItem item1,

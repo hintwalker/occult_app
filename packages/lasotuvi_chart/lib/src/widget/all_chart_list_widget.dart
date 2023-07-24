@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_chart/src/sort/chart_sort_key.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 import '../group/group_chart_has_tags_by.dart';
 import '../query/chart_where_clause.dart';
 import '../sort/chart_has_tags_comparator.dart';

@@ -10,15 +10,23 @@ class ChartCreationNotifer extends StateNotifier<ChartCreationState> {
   ChartCreationNotifer()
       : super(
           ChartCreationState(
-            chart: Chart(DateTime.now().millisecondsSinceEpoch,
-                name: 'noName',
-                gender: Gender.female,
-                birthday:
-                    initialMoment(const TimeZone(offsetInHour: 7)).toDateTime(),
-                watchingYear: DateTime.now().year,
-                timeZoneOffset: 7,
-                created: DateTime.now(),
-                lastViewed: DateTime.now()),
+            chart: Chart.empty().copyWith(
+              name: 'noName',
+              birthday: initialMoment(
+                const TimeZone(offsetInHour: 7),
+              ).toDateTime(),
+            )
+            // Chart(DateTime.now().millisecondsSinceEpoch,
+            //     name: 'noName',
+            //     gender: Gender.female,
+            //     birthday:
+            //         initialMoment(const TimeZone(offsetInHour: 7)).toDateTime(),
+            //     watchingYear: DateTime.now().year,
+            //     timeZoneOffset: 7,
+            //     created: DateTime.now(),
+            //     lastViewed: DateTime.now(),
+            //     modified: DateTime.now().millisecondsSinceEpoch)
+            ,
             valid: true,
           ),
         );

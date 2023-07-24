@@ -1,4 +1,4 @@
-import 'package:tauari_list_view/tauari_list_view.dart';
+import 'list_order.dart';
 
 class SortValue {
   const SortValue(this.name, this.order);

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grouped_list/grouped_list.dart';
-
-import '../tauari_list_view.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 class DataListBodyWidget<U, V, W> extends StatelessWidget {
   const DataListBodyWidget({

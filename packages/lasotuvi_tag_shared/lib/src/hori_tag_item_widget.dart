@@ -23,24 +23,26 @@ class HoriTagItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SyncableCardItemScaffold(
-      uid: uid,
-      colorScheme: colorScheme,
-      onItemTap: () => onTap(context, item),
-      syncStatus: item.syncStatus,
-      onSyncStatusTap: onSyncStatusTap,
-      child: Container(
-        padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
-        constraints: const BoxConstraints(
-          minWidth: 84.0,
+    return Container(
+      padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+      constraints: const BoxConstraints(minWidth: 84.0, maxWidth: 240.0),
+      child: SyncableCardItemScaffold(
+        uid: uid,
+        colorScheme: colorScheme,
+        onItemTap: () => onTap(context, item),
+        syncStatus: item.syncStatus,
+        onSyncStatusTap: onSyncStatusTap,
+        child: Container(
+          padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
+          // constraints: const BoxConstraints(minWidth: 84.0, maxWidth: 240.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                HoriTagTitleWidget(item.title),
+                HoriTagSubTitleWidget(item.subTitle)
+              ]),
         ),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              HoriTagTitleWidget(item.title),
-              HoriTagSubTitleWidget(item.subTitle)
-            ]),
       ),
     );
 

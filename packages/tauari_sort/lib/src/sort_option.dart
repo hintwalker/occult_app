@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tauari_list_view/src/entity/sort_value.dart';
+import 'package:tauari_sort/src/sort_value.dart';
 
 class SortOption {
   const SortOption({

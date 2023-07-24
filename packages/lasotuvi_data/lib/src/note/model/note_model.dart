@@ -1,5 +1,6 @@
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_values/tauari_values.dart';
 
 class NoteModel extends SyncableModel<Note> {
   NoteModel(
@@ -10,6 +11,7 @@ class NoteModel extends SyncableModel<Note> {
     required this.chartId,
     super.storageState,
     super.syncStatus,
+    required super.modified,
   });
   final String title;
   final String content;
@@ -27,6 +29,7 @@ class NoteModel extends SyncableModel<Note> {
       created: DateTime.fromMillisecondsSinceEpoch(id),
       storageState: storageState,
       syncStatus: syncStatus,
+      modified: modified,
     );
   }
 
@@ -56,6 +59,7 @@ class NoteModel extends SyncableModel<Note> {
       ColumnNote.edited: edited.millisecondsSinceEpoch,
       columnState: storageState,
       columnSyncStatus: syncStatus,
+      columnModified: modified,
     };
   }
 
@@ -72,6 +76,9 @@ class NoteModel extends SyncableModel<Note> {
       syncStatus: map[columnSyncStatus] == null
           ? null
           : map[columnSyncStatus] as String,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
     );
   }
 
@@ -84,6 +91,7 @@ class NoteModel extends SyncableModel<Note> {
       chartId: entity.chartId,
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
+      modified: entity.modified,
     );
   }
 
@@ -92,4 +100,12 @@ class NoteModel extends SyncableModel<Note> {
 
   @override
   int get primaryKey => id;
+
+  @override
+  bool operator ==(Object? other) =>
+      identical(other, this) ||
+      other.runtimeType == runtimeType && other is NoteModel && other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

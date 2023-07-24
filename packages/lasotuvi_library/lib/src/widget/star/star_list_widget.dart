@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lasotuvi_library/src/group/group_star_by.dart';
 import 'package:lasotuvi_library/src/sort/star_sort_options.dart';
 import 'package:tauari_list_view/tauari_list_view.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import '../../entity/star_item.dart';
 import '../../query/star_where_clause.dart';

@@ -47,6 +47,7 @@ export 'src/entity/statable.dart';
 export 'src/entity/syncable.dart';
 export 'src/entity/sqlite_getable.dart';
 
+export 'src/entity/modifyable.dart';
 export 'src/entity/dumpable.dart';
 export 'src/entity/set_of_entity.dart';
 export 'src/entity/syncable_entity.dart';

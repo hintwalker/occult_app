@@ -80,6 +80,7 @@ class NoteNavigation {
         content: '[{"insert":"...\\n"}]',
         created: now,
         edited: now,
-        chartId: chart.id));
+        chartId: chart.id,
+        modified: now.millisecondsSinceEpoch));
   }
 }

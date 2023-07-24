@@ -66,10 +66,9 @@ class TopTenRequestBanner extends StatelessWidget {
                         onSyncStatusTap: () => onOpenSyncOptions(item),
                       ),
                   queryArgs: QueryArgs(
-                    uid: uid,
-                    limit: 9,
-                    orderBy: '$columnId DESC',
-                  )))
+                      uid: uid,
+                      limitDisplay: 9,
+                      orderBy: '$columnModified DESC')))
         ],
       ),
     );

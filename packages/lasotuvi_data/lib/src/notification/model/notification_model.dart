@@ -18,6 +18,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
     required this.seen,
     super.storageState,
     super.syncStatus,
+    super.modified = LocalLocked.unlocked,
   });
 
   @override
@@ -32,6 +33,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       created: DateTime.fromMillisecondsSinceEpoch(id),
       syncStatus: syncStatus,
       storageState: storageState,
+      modified: modified,
     );
   }
 
@@ -45,6 +47,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       seen: entity.seen,
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
+      modified: entity.modified,
     );
   }
 
@@ -57,6 +60,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
     int? seen,
     String? storageState,
     String? syncStatus,
+    int? modified,
   }) {
     return NotificationModel(
       id ?? this.id,
@@ -67,6 +71,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       seen: seen ?? this.seen,
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
+      modified: modified ?? this.modified,
     );
   }
 
@@ -93,14 +98,18 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       syncStatus: map[columnSyncStatus] == null
           ? null
           : map[columnSyncStatus] as String,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
     );
   }
 
   @override
   bool operator ==(Object? other) =>
       identical(other, this) ||
-      other.runtimeType == runtimeType ||
-      other is NotificationModel && other.id == id;
+      other.runtimeType == runtimeType &&
+          other is NotificationModel &&
+          other.id == id;
 
   @override
   int get hashCode => id.hashCode;
@@ -116,6 +125,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       ColumnNotification.seen: seen,
       columnState: storageState,
       columnSyncStatus: syncStatus,
+      columnModified: modified,
     };
   }
 
