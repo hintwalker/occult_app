@@ -30,6 +30,7 @@ enum StarFormulaKey {
   khoiVietOption,
   luuHaOption,
   dauQuanOption,
-  amSatOption,
-  tuongTinhOption
+  showAmSat,
+  showTuongTinhCircle,
+  truongSinhOption
 }

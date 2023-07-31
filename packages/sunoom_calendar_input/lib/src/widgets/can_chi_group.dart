@@ -32,6 +32,7 @@ class CanChiGroup extends StatelessWidget {
                 child: DateNameText(
               can?.name,
               align: TextAlign.end,
+              translate: translate,
             )),
             const SizedBox(
               width: 4,
@@ -40,6 +41,7 @@ class CanChiGroup extends StatelessWidget {
                 child: DateNameText(
               chi?.name,
               align: TextAlign.start,
+              translate: translate,
             ))
           ],
         ));

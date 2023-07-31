@@ -9,9 +9,11 @@ class DateNameGroup extends StatefulWidget {
     this.controller, {
     super.key,
     this.colorScheme,
+    this.translate,
   });
   final DateNameGroupController controller;
   final ColorScheme? colorScheme;
+  final String Function(String)? translate;
 
   @override
   State<StatefulWidget> createState() => _DateNameGroupState();
@@ -60,6 +62,7 @@ class _DateNameGroupState extends State<DateNameGroup> {
           can: dayCan,
           chi: dayChi,
           colorScheme: widget.colorScheme,
+          translate: widget.translate,
         )),
         const SizedBox(
           width: 16,
@@ -69,6 +72,7 @@ class _DateNameGroupState extends State<DateNameGroup> {
           can: monthCan,
           chi: monthChi,
           colorScheme: widget.colorScheme,
+          translate: widget.translate,
         )),
         const SizedBox(
           width: 16,
@@ -78,6 +82,7 @@ class _DateNameGroupState extends State<DateNameGroup> {
           can: yearCan,
           chi: yearChi,
           colorScheme: widget.colorScheme,
+          translate: widget.translate,
         )),
       ],
     );

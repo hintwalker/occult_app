@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
-import '../grid_controller.dart';
+import '../tuvi_chart_grid_controller.dart';
 
 class HouseController extends ChangeNotifier {
   bool selected = false;
   bool source = false;
   // final HousePosition currentPosition;
   final House house;
-  late final GridController gridController;
+  late final TuviChartGridController gridController;
   HouseController(this.house);
 
-  void attachTo(GridController gridController) {
+  void attachTo(TuviChartGridController gridController) {
     this.gridController = gridController;
   }
 

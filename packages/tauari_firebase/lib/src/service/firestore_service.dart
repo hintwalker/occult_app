@@ -33,6 +33,7 @@ class FirestoreService implements CloudService {
       int? limit,
       CloudDataWhere? where}) {
     Query<Map<String, dynamic>>? result;
+
     if (where != null) {
       result = collection.where(
         where.field,

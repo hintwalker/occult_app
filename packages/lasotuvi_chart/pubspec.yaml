@@ -38,6 +38,8 @@ dependencies:
     path: ../lasotuvi_tag_shared
   lasotuvi_commentary:
     path: ../lasotuvi_commentary
+  tauari_settings:
+    path: ../tauari_settings
   
 
 dev_dependencies:

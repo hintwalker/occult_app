@@ -1,3 +1,4 @@
+import 'package:either_dart/either.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 
 import '../entity/energy.dart';
@@ -18,13 +19,20 @@ class EnergyRepositoryImpl
   }
 
   @override
-  Future<Energy> subtractEnergy(String uid, int energyValue) async {
-    final oldValue = await doc(uid) ?? const Energy(0);
+  Future<Either<Energy, bool>> subtractEnergy(
+      String uid, int energyValue) async {
+    final oldValue = await doc(uid);
+    if (oldValue == null) {
+      return const Right(false);
+    }
     if (oldValue.value < energyValue) {
-      return oldValue;
+      return const Right(false);
     }
     final newValue = Energy(oldValue.value - energyValue);
-    await update(uid, newValue);
-    return newValue;
+    final result = await update(uid, newValue);
+    if (result == false) {
+      return const Right(false);
+    }
+    return Left(newValue);
   }
 }

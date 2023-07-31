@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  tuvi_chart_diagram:
+    path: ../tuvi_chart_diagram
   lasotuvi_domain:
     path: ../lasotuvi_domain
   lasotuvi_data:
@@ -71,6 +73,7 @@ dependencies:
   sqflite: ^2.2.8+2
   hive: ^2.2.3
   firebase_storage: ^11.2.4
+  either_dart: ^1.0.0
   
 
 dev_dependencies:

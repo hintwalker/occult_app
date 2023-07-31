@@ -4,22 +4,24 @@ import '../sky/sky_config.dart';
 
 import '../star/info/basic_star_info.dart';
 import '../star/star.dart';
-import '../star/star_formulas.dart';
+import '../star/basic_star_formulas.dart';
 import '../star/star_info.dart';
 import '../star/star_iterator.dart';
 import '../star/star_name.dart';
 
 class Sky {
   late Map<StarName, Star> stars;
+  late StarIterator _starIterator;
   final SkyConfig config;
   final Map<String, Map<String, String>> formulas;
 
-  StarIterator get starIterator => StarIterator(StarName.values);
+  StarIterator get starIterator => _starIterator;
   Sky({required this.config, required this.formulas}) {
     stars = {};
-    List<StarName> starNames = StarName.values; // getStarNames(config.school);
+    _starIterator = StarIterator(StarName.values);
+    // List<StarName> starNames = StarName.values; // getStarNames(config.school);
     final starInfos = getStarInfos(config.school);
-    for (var starName in starNames) {
+    for (var starName in StarName.values) {
       final info = starInfos[starName.name];
       stars[starName] = Star(
         name: starName,
@@ -29,7 +31,18 @@ class Sky {
     }
   }
 
-  factory Sky.basic() => Sky(config: SkyConfig.basic(), formulas: starFormulas);
+  Sky copyWith({
+    SkyConfig? config,
+    Map<String, Map<String, String>>? formulas,
+  }) {
+    return Sky(
+      config: config ?? this.config,
+      formulas: formulas ?? this.formulas,
+    );
+  }
+
+  factory Sky.basic() =>
+      Sky(config: SkyConfig.basic(), formulas: basicStarFormulas);
 
   // List<StarName> getStarNames(SchoolName school) {
   //   switch (school) {

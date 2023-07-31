@@ -12,9 +12,12 @@ export 'src/presentation/widget/static_energy_widget.dart';
 export 'src/listing/product_ids.dart';
 export 'src/entity/doc_id_energy.dart';
 // export 'src/entity/column_energy.dart';
+
 export 'src/entity/energy.dart';
 export 'src/repository/energy_repository.dart';
 export 'src/repository/energy_repository_impl.dart';
+
+export 'src/usecase/enough_energy.dart';
 export 'src/usecase/take_energy.dart';
 export 'src/usecase/pay_energy.dart';
 export 'src/usecase/plus_energy.dart';

@@ -17,6 +17,8 @@ dependencies:
   lasotuvi_domain:
     path: ../lasotuvi_domain
   auto_size_text: ^3.0.0
+  tauari_ui:
+    path: ../tauari_ui
   flutter_constraintlayout: ^1.6.3-stable
 
 dev_dependencies:

@@ -26,7 +26,7 @@ class SubscriptionModel implements CloudModel<Subscription> {
   factory SubscriptionModel.fromMap(Map<String, Object?> map) {
     return SubscriptionModel(
       id: map[columnId] as int,
-      packageId: map[ColumnSubscription.packageId] as String,
+      packageId: map[ColumnSubscription.planId] as String,
       beginDate: map[ColumnSubscription.begin] == null
           ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
           : DateTime.fromMillisecondsSinceEpoch(
@@ -44,7 +44,7 @@ class SubscriptionModel implements CloudModel<Subscription> {
   factory SubscriptionModel.fromEntity(Subscription entity) {
     return SubscriptionModel(
       id: entity.id,
-      packageId: entity.packageId,
+      packageId: entity.planId,
       beginDate: entity.beginDate,
       expiredDate: entity.expiredDate,
       timeZoneOffset: entity.timeZoneOffset,
@@ -58,7 +58,7 @@ class SubscriptionModel implements CloudModel<Subscription> {
   Subscription toEntity() {
     return Subscription(
       id: id,
-      packageId: packageId,
+      planId: packageId,
       beginDate: beginDate,
       expiredDate: expiredDate,
       timeZoneOffset: timeZoneOffset,
@@ -98,7 +98,7 @@ class SubscriptionModel implements CloudModel<Subscription> {
       ColumnSubscription.expired: expiredDate.millisecondsSinceEpoch,
       ColumnSubscription.timeZoneOffset:
           Subscription.timeZoneToMapValue(timeZoneOffset),
-      ColumnSubscription.packageId: packageId,
+      ColumnSubscription.planId: packageId,
       ColumnSubscription.total: total,
       ColumnSubscription.energy: energy,
       ColumnSubscription.status: status,

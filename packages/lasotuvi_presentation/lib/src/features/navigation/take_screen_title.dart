@@ -11,6 +11,8 @@ Widget takeScreenTitle(String screenId) {
       return Text(translate('energyMarket'));
     case DrawerIds.storagePlanMarket:
       return Text(translate('storagePlanMarket'));
+    case DrawerIds.charts:
+      return Text(translate('charts'));
     default:
       return const Text('');
   }

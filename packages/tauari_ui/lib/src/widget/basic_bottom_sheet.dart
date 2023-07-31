@@ -6,10 +6,12 @@ class BasicBottomSheet extends StatelessWidget {
     required this.title,
     required this.colorScheme,
     required this.child,
+    this.bottomPanel,
   });
   final Widget child;
   final String title;
   final ColorScheme colorScheme;
+  final Widget? bottomPanel;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class BasicBottomSheet extends StatelessWidget {
               )),
           // child
           Expanded(child: child),
+          if (bottomPanel != null) bottomPanel!
         ]
             // ),
             // ),

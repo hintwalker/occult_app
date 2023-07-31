@@ -3,7 +3,7 @@ import 'package:sunoom/sunoom.dart';
 
 import '../controllers/gregorian_date_controller.dart';
 
-class WeekdayName extends StatelessWidget {
+class WeekdayName extends StatefulWidget {
   const WeekdayName({
     super.key,
     required this.controller,
@@ -13,14 +13,33 @@ class WeekdayName extends StatelessWidget {
   final String Function(String) translate;
 
   @override
+  State<StatefulWidget> createState() => _WeekdayNameState();
+}
+
+class _WeekdayNameState extends State<WeekdayName> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(listenToController);
+  }
+
+  void listenToController() => setState(() {});
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(listenToController);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final year = controller.year;
-    final month = controller.month;
-    final day = controller.day;
+    final year = widget.controller.year;
+    final month = widget.controller.month;
+    final day = widget.controller.day;
     return year == null || month == null || day == null
         ? const Text('!')
         : Text(
-            translate(
+            widget.translate(
               WeekDay.fromDateTime(
                 DateTime(
                   year,

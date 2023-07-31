@@ -51,26 +51,30 @@ void main() async {
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
-  ]).then((_) => runApp(EntryPoint(
+  ]).then(
+    (_) => runApp(
+      EntryPoint(
         translationPath: translationPath,
         supportedLocales: supportedLocales,
         startLocale: const Locale('vi'),
         child: ProviderScope(
-            overrides: [
-              localDatabaseProvider.overrideWithValue(localDatabase),
-              routerProvider
-                  .overrideWith((ref) => ref.read(lasotuviRouterProvider)),
-              mainDrawerControllerProvider
-                  .overrideWithValue(TauariDrawerController()),
-              restorableStateProvider
-                  .overrideWith((ref) => RestorableStateImpl())
-            ],
-            child: RestorableApp(
-              // routerProvider: routerProvider,
-              title: translate('lasotuvi'),
-              theme: AppTheme.light(),
-            )),
-      )));
+          overrides: [
+            localDatabaseProvider.overrideWithValue(localDatabase),
+            routerProvider
+                .overrideWith((ref) => ref.read(lasotuviRouterProvider)),
+            mainDrawerControllerProvider
+                .overrideWithValue(TauariDrawerController()),
+            restorableStateProvider.overrideWith((ref) => RestorableStateImpl())
+          ],
+          child: RestorableApp(
+            // routerProvider: routerProvider,
+            title: translate('lasotuvi'),
+            theme: AppTheme.light(),
+          ),
+        ),
+      ),
+    ),
+  );
 }
 
 Future<void> initTempStorage() async {
@@ -78,6 +82,7 @@ Future<void> initTempStorage() async {
       await path_provider.getApplicationDocumentsDirectory();
   // Hive.init(directory.path);
   await Hive.initFlutter(directory.path);
+  await LasotuviSettings.openSettingsBoxes();
 }
 
 Future<LocalDatabase<Database>> initLocalDatabase() async {

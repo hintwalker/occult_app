@@ -35,27 +35,40 @@ class StoragePlanInfoWidget extends StatelessWidget {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.cloud),
-                      const SizedBox(
-                        width: 8.0,
+                      Icon(
+                        Icons.cloud,
+                        color: style.iconColor,
                       ),
-                      Text('${translate('storagePlan')}:'),
+                      const SizedBox(
+                        width: 4.0,
+                      ),
+                      Text(
+                        '${translate('storagePlan')}:',
+                        style: style.title,
+                      ),
                       const SizedBox(
                         width: 8.0,
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         decoration: BoxDecoration(
-                          // color: style.infoBackgroundColor,
+                          border: Border.all(color: style.iconColor),
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                         child: Row(children: [
-                          Text(data.title),
+                          Text(
+                            data.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           const SizedBox(
                             width: 8.0,
                           ),
                           energyIcon,
-                          Text('${data.energy} /30 ${translate('day')}')
+                          data.energy == 0
+                              ? Text(translate('free'))
+                              : Text('${data.energy} /30 ${translate('day')}')
                         ]),
                       )
                     ],

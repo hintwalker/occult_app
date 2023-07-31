@@ -1,8 +1,8 @@
 import '../entity/subscription.dart';
-import '../repository/current_sub_repository.dart';
+import '../repository/current_subscription_repository.dart';
 
 class OnCurrentSub {
-  final CurrentSubRepository repository;
+  final CurrentSubscriptionRepository repository;
   const OnCurrentSub(this.repository);
 
   Stream<Subscription?> call(String? uid) =>

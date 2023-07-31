@@ -10,8 +10,8 @@
     - Thiên Phủ Hóa Khoa (phuHoaKhoa = 0)
     - Tả Phụ Hóa Khoa (phuHoaKhoa = 1)
 - Trường Sinh: 
-    - Tuổi âm - dương thuận lý và nghịch lý: Thủy Nhị Cục và Thổ Ngũ Cục an tại Thân, Mộc Tam Cục an tại Hợi, Kim Tứ Cục an tại Tỵ, Hỏa Lục Cục an tại Dần. (truongSinhOption=0), (truongSinhOption=1, amDuongNghichLy=0)
-    - Tuổi âm - dương thuận lý thì như trên, còn âm dương nghịch lý thì: Thủy và Thổ an tại Tý, Mộc tại Mão, Kim tại Dậu, Hỏa tại Ngọ. (truongSinhOption=1, amDuongNghichLy=1)
+    - Tuổi âm - dương thuận lý và nghịch lý: Thủy Nhị Cục và Thổ Ngũ Cục an tại Thân, Mộc Tam Cục an tại Hợi, Kim Tứ Cục an tại Tỵ, Hỏa Lục Cục an tại Dần. (truongSinhOption=0)
+    - Tuổi âm - dương thuận lý thì như trên, còn âm dương nghịch lý thì: Thủy và Thổ an tại Tý, Mộc tại Mão, Kim tại Dậu, Hỏa tại Ngọ. (truongSinhOption=1)
 - Hỏa Linh:
     - Tuổi Tỵ, Dậu, Sửu: an Hỏa Tinh khởi từ Mão, Linh Tinh khởi từ Tuất (hoaLinhOption = 0)
     - Tuổi Tỵ, Dậu, Sửu: an Hỏa Tinh khởi từ Tuất, Linh Tinh khởi từ Mão (hoaLinhOption = 1)
@@ -25,8 +25,8 @@
     - Theo chi năm sinh (dauQuanOption = 0)
     - Khởi tính từ năm Tý (dauQuanOption = 1)
 - Âm Sát:
-    - Có (amSatOption = 0)
-    - Không (amSatOption = 1)
+    - Có (amSatOption = 1)
+    - Không (amSatOption = 0)
 - Vòng tướng tinh:
-    - Có (tuongTinhOption = 0)
-    - Không (tuongTinhOption = 1)
+    - Có (tuongTinhOption = 1)
+    - Không (tuongTinhOption = 0)

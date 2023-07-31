@@ -1,5 +1,6 @@
 library lasotuvi_provider;
 
+export 'src/tuvi_chart_diagram/tuvi_chart_grid_controller.dart';
 export 'src/library/controller/star_info_viewer_controller.dart';
 export 'src/library/controller/star_list_controller.dart';
 export 'src/library/controller/book_list_controller.dart';
@@ -27,9 +28,7 @@ export 'src/storage/uploader.dart';
 
 export 'src/drawer/main_drawer_controller.dart';
 
-export 'src/subscription/usecase/extends_subscription_provider.dart';
-export 'src/subscription/usecase/unsubscribe_plan_provider.dart';
-export 'src/subscription/usecase/subscribe_plan_provider.dart';
+export 'src/subscription/usecase/insert_subscription_provider.dart';
 export 'src/subscription/usecase/update_current_sub_provider.dart';
 export 'src/subscription/usecase/on_current_sub_provider.dart';
 export 'src/subscription/usecase/take_current_sub_provider.dart';
@@ -37,9 +36,10 @@ export 'src/subscription/repository/subscription_repository_provider.dart';
 export 'src/subscription/repository/current_sub_repository_provider.dart';
 export 'src/subscription/data_source/subscription_data_source_provider.dart';
 export 'src/subscription/data_source/current_sub_data_source_provider.dart';
-export 'src/subscription/controller/expired_timer_controller_provider.dart';
 export 'src/subscription/controller/current_sub_controller_provider.dart';
 
+export 'src/storage_plan/controller/expired_timer_controller_provider.dart';
+export 'src/storage_plan/usecase/stop_auto_extend.dart';
 export 'src/storage_plan/usecase/take_storage_plan_by_id_provider.dart';
 export 'src/storage_plan/usecase/take_all_storage_plans_provider.dart';
 export 'src/storage_plan/repository/storage_plan_repository_provider.dart';
@@ -53,6 +53,7 @@ export 'src/chart/repository/chart_repository.dart';
 export 'src/chart/repository/cloud_chart_repository.dart';
 export 'src/chart/repository/local_chart_repository.dart';
 
+export 'src/chart/controller/chart_options_modal_controller.dart';
 export 'src/chart/controller/count_chart_everywhere_controller.dart';
 export 'src/chart/controller/chart_detail_controller.dart';
 export 'src/chart/controller/chart_view_controller.dart';
@@ -244,6 +245,8 @@ export 'src/energy_store/energy_repository_provider.dart';
 export 'src/energy_store/usecase/plus_energy_provider.dart';
 export 'src/energy_store/usecase/take_energy_provider.dart';
 export 'src/energy_store/usecase/on_energy_provider.dart';
+export 'src/energy_store/usecase/pay_energy_provider.dart';
+export 'src/energy_store/usecase/enough_energy.dart';
 
 export 'src/purchase/usecase/subscribe_purchase_listing_changes_provider.dart';
 export 'src/purchase/usecase/post_resolve_purchase_provider.dart';

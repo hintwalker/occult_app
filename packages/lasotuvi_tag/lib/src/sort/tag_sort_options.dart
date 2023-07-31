@@ -16,12 +16,12 @@ Iterable<SortOption> tagSortOptions(String Function(String) translate) => [
       ),
       SortOption(
         icon: const Icon(Icons.create_new_folder_outlined),
-        label: translate(TagSortValue.sortByCreatedDesc),
-        value: const SortValue(TagSortValue.sortByCreatedDesc, ListOrder.desc),
+        label: translate(TagSortValue.sortByCreatedAsc),
+        value: const SortValue(TagSortValue.sortByCreatedAsc, ListOrder.asc),
       ),
       SortOption(
         icon: const Icon(Icons.create_new_folder_outlined),
-        label: translate(TagSortValue.sortByCreatedAsc),
-        value: const SortValue(TagSortValue.sortByCreatedAsc, ListOrder.asc),
+        label: translate(TagSortValue.sortByCreatedDesc),
+        value: const SortValue(TagSortValue.sortByCreatedDesc, ListOrder.desc),
       ),
     ];

@@ -15,7 +15,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return BasicBottomSheet(
-      title: translate('addNewData'),
+      title: translate('createNewData'),
       colorScheme: LasotuviAppStyle.colorScheme,
       child: SingleChildScrollView(
         child: Column(
@@ -25,7 +25,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
               tiles: [
                 ListTile(
                   leading: const Icon(Icons.badge_outlined),
-                  title: Text(translate('addNewChart')),
+                  title: Text(translate('createNewChart')),
                   onTap: () {
                     context.pop();
                     ChartNavigation.openChartCreationScreen(context);
@@ -33,7 +33,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.label),
-                  title: Text(translate('addNewTag')),
+                  title: Text(translate('createNewTag')),
                   onTap: () {
                     context.pop();
                     TagNavigation.openTagCreationScreen(
@@ -45,7 +45,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.sticky_note_2_outlined),
-                  title: Text(translate('addNewNote')),
+                  title: Text(translate('createNewNote')),
                   onTap: () {
                     context.pop();
                     NoteNavigation.openChartSelectionScreen(context, ref);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../controller/expired_timer_controller.dart';
 import '../../style/storage_plan_style.dart';
 
 class WillCancelDuration extends StatefulWidget {
@@ -58,7 +59,7 @@ class _WillCancelDurationState extends State<WillCancelDuration> {
     }
 
     if (widget.subscription != null) {
-      widget.controller.startExpiredTimer(widget.subscription!, widget.uid);
+      widget.controller.startExpiredTimer(widget.subscription!);
     }
   }
 

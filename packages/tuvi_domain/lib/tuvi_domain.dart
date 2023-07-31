@@ -57,7 +57,7 @@ export 'src/star/star_name.dart';
 export 'src/star/tran_doan/star_formulas_tran_doan.dart';
 export 'src/star/tran_doan/star_info_tran_doan.dart';
 export 'src/star/tran_doan/star_iterator_tran_doan.dart';
-export 'src/star/star_formulas.dart';
+export 'src/star/basic_star_formulas.dart';
 
 export 'src/tu_hoa/tran_doan/tu_hoa_tran_doan.dart';
 

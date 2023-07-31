@@ -80,12 +80,14 @@ TuViChart buildTuViChart({
   houses[posOfTuan.second]!.isTuan = true;
 
   for (var star in stars.values) {
-    if (star.info.isMajor) {
-      houses[star.position]?.majorStars.add(star);
-    } else if (star.info.isLife) {
-      houses[star.position]?.lifeStar = star;
-    } else {
-      houses[star.position]?.minorStars.add(star);
+    if (star.position != HousePosition.unknown()) {
+      if (star.info.isMajor) {
+        houses[star.position]?.majorStars.add(star);
+      } else if (star.info.isLife) {
+        houses[star.position]?.lifeStar = star;
+      } else {
+        houses[star.position]?.minorStars.add(star);
+      }
     }
   }
 

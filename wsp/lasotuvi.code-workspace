@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "../packages/lasotuvi"
+		},
+		{
+			"path": "../packages/lasotuvi_presentation"
+		},
+		{
+			"path": "../packages/lasotuvi_storage_plan"
+		},
+		{
+			"path": "../packages/lasotuvi_provider"
+		},
+		{
+			"path": "../packages/tauari_subscription"
+		},
+		{
+			"path": "../docs"
+		},
+		{
+			"path": "../packages/lasotuvi_data"
+		},
+		{
+			"path": "../packages/tauari_ui"
+		}
+	],
+	"settings": {}
+}

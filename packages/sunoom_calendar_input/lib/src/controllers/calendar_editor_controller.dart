@@ -1,5 +1,6 @@
 import 'package:sunoom/sunoom.dart';
-import 'package:sunoom_calendar_input/src/controllers/time_controller.dart';
+import '../controllers/time_controller.dart';
+import '../controllers/time_name_controller.dart';
 
 import 'date_name_group_controller.dart';
 import 'gregorian_date_controller.dart';
@@ -12,6 +13,7 @@ class CalendarEditorController {
   final TimeController timeController;
   final LeapMonthOptionsController leapMonthOptionsController;
   final DateNameGroupController dateNameGroupController;
+  final TimeNameController timeNameController;
   LuniSolarDate? luniSolarDate;
   GregorianDate? gregorianDate;
   SimpleTime? time;
@@ -24,6 +26,7 @@ class CalendarEditorController {
     required this.gregController,
     required this.luniController,
     required this.timeController,
+    required this.timeNameController,
     required this.leapMonthOptionsController,
     required this.dateNameGroupController,
     required this.onDateChanged,
@@ -46,6 +49,7 @@ class CalendarEditorController {
     setDateNameGroup();
     setLeapMonthInput();
     setTimeInput();
+    setTimeNameGroup();
   }
 
   void initWithGregorian() {
@@ -98,12 +102,14 @@ class CalendarEditorController {
       setLuniSolarInput();
       setLeapMonthInput();
       setDateNameGroup();
+      setTimeNameGroup();
       onDateChanged(moment, valid: true);
       // onValidate(true);
     } else {
       clearLuniSolarInput();
       clearLeapMonthInput();
       clearDateNameGroup();
+      clearTimeNameGroup();
       clearCache();
       onDateChanged(null, valid: false);
       // onValidate(false);
@@ -119,12 +125,14 @@ class CalendarEditorController {
       setLuniSolarInput();
       setLeapMonthInput();
       setDateNameGroup();
+      setTimeNameGroup();
       onDateChanged(moment, valid: true);
       // onValidate(true);
     } else {
       clearLuniSolarInput();
       clearLeapMonthInput();
       clearDateNameGroup();
+      clearTimeNameGroup();
       clearCache();
       onDateChanged(null, valid: false);
       // onValidate(false);
@@ -167,6 +175,11 @@ class CalendarEditorController {
     dateNameGroupController.setYearChi(null);
   }
 
+  void clearTimeNameGroup() {
+    timeNameController.setCan(null);
+    timeNameController.setChi(null);
+  }
+
   void setLeapMonthInput() {
     leapMonthOptionsController.changedByUser = true;
     leapMonthOptionsController.toggle(
@@ -194,6 +207,14 @@ class CalendarEditorController {
     dateNameGroupController.setYearChi(yearChi.value);
   }
 
+  void setTimeNameGroup() {
+    final dayCan = Can.ofDay(Moment.fromGregorian(gregorianDate!, time));
+    final can = Can.ofTime(time: time ?? const SimpleTime(), canOfDay: dayCan);
+    final chi = Chi.ofTime(time ?? const SimpleTime());
+    timeNameController.setCan(can.value);
+    timeNameController.setChi(chi.value);
+  }
+
   void onLuniSolarDateChanged() {
     if (luniController.state == null) {
       return;
@@ -203,12 +224,14 @@ class CalendarEditorController {
       setGregorianInput();
       setLeapMonthInput();
       setDateNameGroup();
+      setTimeNameGroup;
       onDateChanged(moment, valid: true);
       // onValidate(true);
     } else {
       clearGregorianInput();
       clearLeapMonthInput();
       clearDateNameGroup();
+      clearTimeNameGroup();
       clearCache();
       onDateChanged(null, valid: false);
       // onValidate(false);
@@ -232,6 +255,7 @@ class CalendarEditorController {
       initWithLuniSolar(leapMonthOptionsController.isLeapMonth);
       setGregorianInput();
       setDateNameGroup();
+
       onDateChanged(moment, valid: true);
     }
   }

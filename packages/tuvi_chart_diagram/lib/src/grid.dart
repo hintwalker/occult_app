@@ -4,7 +4,7 @@ import 'package:flutter_constraintlayout/flutter_constraintlayout.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
 import 'dia_ban/dia_ban_section.dart';
-import 'grid_controller.dart';
+import 'tuvi_chart_grid_controller.dart';
 import 'house/house_controller.dart';
 import 'house/widgets/tuvi_house_container.dart';
 
@@ -20,7 +20,7 @@ class TuviChartGrid extends StatefulWidget {
   final TuViChart chart;
   final String Function(String) translate;
   final ColorScheme colorScheme;
-  final GridController controller;
+  final TuviChartGridController controller;
   final HumanBio humanBio;
 
   @override
@@ -84,39 +84,6 @@ class _TuviChartGridState extends State<TuviChartGrid> {
       widget.controller.insert(controller);
     }
 
-    widget.controller.listen();
-
-    // data[HousePosition.tys()] = {
-    //   'id': boxTys,
-    //   'controller': HouseController(
-    //     widget.chart.houses[HousePosition.tys()]!,
-    //   )
-    // };
-
-    // for (var item in data.entries) {
-    //   widget.controller.insert(item.value['controller'] as HouseController);
-    // }
-
-    // tysController = HouseController(
-    //   widget.chart.houses[HousePosition.tys()]!,
-    // );
-    // tyjController = HouseController(
-    //   widget.chart.houses[HousePosition.tyj()]!,
-    // );
-    // suuController = HouseController(
-    //   widget.chart.houses[HousePosition.suu()]!,
-    // );
-    // dauController = HouseController(
-    //   widget.chart.houses[HousePosition.dau()]!,
-    // );
-    // hoiController = HouseController(
-    //   widget.chart.houses[HousePosition.hoi()]!,
-    // );
-
-    // widget.controller.insert(tyjController);
-    // widget.controller.insert(suuController);
-    // widget.controller.insert(dauController);
-    // widget.controller.insert(hoiController);
     // widget.controller.listen();
   }
 
@@ -147,29 +114,6 @@ class _TuviChartGridState extends State<TuviChartGrid> {
 
   @override
   Widget build(BuildContext context) {
-    // final data = {
-    //   HousePosition.tys(): {
-    //     'id': boxTys,
-    //     'controller': tysController,
-    //   },
-    //   HousePosition.suu(): boxSuu,
-    //   HousePosition.dan(): boxDan,
-    //   HousePosition.mao(): boxMao,
-    //   HousePosition.thin(): boxThin,
-    //   HousePosition.tyj(): boxTyj,
-    //   HousePosition.ngo(): boxNgo,
-    //   HousePosition.mui(): boxMui,
-    //   HousePosition.than(): boxThan,
-    //   HousePosition.dau(): boxDau,
-    //   HousePosition.tuat(): boxTuat,
-    //   HousePosition.hoi(): boxHoi
-    // };
-    // final houseHeight = //(MediaQuery.of(context).size.height -
-    //     AppBar().preferredSize.height -
-    //     MediaQuery.of(context).padding.top -
-    //     MediaQuery.of(context).padding.bottom) /
-    // 4;
-
     return LayoutBuilder(builder: (context, constraints) {
       var houseHeight = constraints.maxHeight / 4;
       var houseWidth = constraints.maxWidth / 4;
@@ -377,216 +321,7 @@ class _TuviChartGridState extends State<TuviChartGrid> {
             ),
           ),
         ).applyConstraintId(id: boxTuanTriet)
-        // Container(
-        //   alignment: Alignment.center,
-        //   decoration: BoxDecoration(
-        //     color: widget.colorScheme.background,
-        //     border:
-        //         Border.all(color: widget.colorScheme.onBackground, width: 0.5),
-        //   ),
-        // ).applyConstraintId(id: boxDiaBan),
-      ]
-          // contraints
-          //     .map((key, value) => MapEntry(
-          //           key,
-          //           Container(
-          //             alignment: Alignment.center,
-          //             decoration: BoxDecoration(
-          //               border: Border.all(
-          //                 color: Colors.black,
-          //               ),
-          //             ),
-          //             child: TuviHouse(widget.chart.houses[key]!),
-          //           ).applyConstraintId(id: value),
-          //         ))
-          //     .values
-          //     .toList()
-          //     [
-          //   TuviHouseContainer(
-          //     widget.chart.houses[HousePosition.tyj()]!,
-          //     minorStarSizeGroup: minorStarSizeGroup,
-          //     majorStarSizeGroup: majorStarSizeGroup,
-          //     positionSizeGroup: positionSizeGroup,
-          //     translate: widget.translate,
-          //     controller: tyjController,
-          //     colorScheme: widget.colorScheme,
-          //   ).applyConstraintId(id: boxTyj),
-          //   // Container(
-          //   //   alignment: Alignment.center,
-          //   //   decoration: BoxDecoration(
-          //   //     border: Border.all(
-          //   //       color: Colors.black,
-          //   //     ),
-          //   //   ),
-          //   //   child: TuviHouseContainer(
-          //   //     widget.chart.houses[HousePosition.tyj()]!,
-          //   //     minorStarSizeGroup: minorStarSizeGroup,
-          //   //     majorStarSizeGroup: majorStarSizeGroup,
-          //   //     translate: widget.translate,
-          //   //     constraintId: boxTyj,
-          //   //     controller: tyjController,
-          //   //     colorScheme: widget.colorScheme,
-          //   //   ),
-          //   // ).applyConstraintId(id: boxTyj),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxNgo),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxMui),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxThan),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxThin),
-          //   TuviHouseContainer(
-          //     widget.chart.houses[HousePosition.dau()]!,
-          //     minorStarSizeGroup: minorStarSizeGroup,
-          //     majorStarSizeGroup: majorStarSizeGroup,
-          //     translate: widget.translate,
-          //     controller: dauController,
-          //     colorScheme: widget.colorScheme,
-          //   ).applyConstraintId(id: boxDau),
-          //   // Container(
-          //   //   alignment: Alignment.center,
-          //   //   decoration: BoxDecoration(
-          //   //     border: Border.all(
-          //   //       color: Colors.black,
-          //   //     ),
-          //   //   ),
-          //   // ).applyConstraintId(id: boxDau),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxMao),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxTuat),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxDan),
-          //   TuviHouseContainer(
-          //     widget.chart.houses[HousePosition.suu()]!,
-          //     minorStarSizeGroup: minorStarSizeGroup,
-          //     majorStarSizeGroup: majorStarSizeGroup,
-          //     translate: widget.translate,
-          //     controller: suuController,
-          //     colorScheme: widget.colorScheme,
-          //   ).applyConstraintId(id: boxSuu),
-          //   // Container(
-          //   //   alignment: Alignment.center,
-          //   //   decoration: BoxDecoration(
-          //   //     border: Border.all(
-          //   //       color: Colors.black,
-          //   //     ),
-          //   //   ),
-          //   // ).applyConstraintId(id: boxSuu),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ).applyConstraintId(id: boxTys),
-          //   TuviHouseContainer(
-          //     widget.chart.houses[HousePosition.hoi()]!,
-          //     minorStarSizeGroup: minorStarSizeGroup,
-          //     majorStarSizeGroup: majorStarSizeGroup,
-          //     translate: widget.translate,
-          //     controller: hoiController,
-          //     colorScheme: widget.colorScheme,
-          //   ).applyConstraintId(id: boxHoi),
-          //   // Container(
-          //   //   alignment: Alignment.center,
-          //   //   decoration: BoxDecoration(
-          //   //     border: Border.all(
-          //   //       color: Colors.black,
-          //   //     ),
-          //   //   ),
-          //   // ).applyConstraintId(id: boxHoi),
-          // Container(
-          //   alignment: Alignment.center,
-          //   decoration: BoxDecoration(
-          //     color: widget.colorScheme.background,
-          //     border: Border.all(
-          //       color: Colors.black,
-          //     ),
-          //   ),
-          // ).applyConstraintId(id: boxDiaBan),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //         border: Border.all(
-          //           color: Colors.black,
-          //         ),
-          //         color: Colors.white),
-          //     child: const Text(
-          //       'Tuần',
-          //       style: TextStyle(color: Colors.black, fontSize: 10),
-          //     ),
-          //   ).applyConstraintId(id: boxTuan),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //         border: Border.all(
-          //           color: Colors.black,
-          //         ),
-          //         color: Colors.black),
-          //     child: const Text(
-          //       'Triệt',
-          //       style: TextStyle(color: Colors.white, fontSize: 10),
-          //     ),
-          //   ).applyConstraintId(id: boxTriet),
-          //   Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //         border: Border.all(
-          //           color: Colors.black,
-          //         ),
-          //         color: Colors.black),
-          //     child: const Text(
-          //       'Tuần-Triệt',
-          //       style: TextStyle(color: Colors.white, fontSize: 10),
-          //     ),
-          //   ).applyConstraintId(id: boxTuanTriet),
-          // ],
-          );
+      ]);
     });
   }
 }

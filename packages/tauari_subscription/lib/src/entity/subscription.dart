@@ -6,7 +6,7 @@ import 'subscription_status.dart';
 class Subscription implements CloudGetable, Dumpable {
   Subscription({
     required this.id,
-    required this.packageId,
+    required this.planId,
     required this.beginDate,
     required this.expiredDate,
     required this.timeZoneOffset,
@@ -18,7 +18,7 @@ class Subscription implements CloudGetable, Dumpable {
   final DateTime beginDate;
   final DateTime expiredDate;
   final Duration timeZoneOffset;
-  final String packageId;
+  final String planId;
   final int total;
   final int energy;
   final String status;
@@ -31,7 +31,7 @@ class Subscription implements CloudGetable, Dumpable {
     final begin = DateTime(2023, 1, 1);
     return Subscription(
         id: 0,
-        packageId: '0',
+        planId: '0',
         beginDate: begin,
         expiredDate: DateTime(2025, 12, 31),
         timeZoneOffset: const Duration(hours: 7),
@@ -43,7 +43,7 @@ class Subscription implements CloudGetable, Dumpable {
   factory Subscription.fromMap(Map<String, Object?> map) {
     return Subscription(
       id: map[columnId] as int,
-      packageId: map[ColumnSubscription.packageId] as String,
+      planId: map[ColumnSubscription.planId] as String,
       beginDate: map[ColumnSubscription.begin] == null
           ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
           : DateTime.fromMillisecondsSinceEpoch(
@@ -63,14 +63,14 @@ class Subscription implements CloudGetable, Dumpable {
     DateTime? beginDate,
     DateTime? expiredDate,
     Duration? timeZoneOffset,
-    String? packageId,
+    String? planId,
     int? total,
     int? energy,
     String? status,
   }) {
     return Subscription(
       id: id ?? this.id,
-      packageId: packageId ?? this.packageId,
+      planId: planId ?? this.planId,
       beginDate: beginDate ?? this.beginDate,
       expiredDate: expiredDate ?? this.expiredDate,
       timeZoneOffset: timeZoneOffset ?? this.timeZoneOffset,
@@ -87,7 +87,7 @@ class Subscription implements CloudGetable, Dumpable {
       ColumnSubscription.begin: beginDate.millisecondsSinceEpoch,
       ColumnSubscription.expired: expiredDate.millisecondsSinceEpoch,
       ColumnSubscription.timeZoneOffset: timeZoneToMapValue(timeZoneOffset),
-      ColumnSubscription.packageId: packageId,
+      ColumnSubscription.planId: planId,
       ColumnSubscription.total: total,
       ColumnSubscription.energy: energy,
       ColumnSubscription.status: status,
@@ -110,5 +110,9 @@ class Subscription implements CloudGetable, Dumpable {
 
   Subscription extendExpiredDate(Duration duration) {
     return copyWith(expiredDate: expiredDate.add(duration));
+  }
+
+  Subscription addToTotal(int value) {
+    return copyWith(total: total + value);
   }
 }

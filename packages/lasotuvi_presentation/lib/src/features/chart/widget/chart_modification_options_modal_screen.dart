@@ -17,7 +17,7 @@ class ChartModificationOptionsModalScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ChartEditOptionsModal(
+    return ChartBioModificationModal(
       chartId: chartId,
       syncStatus: syncStatus,
       colorScheme: LasotuviAppStyle.colorScheme,

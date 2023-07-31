@@ -38,6 +38,13 @@ class Moment {
     return gregorian2LuniSolar(gregorian: gregorian, time: time);
   }
 
+  factory Moment.now({TimeZone timeZone = const TimeZone(offsetInHour: 7)}) {
+    final dateTime = DateTime.now();
+    // final currentTimeZoneOffset = dateTime.timeZoneOffset.inHours;
+    // final targetDateTime = dateTime.add(Duration(hours: timeZone.offsetInHour - currentTimeZoneOffset));
+    return dateTime.toMoment(timeZone);
+  }
+
   factory Moment.fromGregorian(GregorianDate gregorian, [SimpleTime? time]) {
     return Moment(
       gregorian: gregorian,

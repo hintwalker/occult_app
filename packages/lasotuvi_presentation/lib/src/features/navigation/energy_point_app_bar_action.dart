@@ -7,7 +7,11 @@ import '../../styles/live_energy_style_impl.dart';
 import '../auth/user_auth_depended_state.dart';
 
 class EnergyPointAppBarAction extends ConsumerStatefulWidget {
-  const EnergyPointAppBarAction({super.key});
+  const EnergyPointAppBarAction({
+    super.key,
+    required this.onTap,
+  });
+  final Function() onTap;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _AppBarTrailingState();
@@ -64,6 +68,7 @@ class _AppBarTrailingState
         style: LiveEnergyStyleImpl(),
         controller: controller,
         uid: uid,
+        onTap: widget.onTap,
       ),
     );
   }

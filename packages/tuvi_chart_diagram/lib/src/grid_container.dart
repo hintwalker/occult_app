@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 
-import 'execute_build_chart.dart';
+// import 'execute_build_chart.dart';
 import 'grid.dart';
-import 'grid_controller.dart';
+import 'tuvi_chart_grid_controller.dart';
 
 class TuviChartContainer extends StatelessWidget {
   const TuviChartContainer(
@@ -11,14 +12,16 @@ class TuviChartContainer extends StatelessWidget {
     super.key,
     required this.translate,
     required this.colorScheme,
+    required this.controller,
   });
   final Chart data;
   final String Function(String) translate;
   final ColorScheme colorScheme;
+  final TuviChartGridController controller;
 
   @override
   Widget build(BuildContext context) {
-    final GridController controller = GridController();
+    // final GridController controller = GridController();
     // final chart = ref.watch(chartProvider(int.parse(chartId)));
     // final width = MediaQuery.of(context).size.width.floorToDouble();
     // final height =
@@ -31,74 +34,90 @@ class TuviChartContainer extends StatelessWidget {
     //     sky: Sky(SkyConfig.tuViVietNam()),
     //     starIterator: StarIterator(starIteratorTranDoan),
     //     formulas: starFormulasTranDoan);
-    return FutureBuilder(
-      builder: (ctx, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.hasData) {
-          return Column(
-              // width: width,
-              // height: height,
-              children: [
-                Expanded(
-                    child: TuviChartGrid(
-                  snapshot.requireData,
-                  translate: translate,
-                  colorScheme: colorScheme,
-                  controller: controller,
-                  humanBio: snapshot.requireData.humanBio,
-                ))
-              ]);
-        } else {
-          return const Center(
-            child: Text('!'),
-          );
-        }
-        //   if (snapshot.connectionState == ConnectionState.waiting) {
-        //     return const Center(
-        //       child: CircularProgressIndicator(),
-        //     );
-        //   } else if (snapshot.hasData) {
-        //     SizedBox(
-        //         width: width,
-        //         height: height,
-        //         child: TuviChartGrid(
-        //           snapshot.requireData,
-        //           translate: translate,
-        //           colorScheme: colorScheme,
-        //           controller: controller,
-        //           humanBio: snapshot.requireData.humanBio,
-        //         )
-        //         //   )
-        //         // ]
-        //         );
-        //     // return InteractiveViewer.builder(
-        //     //     minScale: 1,
-        //     //     maxScale: 2,
-        //     //     builder: (ctx, quad) {
-        //     //       return SizedBox(
-        //     //           width: width,
-        //     //           height: height,
-        //     //           child: TuviChartGrid(
-        //     //             snapshot.data!,
-        //     //             translate: translate,
-        //     //             colorScheme: colorScheme,
-        //     //             controller: controller,
-        //     //             humanBio: snapshot.data!.humanBio,
-        //     //           ));
-        //     //     });
-
-        //   }
-        // else {
-        //     return const Center(
-        //       child: Text('!'),
-        //     );
-        //   }
-      },
-      future: executeBuildChart(data),
+    return BasicFutureBuilder(
+      future: controller.future(data),
+      child: (data) => Column(
+          // width: width,
+          // height: height,
+          children: [
+            Expanded(
+                child: TuviChartGrid(
+              data,
+              translate: translate,
+              colorScheme: colorScheme,
+              controller: controller,
+              humanBio: data.humanBio,
+            ))
+          ]),
     );
+    // return FutureBuilder(
+    //   future: controller.future(data), //executeBuildChart(data),
+    //   builder: (ctx, snapshot) {
+    //     if (snapshot.connectionState == ConnectionState.waiting) {
+    //       return const Center(
+    //         child: CircularProgressIndicator(),
+    //       );
+    //     } else if (snapshot.hasData) {
+    //       return Column(
+    //           // width: width,
+    //           // height: height,
+    //           children: [
+    //             Expanded(
+    //                 child: TuviChartGrid(
+    //               snapshot.requireData,
+    //               translate: translate,
+    //               colorScheme: colorScheme,
+    //               controller: controller,
+    //               humanBio: snapshot.requireData.humanBio,
+    //             ))
+    //           ]);
+    //     } else {
+    //       return const Center(
+    //         child: Text('!'),
+    //       );
+    //     }
+    //     //   if (snapshot.connectionState == ConnectionState.waiting) {
+    //     //     return const Center(
+    //     //       child: CircularProgressIndicator(),
+    //     //     );
+    //     //   } else if (snapshot.hasData) {
+    //     //     SizedBox(
+    //     //         width: width,
+    //     //         height: height,
+    //     //         child: TuviChartGrid(
+    //     //           snapshot.requireData,
+    //     //           translate: translate,
+    //     //           colorScheme: colorScheme,
+    //     //           controller: controller,
+    //     //           humanBio: snapshot.requireData.humanBio,
+    //     //         )
+    //     //         //   )
+    //     //         // ]
+    //     //         );
+    //     //     // return InteractiveViewer.builder(
+    //     //     //     minScale: 1,
+    //     //     //     maxScale: 2,
+    //     //     //     builder: (ctx, quad) {
+    //     //     //       return SizedBox(
+    //     //     //           width: width,
+    //     //     //           height: height,
+    //     //     //           child: TuviChartGrid(
+    //     //     //             snapshot.data!,
+    //     //     //             translate: translate,
+    //     //     //             colorScheme: colorScheme,
+    //     //     //             controller: controller,
+    //     //     //             humanBio: snapshot.data!.humanBio,
+    //     //     //           ));
+    //     //     //     });
+
+    //     //   }
+    //     // else {
+    //     //     return const Center(
+    //     //       child: Text('!'),
+    //     //     );
+    //     //   }
+    //   },
+    // );
 
     // return AsyncValueWidget<Chart?>(
     //   value: chart,

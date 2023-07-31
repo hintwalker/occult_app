@@ -1,4 +1,4 @@
-final basicStarInfo = {
+const basicStarInfo = {
   "tuVi": {
     "isMajor": true,
     "bold": true,

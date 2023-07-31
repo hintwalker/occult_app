@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunoom/sunoom.dart';
+import '../controllers/time_name_controller.dart';
+import 'time_name_group.dart';
 
 import '../controllers/calendar_editor_controller.dart';
 import '../controllers/date_name_group_controller.dart';
@@ -54,6 +56,7 @@ class _CalendarInputState extends State<CalendarInput> {
   late LeapMonthOptionsController _leapMonthOptionsController;
   late CalendarEditorController _calendarEditorController;
   late DateNameGroupController _dateNameGroupController;
+  late TimeNameController _timeNameController;
   @override
   void initState() {
     super.initState();
@@ -94,10 +97,12 @@ class _CalendarInputState extends State<CalendarInput> {
     );
     _leapMonthOptionsController = LeapMonthOptionsController();
     _dateNameGroupController = DateNameGroupController();
+    _timeNameController = TimeNameController();
     _calendarEditorController = CalendarEditorController(
         gregController: _gregController,
         luniController: _luniController,
         timeController: _timeController,
+        timeNameController: _timeNameController,
         leapMonthOptionsController: _leapMonthOptionsController,
         dateNameGroupController: _dateNameGroupController,
         onDateChanged: widget.onDateChanged,
@@ -135,6 +140,7 @@ class _CalendarInputState extends State<CalendarInput> {
         DateNameGroup(
           _dateNameGroupController,
           colorScheme: widget.colorScheme,
+          translate: widget.translate,
         ),
         const SizedBox(
           height: 12,
@@ -148,6 +154,14 @@ class _CalendarInputState extends State<CalendarInput> {
           height: 16,
         ),
         TimeInput(_timeController),
+        const SizedBox(
+          height: 8,
+        ),
+        TimeNameGroup(
+          controller: _timeNameController,
+          colorScheme: widget.colorScheme,
+          translate: widget.translate,
+        ),
       ],
     );
   }

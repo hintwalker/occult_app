@@ -21,10 +21,10 @@ final menus = [
       id: DrawerIds.charts,
       title: translate('charts'),
       icon: const Icon(Icons.people_alt)),
-  DrawerData(
-      id: DrawerIds.commentaries,
-      title: translate('commentary'),
-      icon: const Icon(Icons.self_improvement)),
+  // DrawerData(
+  //     id: DrawerIds.commentaries,
+  //     title: translate('commentary'),
+  //     icon: const Icon(Icons.self_improvement)),
   DrawerData(
       id: DrawerIds.notes,
       title: translate('notes'),
@@ -41,6 +41,10 @@ final menus = [
       id: DrawerIds.library,
       title: translate('library'),
       icon: const Icon(Icons.library_books)),
+  // DrawerData(
+  //     id: DrawerIds.changeDate,
+  //     title: translate('changeDate'),
+  //     icon: const Icon(Icons.edit_calendar)),
   // DrawerData(
   //     id: DrawerIds.groupStars,
   //     title: translate('groupStars'),

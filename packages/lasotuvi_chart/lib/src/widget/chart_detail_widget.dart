@@ -9,17 +9,22 @@ class ChartDetailWidget extends StatelessWidget {
     super.key,
     required this.translate,
     required this.colorScheme,
+    required this.controller,
   });
   final Chart? data;
   final String Function(String) translate;
   final ColorScheme colorScheme;
-
+  final TuviChartGridController controller;
   @override
   Widget build(BuildContext context) {
     return data == null
         ? const Center(child: ErrorTextWidget())
-        : TuviChartContainer(data!,
-            translate: translate, colorScheme: colorScheme);
+        : TuviChartContainer(
+            data!,
+            translate: translate,
+            colorScheme: colorScheme,
+            controller: controller,
+          );
     // BasicModal(
     //   title: data.name,
     //   colorScheme: colorScheme,

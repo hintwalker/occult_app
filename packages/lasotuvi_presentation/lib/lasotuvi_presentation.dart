@@ -1,5 +1,6 @@
 library lasotuvi_presentation;
 
+export 'src/settings/lasotuvi_settings.dart';
 export 'src/shared/translation_path.dart';
 export 'src/shared/screen_app_bar.dart';
 

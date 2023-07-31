@@ -23,7 +23,9 @@ class SyncableDataListStreamController<T extends SyncableEntity>
 
   void listen(String? uid, [QueryArgs? queryArgs]) {
     _subscription = onSyncableData(uid, queryArgs).listen((event) {
-      _streamController?.add(event);
+      if (!(_streamController == null || _streamController!.isClosed)) {
+        _streamController?.add(event);
+      }
     });
   }
 

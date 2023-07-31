@@ -12,7 +12,7 @@ library tuvi_chart_diagram;
 // export 'src/dia_ban/chart_info/chart_info.dart';
 // export 'src/dia_ban/chart_info/human_gender.dart';
 // export 'src/dia_ban/chart_info/human_name.dart';
-
+export 'src/tuvi_chart_grid_controller.dart';
 export 'src/dia_ban/chart_info/item_container.dart';
 // export 'src/dia_ban/chart_info/item_decoration.dart';
 // export 'src/dia_ban/chart_info/item_text_style.dart';

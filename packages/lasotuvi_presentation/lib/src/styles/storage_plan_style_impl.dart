@@ -7,11 +7,16 @@ class StoragePlanStyleImpl extends StoragePlanStyle {
   Color get iconColor => lightColorScheme.secondary;
 
   @override
+  Color get activedRibbonBackground => lightColorScheme.tertiaryContainer;
+  @override
+  Color get activedRibbonTextColor => lightColorScheme.onTertiaryContainer;
+
+  @override
   double get energyIconSize => 34.0;
 
   @override
   TextStyle get title => TextStyle(
-      fontSize: 20.0,
+      fontSize: 24.0,
       fontWeight: FontWeight.bold,
       color: lightColorScheme.primary);
 

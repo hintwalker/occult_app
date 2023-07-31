@@ -1,8 +1,10 @@
 library tauari_ui;
 
+export 'src/widget/builder/advanced_future_builder.dart';
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 
+export 'src/widget/shutdown_confirm_dialog.dart';
 export 'src/widget/circle_container.dart';
 export 'src/widget/data_count_widget.dart';
 export 'src/widget/syncable_card_item_scaffold.dart';

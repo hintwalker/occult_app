@@ -13,8 +13,8 @@ class BasicConfirmDialog extends StatelessWidget {
   });
   final String title;
   final List<Widget> children;
-  final String cancelButtonText;
-  final String noButtonText;
+  final String? cancelButtonText;
+  final String? noButtonText;
   final String yesButtonText;
 
   @override
@@ -23,6 +23,7 @@ class BasicConfirmDialog extends StatelessWidget {
       title: SimpleDialogHeader(title),
       titlePadding:
           const EdgeInsets.only(left: 12.0, top: 8.0, right: 8.0, bottom: 0.0),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       children: [
         ...children,
         const SizedBox(
@@ -34,30 +35,32 @@ class BasicConfirmDialog extends StatelessWidget {
         ),
         Row(
           children: [
-            Expanded(
-              child: TextButton(
-                  onPressed: () => Navigator.pop(
-                        context,
-                        const ConfirmResult(
-                          cancel: true,
-                          no: false,
-                          yes: false,
+            if (cancelButtonText != null)
+              Expanded(
+                child: TextButton(
+                    onPressed: () => Navigator.pop(
+                          context,
+                          const ConfirmResult(
+                            cancel: true,
+                            no: false,
+                            yes: false,
+                          ),
                         ),
-                      ),
-                  child: Text(cancelButtonText)),
-            ),
-            Expanded(
-              child: TextButton(
-                  onPressed: () => Navigator.pop(
-                        context,
-                        const ConfirmResult(
-                          cancel: false,
-                          no: true,
-                          yes: false,
+                    child: Text(cancelButtonText!)),
+              ),
+            if (noButtonText != null)
+              Expanded(
+                child: TextButton(
+                    onPressed: () => Navigator.pop(
+                          context,
+                          const ConfirmResult(
+                            cancel: false,
+                            no: true,
+                            yes: false,
+                          ),
                         ),
-                      ),
-                  child: Text(noButtonText)),
-            ),
+                    child: Text(noButtonText!)),
+              ),
             Expanded(
               child: TextButton(
                   onPressed: () => Navigator.pop(

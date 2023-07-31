@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+// import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:lasotuvi_style/lasotuvi_style.dart';
+import 'package:tauari_translate/tauari_translate.dart';
 
 import '../widget/chart_creation_modal_screen.dart';
 import '../widget/chart_detail_modal_screen.dart';
@@ -130,5 +135,23 @@ class ChartNavigation {
         syncStatus: syncStatus,
       ),
     );
+  }
+
+  static Future<void> showChartOptions({
+    required BuildContext context,
+    required WidgetRef ref,
+    required void Function(Map<String, dynamic>) callback,
+  }) async {
+    final result = await showModalBottomSheet<Map<String, dynamic>>(
+      context: context,
+      builder: (_) => const ChartOptionsModal(
+        colorScheme: LasotuviAppStyle.colorScheme,
+        translate: translate,
+        // controller: ref.watch(chartOptionsModalControllerProvider),
+      ),
+    );
+    if (result != null) {
+      callback(result);
+    }
   }
 }

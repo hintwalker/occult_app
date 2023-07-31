@@ -4,7 +4,7 @@ import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 // import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
-import 'package:lasotuvi_request/lasotuvi_request.dart';
+// import 'package:lasotuvi_request/lasotuvi_request.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:tauari_translate/tauari_translate.dart';
@@ -13,7 +13,7 @@ import '../../chart/navigation/chart_navigation.dart';
 // import '../../commentary/navigation/commentary_navigation.dart';
 import '../../note/navigation/note_navigation.dart';
 import '../../../helper/storage_helper.dart';
-import '../../request/navigation/request_navigation.dart';
+// import '../../request/navigation/request_navigation.dart';
 import '../../tag/navigation/tag_navigation.dart';
 import '../../../styles/general_style.dart';
 import '../../auth/user_auth_depended_state.dart';
@@ -68,29 +68,29 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                       ref.watch(countChartEveryWhereControllerProvider),
                 ),
               ),
-              SizedBox(
-                height: 264.0,
-                child: TopTenRequestBanner(
-                  uid: uid,
-                  controller: ref.watch(requestListControllerProvider),
-                  translate: translate,
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  // onAddData: () =>
-                  //     CommentaryNavigation.openChartSelectionScreen(context, ref),
-                  onShowAll: openAllCommentaryScreen,
-                  onItemTap: (context, item) =>
-                      RequestNavigation.openRequestView(
-                          context: context, request: item),
-                  onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
-                    item,
-                    context: context,
-                    uid: uid,
-                    ref: ref,
-                  ),
-                  countController:
-                      ref.watch(countRequestEveryWhereControllerProvider),
-                ),
-              ),
+              // SizedBox(
+              //   height: 264.0,
+              //   child: TopTenRequestBanner(
+              //     uid: uid,
+              //     controller: ref.watch(requestListControllerProvider),
+              //     translate: translate,
+              //     colorScheme: LasotuviAppStyle.colorScheme,
+              //     // onAddData: () =>
+              //     //     CommentaryNavigation.openChartSelectionScreen(context, ref),
+              //     onShowAll: openAllCommentaryScreen,
+              //     onItemTap: (context, item) =>
+              //         RequestNavigation.openRequestView(
+              //             context: context, request: item),
+              //     onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
+              //       item,
+              //       context: context,
+              //       uid: uid,
+              //       ref: ref,
+              //     ),
+              //     countController:
+              //         ref.watch(countRequestEveryWhereControllerProvider),
+              //   ),
+              // ),
               SizedBox(
                 height: 168.0,
                 child: TopTenTagsBanner(

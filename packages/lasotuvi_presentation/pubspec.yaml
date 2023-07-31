@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   energy_store:
     path: ../energy_store
+  sunoom_calendar_input:
+    path: ../sunoom_calendar_input
   lasotuvi_style:
     path: ../lasotuvi_style
   lasotuvi_storage_plan:
@@ -64,6 +66,8 @@ dependencies:
     path: ../tauari_list_view
   tauari_guard:
     path: ../tauari_guard
+  tauari_settings:
+    path: ../tauari_settings
   lasotuvi_request:
     path: ../lasotuvi_request
   note_editor:

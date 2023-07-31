@@ -22,7 +22,9 @@ class CurrentSubController extends ChangeNotifier {
 
   void listen(String? uid) {
     _subscription = onCurrentSub(uid).listen((event) {
-      _streamController?.add(event);
+      if (!(_streamController == null || _streamController!.isClosed)) {
+        _streamController?.add(event);
+      }
     });
   }
 

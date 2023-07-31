@@ -10,4 +10,12 @@ void main() {
     expect(sky.stars[StarName.tuVi]?.info.isMajor, true);
     expect(sky.stars[StarName.tuVi]?.info.nguHanh.name, 'duong_tho');
   });
+
+  test('should change config', () {
+    var config = SkyConfig.basic();
+
+    print(config.options);
+    config.options[StarFormulaKey.showAmSat.name] = 1;
+    print(config.options);
+  });
 }

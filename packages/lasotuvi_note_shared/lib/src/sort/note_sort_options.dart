@@ -16,22 +16,22 @@ Iterable<SortOption> noteSortOptions(String Function(String) translate) => [
       ),
       SortOption(
         icon: const Icon(Icons.create_new_folder_outlined),
-        label: translate(NoteSortValue.sortByCreatedAsc),
-        value: const SortValue(NoteSortValue.sortByCreatedAsc, ListOrder.asc),
-      ),
-      SortOption(
-        icon: const Icon(Icons.create_new_folder_outlined),
         label: translate(NoteSortValue.sortByCreatedDesc),
         value: const SortValue(NoteSortValue.sortByCreatedDesc, ListOrder.desc),
       ),
       SortOption(
-        icon: const Icon(Icons.text_fields),
-        label: translate(NoteSortValue.sortByTitleDesc),
-        value: const SortValue(NoteSortValue.sortByTitleDesc, ListOrder.desc),
+        icon: const Icon(Icons.create_new_folder_outlined),
+        label: translate(NoteSortValue.sortByCreatedAsc),
+        value: const SortValue(NoteSortValue.sortByCreatedAsc, ListOrder.asc),
       ),
       SortOption(
         icon: const Icon(Icons.text_fields),
         label: translate(NoteSortValue.sortByTitleAsc),
         value: const SortValue(NoteSortValue.sortByTitleAsc, ListOrder.asc),
+      ),
+      SortOption(
+        icon: const Icon(Icons.text_fields),
+        label: translate(NoteSortValue.sortByTitleDesc),
+        value: const SortValue(NoteSortValue.sortByTitleDesc, ListOrder.desc),
       ),
     ];

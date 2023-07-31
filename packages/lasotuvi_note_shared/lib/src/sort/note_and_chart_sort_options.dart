@@ -7,7 +7,6 @@ import 'note_sort_value.dart';
 Iterable<SortOption> noteAndChartSortOptions(
         String Function(String) translate) =>
     [
-      ...noteSortOptions(translate),
       SortOption(
         icon: const Icon(Icons.badge_outlined),
         label: translate(NoteSortValue.sortByChartNameAsc),
@@ -19,4 +18,5 @@ Iterable<SortOption> noteAndChartSortOptions(
         value:
             const SortValue(NoteSortValue.sortByChartNameDesc, ListOrder.desc),
       ),
+      ...noteSortOptions(translate),
     ];

@@ -59,56 +59,90 @@ Map<StarName, Star> navigateStars(
         amDuongRel == AmDuongRel.amDuongNghichLy ? 1 : 0,
     ...options ?? {}
   };
-
-  while (starIterator.moveNext()) {
-    final currentStarName = starIterator.current;
+  final filteredStars =
+      options == null ? starIterator : filterStars(starIterator, options);
+  filteredStars.reset();
+  while (filteredStars.moveNext()) {
+    final currentStarName = filteredStars.current;
     final formula = formulas[currentStarName.name];
     final oldStar = stars[currentStarName];
-    if (formula != null || oldStar != null) {
-      final expr = formula[StarFormulaKey.expression.name] as String;
-      if (currentStarName.name == 'dauQuan') {
-        print(expr);
-      }
-      // final dataValue = formula[StarFormulaKey.data.name];
-      // List data = dataValue == null ? [] : dataValue as List;
-      List data = [];
-      final altDataValue = formula[StarFormulaKey.data.name];
-      final altData = altDataValue == null ? null : altDataValue as String;
-      if (altData != null && altData.isNotEmpty) {
-        final altDataExpr = Expression.parse(altData);
-        data = evaluator.eval(altDataExpr, evalData);
-      }
+    try {
+      if (formula != null || oldStar != null) {
+        final expr = formula[StarFormulaKey.expression.name] as String;
+        // final dataValue = formula[StarFormulaKey.data.name];
+        // List data = dataValue == null ? [] : dataValue as List;
+        List data = [];
+        final altDataValue = formula[StarFormulaKey.data.name];
+        final altData = altDataValue == null ? null : altDataValue as String;
+        if (altData != null && altData.isNotEmpty) {
+          final altDataExpr = Expression.parse(altData);
+          data = evaluator.eval(altDataExpr, evalData);
+        }
 
-      final expression = Expression.parse(expr);
-      int result = evaluator.eval(expression, {
-        'data': data,
-        'floor': floor,
-        'ceil': ceil,
-        ...evalData,
-      });
-      final position = result.fitToHousePosition();
+        final expression = Expression.parse(expr);
+        int result = evaluator.eval(expression, {
+          'data': data,
+          'floor': floor,
+          'ceil': ceil,
+          ...evalData,
+        });
+        final position = result.fitToHousePosition();
 
-      final exportValue = formula[StarFormulaKey.export.name] as String?;
-      final bool export = exportValue == null ? false : exportValue.toBoolean();
+        final exportValue = formula[StarFormulaKey.export.name] as String?;
+        final bool export =
+            exportValue == null ? false : exportValue.toBoolean();
 
-      if (export) {
-        evalData[currentStarName.name] = position;
+        if (export) {
+          evalData[currentStarName.name] = position;
+        }
+
+        final strength = oldStar?.info.brightness[position];
+        // final star = Star(
+        //   name: currentStarName,
+        //   position: HousePosition.fromIndex(position),
+        // );
+        final newStar = oldStar?.copyWith(
+          position: HousePosition.fromIndex(position),
+          strength: strength,
+        );
+        if (newStar != null) {
+          stars[currentStarName] = newStar;
+        }
       }
-
-      final strength = oldStar?.info.brightness[position];
-      // final star = Star(
-      //   name: currentStarName,
-      //   position: HousePosition.fromIndex(position),
-      // );
-      final newStar = oldStar?.copyWith(
-        position: HousePosition.fromIndex(position),
-        strength: strength,
-      );
-      if (newStar != null) {
-        stars[currentStarName] = newStar;
-      }
+    } catch (e) {
+      print(e.toString());
+      print(currentStarName.name);
+      print(formulas);
     }
   }
 
   return stars;
+}
+
+StarIterator filterStars(StarIterator stars, Map<String, dynamic> options) {
+  final newStars = stars.cloneStars();
+  final data = {
+    StarFormulaKey.showAmSat: [StarName.amSat],
+    StarFormulaKey.showTuongTinhCircle: [
+      StarName.tuongTinh,
+      StarName.phanAn,
+      StarName.tueDich,
+      StarName.tucThan,
+      StarName.taiSat,
+      StarName.thienSat,
+      StarName.chiBoi,
+      StarName.nguyetSat,
+      StarName.vongThan,
+    ]
+  };
+  data.forEach((key, value) {
+    final optionValue =
+        options.entries.firstWhere((element) => element.key == key.name);
+    if (optionValue.value == 0) {
+      for (var star in value) {
+        newStars.remove(star);
+      }
+    }
+  });
+  return StarIterator(newStars);
 }

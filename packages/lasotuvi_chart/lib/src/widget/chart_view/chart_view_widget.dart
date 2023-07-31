@@ -129,7 +129,7 @@ class ChartViewWidget extends StatelessWidget {
                               context, chartHasTags!.source),
                           icon: const Icon(Icons.add_circle_outline),
                           label: Text(
-                            translate('addTag'),
+                            translate('addRemoveTag'),
                           ),
                         ),
                       ]),
@@ -223,17 +223,18 @@ class ChartViewWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         top: 0.0, right: 12.0, left: 12.0, bottom: 12.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        FilledButton(
-                            style: FilledButton.styleFrom(
-                                backgroundColor: colorScheme.tertiary),
-                            onPressed: () =>
-                                onSendRequest(chartHasTags!.source),
-                            child: Text(translate('sendCommentaryRequest'),
-                                style: TextStyle(
-                                  color: colorScheme.onTertiary,
-                                ))),
-                        const Spacer(),
+                        // FilledButton(
+                        //     style: FilledButton.styleFrom(
+                        //         backgroundColor: colorScheme.tertiary),
+                        //     onPressed: () =>
+                        //         onSendRequest(chartHasTags!.source),
+                        //     child: Text(translate('sendCommentaryRequest'),
+                        //         style: TextStyle(
+                        //           color: colorScheme.onTertiary,
+                        //         ))),
+                        // const Spacer(),
                         FilledButton(
                           onPressed: () =>
                               onGoToDetail(context, chartHasTags!.source),

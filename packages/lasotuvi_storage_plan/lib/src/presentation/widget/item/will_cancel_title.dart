@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_storage_plan/src/presentation/widget/timer/timer_title_widget.dart';
 
 import '../../style/storage_plan_style.dart';
 
@@ -13,7 +14,7 @@ class WillCancelTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(translate('msgWillCancelSubscription'),
-        style: style.willCancelTitle);
+    return TimerTitleWidget(translate('msgWillCancelSubscription'),
+        style: style);
   }
 }

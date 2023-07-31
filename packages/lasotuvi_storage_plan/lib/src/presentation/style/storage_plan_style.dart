@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class StoragePlanStyle {
   Color get iconColor => Colors.black87;
+  Color get activedRibbonBackground => Colors.green;
+  Color get activedRibbonTextColor => Colors.black87;
   double get energyIconSize => 20.0;
   // Color get textColor => Colors.black87;
   // Color get infoBackgroundColor => Colors.white12;
