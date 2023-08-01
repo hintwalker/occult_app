@@ -27,7 +27,7 @@ class _AllNoteListBodyState extends UserAuthDependedState<AllNoteListBody> {
               future: SortHelper.getSortOption(noteAndChartSortKey),
               child: (sortValue) => AllNoteAndChartListWidget(
                 uid: uid,
-                data: data,
+                data: data ?? [],
                 translate: translate,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 onOpenSyncStatus: ({

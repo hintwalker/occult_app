@@ -179,7 +179,7 @@ class ChartViewWidget extends StatelessWidget {
                           uid: uid,
                           colorScheme: colorScheme,
                           translate: translate,
-                          data: data,
+                          data: data ?? [],
                           onOpenSyncOptions: (_, note) =>
                               onOpenNoteSyncOptions(note),
                           onOpenNoteCreation: (context) =>

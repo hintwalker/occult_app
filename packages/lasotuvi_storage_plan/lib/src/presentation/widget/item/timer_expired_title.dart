@@ -14,6 +14,7 @@ class TimerExpiredTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TimerTitleWidget(translate('msgExpiredAt'), style: style);
+    return TimerTitleWidget(translate('msgExpiredAt'),
+        style: style.expiredTitle);
   }
 }

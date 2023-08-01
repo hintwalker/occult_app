@@ -15,6 +15,6 @@ class WillCancelTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TimerTitleWidget(translate('msgWillCancelSubscription'),
-        style: style);
+        style: style.willCancelTitle);
   }
 }

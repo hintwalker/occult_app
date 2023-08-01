@@ -32,7 +32,7 @@ class _AllCommentaryListBodyState
               future: SortHelper.getSortOption(commentaryAndRequestSortKey),
               child: (sortValue) => AllCommentaryAndRequestListWidget(
                 uid: uid,
-                data: data,
+                data: data ?? [],
                 translate: translate,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 onOpenSyncStatus: ({

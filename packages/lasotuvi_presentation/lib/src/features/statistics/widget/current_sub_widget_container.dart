@@ -68,112 +68,37 @@ class _CurrentSubState
                         navigateToPlanMarket: () => ref
                             .read(mainDrawerControllerProvider)
                             .setScreenId(DrawerIds.storagePlanMarket),
-                      )
-                      // BasicStreamBuilder(
-                      //     stream: ref
-                      //         .watch(currentSubControllerProvider)
-                      //         .dataStream(widget.uid),
-                      //     child: (data) {
-                      //       return Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.center,
-                      //         children: [
-                      //           if (data != null)
-                      //             StoragePlanInfoWidget(
-                      //               uid: widget.uid,
-                      //               planId: data.status ==
-                      //                           SubscriptionStatus.canceled ||
-                      //                       data.planId == StoragePlanIds.free
-                      //                   ? StoragePlanIds.free
-                      //                   : data.planId,
-                      //               style: style,
-                      //               translate: widget.translate,
-                      //               energyIcon: energyIcon,
-                      //               takeStoragePlanById:
-                      //                   ref.read(takeStoragePlanByIdProvider),
-                      //             ),
-                      //           if (data != null &&
-                      //               data.status != SubscriptionStatus.canceled &&
-                      //               data.planId != StoragePlanIds.free)
-                      //             TimerDisplayContainer(data,
-                      //                 translate: widget.translate,
-                      //                 style: ExpiredTimerStyle(),
-                      //                 controller: ref
-                      //                     .read(expiredTimerControllerProvider),
-                      //                 uid: widget.uid),
-                      //           if (data != null &&
-                      //               data.status == SubscriptionStatus.canceled)
-                      //             CanceledPreviousAlert(
-                      //               data,
-                      //               translate: widget.translate,
-                      //             )
-                      //         ],
-                      //       );
-                      //     }),
-                      ),
+                      )),
                 ),
               );
-    // StreamBuilder(
-    //     stream: ref.watch(currentSubControllerProvider).dataStream(widget.uid),
-    //     builder: (ctx, snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return const Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       } else if (snapshot.hasData) {
-    //         final data = snapshot.requireData;
-    //         return Column(
-    //           crossAxisAlignment: CrossAxisAlignment.center,
-    //           children: [
-    //             if (data != null)
-    //               StoragePlanInfoWidget(
-    //                 uid: widget.uid,
-    //                 planId: data.status == SubscriptionStatus.canceled
-    //                     ? StoragePlanIds.free
-    //                     : data.packageId,
-    //                 style: StoragePlanStyleImpl(),
-    //                 translate: widget.translate,
-    //                 energyIcon:
-    //                     EnergyIcon(color: LasotuviAppStyle.colorScheme.primary),
-    //                 takeStoragePlanById: ref.read(takeStoragePlanByIdProvider),
-    //               ),
-    //             if (data != null && data.status != SubscriptionStatus.canceled)
-    //               TimerDisplayContainer(data,
-    //                   translate: widget.translate,
-    //                   style: ExpiredTimerStyle(),
-    //                   controller: ref.read(expiredTimerControllerProvider),
-    //                   uid: widget.uid),
-    //             if (data != null && data.status == SubscriptionStatus.canceled)
-    //               CanceledPreviousAlert(
-    //                 data,
-    //                 translate: widget.translate,
-    //               )
-    //           ],
-    //         );
-    //       } else {
-    //         return const Center(child: SimpleErrorWidget());
-    //       }
-    //     });
   }
 
-  Future<bool> listenToExpired(Subscription subscription) async {
-    final result = await showDialog<ConfirmResult>(
-      context: context,
-      builder: (ctx) => ExtendsConfirmDialog(
-        subscription: subscription,
-        translate: translate,
-        energyIcon: energyIcon,
-        style: style,
-      ),
-    );
-    if (result == null) {
-      await ref
-          .read(storagePlanListControllerProvider)
-          .makeCurrentSubscriptionExpired(subscription);
-    } else if (result.yes) {
-      await ref
-          .read(storagePlanListControllerProvider)
-          .extendsCurrentSub(subscription);
-      return true;
+  Future<bool> listenToExpired(
+      Subscription subscription, bool openExtendsConfirm) async {
+    if (openExtendsConfirm) {
+      final result = await showDialog<ConfirmResult>(
+        context: context,
+        builder: (ctx) => ExtendsConfirmDialog(
+          subscription: subscription,
+          translate: translate,
+          energyIcon: energyIcon,
+          style: style,
+        ),
+      );
+      if (result == null) {
+        await ref
+            .read(storagePlanListControllerProvider)
+            .makeCurrentSubscriptionExpired(subscription);
+      } else if (result.yes) {
+        await ref
+            .read(storagePlanListControllerProvider)
+            .extendsCurrentSub(subscription);
+        return true;
+      } else {
+        await ref
+            .read(storagePlanListControllerProvider)
+            .makeCurrentSubscriptionExpired(subscription);
+      }
     } else {
       await ref
           .read(storagePlanListControllerProvider)

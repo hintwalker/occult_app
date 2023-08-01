@@ -7,11 +7,11 @@ class BasicFutureBuilder<T> extends StatelessWidget {
     super.key,
     required this.future,
     required this.child,
-    this.childIfNull = const Text(''),
+    // this.childIfNull = const Text(''),
   });
   final Future<T> future;
-  final Widget Function(T) child;
-  final Widget childIfNull;
+  final Widget Function(T?) child;
+  // final Widget childIfNull;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class BasicFutureBuilder<T> extends StatelessWidget {
             if (snapshot.hasData) {
               return child(snapshot.requireData);
             } else {
-              return childIfNull;
+              return child(null);
             }
           } else {
             return const Center(

@@ -34,55 +34,86 @@ class _BookReaderState extends State<BookReader> {
   Widget build(BuildContext context) {
     return BasicFutureBuilder(
       future: widget.controller.loadLocalFile(widget.uid, widget.item),
-      child: (localFile) => Column(
-        children: [
-          FutureBuilder(
-              future: controllerCompleter.future,
-              builder: (_, snapshot) {
-                if (snapshot.hasData) {
-                  return BookReaderControlWidget(
-                      controller: bookReaderControlController,
-                      onNextPage: (value) async {
-                        await snapshot.requireData.setPage(value);
-                      },
-                      onPreviousPage: (value) async {
-                        await snapshot.requireData.setPage(value);
-                      });
-                } else {
-                  return Container();
-                }
-              }),
-          const SizedBox(
-            height: 4.0,
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: widget.controller.getCurrentPage(
-                uid: widget.uid,
-                bookName: widget.item.name,
-              ),
-              builder: (_, snapshot) {
-                if (snapshot.hasData) {
-                  return PDFView(
-                    defaultPage: snapshot.requireData,
-                    filePath: localFile.path,
-                    enableSwipe: true,
-                    swipeHorizontal: true,
-                    autoSpacing: false,
-                    pageFling: false,
-                    onViewCreated: (event) =>
-                        controllerCompleter.complete(event),
-                    onPageChanged: onPageChanged,
-                    onRender: onRender,
-                  );
-                } else {
-                  return Container();
-                }
-              },
+      child: (localFile) => localFile == null
+          ? const SizedBox.shrink()
+          : Column(
+              children: [
+                BasicFutureBuilder(
+                  future: controllerCompleter.future,
+                  child: (pdfViewController) => pdfViewController == null
+                      ? const SizedBox.shrink()
+                      : BookReaderControlWidget(
+                          controller: bookReaderControlController,
+                          onNextPage: (value) async {
+                            await pdfViewController.setPage(value);
+                          },
+                          onPreviousPage: (value) async {
+                            await pdfViewController.setPage(value);
+                          }),
+                ),
+                // builder: (_, snapshot) {
+                //   if (snapshot.hasData) {
+                //     return BookReaderControlWidget(
+                //         controller: bookReaderControlController,
+                //         onNextPage: (value) async {
+                //           await snapshot.requireData.setPage(value);
+                //         },
+                //         onPreviousPage: (value) async {
+                //           await snapshot.requireData.setPage(value);
+                //         });
+                //   } else {
+                //     return Container();
+                //   }
+                // }
+                // ),
+                const SizedBox(
+                  height: 4.0,
+                ),
+                Expanded(
+                  child: BasicFutureBuilder(
+                      future: widget.controller.getCurrentPage(
+                        uid: widget.uid,
+                        bookName: widget.item.name,
+                      ),
+                      child: (currentPage) => PDFView(
+                            defaultPage: currentPage ?? 0,
+                            filePath: localFile.path,
+                            enableSwipe: true,
+                            swipeHorizontal: true,
+                            autoSpacing: false,
+                            pageFling: false,
+                            onViewCreated: (event) =>
+                                controllerCompleter.complete(event),
+                            onPageChanged: onPageChanged,
+                            onRender: onRender,
+                          )),
+                  // FutureBuilder(
+                  //   future: widget.controller.getCurrentPage(
+                  //     uid: widget.uid,
+                  //     bookName: widget.item.name,
+                  //   ),
+                  // builder: (_, snapshot) {
+                  //   if (snapshot.hasData) {
+                  //     return PDFView(
+                  //       defaultPage: snapshot.requireData,
+                  //       filePath: localFile.path,
+                  //       enableSwipe: true,
+                  //       swipeHorizontal: true,
+                  //       autoSpacing: false,
+                  //       pageFling: false,
+                  //       onViewCreated: (event) =>
+                  //           controllerCompleter.complete(event),
+                  //       onPageChanged: onPageChanged,
+                  //       onRender: onRender,
+                  //     );
+                  //   } else {
+                  //     return Container();
+                  //   }
+                  // },
+                  // ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 

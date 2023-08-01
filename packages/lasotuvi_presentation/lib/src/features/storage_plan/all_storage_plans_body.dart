@@ -69,76 +69,45 @@ class _AllStoragePlansBodyState
                 expiredTimerController:
                     ref.read(expiredTimerControllerProvider),
                 currentSubController: ref.watch(currentSubControllerProvider),
-                // onRegister: (_) => {},
               );
-    // StreamBuilder(
-    //     stream: ref.watch(currentSubControllerProvider).dataStream(uid),
-    //     builder: (ctx, snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return const Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       } else if (snapshot.hasData) {
-    //         final data = snapshot.requireData;
-    //         // final activedId = data == null
-    //         //     ? StoragePlanIds.free
-    //         //     : data.status == SubscriptionStatus.canceled
-    //         //         ? StoragePlanIds.free
-    //         //         : data.planId;
-    //         // final previousId = data?.planId;
-    //         final style = StoragePlanStyleImpl();
-
-    //         return LiveStoragePlanListWidget(
-    //           uid: uid,
-    //           // activedPlanId: activedId,
-    //           // previousPlanId: previousId,
-    //           controller: ref.watch(storagePlanListControllerProvider),
-    //           translate: translate,
-    //           energyIcon: EnergyIcon(
-    //               color: lightColorScheme.primary,
-    //               size: style.energyIconSize),
-    //           style: style,
-    //           expiredTimerController:
-    //               ref.read(expiredTimerControllerProvider),
-    //           currentSubController:
-    //               ref.watch(currentSubControllerProvider),
-    //           // onRegister: (_) => {},
-    //         );
-    //       } else {
-    //         return const Center(child: SimpleErrorWidget());
-    //       }
-    //     });
   }
 
   Future<void> signIn(WidgetRef ref) async {
     await ref.read(signInWithGoogleProvider)();
   }
 
-  Future<bool> listenToExpired(Subscription subscription) async {
-    final result = await showDialog<ConfirmResult>(
-      context: context,
-      builder: (ctx) => ExtendsConfirmDialog(
-        subscription: subscription,
-        translate: translate,
-        energyIcon: energyIcon,
-        style: style,
-      ),
-    );
-    if (result == null) {
-      await ref
-          .read(storagePlanListControllerProvider)
-          .makeCurrentSubscriptionExpired(subscription);
-    } else if (result.yes) {
-      final extendsResult = await ref
-          .read(storagePlanListControllerProvider)
-          .extendsCurrentSub(subscription);
-      if (extendsResult != ExtendsPlanActionResult.success) {
+  Future<bool> listenToExpired(
+      Subscription subscription, bool openExtendsConfirm) async {
+    if (openExtendsConfirm) {
+      final result = await showDialog<ConfirmResult>(
+        context: context,
+        builder: (ctx) => ExtendsConfirmDialog(
+          subscription: subscription,
+          translate: translate,
+          energyIcon: energyIcon,
+          style: style,
+        ),
+      );
+      if (result == null) {
         await ref
             .read(storagePlanListControllerProvider)
             .makeCurrentSubscriptionExpired(subscription);
-        return false;
+      } else if (result.yes) {
+        final extendsResult = await ref
+            .read(storagePlanListControllerProvider)
+            .extendsCurrentSub(subscription);
+        if (extendsResult != ExtendsPlanActionResult.success) {
+          await ref
+              .read(storagePlanListControllerProvider)
+              .makeCurrentSubscriptionExpired(subscription);
+          return false;
+        }
+        return true;
+      } else {
+        await ref
+            .read(storagePlanListControllerProvider)
+            .makeCurrentSubscriptionExpired(subscription);
       }
-      return true;
     } else {
       await ref
           .read(storagePlanListControllerProvider)

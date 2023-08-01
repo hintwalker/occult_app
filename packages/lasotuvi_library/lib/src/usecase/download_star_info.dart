@@ -4,6 +4,9 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 class DownloadStarInfo extends DownloadMarkdownFile {
   DownloadStarInfo(super.repository);
 }
+// class DownloadStarInfo extends DownloadFileToTemp {
+//   DownloadStarInfo(super.repository);
+// }
 // Future<String> downloadStarInfo(String starName) async {
 //   final storageRef = FirebaseStorage.instance.ref();
 //   final islandRef = storageRef.child('stars/$starName.md');

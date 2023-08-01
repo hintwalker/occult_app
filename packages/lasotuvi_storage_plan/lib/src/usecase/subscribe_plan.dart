@@ -24,12 +24,14 @@ class SubscribePlan {
     required this.takeCurrentUser,
     required this.takeCurrentSubscription,
     required this.insertSubscription,
+    required this.updateLastCanceledSubscription,
     required this.ableToPay,
     required this.pay,
   });
   final TakeCurrentUser takeCurrentUser;
   final TakeCurrentSubscription takeCurrentSubscription;
   final InsertSubscription insertSubscription;
+  final UpdateLastCanceledSubscription updateLastCanceledSubscription;
   final FutureOr<bool> Function(String uid, int value) pay;
   final FutureOr<bool> Function(String uid, int value) ableToPay;
   Future<SubscribeActionResult> call(StoragePlan plan) async {
@@ -64,6 +66,11 @@ class SubscribePlan {
       user.uidInFirestore,
       subscription,
     );
+    if (currentSub != null) {
+      if (currentSub.planId != StoragePlanIds.free) {
+        await updateLastCanceledSubscription(user.uidInFirestore, currentSub);
+      }
+    }
     return SubscribeActionResult.success;
   }
 

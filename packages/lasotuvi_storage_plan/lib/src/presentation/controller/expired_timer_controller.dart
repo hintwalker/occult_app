@@ -17,10 +17,12 @@ class ExpiredTimerController extends ChangeNotifier {
   // final ExtendsPlan extendsSubscription;
   // final CancelPlan cancelPlan;
 
-  Future<bool> Function(Subscription)? _listenerOnExpired;
+  Future<bool> Function(Subscription, bool openExtendsConfirm)?
+      _listenerOnExpired;
   void Function(Subscription)? _listenerOnCanceled;
 
-  void addListenerOnExpired(Future<bool> Function(Subscription) listener) {
+  void addListenerOnExpired(
+      Future<bool> Function(Subscription, bool openExtendsConfirm) listener) {
     _listenerOnExpired = listener;
   }
 
@@ -61,7 +63,12 @@ class ExpiredTimerController extends ChangeNotifier {
       return;
     } else if (isEndTime(duration)) {
       if (subscription.status != SubscriptionStatus.expired) {
-        final willExpired = await onExpired(subscription);
+        final openExtendsConfirm =
+            subscription.status != SubscriptionStatus.cancelExtend;
+        final willExpired = await onExpired(
+          subscription,
+          openExtendsConfirm,
+        );
         if (willExpired) {
           return;
         }
@@ -74,9 +81,21 @@ class ExpiredTimerController extends ChangeNotifier {
     expiredTimer = Timer.periodic(oneSec, (timer) async {
       if (isEndTime(duration)) {
         timer.cancel();
-        if (!await onExpired(subscription)) {
-          startCanceledTimer(subscription);
+        // if (!await onExpired(subscription)) {
+        //   startCanceledTimer(subscription);
+        // }
+        if (subscription.status != SubscriptionStatus.expired) {
+          final openExtendsConfirm =
+              subscription.status != SubscriptionStatus.cancelExtend;
+          final willExpired = await onExpired(
+            subscription,
+            openExtendsConfirm,
+          );
+          if (willExpired) {
+            return;
+          }
         }
+        startCanceledTimer(subscription);
       } else {
         // status = SubscriptionStatus.actived;
         setDuration(duration - oneSec);
@@ -146,9 +165,10 @@ class ExpiredTimerController extends ChangeNotifier {
     super.dispose();
   }
 
-  Future<bool> onExpired(Subscription subscription) async {
+  Future<bool> onExpired(
+      Subscription subscription, bool openExtendsConfirm) async {
     if (_listenerOnExpired != null) {
-      return await _listenerOnExpired!(subscription);
+      return await _listenerOnExpired!(subscription, openExtendsConfirm);
     }
     return false;
     // Cần kiểm tra status của subscription có tự động gia hạn không?

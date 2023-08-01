@@ -32,11 +32,11 @@ class LiveCurrentSubWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasicStreamBuilder(
         stream: currentSubController.onCurrentSub(uid),
-        child: (currentSubSnapshot) => AdvancedFutureBuilder(
+        child: (currentSubSnapshot) => BasicFutureBuilder(
               future: planController.lastCanceledSubscription(uid),
               child: (lastCanceled) {
                 final currentSub = currentSubSnapshot ?? Subscription.free();
-                return AdvancedFutureBuilder(
+                return BasicFutureBuilder(
                   future:
                       planController.takeCurrentPlan(uid, currentSub.planId),
                   child: (currentPlan) => CurrentSubWrapper(

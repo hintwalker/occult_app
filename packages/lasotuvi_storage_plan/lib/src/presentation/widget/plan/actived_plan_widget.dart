@@ -25,7 +25,7 @@ class ActivedPlanWidget extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(
                 color: style.activedRibbonBackground,
-                width: 2.0,
+                width: 4.0,
               ),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(12.0),

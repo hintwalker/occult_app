@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
 
 class TimerTitleWidget extends StatelessWidget {
   const TimerTitleWidget(
@@ -8,7 +7,7 @@ class TimerTitleWidget extends StatelessWidget {
     required this.style,
   });
   final String text;
-  final StoragePlanStyle style;
+  final TextStyle style;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class TimerTitleWidget extends StatelessWidget {
       children: [
         Text(
           text,
-          style: style.expiredTitle,
+          style: style,
         ),
       ],
     );

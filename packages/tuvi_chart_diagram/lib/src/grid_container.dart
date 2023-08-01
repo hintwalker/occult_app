@@ -36,19 +36,21 @@ class TuviChartContainer extends StatelessWidget {
     //     formulas: starFormulasTranDoan);
     return BasicFutureBuilder(
       future: controller.future(data),
-      child: (data) => Column(
-          // width: width,
-          // height: height,
-          children: [
-            Expanded(
-                child: TuviChartGrid(
-              data,
-              translate: translate,
-              colorScheme: colorScheme,
-              controller: controller,
-              humanBio: data.humanBio,
-            ))
-          ]),
+      child: (data) => data == null
+          ? const SizedBox.shrink()
+          : Column(
+              // width: width,
+              // height: height,
+              children: [
+                  Expanded(
+                      child: TuviChartGrid(
+                    data,
+                    translate: translate,
+                    colorScheme: colorScheme,
+                    controller: controller,
+                    humanBio: data.humanBio,
+                  ))
+                ]),
     );
     // return FutureBuilder(
     //   future: controller.future(data), //executeBuildChart(data),

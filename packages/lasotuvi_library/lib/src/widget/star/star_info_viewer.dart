@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_library/src/controller/star_info_viewer_controller.dart';
+import '../../controller/star_info_viewer_controller.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 import '../markdown_viewer.dart';
 
 class StarInfoViewer extends StatefulWidget {
@@ -22,22 +23,28 @@ class StarInfoViewer extends StatefulWidget {
 class _StarInfoViewerState extends State<StarInfoViewer> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: widget.controller
-            .download(uid: widget.uid, starName: widget.starName),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasData) {
-            return MarkdownViewer(snapshot.requireData);
-            // return Markdown(
-            //   data: snapshot.requireData,
-            //   styleSheet: MarkdownStyleSheet.fromTheme(themeData),
-            //   styleSheetTheme: MarkdownStyleSheetBaseTheme.material,
-            // );
-          } else {
-            return const Text('!');
-          }
-        });
+    return BasicFutureBuilder(
+      future: widget.controller
+          .download(uid: widget.uid, starName: widget.starName),
+      child: (data) =>
+          data == null ? const ErrorTextWidget() : MarkdownViewer(data),
+    );
+    // return FutureBuilder(
+    //     future: widget.controller
+    //         .download(uid: widget.uid, starName: widget.starName),
+    //     builder: (ctx, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.waiting) {
+    //         return const Center(child: CircularProgressIndicator());
+    //       } else if (snapshot.hasData) {
+    //         return MarkdownViewer(snapshot.requireData);
+    //         // return Markdown(
+    //         //   data: snapshot.requireData,
+    //         //   styleSheet: MarkdownStyleSheet.fromTheme(themeData),
+    //         //   styleSheetTheme: MarkdownStyleSheetBaseTheme.material,
+    //         // );
+    //       } else {
+    //         return const Text('!');
+    //       }
+    //     });
   }
 }

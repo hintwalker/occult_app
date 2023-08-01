@@ -1,6 +1,5 @@
 library tauari_ui;
 
-export 'src/widget/builder/advanced_future_builder.dart';
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 

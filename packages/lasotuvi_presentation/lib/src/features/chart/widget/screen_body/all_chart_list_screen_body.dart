@@ -33,7 +33,7 @@ class _AllChartBodyState extends UserAuthDependedState<AllChartListScreenBody> {
             child: (data) => BasicFutureBuilder<SortValue?>(
               future: SortHelper.getSortOption(chartSortKey),
               child: (sortValue) => AllChartListWidget(
-                data,
+                data ?? [],
                 uid: uid,
                 slidable: false,
                 translate: translate,

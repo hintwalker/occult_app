@@ -9,7 +9,7 @@ class BasicStreamBuilder<T> extends StatelessWidget {
     this.childIfNull = const Text(''),
   });
   final Stream<T> stream;
-  final Widget Function(T) child;
+  final Widget Function(T?) child;
   final Widget childIfNull;
 
   @override
@@ -25,7 +25,7 @@ class BasicStreamBuilder<T> extends StatelessWidget {
             if (snapshot.hasData) {
               return child(snapshot.requireData);
             } else {
-              return childIfNull;
+              return child(null);
             }
             // }
           } else {

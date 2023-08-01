@@ -21,7 +21,7 @@ class StarListModalScreen extends ConsumerWidget {
         child: (data) => BasicFutureBuilder(
           future: SortHelper.getSortOption(starSortKey),
           child: (sortValue) => StarListWidget(
-            data: data,
+            data: data ?? [],
             onItemTap: (item) =>
                 LibraryNavigation.showStarInfoViewer(context, item),
             translate: translate,

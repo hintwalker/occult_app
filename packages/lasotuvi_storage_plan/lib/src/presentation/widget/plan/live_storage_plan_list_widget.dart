@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../entity/storage_plan_ids.dart';
+import '../plan/plan_warning_canceled.dart';
+import '../plan/plan_warning_expired.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-import 'package:tauari_utils/tauari_utils.dart';
+// import 'package:tauari_utils/tauari_utils.dart';
 
 // import '../../entity/storage_plan.dart';
 import '../../controller/expired_timer_controller.dart';
@@ -37,62 +40,106 @@ class LiveStoragePlanListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return BasicFutureBuilder(
         future: controller.allPlans(uid),
-        builder: (ctx, plans) {
-          if (plans.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (plans.hasData) {
+        child: (plans) {
+          if (plans == null) {
+            return const ErrorTextWidget();
+          } else {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: StreamBuilder(
-                  stream: currentSubController.onCurrentSub(uid),
-                  builder: (ctx, currentSub) {
-                    if (currentSub.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (currentSub.hasData) {
-                      return BasicFutureBuilder(
-                          future: controller.lastCanceledSubscription.call(uid),
-                          child: (lastCanceled) => StoragePlanList(
-                                plans: plans.requireData,
-                                // onRegister: onRegister,
+              padding: const EdgeInsets.symmetric(horizontal: 0.0),
+              child: BasicStreamBuilder(
+                stream: currentSubController.onCurrentSub(uid),
+                child: (currentSub) => BasicFutureBuilder(
+                  future: controller.lastCanceledSubscription.call(uid),
+                  child: (lastCanceled) => Column(
+                    children: [
+                      if (currentSub != null)
+                        currentSub.status == SubscriptionStatus.expired
+                            ? PlanWariningExpired(
                                 translate: translate,
                                 style: style,
-                                energyIcon: energyIcon,
-                                expiredTimerController: expiredTimerController,
-                                // activedPlanId: activedPlanId,
-                                // previousPlanId: previousPlanId,
-                                subscription: currentSub.requireData ??
-                                    Subscription.free(),
-                                // uid: uid,
-                                controller: controller,
-                                lastCanceled: lastCanceled,
-                              ),
-                          childIfNull: StoragePlanList(
-                            plans: plans.requireData,
-                            // onRegister: onRegister,
-                            translate: translate,
-                            style: style,
-                            energyIcon: energyIcon,
-                            expiredTimerController: expiredTimerController,
-                            // activedPlanId: activedPlanId,
-                            // previousPlanId: previousPlanId,
-                            subscription:
-                                currentSub.requireData ?? Subscription.free(),
-                            // uid: uid,
-                            controller: controller,
-                            lastCanceled: null,
-                          ));
-                    } else {
-                      return const Center(child: SimpleErrorWidget());
-                    }
-                  }),
-            );
-          } else {
-            return const Center(
-              child: Text('!'),
+                                canceledDate: currentSub.expiredDate
+                                    .add(TimeConfig.cancelDuration),
+                                onExtendsButtonTap: () =>
+                                    controller.extendsPlan(currentSub))
+                            : lastCanceled != null
+                                ? currentSub.planId == StoragePlanIds.free
+                                    ? PlanWariningCanceled(
+                                        translate: translate,
+                                        style: style,
+                                        canceledDate: lastCanceled.expiredDate
+                                            .add(TimeConfig.cancelDuration),
+                                      )
+                                    : const SizedBox(
+                                        height: 4.0,
+                                      )
+                                : const SizedBox(
+                                    height: 4.0,
+                                  ),
+                      Expanded(
+                        child: StoragePlanList(
+                          plans: plans,
+                          // onRegister: onRegister,
+                          translate: translate,
+                          style: style,
+                          energyIcon: energyIcon,
+                          expiredTimerController: expiredTimerController,
+                          // activedPlanId: activedPlanId,
+                          // previousPlanId: previousPlanId,
+                          subscription: currentSub ?? Subscription.free(),
+                          // uid: uid,
+                          controller: controller,
+                          lastCanceled: lastCanceled,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // child: StreamBuilder(
+                //     stream: currentSubController.onCurrentSub(uid),
+                //     builder: (ctx, currentSub) {
+                //       if (currentSub.connectionState == ConnectionState.waiting) {
+                //         return const CircularProgressIndicator();
+                //       } else if (currentSub.hasData) {
+                //         return AdvancedFutureBuilder(
+                //           future: controller.lastCanceledSubscription.call(uid),
+                //           child: (lastCanceled) => StoragePlanList(
+                //             plans: plans.requireData,
+                //             // onRegister: onRegister,
+                //             translate: translate,
+                //             style: style,
+                //             energyIcon: energyIcon,
+                //             expiredTimerController: expiredTimerController,
+                //             // activedPlanId: activedPlanId,
+                //             // previousPlanId: previousPlanId,
+                //             subscription:
+                //                 currentSub.requireData ?? Subscription.free(),
+                //             // uid: uid,
+                //             controller: controller,
+                //             lastCanceled: lastCanceled,
+                //           ),
+                //           // childIfNull: StoragePlanList(
+                //           //   plans: plans.requireData,
+                //           //   // onRegister: onRegister,
+                //           //   translate: translate,
+                //           //   style: style,
+                //           //   energyIcon: energyIcon,
+                //           //   expiredTimerController: expiredTimerController,
+                //           //   // activedPlanId: activedPlanId,
+                //           //   // previousPlanId: previousPlanId,
+                //           //   subscription:
+                //           //       currentSub.requireData ?? Subscription.free(),
+                //           //   // uid: uid,
+                //           //   controller: controller,
+                //           //   lastCanceled: null,
+                //           // )
+                //         );
+                //       } else {
+                //         return const Center(child: SimpleErrorWidget());
+                //       }
+                //     }),
+              ),
             );
           }
         });

@@ -43,7 +43,8 @@ class ExtendsPlan {
       user.uidInFirestore,
       subscription
           .extendExpiredDate(TimeConfig.expiredDuration)
-          .addToTotal(subscription.energy),
+          .addToTotal(subscription.energy)
+          .copyWith(status: SubscriptionStatus.actived),
     );
 
     return ExtendsPlanActionResult.success;

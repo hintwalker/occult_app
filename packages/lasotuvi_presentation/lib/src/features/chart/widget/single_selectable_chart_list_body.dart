@@ -34,7 +34,7 @@ class _SingleSelectableChartListBodyState
             child: BasicStreamBuilder(
               stream: ref.watch(chartListControllerProvider).stream(uid),
               child: (data) => SingleSelectableChartListWidget(
-                data,
+                data ?? [],
                 uid: uid,
                 translate: translate,
                 colorScheme: LasotuviAppStyle.colorScheme,

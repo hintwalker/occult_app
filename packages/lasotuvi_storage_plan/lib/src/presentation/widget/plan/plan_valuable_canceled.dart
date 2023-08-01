@@ -57,7 +57,7 @@ class PlanValuableCanceled extends StatelessWidget {
             ? const SizedBox.shrink()
             : TimerTitleWidget(
                 translate('cancledAt'),
-                style: style,
+                style: style.canceledTitle,
               ),
         timerValue: lastCanceled == null
             ? const SizedBox.shrink()

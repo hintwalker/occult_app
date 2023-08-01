@@ -14,6 +14,7 @@ class TimerUsageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TimerTitleWidget(translate('msgTimerUsage'), style: style);
+    return TimerTitleWidget(translate('msgTimerUsage'),
+        style: style.nextPaymentTitle);
   }
 }

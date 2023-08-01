@@ -26,7 +26,7 @@ class _AllTagListBodyState extends UserAuthDependedState<AllTagListBody> {
             child: (data) => BasicFutureBuilder(
               future: SortHelper.getSortOption(tagSortKey),
               child: (sortValue) => AllTagListWidget(
-                data: data,
+                data: data ?? [],
                 uid: uid,
                 translate: translate,
                 colorScheme: LasotuviAppStyle.colorScheme,

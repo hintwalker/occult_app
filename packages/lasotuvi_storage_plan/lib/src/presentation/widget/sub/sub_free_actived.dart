@@ -42,7 +42,7 @@ class SubFreeActived extends StatelessWidget {
             ? const SizedBox.shrink()
             : TimerTitleWidget(
                 translate('lastPackageCanceledAt'),
-                style: style,
+                style: style.canceledTitle,
               ),
         lastCanceled == null
             ? const SizedBox.shrink()

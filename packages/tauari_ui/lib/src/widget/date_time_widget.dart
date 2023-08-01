@@ -15,6 +15,6 @@ class DateTimeWidget extends StatelessWidget {
     final offsetString = offset >= 0 ? '+$offset' : '$offset';
     return Text(
         style: style,
-        '${dateTime.day}/${dateTime.month}/${dateTime.year} | ${dateTime.hour}:${dateTime.minute}:${dateTime.second} UTC$offsetString');
+        '${dateTime.day}-${dateTime.month}-${dateTime.year} | ${dateTime.hour}:${dateTime.minute}:${dateTime.second} UTC$offsetString');
   }
 }

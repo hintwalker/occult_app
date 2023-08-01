@@ -48,7 +48,7 @@ class PlanItemWidgetWithTimer extends StatelessWidget {
               ),
               if (cancelExtendsText != null) cancelExtendsText!,
               const SizedBox(
-                height: 12.0,
+                height: 8.0,
               ),
               const Divider(
                 height: 1.0,

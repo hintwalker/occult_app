@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:tauari_utils/tauari_utils.dart';
 
 import '../../repository/remote_file_repository.dart';
@@ -20,7 +21,15 @@ class DownloadMarkdownFile {
         maxSize: maxSize,
       );
       final stringData = convertUint8ListToString(data);
-      await existFile.writeAsString(stringData);
+      try {
+        await existFile.create(recursive: true);
+        await existFile.writeAsString(stringData);
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+      }
+
       return stringData;
     }
   }

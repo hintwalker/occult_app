@@ -109,7 +109,7 @@ class Subscription implements CloudGetable, Dumpable {
   int get hashCode => Object.hash(id, expiredDate);
 
   Subscription extendExpiredDate(Duration duration) {
-    return copyWith(expiredDate: expiredDate.add(duration));
+    return copyWith(expiredDate: DateTime.now().add(duration));
   }
 
   Subscription addToTotal(int value) {

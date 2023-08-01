@@ -44,7 +44,7 @@ class _CheckBoxChartListBodyState
               child: (chartHasTags) => BasicFutureBuilder(
                 future: SortHelper.getSortOption(chartSortKey),
                 child: (sortValue) => CheckBoxChartListWidget(
-                  chartHasTags,
+                  chartHasTags ?? [],
                   uid: uid,
                   tagId: widget.tag.id,
                   translate: translate,

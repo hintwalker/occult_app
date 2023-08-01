@@ -19,7 +19,7 @@ class BookListModalScreen extends ConsumerWidget {
       child: BasicFutureBuilder(
         future: ref.watch(bookListControllerProvider).allData(),
         child: (data) => BookListWidget(
-          data: data,
+          data: data ?? [],
           onItemTap: (item) => LibraryNavigation.showBookReader(context, item),
           translate: translate,
         ),
