@@ -1,6 +1,7 @@
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 
+import '../../old_version_data/structure/old_tag_columns.dart';
 import '../column_tag.dart';
 
 class Tag extends SyncableEntity<Tag> {
@@ -35,6 +36,23 @@ class Tag extends SyncableEntity<Tag> {
         modified: map[columnModified] == null
             ? LocalLocked.unlocked
             : map[columnModified] as int);
+  }
+
+  static Tag fromOldVersion(Map<String, Object?> map) {
+    return Tag(
+      map[OldTagColumns.createdDate] as int,
+      title: map[OldTagColumns.name] == null
+          ? ''
+          : map[OldTagColumns.name] as String,
+      subTitle: map[OldTagColumns.description] == null
+          ? ''
+          : map[OldTagColumns.description] as String,
+      created: DateTime.fromMillisecondsSinceEpoch(
+          map[OldTagColumns.createdDate] as int),
+      storageState: null,
+      syncStatus: null,
+      modified: LocalLocked.unlocked,
+    );
   }
 
   @override

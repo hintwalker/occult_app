@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
+import 'package:tauari_translate/tauari_translate.dart';
 
 class MarketBody extends ConsumerStatefulWidget {
   const MarketBody({super.key});
@@ -37,7 +38,7 @@ class _EnergyMarketScreenBodyState extends ConsumerState<MarketBody> {
                     products: ref.watch(energyStoreControllerProvider
                         .select((value) => value.products)),
                     colorScheme: LasotuviAppStyle.colorScheme,
-                    translate: (text) => text,
+                    translate: translate,
                     onItemTap: (product) async {
                       await ref
                           .read(energyStoreControllerProvider.notifier)

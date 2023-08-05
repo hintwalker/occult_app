@@ -4,6 +4,7 @@ import 'package:lasotuvi_library/lasotuvi_library.dart';
 import 'package:lasotuvi_presentation/src/features/auth/user_auth_depended_state.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
+import 'package:tauari_auth_widget/tauari_auth_widget.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
@@ -25,11 +26,19 @@ class _BookReaderModalScreenState
       colorScheme: LasotuviAppStyle.colorScheme,
       child: findingUid
           ? const LoadingWidget()
-          : BookReader(
-              uid: uid!,
-              controller: ref.watch(bookReaderControllerProvider),
-              item: widget.item,
-            ),
+          : uid == null
+              ? Center(
+                  child: GoogleSignInButton(
+                      onTap: () => ref.read(signInWithGoogleProvider).call(),
+                      title: translate('signIn')),
+                )
+              : BookReaderContainer(
+                  uid: uid!,
+                  controller: ref.watch(bookReaderControllerProvider),
+                  item: widget.item,
+                  colorScheme: LasotuviAppStyle.colorScheme,
+                  translate: translate,
+                ),
     );
   }
 }

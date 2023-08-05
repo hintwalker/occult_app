@@ -283,7 +283,7 @@ class SyncableRelRepositoryImpl<
       String? uid,
       SyncableEntityCarrier<L, R> Function(L left, Iterable<R> rights)
           onCreateItem) {
-    return leftRepository
+    final result = leftRepository
         .onEveryWhere(uid)
         // .asyncMap((event) async {
         //   final rightsFuture = event.map((left) => rightData(uid, left.id));
@@ -299,6 +299,7 @@ class SyncableRelRepositoryImpl<
                 return onCreateItem(left, rights);
               },
             )));
+    return result;
     // return onCreateItem(left, rights);
   }
 

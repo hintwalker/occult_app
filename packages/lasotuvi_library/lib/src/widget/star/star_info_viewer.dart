@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 import '../../controller/star_info_viewer_controller.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import '../markdown_viewer.dart';
@@ -10,10 +11,12 @@ class StarInfoViewer extends StatefulWidget {
     required this.uid,
     required this.colorScheme,
     required this.controller,
+    required this.translate,
   });
   final String uid;
   final String starName;
   final ColorScheme colorScheme;
+  final String Function(String) translate;
   final StarInfoViewerController controller;
 
   @override
@@ -21,14 +24,47 @@ class StarInfoViewer extends StatefulWidget {
 }
 
 class _StarInfoViewerState extends State<StarInfoViewer> {
+  bool? connected;
+
+  @override
+  void initState() {
+    super.initState();
+    checkConnection();
+  }
+
+  void checkConnection() async {
+    final result = await availableNetwork();
+    setState(() {
+      connected = result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BasicFutureBuilder(
-      future: widget.controller
-          .download(uid: widget.uid, starName: widget.starName),
-      child: (data) =>
-          data == null ? const ErrorTextWidget() : MarkdownViewer(data),
-    );
+    return connected == null
+        ? const LoadingWidget()
+        : connected == false
+            ? BasicFutureBuilder(
+                future: widget.controller.loadFromLocal(
+                  uid: widget.uid,
+                  starName: widget.starName,
+                ),
+                child: (data) => data == null || data.isEmpty
+                    ? NoConnectionErrorText(
+                        translate: widget.translate,
+                        textColor: widget.colorScheme.error,
+                      )
+                    : MarkdownViewer(data))
+            : BasicFutureBuilder(
+                future: widget.controller
+                    .download(uid: widget.uid, starName: widget.starName),
+                child: (data) => data == null
+                    ? DownloadFailedErrorText(
+                        translate: widget.translate,
+                        textColor: widget.colorScheme.error,
+                      )
+                    : MarkdownViewer(data),
+              );
     // return FutureBuilder(
     //     future: widget.controller
     //         .download(uid: widget.uid, starName: widget.starName),

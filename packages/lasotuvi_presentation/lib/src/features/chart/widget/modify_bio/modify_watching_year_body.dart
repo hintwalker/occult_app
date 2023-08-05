@@ -28,17 +28,17 @@ class _ModifyWatchingYearBodyState
   @override
   Widget build(BuildContext context) {
     final processing = ref.watch(modifyChartControllerProvider);
-    return findingUid || processing
-        ? const LoadingWidget()
-        : BasicStreamBuilder(
-            stream: ref.read(chartDetailControllerProvider).stream(
-                  uid: uid,
-                  docId: widget.chartId,
-                  syncStatus: widget.syncStatus,
-                ),
-            child: (data) => ModifyWatchingYearModal(
-              title: translate('modifyWatchingYear'),
-              child: ModifyWatchingYearWidget(
+    return ModifyWatchingYearModal(
+      title: translate('modifyWatchingYear'),
+      child: findingUid || processing
+          ? const LoadingWidget()
+          : BasicStreamBuilder(
+              stream: ref.watch(chartDetailControllerProvider).stream(
+                    uid: uid,
+                    docId: widget.chartId,
+                    syncStatus: widget.syncStatus,
+                  ),
+              child: (data) => ModifyWatchingYearWidget(
                 data,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 translate: translate,
@@ -52,6 +52,6 @@ class _ModifyWatchingYearBodyState
                     ),
               ),
             ),
-          );
+    );
   }
 }

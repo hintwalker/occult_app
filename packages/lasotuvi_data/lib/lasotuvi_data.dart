@@ -70,3 +70,5 @@ export 'src/db/table_names.dart';
 export 'src/db/on_db_created.dart';
 export 'src/db/on_db_configure.dart';
 export 'src/db/database_names.dart';
+export 'src/db/table_names_old.dart';
+export 'src/db/migrate_old_data.dart';

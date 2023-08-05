@@ -4,6 +4,5 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 
 import '../data_source/firebase_chart_data_source.dart';
 
-final cloudChartRepositoryProvider = Provider.autoDispose<CloudChartRepository>(
-    (ref) =>
-        CloudChartRepositoryImpl(ref.read(firebaseChartDataSourceProvider)));
+final cloudChartRepositoryProvider = Provider<CloudChartRepository>((ref) =>
+    CloudChartRepositoryImpl(ref.watch(firebaseChartDataSourceProvider)));

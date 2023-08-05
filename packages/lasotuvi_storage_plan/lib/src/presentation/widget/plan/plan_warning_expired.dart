@@ -25,32 +25,34 @@ class PlanWariningExpired extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Text(
-                  translate('allOverloadDataWillBeDeletedAt'),
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.white,
+            Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    translate('allOverloadDataWillBeDeletedAt'),
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                DateTimeWidget(
-                  canceledDate,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.white,
+                  DateTimeWidget(
+                    canceledDate,
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                ExtendsPlanButton(
-                    translate: translate, onTap: onExtendsButtonTap),
-              ],
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  ExtendsPlanButton(
+                      translate: translate, onTap: onExtendsButtonTap),
+                ],
+              ),
             ),
           ],
         ));

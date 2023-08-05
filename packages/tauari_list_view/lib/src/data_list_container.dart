@@ -12,7 +12,10 @@ class DataListContainer<U, V> extends StatefulWidget {
     required this.groupBy,
     required this.groupComparator,
     required this.groupSeperatorBuilder,
+    required this.colorScheme,
+    required this.translate,
     this.useStickyGroupSeparators = false,
+
     // this.order = ListOrder.asc,
     this.sort = true,
     this.seperator,
@@ -28,6 +31,8 @@ class DataListContainer<U, V> extends StatefulWidget {
   // final ListOrder order;
   final bool sort;
   final Widget? seperator;
+  final String Function(String) translate;
+  final ColorScheme colorScheme;
 
   @override
   State<DataListContainer<U, V>> createState() =>
@@ -62,24 +67,57 @@ class _DataListContainerState<U, V> extends State<DataListContainer<U, V>> {
 
   @override
   Widget build(BuildContext context) {
-    return DataListBodyWidget<U, V, U>(
-      data: widget.controller.foundData,
-      itemBuilder: (context, item) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-        child: DataListItem<U>(
-          item,
-          buttons: widget.actionButtons,
-          slidable: widget.actionButtons.isNotEmpty,
-          child: widget.itemBuilder(item),
+    return Column(
+      children: [
+        if (!(widget.controller.sortOption == null ||
+            widget.controller.sortOption!.name.isEmpty))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                decoration: BoxDecoration(
+                    border: Border.symmetric(
+                        horizontal: BorderSide(
+                            color:
+                                widget.colorScheme.outline.withOpacity(0.6)))),
+                child: Text(
+                  '${widget.translate('sortBy')}: ${widget.translate(widget.controller.sortOption!.name)}',
+                  style: TextStyle(
+                      color: widget.colorScheme.outline.withOpacity(0.6),
+                      fontStyle: FontStyle.italic),
+                ),
+              ),
+            ],
+          ),
+        if (!(widget.controller.sortOption == null ||
+            widget.controller.sortOption!.name.isEmpty))
+          const SizedBox(
+            height: 4.0,
+          ),
+        Expanded(
+          child: DataListBodyWidget<U, V, U>(
+            data: widget.controller.foundData,
+            itemBuilder: (context, item) => Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: DataListItem<U>(
+                item,
+                buttons: widget.actionButtons,
+                slidable: widget.actionButtons.isNotEmpty,
+                child: widget.itemBuilder(item),
+              ),
+            ),
+            groupBy: widget.groupBy,
+            groupComparator: widget.groupComparator,
+            groupSeperatorBuilder: widget.groupSeperatorBuilder,
+            sort: widget.sort,
+            // order: order,
+            useStickyGroupSeparators: widget.useStickyGroupSeparators,
+            seperator: widget.seperator,
+          ),
         ),
-      ),
-      groupBy: widget.groupBy,
-      groupComparator: widget.groupComparator,
-      groupSeperatorBuilder: widget.groupSeperatorBuilder,
-      sort: widget.sort,
-      // order: order,
-      useStickyGroupSeparators: widget.useStickyGroupSeparators,
-      seperator: widget.seperator,
+      ],
     );
   }
 }

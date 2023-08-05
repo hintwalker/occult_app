@@ -4,8 +4,10 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 class FirebaseStorageService extends RemoteFileService {
   const FirebaseStorageService(this.firebaseStorage);
@@ -83,27 +85,57 @@ class FirebaseStorageService extends RemoteFileService {
     required Function(int count, int total) onReceiveProgress,
     required Function(File tempFile) onSuccess,
   }) async {
-    final tempDir = await getTemporaryDirectory();
-    final tempPath = '${tempDir.path}/$uid/$fileName';
+    // final tempDir = await getTemporaryDirectory();
+    // final tempPath = '${tempDir.path}/$uid/$fileName';
     final dio = Dio();
-    final tempFile = File(tempPath);
-    if (await tempFile.exists()) {
-      if (await tempFile.length() == 0) {
+    final file = await tempFile(uid: uid, name: fileName); // File(tempPath);
+    if (await file.exists()) {
+      if (await file.length() == 0) {
         await dio.download(
           url,
-          tempPath,
+          file.path,
           onReceiveProgress: onReceiveProgress,
         );
       } else {
-        onSuccess(tempFile);
+        onSuccess(file);
       }
     } else {
       await dio.download(
         url,
-        tempPath,
+        file.path,
         onReceiveProgress: onReceiveProgress,
       );
     }
-    return tempFile;
+    return file;
+  }
+
+  @override
+  Future<void> uploadFile(File file, String destination) async {
+    final fileRef = firebaseStorage.ref().child(destination);
+    final compressed = await FlutterImageCompress.compressWithFile(file.path,
+        minHeight: 216, minWidth: 216, quality: 10);
+    if (compressed != null) {
+      fileRef.putData(compressed);
+    }
+  }
+
+  @override
+  Future<void> deleteFile(String filePath) async {
+    final fileRef = firebaseStorage.ref().child(filePath);
+    await fileRef.delete();
+  }
+
+  @override
+  Future<void> downloadFile({
+    required String uid,
+    required String localFilePath,
+    required String remoteFilePath,
+  }) async {
+    final file = File(localFilePath);
+    if (await file.exists()) {
+      return;
+    }
+    final fileRef = firebaseStorage.ref().child(remoteFilePath);
+    fileRef.writeToFile(file);
   }
 }

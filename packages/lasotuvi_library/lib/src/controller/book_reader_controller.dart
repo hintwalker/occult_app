@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 import '../box/library_box_name.dart';
 
 import '../entity/book_item.dart';
@@ -12,7 +13,16 @@ class BookReaderController extends ChangeNotifier {
   final DownloadBookToLocal downloadBookToLocal;
   bool downloadSuccess = false;
 
-  Future<File> loadLocalFile(String uid, BookItem item) async {
+  Future<File?> loadLocalBook(String uid, BookItem item) async {
+    final file = await tempFile(uid: uid, name: '${item.name}.pdf');
+    if (await file.exists()) {
+      return file;
+    } else {
+      return null;
+    }
+  }
+
+  Future<File> downloadBook(String uid, BookItem item) async {
     return await downloadBookToLocal.call(
       uid: uid,
       fileName: '${item.name}.pdf',

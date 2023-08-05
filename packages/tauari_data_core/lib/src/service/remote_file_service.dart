@@ -20,4 +20,11 @@ abstract class RemoteFileService {
       required String url,
       required Function(int count, int total) onReceiveProgress,
       required Function(File tempFile) onSuccess});
+  Future<void> uploadFile(File file, String destination);
+  Future<void> deleteFile(String filePath);
+  Future<void> downloadFile({
+    required String uid,
+    required String localFilePath,
+    required String remoteFilePath,
+  });
 }

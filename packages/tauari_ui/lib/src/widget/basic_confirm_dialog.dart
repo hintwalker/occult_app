@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'simple_dialog_header.dart';
 
@@ -23,7 +24,8 @@ class BasicConfirmDialog extends StatelessWidget {
       title: SimpleDialogHeader(title),
       titlePadding:
           const EdgeInsets.only(left: 12.0, top: 8.0, right: 8.0, bottom: 0.0),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       children: [
         ...children,
         const SizedBox(
@@ -51,14 +53,17 @@ class BasicConfirmDialog extends StatelessWidget {
             if (noButtonText != null)
               Expanded(
                 child: TextButton(
-                    onPressed: () => Navigator.pop(
-                          context,
-                          const ConfirmResult(
-                            cancel: false,
-                            no: true,
-                            yes: false,
-                          ),
-                        ),
+                    onPressed: () => SchedulerBinding.instance
+                            .addPostFrameCallback((timeStamp) {
+                          Navigator.pop(
+                            context,
+                            const ConfirmResult(
+                              cancel: false,
+                              no: true,
+                              yes: false,
+                            ),
+                          );
+                        }),
                     child: Text(noButtonText!)),
               ),
             Expanded(

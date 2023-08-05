@@ -49,6 +49,8 @@ class AllTagListWidget extends StatelessWidget {
       onSearch: controller.runFilter,
       child: DataListContainer<Tag, SimpleTextGroup>(
         data: data,
+        colorScheme: colorScheme,
+        translate: translate,
         // order: controller.sortOption?.order ?? ListOrder.asc,
         controller: controller,
         groupBy: (e) => groupTagsBy(

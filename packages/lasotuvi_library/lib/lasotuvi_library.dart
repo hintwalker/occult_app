@@ -11,6 +11,7 @@ export 'src/usecase/take_all_book_list.dart';
 export 'src/usecase/download_book_to_local.dart';
 export 'src/usecase/take_all_star_list.dart';
 export 'src/usecase/download_star_info.dart';
+export 'src/usecase/load_star_info_from_local.dart';
 
 export 'src/widget/library_widget.dart';
 export 'src/widget/markdown_viewer.dart';
@@ -18,7 +19,7 @@ export 'src/widget/markdown_viewer.dart';
 export 'src/widget/book/book_item_widget.dart';
 export 'src/widget/book/book_reader_modal.dart';
 export 'src/widget/book/book_list_widget.dart';
-export 'src/widget/book/book_reader.dart';
+export 'src/widget/book/book_reader_container.dart';
 export 'src/widget/book/book_list_modal.dart';
 
 export 'src/widget/star/star_info_modal.dart';

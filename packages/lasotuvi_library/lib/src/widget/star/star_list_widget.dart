@@ -42,6 +42,8 @@ class StarListWidget extends StatelessWidget {
       sortOptions: starSortOptions(translate),
       child: DataListContainer<StarItem, SimpleTextGroup>(
         data: data,
+        colorScheme: colorScheme,
+        translate: translate,
         controller: controller,
         itemBuilder: (item) => StarItemWidget(
           item,

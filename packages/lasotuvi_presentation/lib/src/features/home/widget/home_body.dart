@@ -8,6 +8,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:lasotuvi_tag/lasotuvi_tag.dart';
 import 'package:tauari_translate/tauari_translate.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 
 import '../../chart/navigation/chart_navigation.dart';
 // import '../../commentary/navigation/commentary_navigation.dart';
@@ -33,190 +34,195 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
   final controller = HomeController();
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CurrentSubWidgetContainer(
-                uid: uid,
-                translate: translate,
-              ),
-              SizedBox(
-                height: GeneralStyle.topTenBannerHeight,
-                child: TopTenChartsBanner(
-                  controller: ref.watch(chartListControllerProvider),
+    return WillPopScope(
+      onWillPop: () => onWillPop(context),
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CurrentSubWidgetContainer(
                   uid: uid,
+                  translate: translate,
+                ),
+                SizedBox(
+                  height: GeneralStyle.topTenBannerHeight,
+                  child: TopTenChartsBanner(
+                    controller: ref.watch(chartListControllerProvider),
+                    uid: uid,
+                    translate: translate,
+                    colorScheme: LasotuviAppStyle.colorScheme,
+                    onAddData: () =>
+                        ChartNavigation.openChartCreationScreen(context),
+                    onShowAll: openAllChartsScreen,
+                    onItemTap: (context, chart) =>
+                        ChartNavigation.openChartView(
+                      context: context,
+                      chart: chart,
+                    ),
+                    // chartView: (chartId) => ChartViewBody(chartId: chartId),
+                    onOpenSyncOptions: (chart) =>
+                        StorageHelper.showOptionsModal(
+                      chart,
+                      context: context,
+                      uid: uid,
+                      ref: ref,
+                    ),
+                    countController:
+                        ref.watch(countChartEveryWhereControllerProvider),
+                  ),
+                ),
+                // SizedBox(
+                //   height: 264.0,
+                //   child: TopTenRequestBanner(
+                //     uid: uid,
+                //     controller: ref.watch(requestListControllerProvider),
+                //     translate: translate,
+                //     colorScheme: LasotuviAppStyle.colorScheme,
+                //     // onAddData: () =>
+                //     //     CommentaryNavigation.openChartSelectionScreen(context, ref),
+                //     onShowAll: openAllCommentaryScreen,
+                //     onItemTap: (context, item) =>
+                //         RequestNavigation.openRequestView(
+                //             context: context, request: item),
+                //     onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
+                //       item,
+                //       context: context,
+                //       uid: uid,
+                //       ref: ref,
+                //     ),
+                //     countController:
+                //         ref.watch(countRequestEveryWhereControllerProvider),
+                //   ),
+                // ),
+                SizedBox(
+                  height: 168.0,
+                  child: TopTenTagsBanner(
+                    controller: ref.watch(tagListControllerProvider),
+                    uid: uid,
+                    translate: translate,
+                    colorScheme: LasotuviAppStyle.colorScheme,
+                    onAddData: () => TagNavigation.openTagCreationScreen(
+                      context,
+                      (tag) => TagNavigation.openTagDetail(
+                          context: context, tag: tag),
+                    ),
+                    onShowAll: openAllTagsScreen,
+                    onItemTap: (context, tag) =>
+                        TagNavigation.openTagDetail(context: context, tag: tag),
+                    onOpenSyncOptions: (tag) => StorageHelper.showOptionsModal(
+                      tag,
+                      context: context,
+                      uid: uid,
+                      ref: ref,
+                    ),
+                    countController:
+                        ref.watch(countTagEveryWhereControllerProvider),
+                  ),
+                ),
+
+                // Expanded(
+                // child:
+                TopTenNotesBanner(
+                  uid: uid,
+                  controller: ref.watch(noteAndChartListControllerProvider),
                   translate: translate,
                   colorScheme: LasotuviAppStyle.colorScheme,
                   onAddData: () =>
-                      ChartNavigation.openChartCreationScreen(context),
-                  onShowAll: openAllChartsScreen,
-                  onItemTap: (context, chart) => ChartNavigation.openChartView(
-                    context: context,
-                    chart: chart,
-                  ),
-                  // chartView: (chartId) => ChartViewBody(chartId: chartId),
-                  onOpenSyncOptions: (chart) => StorageHelper.showOptionsModal(
-                    chart,
+                      NoteNavigation.openChartSelectionScreen(context, ref),
+                  onShowAll: openAllNotesScreen,
+                  onItemTap: (note) =>
+                      NoteNavigation.openNoteEditorScreen(context, note),
+                  onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
+                    item,
                     context: context,
                     uid: uid,
                     ref: ref,
                   ),
                   countController:
-                      ref.watch(countChartEveryWhereControllerProvider),
+                      ref.watch(countNoteEveryWhereControllerProvider),
                 ),
-              ),
-              // SizedBox(
-              //   height: 264.0,
-              //   child: TopTenRequestBanner(
-              //     uid: uid,
-              //     controller: ref.watch(requestListControllerProvider),
-              //     translate: translate,
-              //     colorScheme: LasotuviAppStyle.colorScheme,
-              //     // onAddData: () =>
-              //     //     CommentaryNavigation.openChartSelectionScreen(context, ref),
-              //     onShowAll: openAllCommentaryScreen,
-              //     onItemTap: (context, item) =>
-              //         RequestNavigation.openRequestView(
-              //             context: context, request: item),
-              //     onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
-              //       item,
-              //       context: context,
-              //       uid: uid,
-              //       ref: ref,
-              //     ),
-              //     countController:
-              //         ref.watch(countRequestEveryWhereControllerProvider),
-              //   ),
-              // ),
-              SizedBox(
-                height: 168.0,
-                child: TopTenTagsBanner(
-                  controller: ref.watch(tagListControllerProvider),
-                  uid: uid,
-                  translate: translate,
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  onAddData: () => TagNavigation.openTagCreationScreen(
-                    context,
-                    (tag) =>
-                        TagNavigation.openTagDetail(context: context, tag: tag),
-                  ),
-                  onShowAll: openAllTagsScreen,
-                  onItemTap: (context, tag) =>
-                      TagNavigation.openTagDetail(context: context, tag: tag),
-                  onOpenSyncOptions: (tag) => StorageHelper.showOptionsModal(
-                    tag,
-                    context: context,
-                    uid: uid,
-                    ref: ref,
-                  ),
-                  countController:
-                      ref.watch(countTagEveryWhereControllerProvider),
+                const SizedBox(
+                  height: 48.0,
                 ),
-              ),
-
-              // Expanded(
-              // child:
-              TopTenNotesBanner(
-                uid: uid,
-                controller: ref.watch(noteAndChartListControllerProvider),
-                translate: translate,
-                colorScheme: LasotuviAppStyle.colorScheme,
-                onAddData: () =>
-                    NoteNavigation.openChartSelectionScreen(context, ref),
-                onShowAll: openAllNotesScreen,
-                onItemTap: (note) =>
-                    NoteNavigation.openNoteEditorScreen(context, note),
-                onOpenSyncOptions: (item) => StorageHelper.showOptionsModal(
-                  item,
-                  context: context,
-                  uid: uid,
-                  ref: ref,
+                ElevatedButton(
+                    onPressed: openAllNotesScreen,
+                    child: Text(translate('showAllNotes'))),
+                const SizedBox(
+                  height: 192.0,
                 ),
-                countController:
-                    ref.watch(countNoteEveryWhereControllerProvider),
-              ),
-              const SizedBox(
-                height: 48.0,
-              ),
-              ElevatedButton(
-                  onPressed: openAllNotesScreen,
-                  child: Text(translate('showAllNotes'))),
-              const SizedBox(
-                height: 192.0,
-              ),
-              const Divider(
-                height: 1.0,
-                thickness: 1.0,
-              ),
-              const SizedBox(
-                height: 2.0,
-              ),
-              const Divider(
-                height: 1.0,
-                thickness: 1.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('---',
-                      style: TextStyle(
-                          color: LasotuviAppStyle.colorScheme.primary))
-                ],
-              )
-              // )
-            ],
+                const Divider(
+                  height: 1.0,
+                  thickness: 1.0,
+                ),
+                const SizedBox(
+                  height: 2.0,
+                ),
+                const Divider(
+                  height: 1.0,
+                  thickness: 1.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('---',
+                        style: TextStyle(
+                            color: LasotuviAppStyle.colorScheme.primary))
+                  ],
+                )
+                // )
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            decoration: BoxDecoration(
-                color: LasotuviAppStyle.colorScheme.primaryContainer,
-                shape: BoxShape.rectangle,
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: LasotuviAppStyle.colorScheme.primaryContainer,
+                  shape: BoxShape.rectangle,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(44.0),
+                    bottomRight: Radius.circular(44.0),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: LasotuviAppStyle.colorScheme.outline,
+                      offset: const Offset(2.0, 2.0),
+                      spreadRadius: 1.0,
+                      blurRadius: 2.0,
+                    ),
+                    BoxShadow(
+                      color: LasotuviAppStyle.colorScheme.primaryContainer,
+                      // offset: const Offset(2.0, 2.0),
+                      // spreadRadius: 2.0,
+                      // blurRadius: 2.0,
+                    )
+                  ]),
+              child: InkWell(
+                onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const DataCreationOptionsModal()),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(44.0),
                   bottomRight: Radius.circular(44.0),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: LasotuviAppStyle.colorScheme.outline,
-                    offset: const Offset(2.0, 2.0),
-                    spreadRadius: 1.0,
-                    blurRadius: 2.0,
-                  ),
-                  BoxShadow(
-                    color: LasotuviAppStyle.colorScheme.primaryContainer,
-                    // offset: const Offset(2.0, 2.0),
-                    // spreadRadius: 2.0,
-                    // blurRadius: 2.0,
-                  )
-                ]),
-            child: InkWell(
-              onTap: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => const DataCreationOptionsModal()),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(44.0),
-                bottomRight: Radius.circular(44.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: IconButton(
-                  onPressed: null,
-                  disabledColor: LasotuviAppStyle.colorScheme.primary,
-                  icon: const Icon(
-                    Icons.add,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: IconButton(
+                    onPressed: null,
+                    disabledColor: LasotuviAppStyle.colorScheme.primary,
+                    icon: const Icon(
+                      Icons.add,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -310,5 +316,13 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
 
   void openAllCommentaryScreen() {
     ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.commentaries);
+  }
+
+  Future<bool> onWillPop(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      builder: (_) => const ShutdownConfirmDialog(
+          colorScheme: LasotuviAppStyle.colorScheme, translate: translate),
+    );
   }
 }

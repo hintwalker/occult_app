@@ -59,6 +59,8 @@ export 'src/chart/controller/chart_detail_controller.dart';
 export 'src/chart/controller/chart_view_controller.dart';
 export 'src/chart/controller/chart_list_controller.dart';
 
+export 'src/chart/usecase/upload_avatar.dart';
+export 'src/chart/usecase/delete_avatar_from_cloud.dart';
 export 'src/chart/usecase/chart_by_note_id.dart';
 export 'src/chart/usecase/update_chart.dart';
 export 'src/chart/usecase/on_chart.dart';
@@ -73,6 +75,7 @@ export 'src/chart/usecase/sync_charts.dart';
 export 'src/chart_tag/controller/tag_has_charts_list_controller.dart';
 export 'src/chart_tag/controller/chart_has_tags_list_controller_provider.dart';
 
+export 'src/chart_tag/usecase/insert_many_chart_tags_to_local.dart';
 export 'src/chart_tag/usecase/dis_connect_tags_from_chart.dart';
 export 'src/chart_tag/usecase/connect_tags_to_chart.dart';
 export 'src/chart_tag/usecase/dis_connect_charts_from_tag.dart';
@@ -218,6 +221,7 @@ export 'src/notification/usecase/insert_notification_to_local.dart';
 export 'src/notification/usecase/sync_notifications.dart';
 
 export 'src/database/local_database_provider.dart';
+export 'src/database/migrate_old_data.dart';
 
 export 'src/user/user_data_source_provider.dart';
 export 'src/user/set_user_provider.dart';

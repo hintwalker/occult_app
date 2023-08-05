@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lasotuvi/src/screen/splash/splash.dart';
 // import 'package:lasotuvi/screen/take_screen.dart';
 // import 'package:lasotuvi/screen/chart/all_charts_screen.dart';
 // import 'package:lasotuvi/screen/chart/chart_creation_screen.dart';
@@ -185,6 +186,14 @@ class LasotuviRoutes {
         restorationId: RouteName.noteEditor,
         noteId: state.pathParameters[RouterParams.noteId]!,
         syncStatus: state.pathParameters[RouterParams.syncStatus]!,
+      ),
+    ),
+    GoRoute(
+      path: RoutePath.splash,
+      name: RouteName.splash,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (context, state) => const SplashScreen(
+        restorationId: RouteName.splash,
       ),
     ),
     // GoRoute(

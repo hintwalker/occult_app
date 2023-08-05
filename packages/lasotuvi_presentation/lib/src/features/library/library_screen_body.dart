@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
+import 'package:lasotuvi_presentation/src/features/navigation/drawer_ids.dart';
+import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'navigation/library_navigation.dart';
 
 import '../auth/user_auth_depended_state.dart';
@@ -15,9 +17,15 @@ class LibraryScreenBody extends ConsumerStatefulWidget {
 class _LibraryBodyState extends UserAuthDependedState<LibraryScreenBody> {
   @override
   Widget build(BuildContext context) {
-    return LibraryWidget(
-      onOpenStarsSceen: () => LibraryNavigation.showStarsScreen(context),
-      onOpenBooksScreen: () => LibraryNavigation.showBooksScreen(context),
+    return WillPopScope(
+      onWillPop: () {
+        ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.home);
+        return Future.value(false);
+      },
+      child: LibraryWidget(
+        onOpenStarsSceen: () => LibraryNavigation.showStarsScreen(context),
+        onOpenBooksScreen: () => LibraryNavigation.showBooksScreen(context),
+      ),
     );
     // findingUid
     //     ? const Center(

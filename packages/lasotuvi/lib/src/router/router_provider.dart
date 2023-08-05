@@ -14,7 +14,7 @@ final lasotuviRouterProvider = Provider.autoDispose<GoRouter>((ref) {
     navigatorKey: rootNavigatorKey,
     refreshListenable: notifier,
     debugLogDiagnostics: true,
-    initialLocation: RoutePath.home,
+    initialLocation: RoutePath.splash,
     routes: LasotuviRoutes.routes,
     redirect: notifier.redirect,
   );

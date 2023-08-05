@@ -42,6 +42,16 @@ class StoragePlan implements CloudGetable, Dumpable {
     );
   }
 
+  factory StoragePlan.free() {
+    return const StoragePlan(
+        id: '0',
+        limitChart: 10,
+        limitNote: 10,
+        limitTag: 10,
+        energy: 0,
+        title: 'T0');
+  }
+
   @override
   String get docId => id;
 }

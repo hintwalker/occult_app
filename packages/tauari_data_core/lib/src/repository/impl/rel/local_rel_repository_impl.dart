@@ -148,6 +148,7 @@ abstract class LocalRelRepositoryImpl<
   Future<List<int>> connectManyLeftToRight(R right, Iterable<L> lefts) async {
     final List<int> ids = [];
     for (var left in lefts) {
+      await Future.delayed(const Duration(milliseconds: 1));
       final id = await connectOnLocal(left.primaryKey, right.primaryKey);
       ids.add(id);
     }

@@ -1,3 +1,5 @@
+import 'package:lasotuvi_domain/src/chart/usecase/delete_avatar_from_cloud.dart';
+
 import '../chart/entity/chart.dart';
 import '../chart/usecase/delete_chart_from_cloud.dart';
 import '../chart/usecase/delete_chart_from_local.dart';
@@ -15,6 +17,7 @@ class Remover {
   final DeleteTagFromCloud deleteTagFromCloud;
   final DeleteNoteFromLocal deleteNoteFromLocal;
   final DeleteNoteFromCloud deleteNoteFromCloud;
+  final DeleteAvatarFromCloud deleteAvatarFromCloud;
 
   const Remover({
     required this.deleteChartFromLocal,
@@ -23,11 +26,13 @@ class Remover {
     required this.deleteNoteFromCloud,
     required this.deleteTagFromLocal,
     required this.deleteTagFromCloud,
+    required this.deleteAvatarFromCloud,
   });
   Future<void> deleteFromLocal<T>({required Iterable<T> items}) async {
     if (T == Chart) {
       for (var i = 0; i < items.length; i++) {
-        await deleteChartFromLocal(items.elementAt(i) as Chart);
+        final item = items.elementAt(i) as Chart;
+        await deleteChartFromLocal(item);
       }
     } else if (T == Tag) {
       for (var i = 0; i < items.length; i++) {
@@ -44,7 +49,11 @@ class Remover {
       {required String uid, required Iterable<T> items}) async {
     if (T == Chart) {
       for (var i = 0; i < items.length; i++) {
-        await deleteChartFromCloud(uid, items.elementAt(i) as Chart);
+        final item = items.elementAt(i) as Chart;
+        await deleteChartFromCloud(uid, item);
+        if (!(item.avatar == null || item.avatar!.isEmpty)) {
+          await deleteAvatarFromCloud(uid, item.avatar!.split('/').last);
+        }
       }
     } else if (T == Tag) {
       for (var i = 0; i < items.length; i++) {

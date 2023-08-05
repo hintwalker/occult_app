@@ -98,6 +98,7 @@ class _NoteEditorState<T> extends State<NoteEditorWidget<T>> {
       widget.note.coppyWithTitleAndContent(
         title: _titleController.text,
         content: stringData,
+        time: DateTime.now(),
       ),
       widget.uid,
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
@@ -27,7 +27,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
                   leading: const Icon(Icons.badge_outlined),
                   title: Text(translate('createNewChart')),
                   onTap: () {
-                    context.pop();
+                    // context.pop();
                     ChartNavigation.openChartCreationScreen(context);
                   },
                 ),
@@ -35,7 +35,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
                   leading: const Icon(Icons.label),
                   title: Text(translate('createNewTag')),
                   onTap: () {
-                    context.pop();
+                    // context.pop();
                     TagNavigation.openTagCreationScreen(
                       context,
                       (tag) => TagNavigation.openTagDetail(
@@ -47,7 +47,7 @@ class DataCreationOptionsModal extends ConsumerWidget {
                   leading: const Icon(Icons.sticky_note_2_outlined),
                   title: Text(translate('createNewNote')),
                   onTap: () {
-                    context.pop();
+                    // context.pop();
                     NoteNavigation.openChartSelectionScreen(context, ref);
                   },
                 ),

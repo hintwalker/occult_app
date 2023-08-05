@@ -54,6 +54,7 @@ class _ModifyChartAvatarWidgetState
                   value = event;
                 }),
               ),
+              chartId: widget.chart!.docId,
             ),
           );
   }

@@ -38,27 +38,27 @@ class ChartBioModificationModal extends StatelessWidget {
               tiles: [
                 ListTile(
                   leading: const Icon(Icons.account_box_outlined),
-                  title: Text(translate('changeAvatar')),
+                  title: Text(translate('modifyAvatar')),
                   onTap: () => onOpenChangeAvatar(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.text_fields),
-                  title: Text(translate('changeName')),
+                  title: Text(translate('modifyChartName')),
                   onTap: () => onOpenChangeName(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.transgender),
-                  title: Text(translate('changeGender')),
+                  title: Text(translate('modifyGender')),
                   onTap: () => onOpenChangeGender(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.today_outlined),
-                  title: Text(translate('changeBirthday')),
+                  title: Text(translate('modifyBirthday')),
                   onTap: () => onOpenChangeBirthday(chartId, syncStatus),
                 ),
                 ListTile(
                   leading: const Icon(Icons.visibility_outlined),
-                  title: Text(translate('changeWatchingYear')),
+                  title: Text(translate('modifyWatchingYear')),
                   onTap: () => onOpenChangeWatchingYear(chartId, syncStatus),
                 ),
                 // ListTile(

@@ -20,7 +20,7 @@ tags	Nhãn
 notes	Ghi chú
 library	Thư viện
 storagePlanMarket	Gói lưu trữ
-energyMarket	Mua điểm năng lượng
+energyMarket	Điểm năng lượng
 search	Tìm kiếm
 charts	Lá số
 commentary	Luận giải
@@ -43,8 +43,8 @@ sortByTitleAsc	Tiêu đề A -> Z
 sortByTitleDesc	Tiêu đề Z -> A
 sortByChartNameAsc	Tên đương số A -> Z
 sortByChartNameDesc	Tên đương số Z -> A
-sortByBirthdayAsc	Đương số trẻ -> già
-sortByBirthdayDesc	Đương số già -> trẻ
+sortByBirthdayAsc	Đương số già -> trẻ
+sortByBirthdayDesc	Đương số trẻ -> già
 storagePlan	Gói lưu trữ
 day	ngày
 tuoi	tuổi
@@ -63,6 +63,7 @@ delete_from_cloud	Xóa trên cloud
 changeInfo	Sửa thông tin
 addChart	Thêm lá số
 addNote	Thêm ghi chú
+addRemoveTag	Thêm/gỡ nhãn
 addTag	Thêm nhãn
 createTag	Tạo nhãn
 createNewTag	Tạo nhãn mới
@@ -316,28 +317,6 @@ saTrungTho	Sa Trung Thổ
 thienThuongHoa	Thiên Thượng Hỏa
 bachLuuMoc	Bạch Lựu Mộc
 daiHaiThuy	Đại Hải Thủy
-giap	Giáp
-at	Ất
-binh	Bính
-dinh	Đinh
-mau	Mậu
-ky	Kỷ
-canh	Canh
-tan	Tân
-nham	Nhâm
-quy	Quý
-tys	Tý
-suu	Sửu
-dan	Dần
-mao	Mão
-thin	Thìn
-tyj	Tỵ
-ngo	Ngọ
-mui	Mùi
-than	Thân
-dau	Dậu
-tuat	Tuất
-hoi	Hợi
 canCanh	Can Canh
 canNham	Can Nhâm
 canTan	Can Tân
@@ -356,10 +335,65 @@ msgTaPhuHoaKhoaOption	Tả Phụ Hóa Khoa
 msgTruongSinhNormalOption	Âm - Dương thuận lý và Âm - Dương nghịch lý an Trường Sinh như nhau
 msgTruongSinhDifferentOption	Âm - Dương thuận lý và Âm - Dương nghịch lý an Trường Sinh khác nhau
 msgTruongSinhNormalSubtitle	Thủy, Thổ -> Thân, Mộc -> Hợi, Kim -> Tỵ, Hỏa -> Dần
-msgTruongSinhDifferentOption	Nghịch lý: Thủy, Thổ -> Tý, Mộc -> Mão, Kim -> Dậu, Hỏa -> Ngọ
+msgTruongSinhDifferentSubtitle	Nghịch lý: Thủy, Thổ -> Tý, Mộc -> Mão, Kim -> Dậu, Hỏa -> Ngọ
 msgHoaTinhMaoOption	Tỵ, Dậu, Sửu: Hỏa Tinh khởi từ Mão, Linh Tinh khởi từ Tuất
 msgHoaTinhTuatOption	Tỵ, Dậu, Sửu: Hỏa Tinh khởi từ Tuất, Linh Tinh khởi từ Mão
 msgLuuHaDinhThinOption	Tuổi Đinh an tại Thìn, tuổi canh an tại Thân
 msgLuuHaDinhThanOption	Tuổi Đinh an tại Thân, tuổi canh an tại Thìn
 msgDauQuanChiNamSinhOption	An theo chi năm sinh
 msgDauQuanNamTyOption	An theo năm Tý
+tuyChinhAnSao	Tùy chỉnh an sao
+chageDate	Đổi ngày
+createNewChart	Lập lá số mới
+createNewNote	Tạo ghi chú mới
+createNewData	Thêm dữ liệu mới
+subscribe	Đăng ký
+upgradeNow	Nâng cấp ngay
+buy	Mua
+canceledAt	Đã hủy vào lúc:
+allOverloadDataWillBeDeletedAt	Tất cả dữ liệu vượt hạn mức sẽ bị xóa vào lúc:
+allOverloadDataDeletedAt	Tất cả dữ liệu vượt hạn mức đã bị xóa vĩnh viễn vào lúc:
+msgTimerUsage	Thời hạn sử dụng còn lại:
+extends	Gia hạn
+confirm	Xác nhận
+confirmExtends	Bạn có muốn tiếp tục sử dụng gói hiện tại với mức giá:
+lastPackageCanceledAt	Gói lưu trữ mà bạn đăng ký trước đó đã hủy vào lúc:
+selectTag	Chọn nhãn
+tagCreation	Tạo nhãn mới
+noTitle	Không tiêu đề
+subTitle	Mô tả ngắn
+selectOneChart	Chọn 1 lá số
+changeAvatar	Đổi ảnh đại diện
+changeName	Đổi tên đương số
+changeGender	Đổi giới tính
+changeBirthday	Đổi ngày/giờ sinh
+changeWatchingYear	Đổi năm xem
+luanVeCacSao	Luận về các sao
+tuViDauSoToanThu	Tử Vi Đẩu Số Toàn Thư
+tuViDauSoTanBien	Tử Vi Đẩu Số Tân Biên
+soTuViDuoiMatKhoaHoc	Số Tử Vi Dưới Mắt Khoa Học
+tuViAoBi	Tử Vi Ảo Bí
+anQuangThienQuy	Ân Quang - Thiên Quý
+coThanQuaTu	Cô Thần - Quả Tú
+diaKhongDiaKiep	Địa Không - Địa Kiếp
+giaiThanThienKho	Giải Thần - Thiên Khố
+hongLoanThienHi	Hồng Loan - Thiên Hỉ
+hoaTinhLinhTinh	Hỏa Linh - Linh Tinh
+kinhDuongDaLa	Kình Dương - Đà La
+longTriPhuongCac	Long Trì - Phượng Các
+longDucPhucDuc	Long Đức - Phúc Đức
+locMa	Lộc Mã
+songHao	Song Hao
+tuHoa	Tứ Hóa
+thaiPhuPhongCao	Thai Phụ - Phong Cáo
+thienQuanThienPhuc	Thiên Quan - Thiên Phúc
+thienThoThienTai	Thiên Thọ - Thiên Tài
+thienDucNguyetDuc	Thiên Đức - Nguyệt Đức
+thienKhocThienHu	Thiên Khốc - Thiên Hư
+taPhuHuuBat	Tả Phụ - Hữu Bật
+thienKhoiThienViet	Thiên Khôi - Thiên Việt
+tamThaiBatToa	Tam Thai - Bát Tọa
+vongThaiTue	Vòng Thái Tuế
+vongBacSi	Vòng Bác Sĩ
+vongTuongTinh	Vòng Tướng Tinh
+xuongKhuc	Văn Xương - Văn Khúc

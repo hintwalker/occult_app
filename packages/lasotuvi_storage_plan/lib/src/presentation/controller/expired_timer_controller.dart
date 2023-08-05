@@ -204,4 +204,12 @@ class ExpiredTimerController extends ChangeNotifier {
     //   }
     // }
   }
+
+  void removeListenerOnExpired() {
+    _listenerOnExpired = null;
+  }
+
+  void removeListenerOnCanceled() {
+    _listenerOnCanceled = null;
+  }
 }

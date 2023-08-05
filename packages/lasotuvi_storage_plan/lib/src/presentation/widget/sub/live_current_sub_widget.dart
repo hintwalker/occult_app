@@ -3,6 +3,7 @@ import 'package:lasotuvi_storage_plan/src/presentation/widget/sub/current_sub_wa
 import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../../entity/storage_plan.dart';
 import '../../controller/expired_timer_controller.dart';
 import '../../controller/storage_plan_list_controller.dart';
 import '../../style/storage_plan_style.dart';
@@ -46,7 +47,7 @@ class LiveCurrentSubWidget extends StatelessWidget {
                       translate: translate,
                       timerController: timerController,
                       energyIcon: energyIcon,
-                      plan: currentPlan!,
+                      plan: currentPlan ?? StoragePlan.free(),
                       planController: planController,
                       navigateToPlanMarket: navigateToPlanMarket),
                 );

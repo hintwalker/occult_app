@@ -17,29 +17,33 @@ class PlanWariningCanceled extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      decoration: const BoxDecoration(color: Color.fromARGB(255, 230, 41, 44)),
+      decoration: BoxDecoration(color: Colors.blueGrey.shade100),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            children: [
-              Text(
-                translate('allOverloadDataDeletedAt'),
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.white,
-                ),
-              ),
-              DateTimeWidget(canceledDate,
-                  style: const TextStyle(
-                    fontSize: 18.0,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  translate('allOverloadDataDeletedAt'),
+                  style: TextStyle(
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,
-                    color: Colors.white,
-                  )),
-            ],
+                    color: Colors.blueGrey.shade700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                DateTimeWidget(canceledDate,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.blueGrey.shade700,
+                    )),
+              ],
+            ),
           ),
         ],
       ),

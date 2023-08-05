@@ -128,6 +128,7 @@ class Commentary extends MustBuyEntity<Commentary>
   Commentary coppyWithTitleAndContent({
     required String title,
     required String content,
+    DateTime? time,
   }) =>
       copyWith(
         title: title,

@@ -13,6 +13,8 @@ class CheckboxDataListContainer<U, V> extends StatefulWidget {
     required this.groupBy,
     required this.groupComparator,
     required this.groupSeperatorBuilder,
+    required this.colorScheme,
+    required this.translate,
     this.useStickyGroupSeparators = false,
     // this.order = ListOrder.asc,
     this.sort = true,
@@ -27,6 +29,8 @@ class CheckboxDataListContainer<U, V> extends StatefulWidget {
   final V Function(SelectableItem<U>) groupBy;
   final int Function(V, V) groupComparator;
   final Widget Function(V) groupSeperatorBuilder;
+  final String Function(String) translate;
+  final ColorScheme colorScheme;
   final bool useStickyGroupSeparators;
   // final ListOrder order;
   final bool sort;
@@ -110,41 +114,69 @@ class _CheckboxDataListContainerState<U, V>
 
   @override
   Widget build(BuildContext context) {
-    return DataListBodyWidget<U, V, SelectableItem<U>>(
-      data: widget.controller.foundData,
-      itemBuilder: (context, item) => CheckBoxListItem<U>(
-        item,
-        child: widget.itemBuilder(item.data),
-        onChanged: (checked) => widget.controller.onCheckChanged(item, checked),
-        // {
-        // final old = selected.where((element) =>
-        //     widget.itemId(element.data) == widget.itemId(item.data));
-        // if (old.isNotEmpty) {
-        //   selected.remove(old.first);
-        // }
-        // selected.add(item.copyWith(selected: checked));
-        // setState(() {
-        //   final index = selectableItems.indexWhere(
-        //     (element) =>
-        //         widget.itemId(element.data) == widget.itemId(item.data),
-        //   );
-        //   selectableItems.removeAt(index);
-        //   // selectableItems.removeWhere((element) =>
-        //   //     widget.itemId(element.data) ==
-        //   //     widget.itemId(item.data));
-        //   selectableItems.insert(index, item.copyWith(selected: checked));
-        // });
-        // }
-        // checked
-        //     ? selected.add(item)
-        //     : selected.remove(item),
-      ),
-      groupBy: widget.groupBy,
-      groupComparator: widget.groupComparator,
-      groupSeperatorBuilder: widget.groupSeperatorBuilder,
-      sort: widget.sort,
-      // order: widget.order,
-      useStickyGroupSeparators: widget.useStickyGroupSeparators,
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.symmetric(
+                      horizontal: BorderSide(
+                          color: widget.colorScheme.outline.withOpacity(0.6)))),
+              child: Text(
+                widget
+                    .translate('sortBy ${widget.controller.sortOption!.name}'),
+                style: TextStyle(
+                    color: widget.colorScheme.outline.withOpacity(0.6),
+                    fontStyle: FontStyle.italic),
+              ),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 4.0,
+        ),
+        Expanded(
+          child: DataListBodyWidget<U, V, SelectableItem<U>>(
+            data: widget.controller.foundData,
+            itemBuilder: (context, item) => CheckBoxListItem<U>(
+              item,
+              child: widget.itemBuilder(item.data),
+              onChanged: (checked) =>
+                  widget.controller.onCheckChanged(item, checked),
+              // {
+              // final old = selected.where((element) =>
+              //     widget.itemId(element.data) == widget.itemId(item.data));
+              // if (old.isNotEmpty) {
+              //   selected.remove(old.first);
+              // }
+              // selected.add(item.copyWith(selected: checked));
+              // setState(() {
+              //   final index = selectableItems.indexWhere(
+              //     (element) =>
+              //         widget.itemId(element.data) == widget.itemId(item.data),
+              //   );
+              //   selectableItems.removeAt(index);
+              //   // selectableItems.removeWhere((element) =>
+              //   //     widget.itemId(element.data) ==
+              //   //     widget.itemId(item.data));
+              //   selectableItems.insert(index, item.copyWith(selected: checked));
+              // });
+              // }
+              // checked
+              //     ? selected.add(item)
+              //     : selected.remove(item),
+            ),
+            groupBy: widget.groupBy,
+            groupComparator: widget.groupComparator,
+            groupSeperatorBuilder: widget.groupSeperatorBuilder,
+            sort: widget.sort,
+            // order: widget.order,
+            useStickyGroupSeparators: widget.useStickyGroupSeparators,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -23,7 +23,7 @@ class SingleSelectableChartListModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasicModal(
-      title: translate('selectOnChart'),
+      title: translate('selectOneChart'),
       colorScheme: colorScheme,
       child: child,
       // child: SingleSelectableChartListBuilder(

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tauari_ui/tauari_ui.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import '../controller/chart_avatar_controller.dart';
 
@@ -10,18 +13,12 @@ class ChartAvatarChosenWidget extends ConsumerStatefulWidget {
     super.key,
     required this.controller,
     required this.translate,
+    required this.chartId,
   });
   final ChartAvatarController controller;
   final String Function(String) translate;
+  final String chartId;
   final imagePicker = ImagePicker();
-
-  void pickImage(
-      BuildContext context, WidgetRef ref, Function() callback) async {
-    final image = await imagePicker.pickImage(source: ImageSource.gallery);
-    controller.onChanged(image?.path, true);
-    callback();
-    // ref.read(chartCreationNotifierProvider.notifier).updateAvatar(image?.path);
-  }
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -36,8 +33,32 @@ class _ChartAvatarChosenState extends ConsumerState<ChartAvatarChosenWidget> {
     updateAvatar();
   }
 
+  void pickImage(
+      BuildContext context, WidgetRef ref, Function() callback) async {
+    final image =
+        await widget.imagePicker.pickImage(source: ImageSource.gallery);
+    String? path = image?.path;
+    if (image != null) {
+      final parentPath = await tempPath();
+      path = '$parentPath/${widget.chartId}';
+      final file = File(path);
+      if (await file.exists()) {
+        await file.delete();
+      }
+      await image.saveTo(path);
+      final pickedFile = File(image.path);
+      await pickedFile.delete();
+    }
+
+    widget.controller.onChanged(path, true);
+    callback();
+    // ref.read(chartCreationNotifierProvider.notifier).updateAvatar(image?.path);
+  }
+
   void updateAvatar() {
     setState(() {
+      imageCache.clear();
+      imageCache.clearLiveImages();
       avatar = widget.controller.value;
     });
   }
@@ -80,7 +101,7 @@ class _ChartAvatarChosenState extends ConsumerState<ChartAvatarChosenWidget> {
                 },
                 child: Text(widget.translate('default'))),
             ElevatedButton(
-              onPressed: () => widget.pickImage(context, ref, updateAvatar),
+              onPressed: () => pickImage(context, ref, updateAvatar),
               child: Text(
                 widget.translate(
                   'browse...',

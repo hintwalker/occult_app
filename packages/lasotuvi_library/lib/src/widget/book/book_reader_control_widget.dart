@@ -47,7 +47,7 @@ class _BookReaderControlState extends State<BookReaderControlWidget> {
               border: Border.all(color: Colors.black12),
               borderRadius: BorderRadius.circular(12.0)),
           child: Text(
-              '${widget.controller.currentPage} / ${widget.controller.totalPage}'),
+              '${widget.controller.currentPageDisplay} / ${widget.controller.totalPage}'),
         ),
         IconButton(
             onPressed: () {

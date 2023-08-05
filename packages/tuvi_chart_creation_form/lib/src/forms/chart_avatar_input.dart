@@ -12,9 +12,11 @@ class ChartAvatarInput extends ConsumerWidget {
   ChartAvatarInput({
     super.key,
     required this.translate,
+    required this.chartId,
   });
   final String Function(String) translate;
   final imagePicker = ImagePicker();
+  final String chartId;
 
   void showModal({
     required BuildContext context,
@@ -27,8 +29,8 @@ class ChartAvatarInput extends ConsumerWidget {
         builder: (ctx) =>
             // Material(child:
             ChartAvatarChosenModal(
-              translate: translate,
-              controller: ChartAvatarController(
+                translate: translate,
+                controller: ChartAvatarController(
                   value: initAvatar,
                   updateValid: (value) => ref
                       .read(chartCreationNotifierProvider.notifier)
@@ -36,8 +38,9 @@ class ChartAvatarInput extends ConsumerWidget {
                   updateValue: (value) => ref
                       .read(chartCreationNotifierProvider.notifier)
                       .updateAvatar(value),
-                  initGender: initGender),
-            )
+                  initGender: initGender,
+                ),
+                chartId: chartId)
         // )
         );
     // showModalBottomSheet(

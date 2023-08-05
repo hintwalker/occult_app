@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
+import 'package:tauari_auth_widget/tauari_auth_widget.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
@@ -25,17 +26,17 @@ class _StarInfoBodyState extends UserAuthDependedState<StarInfoBody> {
       child: findingUid
           ? const LoadingWidget()
           : uid == null
-              ? const Center(
-                  child: NeedSignInAlertDialog(
-                    colorScheme: LasotuviAppStyle.colorScheme,
-                    translate: translate,
-                  ),
+              ? Center(
+                  child: GoogleSignInButton(
+                      onTap: () => ref.read(signInWithGoogleProvider).call(),
+                      title: translate('signIn')),
                 )
               : StarInfoViewer(
                   widget.item.name,
                   uid: uid!,
                   controller: ref.watch(starInfoViewerControllerProvider),
                   colorScheme: LasotuviAppStyle.colorScheme,
+                  translate: translate,
                 ),
     );
   }

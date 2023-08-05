@@ -1,6 +1,7 @@
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 
+import '../../old_version_data/structure/old_note_columns.dart';
 import '../column_note.dart';
 
 class Note extends SyncableEntity<Note> implements NoteLike<Note> {
@@ -43,6 +44,24 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
         modified: map[columnModified] == null
             ? LocalLocked.unlocked
             : map[columnModified] as int);
+  }
+
+  static Note fromOldVersion(Map<String, Object?> map) {
+    return Note(
+      map[OldNoteColumns.createdDate] as int,
+      title: map[OldNoteColumns.noteTitle] == null
+          ? ''
+          : map[OldNoteColumns.noteTitle] as String,
+      content: '[{"insert":"${map[OldNoteColumns.noteText]}\\n"}]',
+      created: DateTime.fromMillisecondsSinceEpoch(
+          map[OldNoteColumns.createdDate] as int),
+      edited: DateTime.fromMillisecondsSinceEpoch(
+          map[OldNoteColumns.lastUpdated] as int),
+      chartId: map[OldNoteColumns.humanId] as int,
+      storageState: null,
+      syncStatus: null,
+      modified: LocalLocked.unlocked,
+    );
   }
 
   @override
@@ -119,10 +138,12 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
   Note coppyWithTitleAndContent({
     required String title,
     required String content,
+    DateTime? time,
   }) =>
       copyWith(
         title: title,
         content: content,
+        edited: time,
       );
 
   @override

@@ -32,7 +32,14 @@ class Dashboard extends ConsumerWidget {
         child: Scaffold(
           body: DrawerScaffold(
               header: const TuviDrawerHeader(),
-              title: (id) => Text(getScreenTitle(id).toUpperCase()),
+              title: (id) => Text(
+                    getScreenTitle(id).toUpperCase(),
+                    style: TextStyle(
+                        color: LasotuviAppStyle.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        letterSpacing: 1.4),
+                  ),
               menus: menus,
               style: const DrawerStyleImpl(LasotuviAppStyle.colorScheme),
               onMenuTap: (menu) => context.goNamed(menu),

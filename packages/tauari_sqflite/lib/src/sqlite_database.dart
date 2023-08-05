@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -90,6 +91,16 @@ class SqliteDatabase extends LocalDatabase<Database> {
 
   @override
   int get dbVersion => 1;
+
+  static Future<Database> openOtherDatabase(String name) async {
+    return await openDatabase(join(await getDatabasesPath(), name));
+  }
+
+  static Future<bool> exists(String name) async {
+    final path = join(await getDatabasesPath(), name);
+    final file = File(path);
+    return await file.exists();
+  }
 
   // void triggerUpdate() {
   //   updateTriggerController.sink.add(true);

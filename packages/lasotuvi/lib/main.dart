@@ -18,6 +18,7 @@ import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:sqflite/sqflite.dart' as sqflite show databaseFactory;
+// import 'package:tauari_utils/tauari_utils.dart';
 import 'package:tuvi_style/tuvi_style.dart';
 
 import 'src/firebase_options.dart';
@@ -33,6 +34,7 @@ void main() async {
     // 1. Debug provider
     // 2. Safety Net provider
     // 3. Play Integrity provider
+    // androidProvider: AndroidProvider.playIntegrity,
     androidProvider: AndroidProvider.debug,
     // Default provider for iOS/macOS is the Device Check provider. You can use the "AppleProvider" enum to choose
     // your preferred provider. Choose from:
@@ -45,7 +47,7 @@ void main() async {
 
   await initTempStorage();
   final localDatabase = await initLocalDatabase();
-
+  // await loadOldData();
   GoRouter.optionURLReflectsImperativeAPIs = true;
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -92,5 +94,18 @@ Future<LocalDatabase<Database>> initLocalDatabase() async {
       onConfigure: onDbConfigure,
       databaseName: DatabaseNames.v1_2);
   await localDatabase.ready;
+
   return localDatabase;
 }
+
+// Future<void> loadOldData() async {
+//   final exists = await SqliteDatabase.exists(DatabaseNames.old);
+//   if (!exists) {
+//     return;
+//   }
+//   final oldDb = await SqliteDatabase.openOtherDatabase(DatabaseNames.old);
+//   final humans = await oldDb.query('human_info', columns: ['name', 'gender']);
+//   for (var human in humans) {
+//     print(human);
+//   }
+// }

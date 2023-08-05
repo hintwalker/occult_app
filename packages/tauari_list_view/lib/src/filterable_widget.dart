@@ -49,9 +49,6 @@ class FilterableWidget extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(
-          height: 2.0,
-        ),
         Expanded(child: child),
       ],
     );

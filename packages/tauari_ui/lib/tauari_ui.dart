@@ -3,6 +3,8 @@ library tauari_ui;
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 
+export 'src/widget/download_failed_error_text.dart';
+export 'src/widget/no_connection_error_text.dart';
 export 'src/widget/shutdown_confirm_dialog.dart';
 export 'src/widget/circle_container.dart';
 export 'src/widget/data_count_widget.dart';

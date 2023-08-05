@@ -4,6 +4,7 @@ abstract class NoteLike<T> {
   T coppyWithTitleAndContent({
     required String title,
     required String content,
+    DateTime? time,
   });
   T get data;
   String get noteTitle;

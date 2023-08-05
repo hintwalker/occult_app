@@ -52,6 +52,8 @@ class AllCommentaryAndRequestListWidget extends StatelessWidget {
       onSearch: controller.runFilter,
       child: DataListContainer<CommentaryAndRequest, SimpleTextGroup>(
         data: data,
+        colorScheme: colorScheme,
+        translate: translate,
         // order: controller.sortOption?.order ?? ListOrder.asc,
         controller: controller,
         groupBy: (e) => groupCommentaryAndRequestBy(

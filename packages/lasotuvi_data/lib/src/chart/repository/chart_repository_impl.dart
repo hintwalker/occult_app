@@ -9,4 +9,18 @@ class ChartRepositoryImpl extends SyncableRepositoryImpl<Chart, ChartModel>
     required super.localRepository,
     required super.cloudRepository,
   });
+
+  @override
+  Future<void> uploadAvatar(String uid, String localFilePath) =>
+      (cloudRepository as CloudChartRepository)
+          .uploadAvatar(uid, localFilePath);
+
+  @override
+  Future<void> deleteAvatarFromCloud(String uid, String fileName) =>
+      (cloudRepository as CloudChartRepository).deleteAvatar(uid, fileName);
+
+  @override
+  Future<void> downloadAvatar(String uid, String localFilePath) =>
+      (cloudRepository as CloudChartRepository)
+          .downloadAvatar(uid, localFilePath);
 }

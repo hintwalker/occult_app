@@ -78,6 +78,8 @@ class AllChartListWidget extends StatelessWidget {
       onSearch: controller.runFilter,
       child: DataListContainer<ChartHasTags, SimpleTextGroup>(
         data: data,
+        colorScheme: colorScheme,
+        translate: translate,
         // order: controller.sortOption?.order ?? ListOrder.asc,
         controller: controller,
         groupBy: (e) => groupChartHasTagsBy(

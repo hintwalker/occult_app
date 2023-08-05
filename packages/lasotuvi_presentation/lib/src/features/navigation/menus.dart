@@ -26,13 +26,14 @@ final menus = [
   //     title: translate('commentary'),
   //     icon: const Icon(Icons.self_improvement)),
   DrawerData(
-      id: DrawerIds.notes,
-      title: translate('notes'),
-      icon: const Icon(Icons.sticky_note_2)),
-  DrawerData(
       id: DrawerIds.tags,
       title: translate('tags'),
       icon: const Icon(Icons.label)),
+  DrawerData(
+      id: DrawerIds.notes,
+      title: translate('notes'),
+      icon: const Icon(Icons.sticky_note_2)),
+
   // DrawerData(
   //     id: DrawerIds.books,
   //     title: translate('books'),

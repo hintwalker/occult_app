@@ -35,6 +35,7 @@ export 'src/usecase/syncable/delete_every_where.dart';
 export 'src/usecase/syncable/sync_data.dart';
 export 'src/usecase/cloud/delete_from_cloud.dart';
 export 'src/usecase/local/delete_from_local.dart';
+export 'src/usecase/local/insert_many_to_local.dart';
 
 export 'src/entity/note_like.dart';
 

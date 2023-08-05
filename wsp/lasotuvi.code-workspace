@@ -7,13 +7,13 @@
 			"path": "../packages/lasotuvi_presentation"
 		},
 		{
-			"path": "../packages/lasotuvi_storage_plan"
-		},
-		{
-			"path": "../packages/lasotuvi_provider"
-		},
-		{
 			"path": "../docs"
+		},
+		{
+			"path": "../packages/tuvi_strings"
+		},
+		{
+			"path": "../packages/tauari_ui"
 		}
 	],
 	"settings": {}

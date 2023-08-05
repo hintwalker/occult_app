@@ -19,8 +19,9 @@ class SingleSelectableChartListWidget extends StatelessWidget {
     required this.onItemTap,
     required this.uid,
     required this.onSaveSortOption,
+    required this.initSortValue,
   });
-
+  final SortValue? initSortValue;
   final Iterable<Chart> data;
   final String Function(String) translate;
   final ColorScheme colorScheme;
@@ -32,7 +33,7 @@ class SingleSelectableChartListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = DataListController(
       whereTest: chartWhereClause,
-      sortOption: null,
+      sortOption: initSortValue,
       itemComparator: chartItemComparator,
       onSaveSortOption: (e) => onSaveSortOption(chartSortKey, e),
     );
@@ -44,6 +45,8 @@ class SingleSelectableChartListWidget extends StatelessWidget {
       onSearch: controller.runFilter,
       child: DataListContainer<Chart, SimpleTextGroup>(
         data: data,
+        colorScheme: colorScheme,
+        translate: translate,
         // order: controller.sortOption?.order ?? ListOrder.asc,
         controller: controller,
         groupBy: (e) => groupChartsBy(

@@ -23,12 +23,12 @@ class ChartCreationStep1 extends ConsumerWidget {
     return Column(
       children: [
         ChartAvatarInput(
-          translate: translate,
-        ),
+            translate: translate,
+            chartId: ref.read(chartCreationNotifierProvider).chart.docId),
         ChartNameInput(
           translate: translate,
           controller: ChartNameController(
-            value: translate('noName'),
+            value: 'Unnamed',
             updateValid: (value) => ref
                 .read(chartCreationNotifierProvider.notifier)
                 .updateValid(value),

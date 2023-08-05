@@ -1,4 +1,5 @@
 import '../chart/entity/chart.dart';
+import '../chart/usecase/upload_avatar.dart';
 import '../chart/usecase/upload_chart.dart';
 import '../note/entity/note.dart';
 import '../note/usecase/upload_note.dart';
@@ -9,11 +10,13 @@ class Uploader {
   final UploadChart uploadChart;
   final UploadTag uploadTag;
   final UploadNote uploadNote;
+  final UploadAvatar uploadAvatar;
   // final List<WorkProgressListener> listeners = [];
   Uploader({
     required this.uploadChart,
     required this.uploadTag,
     required this.uploadNote,
+    required this.uploadAvatar,
   });
   // void addListener(WorkProgressListener listener, [int index = 0]) {
   //   listeners.insert(index, listener);
@@ -23,7 +26,12 @@ class Uploader {
       {required String uid, required Iterable<T> items}) async {
     if (T == Chart) {
       for (var i = 0; i < items.length; i++) {
-        await uploadChart(uid, items.elementAt(i) as Chart);
+        final item = items.elementAt(i) as Chart;
+        await uploadChart(uid, item);
+        if (!(item.avatar == null || item.avatar!.isEmpty)) {
+          await uploadAvatar(uid, item.avatar!);
+        }
+
         // for (var listener in listeners) {
         //   listener.listen(ProgressData(i + 1));
         // }

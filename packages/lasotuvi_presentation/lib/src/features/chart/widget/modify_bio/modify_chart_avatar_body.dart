@@ -60,7 +60,7 @@ class _ModifyChartAvatarBodyState
                 translate: translate,
                 onUpdate: (chart) => ref
                     .read(modifyChartControllerProvider.notifier)
-                    .updateChart(
+                    .updateAvatar(
                         context: context, uid: uid, chart: chart, ref: ref),
               ),
             ),

@@ -13,9 +13,12 @@ dependencies:
   firebase_storage: ^11.2.4
   flutter:
     sdk: flutter
+  flutter_image_compress: ^2.0.4
   path_provider: ^2.0.15
   tauari_data_core:
     path: ../tauari_data_core
+  tauari_utils:
+    path: ../tauari_utils
 
 dev_dependencies:
   flutter_test:

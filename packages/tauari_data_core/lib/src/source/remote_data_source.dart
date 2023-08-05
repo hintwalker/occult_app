@@ -56,7 +56,8 @@ abstract class RemoteDataSource<T extends CloudModel>
     if (!doc.exists) {
       return null;
     }
-    return itemMapper(doc);
+    final data = itemMapper(doc);
+    return data;
   }
 
   Stream<int> onCount(String uid) {

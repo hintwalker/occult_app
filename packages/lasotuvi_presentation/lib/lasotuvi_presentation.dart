@@ -4,6 +4,7 @@ export 'src/settings/lasotuvi_settings.dart';
 export 'src/shared/translation_path.dart';
 export 'src/shared/screen_app_bar.dart';
 
+export 'src/features/splash/splash_screen_body.dart';
 export 'src/features/tag/navigation/tag_navigation.dart';
 export 'src/features/chart/navigation/chart_navigation.dart';
 export 'src/helper/storage_helper.dart';

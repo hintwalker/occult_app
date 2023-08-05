@@ -39,12 +39,26 @@ class _AllStoragePlansBodyState
     energyIcon = EnergyIcon(
         color: LasotuviAppStyle.colorScheme.primary,
         size: style.energyIconSize);
-    ref
-        .read(expiredTimerControllerProvider)
-        .addListenerOnExpired(listenToExpired);
-    ref
-        .read(expiredTimerControllerProvider)
-        .addListenerOnCanceled(listenToCanceled);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref
+          .read(expiredTimerControllerProvider)
+          .addListenerOnExpired(listenToExpired);
+      ref
+          .read(expiredTimerControllerProvider)
+          .addListenerOnCanceled(listenToCanceled);
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (mounted) {
+        ref.read(expiredTimerControllerProvider).removeListenerOnExpired();
+        ref.read(expiredTimerControllerProvider).removeListenerOnCanceled();
+      }
+    });
+
+    super.dispose();
   }
 
   @override
@@ -78,6 +92,10 @@ class _AllStoragePlansBodyState
 
   Future<bool> listenToExpired(
       Subscription subscription, bool openExtendsConfirm) async {
+    await Future.delayed(const Duration(milliseconds: 200));
+    if (!mounted) {
+      return false;
+    }
     if (openExtendsConfirm) {
       final result = await showDialog<ConfirmResult>(
         context: context,

@@ -4,7 +4,8 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 import '../model/chart_tag_model.dart';
 
 class LocalChartTagRepositoryImpl
-    extends LocalRelRepositoryImpl<ChartTag, ChartTagModel, Chart, Tag> {
+    extends LocalRelRepositoryImpl<ChartTag, ChartTagModel, Chart, Tag>
+    implements LocalChartTagRepository {
   LocalChartTagRepositoryImpl(
     super.dataSource, {
     required super.leftIdColumn,

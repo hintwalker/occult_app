@@ -4,6 +4,8 @@ class BookReaderControlController extends ChangeNotifier {
   int currentPage = 0;
   int totalPage = 0;
 
+  int get currentPageDisplay => currentPage + 1;
+
   BookReaderControlController({
     this.currentPage = 0,
     this.totalPage = 0,

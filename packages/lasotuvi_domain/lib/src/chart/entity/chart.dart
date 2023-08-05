@@ -3,6 +3,7 @@ import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
+import '../../old_version_data/structure/old_chart_columns.dart';
 import '../column_chart.dart';
 
 class Chart extends SyncableEntity<Chart> {
@@ -93,6 +94,50 @@ class Chart extends SyncableEntity<Chart> {
         modified: map[columnModified] == null
             ? LocalLocked.unlocked
             : map[columnModified] as int);
+  }
+
+  static Chart fromOldVersion(Map<String, Object?> map) {
+    return Chart(
+      map[OldChartColumns.createdDate] as int,
+      name: map[OldChartColumns.name] == null
+          ? ''
+          : map[OldChartColumns.name] as String,
+      gender: map[OldChartColumns.gender] == null
+          ? Gender.female
+          : Gender.fromInt(map[OldChartColumns.gender] as int),
+      watchingYear: map[OldChartColumns.watchingYear] == null
+          ? 2023
+          : map[OldChartColumns.watchingYear] as int,
+      timeZoneOffset: 7,
+      avatar: _getOldAvatar(map[OldChartColumns.avatar]),
+      birthday: DateTime(
+          map[OldChartColumns.yearGreg] as int,
+          map[OldChartColumns.monthGreg] as int,
+          map[OldChartColumns.dayGreg] as int,
+          map[OldChartColumns.hour] as int,
+          map[OldChartColumns.minute] as int),
+      created: DateTime.fromMillisecondsSinceEpoch(
+          map[OldChartColumns.createdDate] as int),
+      lastViewed: map[OldChartColumns.lastOpened] == null
+          ? DateTime.now()
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[OldChartColumns.lastOpened] as int),
+      syncStatus: null,
+      storageState: null,
+      modified: LocalLocked.unlocked,
+    );
+  }
+
+  static String? _getOldAvatar(Object? oldAvatar) {
+    if (oldAvatar == null) {
+      return null;
+    }
+    final string = oldAvatar as String;
+    if (string.length < 10) {
+      return null;
+    } else {
+      return string.substring(7);
+    }
   }
 
   Chart copyWith({

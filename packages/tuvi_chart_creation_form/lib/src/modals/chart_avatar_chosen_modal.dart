@@ -10,10 +10,12 @@ class ChartAvatarChosenModal extends ConsumerWidget {
     super.key,
     required this.controller,
     required this.translate,
+    required this.chartId,
   });
 
   final ChartAvatarController controller;
   final String Function(String) translate;
+  final String chartId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,6 +26,7 @@ class ChartAvatarChosenModal extends ConsumerWidget {
         child: ChartAvatarChosenWidget(
           controller: controller,
           translate: translate,
+          chartId: chartId,
         ),
       )
     ]);

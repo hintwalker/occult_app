@@ -52,7 +52,7 @@ class BasicModal extends StatelessWidget {
                         width: 8,
                       ),
                       IconButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () => Navigator.maybePop(context),
                           icon: const Icon(Icons.arrow_back)),
                       const SizedBox(
                         width: 8,

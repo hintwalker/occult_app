@@ -2,6 +2,7 @@
     package="com.tauari.lasotuvi">
     <uses-permission android:name="android.permission.INTERNET" /> 
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
    <application
         android:label="@string/app_label"
         android:name="${applicationName}"

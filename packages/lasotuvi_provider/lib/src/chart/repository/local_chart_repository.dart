@@ -4,6 +4,6 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 
 import '../data_source/sqlite_chart_data_source.dart';
 
-final localChartRepositoryProvider = Provider.autoDispose<LocalChartRepository>(
+final localChartRepositoryProvider = Provider<LocalChartRepository>(
   (ref) => LocalChartRepositoryImpl(ref.read(sqliteChartDataSourceProvider)),
 );

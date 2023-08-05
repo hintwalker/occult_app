@@ -19,30 +19,36 @@ class AllNoteListBody extends ConsumerStatefulWidget {
 class _AllNoteListBodyState extends UserAuthDependedState<AllNoteListBody> {
   @override
   Widget build(BuildContext context) {
-    return findingUid
-        ? const LoadingWidget()
-        : BasicStreamBuilder(
-            stream: ref.watch(noteAndChartListControllerProvider).stream(uid),
-            child: (data) => BasicFutureBuilder(
-              future: SortHelper.getSortOption(noteAndChartSortKey),
-              child: (sortValue) => AllNoteAndChartListWidget(
-                uid: uid,
-                data: data ?? [],
-                translate: translate,
-                colorScheme: LasotuviAppStyle.colorScheme,
-                onOpenSyncStatus: ({
-                  required Note note,
-                  required String? uid,
-                }) =>
-                    onOpenSyncStatus(
-                        context: context, note: note, uid: uid, ref: ref),
-                onItemTap: onItemTap,
-                onSaveSortOption: (key, value) =>
-                    SortHelper.saveSortOption(key, value),
-                initSortValue: sortValue,
+    return WillPopScope(
+      onWillPop: () {
+        ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.home);
+        return Future.value(false);
+      },
+      child: findingUid
+          ? const LoadingWidget()
+          : BasicStreamBuilder(
+              stream: ref.watch(noteAndChartListControllerProvider).stream(uid),
+              child: (data) => BasicFutureBuilder(
+                future: SortHelper.getSortOption(noteAndChartSortKey),
+                child: (sortValue) => AllNoteAndChartListWidget(
+                  uid: uid,
+                  data: data ?? [],
+                  translate: translate,
+                  colorScheme: LasotuviAppStyle.colorScheme,
+                  onOpenSyncStatus: ({
+                    required Note note,
+                    required String? uid,
+                  }) =>
+                      onOpenSyncStatus(
+                          context: context, note: note, uid: uid, ref: ref),
+                  onItemTap: onItemTap,
+                  onSaveSortOption: (key, value) =>
+                      SortHelper.saveSortOption(key, value),
+                  initSortValue: sortValue,
+                ),
               ),
             ),
-          );
+    );
   }
 
   void onItemTap(BuildContext context, Note note, String? uid) {

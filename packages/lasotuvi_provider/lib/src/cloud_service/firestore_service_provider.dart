@@ -4,6 +4,6 @@ import 'package:tauari_firebase/tauari_firebase.dart';
 
 import '../firebase/firebase_firestore_provider.dart';
 
-final firestoreServiceProvider = Provider.autoDispose<CloudService>(
-  (ref) => FirestoreService(ref.read(firebaseFirestoreProvider)),
+final firestoreServiceProvider = Provider<CloudService>(
+  (ref) => FirestoreService(ref.watch(firebaseFirestoreProvider)),
 );

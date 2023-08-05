@@ -1,5 +1,6 @@
 library tauari_utils;
 
+export 'src/is_first_run.dart';
 export 'src/contert_uint8list_to_string.dart';
 
 export 'src/temp_file.dart';

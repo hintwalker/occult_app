@@ -33,14 +33,18 @@ class _SingleSelectableChartListBodyState
             colorScheme: LasotuviAppStyle.colorScheme,
             child: BasicStreamBuilder(
               stream: ref.watch(chartListControllerProvider).stream(uid),
-              child: (data) => SingleSelectableChartListWidget(
-                data ?? [],
-                uid: uid,
-                translate: translate,
-                colorScheme: LasotuviAppStyle.colorScheme,
-                onItemTap: widget.onSelect,
-                onSaveSortOption: (key, value) =>
-                    SortHelper.saveSortOption(key, value),
+              child: (data) => BasicFutureBuilder<SortValue?>(
+                future: SortHelper.getSortOption(chartSortKey),
+                child: (sortValue) => SingleSelectableChartListWidget(
+                  data ?? [],
+                  uid: uid,
+                  initSortValue: sortValue,
+                  translate: translate,
+                  colorScheme: LasotuviAppStyle.colorScheme,
+                  onItemTap: widget.onSelect,
+                  onSaveSortOption: (key, value) =>
+                      SortHelper.saveSortOption(key, value),
+                ),
               ),
             ),
           );

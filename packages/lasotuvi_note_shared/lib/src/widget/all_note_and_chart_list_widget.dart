@@ -40,7 +40,7 @@ class AllNoteAndChartListWidget extends StatelessWidget {
       whereTest: (item, query) => noteAndChartWhereClause(item, query),
       sortOption: initSortValue,
       itemComparator: noteAndChartComparator,
-      onSaveSortOption: (e) => onSaveSortOption(noteSortKey, e),
+      onSaveSortOption: (e) => onSaveSortOption(noteAndChartSortKey, e),
     );
     return FilterableWidget(
       colorScheme: colorScheme,
@@ -50,6 +50,8 @@ class AllNoteAndChartListWidget extends StatelessWidget {
       onSearch: controller.runFilter,
       child: DataListContainer<NoteAndChart, SimpleTextGroup>(
         data: data,
+        colorScheme: colorScheme,
+        translate: translate,
         // order: controller.sortOption?.order ?? ListOrder.asc,
         controller: controller,
         groupBy: (e) => groupNoteAndChartBy(

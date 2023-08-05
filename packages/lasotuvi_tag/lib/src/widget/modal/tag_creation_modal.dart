@@ -17,13 +17,16 @@ class TagCreationModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasicDialog(
-      title: translate('tagCreation hoij pijo oih pijs'),
+      title: translate('tagCreation'),
       // colorScheme: colorScheme,
       children: [
         TagCreationWidget(
             colorScheme: colorScheme,
             translate: translate,
-            onCreateTag: onCreateTag),
+            onCreateTag: (title, subTitle) {
+              onCreateTag(title, subTitle);
+              Navigator.pop(context);
+            }),
       ],
     );
   }

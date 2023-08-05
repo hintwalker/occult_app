@@ -11,7 +11,7 @@ class ChartCreationNotifer extends StateNotifier<ChartCreationState> {
       : super(
           ChartCreationState(
             chart: Chart.empty().copyWith(
-              name: 'noName',
+              name: 'Unnamed',
               birthday: initialMoment(
                 const TimeZone(offsetInHour: 7),
               ).toDateTime(),

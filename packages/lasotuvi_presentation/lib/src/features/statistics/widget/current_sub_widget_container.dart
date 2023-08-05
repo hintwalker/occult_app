@@ -75,6 +75,10 @@ class _CurrentSubState
 
   Future<bool> listenToExpired(
       Subscription subscription, bool openExtendsConfirm) async {
+    await Future.delayed(const Duration(milliseconds: 200));
+    if (!mounted) {
+      return false;
+    }
     if (openExtendsConfirm) {
       final result = await showDialog<ConfirmResult>(
         context: context,

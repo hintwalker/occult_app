@@ -16,6 +16,28 @@ class ModifyChartController extends StateNotifier<bool> {
   }) async {
     state = true;
     await ref.read(updateChartProvider)(uid, chart);
+
+    state = false;
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (context.mounted) {
+        context.pop();
+      }
+    });
+  }
+
+  Future<void> updateAvatar({
+    required BuildContext context,
+    required String? uid,
+    required Chart chart,
+    required WidgetRef ref,
+  }) async {
+    state = true;
+    await ref.read(updateChartProvider)(uid, chart);
+    if (uid != null) {
+      if (!(chart.avatar == null || chart.avatar!.isEmpty)) {
+        await ref.read(uploadAvatarProvider).call(uid, chart.avatar!);
+      }
+    }
     state = false;
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (context.mounted) {

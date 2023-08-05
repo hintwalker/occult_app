@@ -7,5 +7,9 @@ class LiveEnergyStyleImpl implements LiveEnergyStyle {
   Color get iconColor => lightColorScheme.primary;
 
   @override
-  TextStyle get textStyle => TextStyle(color: lightColorScheme.primary);
+  TextStyle get textStyle => TextStyle(
+      color: lightColorScheme.primary,
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.2);
 }

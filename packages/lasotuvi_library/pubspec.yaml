@@ -22,6 +22,8 @@ dependencies:
     path: ../tauari_list_view
   tauari_sort:
     path: ../tauari_sort
+  tauari_utils:
+    path: ../tauari_utils
 
 dev_dependencies:
   flutter_test:

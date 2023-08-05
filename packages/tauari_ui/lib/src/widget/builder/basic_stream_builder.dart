@@ -17,19 +17,20 @@ class BasicStreamBuilder<T> extends StatelessWidget {
     return StreamBuilder<T>(
         stream: stream,
         builder: (_, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingWidget();
             // final data = snapshot.requireData;
             // if (data == null) {
             //   return const ErrorTextWidget();
             // } else {
+
+            // }
+          } else {
             if (snapshot.hasData) {
               return child(snapshot.requireData);
             } else {
               return child(null);
             }
-            // }
-          } else {
-            return const LoadingWidget();
           }
         });
   }

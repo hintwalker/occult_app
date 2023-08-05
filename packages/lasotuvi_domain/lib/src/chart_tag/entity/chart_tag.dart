@@ -1,6 +1,7 @@
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_values/tauari_values.dart';
 
+import '../../old_version_data/structure/old_chart_tag_columns.dart';
 import '../column_chart_tag.dart';
 
 class ChartTag extends SyncableEntity<ChartTag> {
@@ -27,6 +28,15 @@ class ChartTag extends SyncableEntity<ChartTag> {
         modified: map[columnModified] == null
             ? LocalLocked.unlocked
             : map[columnModified] as int);
+  }
+
+  static ChartTag fromOldVersion(int id, Map<String, Object?> map) {
+    return ChartTag(id,
+        chartId: map[OldChartTagColumns.humanId] as int,
+        tagId: map[OldChartTagColumns.tagId] as int,
+        syncStatus: null,
+        storageState: null,
+        modified: LocalLocked.unlocked);
   }
 
   static ChartTag fromIds(int id, int chartId, int tagId) {

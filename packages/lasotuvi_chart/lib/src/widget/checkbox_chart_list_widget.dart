@@ -65,6 +65,8 @@ class CheckBoxChartListWidget extends StatelessWidget {
         onSortOptionSelected: controller.setSortOption,
         child: CheckboxDataListContainer<ChartHasTags, SimpleTextGroup>(
           data: data,
+          colorScheme: colorScheme,
+          translate: translate,
           // order: controller.sortOption?.order ?? ListOrder.asc,
           controller: controller,
           groupBy: (e) =>

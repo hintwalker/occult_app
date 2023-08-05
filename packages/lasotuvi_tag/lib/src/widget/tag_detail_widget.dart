@@ -73,7 +73,7 @@ class TagDetailWidget extends StatelessWidget {
                 onPressed: () => onOpenChartList(context, tagHasCharts.source),
                 icon: const Icon(Icons.add_circle_outline),
                 label: Text(
-                  translate('addChart'),
+                  translate('addOrRemoveChart'),
                 ),
               ),
             ]),
