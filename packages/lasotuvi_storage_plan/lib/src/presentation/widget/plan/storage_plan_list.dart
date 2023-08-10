@@ -24,6 +24,7 @@ class StoragePlanList extends StatelessWidget {
     required this.subscription,
     required this.lastCanceled,
     required this.controller,
+    required this.willSubscribe,
     // this.uid,
   });
   final Iterable<StoragePlan> plans;
@@ -34,6 +35,8 @@ class StoragePlanList extends StatelessWidget {
   final StoragePlanListController controller;
   final Subscription subscription;
   final Subscription? lastCanceled;
+  final Future<bool> Function(BuildContext context, StoragePlan plan)
+      willSubscribe;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +54,7 @@ class StoragePlanList extends StatelessWidget {
             energyIcon: energyIcon,
             plan: plans.elementAt(index),
             planController: controller,
+            willSubscribe: willSubscribe,
           );
         });
   }

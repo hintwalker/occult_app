@@ -6,6 +6,7 @@ import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 
+import '../../../router/route_name.dart';
 import '../widget/chart_creation_modal_screen.dart';
 import '../widget/chart_detail_modal_screen.dart';
 import '../widget/chart_modification_options_modal_screen.dart';
@@ -30,39 +31,51 @@ class ChartNavigation {
     required String? syncStatus,
   }) {
     showDialog(
-        context: context,
-        builder: (_) =>
-            ChartDetailModalScreen(chartId: chartId, syncStatus: syncStatus));
+      context: context,
+      builder: (_) =>
+          ChartDetailModalScreen(chartId: chartId, syncStatus: syncStatus),
+      routeSettings: const RouteSettings(
+        name: RouteName.chartDetail,
+      ),
+    );
   }
 
   static void openChartView({
     required BuildContext context,
     // required WidgetRef ref,
     required Chart chart,
+    required bool saveLastView,
   }) {
     showDialog(
         context: context,
-        builder: (context) => ChartViewModalScreen(chart: chart),
-        routeSettings: const RouteSettings(name: 'chartView'));
+        builder: (context) => ChartViewModalScreen(
+              chart: chart,
+              saveLastView: saveLastView,
+            ),
+        routeSettings: const RouteSettings(name: RouteName.chartView));
     // pageBuilder: (context, animation, secondaryAnimation) =>
     //     ChartViewBody(chart: chart),
     // routeSettings: const RouteSettings(name: 'chartView'));
   }
 
   static void openCheckboxChartList(BuildContext context, Tag tag) {
-    showGeneralDialog(
+    showDialog(
       context: context,
-      pageBuilder: (context, animation, secondaryAnimation) =>
+      builder: (
+        context,
+      ) =>
           Material(child: CheckboxChartListBody(tag)),
     );
   }
 
-  static void openChartEditOptions(BuildContext context, Chart chart) {
+  static void openChartEditOptions(BuildContext context, Chart chart,
+      {void Function()? callback}) {
     showModalBottomSheet(
       context: context,
       builder: (context) => ChartModificationOptionsModalScreen(
         chartId: chart.id,
         syncStatus: chart.syncStatus,
+        callback: callback,
       ),
     );
   }
@@ -71,12 +84,15 @@ class ChartNavigation {
     required BuildContext context,
     required int chartId,
     required String? syncStatus,
+    void Function()? callback,
   }) {
     showDialog(
+      useRootNavigator: false,
       context: context,
       builder: (context) => ModifyChartNameBody(
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
     );
   }
@@ -85,12 +101,14 @@ class ChartNavigation {
     required BuildContext context,
     required int chartId,
     required String? syncStatus,
+    void Function()? callback,
   }) {
     showDialog(
       context: context,
       builder: (context) => ModifyBirthdayBody(
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
     );
   }
@@ -99,12 +117,14 @@ class ChartNavigation {
     required BuildContext context,
     required int chartId,
     required String? syncStatus,
+    void Function()? callback,
   }) {
     showDialog(
       context: context,
       builder: (context) => ModifyGenderBody(
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
     );
   }
@@ -113,12 +133,14 @@ class ChartNavigation {
     required BuildContext context,
     required int chartId,
     required String? syncStatus,
+    void Function()? callback,
   }) {
     showDialog(
       context: context,
       builder: (context) => ModifyChartAvatarBody(
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
     );
   }
@@ -127,12 +149,14 @@ class ChartNavigation {
     required BuildContext context,
     required int chartId,
     required String? syncStatus,
+    void Function()? callback,
   }) {
     showDialog(
       context: context,
       builder: (context) => ModifyWatchingYearBody(
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
     );
   }

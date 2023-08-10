@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StoragePlanStyle {
+  Color get primary => Colors.black87;
+  Color get outline => Colors.black87;
+
   Color get iconColor => Colors.black87;
   Color get activedRibbonBackground => Colors.green;
   Color get activedRibbonTextColor => Colors.black87;

@@ -51,7 +51,7 @@ class AllTagListWidget extends StatelessWidget {
         data: data,
         colorScheme: colorScheme,
         translate: translate,
-        // order: controller.sortOption?.order ?? ListOrder.asc,
+        order: controller.sortOption?.order ?? ListOrder.asc,
         controller: controller,
         groupBy: (e) => groupTagsBy(
           e,

@@ -27,6 +27,8 @@ export 'src/commentary/repository/commentary_and_request/local_commentary_and_re
 export 'src/commentary/repository/commentary_and_request/cloud_commentary_and_request_repository.dart';
 export 'src/commentary/repository/commentary_and_request/commentary_and_request_repository.dart';
 
+export 'src/note/usecase/count_note.dart';
+export 'src/note/usecase/count_note_on_cloud.dart';
 export 'src/note/usecase/update_note.dart';
 export 'src/note/usecase/on_note_by_id.dart';
 export 'src/note/usecase/on_note_by_chart_id.dart';
@@ -93,6 +95,9 @@ export 'src/chart_tag/usecase/on_chart_has_tags.dart';
 export 'src/chart_tag/usecase/sync_chart_tags.dart';
 export 'src/chart_tag/usecase/on_tag_has_charts.dart';
 
+export 'src/chart/usecase/count_chart_on_cloud.dart';
+export 'src/chart/usecase/count_chart.dart';
+export 'src/chart/usecase/take_chart.dart';
 export 'src/chart/usecase/download_avatar.dart';
 export 'src/chart/usecase/delete_avatar_from_cloud.dart';
 export 'src/chart/usecase/upload_avatar.dart';
@@ -117,6 +122,8 @@ export 'src/chart/repository/cloud_chart_repository.dart';
 export 'src/chart/repository/local_chart_repository.dart';
 export 'src/chart/column_chart.dart';
 
+export 'src/tag/usecase/count_tag.dart';
+export 'src/tag/usecase/count_tag_on_cloud.dart';
 export 'src/tag/usecase/on_tag_has_charts_list.dart';
 export 'src/tag/usecase/update_tag.dart';
 export 'src/tag/usecase/insert_tag_to_local.dart';

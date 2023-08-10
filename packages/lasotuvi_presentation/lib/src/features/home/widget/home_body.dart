@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 // import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
+import 'package:lasotuvi_presentation/src/shared/widget/new_data_option_button.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 // import 'package:lasotuvi_request/lasotuvi_request.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
@@ -20,8 +22,6 @@ import '../../../styles/general_style.dart';
 import '../../auth/user_auth_depended_state.dart';
 import '../../navigation/drawer_ids.dart';
 import '../../statistics/widget/current_sub_widget_container.dart';
-import '../controller/home_controller.dart';
-import 'data_creation_options_modal.dart';
 
 class HomeBody extends ConsumerStatefulWidget {
   const HomeBody({super.key});
@@ -31,7 +31,6 @@ class HomeBody extends ConsumerStatefulWidget {
 }
 
 class _HomeBodyState extends UserAuthDependedState<HomeBody> {
-  final controller = HomeController();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -60,6 +59,7 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                         ChartNavigation.openChartView(
                       context: context,
                       chart: chart,
+                      saveLastView: true,
                     ),
                     // chartView: (chartId) => ChartViewBody(chartId: chartId),
                     onOpenSyncOptions: (chart) =>
@@ -175,52 +175,7 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
               ],
             ),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: LasotuviAppStyle.colorScheme.primaryContainer,
-                  shape: BoxShape.rectangle,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(44.0),
-                    bottomRight: Radius.circular(44.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: LasotuviAppStyle.colorScheme.outline,
-                      offset: const Offset(2.0, 2.0),
-                      spreadRadius: 1.0,
-                      blurRadius: 2.0,
-                    ),
-                    BoxShadow(
-                      color: LasotuviAppStyle.colorScheme.primaryContainer,
-                      // offset: const Offset(2.0, 2.0),
-                      // spreadRadius: 2.0,
-                      // blurRadius: 2.0,
-                    )
-                  ]),
-              child: InkWell(
-                onTap: () => showModalBottomSheet(
-                    context: context,
-                    builder: (context) => const DataCreationOptionsModal()),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(44.0),
-                  bottomRight: Radius.circular(44.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: IconButton(
-                    onPressed: null,
-                    disabledColor: LasotuviAppStyle.colorScheme.primary,
-                    icon: const Icon(
-                      Icons.add,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          const NewDataOptionButton(),
         ],
       ),
     );
@@ -319,10 +274,16 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
   }
 
   Future<bool> onWillPop(BuildContext context) async {
-    return await showDialog(
+    final result = await showDialog<bool>(
       context: context,
       builder: (_) => const ShutdownConfirmDialog(
           colorScheme: LasotuviAppStyle.colorScheme, translate: translate),
     );
+    if (result == null || !result) {
+      return false;
+    } else {
+      SystemNavigator.pop();
+      return true;
+    }
   }
 }

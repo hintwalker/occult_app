@@ -35,12 +35,8 @@ class _TagFormWidgetState extends State<TagFormWidget> {
   void initState() {
     super.initState();
     setState(() {
-      if (widget.title != null) {
-        title = widget.title!;
-      }
-      if (widget.subTitle != null) {
-        subTitle = widget.subTitle!;
-      }
+      title = widget.title ?? widget.translate('noTitle');
+      subTitle = widget.subTitle ?? widget.translate('subTitle');
     });
     titleController = TextEditingController(text: title);
     subTitleController = TextEditingController(text: subTitle);

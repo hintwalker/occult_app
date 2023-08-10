@@ -14,7 +14,7 @@ class TauariSettings {
   static ValueListenable<dynamic> settings(String boxName) =>
       Hive.box(boxName).listenable();
 
-  static Future<Box> openBox(String name) => Hive.openBox(name);
+  static Future<Box<T>> openBox<T>(String name) => Hive.openBox<T>(name);
 
   static dynamic dataOfKey(String name, String key, {dynamic defaultValue}) =>
       Hive.box(name).get(

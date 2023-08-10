@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
-import 'package:tauari_utils/tauari_utils.dart';
+// import 'package:tauari_utils/tauari_utils.dart';
 
 class CanceledPreviousAlert extends StatelessWidget {
   const CanceledPreviousAlert(
@@ -32,7 +33,7 @@ class CanceledPreviousAlert extends StatelessWidget {
           //   height: 0.0,
           // ),
           Text(
-            dateTimeToString(canceledDate),
+            canceledDate.toStringVn(showSeconds: true),
             style: const TextStyle(
               height: 1.2,
               fontStyle: FontStyle.italic,

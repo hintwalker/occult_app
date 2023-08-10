@@ -1,4 +1,4 @@
-enum StopAutoExtendActionResult {
+enum AutoExtendActionResult {
   success,
   needSignIn,
   unknownError,

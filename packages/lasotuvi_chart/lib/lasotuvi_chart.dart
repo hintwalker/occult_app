@@ -1,7 +1,8 @@
 library lasotuvi_chart;
 
 export 'src/widget/builder/chart_detail_builder.dart';
-
+export 'src/query/chart_where_clause.dart';
+export 'src/sort/selectable_chart_has_tags_comparator.dart';
 export 'src/sort/chart_sort_key.dart';
 export 'src/widget/modify_bio/scaffold/modify_scaffold.dart';
 export 'src/widget/modify_bio/modify_state.dart';

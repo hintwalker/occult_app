@@ -1,5 +1,7 @@
 library tauari_utils;
 
+export 'src/list_update.dart';
+
 export 'src/is_first_run.dart';
 export 'src/contert_uint8list_to_string.dart';
 

@@ -20,6 +20,7 @@ class TagItemCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.only(left: 12.0, top: 8.0, bottom: 4.0),
       child: InkWell(
         onTap: onTap != null ? () => onTap!(context, data, uid) : null,
         borderRadius: BorderRadius.circular(12.0),

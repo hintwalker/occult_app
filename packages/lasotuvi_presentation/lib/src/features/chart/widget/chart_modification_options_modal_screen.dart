@@ -11,9 +11,11 @@ class ChartModificationOptionsModalScreen extends ConsumerWidget {
     super.key,
     required this.chartId,
     required this.syncStatus,
+    this.callback,
   });
   final int chartId;
   final String? syncStatus;
+  final void Function()? callback;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,30 +29,35 @@ class ChartModificationOptionsModalScreen extends ConsumerWidget {
         context: context,
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
       onOpenChangeName: (chartId, syncStatus) =>
           ChartNavigation.openModifyChartNameModal(
         context: context,
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
       onOpenChangeGender: (chartId, syncStatus) =>
           ChartNavigation.openModifyGenderModal(
         context: context,
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
       onOpenChangeBirthday: (chartId, syncStatus) =>
           ChartNavigation.openModifyBirthdayModal(
         context: context,
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
       onOpenChangeWatchingYear: (chartId, syncStatus) =>
           ChartNavigation.openModifyWatchingYearModal(
         context: context,
         chartId: chartId,
         syncStatus: syncStatus,
+        callback: callback,
       ),
     );
   }

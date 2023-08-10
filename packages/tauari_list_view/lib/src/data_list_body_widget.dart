@@ -11,7 +11,7 @@ class DataListBodyWidget<U, V, W> extends StatelessWidget {
     required this.groupBy,
     required this.groupComparator,
     required this.groupSeperatorBuilder,
-    this.order = ListOrder.asc,
+    required this.order,
     this.sort = true,
     this.useStickyGroupSeparators = false,
     this.seperator,
@@ -40,9 +40,12 @@ class DataListBodyWidget<U, V, W> extends StatelessWidget {
         padding:
             const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 128.0),
         sort: sort,
-        order: order == ListOrder.asc
-            ? GroupedListOrder.ASC
-            : GroupedListOrder.DESC,
+        order:
+            // order == ListOrder.asc
+            //     ?
+            GroupedListOrder.ASC,
+        //     :
+        // GroupedListOrder.DESC,
         itemBuilder: itemBuilder,
         separator: seperator ?? const SizedBox.shrink(),
 

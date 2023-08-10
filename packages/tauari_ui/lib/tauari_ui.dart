@@ -3,6 +3,12 @@ library tauari_ui;
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 
+export 'src/confirm_dialog/delete_chart_confirm_dialog.dart';
+
+export 'src/widget/need_upgrade_plan_dialog.dart';
+export 'src/widget/need_to_buy_more_energy_dialog.dart';
+export 'src/widget/basic_error_modal.dart';
+export 'src/widget/basic_top_bar.dart';
 export 'src/widget/download_failed_error_text.dart';
 export 'src/widget/no_connection_error_text.dart';
 export 'src/widget/shutdown_confirm_dialog.dart';

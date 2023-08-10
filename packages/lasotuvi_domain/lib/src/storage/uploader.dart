@@ -22,8 +22,10 @@ class Uploader {
   //   listeners.insert(index, listener);
   // }
 
-  Future<int> upload<T>(
-      {required String uid, required Iterable<T> items}) async {
+  Future<int> upload<T>({
+    required String uid,
+    required Iterable<T> items,
+  }) async {
     if (T == Chart) {
       for (var i = 0; i < items.length; i++) {
         final item = items.elementAt(i) as Chart;

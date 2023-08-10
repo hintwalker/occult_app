@@ -10,6 +10,8 @@ abstract class AuthDependedState<T extends ConsumerStatefulWidget>
   String? uid;
   bool findingUid = true;
   RegisterOnAuthStateChanged get registerOnAuthStateChanged;
+
+  FutureOr<void> callbackAfterGetUser(String? uid) {}
   @override
   void initState() {
     super.initState();
@@ -17,16 +19,18 @@ abstract class AuthDependedState<T extends ConsumerStatefulWidget>
   }
 
   void startListening() {
-    _streamSubscription = registerOnAuthStateChanged.call((user) {
+    _streamSubscription = registerOnAuthStateChanged.call((user) async {
       setState(() {
         uid = user.uidInFirestore;
         findingUid = false;
+        callbackAfterGetUser(uid);
       });
       return user.uidInFirestore;
     }, () {
       setState(() {
         uid = null;
         findingUid = false;
+        callbackAfterGetUser(uid);
       });
     });
   }

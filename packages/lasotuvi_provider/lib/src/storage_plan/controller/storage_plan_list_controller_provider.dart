@@ -34,7 +34,7 @@ final storagePlanListControllerProvider =
     //   return newEnergy.isLeft;
     // },
     // ableToPay: ref.read(enoughEnergyProvider).call,
-    stopAutoExtend: ref.read(stopAutoExtendProvider),
+    autoExtends: ref.read(stopAutoExtendProvider),
     // takeCurrentSub: ref.read(takeCurrentSubProvider),
     extendsPlan: ref.read(extendsPlanProvider),
     lastCanceledSubscription: ref.read(takeLastCanceledSubscription),

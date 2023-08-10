@@ -28,6 +28,8 @@ dependencies:
     path: ../tauari_data_core
   tuvi_strings:
     path: ../tuvi_strings
+  tauari_date_format:
+    path: ../tauari_date_format
 
 dev_dependencies:
   flutter_test:

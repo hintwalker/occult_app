@@ -31,7 +31,7 @@ class StorageOptionsModal<T extends SyncableEntity> extends StatefulWidget {
   final ColorScheme colorScheme;
   final String Function(String) translate;
   // final StorageOptionsModalController controller;
-  final Future Function(String, T) onUpload;
+  final Future<bool> Function(String?, T) onUpload;
   final Future Function(String, T) onDownload;
   final Future Function(String, T) onDeleteFromCloud;
   final Future Function(T) onDeleteFromLocal;
@@ -67,16 +67,19 @@ class _StorageOptionsModalState<T extends SyncableEntity>
   }
 
   Future<void> upload() async {
-    if (widget.uid != null) {
-      await widget.onUpload(widget.uid!, widget.item);
-      // await ref
-      //     .read(uploaderProvider)
-      //     .upload<T>(uid: widget.uid!, items: widget.items);
+    // if (widget.uid != null) {
+    final result = await widget.onUpload(widget.uid, widget.item);
+    // await ref
+    //     .read(uploaderProvider)
+    //     .upload<T>(uid: widget.uid!, items: widget.items);
+    if (result) {
       setState(() {
         onCloud = SyncStatus.synced;
       });
       doCallback();
     }
+
+    // }
   }
 
   Future<void> download() async {

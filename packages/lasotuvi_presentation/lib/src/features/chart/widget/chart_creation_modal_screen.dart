@@ -42,7 +42,11 @@ class _ChartCreationModalScreenState
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (context.mounted) {
         context.pop();
-        ChartNavigation.openChartView(context: context, chart: chart);
+        ChartNavigation.openChartView(
+          context: context,
+          chart: chart,
+          saveLastView: true,
+        );
       }
     });
   }

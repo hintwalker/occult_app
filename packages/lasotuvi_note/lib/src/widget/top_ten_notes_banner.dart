@@ -64,7 +64,7 @@ class TopTenNotesBanner extends StatelessWidget {
             ),
             queryArgs: QueryArgs(
               uid: uid,
-              limit: 9,
+              limitDisplay: 10,
               orderBy: '${ColumnNote.edited} DESC',
             ),
           ),

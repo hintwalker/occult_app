@@ -52,7 +52,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
       title: map[OldNoteColumns.noteTitle] == null
           ? ''
           : map[OldNoteColumns.noteTitle] as String,
-      content: '[{"insert":"${map[OldNoteColumns.noteText]}\\n"}]',
+      content: '[{"insert":"${map[OldNoteColumns.noteText.trim()]}\\n"}]',
       created: DateTime.fromMillisecondsSinceEpoch(
           map[OldNoteColumns.createdDate] as int),
       edited: DateTime.fromMillisecondsSinceEpoch(

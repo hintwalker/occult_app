@@ -10,7 +10,7 @@ class TagDetailWidget extends StatelessWidget {
     required this.colorScheme,
     required this.translate,
     // required this.onChartItemTap,
-    required this.onOpenTagSyncOptions,
+    // required this.onOpenTagSyncOptions,
     // required this.chartSyncOptions,
     required this.onChangeInfoTap,
     required this.onOpenChartList,
@@ -20,7 +20,7 @@ class TagDetailWidget extends StatelessWidget {
   final TagHasCharts tagHasCharts;
   final ColorScheme colorScheme;
   final String Function(String) translate;
-  final void Function(Tag tag) onOpenTagSyncOptions;
+  // final void Function(BuildContext context, Tag tag) onOpenTagSyncOptions;
   // final void Function(BuildContext context, Chart chart) onChartItemTap;
   // final Widget Function(Tag, {String? uid, String? syncStatus}) tagSyncOptions;
   // final Widget Function(Chart, {String? uid, String? syncStatus})
@@ -53,13 +53,31 @@ class TagDetailWidget extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     SyncStatusRibbonWidget(
+            //       colorScheme: colorScheme,
+            //       onTap: () => onOpenTagSyncOptions(
+            //         context,
+            //         tagHasCharts.source,
+            //       ),
+            //     ),
+            //     const SizedBox(
+            //       width: 32,
+            //     ),
             ElevatedButton.icon(
-                onPressed: () => onChangeInfoTap(
-                      context,
-                      tagHasCharts.source,
-                    ),
-                icon: const Icon(Icons.edit),
-                label: Text(translate('changeInfo'))),
+              onPressed: () => onChangeInfoTap(
+                context,
+                tagHasCharts.source,
+              ),
+              icon: const Icon(Icons.edit),
+              label: Text(
+                translate('changeInfo'),
+              ),
+            ),
+            //   ],
+            // ),
             const SizedBox(
               height: 24.0,
             ),

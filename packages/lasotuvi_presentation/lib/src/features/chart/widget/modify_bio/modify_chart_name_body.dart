@@ -13,9 +13,11 @@ class ModifyChartNameBody extends ConsumerStatefulWidget {
     super.key,
     required this.chartId,
     required this.syncStatus,
+    this.callback,
   });
   final int chartId;
   final String? syncStatus;
+  final void Function()? callback;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -29,10 +31,10 @@ class _ModifyChartNameBodyState
     final processing = ref.watch(modifyChartControllerProvider);
     return findingUid || processing
         ? const LoadingWidget()
-        : BasicStreamBuilder(
-            stream: ref.watch(chartDetailControllerProvider).stream(
+        : BasicFutureBuilder(
+            future: ref.watch(chartDetailControllerProvider).takeById(
                   uid: uid,
-                  docId: widget.chartId,
+                  id: widget.chartId,
                   syncStatus: widget.syncStatus,
                 ),
             child: (data) => ModifyChartNameModal(
@@ -40,16 +42,48 @@ class _ModifyChartNameBodyState
               child: ModifyChartNameWidget(
                 data,
                 translate: translate,
-                onUpdate: (chart) => ref
-                    .read(modifyChartControllerProvider.notifier)
-                    .updateChart(
-                      context: context,
-                      uid: uid,
-                      chart: chart,
-                      ref: ref,
-                    ),
+                onUpdate: (chart) async {
+                  await ref
+                      .read(modifyChartControllerProvider.notifier)
+                      .updateChart(
+                        context: context,
+                        uid: uid,
+                        chart: chart,
+                        ref: ref,
+                      );
+                  if (widget.callback != null) {
+                    widget.callback!();
+                  }
+                },
               ),
             ),
           );
+    // BasicStreamBuilder(
+    //     stream: ref.watch(chartDetailControllerProvider).stream(
+    //           uid: uid,
+    //           docId: widget.chartId,
+    //           syncStatus: widget.syncStatus,
+    //         ),
+    //     child: (data) => ModifyChartNameModal(
+    //       title: translate('modifyChartName'),
+    //       child: ModifyChartNameWidget(
+    //         data,
+    //         translate: translate,
+    //         onUpdate: (chart) async {
+    //           await ref
+    //               .read(modifyChartControllerProvider.notifier)
+    //               .updateChart(
+    //                 context: context,
+    //                 uid: uid,
+    //                 chart: chart,
+    //                 ref: ref,
+    //               );
+    //           if (widget.callback != null) {
+    //             widget.callback!();
+    //           }
+    //         },
+    //       ),
+    //     ),
+    //   );
   }
 }

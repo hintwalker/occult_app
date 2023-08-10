@@ -3,6 +3,7 @@ import 'package:lasotuvi_request_shared/lasotuvi_request_shared.dart';
 // import 'package:lasotuvi_chart_tag/lasotuvi_chart_tag.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sunoom/sunoom.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 // import 'tag_item_in_chart.widget.dart';

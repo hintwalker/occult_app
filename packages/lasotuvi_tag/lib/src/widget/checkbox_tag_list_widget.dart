@@ -61,7 +61,7 @@ class CheckBoxTagListWidget extends StatelessWidget {
           onPressed: () => onOpenTagCreation(context),
           icon: const Icon(Icons.add),
           label: Text(
-            translate('createTag'),
+            translate('createNewTag'),
           ),
         ),
         const SizedBox(
@@ -87,7 +87,7 @@ class CheckBoxTagListWidget extends StatelessWidget {
                 data: data,
                 colorScheme: colorScheme,
                 translate: translate,
-                // order: controller.sortOption?.order ?? ListOrder.asc,
+                order: controller.sortOption?.order ?? ListOrder.asc,
                 initSelected: initSelected,
                 itemId: itemId,
                 controller: controller,

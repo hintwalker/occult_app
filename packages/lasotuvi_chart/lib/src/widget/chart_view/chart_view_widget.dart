@@ -16,7 +16,7 @@ class ChartViewWidget extends StatelessWidget {
     required this.translate,
     required this.onGoToDetail,
     required this.colorScheme,
-    required this.onOpenChartSyncOptions,
+    // required this.onOpenChartSyncOptions,
     required this.onOpenNoteSyncOptions,
     required this.openTagSyncOptions,
     // required this.onOpenCommentarySyncOptions,
@@ -34,7 +34,7 @@ class ChartViewWidget extends StatelessWidget {
   final ChartHasTags? chartHasTags;
   final ChartViewController controller;
   final ColorScheme colorScheme;
-  final void Function(BuildContext context, Chart chart) onOpenChartSyncOptions;
+  // final void Function(BuildContext context, Chart chart) onOpenChartSyncOptions;
   final void Function(Note note) onOpenNoteSyncOptions;
   final void Function(Request request) onOpenRequestView;
   final void Function(Tag tag) onOpenTagDetail;
@@ -96,8 +96,8 @@ class ChartViewWidget extends StatelessWidget {
                                     chartHasTags!.source,
                                     uid: uid,
                                     colorScheme: colorScheme,
-                                    openSyncOptions: (context, chart) =>
-                                        onOpenChartSyncOptions(context, chart),
+                                    // openSyncOptions: (context, chart) =>
+                                    //     onOpenChartSyncOptions(context, chart),
                                   ),
                                   ElevatedButton.icon(
                                     onPressed: () => onOpenChartEditOptions(

@@ -25,11 +25,11 @@ class SubscriptionTitle extends StatelessWidget {
           color: style.iconColor,
         ),
         const SizedBox(
-          width: 4.0,
+          width: 8.0,
         ),
         Text(
           '${translate('storagePlan')}:',
-          style: style.title,
+          style: TextStyle(fontSize: 18.0, color: style.outline),
         ),
         const SizedBox(
           width: 8.0,
@@ -43,17 +43,24 @@ class SubscriptionTitle extends StatelessWidget {
           child: Row(children: [
             Text(
               plan.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                  color: style.primary),
             ),
             const SizedBox(
               width: 8.0,
             ),
             energyIcon,
-            plan.energy == 0
-                ? Text(translate('free'))
-                : Text('${plan.energy} /30 ${translate('day')}')
+            Text(
+              plan.energy == 0
+                  ? translate('free')
+                  : '${plan.energy} /30 ${translate('day')}',
+              style: TextStyle(
+                fontSize: 16.0,
+                color: style.primary,
+              ),
+            )
           ]),
         )
       ],

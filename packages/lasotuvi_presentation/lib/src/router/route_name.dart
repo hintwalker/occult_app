@@ -45,4 +45,5 @@ class RouteName {
   // static const commentaryReader = 'commentaryReader';
 
   static const commentaries = 'commentaries';
+  static const statistic = 'statistic';
 }

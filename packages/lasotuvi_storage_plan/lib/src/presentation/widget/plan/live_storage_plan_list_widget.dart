@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../entity/storage_plan.dart';
 import '../../../entity/storage_plan_ids.dart';
 import '../plan/plan_warning_canceled.dart';
 import '../plan/plan_warning_expired.dart';
@@ -24,6 +25,7 @@ class LiveStoragePlanListWidget extends StatelessWidget {
     // this.previousPlanId,
     required this.uid,
     required this.currentSubController,
+    required this.willSubscribe,
     // required this.onRegister,
   });
 
@@ -36,6 +38,8 @@ class LiveStoragePlanListWidget extends StatelessWidget {
   // final String? activedPlanId;
   // final String? previousPlanId;
   final CurrentSubController currentSubController;
+  final Future<bool> Function(BuildContext context, StoragePlan plan)
+      willSubscribe;
   // final void Function(StoragePlan) onRegister;
 
   @override
@@ -91,6 +95,7 @@ class LiveStoragePlanListWidget extends StatelessWidget {
                           // uid: uid,
                           controller: controller,
                           lastCanceled: lastCanceled,
+                          willSubscribe: willSubscribe,
                         ),
                       ),
                     ],

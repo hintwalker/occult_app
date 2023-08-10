@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import '../tauari_list_view.dart';
 
@@ -15,8 +16,7 @@ class DataListContainer<U, V> extends StatefulWidget {
     required this.colorScheme,
     required this.translate,
     this.useStickyGroupSeparators = false,
-
-    // this.order = ListOrder.asc,
+    required this.order,
     this.sort = true,
     this.seperator,
   });
@@ -28,7 +28,7 @@ class DataListContainer<U, V> extends StatefulWidget {
   final int Function(V, V) groupComparator;
   final Widget Function(V) groupSeperatorBuilder;
   final bool useStickyGroupSeparators;
-  // final ListOrder order;
+  final ListOrder order;
   final bool sort;
   final Widget? seperator;
   final String Function(String) translate;
@@ -112,7 +112,7 @@ class _DataListContainerState<U, V> extends State<DataListContainer<U, V>> {
             groupComparator: widget.groupComparator,
             groupSeperatorBuilder: widget.groupSeperatorBuilder,
             sort: widget.sort,
-            // order: order,
+            order: widget.order,
             useStickyGroupSeparators: widget.useStickyGroupSeparators,
             seperator: widget.seperator,
           ),

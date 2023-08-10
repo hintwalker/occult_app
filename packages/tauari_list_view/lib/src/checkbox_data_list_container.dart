@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_sort/tauari_sort.dart';
 
 import '../tauari_list_view.dart';
 
@@ -16,7 +17,7 @@ class CheckboxDataListContainer<U, V> extends StatefulWidget {
     required this.colorScheme,
     required this.translate,
     this.useStickyGroupSeparators = false,
-    // this.order = ListOrder.asc,
+    required this.order,
     this.sort = true,
   });
 
@@ -32,7 +33,7 @@ class CheckboxDataListContainer<U, V> extends StatefulWidget {
   final String Function(String) translate;
   final ColorScheme colorScheme;
   final bool useStickyGroupSeparators;
-  // final ListOrder order;
+  final ListOrder order;
   final bool sort;
 
   @override
@@ -50,7 +51,7 @@ class _CheckboxDataListContainerState<U, V>
   void initState() {
     super.initState();
     widget.controller.addListener(listenToController);
-    widget.controller.setData(widget.data);
+    widget.controller.initial(widget.data);
     // setState(() {
     //   selectableItems = widget.data
     //       .map((e) => SelectableItem(e,
@@ -67,7 +68,8 @@ class _CheckboxDataListContainerState<U, V>
     super.didUpdateWidget(oldWidget);
     widget.controller.removeListener(listenToController);
     widget.controller.addListener(listenToController);
-    widget.controller.setData(widget.data);
+    widget.controller.initial(widget.data);
+    // widget.controller.setData(widget.data);
   }
 
   @override
@@ -172,7 +174,7 @@ class _CheckboxDataListContainerState<U, V>
             groupComparator: widget.groupComparator,
             groupSeperatorBuilder: widget.groupSeperatorBuilder,
             sort: widget.sort,
-            // order: widget.order,
+            order: widget.order,
             useStickyGroupSeparators: widget.useStickyGroupSeparators,
           ),
         ),

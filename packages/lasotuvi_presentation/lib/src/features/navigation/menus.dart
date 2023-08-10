@@ -10,6 +10,11 @@ final menus = [
       title: translate('home'),
       icon: const Icon(Icons.home)),
   DrawerData(
+    id: DrawerIds.statistic,
+    title: translate('statistic'),
+    icon: const Icon(Icons.storage_rounded),
+  ),
+  DrawerData(
       id: DrawerIds.energyMarket,
       title: translate('energyMarket'),
       icon: const Icon(Icons.water_drop)),
@@ -30,9 +35,10 @@ final menus = [
       title: translate('tags'),
       icon: const Icon(Icons.label)),
   DrawerData(
-      id: DrawerIds.notes,
-      title: translate('notes'),
-      icon: const Icon(Icons.sticky_note_2)),
+    id: DrawerIds.notes,
+    title: translate('notes'),
+    icon: const Icon(Icons.sticky_note_2),
+  ),
 
   // DrawerData(
   //     id: DrawerIds.books,

@@ -52,6 +52,7 @@ abstract class LocalDataSource<T extends LocalModel> {
   }
 
   Stream<int> onCount() => dao.onCount();
+
   Stream<Iterable<T>> onData([QueryArgs? queryArgs]) {
     return dao.onData(queryArgs).map((event) => event.map((e) => fromMap(e)));
   }

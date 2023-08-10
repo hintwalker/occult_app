@@ -61,6 +61,7 @@ class _SelectableDataListViewState<U, V>
     setState(() {
       selectableItems = widget.data
           .map((e) => SelectableItem(e,
+              id: widget.itemId(e),
               initSelected: widget.initSelected(e),
               selected: widget.initSelected(e)))
           .toList();
@@ -79,6 +80,7 @@ class _SelectableDataListViewState<U, V>
     super.didUpdateWidget(oldWidget);
     final inputData = widget.data
         .map((e) => SelectableItem(e,
+            id: widget.itemId(e),
             initSelected: widget.initSelected(e),
             selected: widget.initSelected(e)))
         .toList();

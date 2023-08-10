@@ -31,30 +31,37 @@ class TagDetailBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return BasicStreamBuilder(
       stream: controller.stream(uid, tag),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LoadingWidget();
-        } else if (snapshot.hasData) {
-          final tag = snapshot.requireData;
-          return tag == null ? const ErrorTextWidget() : child(tag);
-          // TagDetailWidget(
-          //     uid: uid,
-          //     tagHasCharts: tag,
-          //     colorScheme: colorScheme,
-          //     translate: translate,
-          //     // onChartItemTap: onChartItemTap,
-          //     tagSyncOptions: tagSyncOptions,
-          //     // chartSyncOptions: chartSyncOptions,
-          //     onChangeInfoTap: onChangeInfoTap,
-          //     onOpenChartList: onOpenChartList,
-          //     chartItem: chartItem,
-          //   );
-        } else {
-          return const ErrorTextWidget();
-        }
-      },
+      loadingWidget: BasicLoadingModal(colorScheme: colorScheme),
+      child: (tagHasCharts) => tagHasCharts == null
+          ? BasicErrorModal(
+              colorScheme: colorScheme,
+            )
+          : child(tagHasCharts),
+      // {
+
+      //   if (snapshot.connectionState == ConnectionState.waiting) {
+      //     return const LoadingWidget();
+      //   } else if (snapshot.hasData) {
+      //     final tag = snapshot.requireData;
+      //     return tag == null ? const ErrorTextWidget() : child(tag);
+      //     // TagDetailWidget(
+      //     //     uid: uid,
+      //     //     tagHasCharts: tag,
+      //     //     colorScheme: colorScheme,
+      //     //     translate: translate,
+      //     //     // onChartItemTap: onChartItemTap,
+      //     //     tagSyncOptions: tagSyncOptions,
+      //     //     // chartSyncOptions: chartSyncOptions,
+      //     //     onChangeInfoTap: onChangeInfoTap,
+      //     //     onOpenChartList: onOpenChartList,
+      //     //     chartItem: chartItem,
+      //     //   );
+      //   } else {
+      //     return const ErrorTextWidget();
+      //   }
+      // },
     );
   }
 }

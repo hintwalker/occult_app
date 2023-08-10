@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tauari_sort/tauari_sort.dart';
-import '../sort/chart_sort_key.dart';
+// import '../sort/chart_sort_key.dart';
 import '../sort/chart_sort_options.dart';
-import '../sort/selectable_chart_has_tags_comparator.dart';
+// import '../sort/selectable_chart_has_tags_comparator.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_list_view/tauari_list_view.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import '../group/group_selectable_charts_by.dart';
-import '../query/chart_where_clause.dart';
+// import '../query/chart_where_clause.dart';
 import 'chart_list_item_widget.dart';
 
 class CheckBoxChartListWidget extends StatelessWidget {
@@ -23,6 +23,7 @@ class CheckBoxChartListWidget extends StatelessWidget {
     required this.onCancel,
     required this.onSaveSortOption,
     required this.initSortValue,
+    required this.controller,
   });
   final int tagId;
   final Iterable<ChartHasTags> data;
@@ -35,18 +36,19 @@ class CheckBoxChartListWidget extends StatelessWidget {
   final void Function(BuildContext context) onCancel;
   final void Function(BuildContext context, Chart chart, String? uid) onItemTap;
   final void Function(String key, SortValue sortOption) onSaveSortOption;
+  final CheckboxDataListController<ChartHasTags> controller;
 
   @override
   Widget build(BuildContext context) {
-    final CheckboxDataListController<ChartHasTags> controller =
-        CheckboxDataListController<ChartHasTags>(
-      whereTest: (item, query) => chartWhereClause(item.source, query),
-      initSelected: initSelected,
-      itemId: itemId,
-      sortOption: initSortValue,
-      itemComparator: selectableChartHasTagsComparator,
-      onSaveSortOption: (e) => onSaveSortOption(chartSortKey, e),
-    );
+    // final CheckboxDataListController<ChartHasTags> controller =
+    //     CheckboxDataListController<ChartHasTags>(
+    //   whereTest: (item, query) => chartWhereClause(item.source, query),
+    //   initSelected: initSelected,
+    //   itemId: itemId,
+    //   sortOption: initSortValue,
+    //   itemComparator: selectableChartHasTagsComparator,
+    //   onSaveSortOption: (e) => onSaveSortOption(chartSortKey, e),
+    // );
 
     return DataSelectionScaffold(
       colorScheme: colorScheme,
@@ -67,7 +69,7 @@ class CheckBoxChartListWidget extends StatelessWidget {
           data: data,
           colorScheme: colorScheme,
           translate: translate,
-          // order: controller.sortOption?.order ?? ListOrder.asc,
+          order: controller.sortOption?.order ?? ListOrder.asc,
           controller: controller,
           groupBy: (e) =>
               groupSelectableChartsBy(e, controller.sortOption, translate),

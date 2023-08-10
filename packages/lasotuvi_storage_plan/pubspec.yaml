@@ -22,6 +22,14 @@ dependencies:
     path: ../tauari_ui
   tauari_auth:
     path: ../tauari_auth
+  tauari_date_format:
+    path: ../tauari_date_format
+  lasotuvi_domain:
+    path: ../lasotuvi_domain
+  equatable: ^2.0.5
+  energy_store:
+    path: ../energy_store
+  flutter_riverpod: ^2.3.6
 
 dev_dependencies:
   flutter_test:

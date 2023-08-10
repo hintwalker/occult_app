@@ -1,5 +1,7 @@
 library tauari_list_view;
 
+export 'src/constant/item_selected_box_name.dart';
+
 export 'src/controller/data_list_controller.dart';
 export 'src/controller/checkbox_data_list_controller.dart';
 

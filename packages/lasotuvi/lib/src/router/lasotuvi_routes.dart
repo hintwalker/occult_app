@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lasotuvi/src/screen/splash/splash.dart';
+import '../screen/splash/splash.dart';
+import '../screen/statistic/statistic_screen_holder.dart';
 // import 'package:lasotuvi/screen/take_screen.dart';
 // import 'package:lasotuvi/screen/chart/all_charts_screen.dart';
 // import 'package:lasotuvi/screen/chart/chart_creation_screen.dart';
@@ -130,6 +131,17 @@ class LasotuviRoutes {
             pageBuilder: (context, state) => const FadeTransitionPage(
               child: AllTagsScreen(
                 restorationId: RouteName.tags,
+                // drawerController: mainDrawerController,
+              ),
+            ),
+          ),
+          GoRoute(
+            name: RouteName.statistic,
+            path: RoutePath.statistic,
+            parentNavigatorKey: shellNavigatorKey,
+            pageBuilder: (context, state) => const FadeTransitionPage(
+              child: StatisticScreenHolder(
+                restorationId: RouteName.statistic,
                 // drawerController: mainDrawerController,
               ),
             ),

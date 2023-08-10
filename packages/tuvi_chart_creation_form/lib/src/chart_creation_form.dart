@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
-import 'package:sunoom/sunoom.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
 import 'chart_creation_notifier.dart';

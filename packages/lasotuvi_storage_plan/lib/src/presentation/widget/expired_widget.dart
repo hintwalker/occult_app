@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 
 import '../style/expired_timer_style.dart';
 
@@ -35,8 +36,16 @@ class ExpiredWidget extends StatelessWidget {
         const SizedBox(
           width: 8.0,
         ),
-        Text('$days ${translate('days')} $hours : $minutes : $seconds',
-            style: TextStyle(color: style.expiredTextColor))
+        DurationWidget(
+          translate: translate,
+          style: TextStyle(color: style.expiredTextColor),
+          day: days,
+          hour: hours,
+          minute: minutes,
+          second: seconds,
+        ),
+        // Text('$days ${translate('days')} $hours : $minutes : $seconds',
+        //     style: TextStyle(color: style.expiredTextColor))
       ]),
     );
   }

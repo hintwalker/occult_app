@@ -9,6 +9,8 @@ import 'package:tauari_sort/tauari_sort.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../../shared/widget/new_data_option_button.dart';
+
 class AllNoteListBody extends ConsumerStatefulWidget {
   const AllNoteListBody({super.key});
 
@@ -24,30 +26,36 @@ class _AllNoteListBodyState extends UserAuthDependedState<AllNoteListBody> {
         ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.home);
         return Future.value(false);
       },
-      child: findingUid
-          ? const LoadingWidget()
-          : BasicStreamBuilder(
-              stream: ref.watch(noteAndChartListControllerProvider).stream(uid),
-              child: (data) => BasicFutureBuilder(
-                future: SortHelper.getSortOption(noteAndChartSortKey),
-                child: (sortValue) => AllNoteAndChartListWidget(
-                  uid: uid,
-                  data: data ?? [],
-                  translate: translate,
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  onOpenSyncStatus: ({
-                    required Note note,
-                    required String? uid,
-                  }) =>
-                      onOpenSyncStatus(
-                          context: context, note: note, uid: uid, ref: ref),
-                  onItemTap: onItemTap,
-                  onSaveSortOption: (key, value) =>
-                      SortHelper.saveSortOption(key, value),
-                  initSortValue: sortValue,
+      child: Stack(
+        children: [
+          findingUid
+              ? const LoadingWidget()
+              : BasicStreamBuilder(
+                  stream:
+                      ref.watch(noteAndChartListControllerProvider).stream(uid),
+                  child: (data) => BasicFutureBuilder(
+                    future: SortHelper.getSortOption(noteAndChartSortKey),
+                    child: (sortValue) => AllNoteAndChartListWidget(
+                      uid: uid,
+                      data: data ?? [],
+                      translate: translate,
+                      colorScheme: LasotuviAppStyle.colorScheme,
+                      onOpenSyncStatus: ({
+                        required Note note,
+                        required String? uid,
+                      }) =>
+                          onOpenSyncStatus(
+                              context: context, note: note, uid: uid, ref: ref),
+                      onItemTap: onItemTap,
+                      onSaveSortOption: (key, value) =>
+                          SortHelper.saveSortOption(key, value),
+                      initSortValue: sortValue,
+                    ),
+                  ),
                 ),
-              ),
-            ),
+          const NewDataOptionButton(),
+        ],
+      ),
     );
   }
 

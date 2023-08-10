@@ -10,7 +10,7 @@ import 'package:tauari_subscription/tauari_subscription.dart';
 
 import '../../entity/storage_plan.dart';
 import '../../usecase/make_current_subscription_expired.dart';
-import '../../usecase/stop_auto_extends.dart';
+import '../../usecase/auto_extends.dart';
 import '../../usecase/subscribe_plan.dart';
 import '../../usecase/take_all_storage_plans.dart';
 import '../../usecase/take_storage_plan_by_id.dart';
@@ -18,7 +18,7 @@ import '../../usecase/take_storage_plan_by_id.dart';
 class StoragePlanListController extends ChangeNotifier {
   StoragePlanListController({
     required this.subscribePlan,
-    required this.stopAutoExtend,
+    required this.autoExtends,
     required this.takeAllStoragePlans,
     required this.extendsPlan,
     required this.lastCanceledSubscription,
@@ -36,7 +36,7 @@ class StoragePlanListController extends ChangeNotifier {
     // this.registeredPlanId,
   });
   final SubscribePlan subscribePlan;
-  final StopAutoExtends stopAutoExtend;
+  final AutoExtends autoExtends;
   final TakeAllStoragePlans takeAllStoragePlans;
   final ExtendsPlan extendsPlan;
   final TakeLastCanceledSubscription lastCanceledSubscription;
@@ -120,14 +120,16 @@ class StoragePlanListController extends ChangeNotifier {
     // return SubscribeActionResult.success;
   }
 
-  Future<StopAutoExtendActionResult> unSubscribe(
-      Subscription subscription) async {
+  Future<AutoExtendActionResult> continueExtends(Subscription subscription) =>
+      autoExtends(subscription, true);
+
+  Future<AutoExtendActionResult> unSubscribe(Subscription subscription) async {
     // final connected = await hasConnection();
     // final user = takeCurrentUser();
     // if (user == null) {
     //   return SubscribeActionResult.needSignIn;
     // }
-    return await stopAutoExtend(subscription);
+    return await autoExtends(subscription, false);
     // return SubscribeActionResult.success;
     // unSubscribePlan.call(user.uidInFirestore);
   }

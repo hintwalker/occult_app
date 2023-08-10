@@ -28,44 +28,48 @@ class _CheckboxTagListBodyState
     extends UserAuthDependedState<CheckboxTagListBody> {
   @override
   Widget build(BuildContext context) {
-    return findingUid
-        ? const LoadingWidget()
-        : CheckboxTagListModal(
-            translate: translate,
-            colorScheme: LasotuviAppStyle.colorScheme,
-            child: BasicStreamBuilder(
-              stream: ref.watch(tagHasChartsListControllerProvider).stream(uid),
-              child: (tagHasCharts) => BasicFutureBuilder(
-                future: SortHelper.getSortOption(tagSortKey),
-                child: (sortValue) => CheckBoxTagListWidget(
-                  tagHasCharts ?? [],
-                  uid: uid,
-                  initSortValue: sortValue,
-                  translate: translate,
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  chartId: widget.chart.id,
-                  onCancel: onCancel,
-                  onSubmit: onSubmit,
-                  onItemTap: (context, tag, _) =>
-                      TagNavigation.openTagDetail(context: context, tag: tag),
-                  onOpenTagCreation: (context) =>
-                      TagNavigation.openTagCreationScreen(
-                    context,
-                    (tag) => doAfterCreation(tag, widget.chart),
-                  ),
-                  openSyncOptions: (uid, tag) =>
-                      StorageHelper.showOptionsModal<Tag>(
-                    tag,
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: findingUid
+          ? const LoadingWidget()
+          : CheckboxTagListModal(
+              translate: translate,
+              colorScheme: LasotuviAppStyle.colorScheme,
+              child: BasicStreamBuilder(
+                stream:
+                    ref.watch(tagHasChartsListControllerProvider).stream(uid),
+                child: (tagHasCharts) => BasicFutureBuilder(
+                  future: SortHelper.getSortOption(tagSortKey),
+                  child: (sortValue) => CheckBoxTagListWidget(
+                    tagHasCharts ?? [],
                     uid: uid,
-                    context: context,
-                    ref: ref,
+                    initSortValue: sortValue,
+                    translate: translate,
+                    colorScheme: LasotuviAppStyle.colorScheme,
+                    chartId: widget.chart.id,
+                    onCancel: onCancel,
+                    onSubmit: onSubmit,
+                    onItemTap: (context, tag, _) =>
+                        TagNavigation.openTagDetail(context: context, tag: tag),
+                    onOpenTagCreation: (context) =>
+                        TagNavigation.openTagCreationScreen(
+                      context,
+                      (tag) => doAfterCreation(tag, widget.chart),
+                    ),
+                    openSyncOptions: (uid, tag) =>
+                        StorageHelper.showOptionsModal<Tag>(
+                      tag,
+                      uid: uid,
+                      context: context,
+                      ref: ref,
+                    ),
+                    onSaveSortOption: (key, value) =>
+                        SortHelper.saveSortOption(key, value),
                   ),
-                  onSaveSortOption: (key, value) =>
-                      SortHelper.saveSortOption(key, value),
                 ),
               ),
             ),
-          );
+    );
   }
 
   Future<void> doAfterCreation(Tag tag, Chart chart) async {
@@ -111,5 +115,10 @@ class _CheckboxTagListBodyState
         context.pop();
       }
     });
+  }
+
+  Future<bool> onWillPop() async {
+    CheckboxDataListController.clearCache();
+    return true;
   }
 }

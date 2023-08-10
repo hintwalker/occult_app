@@ -48,4 +48,5 @@ class RoutePath {
       '/tag/:${RouterParams.tagId}/:${RouterParams.syncStatus}';
 
   static const commentaries = '/commentary/all';
+  static const statistic = '/statistic';
 }

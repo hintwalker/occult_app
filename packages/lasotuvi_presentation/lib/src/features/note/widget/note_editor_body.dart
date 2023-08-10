@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart' show NoteEditorBuilder;
+import 'package:lasotuvi_presentation/src/helper/pop_to_parrent.dart';
 import 'package:note_editor/note_editor.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
@@ -11,6 +12,7 @@ import 'package:sunoom/sunoom.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
+import 'package:tuvi_domain/tuvi_domain.dart';
 
 // import '../../../router/router_params.dart';
 // import '../../auth/auth_depended_state.dart';
@@ -84,9 +86,17 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
     return WillPopScope(
       onWillPop: () => onWillPop(note, context, ref),
       child: NoteEditorScaffold<Note>(
+        uid: uid,
+        syncStatus: note.syncStatus,
         note: note,
         colorScheme: LasotuviAppStyle.colorScheme,
         translate: translate,
+        onOpenSyncOptions: (context) => StorageHelper.showOptionsModal(note,
+            context: context,
+            uid: uid,
+            ref: ref,
+            doBeforeDeleteForever: () =>
+                popToParrent(context, RouteName.noteEditor)),
         child: NoteEditorWidget<Note>(
           translate: translate,
           colorScheme: LasotuviAppStyle.colorScheme,
@@ -114,18 +124,25 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
             }
             final birthday = chart.birthday
                 .toMoment(TimeZone(offsetInHour: chart.timeZoneOffset));
+            final yearsOldFromWatchingYear = yearOld(
+              birthday: birthday,
+              now: DateTime(chart.watchingYear, 12, 31, 23, 59, 59).toMoment(
+                TimeZone(offsetInHour: chart.timeZoneOffset),
+              ),
+            );
             final canWatchingYear = Can.ofLuniYear(chart.watchingYear);
             final chiWatchingYear = Chi.ofLuniYear(chart.watchingYear);
             return Padding(
               padding: const EdgeInsets.only(
-                left: 8,
-                right: 8,
+                left: 0,
+                right: 0,
               ),
               child: Card(
                 child: InkWell(
                   onTap: () => ChartNavigation.openChartView(
                     context: context,
                     chart: chart,
+                    saveLastView: true,
                   ),
                   // ChartHelper.openChartView(context: context, chart: chart),
                   borderRadius: BorderRadius.circular(12.0),
@@ -143,22 +160,21 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text(chart.name,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500)),
+                            Text(birthday.toGregorianDateTimeString()),
                             Text(
-                              chart.name,
-                            ),
-                            Row(
-                              children: [
-                                Text(birthday.toGregorianDateTimeString()),
-                                Text(
-                                  ' (${birthday.toLuniSolarDateString(
-                                    canName: (can) => translate(can.name),
-                                    chiName: (chi) => translate(chi.name),
-                                  )})',
-                                ),
-                              ],
+                              birthday.toLuniSolarDateString(
+                                canName: (can) => translate(can.name),
+                                chiName: (chi) => translate(chi.name),
+                              ),
                             ),
                             Text(
-                                '${translate('watchingYear')}: ${chart.watchingYear} ${translate(canWatchingYear.name)} ${translate(chiWatchingYear.name)}'),
+                              '${translate('watchingYear')}: ${chart.watchingYear} ${translate(canWatchingYear.name)} ${translate(chiWatchingYear.name)} ($yearsOldFromWatchingYear ${translate('t')})',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
                           ],
                         )
                       ],

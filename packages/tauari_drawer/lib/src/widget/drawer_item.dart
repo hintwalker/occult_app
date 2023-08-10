@@ -26,14 +26,14 @@ class DrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      child: InkWell(
-        splashColor: Colors.grey.withOpacity(0.1),
-        highlightColor: Colors.transparent,
-        onTap: onTap,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+            child: InkWell(
+              splashColor: Colors.grey.withOpacity(0.1),
+              highlightColor: Colors.transparent,
+              onTap: onTap,
               child: Row(
                 children: <Widget>[
                   DrawerItemHeader(
@@ -59,13 +59,13 @@ class DrawerItem extends StatelessWidget {
                 ],
               ),
             ),
-            DrawerItemHighlight(
-              visible: selected,
-              // animationController: animationController,
-              style: style,
-            )
-          ],
-        ),
+          ),
+          DrawerItemHighlight(
+            visible: selected,
+            // animationController: animationController,
+            style: style,
+          )
+        ],
       ),
     );
     // return Container(

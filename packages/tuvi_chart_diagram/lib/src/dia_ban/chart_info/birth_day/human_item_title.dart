@@ -10,7 +10,7 @@ class HumanItemTitle extends StatelessWidget {
     return Text(
       translate(title),
       style: const TextStyle(
-        fontSize: 11,
+        fontSize: 12,
         fontStyle: FontStyle.italic,
       ),
     );

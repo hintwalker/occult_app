@@ -34,33 +34,63 @@ class _CheckBoxChartListBodyState
     extends UserAuthDependedState<CheckboxChartListBody> {
   @override
   Widget build(BuildContext context) {
-    return findingUid
-        ? const Center(child: LoadingWidget())
-        : CheckboxChartListModal(
-            colorScheme: LasotuviAppStyle.colorScheme,
-            translate: translate,
-            child: BasicStreamBuilder(
-              stream: ref.watch(chartHasTagsListControllerProvider).stream(uid),
-              child: (chartHasTags) => BasicFutureBuilder(
-                future: SortHelper.getSortOption(chartSortKey),
-                child: (sortValue) => CheckBoxChartListWidget(
-                  chartHasTags ?? [],
-                  uid: uid,
-                  tagId: widget.tag.id,
-                  translate: translate,
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  onCancel: onCancel,
-                  onSubmit: onSubmit,
-                  onItemTap: (context, chart, _) =>
-                      ChartNavigation.openChartView(
-                          context: context, chart: chart),
-                  onSaveSortOption: (key, value) =>
-                      SortHelper.saveSortOption(key, value),
-                  initSortValue: sortValue,
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: findingUid
+          ? const Center(child: LoadingWidget())
+          : CheckboxChartListModal(
+              colorScheme: LasotuviAppStyle.colorScheme,
+              translate: translate,
+              child: BasicStreamBuilder(
+                stream:
+                    ref.watch(chartHasTagsListControllerProvider).stream(uid),
+                child: (chartHasTags) => BasicFutureBuilder(
+                  future: SortHelper.getSortOption(chartSortKey),
+                  child: (sortValue) {
+                    final CheckboxDataListController<ChartHasTags> controller =
+                        CheckboxDataListController<ChartHasTags>(
+                      whereTest: (item, query) =>
+                          chartWhereClause(item.source, query),
+                      initSelected: (ChartHasTags item) => item.carry
+                          .where(
+                            (element) => element.id == widget.tag.id,
+                          )
+                          .isNotEmpty,
+                      itemId: (ChartHasTags item) => item.source.id,
+                      sortOption: sortValue,
+                      itemComparator: selectableChartHasTagsComparator,
+                      onSaveSortOption: (e) =>
+                          (key, value) => SortHelper.saveSortOption(key, value),
+                    );
+                    return CheckBoxChartListWidget(
+                      chartHasTags ?? [],
+                      uid: uid,
+                      tagId: widget.tag.id,
+                      translate: translate,
+                      colorScheme: LasotuviAppStyle.colorScheme,
+                      controller: controller,
+                      onCancel: onCancel,
+                      onSubmit: onSubmit,
+                      onItemTap: (context, chart, _) =>
+                          ChartNavigation.openChartView(
+                        context: context,
+                        chart: chart,
+                        saveLastView: false,
+                      ),
+                      onSaveSortOption: (key, value) =>
+                          SortHelper.saveSortOption(key, value),
+                      initSortValue: sortValue,
+                    );
+                  },
                 ),
               ),
             ),
-          );
+    );
+  }
+
+  Future<bool> onWillPop() async {
+    CheckboxDataListController.clearCache();
+    return true;
   }
 
   void onCancel(BuildContext context) {

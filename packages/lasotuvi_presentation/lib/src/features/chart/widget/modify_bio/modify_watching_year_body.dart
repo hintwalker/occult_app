@@ -14,9 +14,11 @@ class ModifyWatchingYearBody extends ConsumerStatefulWidget {
     super.key,
     required this.chartId,
     required this.syncStatus,
+    this.callback,
   });
   final int chartId;
   final String? syncStatus;
+  final void Function()? callback;
 
   @override
   ConsumerState<ModifyWatchingYearBody> createState() =>
@@ -32,26 +34,56 @@ class _ModifyWatchingYearBodyState
       title: translate('modifyWatchingYear'),
       child: findingUid || processing
           ? const LoadingWidget()
-          : BasicStreamBuilder(
-              stream: ref.watch(chartDetailControllerProvider).stream(
+          : BasicFutureBuilder(
+              future: ref.watch(chartDetailControllerProvider).takeById(
                     uid: uid,
-                    docId: widget.chartId,
+                    id: widget.chartId,
                     syncStatus: widget.syncStatus,
                   ),
               child: (data) => ModifyWatchingYearWidget(
                 data,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 translate: translate,
-                onUpdate: (chart) => ref
-                    .read(modifyChartControllerProvider.notifier)
-                    .updateChart(
-                      context: context,
-                      uid: uid,
-                      chart: chart,
-                      ref: ref,
-                    ),
+                onUpdate: (chart) async {
+                  await ref
+                      .read(modifyChartControllerProvider.notifier)
+                      .updateChart(
+                        context: context,
+                        uid: uid,
+                        chart: chart,
+                        ref: ref,
+                      );
+                  if (widget.callback != null) {
+                    widget.callback!();
+                  }
+                },
               ),
             ),
+      // BasicStreamBuilder(
+      //     stream: ref.watch(chartDetailControllerProvider).stream(
+      //           uid: uid,
+      //           docId: widget.chartId,
+      //           syncStatus: widget.syncStatus,
+      //         ),
+      //     child: (data) => ModifyWatchingYearWidget(
+      //       data,
+      //       colorScheme: LasotuviAppStyle.colorScheme,
+      //       translate: translate,
+      //       onUpdate: (chart) async {
+      //         await ref
+      //             .read(modifyChartControllerProvider.notifier)
+      //             .updateChart(
+      //               context: context,
+      //               uid: uid,
+      //               chart: chart,
+      //               ref: ref,
+      //             );
+      //         if (widget.callback != null) {
+      //           widget.callback!();
+      //         }
+      //       },
+      //     ),
+      //   ),
     );
   }
 }

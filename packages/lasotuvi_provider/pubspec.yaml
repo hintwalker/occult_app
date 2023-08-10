@@ -42,6 +42,8 @@ dependencies:
     path: ../lasotuvi_request
   lasotuvi_request_shared:
     path: ../lasotuvi_request_shared
+  lasotuvi_statistic:
+    path: ../lasotuvi_statistic
 
   tauari_guard:
     path: ../tauari_guard

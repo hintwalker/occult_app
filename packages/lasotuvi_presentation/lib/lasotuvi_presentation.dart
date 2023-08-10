@@ -50,6 +50,8 @@ export 'src/features/storage_plan/all_storage_plans_body.dart';
 
 export 'src/features/dashboard/dashboard.dart';
 
+export 'src/features/statistics/screen/data_statistic_screen.dart';
+
 export 'src/features/navigation/energy_point_app_bar_action.dart';
 export 'src/features/navigation/take_screen_title.dart';
 export 'src/features/navigation/tuvi_drawer_header.dart';
@@ -57,7 +59,6 @@ export 'src/features/navigation/drawer_ids.dart';
 export 'src/features/navigation/main_navigation.dart';
 export 'src/features/navigation/menus.dart';
 
-export 'src/features/home/controller/home_controller.dart';
 export 'src/features/home/widget/data_creation_options_modal.dart';
 export 'src/features/home/widget/home_body.dart';
 

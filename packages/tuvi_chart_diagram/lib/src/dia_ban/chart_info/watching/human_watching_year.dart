@@ -25,9 +25,10 @@ class HumanWatchingYear extends StatelessWidget {
     final yearOldInt = yearOld(
         birthday: birthday,
         now: DateTime(watchingYear).toMoment(birthday.timeZone));
-    final yearOldText = '$yearOldInt ${translate("tuoi")}';
+    final yearOldText = '$yearOldInt-${yearOldInt + 1} ${translate("tuoi")}';
     return Wrap(
       runSpacing: 2.0,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         HumanItemTitle('namXem', translate: translate),
         const SizedBox(

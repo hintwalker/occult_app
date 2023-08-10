@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lasotuvi_chart_shared/lasotuvi_chart_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sunoom/sunoom.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 import 'tag_item_in_chart.widget.dart';
@@ -33,11 +34,12 @@ class ChartItemCardWidget extends StatelessWidget {
     final now = DateTime.now();
     final yearsOld = yearOld(
         birthday: birthday,
-        now: now.toMoment(TimeZone(offsetInHour: now.timeZoneOffset.inHours)));
+        now: now.toMoment(TimeZone(offsetInHour: data.timeZoneOffset)));
     final yearsOldFromWatchingYear = yearOld(
         birthday: birthday,
-        now: DateTime(data.watchingYear, 12, 31, 23, 59, 59)
-            .toMoment(TimeZone(offsetInHour: now.timeZoneOffset.inHours)));
+        now: DateTime(
+          data.watchingYear,
+        ).toMoment(TimeZone(offsetInHour: data.timeZoneOffset)));
     return Card(
       margin: const EdgeInsets.only(left: 12.0, top: 8.0, bottom: 4.0),
       child: InkWell(
@@ -52,7 +54,7 @@ class ChartItemCardWidget extends StatelessWidget {
             children: [
               SizedBox(
                 width: 64.0,
-                height: 72.0,
+                height: 76.0,
                 child: Column(
                   children: [
                     const SizedBox(
@@ -60,13 +62,13 @@ class ChartItemCardWidget extends StatelessWidget {
                     ),
                     Expanded(
                         child: SizedBox(
-                            width: 54.0,
-                            height: 54.0,
+                            width: 48.0,
+                            height: 48.0,
                             child: CircleHumanAvatar(
                               gender: data.gender.intValue,
                               path: data.avatar,
-                              size: 24.0,
-                              fit: BoxFit.scaleDown,
+                              size: 48.0,
+                              fit: BoxFit.cover,
                             ))),
                     Text(
                       '$yearsOld${translate('yearsOldSuffix')}',
@@ -104,10 +106,10 @@ class ChartItemCardWidget extends StatelessWidget {
                           style: const TextStyle(fontSize: 14),
                         ),
                         const SizedBox(
-                          width: 8.0,
+                          width: 4.0,
                         ),
                         Text(
-                          '($yearsOldFromWatchingYear ${translate('yearsOldSuffix')})',
+                          '($yearsOldFromWatchingYear-${yearsOldFromWatchingYear + 1}${translate('yearsOldSuffix')})',
                           style: const TextStyle(fontSize: 14),
                           overflow: TextOverflow.fade,
                         )

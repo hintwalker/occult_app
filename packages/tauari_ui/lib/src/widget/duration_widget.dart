@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
 
 class DurationWidget extends StatelessWidget {
   const DurationWidget({
@@ -19,6 +20,11 @@ class DurationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('$day ${translate('day')} $hour:$minute:$second', style: style);
+    final hourString = stringFormat2Digits(hour);
+    final minuteString = stringFormat2Digits(minute);
+    final secondString = stringFormat2Digits(second);
+    return Text(
+        '$day ${translate('day')} $hourString:$minuteString:$secondString',
+        style: style);
   }
 }

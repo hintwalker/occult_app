@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 
+import '../../../router/route_name.dart';
 import '../checkbox_tag_list_body.dart';
 import '../tag_creation_body.dart';
 import '../tag_detail_body.dart';
@@ -28,6 +29,7 @@ class TagNavigation {
     showDialog(
       context: context,
       builder: (context) => TagDetailBody(tag),
+      routeSettings: const RouteSettings(name: RouteName.tagDetail),
     );
     // context.pushNamed(RouteName.tagDetail, pathParameters: {
     //   RouterParams.tagId: tag.docId,

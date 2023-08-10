@@ -25,6 +25,7 @@ class PlanListItemWrapper extends StatelessWidget {
     required this.energyIcon,
     required this.plan,
     required this.planController,
+    required this.willSubscribe,
     // required this.onSubscribeTap,
     // required this.onCancelExtendsTap,
     // required this.onExtendsTap,
@@ -37,6 +38,8 @@ class PlanListItemWrapper extends StatelessWidget {
   final StoragePlan plan;
   final StoragePlanListController planController;
   final Widget energyIcon;
+  final Future<bool> Function(BuildContext context, StoragePlan plan)
+      willSubscribe;
   // final void Function(StoragePlan plan) onSubscribeTap;
   // final void Function(Subscription subscription) onCancelExtendsTap;
   // final void Function(Subscription subscription) onExtendsTap;
@@ -81,7 +84,7 @@ class PlanListItemWrapper extends StatelessWidget {
           plan: plan,
           currentSubscription: currentSubscription,
           style: style,
-          onSubscribeTap: () => planController.subscribe(plan),
+          onSubscribeTap: () => onSubscribe(context, plan),
         );
       case PlanItemType.canceled:
         return PlanValuableCanceled(
@@ -91,7 +94,7 @@ class PlanListItemWrapper extends StatelessWidget {
           currentSubscription: currentSubscription,
           lastCanceled: lastCanceled,
           style: style,
-          onSubscribeTap: () => planController.subscribe(plan),
+          onSubscribeTap: () => onSubscribe(context, plan),
         );
       case PlanItemType.stopedExtends:
         return PlanValuableStopedExtends(
@@ -102,8 +105,8 @@ class PlanListItemWrapper extends StatelessWidget {
           style: style,
           timerController: timerController,
           planController: planController,
-          onCancelExtendsTap: () =>
-              planController.unSubscribe(currentSubscription),
+          onContinueExtendsTap: () =>
+              planController.continueExtends(currentSubscription),
         );
       case PlanItemType.expired:
       case PlanItemType.keepExpired:
@@ -149,7 +152,7 @@ class PlanListItemWrapper extends StatelessWidget {
       if (lastCanceled == null) {
         if (currentSub.status == SubscriptionStatus.actived) {
           if (plan.id == StoragePlanIds.free) {
-            return PlanItemType.alone;
+            return PlanItemType.freeAlone;
           } else if (plan.id == currentSub.planId) {
             return PlanItemType.actived;
           } else {
@@ -158,7 +161,7 @@ class PlanListItemWrapper extends StatelessWidget {
           }
         } else if (currentSub.status == SubscriptionStatus.cancelExtend) {
           if (plan.id == StoragePlanIds.free) {
-            return PlanItemType.alone;
+            return PlanItemType.freeAlone;
           } else if (plan.id == currentSub.planId) {
             return PlanItemType.stopedExtends;
           } else {
@@ -180,23 +183,27 @@ class PlanListItemWrapper extends StatelessWidget {
         // Neu last canceled khong = null
         if (currentSub.status == SubscriptionStatus.actived) {
           if (plan.id == StoragePlanIds.free) {
-            return PlanItemType.alone;
+            return PlanItemType.freeAlone;
           } else if (plan.id == currentSub.planId) {
             return PlanItemType.actived;
-          } else if (plan.id == lastCanceled.planId) {
-            return PlanItemType.canceled;
-          } else {
+          }
+          // else if (plan.id == lastCanceled.planId) {
+          //   return PlanItemType.canceled;
+          // }
+          else {
             // plan khac
             return PlanItemType.alone;
           }
         } else if (currentSub.status == SubscriptionStatus.cancelExtend) {
           if (plan.id == StoragePlanIds.free) {
-            return PlanItemType.alone;
+            return PlanItemType.freeAlone;
           } else if (plan.id == currentSub.planId) {
             return PlanItemType.stopedExtends;
-          } else if (plan.id == lastCanceled.planId) {
-            return PlanItemType.canceled;
-          } else {
+          }
+          // else if (plan.id == lastCanceled.planId) {
+          //   return PlanItemType.canceled;
+          // }
+          else {
             // plan khac
             return PlanItemType.alone;
           }
@@ -206,9 +213,11 @@ class PlanListItemWrapper extends StatelessWidget {
             return PlanItemType.freeActived;
           } else if (plan.id == currentSub.planId) {
             return PlanItemType.expired;
-          } else if (plan.id == lastCanceled.planId) {
-            return PlanItemType.canceled;
-          } else {
+          }
+          // else if (plan.id == lastCanceled.planId) {
+          //   return PlanItemType.canceled;
+          // }
+          else {
             // plan khac
             return PlanItemType.alone;
           }
@@ -216,6 +225,22 @@ class PlanListItemWrapper extends StatelessWidget {
       }
     }
   }
+
+  void onSubscribe(BuildContext context, StoragePlan plan) async {
+    if (await willSubscribe(context, plan)) {
+      await planController.subscribe(plan);
+    }
+  }
+
+//   Future<void> onSubscribe(StoragePlan plan,
+//       {required BuildContext context}) async {
+
+//         final result = showDialog(context: context, builder: (ctx)  =>
+//         BasicDialog(title: translate('confirm'), children: [
+//           SubscriptionConfirmScreenContent(state: state, translate: translate, onSubmit: onSubmit, onBuyMoreEnergy: onBuyMoreEnergy)
+//         ]));
+//     await planController.subscribe(plan);
+//   }
 }
 
 enum PlanItemType {

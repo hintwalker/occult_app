@@ -25,6 +25,8 @@ dependencies:
   image_picker: ^1.0.1
   tauari_utils:
     path: ../tauari_utils
+  tauari_date_format:
+    path: ../tauari_date_format
 
 dev_dependencies:
   flutter_test:

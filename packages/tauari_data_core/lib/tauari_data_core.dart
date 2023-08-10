@@ -7,6 +7,7 @@ export 'src/usecase/remote_storage/download_pdf_file.dart';
 export 'src/usecase/remote_storage/download_file_to_local.dart';
 export 'src/usecase/remote_storage/download_markdown_file.dart';
 
+export 'src/usecase/syncable/count_every_where.dart';
 export 'src/usecase/syncable/owner_by_depended_id.dart';
 export 'src/usecase/syncable/dis_connect_right_from_left.dart';
 export 'src/usecase/syncable/connect_right_to_left.dart';
@@ -25,6 +26,8 @@ export 'src/usecase/syncable/on_syncable_right_has_left_list.dart';
 export 'src/usecase/syncable/on_syncable_data_list.dart';
 export 'src/usecase/syncable/upload.dart';
 export 'src/usecase/syncable/download.dart';
+
+export 'src/usecase/cloud/count_on_cloud.dart';
 export 'src/usecase/cloud/take_by_id_on_cloud.dart';
 export 'src/usecase/syncable/take_by_id.dart';
 export 'src/usecase/local/insert_to_local.dart';

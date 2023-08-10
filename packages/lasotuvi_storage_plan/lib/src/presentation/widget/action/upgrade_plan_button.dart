@@ -12,9 +12,10 @@ class UpgradePlanButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
+    return FilledButton.icon(
       onPressed: onTap,
-      child: Text(
+      icon: const Icon(Icons.upgrade),
+      label: Text(
         translate('upgradeNow'),
       ),
     );

@@ -74,11 +74,12 @@ class Dashboard extends ConsumerWidget {
   }
 
   Future<bool> onWillPop(BuildContext context) async {
-    return await showDialog(
+    final result = await showDialog<bool>(
       context: context,
       builder: (_) => const ShutdownConfirmDialog(
           colorScheme: LasotuviAppStyle.colorScheme, translate: translate),
     );
+    return result ?? false;
   }
 
   String getScreenTitle(String id) {

@@ -14,9 +14,11 @@ class ModifyBirthdayBody extends ConsumerStatefulWidget {
     super.key,
     required this.chartId,
     required this.syncStatus,
+    this.callback,
   });
   final int chartId;
   final String? syncStatus;
+  final void Function()? callback;
 
   @override
   ConsumerState<ModifyBirthdayBody> createState() => _ModifyBirthdayBodyState();
@@ -29,22 +31,44 @@ class _ModifyBirthdayBodyState
     final processing = ref.watch(modifyChartControllerProvider);
     return findingUid || processing
         ? const LoadingWidget()
-        : BasicStreamBuilder(
-            stream: ref.watch(chartDetailControllerProvider).stream(
-                uid: uid, docId: widget.chartId, syncStatus: widget.syncStatus),
+        : BasicFutureBuilder(
+            future: ref.read(chartDetailControllerProvider).takeById(
+                uid: uid, id: widget.chartId, syncStatus: widget.syncStatus),
             child: (data) => ModifyBirthdayModal(
               title: translate('modifyBirthday'),
               child: ModifyBirthdayWidget(
                 data,
                 colorScheme: LasotuviAppStyle.colorScheme,
                 translate: translate,
-                onUpdate: (chart) => ref
-                    .read(modifyChartControllerProvider.notifier)
-                    .updateChart(
-                        context: context, uid: uid, chart: chart, ref: ref),
+                onUpdate: (chart) async {
+                  ref.read(modifyChartControllerProvider.notifier).updateChart(
+                      context: context, uid: uid, chart: chart, ref: ref);
+                  if (widget.callback != null) {
+                    widget.callback!();
+                  }
+                },
               ),
             ),
           );
+    // BasicStreamBuilder(
+    //     stream: ref.watch(chartDetailControllerProvider).stream(
+    //         uid: uid, docId: widget.chartId, syncStatus: widget.syncStatus),
+    //     child: (data) => ModifyBirthdayModal(
+    //       title: translate('modifyBirthday'),
+    //       child: ModifyBirthdayWidget(
+    //         data,
+    //         colorScheme: LasotuviAppStyle.colorScheme,
+    //         translate: translate,
+    //         onUpdate: (chart) async {
+    //           ref.read(modifyChartControllerProvider.notifier).updateChart(
+    //               context: context, uid: uid, chart: chart, ref: ref);
+    //           if (widget.callback != null) {
+    //             widget.callback!();
+    //           }
+    //         },
+    //       ),
+    //     ),
+    //   );
   }
 
   // Future<void> updateBirthday(Chart chart) async {

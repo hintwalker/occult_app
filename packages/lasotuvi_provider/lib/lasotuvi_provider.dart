@@ -1,5 +1,7 @@
 library lasotuvi_provider;
 
+export 'src/statistic/statistic_state_notifier.dart';
+
 export 'src/tuvi_chart_diagram/tuvi_chart_grid_controller.dart';
 export 'src/library/controller/star_info_viewer_controller.dart';
 export 'src/library/controller/star_list_controller.dart';
@@ -39,12 +41,15 @@ export 'src/subscription/data_source/current_sub_data_source_provider.dart';
 export 'src/subscription/controller/current_sub_controller_provider.dart';
 
 export 'src/storage_plan/controller/expired_timer_controller_provider.dart';
+export 'src/storage_plan/usecase/take_current_storage_plan.dart';
 export 'src/storage_plan/usecase/stop_auto_extend.dart';
 export 'src/storage_plan/usecase/take_storage_plan_by_id_provider.dart';
 export 'src/storage_plan/usecase/take_all_storage_plans_provider.dart';
 export 'src/storage_plan/repository/storage_plan_repository_provider.dart';
 export 'src/storage_plan/data_source/storage_plan_data_source_provider.dart';
 export 'src/storage_plan/controller/storage_plan_list_controller_provider.dart';
+
+export 'src/storage_plan/features/subscription_confirm/notifier/subscription_confirm_notifier.dart';
 
 export 'src/chart/dao/chart_dao.dart';
 export 'src/chart/data_source/firebase_chart_data_source.dart';
@@ -59,6 +64,8 @@ export 'src/chart/controller/chart_detail_controller.dart';
 export 'src/chart/controller/chart_view_controller.dart';
 export 'src/chart/controller/chart_list_controller.dart';
 
+export 'src/chart/usecase/count_chart_on_cloud.dart';
+export 'src/chart/usecase/take_chart.dart';
 export 'src/chart/usecase/upload_avatar.dart';
 export 'src/chart/usecase/delete_avatar_from_cloud.dart';
 export 'src/chart/usecase/chart_by_note_id.dart';
@@ -102,6 +109,8 @@ export 'src/tag/data_source/firebase_tag_data_source.dart';
 export 'src/tag/data_source/sqlite_tag_data_source.dart';
 export 'src/tag/dao/tag_dao_provider.dart';
 
+export 'src/tag/usecase/count_tag.dart';
+export 'src/tag/usecase/count_tag_on_cloud.dart';
 export 'src/tag/usecase/update_tag.dart';
 export 'src/tag/usecase/delete_tag_from_cloud.dart';
 export 'src/tag/usecase/delete_tag_from_local.dart';
@@ -120,6 +129,8 @@ export 'src/note/controller/note_list_controller.dart';
 export 'src/note/controller/note_and_chart_list_controller.dart';
 export 'src/note/controller/count_note_everywhere_controller.dart';
 
+export 'src/note/usecase/count_note.dart';
+export 'src/note/usecase/count_note_on_cloud.dart';
 export 'src/note/usecase/update_note.dart';
 export 'src/note/usecase/on_notes.dart';
 export 'src/note/usecase/on_note_by_chart_id.dart';

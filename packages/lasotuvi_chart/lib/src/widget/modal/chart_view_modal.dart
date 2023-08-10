@@ -5,9 +5,11 @@ class ChartViewModal extends StatelessWidget {
   const ChartViewModal({
     super.key,
     required this.title,
-    // this.uid,
+    required this.uid,
     // required this.chart,
     required this.colorScheme,
+    required this.syncStatus,
+    required this.onOpenSyncOptions,
     // required this.controller,
     required this.child,
     // required this.translate,
@@ -20,10 +22,12 @@ class ChartViewModal extends StatelessWidget {
     // required this.onOpenNoteCreation,
     // required this.onOpenNoteEditor,
   });
-  // final String? uid;
+  final String? uid;
   final ColorScheme colorScheme;
   final String title;
   final Widget child;
+  final String? syncStatus;
+  final void Function(BuildContext context) onOpenSyncOptions;
   // final ChartViewController controller;
   // final Widget Function(ChartHasTags chartHasTags) child;
   // final String Function(String) translate;
@@ -50,6 +54,14 @@ class ChartViewModal extends StatelessWidget {
         BasicModal(
       title: title,
       colorScheme: colorScheme,
+      actions: [
+        SyncStatusRibbonWidget(
+          uid: uid,
+          syncStatus: syncStatus,
+          colorScheme: colorScheme,
+          onTap: () => onOpenSyncOptions(context),
+        )
+      ],
       child: child,
       // colorScheme: colorScheme,
       // translate: translate,

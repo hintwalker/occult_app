@@ -24,7 +24,8 @@ class ExtendsConfirmDialog extends StatelessWidget {
       noButtonText: translate('no'),
       yesButtonText: translate('Extends'),
       children: [
-        Text(translate('confirmExtends')),
+        Text(translate('confirmExtends'),
+            style: const TextStyle(fontSize: 16.0)),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           energyIcon,
           Text('${subscription.energy}', style: style.price),

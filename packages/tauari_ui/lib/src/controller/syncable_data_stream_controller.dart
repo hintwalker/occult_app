@@ -14,8 +14,12 @@ class SyncableDataStreamController<T extends SyncableEntity>
 
   Stream<T?> stream(
       {required String? uid, required int docId, required String? syncStatus}) {
-    _streamController = StreamController<T?>.broadcast();
+    _streamController = StreamController<T?>.broadcast(
+      onCancel: () => _subscription?.cancel(),
+      onListen: () => _subscription?.resume(),
+    );
     listen(uid, docId, syncStatus);
+
     return _streamController!.stream;
   }
 

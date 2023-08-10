@@ -1,4 +1,5 @@
-import '../utils/string_format_2_digits.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
+
 import '../zone/time_zone.dart';
 
 abstract class SimpleDate {
@@ -33,7 +34,12 @@ abstract class SimpleDate {
   //   @Default(TimeZone(offsetInHour: 0)) TimeZone timeZone,
   // }) = GregorianDate;
 
-  String toDateString() {
-    return '${stringFormat2Digits(day)}/${stringFormat2Digits(month)}/${stringFormat2Digits(year)}';
+  String toDateString({String dateSeperator = '-'}) {
+    return formatDateVn(
+      year: year,
+      month: month,
+      day: day,
+      dateSeperator: dateSeperator,
+    );
   }
 }

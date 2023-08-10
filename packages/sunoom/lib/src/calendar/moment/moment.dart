@@ -1,11 +1,12 @@
 // @freezed
+import 'package:tauari_date_format/tauari_date_format.dart';
+
 import '../../calendar/moment/moment_from_date_time.dart';
 
 import '../../can/can.dart';
 import '../../chi/chi.dart';
 import '../../conversion/gregorian_2_luni_solar.dart';
 import '../../conversion/luni_solar_2_gregorian.dart';
-import '../../utils/string_format_2_digits.dart';
 import '../../zone/time_zone.dart';
 import '../gregorian/gregorian_date.dart';
 import '../gregorian/gregorian_from_jdn_local.dart';
@@ -68,29 +69,81 @@ class Moment {
 
   DateTime toDateTime() {
     return DateTime(
-        gregorian.year, gregorian.month, gregorian.day, time.hour, time.minute);
+      gregorian.year,
+      gregorian.month,
+      gregorian.day,
+      time.hour,
+      time.minute,
+    );
   }
 
-  String toGregorianDateString() {
-    return '${stringFormat2Digits(gregorian.day)}/${stringFormat2Digits(gregorian.month)}/${stringFormat2Digits(gregorian.year)}';
+  String toGregorianDateString({String dateSeperator = '-'}) {
+    return formatDateVn(
+      year: gregorian.year,
+      month: gregorian.month,
+      day: gregorian.day,
+      dateSeperator: dateSeperator,
+    );
   }
 
-  String toGregorianDateTimeString() {
-    return '${stringFormat2Digits(gregorian.day)}/${stringFormat2Digits(gregorian.month)}/${stringFormat2Digits(gregorian.year)}, ${stringFormat2Digits(time.hour)}:${stringFormat2Digits(time.minute)}';
+  String toGregorianDateTimeString({
+    String dateSeperator = '-',
+    String timeSeperator = ':',
+  }) {
+    return formatGregorianDateTimeVn(
+      year: gregorian.year,
+      month: gregorian.month,
+      day: gregorian.day,
+      hour: time.hour,
+      minute: time.minute,
+      dateSeperator: dateSeperator,
+      timeSeperator: timeSeperator,
+    );
   }
 
   String toLuniSolarDateString({
     required String Function(Can) canName,
     required String Function(Chi) chiName,
+    String dateSeperator = '-',
   }) {
-    final luniSolar = gregorian2LuniSolar(gregorian: gregorian, time: time);
-    return '${stringFormat2Digits(luniSolar.day)}/${stringFormat2Digits(luniSolar.month)} ${canName(Can.ofLuniYear(luniSolar.year))} ${chiName(Chi.ofLuniYear(luniSolar.year))}';
+    final luniSolar = luniSolarDate;
+    final dayString = '${stringFormat2Digits(luniSolar.day)}$dateSeperator';
+    final monthString = stringFormat2Digits(luniSolar.month);
+
+    final canYear = canName(Can.ofLuniYear(luniSolar.year));
+    final chiYear = chiName(Chi.ofLuniYear(luniSolar.year));
+    return '$dayString$monthString $canYear $chiYear';
+    // return formatLuniDateVn(
+    //   year: luniSolar.year,
+    //   month: luniSolar.month,
+    //   day: luniSolar.day,
+    //   canName: (_) => canName(canYear),
+    //   chiName: (_) => chiName(chiYear),
+    //   dateSeperator: dateSeperator,
+    // );
+    // return '${stringFormat2Digits(luniSolar.day)}/${stringFormat2Digits(luniSolar.month)} ${canName(Can.ofLuniYear(luniSolar.year))} ${chiName(Chi.ofLuniYear(luniSolar.year))}';
   }
 
   @override
-  String toString() {
-    final luniSolar = gregorian2LuniSolar(gregorian: gregorian, time: time);
-    return '${stringFormat2Digits(gregorian.day)}/${stringFormat2Digits(gregorian.month)}/${stringFormat2Digits(gregorian.year)} (${stringFormat2Digits(luniSolar.day)}.${stringFormat2Digits(luniSolar.month)}.${stringFormat2Digits(luniSolar.year)}), ${stringFormat2Digits(time.hour)}:${stringFormat2Digits(time.minute)}';
+  String toString({
+    String dateSeperator = '-',
+    String timeSeperator = ':',
+  }) {
+    final gregString = toGregorianDateTimeString(
+      dateSeperator: dateSeperator,
+      timeSeperator: timeSeperator,
+    );
+    final luniSolar = luniSolarDate;
+    final luniString = formatDateVn(
+      year: luniSolar.year,
+      month: luniSolar.month,
+      day: luniSolar.day,
+      dateSeperator: dateSeperator,
+    );
+
+    return '$gregString ($luniString)';
+
+    // return '${stringFormat2Digits(gregorian.day)}/${stringFormat2Digits(gregorian.month)}/${stringFormat2Digits(gregorian.year)} (${stringFormat2Digits(luniSolar.day)}.${stringFormat2Digits(luniSolar.month)}.${stringFormat2Digits(luniSolar.year)}), ${stringFormat2Digits(time.hour)}:${stringFormat2Digits(time.minute)}';
   }
 
   Moment add(Duration duration) {
@@ -109,5 +162,9 @@ class Moment {
 
   Moment yesterday() {
     return subtract(const Duration(days: 1));
+  }
+
+  Moment now() {
+    return DateTime.now().toMoment(timeZone);
   }
 }

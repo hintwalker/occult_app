@@ -20,6 +20,7 @@ class ShutdownConfirmDialog extends StatelessWidget {
         Text(
           translate('msgExitApp'),
           textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 20),
         ),
         const SizedBox(
           height: 48.0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
 
 class DateTimeWidget extends StatelessWidget {
   const DateTimeWidget(
@@ -11,10 +12,11 @@ class DateTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final offset = dateTime.timeZoneOffset.inHours;
-    final offsetString = offset >= 0 ? '+$offset' : '$offset';
-    return Text(
-        style: style,
-        '${dateTime.day}-${dateTime.month}-${dateTime.year} | ${dateTime.hour}:${dateTime.minute}:${dateTime.second} UTC$offsetString');
+    // final offset = dateTime.timeZoneOffset.inHours;
+    // final offsetString = offset >= 0 ? '+$offset' : '$offset';
+    return Text(dateTime.toStringVn(), style: style);
+    // Text(
+    //     style: style,
+    //     '${dateTime.day}-${dateTime.month}-${dateTime.year} | ${dateTime.hour}:${dateTime.minute}:${dateTime.second} UTC$offsetString');
   }
 }

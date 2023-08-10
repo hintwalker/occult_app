@@ -9,6 +9,8 @@ import 'package:tauari_sort/tauari_sort.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../shared/widget/new_data_option_button.dart';
+
 class AllTagListBody extends ConsumerStatefulWidget {
   const AllTagListBody({super.key});
 
@@ -19,31 +21,42 @@ class AllTagListBody extends ConsumerStatefulWidget {
 class _AllTagListBodyState extends UserAuthDependedState<AllTagListBody> {
   @override
   Widget build(BuildContext context) {
-    return findingUid
-        ? const Center(child: LoadingWidget())
-        : BasicStreamBuilder(
-            stream: ref.watch(tagListControllerProvider).stream(uid),
-            child: (data) => BasicFutureBuilder(
-              future: SortHelper.getSortOption(tagSortKey),
-              child: (sortValue) => AllTagListWidget(
-                data: data ?? [],
-                uid: uid,
-                translate: translate,
-                colorScheme: LasotuviAppStyle.colorScheme,
-                onItemTap: onItemTap,
-                onOpenSyncStatus: ({required tag, required uid}) =>
-                    StorageHelper.showOptionsModal<Tag>(
-                  tag,
-                  context: context,
-                  uid: uid,
-                  ref: ref,
+    return WillPopScope(
+      onWillPop: () {
+        ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.home);
+        return Future.value(false);
+      },
+      child: Stack(
+        children: [
+          findingUid
+              ? const Center(child: LoadingWidget())
+              : BasicStreamBuilder(
+                  stream: ref.watch(tagListControllerProvider).stream(uid),
+                  child: (data) => BasicFutureBuilder(
+                    future: SortHelper.getSortOption(tagSortKey),
+                    child: (sortValue) => AllTagListWidget(
+                      data: data ?? [],
+                      uid: uid,
+                      translate: translate,
+                      colorScheme: LasotuviAppStyle.colorScheme,
+                      onItemTap: onItemTap,
+                      onOpenSyncStatus: ({required tag, required uid}) =>
+                          StorageHelper.showOptionsModal<Tag>(
+                        tag,
+                        context: context,
+                        uid: uid,
+                        ref: ref,
+                      ),
+                      onSaveSortOption: (key, value) =>
+                          SortHelper.saveSortOption(key, value),
+                      initSortValue: sortValue,
+                    ),
+                  ),
                 ),
-                onSaveSortOption: (key, value) =>
-                    SortHelper.saveSortOption(key, value),
-                initSortValue: sortValue,
-              ),
-            ),
-          );
+          const NewDataOptionButton(),
+        ],
+      ),
+    );
   }
 
   void onItemTap(BuildContext context, Tag tag, String? uid) {

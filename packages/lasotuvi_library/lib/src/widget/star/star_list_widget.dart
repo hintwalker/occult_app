@@ -50,6 +50,7 @@ class StarListWidget extends StatelessWidget {
           onTap: onItemTap,
           translate: translate,
         ),
+        order: controller.sortOption?.order ?? ListOrder.asc,
         actionButtons: const [],
         groupBy: (item) => groupStarBy(item, initSortValue),
         groupComparator: (group1, group2) => simpleGroupComparator(

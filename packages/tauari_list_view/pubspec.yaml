@@ -18,6 +18,9 @@ dependencies:
     path: ../tauari_sort
   sunoom:
     path: ../sunoom
+  hive: ^2.2.3
+  tauari_utils:
+    path: ../tauari_utils
 
 dev_dependencies:
   flutter_test:

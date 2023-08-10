@@ -64,7 +64,7 @@ class ChartOptionsModalController extends ChangeNotifier {
       options[StarFormulaKey.truongSinhOption.name] == 0;
   bool get hoaTinhMao => options[StarFormulaKey.hoaLinhOption.name] == 0;
   bool get thienKhoiNgo => options[StarFormulaKey.khoiVietOption.name] == 0;
-  bool get luuHaDinhThin => options[StarFormulaKey.luuHaOption.name] == 0;
+  bool get luuHaDinhThan => options[StarFormulaKey.luuHaOption.name] == 0;
   bool get dauQuanChiNamSinh => options[StarFormulaKey.dauQuanOption.name] == 0;
 
   void setDongHoaKhoa(bool? value) {
@@ -94,7 +94,7 @@ class ChartOptionsModalController extends ChangeNotifier {
         value,
       );
 
-  void setLuuHaDinhThin(bool? value) => setStarFormulaOption(
+  void setLuuHaDinhThan(bool? value) => setStarFormulaOption(
         StarFormulaKey.luuHaOption.name,
         value,
       );

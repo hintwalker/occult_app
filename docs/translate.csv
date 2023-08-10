@@ -60,7 +60,7 @@ upload_to_cloud	Tải lên đám mây
 download	Tải xuống
 delete_from_local	Xóa trên thiết bị
 delete_from_cloud	Xóa trên cloud
-changeInfo	Sửa thông tin
+changeInfo	Đổi thông tin
 addChart	Thêm lá số
 addNote	Thêm ghi chú
 addRemoveTag	Thêm/gỡ nhãn
@@ -198,7 +198,7 @@ thanhLong	Thanh Long
 tuongQuan	Tướng Quân
 tauThu	Tấu Thư
 phiLiem	Phi Liêm
-hyThan	Hỷ Thần
+hiThan	Hỉ Thần
 benhPhu	Bệnh Phù
 phucBinh	Phục Binh
 quanPhuf	Quan Phù
@@ -363,11 +363,6 @@ tagCreation	Tạo nhãn mới
 noTitle	Không tiêu đề
 subTitle	Mô tả ngắn
 selectOneChart	Chọn 1 lá số
-changeAvatar	Đổi ảnh đại diện
-changeName	Đổi tên đương số
-changeGender	Đổi giới tính
-changeBirthday	Đổi ngày/giờ sinh
-changeWatchingYear	Đổi năm xem
 luanVeCacSao	Luận về các sao
 tuViDauSoToanThu	Tử Vi Đẩu Số Toàn Thư
 tuViDauSoTanBien	Tử Vi Đẩu Số Tân Biên
@@ -397,3 +392,24 @@ vongThaiTue	Vòng Thái Tuế
 vongBacSi	Vòng Bác Sĩ
 vongTuongTinh	Vòng Tướng Tinh
 xuongKhuc	Văn Xương - Văn Khúc
+sortBy	Sắp xếp theo
+modifyWatchingYear	Đổi năm xem
+modifyBirthday	Đổi ngày/giờ sinh
+modifyGender	Đổi giới tính
+modifyChartName	Đổi tên đương số
+browse...	Tìm ảnh...
+default	Mặc định
+modifyAvatar	Đổi ảnh đại diện
+editTagInfo	Đổi thông tin nhãn
+addOrRemoveChart	Thêm/gỡ bỏ lá số
+deleteForever	Xóa vĩnh viễn
+storageOptions	Tùy chọn lưu trữ
+upload	Tải lên
+changeDate	Đổi ngày
+noConnection	Không có kết nối mạng!
+save	Lưu
+msgConfirmSaveNote	Bạn có muốn lưu những thay đổi?
+extendsNow	Gia hạn ngay
+continueExtends	Đăng ký gia hạn
+yes	Có
+warningDeleteChart	Chú ý: Khi xóa lá số, mọi ghi chú của lá số sẽ bị xóa theo. Dữ liệu đã bị xóa vĩnh viễn thì không thể lấy lại được!

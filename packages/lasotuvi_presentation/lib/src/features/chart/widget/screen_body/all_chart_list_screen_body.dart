@@ -9,6 +9,7 @@ import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_style/tuvi_style.dart';
 
+import '../../../../shared/widget/new_data_option_button.dart';
 import '../../../navigation/drawer_ids.dart';
 import '../../navigation/chart_navigation.dart';
 import '../../../../helper/storage_helper.dart';
@@ -32,37 +33,43 @@ class _AllChartBodyState extends UserAuthDependedState<AllChartListScreenBody> {
         ref.read(mainDrawerControllerProvider).setScreenId(DrawerIds.home);
         return Future.value(false);
       },
-      child: findingUid
-          ? const LoadingWidget()
-          : BasicStreamBuilder(
-              stream: ref.watch(chartHasTagsListControllerProvider).stream(uid),
-              child: (data) => BasicFutureBuilder<SortValue?>(
-                future: SortHelper.getSortOption(chartSortKey),
-                child: (sortValue) => AllChartListWidget(
-                  data ?? [],
-                  uid: uid,
-                  slidable: false,
-                  translate: translate,
-                  colorScheme: lightColorScheme,
-                  onOpenTag: onOpenTag,
-                  onOpenNote: onOpenNote,
-                  onOpenMore: onOpenMore,
-                  onItemTap: onItemTap,
-                  onOpenSyncStatus: ({required chart, required uid}) =>
-                      StorageHelper.showOptionsModal<Chart>(
-                    chart,
-                    context: context,
-                    uid: uid,
-                    ref: ref,
+      child: Stack(
+        children: [
+          findingUid
+              ? const LoadingWidget()
+              : BasicStreamBuilder(
+                  stream:
+                      ref.watch(chartHasTagsListControllerProvider).stream(uid),
+                  child: (data) => BasicFutureBuilder<SortValue?>(
+                    future: SortHelper.getSortOption(chartSortKey),
+                    child: (sortValue) => AllChartListWidget(
+                      data ?? [],
+                      uid: uid,
+                      slidable: false,
+                      translate: translate,
+                      colorScheme: lightColorScheme,
+                      onOpenTag: onOpenTag,
+                      onOpenNote: onOpenNote,
+                      onOpenMore: onOpenMore,
+                      onItemTap: onItemTap,
+                      onOpenSyncStatus: ({required chart, required uid}) =>
+                          StorageHelper.showOptionsModal<Chart>(
+                        chart,
+                        context: context,
+                        uid: uid,
+                        ref: ref,
+                      ),
+                      onSaveSortOption: SortHelper.saveSortOption,
+                      initSortValue: sortValue,
+                      // storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
+                      //     StorageHelper.storageOptionsModalBuilder<Chart>(item,
+                      //         syncStatus: syncStatus, uid: uid, ref: ref),
+                    ),
                   ),
-                  onSaveSortOption: SortHelper.saveSortOption,
-                  initSortValue: sortValue,
-                  // storageOptionsModalBuilder: (item, {syncStatus, uid}) =>
-                  //     StorageHelper.storageOptionsModalBuilder<Chart>(item,
-                  //         syncStatus: syncStatus, uid: uid, ref: ref),
                 ),
-              ),
-            ),
+          const NewDataOptionButton(),
+        ],
+      ),
     );
   }
 
@@ -76,6 +83,10 @@ class _AllChartBodyState extends UserAuthDependedState<AllChartListScreenBody> {
   void onOpenNote(BuildContext context, Chart chart, String? uid) {}
   void onOpenMore(BuildContext context, Chart chart, String? uid) {}
   void onItemTap(BuildContext context, Chart chart, String? uid) {
-    ChartNavigation.openChartView(context: context, chart: chart);
+    ChartNavigation.openChartView(
+      context: context,
+      chart: chart,
+      saveLastView: true,
+    );
   }
 }

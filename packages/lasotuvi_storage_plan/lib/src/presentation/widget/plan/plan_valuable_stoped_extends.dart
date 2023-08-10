@@ -25,7 +25,7 @@ class PlanValuableStopedExtends extends StatelessWidget {
     required this.style,
     required this.timerController,
     required this.planController,
-    required this.onCancelExtendsTap,
+    required this.onContinueExtendsTap,
   });
   final String Function(String) translate;
   // final ColorScheme colorScheme;
@@ -35,7 +35,7 @@ class PlanValuableStopedExtends extends StatelessWidget {
   final Widget energyIcon;
   final ExpiredTimerController timerController;
   final StoragePlanListController planController;
-  final void Function() onCancelExtendsTap;
+  final void Function() onContinueExtendsTap;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class PlanValuableStopedExtends extends StatelessWidget {
         ),
         action: ContinueExtendsButton(
           translate: translate,
-          onTap: onCancelExtendsTap,
+          onTap: onContinueExtendsTap,
         ),
       ),
     );

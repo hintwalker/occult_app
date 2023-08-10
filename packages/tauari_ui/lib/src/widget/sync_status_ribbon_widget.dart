@@ -4,8 +4,8 @@ import 'package:tauari_values/tauari_values.dart';
 class SyncStatusRibbonWidget extends StatelessWidget {
   const SyncStatusRibbonWidget({
     super.key,
-    this.uid,
-    this.syncStatus,
+    required this.uid,
+    required this.syncStatus,
     required this.colorScheme,
     required this.onTap,
     // required this.storageOptionsModalBuilder,

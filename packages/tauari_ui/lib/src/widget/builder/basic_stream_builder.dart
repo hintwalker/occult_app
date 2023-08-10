@@ -7,10 +7,12 @@ class BasicStreamBuilder<T> extends StatelessWidget {
     required this.stream,
     required this.child,
     this.childIfNull = const Text(''),
+    this.loadingWidget,
   });
   final Stream<T> stream;
   final Widget Function(T?) child;
   final Widget childIfNull;
+  final Widget? loadingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,9 @@ class BasicStreamBuilder<T> extends StatelessWidget {
         stream: stream,
         builder: (_, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LoadingWidget();
+            return loadingWidget == null
+                ? const LoadingWidget()
+                : loadingWidget!;
             // final data = snapshot.requireData;
             // if (data == null) {
             //   return const ErrorTextWidget();

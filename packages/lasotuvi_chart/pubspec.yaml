@@ -40,6 +40,8 @@ dependencies:
     path: ../lasotuvi_commentary
   tauari_settings:
     path: ../tauari_settings
+  tauari_date_format:
+    path: ../tauari_date_format
   
 
 dev_dependencies:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
+import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_settings/tauari_settings.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tuvi_chart_diagram/tuvi_chart_diagram.dart';
@@ -17,6 +18,7 @@ class ChartDetailBuilder extends StatefulWidget {
     required this.onOpenStarsModal,
     required this.onOpenBooksModal,
     required this.onOpenChartOptions,
+    required this.onOpenChartEditOptions,
   });
   final String? uid;
   final String? syncStatus;
@@ -28,6 +30,7 @@ class ChartDetailBuilder extends StatefulWidget {
   final void Function() onOpenBooksModal;
   final void Function(Function(Map<String, dynamic>) callback)
       onOpenChartOptions;
+  final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
 
   @override
   State<ChartDetailBuilder> createState() => _ChartDetailBuilderState();
@@ -58,10 +61,10 @@ class _ChartDetailBuilderState extends State<ChartDetailBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return BasicStreamBuilder(
-      stream: widget.chartDetailController.stream(
+    return BasicFutureBuilder(
+      future: widget.chartDetailController.takeById(
         uid: widget.uid,
-        docId: int.parse(widget.chartId),
+        id: int.parse(widget.chartId),
         syncStatus: widget.syncStatus,
       ),
       child: (data) => ChartDetailModal(
@@ -69,6 +72,7 @@ class _ChartDetailBuilderState extends State<ChartDetailBuilder> {
         colorScheme: widget.colorScheme,
         onOpenBooksModal: widget.onOpenBooksModal,
         onOpenStarsModal: widget.onOpenStarsModal,
+        onOpenChartEditOptions: widget.onOpenChartEditOptions,
         onOpenChartOptions: () =>
             widget.onOpenChartOptions(gridController!.updateOptions),
         child: ChartDetailWidget(
@@ -79,5 +83,27 @@ class _ChartDetailBuilderState extends State<ChartDetailBuilder> {
         ),
       ),
     );
+    // return BasicStreamBuilder(
+    //   stream: widget.chartDetailController.stream(
+    //     uid: widget.uid,
+    //     docId: int.parse(widget.chartId),
+    //     syncStatus: widget.syncStatus,
+    //   ),
+    //   child: (data) => ChartDetailModal(
+    //     data,
+    //     colorScheme: widget.colorScheme,
+    //     onOpenBooksModal: widget.onOpenBooksModal,
+    //     onOpenStarsModal: widget.onOpenStarsModal,
+    //     onOpenChartEditOptions: widget.onOpenChartEditOptions,
+    //     onOpenChartOptions: () =>
+    //         widget.onOpenChartOptions(gridController!.updateOptions),
+    //     child: ChartDetailWidget(
+    //       data,
+    //       translate: widget.translate,
+    //       colorScheme: widget.colorScheme,
+    //       controller: gridController!,
+    //     ),
+    //   ),
+    // );
   }
 }

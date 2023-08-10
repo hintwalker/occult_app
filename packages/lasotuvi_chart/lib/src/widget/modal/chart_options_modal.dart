@@ -319,19 +319,19 @@ class _ChartOptionsModalSate extends State<ChartOptionsModal> {
           ),
           RadioListTile(
             value: true,
-            groupValue: controller!.luuHaDinhThin,
-            onChanged: controller!.setLuuHaDinhThin,
+            groupValue: controller!.luuHaDinhThan,
+            onChanged: controller!.setLuuHaDinhThan,
             title: Text(
-              widget.translate('msgLuuHaDinhThinOption'),
+              widget.translate('msgLuuHaDinhThanOption'),
             ),
             controlAffinity: ListTileControlAffinity.trailing,
           ),
           RadioListTile(
             value: false,
-            groupValue: controller!.luuHaDinhThin,
-            onChanged: controller!.setLuuHaDinhThin,
+            groupValue: controller!.luuHaDinhThan,
+            onChanged: controller!.setLuuHaDinhThan,
             title: Text(
-              widget.translate('msgLuuHaDinhThanOption'),
+              widget.translate('msgLuuHaDinhThinOption'),
             ),
             controlAffinity: ListTileControlAffinity.trailing,
           ),

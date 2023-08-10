@@ -46,7 +46,7 @@ class ChartViewBioWidget extends StatelessWidget {
     final yearOldInt = yearOld(
         birthday: birthday,
         now: DateTime(chart.watchingYear).toMoment(birthday.timeZone));
-    final yearOldText = '$yearOldInt ${translate("tuoi")}';
+    final yearOldText = '$yearOldInt-${yearOldInt + 1} ${translate("tuoi")}';
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

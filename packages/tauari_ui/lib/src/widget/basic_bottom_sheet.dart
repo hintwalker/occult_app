@@ -17,7 +17,7 @@ class BasicBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return
         // Material(
-        // child:
+        //   child:
         // SingleChildScrollView(
         // child: SafeArea(
         // child:
@@ -52,7 +52,7 @@ class BasicBottomSheet extends StatelessWidget {
                 ],
               )),
           // child
-          Expanded(child: child),
+          Expanded(child: Material(child: child)),
           if (bottomPanel != null) bottomPanel!
         ]
             // ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'simple_dialog_header.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 
 class NetworkNotConnectedAlertDialog extends StatelessWidget {
   const NetworkNotConnectedAlertDialog({
@@ -12,9 +11,40 @@ class NetworkNotConnectedAlertDialog extends StatelessWidget {
   final ColorScheme colorScheme;
   @override
   Widget build(BuildContext context) {
-    return SimpleDialog(
-      title: SimpleDialogHeader(translate('alert')),
-      children: [Text(translate('networkNotConnected'))],
+    return BasicDialog(
+      title: translate('alert'),
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: NoConnectionErrorText(
+            translate: translate,
+          ),
+        ),
+        const SizedBox(
+          height: 18.0,
+        ),
+        const Divider(
+          height: 1.0,
+          thickness: 1.0,
+        ),
+        // const SizedBox(
+        //   height: 8.0,
+        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                translate('Ok'),
+              ),
+            ),
+          ],
+        ),
+        // const SizedBox(
+        //   height: 8.0,
+        // ),
+      ],
     );
   }
 }

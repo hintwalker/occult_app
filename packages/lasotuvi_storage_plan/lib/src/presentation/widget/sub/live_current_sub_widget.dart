@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_storage_plan/src/presentation/widget/sub/current_sub_warpper.dart';
+import 'current_sub_warpper.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
@@ -47,7 +47,7 @@ class LiveCurrentSubWidget extends StatelessWidget {
                       translate: translate,
                       timerController: timerController,
                       energyIcon: energyIcon,
-                      plan: currentPlan ?? StoragePlan.free(),
+                      plan: currentPlan ?? const StoragePlan.free(),
                       planController: planController,
                       navigateToPlanMarket: navigateToPlanMarket),
                 );

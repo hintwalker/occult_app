@@ -4,6 +4,10 @@ import 'package:tuvi_style/tuvi_style.dart';
 
 class StoragePlanStyleImpl extends StoragePlanStyle {
   @override
+  Color get primary => lightColorScheme.primary;
+  @override
+  Color get outline => lightColorScheme.outline;
+  @override
   Color get iconColor => lightColorScheme.secondary;
 
   @override
@@ -22,13 +26,13 @@ class StoragePlanStyleImpl extends StoragePlanStyle {
 
   @override
   TextStyle get price => TextStyle(
-        fontSize: 34.0,
+        fontSize: 30.0,
         fontWeight: FontWeight.bold,
         color: lightColorScheme.primary,
       );
   @override
   TextStyle get benifit => TextStyle(
-        fontSize: 16.0,
+        fontSize: 18.0,
         color: lightColorScheme.secondary,
       );
 

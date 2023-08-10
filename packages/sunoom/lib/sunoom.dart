@@ -174,6 +174,5 @@ export 'src/sun/sun_longitude_from_jdn.dart';
 export 'src/sun/sun_longitude_list.dart';
 
 export 'src/utils/mod.dart';
-export 'src/utils/datetime_to_string_vn.dart';
 
 export 'src/zone/time_zone.dart';

@@ -18,11 +18,12 @@ class HoriChartBirthdayWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          moment.toGregorianDateString(),
+          moment.toGregorianDateString(dateSeperator: '-'),
           style: const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
         ),
         Text(
-          moment.toLuniSolarDateString(canName: canName, chiName: chiName),
+          moment.toLuniSolarDateString(
+              canName: canName, chiName: chiName, dateSeperator: '-'),
           style: const TextStyle(
             fontSize: 13.0,
             fontWeight: FontWeight.w500,

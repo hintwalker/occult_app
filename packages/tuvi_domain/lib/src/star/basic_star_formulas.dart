@@ -84,15 +84,15 @@ final basicStarFormulas = {
   "longTri": {"expression": "chiOfYearIndex + 4"},
   "phuongCac": {"expression": "10 - chiOfYearIndex"},
   "tamThai": {"expression": "luniMonthIndex + luniDay + 3"},
-  "batToa": {"expression": "10-luniMonthIndex-luniDay-1"},
+  "batToa": {"expression": "10-luniMonthIndex-luniDay+1"},
   "anQuang": {"expression": "10-hourIndex + luniDay-2"},
-  "thienQuy": {"expression": "hourIndex-luniDay+ 4"},
+  "thienQuy": {"expression": "hourIndex+4-luniDay+2"},
   "daoHoa": {
     "expression": "data[chiOfYearIndex]",
     "data": "[9, 6, 3, 0, 9, 6, 3, 0, 9, 6, 3, 0]"
   },
   "hongLoan": {"expression": "3 - chiOfYearIndex"},
-  "thienHi": {"expression": "10 - luniMonthIndex"},
+  "thienHi": {"expression": "3-chiOfYearIndex-6"},
   "thaiPhu": {"expression": "hourIndex + 4 + 2"},
   "phongCao": {"expression": "hourIndex + 4 - 2"},
   "quocAn": {"expression": "locTon + 8"},
@@ -127,10 +127,7 @@ final basicStarFormulas = {
   "giaiThan": {"expression": "10 - chiOfYearIndex"},
   "thienDuc": {"expression": "chiOfYearIndex + 9"},
   "nguyetDuc": {"expression": "chiOfYearIndex + 5"},
-  "thienY": {
-    "expression": "data[chiOfYearIndex]",
-    "data": "[5, 1, 9, 5, 1, 9, 5, 1, 9, 5, 1, 9]"
-  },
+  "thienY": {"expression": "luniMonthIndex + 1"},
   "coThan": {
     "expression": "data[chiOfYearIndex]",
     "data": "[2, 2, 5, 5, 5, 8, 8, 8, 11, 11, 11, 2]"
@@ -152,7 +149,7 @@ final basicStarFormulas = {
   "luuHa": {
     "expression": "data[canOfYearIndex]",
     "data":
-        "[9, 10, 7, luuHaOption ==0 ? 4 : 8, 5, 6, luuHaOption ==0 ? 8 : 4, 3, 11, 2]"
+        "[9, 10, 7, luuHaOption ==0 ? 8 : 4, 5, 6, luuHaOption ==0 ? 4 : 8, 3, 11, 2]"
   },
   "phaToai": {
     "expression": "data[chiOfYearIndex]",
@@ -165,7 +162,7 @@ final basicStarFormulas = {
   "thieuDuong": {"expression": "chiOfYearIndex + 1"},
   "thieuAm": {"expression": "canOfYearIndex + 3"},
   "quanPhur": {"expression": "locTon + k * 11"},
-  "tuPhu": {"expression": "locTon + 8"},
+  "tuPhu": {"expression": "chiOfYearIndex + 5"},
   "trucPhu": {"expression": "chiOfYearIndex + 11"},
   "tuePha": {"expression": "chiOfYearIndex + 6"},
   "longDuc": {"expression": "chiOfYearIndex + 7"},
