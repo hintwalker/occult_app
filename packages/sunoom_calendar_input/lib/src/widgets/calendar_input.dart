@@ -60,6 +60,10 @@ class _CalendarInputState extends State<CalendarInput> {
   @override
   void initState() {
     super.initState();
+    _initData();
+  }
+
+  void _initData() {
     final moment = widget.initValue ??
         DateTime(1995, 5, 6, 4, 30).toMoment(const TimeZone(offsetInHour: 7));
 
@@ -110,6 +114,13 @@ class _CalendarInputState extends State<CalendarInput> {
         timeZone: moment.timeZone);
     _calendarEditorController.listen();
   }
+
+  // @override
+  // void didUpdateWidget(covariant CalendarInput oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   _timeController.updateHour(widget.initValue?.time.hour.toString(), null);
+  //   // _initData();
+  // }
 
   @override
   void dispose() {

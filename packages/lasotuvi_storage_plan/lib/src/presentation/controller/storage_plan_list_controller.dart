@@ -55,7 +55,7 @@ class StoragePlanListController extends ChangeNotifier {
   // Iterable<StoragePlan> plans = [];
 
   Future<StoragePlan?> takeCurrentPlan(String? uid, String planId) async {
-    return await takeStoragePlanById(uid, planId);
+    return await takeStoragePlanById(planId);
   }
 
   Future<SubscribeActionResult> subscribe(StoragePlan plan) async {

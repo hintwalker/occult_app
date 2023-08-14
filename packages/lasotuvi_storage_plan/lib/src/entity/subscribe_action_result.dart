@@ -3,5 +3,6 @@ enum SubscribeActionResult {
   notEnoughEnergy,
   needSignIn,
   paymentFailed,
-  unknownError
+  unknownError,
+  noConnection,
 }

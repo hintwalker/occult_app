@@ -19,7 +19,14 @@ class ChartCreationScreen extends StatelessWidget {
             title: const Text('Chart creation'),
             backgroundColor: LasotuviAppStyle.colorScheme.background,
           ),
-          body: const ChartCreationModalScreen(),
+          body: const Column(children: [
+            Placeholder(
+              fallbackHeight: 50.0,
+            ),
+            Expanded(
+              child: ChartCreationModalScreen(),
+            ),
+          ]),
           backgroundColor: LasotuviAppStyle.colorScheme.background,
         ));
   }

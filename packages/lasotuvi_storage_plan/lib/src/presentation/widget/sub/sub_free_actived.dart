@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
 
-import '../../widget/action/upgrade_plan_button.dart';
+import '../../../features/plan/widget/upgrade_plan_button.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
 
 import '../item/subscription_title.dart';
@@ -41,7 +41,7 @@ class SubFreeActived extends StatelessWidget {
         lastCanceled == null
             ? const SizedBox.shrink()
             : TimerTitleWidget(
-                translate('lastPackageCanceledAt'),
+                '${translate('plan')} T${lastCanceled!.planId} ${translate('lastPackageCanceledAt')}',
                 style: style.canceledTitle,
               ),
         lastCanceled == null

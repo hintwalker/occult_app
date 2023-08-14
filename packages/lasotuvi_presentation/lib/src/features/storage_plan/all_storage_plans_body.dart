@@ -1,7 +1,11 @@
-import 'package:energy_store/energy_store.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_presentation/src/features/energy_market/energy_store_container.dart';
+import 'package:lasotuvi_presentation/src/features/storage_plan/usecase/execute_extends_subscription.dart';
+import 'package:lasotuvi_presentation/src/styles/current_plan_style_impl.dart';
+import 'package:lasotuvi_presentation/src/styles/plan_list_item_style_impl.dart';
 import 'package:lasotuvi_presentation/src/styles/subscription_confirm_style_impl.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
@@ -29,40 +33,45 @@ class _AllStoragePlansBodyState
     extends UserAuthDependedState<AllStoragePlansBody> {
   final style = StoragePlanStyleImpl();
   late Widget energyIcon;
-
+  @override
+  FutureOr callbackAfterGetUser(String? uid) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await ref.read(planListNotifierProvider.notifier).fetchData();
+    });
+  }
   // @override
   // void dispose() {
   //   ref.read(expiredTimerControllerProvider).cancelAllTimer();
   //   super.dispose();
   // }
 
-  @override
-  void initState() {
-    super.initState();
-    energyIcon = EnergyIcon(
-        color: LasotuviAppStyle.colorScheme.primary,
-        size: style.energyIconSize);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref
-          .read(expiredTimerControllerProvider)
-          .addListenerOnExpired(listenToExpired);
-      ref
-          .read(expiredTimerControllerProvider)
-          .addListenerOnCanceled(listenToCanceled);
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   energyIcon = EnergyIcon(
+  //       color: LasotuviAppStyle.colorScheme.primary,
+  //       size: style.energyIconSize);
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     ref
+  //         .read(expiredTimerControllerProvider)
+  //         .addListenerOnExpired(listenToExpired);
+  //     ref
+  //         .read(expiredTimerControllerProvider)
+  //         .addListenerOnCanceled(listenToCanceled);
+  //   });
+  // }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (mounted) {
-        ref.read(expiredTimerControllerProvider).removeListenerOnExpired();
-        ref.read(expiredTimerControllerProvider).removeListenerOnCanceled();
-      }
-    });
+  // @override
+  // void dispose() {
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     if (mounted) {
+  //       ref.read(expiredTimerControllerProvider).removeListenerOnExpired();
+  //       ref.read(expiredTimerControllerProvider).removeListenerOnCanceled();
+  //     }
+  //   });
 
-    super.dispose();
-  }
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,19 +89,41 @@ class _AllStoragePlansBodyState
                     title: translate('signIn'),
                   ),
                 )
-              : LiveStoragePlanListWidget(
-                  uid: uid,
-                  // activedPlanId: activedId,
-                  // previousPlanId: previousId,
-                  controller: ref.watch(storagePlanListControllerProvider),
+              : PlanListScreenContent(
+                  state: ref.watch(planListNotifierProvider),
+                  currentPlanStyle: CurrentPlanStyleImpl.apply(
+                    LasotuviAppStyle.colorScheme,
+                  ),
                   translate: translate,
-                  energyIcon: energyIcon,
-                  style: style,
-                  expiredTimerController:
-                      ref.read(expiredTimerControllerProvider),
-                  currentSubController: ref.watch(currentSubControllerProvider),
-                  willSubscribe: (_, plan) => willSubscribe(context, plan),
+                  showExtendsConfirm: (subscription) async {
+                    final result = await executeExtendsSubscription(
+                      context: context,
+                      subscription: subscription,
+                      ref: ref,
+                    );
+                    await ref
+                        .read(planListNotifierProvider.notifier)
+                        .fetchData();
+                    return result;
+                  },
+                  itemStyle: PlanListItemStyleImpl.apply(
+                    LasotuviAppStyle.colorScheme,
+                  ),
+                  onSubscribe: (plan) => willSubscribe(context, plan),
                 ),
+      // : LiveStoragePlanListWidget(
+      //     uid: uid,
+      //     // activedPlanId: activedId,
+      //     // previousPlanId: previousId,
+      //     controller: ref.watch(storagePlanListControllerProvider),
+      //     translate: translate,
+      //     energyIcon: energyIcon,
+      //     style: style,
+      //     expiredTimerController:
+      //         ref.read(expiredTimerControllerProvider),
+      //     currentSubController: ref.watch(currentSubControllerProvider),
+      //     willSubscribe: (_, plan) => willSubscribe(context, plan),
+      //   ),
     );
   }
 
@@ -127,6 +158,8 @@ class _AllStoragePlansBodyState
       if (result == null || !result) {
         return false;
       } else {
+        await ref.read(planListNotifierProvider.notifier).subscribe(plan);
+        await ref.read(planListNotifierProvider.notifier).fetchData();
         return true;
       }
     }
@@ -136,6 +169,19 @@ class _AllStoragePlansBodyState
   Future<void> signIn(WidgetRef ref) async {
     await ref.read(signInWithGoogleProvider)();
   }
+
+//   Future<bool> showExtendsConfirm(Subscription subscription) async {
+// final result = await showDialog<ConfirmResult>(
+//         context: context,
+//         builder: (ctx) => ExtendsConfirmDialog(
+//           subscription: subscription,
+//           translate: translate,
+//           energyIcon: energyIcon,
+//           style: style,
+//         ),
+// );
+// return result?.yes ?? false;
+//   }
 
   Future<bool> listenToExpired(
       Subscription subscription, bool openExtendsConfirm) async {

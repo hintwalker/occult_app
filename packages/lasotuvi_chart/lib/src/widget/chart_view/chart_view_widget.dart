@@ -27,6 +27,7 @@ class ChartViewWidget extends StatelessWidget {
     required this.onOpenRequestView,
     required this.onSendRequest,
     required this.onOpenTagDetail,
+    required this.topBanner,
 
     // required this.onOpenCommentaryReader,
   });
@@ -54,6 +55,7 @@ class ChartViewWidget extends StatelessWidget {
   final void Function(BuildContext context, Chart chart) onOpenNoteCreation;
   final void Function(BuildContext context, Note note) onOpenNoteEditor;
   final void Function(Chart chart) onSendRequest;
+  final Widget? topBanner;
   // final void Function(BuildContext context, Commentary commentary)
   //     onOpenCommentaryReader;
 
@@ -65,134 +67,147 @@ class ChartViewWidget extends StatelessWidget {
         : Stack(
             fit: StackFit.expand,
             children: [
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: ChartViewBioWidget(
-                              chartHasTags!.source,
-                              translate: translate,
+              Column(
+                children: [
+                  if (topBanner != null) topBanner!,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 8.0,
                             ),
-                          ),
-                          const SizedBox(
-                            width: 8.0,
-                          ),
-                          // const Spacer(),
-                          Expanded(
-                              flex: 1,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  ChartViewAvatarWidget(
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: ChartViewBioWidget(
                                     chartHasTags!.source,
-                                    uid: uid,
-                                    colorScheme: colorScheme,
-                                    // openSyncOptions: (context, chart) =>
-                                    //     onOpenChartSyncOptions(context, chart),
+                                    translate: translate,
                                   ),
-                                  ElevatedButton.icon(
-                                    onPressed: () => onOpenChartEditOptions(
-                                        context, chartHasTags!.source),
-                                    icon: const Icon(Icons.edit),
-                                    label: Text(
-                                      translate('changeInfo'),
-                                    ),
-                                  ),
-                                ],
-                              ))
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                      Row(children: [
-                        Text(
-                          '${translate('tag')} (${chartHasTags!.carry.length})',
-                          style: TextStyle(
-                              fontSize: 22.0, color: colorScheme.primary),
-                        ),
-                        const SizedBox(width: 12.0),
-                        ElevatedButton.icon(
-                          onPressed: () => onOpenCheckboxTagList(
-                              context, chartHasTags!.source),
-                          icon: const Icon(Icons.add_circle_outline),
-                          label: Text(
-                            translate('addRemoveTag'),
-                          ),
-                        ),
-                      ]),
+                                ),
+                                const SizedBox(
+                                  width: 8.0,
+                                ),
+                                // const Spacer(),
+                                Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ChartViewAvatarWidget(
+                                          chartHasTags!.source,
+                                          uid: uid,
+                                          colorScheme: colorScheme,
+                                          // openSyncOptions: (context, chart) =>
+                                          //     onOpenChartSyncOptions(context, chart),
+                                        ),
+                                        ElevatedButton.icon(
+                                          onPressed: () =>
+                                              onOpenChartEditOptions(context,
+                                                  chartHasTags!.source),
+                                          icon: const Icon(Icons.edit),
+                                          label: Text(
+                                            translate('changeInfo'),
+                                          ),
+                                        ),
+                                      ],
+                                    ))
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                            const SizedBox(
+                              height: 24.0,
+                            ),
+                            Row(children: [
+                              Text(
+                                '${translate('tag')} (${chartHasTags!.carry.length})',
+                                style: TextStyle(
+                                    fontSize: 22.0, color: colorScheme.primary),
+                              ),
+                              const SizedBox(width: 12.0),
+                              ElevatedButton.icon(
+                                onPressed: () => onOpenCheckboxTagList(
+                                    context, chartHasTags!.source),
+                                icon: const Icon(Icons.add_circle_outline),
+                                label: Text(
+                                  translate('addRemoveTag'),
+                                ),
+                              ),
+                            ]),
 
-                      WrapTagListWidget(
-                          tags: chartHasTags!.carry,
-                          itemBuilder: (e) => HoriTagItemWidget(
-                                e,
+                            WrapTagListWidget(
+                                tags: chartHasTags!.carry,
+                                itemBuilder: (e) => HoriTagItemWidget(
+                                      e,
+                                      uid: uid,
+                                      colorScheme: colorScheme,
+                                      onSyncStatusTap: () => openTagSyncOptions(
+                                          e,
+                                          context: context,
+                                          callback: wrapTagListController
+                                              .onSyncStatusChange),
+                                      onTap: (context, tag) =>
+                                          onOpenTagDetail(tag),
+                                    ),
+                                controller: wrapTagListController),
+                            const SizedBox(
+                              height: 24.0,
+                            ),
+
+                            // const SizedBox(
+                            //   height: 24.0,
+                            // ),
+                            // BasicStreamBuilder(
+                            //   stream: controller.commentaryStream(
+                            //       uid, chartHasTags!.source),
+                            //   child: (data) => CommentaryGridWidget(
+                            //     uid: uid,
+                            //     colorScheme: colorScheme,
+                            //     translate: translate,
+                            //     data: data,
+                            //     onOpenSyncOptions: (_, commentary) =>
+                            //         onOpenCommentarySyncOptions(commentary),
+                            //     // onOpenCommentaryCreation: (context) =>
+                            //     //     onOpenNoteCreation(context, chartHasTags!.source),
+                            //     onOpenCommentaryReader: onOpenCommentaryReader,
+                            //   ),
+                            // ),
+                            const SizedBox(
+                              height: 24.0,
+                            ),
+                            BasicStreamBuilder(
+                              stream: controller.noteStream(
+                                  uid, chartHasTags!.source),
+                              child: (data) => NoteGridWidget(
                                 uid: uid,
                                 colorScheme: colorScheme,
-                                onSyncStatusTap: () => openTagSyncOptions(e,
-                                    context: context,
-                                    callback: wrapTagListController
-                                        .onSyncStatusChange),
-                                onTap: (context, tag) => onOpenTagDetail(tag),
+                                translate: translate,
+                                data: data ?? [],
+                                onOpenSyncOptions: (_, note) =>
+                                    onOpenNoteSyncOptions(note),
+                                onOpenNoteCreation: (context) =>
+                                    onOpenNoteCreation(
+                                        context, chartHasTags!.source),
+                                onOpenNoteEditor: onOpenNoteEditor,
                               ),
-                          controller: wrapTagListController),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-
-                      // const SizedBox(
-                      //   height: 24.0,
-                      // ),
-                      // BasicStreamBuilder(
-                      //   stream: controller.commentaryStream(
-                      //       uid, chartHasTags!.source),
-                      //   child: (data) => CommentaryGridWidget(
-                      //     uid: uid,
-                      //     colorScheme: colorScheme,
-                      //     translate: translate,
-                      //     data: data,
-                      //     onOpenSyncOptions: (_, commentary) =>
-                      //         onOpenCommentarySyncOptions(commentary),
-                      //     // onOpenCommentaryCreation: (context) =>
-                      //     //     onOpenNoteCreation(context, chartHasTags!.source),
-                      //     onOpenCommentaryReader: onOpenCommentaryReader,
-                      //   ),
-                      // ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                      BasicStreamBuilder(
-                        stream:
-                            controller.noteStream(uid, chartHasTags!.source),
-                        child: (data) => NoteGridWidget(
-                          uid: uid,
-                          colorScheme: colorScheme,
-                          translate: translate,
-                          data: data ?? [],
-                          onOpenSyncOptions: (_, note) =>
-                              onOpenNoteSyncOptions(note),
-                          onOpenNoteCreation: (context) =>
-                              onOpenNoteCreation(context, chartHasTags!.source),
-                          onOpenNoteEditor: onOpenNoteEditor,
+                            ),
+                            const SizedBox(
+                              height: 192.0,
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 192.0,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
               Positioned(
                 bottom: 0.0,

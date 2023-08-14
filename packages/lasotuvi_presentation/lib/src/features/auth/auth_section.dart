@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
@@ -10,6 +11,7 @@ class AuthSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const avatarSize = 48.0;
     return Center(
       child: UserAuthWidget(
         controller: ref.watch(authControllerProvider),
@@ -21,11 +23,27 @@ class AuthSection extends ConsumerWidget {
             user.photoUrl == null
                 ? const Icon(
                     Icons.account_circle,
-                    size: 64.0,
+                    size: avatarSize,
                   )
                 : ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(64.0)),
-                    child: Image.network(user.photoUrl!)),
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(avatarSize)),
+                    child: CachedNetworkImage(
+                      imageUrl: user.photoUrl!,
+                      height: avatarSize,
+                      width: avatarSize,
+                      fit: BoxFit.fill,
+                      placeholder: (_, __) => const Icon(
+                        Icons.account_circle,
+                        size: avatarSize,
+                      ),
+                      errorWidget: (_, __, ___) => const Icon(
+                        Icons.account_circle,
+                        size: avatarSize,
+                      ),
+                    )
+                    // Image.network(user.photoUrl!),
+                    ),
             const SizedBox(height: 8.0),
             Text(user.displayName!),
             const SizedBox(height: 8.0),

@@ -7,12 +7,17 @@ class EnergyIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/icons/water_ec.png',
-      package: 'energy_store',
-      width: size ?? 20.0,
-      height: size ?? 20.0,
+    return Icon(
+      Icons.energy_savings_leaf_outlined,
       color: color,
+      size: size,
     );
+    // return Image.asset(
+    //   'assets/icons/water_ec.png',
+    //   package: 'energy_store',
+    //   width: size ?? 20.0,
+    //   height: size ?? 20.0,
+    //   color: color,
+    // );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_storage_plan/src/presentation/widget/action/extends_plan_button.dart';
+import 'package:lasotuvi_storage_plan/src/features/plan/widget/extends_plan_button.dart';
 // import '../item/timer_usage_title.dart';
 import '../../controller/expired_timer_controller.dart';
 import '../../controller/storage_plan_list_controller.dart';

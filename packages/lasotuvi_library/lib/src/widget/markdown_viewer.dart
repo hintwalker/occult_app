@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:markdown_widget/markdown_widget.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+// import 'package:markdown_widget/markdown_widget.dart';
 
 class MarkdownViewer extends StatefulWidget {
-  const MarkdownViewer(this.data, {super.key});
+  const MarkdownViewer(
+    this.data, {
+    super.key,
+    required this.colorScheme,
+  });
   final String data;
+  final ColorScheme colorScheme;
 
   @override
   State<MarkdownViewer> createState() => _MarkdownViewerState();
@@ -13,20 +19,42 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
   final maxSize = 48;
   final minSize = 14;
   double textBodySize = 16;
+  double textH1 = 28;
+  double textH2 = 24;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        MarkdownWidget(
+        Markdown(
           data: widget.data,
           shrinkWrap: true,
-          selectable: false,
           padding:
               const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 126.0),
-          config: MarkdownConfig.defaultConfig.copy(
-              configs: [PConfig(textStyle: TextStyle(fontSize: textBodySize))]),
+          styleSheet: MarkdownStyleSheet(
+              h1: TextStyle(fontSize: textH1),
+              h2: TextStyle(fontSize: textH2),
+              p: TextStyle(fontSize: textBodySize),
+              em: TextStyle(fontSize: textBodySize),
+              code: TextStyle(
+                fontSize: textBodySize,
+                color: widget.colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
+              blockquoteDecoration: BoxDecoration(
+                  color: widget.colorScheme.tertiaryContainer.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(12.0))),
         ),
+
+        // MarkdownWidget(
+        //   data: widget.data,
+        //   shrinkWrap: true,
+        //   selectable: false,
+        //   padding:
+        //       const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 126.0),
+        //   config: MarkdownConfig.defaultConfig.copy(
+        //       configs: [PConfig(textStyle: TextStyle(fontSize: textBodySize))]),
+        // ),
         Positioned(
             right: 12.0,
             bottom: 32.0,
@@ -39,6 +67,8 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
                         : () {
                             setState(() {
                               textBodySize--;
+                              textH1--;
+                              textH2--;
                             });
                           },
                     icon: const Icon(Icons.text_decrease),
@@ -60,6 +90,8 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
                         : () {
                             setState(() {
                               textBodySize++;
+                              textH1++;
+                              textH2++;
                             });
                           },
                     icon: const Icon(Icons.text_increase),

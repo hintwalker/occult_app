@@ -11,7 +11,10 @@ abstract class SyncableDependentRepository<E extends SyncableEntity,
     required super.cloudRepository,
   });
 
-  Future<O?> ownerOf(String? uid, int dependentId);
+  Future<O?> ownerOf({
+    required String? uid,
+    required int dependentId,
+  });
   Future<Iterable<E>> byOwnerId(
     String? uid,
     int ownerId,

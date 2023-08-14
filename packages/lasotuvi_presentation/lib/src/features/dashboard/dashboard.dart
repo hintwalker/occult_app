@@ -98,6 +98,8 @@ class Dashboard extends ConsumerWidget {
         return translate('tags');
       case DrawerIds.storagePlanMarket:
         return translate('storagePlanMarket');
+      case DrawerIds.statistic:
+        return translate('statistic');
       default:
         return '';
     }

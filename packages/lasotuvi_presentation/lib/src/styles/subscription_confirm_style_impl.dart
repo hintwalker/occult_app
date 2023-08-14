@@ -19,6 +19,18 @@ class SubscriptionConfirmStyleImpl {
       cancelPlanIconColor: colorScheme.outline,
       nextPlanIconColor: colorScheme.tertiary,
       overlayColor: colorScheme.outline.withOpacity(0.5),
+      energyIconColor: colorScheme.primary,
+      billingBackgroundColor: colorScheme.primaryContainer,
+      billingTitleTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: colorScheme.onPrimaryContainer,
+      ),
+      billingValueTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: colorScheme.primary,
+      ),
     );
   }
 }

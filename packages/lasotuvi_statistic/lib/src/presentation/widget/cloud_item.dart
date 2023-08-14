@@ -21,8 +21,11 @@ class CloudItem extends StatelessWidget {
     return ListTile(
       dense: true,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(
+            width: 20.0,
+          ),
           if (leading != null) leading!,
           const SizedBox(
             width: 8.0,
@@ -30,20 +33,20 @@ class CloudItem extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
           Text(
             '$value/$maxValue',
             style: TextStyle(
-              fontSize: 24.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: value < maxValue ? colorScheme.primary : colorScheme.error,
             ),
           ),
           const SizedBox(width: 8.0),
           SizedBox(
-            width: 128,
+            width: 84,
             height: 20.0,
             // child: Container(
             //   decoration: BoxDecoration(

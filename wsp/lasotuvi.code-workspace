@@ -10,43 +10,25 @@
 			"path": "../docs"
 		},
 		{
-			"path": "../packages/tauari_ui"
+			"path": "../packages/tuvi_strings"
+		},
+		{
+			"path": "../packages/lasotuvi_ads"
 		},
 		{
 			"path": "../packages/lasotuvi_statistic"
 		},
 		{
-			"path": "../packages/lasotuvi_domain"
-		},
-		{
-			"path": "../packages/lasotuvi_provider"
-		},
-		{
-			"path": "../packages/tauari_auth_widget"
-		},
-		{
-			"path": "../packages/tauari_data_core"
+			"path": "../packages/tauari_utils"
 		},
 		{
 			"path": "../packages/lasotuvi_storage_plan"
 		},
 		{
-			"path": "../packages/energy_store"
+			"path": "../packages/lasotuvi_provider"
 		},
 		{
-			"path": "../packages/tauari_firebase"
-		},
-		{
-			"path": "../packages/storage_options"
-		},
-		{
-			"path": "../packages/tuvi_strings"
-		},
-		{
-			"path": "../packages/sunoom"
-		},
-		{
-			"path": "../packages/lasotuvi_data"
+			"path": "../packages/tauari_subscription"
 		}
 	],
 	"settings": {}

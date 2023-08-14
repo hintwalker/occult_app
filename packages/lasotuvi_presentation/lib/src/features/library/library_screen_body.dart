@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
 import 'package:lasotuvi_presentation/src/features/navigation/drawer_ids.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:tauari_translate/tauari_translate.dart';
 import 'navigation/library_navigation.dart';
 
 import '../auth/user_auth_depended_state.dart';
@@ -23,6 +24,7 @@ class _LibraryBodyState extends UserAuthDependedState<LibraryScreenBody> {
         return Future.value(false);
       },
       child: LibraryWidget(
+        translate: translate,
         onOpenStarsSceen: () => LibraryNavigation.showStarsScreen(context),
         onOpenBooksScreen: () => LibraryNavigation.showBooksScreen(context),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_date_format/tauari_date_format.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
-import 'package:tauari_utils/tauari_utils.dart';
 
 class PaymentScheduleInfoWidget extends StatelessWidget {
   const PaymentScheduleInfoWidget(
@@ -19,7 +19,7 @@ class PaymentScheduleInfoWidget extends StatelessWidget {
         const SizedBox(
           width: 8.0,
         ),
-        Text(dateTimeToString(subscription.expiredDate))
+        Text(subscription.expiredDate.toStringVn())
       ],
     );
   }

@@ -24,7 +24,7 @@ class StoragePlanInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: takeStoragePlanById.call(uid, planId),
+        future: takeStoragePlanById.call(planId),
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator.adaptive();

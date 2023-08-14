@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:lasotuvi_data/lasotuvi_data.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
@@ -47,6 +48,9 @@ void main() async {
 
   await initTempStorage();
   final localDatabase = await initLocalDatabase();
+
+  await initAds();
+
   // await loadOldData();
   GoRouter.optionURLReflectsImperativeAPIs = true;
 
@@ -77,6 +81,13 @@ void main() async {
       ),
     ),
   );
+}
+
+Future<void> initAds() async {
+  RequestConfiguration configuration =
+      RequestConfiguration(testDeviceIds: ["B25285BA668EE2347809BEE76CDC2415"]);
+  await MobileAds.instance.updateRequestConfiguration(configuration);
+  await MobileAds.instance.initialize();
 }
 
 Future<void> initTempStorage() async {

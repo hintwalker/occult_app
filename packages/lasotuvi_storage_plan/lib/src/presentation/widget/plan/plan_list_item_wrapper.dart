@@ -5,6 +5,8 @@ import 'package:lasotuvi_storage_plan/src/presentation/widget/plan/plan_valuable
 import 'package:lasotuvi_storage_plan/src/presentation/widget/plan/plan_valuable_expired.dart';
 import 'package:lasotuvi_storage_plan/src/presentation/widget/plan/plan_valuable_stoped_extends.dart';
 import 'package:tauari_subscription/tauari_subscription.dart';
+import 'package:tauari_ui/tauari_ui.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import '../../../entity/storage_plan.dart';
 import '../../../entity/storage_plan_ids.dart';
@@ -84,7 +86,10 @@ class PlanListItemWrapper extends StatelessWidget {
           plan: plan,
           currentSubscription: currentSubscription,
           style: style,
-          onSubscribeTap: () => onSubscribe(context, plan),
+          onSubscribeTap: () => onSubscribe(
+            context,
+            plan,
+          ),
         );
       case PlanItemType.canceled:
         return PlanValuableCanceled(
@@ -227,8 +232,21 @@ class PlanListItemWrapper extends StatelessWidget {
   }
 
   void onSubscribe(BuildContext context, StoragePlan plan) async {
-    if (await willSubscribe(context, plan)) {
-      await planController.subscribe(plan);
+    final online = await availableNetwork();
+    if (!online) {
+      // ignore: use_build_context_synchronously
+      await showDialog(
+        context: context,
+        builder: (ctx) => NeedSignInAlertDialog(
+          translate: translate,
+        ),
+      );
+      return;
+    } else {
+// ignore: use_build_context_synchronously
+      if (await willSubscribe(context, plan)) {
+        await planController.subscribe(plan);
+      }
     }
   }
 

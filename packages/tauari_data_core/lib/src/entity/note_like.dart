@@ -10,4 +10,5 @@ abstract class NoteLike<T> {
   String get noteTitle;
   String get noteContent;
   int get noteId;
+  String? get noteSyncStatus;
 }

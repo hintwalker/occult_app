@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_presentation/src/styles/current_plan_style_impl.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_statistic/lasotuvi_statistic.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
@@ -10,6 +11,7 @@ import 'package:tauari_ui/tauari_ui.dart';
 
 import '../../auth/user_auth_depended_state.dart';
 import '../../navigation/drawer_ids.dart';
+import '../../storage_plan/usecase/execute_extends_subscription.dart';
 
 class DataStatisticScreen extends ConsumerStatefulWidget {
   const DataStatisticScreen({super.key});
@@ -24,7 +26,7 @@ class _DataStatisticScreenState
   @override
   FutureOr callbackAfterGetUser(String? uid) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      ref.read(statisticStateNotifierProvider.notifier).fetchData(uid);
+      await ref.read(statisticStateNotifierProvider.notifier).fetchData(uid);
     });
   }
 
@@ -41,10 +43,23 @@ class _DataStatisticScreenState
               state: ref.watch(statisticStateNotifierProvider),
               translate: translate,
               colorScheme: LasotuviAppStyle.colorScheme,
+              currentPlanStyle:
+                  CurrentPlanStyleImpl.apply(LasotuviAppStyle.colorScheme),
               showPlans: () =>
                   ref.read(mainDrawerControllerProvider).setScreenId(
                         DrawerIds.storagePlanMarket,
                       ),
+              showExtendsConfirm: (subscription) async {
+                final result = await executeExtendsSubscription(
+                  context: context,
+                  subscription: subscription,
+                  ref: ref,
+                );
+                ref
+                    .read(statisticStateNotifierProvider.notifier)
+                    .fetchData(uid);
+                return result;
+              },
             ),
     );
   }

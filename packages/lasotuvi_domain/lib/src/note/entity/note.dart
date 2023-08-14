@@ -151,4 +151,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
 
   @override
   Note copyWithModified(int value) => copyWith(modified: value);
+
+  @override
+  String? get noteSyncStatus => syncStatus;
 }

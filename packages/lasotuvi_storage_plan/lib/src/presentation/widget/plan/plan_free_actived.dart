@@ -22,7 +22,11 @@ class PlanFreeActived extends StatelessWidget {
       translate: translate,
       style: style,
       child: PlanItemWidget(
-        title: PlanTitle(plan, style: style),
+        title: PlanListItemTitle(
+          plan,
+          style: style.title,
+          translate: translate,
+        ),
         price: Text(
           translate('free'),
           style: style.price,

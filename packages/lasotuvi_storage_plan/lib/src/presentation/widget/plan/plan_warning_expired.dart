@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
-import 'package:lasotuvi_storage_plan/src/presentation/widget/action/extends_plan_button.dart';
+import 'package:lasotuvi_storage_plan/src/features/plan/widget/extends_plan_button.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
 class PlanWariningExpired extends StatelessWidget {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart' show HomeBody;
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
+import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
+    show AppConfig, HomeBody;
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,10 +18,22 @@ class HomeScreen extends StatelessWidget {
     return RestorationScope(
       restorationId: restorationId,
       child: Container(
-          decoration: BoxDecoration(
-            color: LasotuviAppStyle.colorScheme.background,
-          ),
-          child: const HomeBody()),
+        decoration: BoxDecoration(
+          color: LasotuviAppStyle.colorScheme.background,
+        ),
+        child: const Column(
+          children: [
+            if (AppConfig.showAds) BannerAds(id: AndroidAdsIds.banner),
+            if (AppConfig.showAds)
+              SizedBox(
+                height: 2.0,
+              ),
+            Expanded(
+              child: HomeBody(),
+            ),
+          ],
+        ),
+      ),
       // Center(
       //   child: FilledButton(
       //       onPressed: () => drawerController.setScreenId('energyMarket'),

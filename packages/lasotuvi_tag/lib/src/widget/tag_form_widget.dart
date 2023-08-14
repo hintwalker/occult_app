@@ -45,10 +45,12 @@ class _TagFormWidgetState extends State<TagFormWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-          left: 8.0,
-          right: 8.0,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 24),
+      padding: const EdgeInsets.only(
+        left: 8.0,
+        right: 8.0,
+        bottom: 0.0,
+        // MediaQuery.of(context).viewInsets.bottom + 24
+      ),
       child: Form(
         key: _formKey,
         autovalidateMode: AutovalidateMode.always,
@@ -100,7 +102,14 @@ class _TagFormWidgetState extends State<TagFormWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FilledButton(
+                Expanded(
+                  child: TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(widget.translate('cancel')),
+                  ),
+                ),
+                Expanded(
+                  child: FilledButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         widget.onSubmit(widget.tagId, title, subTitle);
@@ -109,7 +118,9 @@ class _TagFormWidgetState extends State<TagFormWidget> {
                         // });
                       }
                     },
-                    child: Text(widget.submitButtonText))
+                    child: Text(widget.submitButtonText),
+                  ),
+                ),
               ],
             )
           ],

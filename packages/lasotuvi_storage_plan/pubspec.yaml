@@ -30,6 +30,7 @@ dependencies:
   energy_store:
     path: ../energy_store
   flutter_riverpod: ^2.3.6
+  either_dart: ^1.0.0
 
 dev_dependencies:
   flutter_test:

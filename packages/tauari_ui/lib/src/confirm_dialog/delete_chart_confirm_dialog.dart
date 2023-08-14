@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../widget/basic_confirm_dialog.dart';
 
-class DeleteChartConfirmDialog extends StatelessWidget {
-  const DeleteChartConfirmDialog({
+class DeleteDataConfirmDialog extends StatelessWidget {
+  const DeleteDataConfirmDialog({
     super.key,
     required this.translate,
+    required this.message,
+    required this.confirmText,
   });
+  final String message;
+  final String confirmText;
   final String Function(String) translate;
 
   @override
@@ -18,7 +22,17 @@ class DeleteChartConfirmDialog extends StatelessWidget {
       yesButtonText: translate('yes'),
       children: [
         Text(
-          translate('warningDeleteChart'),
+          message,
+          // translate('warningDeleteChart'),
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 20),
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Text(
+          confirmText,
+          // translate('warningDeleteChart'),
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 20),
         ),

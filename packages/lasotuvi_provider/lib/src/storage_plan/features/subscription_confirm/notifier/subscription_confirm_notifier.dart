@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:lasotuvi_provider/src/storage_plan/usecase/prepare_bill.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
 
 final subscriptionConfirmNotifierProvider = StateNotifierProvider<
@@ -10,5 +11,7 @@ final subscriptionConfirmNotifierProvider = StateNotifierProvider<
     countNoteOnCloud: ref.read(countNoteOnCloudProvider),
     countTagOnCloud: ref.read(countTagOnCloudProvider),
     enoughEnergy: ref.read(enoughEnergyProvider),
+    prepareBill: ref.read(prepareBillProvider),
+    takeCurrentSubscription: ref.read(takeCurrentSubProvider),
   ),
 );

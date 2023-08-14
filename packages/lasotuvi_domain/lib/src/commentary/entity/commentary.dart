@@ -146,4 +146,7 @@ class Commentary extends MustBuyEntity<Commentary>
 
   @override
   Commentary copyWithModified(int value) => copyWith(modified: value);
+
+  @override
+  String? get noteSyncStatus => syncStatus;
 }

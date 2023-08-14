@@ -20,9 +20,9 @@ import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
 import 'package:tauari_ui/tauari_ui.dart';
 
 import '../screen/chart/all_charts.dart';
-import '../screen/chart/chart.dart';
+// import '../screen/chart/chart.dart';
 import '../screen/chart/chart_creation.dart';
-import '../screen/chart/chart_detail.dart';
+// import '../screen/chart/chart_detail.dart';
 import '../screen/commentary/all_commentaries.dart';
 import '../screen/home.dart';
 import '../screen/library/library.dart';
@@ -170,26 +170,26 @@ class LasotuviRoutes {
         restorationId: RouteName.chartCreation,
       )),
     ),
-    GoRoute(
-      path: RoutePath.chartView,
-      name: RouteName.chartView,
-      parentNavigatorKey: rootNavigatorKey,
-      builder: (context, state) => ChartScreen(
-        restorationId: RouteName.chartView,
-        // uid: state.pathParameters[RouterParams.uid]!,
-        chartId: state.pathParameters[RouterParams.chartId]!,
-      ),
-    ),
-    GoRoute(
-      path: RoutePath.chartDetail,
-      name: RouteName.chartDetail,
-      parentNavigatorKey: rootNavigatorKey,
-      builder: (context, state) => ChartDetailScreen(
-        restorationId: RouteName.chartView,
-        chartId: state.pathParameters[RouterParams.chartId]!,
-        syncStatus: state.pathParameters[RouterParams.syncStatus]!,
-      ),
-    ),
+    // GoRoute(
+    //   path: RoutePath.chartView,
+    //   name: RouteName.chartView,
+    //   parentNavigatorKey: rootNavigatorKey,
+    //   builder: (context, state) => ChartScreen(
+    //     restorationId: RouteName.chartView,
+    //     // uid: state.pathParameters[RouterParams.uid]!,
+    //     chartId: state.pathParameters[RouterParams.chartId]!,
+    //   ),
+    // ),
+    // GoRoute(
+    //   path: RoutePath.chartDetail,
+    //   name: RouteName.chartDetail,
+    //   parentNavigatorKey: rootNavigatorKey,
+    //   builder: (context, state) => ChartDetailScreen(
+    //     restorationId: RouteName.chartView,
+    //     chartId: state.pathParameters[RouterParams.chartId]!,
+    //     syncStatus: state.pathParameters[RouterParams.syncStatus]!,
+    //   ),
+    // ),
     GoRoute(
       path: RoutePath.noteEditor,
       name: RouteName.noteEditor,

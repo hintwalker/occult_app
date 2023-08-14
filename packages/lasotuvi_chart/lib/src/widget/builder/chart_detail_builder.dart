@@ -19,10 +19,12 @@ class ChartDetailBuilder extends StatefulWidget {
     required this.onOpenBooksModal,
     required this.onOpenChartOptions,
     required this.onOpenChartEditOptions,
+    // required this.topBanner,
   });
   final String? uid;
   final String? syncStatus;
   final String chartId;
+  // final Widget? topBanner;
   final ColorScheme colorScheme;
   final ChartDetailController chartDetailController;
   final String Function(String) translate;
@@ -69,6 +71,7 @@ class _ChartDetailBuilderState extends State<ChartDetailBuilder> {
       ),
       child: (data) => ChartDetailModal(
         data,
+        // topBanner: widget.topBanner,
         colorScheme: widget.colorScheme,
         onOpenBooksModal: widget.onOpenBooksModal,
         onOpenStarsModal: widget.onOpenStarsModal,

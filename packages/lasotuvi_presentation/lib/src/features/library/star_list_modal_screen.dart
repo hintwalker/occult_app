@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
-import 'package:lasotuvi_presentation/src/features/library/navigation/library_navigation.dart';
+import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
+import '../library/navigation/library_navigation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_sort/tauari_sort.dart';
@@ -19,17 +21,24 @@ class StarListModalScreen extends ConsumerWidget {
       child: BasicFutureBuilder(
         future: ref.watch(starListControllerProvider).allData(),
         child: (data) => BasicFutureBuilder(
-          future: SortHelper.getSortOption(starSortKey),
-          child: (sortValue) => StarListWidget(
-            data: data ?? [],
-            onItemTap: (item) =>
-                LibraryNavigation.showStarInfoViewer(context, item),
-            translate: translate,
-            colorScheme: LasotuviAppStyle.colorScheme,
-            onSaveSortOption: SortHelper.saveSortOption,
-            initSortValue: sortValue,
-          ),
-        ),
+            future: SortHelper.getSortOption(starSortKey),
+            child: (sortValue) => Column(
+                  children: [
+                    if (AppConfig.showAds)
+                      const BannerAds(id: AndroidAdsIds.banner),
+                    Expanded(
+                      child: StarListWidget(
+                        data: data ?? [],
+                        onItemTap: (item) =>
+                            LibraryNavigation.showStarInfoViewer(context, item),
+                        translate: translate,
+                        colorScheme: LasotuviAppStyle.colorScheme,
+                        onSaveSortOption: SortHelper.saveSortOption,
+                        initSortValue: sortValue,
+                      ),
+                    ),
+                  ],
+                )),
       ),
     );
   }

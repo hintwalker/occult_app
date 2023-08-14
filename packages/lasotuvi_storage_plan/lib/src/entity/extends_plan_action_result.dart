@@ -3,5 +3,6 @@ enum ExtendsPlanActionResult {
   notEnoughEnergy,
   needSignIn,
   paymentFailed,
-  unknownError
+  unknownError,
+  noConnection,
 }

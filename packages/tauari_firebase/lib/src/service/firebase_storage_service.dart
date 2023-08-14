@@ -111,6 +111,9 @@ class FirebaseStorageService extends RemoteFileService {
 
   @override
   Future<void> uploadFile(File file, String destination) async {
+    if (!await file.exists()) {
+      return;
+    }
     final fileRef = firebaseStorage.ref().child(destination);
     final compressed = await FlutterImageCompress.compressWithFile(file.path,
         minHeight: 216, minWidth: 216, quality: 10);
@@ -122,7 +125,9 @@ class FirebaseStorageService extends RemoteFileService {
   @override
   Future<void> deleteFile(String filePath) async {
     final fileRef = firebaseStorage.ref().child(filePath);
-    await fileRef.delete();
+    try {
+      await fileRef.delete();
+    } catch (_) {}
   }
 
   @override

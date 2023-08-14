@@ -37,7 +37,7 @@ final storagePlanListControllerProvider =
     autoExtends: ref.read(stopAutoExtendProvider),
     // takeCurrentSub: ref.read(takeCurrentSubProvider),
     extendsPlan: ref.read(extendsPlanProvider),
-    lastCanceledSubscription: ref.read(takeLastCanceledSubscription),
+    lastCanceledSubscription: ref.read(takeLastCanceledSubscriptionProvider),
     cancelPlan: ref.read(cancelPlanProvider),
   ),
 );

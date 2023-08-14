@@ -118,24 +118,27 @@ class _CheckboxDataListContainerState<U, V>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.symmetric(
-                      horizontal: BorderSide(
-                          color: widget.colorScheme.outline.withOpacity(0.6)))),
-              child: Text(
-                widget
-                    .translate('sortBy ${widget.controller.sortOption!.name}'),
-                style: TextStyle(
-                    color: widget.colorScheme.outline.withOpacity(0.6),
-                    fontStyle: FontStyle.italic),
-              ),
-            )
-          ],
-        ),
+        if (!(widget.controller.sortOption == null ||
+            widget.controller.sortOption!.name.isEmpty))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.symmetric(
+                        horizontal: BorderSide(
+                            color:
+                                widget.colorScheme.outline.withOpacity(0.6)))),
+                child: Text(
+                  widget.translate(
+                      'sortBy ${widget.controller.sortOption!.name}'),
+                  style: TextStyle(
+                      color: widget.colorScheme.outline.withOpacity(0.6),
+                      fontStyle: FontStyle.italic),
+                ),
+              )
+            ],
+          ),
         const SizedBox(
           height: 4.0,
         ),

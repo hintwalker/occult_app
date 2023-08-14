@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
 import '../../../entity/storage_plan.dart';
-import '../../style/storage_plan_style.dart';
 
-class PlanTitle extends StatelessWidget {
-  const PlanTitle(
+class PlanListItemTitle extends StatelessWidget {
+  const PlanListItemTitle(
     this.item, {
     super.key,
     required this.style,
+    required this.translate,
   });
 
   final StoragePlan item;
-  final StoragePlanStyle style;
+  final TextStyle? style;
+  final String Function(String) translate;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      item.title,
-      style: style.title,
+      '${translate('plan')} ${item.title}',
+      style: style,
     );
   }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
-import 'package:lasotuvi_presentation/src/features/request/navigation/request_navigation.dart';
+import '../../../config/app_config.dart';
+import '../../../helper/pop_to_parrent.dart';
+import '../../../router/route_name.dart';
+import '../../request/navigation/request_navigation.dart';
 import 'package:lasotuvi_tag_shared/lasotuvi_tag_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 // import 'package:lasotuvi_presentation/src/features/commentary/navigation/commentary_navigation.dart';
@@ -10,8 +14,8 @@ import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import '../../../helper/pop_to_parrent.dart';
-import '../../../router/route_name.dart';
+// import '../../../helper/pop_to_parrent.dart';
+// import '../../../router/route_name.dart';
 import '../navigation/chart_navigation.dart';
 import '../../note/navigation/note_navigation.dart';
 import '../../../helper/storage_helper.dart';
@@ -26,7 +30,6 @@ class ChartViewModalScreen extends ConsumerStatefulWidget {
   });
   final Chart chart;
   final bool saveLastView;
-
   @override
   ConsumerState<ChartViewModalScreen> createState() =>
       _ChartViewModalScreenState();
@@ -67,18 +70,24 @@ class _ChartViewModalScreenState
                       syncStatus: data.source.syncStatus,
                       title: data.source.name,
                       colorScheme: LasotuviAppStyle.colorScheme,
-                      onOpenSyncOptions: (context) =>
-                          StorageHelper.showOptionsModal(
-                        data.source,
-                        context: context,
-                        uid: uid,
-                        ref: ref,
-                        doBeforeDeleteForever: () =>
-                            popToParrent(context, RouteName.chartView),
-                      ),
+                      onOpenSyncOptions: (context) {
+                        // context.pop();
+                        // context.pop();
+                        StorageHelper.showOptionsModal(
+                          data.source,
+                          context: context,
+                          uid: uid,
+                          ref: ref,
+                          callback: () =>
+                              popToParrent(context, RouteName.chartView),
+                        );
+                      },
                       child: ChartViewWidget(
                         data,
                         uid: uid,
+                        topBanner: AppConfig.showAds
+                            ? const BannerAds(id: AndroidAdsIds.banner)
+                            : null,
                         controller: controller,
                         translate: translate,
                         colorScheme: LasotuviAppStyle.colorScheme,

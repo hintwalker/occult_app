@@ -41,6 +41,9 @@ export 'src/subscription/data_source/current_sub_data_source_provider.dart';
 export 'src/subscription/controller/current_sub_controller_provider.dart';
 
 export 'src/storage_plan/controller/expired_timer_controller_provider.dart';
+
+export 'src/storage_plan/usecase/verify_current_plan_state.dart';
+export 'src/storage_plan/usecase/verify_current_subscription.dart';
 export 'src/storage_plan/usecase/take_current_storage_plan.dart';
 export 'src/storage_plan/usecase/stop_auto_extend.dart';
 export 'src/storage_plan/usecase/take_storage_plan_by_id_provider.dart';
@@ -50,6 +53,8 @@ export 'src/storage_plan/data_source/storage_plan_data_source_provider.dart';
 export 'src/storage_plan/controller/storage_plan_list_controller_provider.dart';
 
 export 'src/storage_plan/features/subscription_confirm/notifier/subscription_confirm_notifier.dart';
+export 'src/storage_plan/features/plan/notifier/current_plan_notifier.dart';
+export 'src/storage_plan/features/plan/notifier/plan_list_notifier.dart';
 
 export 'src/chart/dao/chart_dao.dart';
 export 'src/chart/data_source/firebase_chart_data_source.dart';

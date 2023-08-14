@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show LibraryScreenBody;
+    show AppConfig, LibraryScreenBody;
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 
 class LibraryScreen extends StatelessWidget {
@@ -16,7 +17,18 @@ class LibraryScreen extends StatelessWidget {
       restorationId: restorationId,
       child: Container(
         color: LasotuviAppStyle.colorScheme.background,
-        child: const LibraryScreenBody(),
+        child: const Column(
+          children: [
+            if (AppConfig.showAds) BannerAds(id: AndroidAdsIds.banner),
+            if (AppConfig.showAds)
+              SizedBox(
+                height: 2.0,
+              ),
+            Expanded(
+              child: LibraryScreenBody(),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,9 @@ library tauari_subscription;
 
 export 'src/config/time_config.dart';
 
+export 'src/usecase/has_subscription_canceled.dart';
 export 'src/usecase/update_current_subscription.dart';
+export 'src/usecase/has_subscription_expired.dart';
 
 export 'src/controller/current_sub_controller.dart';
 
@@ -23,6 +25,7 @@ export 'src/repository/impl/subscription_repository_impl.dart';
 export 'src/repository/impl/current_sub_repository_impl.dart';
 export 'src/repository/impl/last_canceled_subscription_repository_impl.dart';
 
+export 'src/entity/pair_subscription.dart';
 export 'src/entity/subscription_status.dart';
 export 'src/entity/column_subscription.dart';
 export 'src/entity/subscription.dart';

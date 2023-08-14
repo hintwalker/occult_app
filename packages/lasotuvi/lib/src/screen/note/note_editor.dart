@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show NoteEditorBody;
+    show AppConfig, NoteEditorBody;
 
 class NoteEditorScreen extends StatelessWidget {
   const NoteEditorScreen({
@@ -18,15 +19,32 @@ class NoteEditorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId,
-        child: Scaffold(
-          // appBar: AppBar(
-          //   backgroundColor: LasotuviAppStyle.colorScheme.background,
-          // ),
-          body: NoteEditorBody(
-            noteId,
-            syncStatus: syncStatus,
-          ),
-        ));
+      restorationId: restorationId,
+      child: Scaffold(
+        // appBar: AppBar(
+        //   backgroundColor: LasotuviAppStyle.colorScheme.background,
+        // ),
+        body: SafeArea(
+          child: Column(children: [
+            if (AppConfig.showAds) const BannerAds(id: AndroidAdsIds.banner),
+            if (AppConfig.showAds)
+              const SizedBox(
+                height: 2.0,
+              ),
+            Expanded(
+              child: NoteEditorBody(
+                noteId,
+                syncStatus: syncStatus,
+              ),
+            )
+            // Center(
+            //   child: FilledButton(
+            //       onPressed: () => drawerController.setScreenId('home'),
+            //       child: const Text('Go to Home')),
+            // )
+          ]),
+        ),
+      ),
+    );
   }
 }

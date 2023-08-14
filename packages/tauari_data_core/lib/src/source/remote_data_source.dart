@@ -1,3 +1,5 @@
+import 'package:tauari_utils/tauari_utils.dart';
+
 import '../model/cloud_model.dart';
 import '../query/query_args.dart';
 import '../service/cloud_service.dart';
@@ -28,14 +30,23 @@ abstract class RemoteDataSource<T extends CloudModel>
 
   Future<bool> update(String uid, T item) => insert(uid, item);
 
-  Future<bool> exist(String uid, String docId) =>
-      service.exists(collectionPath: dataCollectionPath(uid), docId: docId);
+  Future<bool> exist(String uid, String docId) async {
+    final online = await availableNetwork();
+    return await service.exists(
+      collectionPath: dataCollectionPath(uid),
+      docId: docId,
+      online: online,
+    );
+  }
 
   Future<bool> delete(String uid, String docId) async {
+    final online = await availableNetwork();
     try {
-      await service.deleteDocumentFromCollection(
-          collectionPath: dataCollectionPath(uid), docId: docId);
-      return true;
+      return await service.deleteDocumentFromCollection(
+        collectionPath: dataCollectionPath(uid),
+        docId: docId,
+        online: online,
+      );
     } catch (e) {
       return false;
     }
@@ -51,8 +62,12 @@ abstract class RemoteDataSource<T extends CloudModel>
 
   Future<T?> byId(String uid, String docId) async {
     final collection = dataCollectionPath(uid);
-    final doc =
-        await service.getFromDocument(collectionPath: collection, docId: docId);
+    final online = await availableNetwork();
+    final doc = await service.getFromDocument(
+      collectionPath: collection,
+      docId: docId,
+      online: online,
+    );
     if (!doc.exists) {
       return null;
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart'
-    show AllChartListScreenBody;
+    show AllChartListScreenBody, AppConfig;
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 
 class ChartsScreen extends StatelessWidget {
@@ -13,11 +14,24 @@ class ChartsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RestorationScope(
-        restorationId: restorationId,
-        child: Container(
-            decoration: BoxDecoration(
-              color: LasotuviAppStyle.colorScheme.background,
+      restorationId: restorationId,
+      child: Column(
+        children: [
+          if (AppConfig.showAds) const BannerAds(id: AndroidAdsIds.banner),
+          if (AppConfig.showAds)
+            const SizedBox(
+              height: 2.0,
             ),
-            child: const AllChartListScreenBody()));
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: LasotuviAppStyle.colorScheme.background,
+              ),
+              child: const AllChartListScreenBody(),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

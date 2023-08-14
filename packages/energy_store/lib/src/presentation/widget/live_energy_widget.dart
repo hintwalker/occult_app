@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import '../../entity/energy.dart';
 import '../controller/energy_widget_controller.dart';
@@ -46,14 +49,33 @@ class LiveEnergyWidget extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator();
                       } else if (snapshot.hasData) {
-                        return Text(
-                          snapshot.data?.value.toString() ?? '0',
-                          style: style.textStyle,
+                        final energy = formatThousandSeperator(
+                            snapshot.requireData.value,
+                            locale: Platform.localeName);
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          transitionBuilder:
+                              (Widget child, Animation<double> animation) {
+                            // return SlideTransition(
+                            //   position: Tween<Offset>(
+                            //           begin: const Offset(0.0, -0.5),
+                            //           end: const Offset(0.0, 0.0))
+                            //       .animate(animation),
+                            //   child: child,
+                            // );
+                            return ScaleTransition(
+                              scale: animation,
+                              child: child,
+                            );
+                          },
+                          child: Text(
+                            energy,
+                            key: ValueKey<String>(energy),
+                            style: style.textStyle,
+                          ),
                         );
                       } else {
-                        return const Center(
-                          child: Text('!'),
-                        );
+                        return const Text('0');
                       }
                     })
               ],

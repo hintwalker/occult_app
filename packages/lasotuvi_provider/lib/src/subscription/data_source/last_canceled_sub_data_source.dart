@@ -5,4 +5,4 @@ import '../../cloud_service/firestore_service_provider.dart';
 
 final lastCanceledSubDataSourceProvider =
     Provider.autoDispose<FirebaseLastCanceledSubDataSource>((ref) =>
-        FirebaseLastCanceledSubDataSource(ref.read(firestoreServiceProvider)));
+        FirebaseLastCanceledSubDataSource(ref.watch(firestoreServiceProvider)));

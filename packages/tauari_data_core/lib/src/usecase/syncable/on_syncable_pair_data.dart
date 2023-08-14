@@ -12,11 +12,15 @@ abstract class OnSyncablePairData<E extends SyncableEntity,
     required this.onCreateItem,
   });
 
-  Stream<Iterable<P>> call({String? uid, QueryArgs? queryArgs}) => repository
-      .onOwnerAndThis(
-        uid: uid,
-        queryArgs: queryArgs,
-        onCreateItem: onCreateItem,
-      )
-      .map((event) => event.whereType());
+  Stream<Iterable<P>> call({
+    required String? uid,
+    required QueryArgs? queryArgs,
+  }) =>
+      repository
+          .onOwnerAndThis(
+            uid: uid,
+            queryArgs: queryArgs,
+            onCreateItem: onCreateItem,
+          )
+          .map((event) => event.whereType());
 }

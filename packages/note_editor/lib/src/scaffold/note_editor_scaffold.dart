@@ -28,37 +28,38 @@ class NoteEditorScaffold<T> extends StatelessWidget {
     return
         // Material(
         //     child:
-        SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          BasicTopBar(
-            title: chartAvatar(note),
-            colorScheme: colorScheme,
-            actions: [
-              SyncStatusRibbonWidget(
-                  uid: uid,
-                  syncStatus: syncStatus,
-                  colorScheme: colorScheme,
-                  onTap: () => onOpenSyncOptions(context))
-            ],
-          ),
-          // Row(
-          //   children: [
-          //     IconButton(
-          //       onPressed: () => Navigator.maybePop(context),
-          //       icon: const Icon(Icons.arrow_back),
-          //     ),
-          //     const SizedBox(width: 8.0),
-          //     Expanded(
-          //       child: chartAvatar(note),
-          //     ),
-          //   ],
-          // ),
-          Expanded(child: child),
-        ],
-      ),
+        //   SafeArea(
+        // child:
+        Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        BasicTopBar(
+          title: chartAvatar(note),
+          colorScheme: colorScheme,
+          actions: [
+            SyncStatusRibbonWidget(
+                uid: uid,
+                syncStatus: syncStatus,
+                colorScheme: colorScheme,
+                onTap: () => onOpenSyncOptions(context))
+          ],
+        ),
+        // Row(
+        //   children: [
+        //     IconButton(
+        //       onPressed: () => Navigator.maybePop(context),
+        //       icon: const Icon(Icons.arrow_back),
+        //     ),
+        //     const SizedBox(width: 8.0),
+        //     Expanded(
+        //       child: chartAvatar(note),
+        //     ),
+        //   ],
+        // ),
+        Expanded(child: child),
+      ],
+      // ),
       // ),
     );
   }

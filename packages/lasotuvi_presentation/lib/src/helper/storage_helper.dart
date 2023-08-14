@@ -77,7 +77,6 @@ class StorageHelper {
       await showDialog(
         context: context,
         builder: (_) => const NeedSignInAlertDialog(
-          colorScheme: LasotuviAppStyle.colorScheme,
           translate: translate,
         ),
       );
@@ -98,7 +97,6 @@ class StorageHelper {
         await showDialog(
           context: context,
           builder: (_) => const NeedSignInAlertDialog(
-            colorScheme: LasotuviAppStyle.colorScheme,
             translate: translate,
           ),
         );
@@ -164,7 +162,26 @@ class StorageHelper {
   }) async {
     final result = await showDialog<ConfirmResult>(
       context: context,
-      builder: (ctx) => const DeleteChartConfirmDialog(translate: translate),
+      builder: (ctx) {
+        String message = '';
+        String confirmText = '';
+
+        if (T == Chart) {
+          message = 'warningDeleteChart';
+          confirmText = 'confirmDeleteChart';
+        } else if (T == Tag) {
+          message = 'warningDeleteTag';
+          confirmText = 'confirmDeleteTag';
+        } else {
+          message = 'warningDeleteNote';
+          confirmText = 'confirmDeleteNote';
+        }
+        return DeleteDataConfirmDialog(
+          translate: translate,
+          message: translate(message),
+          confirmText: translate(confirmText),
+        );
+      },
     );
     if (result != null) {
       if (result.yes) {

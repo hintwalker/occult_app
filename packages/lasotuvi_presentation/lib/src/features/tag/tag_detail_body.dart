@@ -53,8 +53,7 @@ class _TagDetailBodyState extends UserAuthDependedState<TagDetailBody> {
                 context: context,
                 uid: uid,
                 ref: ref,
-                doBeforeDeleteForever: () =>
-                    popToParrent(context, RouteName.tagDetail),
+                callback: () => popToParrent(context, RouteName.tagDetail),
               ),
               child: TagDetailWidget(
                 uid: uid,

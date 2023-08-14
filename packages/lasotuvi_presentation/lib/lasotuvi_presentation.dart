@@ -1,6 +1,10 @@
 library lasotuvi_presentation;
 
+export 'src/config/app_config.dart';
+
 export 'src/settings/lasotuvi_settings.dart';
+
+export 'src/shared/widget/new_data_option_button.dart';
 export 'src/shared/translation_path.dart';
 export 'src/shared/screen_app_bar.dart';
 
@@ -53,7 +57,6 @@ export 'src/features/dashboard/dashboard.dart';
 export 'src/features/statistics/screen/data_statistic_screen.dart';
 
 export 'src/features/navigation/energy_point_app_bar_action.dart';
-export 'src/features/navigation/take_screen_title.dart';
 export 'src/features/navigation/tuvi_drawer_header.dart';
 export 'src/features/navigation/drawer_ids.dart';
 export 'src/features/navigation/main_navigation.dart';

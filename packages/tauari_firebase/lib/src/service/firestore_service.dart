@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 class FirestoreService implements CloudService {
   const FirestoreService(this.firestore);
@@ -76,8 +77,13 @@ class FirestoreService implements CloudService {
       int? limit,
       CloudDataWhere? where}) async {
     var collection = firestore.collection(collectionPath);
+    final online = await availableNetwork();
     if (orderBy == null && limit == null && where == null) {
-      return collection.get();
+      return collection.get(
+        GetOptions(
+          source: online ? Source.serverAndCache : Source.cache,
+        ),
+      );
     }
     final result = _buildQuery(
       collection: collection,
@@ -85,7 +91,11 @@ class FirestoreService implements CloudService {
       limit: limit,
       where: where,
     );
-    return await result.get();
+    return await result.get(
+      GetOptions(
+        source: online ? Source.serverAndCache : Source.cache,
+      ),
+    );
   }
 
   @override
@@ -97,7 +107,7 @@ class FirestoreService implements CloudService {
     var collection = firestore.collection(collectionPath);
 
     if (orderBy == null && limit == null && where == null) {
-      return collection.snapshots();
+      return collection.snapshots(includeMetadataChanges: true);
     }
     final result = _buildQuery(
       collection: collection,
@@ -106,7 +116,7 @@ class FirestoreService implements CloudService {
       where: where,
     );
 
-    return result.snapshots();
+    return result.snapshots(includeMetadataChanges: true);
     // return firestore
     //     .collection(collectionPath)
     //     .orderBy(orderField, descending: descending)
@@ -117,29 +127,57 @@ class FirestoreService implements CloudService {
   /// Document Operations
 
   @override
-  Future<void> deleteDocumentFromCollection(
-      {required String collectionPath, required String docId}) async {
-    return firestore.collection(collectionPath).doc(docId).delete();
+  Future<bool> deleteDocumentFromCollection({
+    required String collectionPath,
+    required String docId,
+    required bool online,
+  }) async {
+    final doc = firestore.collection(collectionPath).doc(docId);
+    final data = await doc.get(
+      GetOptions(
+        source: online ? Source.serverAndCache : Source.cache,
+      ),
+    );
+    if (data.exists) {
+      await firestore.collection(collectionPath).doc(docId).delete();
+      return true;
+    }
+    return false;
   }
 
   @override
-  Future<DocumentSnapshot<Map<String, dynamic>>> getFromDocument(
-      {required String collectionPath, required String docId}) {
-    return firestore.collection(collectionPath).doc(docId).get();
+  Future<DocumentSnapshot<Map<String, dynamic>>> getFromDocument({
+    required String collectionPath,
+    required String docId,
+    required bool online,
+  }) async {
+    return firestore.collection(collectionPath).doc(docId).get(
+          GetOptions(
+            source: online ? Source.serverAndCache : Source.cache,
+          ),
+        );
   }
 
   @override
-  Future<void> setDataOnDocument(
-      {required Map<String, dynamic> data,
-      required String collectionPath,
-      required String doc}) {
-    return firestore.collection(collectionPath).doc(doc).set(data);
+  Future<void> setDataOnDocument({
+    required Map<String, dynamic> data,
+    required String collectionPath,
+    required String doc,
+  }) async {
+    final docRef = firestore.collection(collectionPath).doc(doc);
+
+    await docRef.set(
+      data,
+    );
   }
 
   @override
   Stream<DocumentSnapshot<Map<String, dynamic>>> getSnapshotStreamFromDocument(
           {required String collectionPath, required String docId}) =>
-      firestore.collection(collectionPath).doc(docId).snapshots();
+      firestore
+          .collection(collectionPath)
+          .doc(docId)
+          .snapshots(includeMetadataChanges: true);
 
   @override
   Future<void> updateDataOnDocument(
@@ -157,10 +195,16 @@ class FirestoreService implements CloudService {
       .map((event) => event.count);
 
   @override
-  Future<bool> exists(
-      {required String collectionPath, required String docId}) async {
-    final document =
-        await firestore.collection(collectionPath).doc(docId).get();
+  Future<bool> exists({
+    required String collectionPath,
+    required String docId,
+    required bool online,
+  }) async {
+    final document = await firestore.collection(collectionPath).doc(docId).get(
+          GetOptions(
+            source: online ? Source.serverAndCache : Source.cache,
+          ),
+        );
     return document.exists;
   }
 }

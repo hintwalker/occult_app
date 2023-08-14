@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 // import 'package:lasotuvi_commentary/lasotuvi_commentary.dart';
 import 'package:lasotuvi_note/lasotuvi_note.dart';
-import 'package:lasotuvi_presentation/src/shared/widget/new_data_option_button.dart';
+import '../../../config/app_config.dart';
+import '../../../shared/widget/new_data_option_button.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 // import 'package:lasotuvi_request/lasotuvi_request.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
@@ -41,10 +42,11 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CurrentSubWidgetContainer(
-                  uid: uid,
-                  translate: translate,
-                ),
+                if (AppConfig.showCurrentPlan)
+                  CurrentSubWidgetContainer(
+                    uid: uid,
+                    translate: translate,
+                  ),
                 SizedBox(
                   height: GeneralStyle.topTenBannerHeight,
                   child: TopTenChartsBanner(

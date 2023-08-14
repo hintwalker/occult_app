@@ -1,4 +1,5 @@
 import 'package:rxdart/rxdart.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import '../../../entity/syncable_entity.dart';
 import '../../../entity/syncable_entity_carrier.dart';
@@ -78,18 +79,26 @@ abstract class SyncableDependentRepositoryImpl<
   }
 
   @override
-  Future<O?> ownerOf(String? uid, int dependentId) async {
+  Future<O?> ownerOf({
+    required String? uid,
+    required int dependentId,
+    // required String? syncStatus,
+  }) async {
     final local = await localDependentRepository.ownerLocal(dependentId);
-    if (uid == null) {
+    final online = await availableNetwork();
+    if (uid == null || !online) {
       return local;
+    }
+    if (local == null) {
+      return null;
     }
     final cloud = await cloudDependentRepository.ownerCloud(uid, dependentId);
     if (cloud == null) {
       return local;
     }
-    if (local == null) {
-      return cloud;
-    }
+    // if (local == null) {
+    //   return cloud;
+    // }
     return mergeCloudToLocal<O>(uid: uid, local: [local], cloud: [cloud]).first;
   }
 
@@ -114,14 +123,24 @@ abstract class SyncableDependentRepositoryImpl<
   Stream<Iterable<SyncableEntityPair<E, O>>> onOwnerAndThis(
       {String? uid,
       QueryArgs? queryArgs,
+      // required String? syncStatus,
       required SyncableEntityPair<E, O> Function(E p1, O p2) onCreateItem}) {
-    return onEveryWhere(uid, queryArgs)
-        .asyncMap((event) async => await Future.wait(event.map((e) async {
-              final owner = await ownerOf(uid, e.id);
-              // if (own == null) {
-              //   return null;
-              // }
-              return onCreateItem(e, owner!);
-            })));
+    return onEveryWhere(uid, queryArgs).asyncMap(
+      (event) async => await Future.wait(
+        event.map(
+          (e) async {
+            final owner = await ownerOf(
+              uid: uid,
+              dependentId: e.id,
+              // syncStatus: syncStatus,
+            );
+            // if (own == null) {
+            //   return null;
+            // }
+            return onCreateItem(e, owner!);
+          },
+        ),
+      ),
+    );
   }
 }

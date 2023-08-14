@@ -108,8 +108,10 @@ class _CommentaryReaderBodyState
 
   Widget chartAvatar(Commentary commentary) {
     return FutureBuilder(
-        future:
-            ref.read(requestByCommentaryIdProvider).call(uid, commentary.id),
+        future: ref.read(requestByCommentaryIdProvider).call(
+              uid: uid,
+              dependentId: commentary.id,
+            ),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final request = snapshot.requireData;

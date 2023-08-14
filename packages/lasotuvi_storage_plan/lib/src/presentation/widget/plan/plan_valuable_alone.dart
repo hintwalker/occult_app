@@ -7,7 +7,7 @@ import '../../../entity/storage_plan.dart';
 import '../../style/storage_plan_style.dart';
 import '../item/plan_price.dart';
 import '../item/plan_property.dart';
-import '../item/plan_title.dart';
+import '../../../features/plan/widget/plan_list_item_title.dart';
 
 class PlanValuableAlone extends StatelessWidget {
   const PlanValuableAlone({
@@ -32,7 +32,11 @@ class PlanValuableAlone extends StatelessWidget {
   Widget build(BuildContext context) {
     return NonActivedPlanWidget(
       child: PlanItemWidget(
-        title: PlanTitle(plan, style: style),
+        title: PlanListItemTitle(
+          plan,
+          style: style.title,
+          translate: translate,
+        ),
         price: PlanPrice(
           plan,
           translate: translate,

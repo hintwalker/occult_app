@@ -10,6 +10,10 @@ class SubscriptionConfirmStyle {
     this.cancelPlanIconColor,
     this.nextPlanIconColor,
     this.overlayColor,
+    this.energyIconColor,
+    this.billingTitleTextStyle,
+    this.billingValueTextStyle,
+    this.billingBackgroundColor,
   });
   final TextStyle? planTitle;
   final TextStyle? planPrice;
@@ -19,4 +23,8 @@ class SubscriptionConfirmStyle {
   final Color? cancelPlanIconColor;
   final Color? nextPlanIconColor;
   final Color? overlayColor;
+  final Color? energyIconColor;
+  final TextStyle? billingTitleTextStyle;
+  final TextStyle? billingValueTextStyle;
+  final Color? billingBackgroundColor;
 }

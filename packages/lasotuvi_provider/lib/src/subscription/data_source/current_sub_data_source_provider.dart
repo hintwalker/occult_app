@@ -5,4 +5,4 @@ import '../../cloud_service/firestore_service_provider.dart';
 
 final currentSubDataSourceProvider =
     Provider.autoDispose<FirebaseCurrentSubDataSource>((ref) =>
-        FirebaseCurrentSubDataSource(ref.read(firestoreServiceProvider)));
+        FirebaseCurrentSubDataSource(ref.watch(firestoreServiceProvider)));

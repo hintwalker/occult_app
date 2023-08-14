@@ -5,4 +5,4 @@ import '../../cloud_service/firestore_service_provider.dart';
 
 final subscriptionDataSourceProvider =
     Provider.autoDispose<FirebaseSubscriptionDataSource>((ref) =>
-        FirebaseSubscriptionDataSource(ref.read(firestoreServiceProvider)));
+        FirebaseSubscriptionDataSource(ref.watch(firestoreServiceProvider)));

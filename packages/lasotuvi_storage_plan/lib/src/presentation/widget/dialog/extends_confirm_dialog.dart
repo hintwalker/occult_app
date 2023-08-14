@@ -22,7 +22,7 @@ class ExtendsConfirmDialog extends StatelessWidget {
       title: translate('confirm'),
       cancelButtonText: null,
       noButtonText: translate('no'),
-      yesButtonText: translate('Extends'),
+      yesButtonText: translate('extends'),
       children: [
         Text(translate('confirmExtends'),
             style: const TextStyle(fontSize: 16.0)),

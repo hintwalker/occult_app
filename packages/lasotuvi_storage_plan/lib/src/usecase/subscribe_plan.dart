@@ -6,6 +6,8 @@ import 'package:tauari_subscription/tauari_subscription.dart';
 import '../entity/storage_plan.dart';
 import '../entity/storage_plan_ids.dart';
 import '../entity/subscribe_action_result.dart';
+import 'pay_a_plan.dart';
+import 'prepare_bill.dart';
 
 ///
 /// Đăng ký gói mới, nâng cấp, hạ cấp.
@@ -27,13 +29,16 @@ class SubscribePlan {
     required this.updateLastCanceledSubscription,
     required this.ableToPay,
     required this.pay,
+    required this.prepareBill,
   });
   final TakeCurrentUser takeCurrentUser;
   final TakeCurrentSubscription takeCurrentSubscription;
   final InsertSubscription insertSubscription;
   final UpdateLastCanceledSubscription updateLastCanceledSubscription;
-  final FutureOr<bool> Function(String uid, int value) pay;
+  final PayAPlan pay;
+  // final FutureOr<bool> Function(String uid, int value) pay;
   final FutureOr<bool> Function(String uid, int value) ableToPay;
+  final PrepareBill prepareBill;
   Future<SubscribeActionResult> call(StoragePlan plan) async {
     final user = takeCurrentUser();
     if (user == null) {
@@ -41,14 +46,17 @@ class SubscribePlan {
     }
 
     final currentSub = await takeCurrentSubscription(user.uidInFirestore);
-    final payValue = _getMustPayValue(plan, currentSub);
+    final payValue = prepareBill(
+      nextPlan: plan,
+      currentSubscription: currentSub,
+    ); //_getMustPayValue(plan, currentSub);
 
     if (!await ableToPay(user.uidInFirestore, payValue)) {
       return SubscribeActionResult.notEnoughEnergy;
     }
 
-    final success = await pay(user.uidInFirestore, payValue);
-    if (!success) {
+    final success = await pay(payValue);
+    if (success.isRight) {
       return SubscribeActionResult.paymentFailed;
     }
     final today = DateTime.now();
@@ -74,36 +82,36 @@ class SubscribePlan {
     return SubscribeActionResult.success;
   }
 
-  int _getMustPayValue(StoragePlan plan, Subscription? currentSub) {
-    if (currentSub == null || currentSub.planId == StoragePlanIds.free) {
-      return plan.energy;
-    }
-    // Nếu đã hết hạn thì trả về giá của plan
-    if (_hasExpired(currentSub)) {
-      return plan.energy;
-    }
-    // Tính điểm năng lượng tương ứng với passedTime
-    final passedEnergy = _getPassedEnergy(currentSub);
-    return plan.energy - passedEnergy;
-  }
+  // int _getMustPayValue(StoragePlan plan, Subscription? currentSub) {
+  //   if (currentSub == null || currentSub.planId == StoragePlanIds.free) {
+  //     return plan.energy;
+  //   }
+  //   // Nếu đã hết hạn thì trả về giá của plan
+  //   if (_hasExpired(currentSub)) {
+  //     return plan.energy;
+  //   }
+  //   // Tính điểm năng lượng tương ứng với passedTime
+  //   final passedEnergy = _getPassedEnergy(currentSub);
+  //   return plan.energy - passedEnergy;
+  // }
 
-  bool _hasExpired(Subscription currentSub) {
-    return DateTime.now().isBefore(currentSub.expiredDate);
-  }
+  // bool _hasExpired(Subscription currentSub) {
+  //   return DateTime.now().isBefore(currentSub.expiredDate);
+  // }
 
-  int _getPassedEnergy(Subscription currentSub) {
-    // Tính thời gian đã sử dụng
-    final passedDays = _getPassedTimeInDay(currentSub);
-    if (TimeConfig.expiredDuration.inDays == 0) {
-      return 0;
-    }
-    return (currentSub.energy / TimeConfig.expiredDuration.inDays).floor() *
-        passedDays;
-  }
+  // int _getPassedEnergy(Subscription currentSub) {
+  //   // Tính thời gian đã sử dụng
+  //   final passedDays = _getPassedTimeInDay(currentSub);
+  //   if (TimeConfig.expiredDuration.inDays == 0) {
+  //     return 0;
+  //   }
+  //   return (currentSub.energy / TimeConfig.expiredDuration.inDays).floor() *
+  //       passedDays;
+  // }
 
-  int _getPassedTimeInDay(Subscription currentSub) {
-    return DateTime.now()
-        .difference(currentSub.expiredDate.subtract(TimeConfig.expiredDuration))
-        .inDays;
-  }
+  // int _getPassedTimeInDay(Subscription currentSub) {
+  //   return DateTime.now()
+  //       .difference(currentSub.expiredDate.subtract(TimeConfig.expiredDuration))
+  //       .inDays;
+  // }
 }

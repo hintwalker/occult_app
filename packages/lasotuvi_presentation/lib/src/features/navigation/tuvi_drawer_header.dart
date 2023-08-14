@@ -11,7 +11,7 @@ class TuviDrawerHeader extends StatelessWidget {
     return const Column(
       children: [
         SizedBox(
-          height: 30,
+          height: 20,
         ),
         AuthSection()
       ],

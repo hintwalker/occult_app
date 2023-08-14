@@ -11,7 +11,7 @@ import '../../style/storage_plan_style.dart';
 import 'actived_plan_widget.dart';
 import '../item/plan_price.dart';
 import '../item/plan_property.dart';
-import '../item/plan_title.dart';
+import '../../../features/plan/widget/plan_list_item_title.dart';
 import '../timer/timer_value_widget.dart';
 
 class PlanValuableStopedExtends extends StatelessWidget {
@@ -43,7 +43,11 @@ class PlanValuableStopedExtends extends StatelessWidget {
       translate: translate,
       style: style,
       child: PlanItemWidgetWithTimer(
-        title: PlanTitle(plan, style: style),
+        title: PlanListItemTitle(
+          plan,
+          style: style.title,
+          translate: translate,
+        ),
         price: PlanPrice(
           plan,
           translate: translate,

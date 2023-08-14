@@ -54,7 +54,10 @@ class _StarInfoViewerState extends State<StarInfoViewer> {
                         translate: widget.translate,
                         textColor: widget.colorScheme.error,
                       )
-                    : MarkdownViewer(data))
+                    : MarkdownViewer(
+                        data,
+                        colorScheme: widget.colorScheme,
+                      ))
             : BasicFutureBuilder(
                 future: widget.controller
                     .download(uid: widget.uid, starName: widget.starName),
@@ -63,7 +66,7 @@ class _StarInfoViewerState extends State<StarInfoViewer> {
                         translate: widget.translate,
                         textColor: widget.colorScheme.error,
                       )
-                    : MarkdownViewer(data),
+                    : MarkdownViewer(data, colorScheme: widget.colorScheme),
               );
     // return FutureBuilder(
     //     future: widget.controller

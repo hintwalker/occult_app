@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
-import 'package:lasotuvi_presentation/src/features/auth/user_auth_depended_state.dart';
+import '../../config/app_config.dart';
+import '../auth/user_auth_depended_state.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_auth_widget/tauari_auth_widget.dart';
@@ -32,12 +34,20 @@ class _BookReaderModalScreenState
                       onTap: () => ref.read(signInWithGoogleProvider).call(),
                       title: translate('signIn')),
                 )
-              : BookReaderContainer(
-                  uid: uid!,
-                  controller: ref.watch(bookReaderControllerProvider),
-                  item: widget.item,
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  translate: translate,
+              : Column(
+                  children: [
+                    if (AppConfig.showAds)
+                      const BannerAds(id: AndroidAdsIds.banner),
+                    Expanded(
+                      child: BookReaderContainer(
+                        uid: uid!,
+                        controller: ref.watch(bookReaderControllerProvider),
+                        item: widget.item,
+                        colorScheme: LasotuviAppStyle.colorScheme,
+                        translate: translate,
+                      ),
+                    ),
+                  ],
                 ),
     );
   }

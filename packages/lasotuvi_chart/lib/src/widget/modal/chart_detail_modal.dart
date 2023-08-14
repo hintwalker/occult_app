@@ -11,10 +11,12 @@ class ChartDetailModal extends StatelessWidget {
     required this.onOpenBooksModal,
     required this.onOpenChartOptions,
     required this.onOpenChartEditOptions,
+    // required this.topBanner,
     required this.child,
   });
   final ColorScheme colorScheme;
   final Chart? chart;
+  // final Widget? topBanner;
   final Widget child;
   final void Function() onOpenStarsModal;
   final void Function() onOpenBooksModal;
@@ -33,6 +35,7 @@ class ChartDetailModal extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                    // if(topBanner != null) topBanner!,
                     Container(
                         decoration: BoxDecoration(
                           color: colorScheme.background,

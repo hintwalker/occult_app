@@ -20,6 +20,7 @@ class ChartNameInput extends ConsumerStatefulWidget {
 class _ChartNameInputState extends ConsumerState<ChartNameInput> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController controller;
+  bool firstTap = true;
   @override
   void initState() {
     super.initState();
@@ -53,10 +54,14 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
           //       .updateName(value);
           // }
         },
-        // onTap: () => controller.selection = TextSelection(
-        //       baseOffset: 0,
-        //       extentOffset: controller.value.text.length,
-        //     ),
+        onTap: () {
+          if (firstTap) {
+            controller.clear();
+            setState(() {
+              firstTap = false;
+            });
+          }
+        },
       ),
     );
   }

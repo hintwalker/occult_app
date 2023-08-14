@@ -32,8 +32,10 @@ class ChartNavigation {
   }) {
     showDialog(
       context: context,
-      builder: (_) =>
-          ChartDetailModalScreen(chartId: chartId, syncStatus: syncStatus),
+      builder: (_) => ChartDetailModalScreen(
+        chartId: chartId,
+        syncStatus: syncStatus,
+      ),
       routeSettings: const RouteSettings(
         name: RouteName.chartDetail,
       ),

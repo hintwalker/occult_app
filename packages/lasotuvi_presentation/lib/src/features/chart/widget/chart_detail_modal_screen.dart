@@ -17,9 +17,11 @@ class ChartDetailModalScreen extends ConsumerStatefulWidget {
     super.key,
     required this.chartId,
     required this.syncStatus,
+    // required this.topBanner,
   });
   final String chartId;
   final String? syncStatus;
+  // final Widget? topBanner;
 
   @override
   ConsumerState<ChartDetailModalScreen> createState() =>
@@ -53,39 +55,6 @@ class _ChartDetailModalScreenState
   @override
   Widget build(BuildContext context) {
     final controller = ref.watch(chartDetailControllerProvider);
-    // return findingUid
-    //     ? const BasicLoadingModal(
-    //         colorScheme: LasotuviAppStyle.colorScheme,
-    //       )
-    //     : BasicStreamBuilder(
-    //         stream: controller.stream(
-    //             uid: uid,
-    //             docId: int.parse(widget.chartId),
-    //             syncStatus: widget.syncStatus),
-    //         child: (data) => data == null
-    //             ? const ErrorTextWidget()
-    //             : ChartDetailModal(
-    //                 data,
-    //                 colorScheme: LasotuviAppStyle.colorScheme,
-    //                 onOpenBooksModal: () =>
-    //                     LibraryNavigation.showBooksScreen(context),
-    //                 onOpenStarsModal: () =>
-    //                     LibraryNavigation.showStarsScreen(context),
-    //                 onOpenChartEditOptions: (context, chart) =>
-    //                     ChartNavigation.openChartEditOptions(context, chart,
-    //                         callback: () => setState(() {})),
-    //                 onOpenChartOptions: () => (callback) =>
-    //                     ChartNavigation.showChartOptions(
-    //                         context: context, ref: ref, callback: callback),
-    //                 child: ChartDetailWidget(
-    //                   data,
-    //                   translate: translate,
-    //                   colorScheme: LasotuviAppStyle.colorScheme,
-    //                   controller: gridController!,
-    //                 ),
-    //               ),
-    //       );
-
     return findingUid
         ? const BasicLoadingModal(
             colorScheme: LasotuviAppStyle.colorScheme,
@@ -94,6 +63,7 @@ class _ChartDetailModalScreenState
             chartDetailController: controller,
             uid: uid,
             syncStatus: widget.syncStatus,
+            // topBanner: widget.topBanner,
             colorScheme: LasotuviAppStyle.colorScheme,
             translate: translate,
             chartId: widget.chartId,

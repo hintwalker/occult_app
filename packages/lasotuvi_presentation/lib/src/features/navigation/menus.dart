@@ -17,7 +17,7 @@ final menus = [
   DrawerData(
       id: DrawerIds.energyMarket,
       title: translate('energyMarket'),
-      icon: const Icon(Icons.water_drop)),
+      icon: const Icon(Icons.energy_savings_leaf_outlined)),
   DrawerData(
       id: DrawerIds.storagePlanMarket,
       title: translate('storagePlanMarket'),

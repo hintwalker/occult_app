@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../item/will_cancel_title.dart';
 import '../../controller/storage_plan_list_controller.dart';
-import '../action/extends_plan_button.dart';
+import '../../../features/plan/widget/extends_plan_button.dart';
 // import '../item/timer_expired_title.dart';
 // import '../item/will_cancel_title.dart';
 // import '../item/expired_date_time.dart';
@@ -15,7 +15,7 @@ import '../../controller/expired_timer_controller.dart';
 import '../../style/storage_plan_style.dart';
 import '../item/plan_price.dart';
 import '../item/plan_property.dart';
-import '../item/plan_title.dart';
+import '../../../features/plan/widget/plan_list_item_title.dart';
 // import '../timer/timer_value_widget.dart';
 
 class PlanValuableExpired extends StatelessWidget {
@@ -45,7 +45,11 @@ class PlanValuableExpired extends StatelessWidget {
   Widget build(BuildContext context) {
     return NonActivedPlanWidget(
       child: PlanItemWidgetWithTimer(
-        title: PlanTitle(plan, style: style),
+        title: PlanListItemTitle(
+          plan,
+          style: style.title,
+          translate: translate,
+        ),
         price: PlanPrice(
           plan,
           translate: translate,

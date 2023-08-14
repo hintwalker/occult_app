@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_note_shared/lasotuvi_note_shared.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_sort/tauari_sort.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
+import '../../../helper/storage_helper.dart';
 import '../../../shared/widget/new_data_option_button.dart';
+import '../../auth/user_auth_depended_state.dart';
+import '../../navigation/drawer_ids.dart';
+import '../navigation/note_navigation.dart';
 
 class AllNoteListBody extends ConsumerStatefulWidget {
   const AllNoteListBody({super.key});

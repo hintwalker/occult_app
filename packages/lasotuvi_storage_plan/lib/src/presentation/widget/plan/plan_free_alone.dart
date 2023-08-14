@@ -22,7 +22,11 @@ class PlanFreeAlone extends StatelessWidget {
   Widget build(BuildContext context) {
     return NonActivedPlanWidget(
       child: PlanItemWidget(
-        title: PlanTitle(plan, style: style),
+        title: PlanListItemTitle(
+          plan,
+          style: style.title,
+          translate: translate,
+        ),
         price: PlanPrice(plan,
             translate: translate, energyIcon: energyIcon, style: style),
         property: PlanProperty(plan, translate: translate, style: style),

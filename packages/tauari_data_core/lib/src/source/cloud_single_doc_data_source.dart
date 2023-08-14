@@ -1,3 +1,5 @@
+import 'package:tauari_utils/tauari_utils.dart';
+
 import '../model/cloud_model.dart';
 import '../service/cloud_service.dart';
 import 'no_sql_data_source.dart';
@@ -27,13 +29,23 @@ abstract class CloudSingleDocDataSource<T extends CloudModel>
 
   Future<bool> update(String uid, T doc) => insert(uid, doc);
 
-  Future<bool> exist(String uid) =>
-      service.exists(collectionPath: dataCollectionPath(uid), docId: docId);
+  Future<bool> exist(String uid) async {
+    final online = await availableNetwork();
+    return await service.exists(
+      collectionPath: dataCollectionPath(uid),
+      docId: docId,
+      online: online,
+    );
+  }
 
   Future<bool> delete(String uid) async {
+    final online = await availableNetwork();
     try {
       await service.deleteDocumentFromCollection(
-          collectionPath: dataCollectionPath(uid), docId: docId);
+        collectionPath: dataCollectionPath(uid),
+        docId: docId,
+        online: online,
+      );
       return true;
     } catch (e) {
       return false;
@@ -41,8 +53,12 @@ abstract class CloudSingleDocDataSource<T extends CloudModel>
   }
 
   Future<T?> doc(String uid) async {
+    final online = await availableNetwork();
     final doc = await service.getFromDocument(
-        collectionPath: dataCollectionPath(uid), docId: docId);
+      collectionPath: dataCollectionPath(uid),
+      docId: docId,
+      online: online,
+    );
     if (!doc.exists) {
       return null;
     }

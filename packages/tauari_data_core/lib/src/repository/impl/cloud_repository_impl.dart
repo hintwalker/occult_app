@@ -19,11 +19,14 @@ abstract class CloudRepositoryImpl<E extends CloudGetable,
   @override
   Future<bool> deleteFromCloud(
       {required String uid, required String docId}) async {
-    final rows = await dataSource.delete(uid, docId);
-    for (var trigger in onCloudDeletionTriggers) {
-      await trigger(uid, docId);
+    final result = await dataSource.delete(uid, docId);
+    if (result) {
+      for (var trigger in onCloudDeletionTriggers) {
+        await trigger(uid, docId);
+      }
     }
-    return rows;
+
+    return result;
   }
 
   // @override

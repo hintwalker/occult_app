@@ -19,11 +19,21 @@ class _TimeInputState extends State<TimeInput> {
   @override
   void initState() {
     super.initState();
+    _initData();
+  }
+
+  void _initData() {
     _hourController.text = widget.controller.hour?.toString() ?? '';
     _minuteController.text = widget.controller.minute?.toString() ?? '';
     widget.controller.hourController = _hourController;
     widget.controller.minuteController = _minuteController;
   }
+
+  // @override
+  // void didUpdateWidget(covariant TimeInput oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   _initData();
+  // }
 
   @override
   Widget build(BuildContext context) {

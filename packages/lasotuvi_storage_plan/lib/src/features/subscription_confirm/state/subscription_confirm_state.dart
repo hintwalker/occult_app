@@ -11,50 +11,55 @@ enum SubscriptionConfirmWorkingState {
 
 class SubscriptionConfirmState extends Equatable {
   const SubscriptionConfirmState({
-    required this.state,
+    required this.workingState,
     required this.currentPlan,
     required this.nextPlan,
     required this.countChartOnCloud,
     required this.countNoteOnCloud,
     required this.countTagOnCloud,
     required this.canAfford,
+    required this.bill,
   });
-  final SubscriptionConfirmWorkingState state;
+  final SubscriptionConfirmWorkingState workingState;
   final StoragePlan currentPlan;
   final StoragePlan nextPlan;
   final int countChartOnCloud;
   final int countTagOnCloud;
   final int countNoteOnCloud;
   final bool canAfford;
+  final int bill;
 
   SubscriptionConfirmState copyWith({
-    SubscriptionConfirmWorkingState? state,
+    SubscriptionConfirmWorkingState? workingState,
     StoragePlan? currentPlan,
     StoragePlan? nextPlan,
     int? countChartOnCloud,
     int? countTagOnCloud,
     int? countNoteOnCloud,
     bool? canAfford,
+    int? bill,
   }) {
     return SubscriptionConfirmState(
-      state: state ?? this.state,
+      workingState: workingState ?? this.workingState,
       currentPlan: currentPlan ?? this.currentPlan,
       nextPlan: nextPlan ?? this.nextPlan,
       countChartOnCloud: countChartOnCloud ?? this.countChartOnCloud,
       countNoteOnCloud: countNoteOnCloud ?? this.countNoteOnCloud,
       countTagOnCloud: countTagOnCloud ?? this.countTagOnCloud,
       canAfford: canAfford ?? this.canAfford,
+      bill: bill ?? this.bill,
     );
   }
 
   const SubscriptionConfirmState.initial({
-    this.state = SubscriptionConfirmWorkingState.initial,
+    this.workingState = SubscriptionConfirmWorkingState.initial,
     this.currentPlan = const StoragePlan.free(),
     this.nextPlan = const StoragePlan.free(),
     this.countChartOnCloud = 0,
     this.countNoteOnCloud = 0,
     this.countTagOnCloud = 0,
     this.canAfford = false,
+    this.bill = 0,
   });
 
   @override
@@ -65,5 +70,6 @@ class SubscriptionConfirmState extends Equatable {
         countTagOnCloud,
         countNoteOnCloud,
         canAfford,
+        bill,
       ];
 }

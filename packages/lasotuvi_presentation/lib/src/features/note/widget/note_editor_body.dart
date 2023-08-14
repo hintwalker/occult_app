@@ -91,12 +91,13 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
         note: note,
         colorScheme: LasotuviAppStyle.colorScheme,
         translate: translate,
-        onOpenSyncOptions: (context) => StorageHelper.showOptionsModal(note,
-            context: context,
-            uid: uid,
-            ref: ref,
-            doBeforeDeleteForever: () =>
-                popToParrent(context, RouteName.noteEditor)),
+        onOpenSyncOptions: (context) => StorageHelper.showOptionsModal(
+          note,
+          context: context,
+          uid: uid,
+          ref: ref,
+          callback: () => popToParrent(context, RouteName.noteEditor),
+        ),
         child: NoteEditorWidget<Note>(
           translate: translate,
           colorScheme: LasotuviAppStyle.colorScheme,
@@ -114,7 +115,10 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
 
   Widget chartAvatar(NoteLike note) {
     return FutureBuilder(
-        future: ref.read(chartByNoteIdProvider).call(uid, note.noteId),
+        future: ref.read(chartByNoteIdProvider).call(
+              uid: uid,
+              dependentId: note.noteId,
+            ),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final chart = snapshot.requireData;

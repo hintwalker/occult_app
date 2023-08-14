@@ -5,8 +5,9 @@ import '../simple_time.dart';
 import 'moment.dart';
 
 extension MomentFromDateTime on DateTime {
-  Moment toMoment(TimeZone timeZone) {
-    return Moment.fromGregorian(toGregorian(timeZone),
+  Moment toMoment(TimeZone? timeZone) {
+    return Moment.fromGregorian(
+        toGregorian(timeZone ?? TimeZone(offsetInHour: timeZoneOffset.inHours)),
         SimpleTime(hour: hour, minute: minute, second: second));
   }
 }

@@ -38,6 +38,7 @@ class CurrentSubWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final widgetType = getWidgetType(currentSub: currentSubscription);
+
     switch (widgetType) {
       case CurrentSubType.freeActived:
         return SubFreeActived(
@@ -98,7 +99,8 @@ class CurrentSubWrapper extends StatelessWidget {
       return CurrentSubType.freeActived;
     } else {
       // not free
-      if (currentSub.status == SubscriptionStatus.actived) {
+      if (currentSub.status == SubscriptionStatus.actived ||
+          currentSub.status == SubscriptionStatus.cancelExtend) {
         return CurrentSubType.actived;
       } else {
         return CurrentSubType.expired;

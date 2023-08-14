@@ -24,6 +24,10 @@ class _DateInputState extends State<DateInput> {
   @override
   void initState() {
     super.initState();
+    _initData();
+  }
+
+  void _initData() {
     _dayController.text = widget.controller.day?.toString() ?? '';
     _monthController.text = widget.controller.month?.toString() ?? '';
     _yearController.text = widget.controller.year?.toString() ?? '';
@@ -31,6 +35,12 @@ class _DateInputState extends State<DateInput> {
     widget.controller.monthController = _monthController;
     widget.controller.yearController = _yearController;
   }
+
+  // @override
+  // void didUpdateWidget(covariant DateInput oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   _initData();
+  // }
 
   @override
   Widget build(BuildContext context) {

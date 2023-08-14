@@ -16,7 +16,13 @@ void main() {
   late CountTagOnCloud countTagOnCloud;
   late CountNote countNote;
   late CountNoteOnCloud countNoteOnCloud;
-  late TakeCurrentStoragePlan takeCurrentStoragePlan;
+  late VerifyCurrentPlanState verifyCurrentPlanState;
+  // late TakeCurrentStoragePlan takeCurrentStoragePlan;
+  // late VerifyCurrentSubscription verifyCurrentSubscription;
+  // late TakeStoragePlanById takeStoragePlanById;
+  // late TakeCurrentUser takeCurrentUser;
+  // late TakeCurrentSubscription takeCurrentSubscription;
+  // late HasSubscriptionExpired hasSubscriptionExpired;
 
   late StatisticStateNotifier notifier;
 
@@ -27,7 +33,13 @@ void main() {
     countTagOnCloud = MockCountTagOnCloud();
     countNote = MockCountNote();
     countNoteOnCloud = MockCountNoteOnCloud();
-    takeCurrentStoragePlan = MockTakeCurrentStoragePlan();
+    verifyCurrentPlanState = MockVerifyCurrentPlanState();
+    // takeCurrentUser = MockTakeCurrentUser();
+    // takeCurrentSubscription = MockTakeCurrentSubscription();
+    // // takeCurrentStoragePlan = MockTakeCurrentStoragePlan();
+    // verifyCurrentSubscription = MockVerifyCurrentSubscription();
+    // takeStoragePlanById = MockTakeStoragePlanById();
+    // hasSubscriptionExpired = MockHasSubscriptionExpired();
     notifier = StatisticStateNotifier(
       countChart: countChart,
       countChartOnCloud: countChartOnCloud,
@@ -35,7 +47,13 @@ void main() {
       countTagOnCloud: countTagOnCloud,
       countNote: countNote,
       countNoteOnCloud: countNoteOnCloud,
-      takeCurrentStoragePlan: takeCurrentStoragePlan,
+      verifyCurrentPlanState: verifyCurrentPlanState,
+      // verifyCurrentSubscription: verifyCurrentSubscription,
+      // takeStoragePlanById: takeStoragePlanById,
+      // takeCurrentSubscription: takeCurrentSubscription,
+      // takeCurrentUser: takeCurrentUser,
+      // hasSubscriptionExpired: hasSubscriptionExpired,
+      // takeCurrentStoragePlan: takeCurrentStoragePlan,
     );
   });
 
@@ -54,15 +72,19 @@ void main() {
       countTagOnCloud: countTagOnCloud,
       countNote: countNote,
       countNoteOnCloud: countNoteOnCloud,
-      takeCurrentStoragePlan: takeCurrentStoragePlan,
+      verifyCurrentPlanState: verifyCurrentPlanState,
+      // verifyCurrentSubscription: verifyCurrentSubscription,
+      // takeStoragePlanById: takeStoragePlanById,
+      // takeCurrentSubscription: takeCurrentSubscription,
+      // takeCurrentUser: takeCurrentUser,
+      // hasSubscriptionExpired: hasSubscriptionExpired,
     ),
     expect: () => [
       const StatisticState(
-        state: StatisticWorkingState.loading,
+        workingState: StatisticWorkingState.loading,
       ),
       const StatisticState(
-        state: StatisticWorkingState.loaded,
-        hasData: true,
+        workingState: StatisticWorkingState.loaded,
         totalChartCount: 10,
       )
     ],

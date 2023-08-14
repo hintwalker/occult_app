@@ -18,8 +18,11 @@ class LocalItem extends StatelessWidget {
     return ListTile(
       dense: true,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(
+            width: 20.0,
+          ),
           if (leading != null) leading!,
           const SizedBox(
             width: 8.0,

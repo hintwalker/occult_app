@@ -18,7 +18,7 @@ class NextPlanInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(plan.title, style: titleStyle),
+        Text('${translate('plan')} ${plan.title}', style: titleStyle),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(Icons.energy_savings_leaf_outlined, color: priceStyle?.color),
           const SizedBox(

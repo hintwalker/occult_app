@@ -11,7 +11,12 @@ class StatisticStateNotifier extends StateNotifier<StatisticState> {
     required this.countTagOnCloud,
     required this.countNote,
     required this.countNoteOnCloud,
-    required this.takeCurrentStoragePlan,
+    // required this.takeStoragePlanById,
+    // required this.verifyCurrentSubscription,
+    // required this.takeCurrentSubscription,
+    // required this.takeCurrentUser,
+    // required this.hasSubscriptionExpired,
+    required this.verifyCurrentPlanState,
   }) : super(const StatisticState.initial());
   final CountChart countChart;
   final CountChartOnCloud countChartOnCloud;
@@ -19,37 +24,61 @@ class StatisticStateNotifier extends StateNotifier<StatisticState> {
   final CountTagOnCloud countTagOnCloud;
   final CountNote countNote;
   final CountNoteOnCloud countNoteOnCloud;
-  final TakeCurrentStoragePlan takeCurrentStoragePlan;
+  // final VerifyCurrentSubscription verifyCurrentSubscription;
+  // final TakeStoragePlanById takeStoragePlanById;
+  // final TakeCurrentSubscription takeCurrentSubscription;
+  // final TakeCurrentUser takeCurrentUser;
+  // final HasSubscriptionExpired hasSubscriptionExpired;
+
+  final VerifyCurrentPlanState verifyCurrentPlanState;
+
+  // final TakeCurrentStoragePlan takeCurrentStoragePlan;
 
   Future<void> fetchData(String? uid) async {
     state = state.copyWith(
-      state: StatisticWorkingState.loading,
+      workingState: StatisticWorkingState.loading,
     );
+    // final user = takeCurrentUser();
     final totalChart = await countChart(uid);
     final totalTag = await countTag(uid);
     final totalNote = await countNote(uid);
     final cloudChart = await countChartOnCloud(uid);
     final cloudTag = await countTagOnCloud(uid);
     final cloudNote = await countNoteOnCloud(uid);
-
-    final currentPlan = await takeCurrentStoragePlan(uid);
-    final maxChart = currentPlan.limitChart;
-    final maxTag = currentPlan.limitTag;
-    final maxNote = currentPlan.limitNote;
+    final currentPlanState = await verifyCurrentPlanState();
+    // final verifiedSubscription = await verifyCurrentSubscription();
+    // final currentPlan = await takeStoragePlanById(
+    //       verifiedSubscription.using.planId,
+    //     ) ??
+    //     const StoragePlan.free();
+    // final maxChart = currentPlan.limitChart;
+    // final maxTag = currentPlan.limitTag;
+    // final maxNote = currentPlan.limitNote;
+    // final currentSub = await takeCurrentSubscription(user?.uidInFirestore);
+    // final shouldExtends = shouldExtendsSubscription(currentSub);
+    // final shouldUpgrade =
+    //     shouldExtends ? false : shouldUpgradePlan(currentPlan);
 
     state = state.copyWith(
-      state: StatisticWorkingState.loaded,
+      workingState: StatisticWorkingState.loaded,
       totalChartCount: totalChart,
       totalTagCount: totalTag,
       totalNoteCount: totalNote,
       cloudChartCount: cloudChart,
       cloudTagCount: cloudTag,
       cloudNoteCount: cloudNote,
-      maxChartCount: maxChart,
-      maxNoteCount: maxNote,
-      maxTagCount: maxTag,
-      showUpgradeButton: currentPlan.id != StoragePlanIds.max,
-      hasData: true,
+
+      // maxChartCount: maxChart,
+      // maxNoteCount: maxNote,
+      // maxTagCount: maxTag,
+      showExtendsButton: currentPlanState.ableToExtends,
+      showUpgradeButton: currentPlanState.ableToUpgrade,
+      currentPlan: currentPlanState.currentPlan,
+      usingPlan: currentPlanState.usingPlan,
+      currentSubscription: currentPlanState.currentSubscription,
+      hasExpired: currentPlanState.hasExpired,
+
+      // hasData: true,
     );
   }
 

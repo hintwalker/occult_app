@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
+import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_translate/tauari_translate.dart';
@@ -18,11 +20,17 @@ class BookListModalScreen extends ConsumerWidget {
       translate: translate,
       child: BasicFutureBuilder(
         future: ref.watch(bookListControllerProvider).allData(),
-        child: (data) => BookListWidget(
-          data: data ?? [],
-          onItemTap: (item) => LibraryNavigation.showBookReader(context, item),
-          translate: translate,
-        ),
+        child: (data) => Column(children: [
+          if (AppConfig.showAds) const BannerAds(id: AndroidAdsIds.banner),
+          Expanded(
+            child: BookListWidget(
+              data: data ?? [],
+              onItemTap: (item) =>
+                  LibraryNavigation.showBookReader(context, item),
+              translate: translate,
+            ),
+          ),
+        ]),
       ),
     );
   }

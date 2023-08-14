@@ -28,16 +28,20 @@ class ShutdownConfirmDialog extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            OutlinedButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: Text(
-                translate('no'),
+            Expanded(
+              child: TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text(
+                  translate('no'),
+                ),
               ),
             ),
-            FilledButton(
-              onPressed: () => Navigator.pop(context, true),
-              child: Text(
-                translate('exit'),
+            Expanded(
+              child: FilledButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(
+                  translate('exit'),
+                ),
               ),
             ),
           ],

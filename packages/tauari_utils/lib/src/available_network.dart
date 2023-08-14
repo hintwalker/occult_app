@@ -6,3 +6,9 @@ Future<bool> availableNetwork() async {
       connectivityResult == ConnectivityResult.wifi ||
       connectivityResult == ConnectivityResult.vpn;
 }
+
+bool isOnline(ConnectivityResult connectivityResult) {
+  return connectivityResult == ConnectivityResult.mobile ||
+      connectivityResult == ConnectivityResult.wifi ||
+      connectivityResult == ConnectivityResult.vpn;
+}

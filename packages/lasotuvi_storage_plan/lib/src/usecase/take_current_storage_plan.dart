@@ -14,7 +14,8 @@ class TakeCurrentStoragePlan {
     if (currentSub == null) {
       return const StoragePlan.free();
     }
-    final plan = await takeStoragePlanById.call(uid, currentSub.planId);
+
+    final plan = await takeStoragePlanById.call(currentSub.planId);
     return plan ?? const StoragePlan.free();
   }
 }
