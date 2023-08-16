@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_ui/tauari_ui.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import 'static_energy_widget.dart';
 
@@ -41,7 +43,23 @@ class EnergyListItem extends StatelessWidget {
               fontSize: 18.0,
             ),
           )),
-          FilledButton(onPressed: onTap, child: Text(translate('buy'))),
+          BasicFutureBuilder(
+            future: availableNetwork(),
+            child: (network) => network == null || !network
+                ? OutlinedButton.icon(
+                    onPressed: null,
+                    icon: const Icon(Icons.wifi_off_outlined),
+                    label: Text(
+                      translate('noNetwork'),
+                    ),
+                  )
+                : FilledButton(
+                    onPressed: onTap,
+                    child: Text(
+                      translate('buy'),
+                    ),
+                  ),
+          ),
         ],
       ),
     );

@@ -14,7 +14,6 @@ export 'src/usecase/download_star_info.dart';
 export 'src/usecase/load_star_info_from_local.dart';
 
 export 'src/widget/library_widget.dart';
-export 'src/widget/markdown_viewer.dart';
 
 export 'src/widget/book/book_item_widget.dart';
 export 'src/widget/book/book_reader_modal.dart';

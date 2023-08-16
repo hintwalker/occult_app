@@ -37,6 +37,7 @@ class ChartDetailModal extends StatelessWidget {
                 children: [
                     // if(topBanner != null) topBanner!,
                     Container(
+                        height: 48.0,
                         decoration: BoxDecoration(
                           color: colorScheme.background,
                         ),

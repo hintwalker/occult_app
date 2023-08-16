@@ -195,9 +195,9 @@ class CheckboxDataListController<U> extends ChangeNotifier {
     );
   }
 
-  static void clearCache() {
+  static Future<void> clearCache() async {
     final box = Hive.box<List<dynamic>>(itemSelectedBoxName);
-    box.clear();
+    await box.clear();
   }
 
   @override

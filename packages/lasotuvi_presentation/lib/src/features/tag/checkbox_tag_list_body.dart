@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
@@ -82,7 +81,7 @@ class _CheckboxTagListBodyState
   }
 
   void onCancel(BuildContext context) {
-    context.pop();
+    Navigator.maybePop(context);
   }
 
   Future<void> onSubmit(BuildContext context,
@@ -109,16 +108,15 @@ class _CheckboxTagListBodyState
           .read(disConnectTagsFromChartProvider)
           .call(uid: uid, left: widget.chart, rights: disConnectedTags);
     }
-
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (context.mounted) {
-        context.pop();
+        Navigator.maybePop(context);
       }
     });
   }
 
   Future<bool> onWillPop() async {
-    CheckboxDataListController.clearCache();
+    await CheckboxDataListController.clearCache();
     return true;
   }
 }

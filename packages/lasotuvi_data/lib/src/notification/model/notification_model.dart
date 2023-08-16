@@ -19,22 +19,22 @@ class NotificationModel extends SyncableModel<TuviNotification> {
     super.storageState,
     super.syncStatus,
     super.modified = LocalLocked.unlocked,
+    super.uploadDate,
   });
 
   @override
   TuviNotification toEntity() {
-    return TuviNotification(
-      id,
-      title: title,
-      content: content,
-      type: type,
-      url: url,
-      seen: seen,
-      created: DateTime.fromMillisecondsSinceEpoch(id),
-      syncStatus: syncStatus,
-      storageState: storageState,
-      modified: modified,
-    );
+    return TuviNotification(id,
+        title: title,
+        content: content,
+        type: type,
+        url: url,
+        seen: seen,
+        created: DateTime.fromMillisecondsSinceEpoch(id),
+        syncStatus: syncStatus,
+        storageState: storageState,
+        modified: modified,
+        uploadDate: uploadDate);
   }
 
   static NotificationModel fromEntity(TuviNotification entity) {
@@ -48,6 +48,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
       modified: entity.modified,
+      uploadDate: entity.uploadDate,
     );
   }
 
@@ -61,6 +62,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
     String? storageState,
     String? syncStatus,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return NotificationModel(
       id ?? this.id,
@@ -72,6 +74,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
@@ -101,6 +104,11 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       modified: map[columnModified] == null
           ? LocalLocked.unlocked
           : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
     );
   }
 
@@ -126,6 +134,7 @@ class NotificationModel extends SyncableModel<TuviNotification> {
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 

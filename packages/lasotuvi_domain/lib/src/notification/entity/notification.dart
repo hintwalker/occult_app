@@ -15,6 +15,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
     super.storageState,
     super.syncStatus,
     required super.modified,
+    super.uploadDate,
   });
   final String title;
   final String content;
@@ -46,7 +47,8 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
       columnCreated: created.millisecondsSinceEpoch,
       columnSyncStatus: getSyncStatus,
       columnState: state,
-      columnModified: modified
+      columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -79,6 +81,11 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
       modified: map[columnModified] == null
           ? LocalLocked.unlocked
           : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
     );
   }
 
@@ -93,6 +100,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
     String? syncStatus,
     String? storageState,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return TuviNotification(
       id ?? this.id,
@@ -105,6 +113,7 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
       syncStatus: syncStatus ?? this.syncStatus,
       storageState: storageState ?? this.storageState,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
@@ -130,4 +139,8 @@ class TuviNotification extends SyncableEntity<TuviNotification> {
 
   @override
   TuviNotification copyWithModified(int value) => copyWith(modified: value);
+
+  @override
+  TuviNotification copyWithUploadDate(DateTime? value) =>
+      copyWith(uploadDate: value);
 }

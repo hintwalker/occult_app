@@ -13,6 +13,7 @@ class ChartTagModel extends SyncableModel<ChartTag> {
     super.storageState,
     super.syncStatus,
     required super.modified,
+    super.uploadDate,
   });
 
   static ChartTagModel fromMap(Map<String, Object?> map) {
@@ -23,6 +24,11 @@ class ChartTagModel extends SyncableModel<ChartTag> {
       modified: map[columnModified] == null
           ? LocalLocked.unlocked
           : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
     );
   }
 
@@ -34,6 +40,7 @@ class ChartTagModel extends SyncableModel<ChartTag> {
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
       modified: entity.modified,
+      uploadDate: entity.uploadDate,
     );
   }
 
@@ -44,6 +51,7 @@ class ChartTagModel extends SyncableModel<ChartTag> {
     String? storageState,
     String? syncStatus,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return ChartTagModel(
       id ?? this.id,
@@ -52,6 +60,7 @@ class ChartTagModel extends SyncableModel<ChartTag> {
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
@@ -64,6 +73,7 @@ class ChartTagModel extends SyncableModel<ChartTag> {
       storageState: storageState,
       syncStatus: syncStatus,
       modified: modified,
+      uploadDate: uploadDate,
     );
   }
 
@@ -76,6 +86,7 @@ class ChartTagModel extends SyncableModel<ChartTag> {
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 

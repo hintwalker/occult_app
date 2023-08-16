@@ -205,6 +205,7 @@ class _NoteEditorState<T> extends State<NoteEditorWidget<T>> {
                   controller: _contentController!,
                   showAlignmentButtons: true,
                   afterButtonPressed: _focusNode.requestFocus,
+                  showFontFamily: false,
                 ),
               )),
             ],

@@ -21,6 +21,8 @@ dependencies:
   either_dart: ^1.0.0
   tauari_utils:
     path: ../tauari_utils
+  tauari_ui:
+    path: ../tauari_ui
 
 dev_dependencies:
   flutter_test:

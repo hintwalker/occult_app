@@ -12,6 +12,7 @@ class NoteModel extends SyncableModel<Note> {
     super.storageState,
     super.syncStatus,
     required super.modified,
+    super.uploadDate,
   });
   final String title;
   final String content;
@@ -30,6 +31,7 @@ class NoteModel extends SyncableModel<Note> {
       storageState: storageState,
       syncStatus: syncStatus,
       modified: modified,
+      uploadDate: uploadDate,
     );
   }
 
@@ -60,6 +62,7 @@ class NoteModel extends SyncableModel<Note> {
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -79,6 +82,11 @@ class NoteModel extends SyncableModel<Note> {
       modified: map[columnModified] == null
           ? LocalLocked.unlocked
           : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
     );
   }
 
@@ -92,6 +100,7 @@ class NoteModel extends SyncableModel<Note> {
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
       modified: entity.modified,
+      uploadDate: entity.uploadDate,
     );
   }
 

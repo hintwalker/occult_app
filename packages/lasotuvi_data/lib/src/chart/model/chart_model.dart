@@ -24,6 +24,7 @@ class ChartModel extends SyncableModel<Chart> {
     super.storageState,
     super.syncStatus,
     required super.modified,
+    super.uploadDate,
   });
 
   @override
@@ -41,6 +42,7 @@ class ChartModel extends SyncableModel<Chart> {
       syncStatus: syncStatus,
       storageState: storageState,
       modified: modified,
+      uploadDate: uploadDate,
     );
   }
 
@@ -57,6 +59,7 @@ class ChartModel extends SyncableModel<Chart> {
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
       modified: entity.modified,
+      uploadDate: entity.uploadDate,
     );
   }
 
@@ -72,6 +75,7 @@ class ChartModel extends SyncableModel<Chart> {
     String? storageState,
     String? syncStatus,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return ChartModel(
       id ?? this.id,
@@ -85,40 +89,46 @@ class ChartModel extends SyncableModel<Chart> {
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
   static ChartModel fromMap(Map<String, Object?> map) {
-    return ChartModel(map[columnId] as int,
-        name: map[ColumnChart.name] == null
-            ? ''
-            : map[ColumnChart.name] as String,
-        gender: map[ColumnChart.gender] == null
-            ? 0
-            : map[ColumnChart.gender] as int,
-        birthday: map[ColumnChart.birthday] == null
-            ? DateTime(1990, 1, 1, 0, 1).millisecondsSinceEpoch
-            : map[ColumnChart.birthday] as int,
-        watchingYear: map[ColumnChart.watchingYear] == null
-            ? 2023
-            : map[ColumnChart.watchingYear] as int,
-        timeZoneOffset: map[ColumnChart.timeZoneOffset] == null
-            ? 7
-            : map[ColumnChart.timeZoneOffset] as int,
-        lastViewed: map[ColumnChart.lastViewed] == null
-            ? DateTime.now().millisecond
-            : map[ColumnChart.lastViewed] as int,
-        avatar: map[ColumnChart.avatar] == null
-            ? null
-            : map[ColumnChart.avatar] as String,
-        storageState:
-            map[columnState] == null ? null : map[columnState] as String,
-        syncStatus: map[columnSyncStatus] == null
-            ? null
-            : map[columnSyncStatus] as String,
-        modified: map[columnModified] == null
-            ? LocalLocked.unlocked
-            : map[columnModified] as int);
+    return ChartModel(
+      map[columnId] as int,
+      name:
+          map[ColumnChart.name] == null ? '' : map[ColumnChart.name] as String,
+      gender:
+          map[ColumnChart.gender] == null ? 0 : map[ColumnChart.gender] as int,
+      birthday: map[ColumnChart.birthday] == null
+          ? DateTime(1990, 1, 1, 0, 1).millisecondsSinceEpoch
+          : map[ColumnChart.birthday] as int,
+      watchingYear: map[ColumnChart.watchingYear] == null
+          ? 2023
+          : map[ColumnChart.watchingYear] as int,
+      timeZoneOffset: map[ColumnChart.timeZoneOffset] == null
+          ? 7
+          : map[ColumnChart.timeZoneOffset] as int,
+      lastViewed: map[ColumnChart.lastViewed] == null
+          ? DateTime.now().millisecond
+          : map[ColumnChart.lastViewed] as int,
+      avatar: map[ColumnChart.avatar] == null
+          ? null
+          : map[ColumnChart.avatar] as String,
+      storageState:
+          map[columnState] == null ? null : map[columnState] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
+    );
   }
 
   @override
@@ -143,6 +153,7 @@ class ChartModel extends SyncableModel<Chart> {
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 

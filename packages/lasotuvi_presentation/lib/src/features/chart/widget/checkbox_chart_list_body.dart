@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_chart/lasotuvi_chart.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
@@ -89,12 +88,12 @@ class _CheckBoxChartListBodyState
   }
 
   Future<bool> onWillPop() async {
-    CheckboxDataListController.clearCache();
+    await CheckboxDataListController.clearCache();
     return true;
   }
 
   void onCancel(BuildContext context) {
-    context.pop();
+    Navigator.maybePop(context);
   }
 
   Future<void> onSubmit(BuildContext context,
@@ -123,7 +122,7 @@ class _CheckBoxChartListBodyState
     }
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (context.mounted) {
-        context.pop();
+        Navigator.maybePop(context);
       }
     });
   }

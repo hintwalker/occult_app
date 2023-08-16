@@ -1,5 +1,6 @@
 library lasotuvi_note_shared;
 
+export 'src/controller/count_note_on_cloud_controller.dart';
 export 'src/controller/count_note_everywhere_controller.dart';
 export 'src/sort/note_sort_key.dart';
 

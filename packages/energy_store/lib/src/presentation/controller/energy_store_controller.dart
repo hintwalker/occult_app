@@ -79,7 +79,7 @@ class EnergyStoreController extends ChangeNotifier {
       (purchaseDetailsList) {
         postResolvePurchase(
           purchaseDetailsList,
-          onDelivery: _onDelivery,
+          onDelivery: onDelivery,
           onError: (p0) {},
           onPending: (p0) {},
         );
@@ -88,7 +88,7 @@ class EnergyStoreController extends ChangeNotifier {
     );
   }
 
-  Future<void> _onDelivery(int value) async {
+  Future<void> onDelivery(int value) async {
     // state = const AsyncValue.loading();
     if (await availableNetwork()) {
       final uid = await getUid();

@@ -39,13 +39,14 @@ class StatisticStateNotifier extends StateNotifier<StatisticState> {
       workingState: StatisticWorkingState.loading,
     );
     // final user = takeCurrentUser();
+    final currentPlanState = await verifyCurrentPlanState();
     final totalChart = await countChart(uid);
     final totalTag = await countTag(uid);
     final totalNote = await countNote(uid);
     final cloudChart = await countChartOnCloud(uid);
     final cloudTag = await countTagOnCloud(uid);
     final cloudNote = await countNoteOnCloud(uid);
-    final currentPlanState = await verifyCurrentPlanState();
+
     // final verifiedSubscription = await verifyCurrentSubscription();
     // final currentPlan = await takeStoragePlanById(
     //       verifiedSubscription.using.planId,

@@ -33,10 +33,12 @@ class NoteEditorBody extends ConsumerStatefulWidget {
 
 class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
   NoteEditorBodyController? controller;
+  String? syncStatus;
   @override
   void initState() {
     super.initState();
     controller = NoteEditorBodyController(update: ref.read(updateNoteProvider));
+    syncStatus = RouterParams.getPathParamValue(widget.syncStatus);
   }
 
   @override
@@ -76,7 +78,7 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
     return NoteEditorBuilder(
       uid: uid,
       noteId: widget.noteId,
-      syncStatus: RouterParams.getPathParamValue(widget.syncStatus),
+      syncStatus: syncStatus,
       controller: ref.watch(noteEditorControllerProvider),
       child: (note) => getEditorWidget(note),
     );
@@ -87,7 +89,8 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
       onWillPop: () => onWillPop(note, context, ref),
       child: NoteEditorScaffold<Note>(
         uid: uid,
-        syncStatus: note.syncStatus,
+        syncStatus:
+            syncStatus, //RouterParams.getPathParamValue(widget.syncStatus),
         note: note,
         colorScheme: LasotuviAppStyle.colorScheme,
         translate: translate,
@@ -96,14 +99,20 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
           context: context,
           uid: uid,
           ref: ref,
-          callback: () => popToParrent(context, RouteName.noteEditor),
+          callback: (status) => setState(() {
+            syncStatus = status;
+          }),
+          doAfterDeleteForever: () =>
+              popToParrent(context, RouteName.noteEditor),
         ),
         child: NoteEditorWidget<Note>(
+          uid: uid,
           translate: translate,
           colorScheme: LasotuviAppStyle.colorScheme,
           note: note,
           onChanged: (note, uid) => controller!.onChanged(note, ref, uid),
-          onSave: (note, uid) => controller!.save(note: note, uid: uid),
+          onSave: (note, uid) => controller!
+              .save(note: note.copyWithSyncStatus(syncStatus), uid: uid),
           toggleEditMode: (value) =>
               ref.read(noteEditingStateProvider.notifier).state = value,
           onHitMaxLength: (value) => onHitMaxLength(context, value),
@@ -143,10 +152,10 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
               ),
               child: Card(
                 child: InkWell(
-                  onTap: () => ChartNavigation.openChartView(
+                  onTap: () => ChartNavigation.openChartDetail(
                     context: context,
-                    chart: chart,
-                    saveLastView: true,
+                    chartId: chart.docId,
+                    syncStatus: chart.syncStatus,
                   ),
                   // ChartHelper.openChartView(context: context, chart: chart),
                   borderRadius: BorderRadius.circular(12.0),
@@ -175,7 +184,7 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
                               ),
                             ),
                             Text(
-                              '${translate('watchingYear')}: ${chart.watchingYear} ${translate(canWatchingYear.name)} ${translate(chiWatchingYear.name)} ($yearsOldFromWatchingYear ${translate('t')})',
+                              '${translate('watchingYear')}: ${chart.watchingYear} ${translate(canWatchingYear.name)} ${translate(chiWatchingYear.name)} ($yearsOldFromWatchingYear ${translate('yearsOldSuffix')})',
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                             ),

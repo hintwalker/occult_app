@@ -16,7 +16,7 @@ final menus = [
   ),
   DrawerData(
       id: DrawerIds.energyMarket,
-      title: translate('energyMarket'),
+      title: translate('energyPointMarket'),
       icon: const Icon(Icons.energy_savings_leaf_outlined)),
   DrawerData(
       id: DrawerIds.storagePlanMarket,
@@ -45,9 +45,15 @@ final menus = [
   //     title: translate('books'),
   //     icon: const Icon(Icons.menu_book_sharp)),
   DrawerData(
-      id: DrawerIds.library,
-      title: translate('library'),
-      icon: const Icon(Icons.library_books)),
+    id: DrawerIds.library,
+    title: translate('library'),
+    icon: const Icon(Icons.library_books),
+  ),
+  DrawerData(
+    id: DrawerIds.manual,
+    title: translate('manual'),
+    icon: const Icon(Icons.help_outline),
+  ),
   // DrawerData(
   //     id: DrawerIds.changeDate,
   //     title: translate('changeDate'),

@@ -52,13 +52,13 @@ abstract class CloudDependentRepositoryImpl<
   }
 
   @override
-  Future<O?> ownerCloud(String uid, int dependentId) async {
-    final dependentItem =
-        await byIdOnCloud(uid: uid, docId: dependentId.toString());
-    if (dependentItem == null) {
-      return null;
-    }
-    final ownerId = getOwnerId(dependentItem);
+  Future<O?> ownerCloud(String uid, int ownerId) async {
+    // final dependentItem =
+    //     await byIdOnCloud(uid: uid, docId: dependentId.toString());
+    // if (dependentItem == null) {
+    //   return null;
+    // }
+    // final ownerId = getOwnerId(dependentItem);
     return await ownerRepository.byIdOnCloud(
         uid: uid, docId: ownerId.toString());
   }

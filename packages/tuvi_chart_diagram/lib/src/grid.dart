@@ -44,6 +44,8 @@ class _TuviChartGridState extends State<TuviChartGrid> {
   // ConstraintId boxTys = ConstraintId('boxTys');
   // ConstraintId boxHoi = ConstraintId('boxHoi');
 
+  final _transformationcontroller = TransformationController();
+
   ConstraintId boxTuan = ConstraintId('boxTuan');
   ConstraintId boxTriet = ConstraintId('boxTriet');
   ConstraintId boxTuanTriet = ConstraintId('boxTuanTriet');
@@ -112,6 +114,12 @@ class _TuviChartGridState extends State<TuviChartGrid> {
     return chart.posOfTuan.first.toInt() == chart.posOfTriet.first.toInt();
   }
 
+  void _handleDoubleTap() {
+    if (_transformationcontroller.value != Matrix4.identity()) {
+      _transformationcontroller.value = Matrix4.identity();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -121,207 +129,216 @@ class _TuviChartGridState extends State<TuviChartGrid> {
       // if (constraints.maxHeight < constraints.maxWidth) {
       //   houseHeight = 180.0;
       // }
-      return ConstraintLayout(childConstraints: [
-        Constraint(
-          id: getConstraintId(HousePosition.tyj()),
-          width: houseWidth,
-          height: houseHeight,
-          topLeftTo: parent,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.ngo()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.tyj()).right,
-          top: getConstraintId(HousePosition.tyj()).top,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.mui()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.ngo()).right,
-          top: getConstraintId(HousePosition.tyj()).top,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.than()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.mui()).right,
-          top: getConstraintId(HousePosition.tyj()).top,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.thin()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.tyj()).left,
-          top: getConstraintId(HousePosition.tyj()).bottom,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.dau()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.than()).left,
-          top: getConstraintId(HousePosition.tyj()).bottom,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.mao()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.tyj()).left,
-          top: getConstraintId(HousePosition.thin()).bottom,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.tuat()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.dau()).left,
-          top: getConstraintId(HousePosition.dau()).bottom,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.dan()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.tyj()).left,
-          top: getConstraintId(HousePosition.mao()).bottom,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.suu()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.dan()).right,
-          top: getConstraintId(HousePosition.dan()).top,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.tys()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.suu()).right,
-          top: getConstraintId(HousePosition.dan()).top,
-        ),
-        Constraint(
-          id: getConstraintId(HousePosition.hoi()),
-          width: houseWidth,
-          height: houseHeight,
-          left: getConstraintId(HousePosition.tuat()).left,
-          top: getConstraintId(HousePosition.dan()).top,
-        ),
-        Constraint(
-          id: boxDiaBan,
-          width: matchConstraint,
-          height: matchConstraint,
-          left: getConstraintId(HousePosition.thin()).right,
-          right: getConstraintId(HousePosition.tuat()).left,
-          top: getConstraintId(HousePosition.thin()).top,
-          bottom: getConstraintId(HousePosition.mao()).bottom,
-        ),
-        Constraint(
-          id: boxTuan,
-          width: 60,
-          height: 12,
-          left: leftOfTuanTriet(widget.chart.posOfTuan),
-          right: rightOfTuanTriet(widget.chart.posOfTuan),
-          top: verticalOfTuanTriet(widget.chart.posOfTuan),
-          bottom: verticalOfTuanTriet(widget.chart.posOfTuan),
-        ),
-        Constraint(
-          id: boxTriet,
-          width: 60,
-          height: 12,
-          left: leftOfTuanTriet(widget.chart.posOfTriet),
-          right: rightOfTuanTriet(widget.chart.posOfTriet),
-          top: verticalOfTuanTriet(widget.chart.posOfTriet),
-          bottom: verticalOfTuanTriet(widget.chart.posOfTriet),
-        ),
-        Constraint(
-          id: boxTuanTriet,
-          width: 60,
-          height: 12,
-          left: leftOfTuanTriet(widget.chart.posOfTriet),
-          right: rightOfTuanTriet(widget.chart.posOfTriet),
-          top: verticalOfTuanTriet(widget.chart.posOfTriet),
-          bottom: verticalOfTuanTriet(widget.chart.posOfTriet),
-        ),
-      ], children: [
-        for (var entry in data.entries)
-          TuviHouseContainer(
-            widget.chart.houses[entry.key]!,
-            minorStarSizeGroup: minorStarSizeGroup,
-            majorStarSizeGroup: majorStarSizeGroup,
-            positionSizeGroup: positionSizeGroup,
-            translate: widget.translate,
-            controller: entry.value['controller'] as HouseController,
-            colorScheme: widget.colorScheme,
-          ).applyConstraintId(id: entry.value['id'] as ConstraintId),
-        DiaBanSection(
-          chart: widget.chart,
-          humanBio: widget.humanBio,
-          colorScheme: widget.colorScheme,
-          translate: widget.translate,
-        ).applyConstraintId(id: boxDiaBan),
-        Visibility(
-          visible: !tuanTrietVisible(widget.chart),
-          child: Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
+      return GestureDetector(
+        onDoubleTap: _handleDoubleTap,
+        child: InteractiveViewer.builder(
+          transformationController: _transformationcontroller,
+          builder: (ctx, viewport) => ConstraintLayout(
+            childConstraints: [
+              Constraint(
+                id: getConstraintId(HousePosition.tyj()),
+                width: houseWidth,
+                height: houseHeight,
+                topLeftTo: parent,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.ngo()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.tyj()).right,
+                top: getConstraintId(HousePosition.tyj()).top,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.mui()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.ngo()).right,
+                top: getConstraintId(HousePosition.tyj()).top,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.than()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.mui()).right,
+                top: getConstraintId(HousePosition.tyj()).top,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.thin()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.tyj()).left,
+                top: getConstraintId(HousePosition.tyj()).bottom,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.dau()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.than()).left,
+                top: getConstraintId(HousePosition.tyj()).bottom,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.mao()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.tyj()).left,
+                top: getConstraintId(HousePosition.thin()).bottom,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.tuat()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.dau()).left,
+                top: getConstraintId(HousePosition.dau()).bottom,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.dan()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.tyj()).left,
+                top: getConstraintId(HousePosition.mao()).bottom,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.suu()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.dan()).right,
+                top: getConstraintId(HousePosition.dan()).top,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.tys()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.suu()).right,
+                top: getConstraintId(HousePosition.dan()).top,
+              ),
+              Constraint(
+                id: getConstraintId(HousePosition.hoi()),
+                width: houseWidth,
+                height: houseHeight,
+                left: getConstraintId(HousePosition.tuat()).left,
+                top: getConstraintId(HousePosition.dan()).top,
+              ),
+              Constraint(
+                id: boxDiaBan,
+                width: matchConstraint,
+                height: matchConstraint,
+                left: getConstraintId(HousePosition.thin()).right,
+                right: getConstraintId(HousePosition.tuat()).left,
+                top: getConstraintId(HousePosition.thin()).top,
+                bottom: getConstraintId(HousePosition.mao()).bottom,
+              ),
+              Constraint(
+                id: boxTuan,
+                width: 60,
+                height: 12,
+                left: leftOfTuanTriet(widget.chart.posOfTuan),
+                right: rightOfTuanTriet(widget.chart.posOfTuan),
+                top: verticalOfTuanTriet(widget.chart.posOfTuan),
+                bottom: verticalOfTuanTriet(widget.chart.posOfTuan),
+              ),
+              Constraint(
+                id: boxTriet,
+                width: 60,
+                height: 12,
+                left: leftOfTuanTriet(widget.chart.posOfTriet),
+                right: rightOfTuanTriet(widget.chart.posOfTriet),
+                top: verticalOfTuanTriet(widget.chart.posOfTriet),
+                bottom: verticalOfTuanTriet(widget.chart.posOfTriet),
+              ),
+              Constraint(
+                id: boxTuanTriet,
+                width: 60,
+                height: 12,
+                left: leftOfTuanTriet(widget.chart.posOfTriet),
+                right: rightOfTuanTriet(widget.chart.posOfTriet),
+                top: verticalOfTuanTriet(widget.chart.posOfTriet),
+                bottom: verticalOfTuanTriet(widget.chart.posOfTriet),
+              ),
+            ],
+            children: [
+              for (var entry in data.entries)
+                TuviHouseContainer(
+                  widget.chart.houses[entry.key]!,
+                  minorStarSizeGroup: minorStarSizeGroup,
+                  majorStarSizeGroup: majorStarSizeGroup,
+                  positionSizeGroup: positionSizeGroup,
+                  translate: widget.translate,
+                  controller: entry.value['controller'] as HouseController,
+                  colorScheme: widget.colorScheme,
+                ).applyConstraintId(id: entry.value['id'] as ConstraintId),
+              DiaBanSection(
+                chart: widget.chart,
+                humanBio: widget.humanBio,
+                colorScheme: widget.colorScheme,
+                translate: widget.translate,
+              ).applyConstraintId(id: boxDiaBan),
+              Visibility(
+                visible: !tuanTrietVisible(widget.chart),
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                      color: Colors.white),
+                  child: Text(
+                    widget.translate('tuan'),
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                        height: 1.1,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                color: Colors.white),
-            child: Text(
-              widget.translate('tuan'),
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 10,
-                  height: 1.1,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ).applyConstraintId(id: boxTuan),
-        Visibility(
-          visible: !tuanTrietVisible(widget.chart),
-          child: Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
+              ).applyConstraintId(id: boxTuan),
+              Visibility(
+                visible: !tuanTrietVisible(widget.chart),
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                      color: Colors.black),
+                  child: Text(
+                    widget.translate('triet'),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        height: 1.1,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                color: Colors.black),
-            child: Text(
-              widget.translate('triet'),
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  height: 1.1,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ).applyConstraintId(id: boxTriet),
-        Visibility(
-          visible: tuanTrietVisible(widget.chart),
-          child: Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
+              ).applyConstraintId(id: boxTriet),
+              Visibility(
+                visible: tuanTrietVisible(widget.chart),
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                      color: Colors.black),
+                  child: Text(
+                    widget.translate('tuanTriet'),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        height: 1.1,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                color: Colors.black),
-            child: Text(
-              widget.translate('tuanTriet'),
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  height: 1.1,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            ),
+              ).applyConstraintId(id: boxTuanTriet),
+            ],
           ),
-        ).applyConstraintId(id: boxTuanTriet)
-      ]);
+        ),
+      );
     });
   }
 }

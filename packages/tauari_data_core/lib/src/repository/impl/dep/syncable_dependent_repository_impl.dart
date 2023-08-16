@@ -92,7 +92,8 @@ abstract class SyncableDependentRepositoryImpl<
     if (local == null) {
       return null;
     }
-    final cloud = await cloudDependentRepository.ownerCloud(uid, dependentId);
+
+    final cloud = await cloudDependentRepository.ownerCloud(uid, local.id);
     if (cloud == null) {
       return local;
     }

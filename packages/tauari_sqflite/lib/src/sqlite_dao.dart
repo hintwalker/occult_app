@@ -18,7 +18,7 @@ abstract class SqliteDao extends Dao {
     return await database.db!.query(
       tableName,
       orderBy: queryArgs?.orderBy, //?? '${ColumnChart.lastViewed} DESC',
-      limit: queryArgs?.limit,
+      limit: queryArgs?.limitLocal,
       where: queryArgs?.where,
       whereArgs: queryArgs?.whereArgs,
       groupBy: queryArgs?.groupBy,

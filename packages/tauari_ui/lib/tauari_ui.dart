@@ -1,5 +1,9 @@
 library tauari_ui;
 
+export 'src/widget/not_enough_energy_dialog.dart';
+export 'src/widget/payment_failure_dialog.dart';
+export 'src/widget/payment_success_dialog.dart';
+
 export 'src/widget/builder/basic_future_builder.dart';
 export 'src/widget/builder/basic_stream_builder.dart';
 
@@ -40,6 +44,7 @@ export 'src/widget/loading_widget.dart';
 export 'src/widget/horizontal_data_list_builder.dart';
 export 'src/widget/horizontal_pair_data_list_builder.dart';
 
+export 'src/controller/count_on_cloud_controller.dart';
 export 'src/controller/count_everywhere_controller.dart';
 export 'src/controller/syncable_data_stream_controller.dart';
 export 'src/controller/syncable_data_manipulate_controller.dart';

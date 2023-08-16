@@ -17,10 +17,12 @@ class ChartInfo extends StatelessWidget {
     required this.chart,
     required this.humanBio,
     required this.translate,
+    required this.colorScheme,
   });
   final HumanBio humanBio;
   final TuViChart chart;
   final String Function(String) translate;
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,10 @@ class ChartInfo extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            HumanName(humanBio.name),
+            HumanName(
+              humanBio.name,
+              colorScheme: colorScheme,
+            ),
             HumanGender(
               humanBio.dnan,
               translate: translate,

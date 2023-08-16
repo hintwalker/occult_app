@@ -17,6 +17,7 @@ class Commentary extends MustBuyEntity<Commentary>
     required super.price,
     required super.paid,
     required super.modified,
+    super.uploadDate,
   });
   final String title;
   final String content;
@@ -44,48 +45,57 @@ class Commentary extends MustBuyEntity<Commentary>
       columnPrice: price,
       columnPaid: paid,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 
   factory Commentary.fromMap(Map<String, dynamic> map) {
-    return Commentary(map[columnId] as int,
-        title: map[ColumnCommentary.title] == null
-            ? ''
-            : map[ColumnCommentary.title] as String,
-        content: map[ColumnCommentary.content] as String,
-        created: map[columnCreated] == null
-            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-        lastViewed: map[ColumnCommentary.lastViewed] == null
-            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-            : DateTime.fromMillisecondsSinceEpoch(
-                map[ColumnCommentary.lastViewed] as int),
-        requestId: map[ColumnCommentary.requestId] as int,
-        storageState:
-            map[columnState] == null ? null : map[columnState] as String,
-        syncStatus: map[columnSyncStatus] == null
-            ? null
-            : map[columnSyncStatus] as String,
-        price: map[columnPrice] == null ? 0 : map[columnPrice] as int,
-        paid:
-            map[columnPaid] == null ? PaidValue.unPaid : map[columnPaid] as int,
-        modified: map[columnModified] == null
-            ? LocalLocked.unlocked
-            : map[columnModified] as int);
+    return Commentary(
+      map[columnId] as int,
+      title: map[ColumnCommentary.title] == null
+          ? ''
+          : map[ColumnCommentary.title] as String,
+      content: map[ColumnCommentary.content] as String,
+      created: map[columnCreated] == null
+          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+      lastViewed: map[ColumnCommentary.lastViewed] == null
+          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[ColumnCommentary.lastViewed] as int),
+      requestId: map[ColumnCommentary.requestId] as int,
+      storageState:
+          map[columnState] == null ? null : map[columnState] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
+      price: map[columnPrice] == null ? 0 : map[columnPrice] as int,
+      paid: map[columnPaid] == null ? PaidValue.unPaid : map[columnPaid] as int,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
+    );
   }
 
-  Commentary copyWith(
-      {int? id,
-      String? title,
-      String? content,
-      DateTime? created,
-      DateTime? lastViewed,
-      String? syncStatus,
-      int? requestId,
-      String? storageState,
-      int? price,
-      int? paid,
-      int? modified}) {
+  Commentary copyWith({
+    int? id,
+    String? title,
+    String? content,
+    DateTime? created,
+    DateTime? lastViewed,
+    String? syncStatus,
+    int? requestId,
+    String? storageState,
+    int? price,
+    int? paid,
+    int? modified,
+    DateTime? uploadDate,
+  }) {
     return Commentary(
       id ?? this.id,
       title: title ?? this.title,
@@ -98,6 +108,7 @@ class Commentary extends MustBuyEntity<Commentary>
       price: price ?? this.price,
       paid: paid ?? this.paid,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
@@ -149,4 +160,7 @@ class Commentary extends MustBuyEntity<Commentary>
 
   @override
   String? get noteSyncStatus => syncStatus;
+
+  @override
+  Commentary copyWithUploadDate(DateTime? value) => copyWith(uploadDate: value);
 }

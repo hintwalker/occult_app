@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SubscriptionConfirmStyle {
+  final double? energyIconSize;
+  final double? propertyIconSize;
   const SubscriptionConfirmStyle({
     this.planTitle,
     this.planPrice,
@@ -14,6 +16,8 @@ class SubscriptionConfirmStyle {
     this.billingTitleTextStyle,
     this.billingValueTextStyle,
     this.billingBackgroundColor,
+    this.energyIconSize,
+    this.propertyIconSize,
   });
   final TextStyle? planTitle;
   final TextStyle? planPrice;

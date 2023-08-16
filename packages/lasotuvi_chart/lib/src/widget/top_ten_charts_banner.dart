@@ -17,6 +17,7 @@ class TopTenChartsBanner extends StatelessWidget {
     required this.onOpenSyncOptions,
     required this.onItemTap,
     required this.countController,
+    required this.countOnCloudController,
   });
 
   final String? uid;
@@ -31,6 +32,7 @@ class TopTenChartsBanner extends StatelessWidget {
   final void Function(BuildContext context, Chart chart) onItemTap;
   // final OnCountChart onChartCount;
   final CountChartEveryWhereController countController;
+  final CountOnCloudController countOnCloudController;
   // final Widget Function(String chartId) chartView;
 
   @override
@@ -50,6 +52,7 @@ class TopTenChartsBanner extends StatelessWidget {
             dataCount: DataCountWidget(
               uid: uid,
               controller: countController,
+              cloudController: countOnCloudController,
               colorScheme: colorScheme,
             ),
           ),

@@ -5,3 +5,4 @@ const columnState = '_s';
 const columnPrice = '_v';
 const columnPaid = '_p';
 const columnModified = '_m';
+const columnUploadDate = '_u';

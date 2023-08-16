@@ -8,10 +8,12 @@ class PlanListItemActivedHolder extends StatelessWidget {
     required this.child,
     required this.style,
     required this.translate,
+    required this.isActived,
   });
   final Widget child;
   final PlanListItemStyle style;
   final String Function(String) translate;
+  final bool isActived;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +24,12 @@ class PlanListItemActivedHolder extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(4.0),
             decoration: BoxDecoration(
-              border: Border.all(
-                color: style.activedSinalBorderColor ?? Colors.black87,
-                width: 4.0,
-              ),
+              border: !isActived
+                  ? null
+                  : Border.all(
+                      color: style.activedSinalBorderColor ?? Colors.black87,
+                      width: 4.0,
+                    ),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(12.0),
                 bottomLeft: Radius.circular(12.0),
@@ -34,13 +38,14 @@ class PlanListItemActivedHolder extends StatelessWidget {
             ),
             child: child,
           ),
-          Positioned(
-            child: PlanListItemActivedSignal(
-              translate: translate,
-              backgroundColor: style.activedSignalBackground,
-              textStyle: style.activedSignalTextStyle,
+          if (isActived)
+            Positioned(
+              child: PlanListItemActivedSignal(
+                translate: translate,
+                backgroundColor: style.activedSignalBackground,
+                textStyle: style.activedSignalTextStyle,
+              ),
             ),
-          ),
         ],
       ),
     );

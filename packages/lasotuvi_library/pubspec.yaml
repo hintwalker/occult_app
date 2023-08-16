@@ -23,7 +23,8 @@ dependencies:
     path: ../tauari_sort
   tauari_utils:
     path: ../tauari_utils
-  flutter_markdown: ^0.6.17+1
+  tauari_markdown:
+    path: ../tauari_markdown
 
 dev_dependencies:
   flutter_test:

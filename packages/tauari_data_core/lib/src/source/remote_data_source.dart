@@ -84,7 +84,7 @@ abstract class RemoteDataSource<T extends CloudModel>
       collectionPath: dataCollectionPath(uid),
       where: queryArgs?.firestoreWhere,
       orderBy: queryArgs?.firestoreOrderBy,
-      limit: queryArgs?.limit,
+      limit: queryArgs?.limitCloud,
     );
     return listMapper(list);
     // return await service
@@ -104,7 +104,7 @@ abstract class RemoteDataSource<T extends CloudModel>
     return service
         .getSnapshotStreamFromCollection(
           collectionPath: dataCollectionPath(uid),
-          limit: queryArgs?.limit,
+          limit: queryArgs?.limitCloud,
           where: queryArgs?.firestoreWhere,
           orderBy: queryArgs?.firestoreOrderBy,
         )

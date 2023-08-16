@@ -39,7 +39,7 @@ class CloudItem extends StatelessWidget {
           Text(
             '$value/$maxValue',
             style: TextStyle(
-              fontSize: 20.0,
+              fontSize: 18.0,
               fontWeight: FontWeight.bold,
               color: value < maxValue ? colorScheme.primary : colorScheme.error,
             ),
@@ -66,10 +66,13 @@ class CloudItem extends StatelessWidget {
       ),
       subtitle: value > maxValue
           ? Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                const SizedBox(
+                  width: 24,
+                ),
                 Text(
-                  '${translate('duLieuVuotMuc')}: ${value - maxValue}',
+                  '${translate('vuotMuc')}: ${value - maxValue}',
                   style: TextStyle(
                     fontSize: 16,
                     color: colorScheme.error,

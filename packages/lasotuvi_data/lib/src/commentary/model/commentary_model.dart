@@ -14,6 +14,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
     required super.price,
     required super.paid,
     super.modified = LocalLocked.unlocked,
+    super.uploadDate,
   });
   final String title;
   final String content;
@@ -34,6 +35,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       price: price,
       paid: paid,
       modified: modified,
+      uploadDate: uploadDate,
     );
   }
 
@@ -66,6 +68,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       columnPrice: price,
       columnPaid: paid,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -87,6 +90,11 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       modified: map[columnModified] == null
           ? LocalLocked.unlocked
           : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
     );
   }
 
@@ -102,6 +110,7 @@ class CommentaryModel extends MustBuyModel<Commentary> {
       price: entity.price,
       paid: entity.paid,
       modified: entity.modified,
+      uploadDate: entity.uploadDate,
     );
   }
 

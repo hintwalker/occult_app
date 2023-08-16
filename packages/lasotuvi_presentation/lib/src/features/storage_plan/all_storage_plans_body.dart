@@ -11,15 +11,14 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:tauari_auth_widget/tauari_auth_widget.dart';
-import 'package:tauari_subscription/tauari_subscription.dart';
 // import 'package:tauari_subscription/tauari_subscription.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 // import 'package:tauari_utils/tauari_utils.dart';
 
-import '../../styles/storage_plan_style_impl.dart';
 import '../auth/user_auth_depended_state.dart';
 import '../navigation/drawer_ids.dart';
+import 'usecase/resolve_extends_action_result.dart';
 
 class AllStoragePlansBody extends ConsumerStatefulWidget {
   const AllStoragePlansBody({super.key});
@@ -31,7 +30,9 @@ class AllStoragePlansBody extends ConsumerStatefulWidget {
 
 class _AllStoragePlansBodyState
     extends UserAuthDependedState<AllStoragePlansBody> {
-  final style = StoragePlanStyleImpl();
+  // final subscriptionStyle = SubscriptionConfirmStyleImpl.apply(
+  //   LasotuviAppStyle.colorScheme,
+  // );
   late Widget energyIcon;
   @override
   FutureOr callbackAfterGetUser(String? uid) {
@@ -104,7 +105,11 @@ class _AllStoragePlansBodyState
                     await ref
                         .read(planListNotifierProvider.notifier)
                         .fetchData();
-                    return result;
+                    if (context.mounted) {
+                      return await resolveExtendsActionResult(
+                          context: context, result: result);
+                    }
+                    return false;
                   },
                   itemStyle: PlanListItemStyleImpl.apply(
                     LasotuviAppStyle.colorScheme,
@@ -138,27 +143,60 @@ class _AllStoragePlansBodyState
           title: translate('confirm'),
           children: [
             SubscriptionConfirmScreenContent(
-              state: ref.watch(subscriptionConfirmNotifierProvider),
-              translate: translate,
-              style: SubscriptionConfirmStyleImpl.apply(
-                  LasotuviAppStyle.colorScheme),
-              onSubmit: () => Navigator.pop(ctx, true),
-              onBuyMoreEnergy: () => showDialog(
-                context: ctx,
-                builder: (_) => BasicBottomSheet(
-                  title: translate('energyPointMarket'),
-                  colorScheme: LasotuviAppStyle.colorScheme,
-                  child: const EnergyStoreContainer(),
-                ),
-              ),
-            ),
+                state: ref.watch(subscriptionConfirmNotifierProvider),
+                translate: translate,
+                style: SubscriptionConfirmStyleImpl.apply(
+                    LasotuviAppStyle.colorScheme),
+                onSubmit: () => Navigator.pop(ctx, true),
+                onBuyMoreEnergy: () async {
+                  await showModalBottomSheet(
+                    context: ctx,
+                    builder: (_) => BasicBottomSheet(
+                      title: translate('energyPointMarket'),
+                      colorScheme: LasotuviAppStyle.colorScheme,
+                      child: const EnergyStoreContainer(),
+                    ),
+                  );
+
+                  await Future.delayed(Duration.zero);
+                  if (ctx.mounted) {
+                    Navigator.pop(ctx, false);
+                  }
+                  if (context.mounted) {
+                    willSubscribe(context, plan);
+                  }
+                }),
           ],
         ),
       );
       if (result == null || !result) {
         return false;
       } else {
-        await ref.read(planListNotifierProvider.notifier).subscribe(plan);
+        final subscribeResult =
+            await ref.read(planListNotifierProvider.notifier).subscribe(plan);
+        if (context.mounted) {
+          Timer? timer;
+          await showDialog(
+              context: context,
+              builder: (ctx) {
+                timer = Timer(const Duration(seconds: 2), () {
+                  Navigator.pop(ctx);
+                });
+                return subscribeResult == SubscribeActionResult.success
+                    ? const PaymentSuccessDialog(translate: translate)
+                    : const PaymentFailureDialog(translate: translate);
+                // return AlertDialog(
+                //   title: Text(translate('')),
+                //   content: SingleChildScrollView(
+                //     child: Text(subscribeResult.name),
+                //   ),
+                // );
+              }).then((val) {
+            if (timer?.isActive ?? false) {
+              timer?.cancel();
+            }
+          });
+        }
         await ref.read(planListNotifierProvider.notifier).fetchData();
         return true;
       }
@@ -183,54 +221,56 @@ class _AllStoragePlansBodyState
 // return result?.yes ?? false;
 //   }
 
-  Future<bool> listenToExpired(
-      Subscription subscription, bool openExtendsConfirm) async {
-    await Future.delayed(const Duration(milliseconds: 200));
-    if (!mounted) {
-      return false;
-    }
-    if (openExtendsConfirm) {
-      final result = await showDialog<ConfirmResult>(
-        context: context,
-        builder: (ctx) => ExtendsConfirmDialog(
-          subscription: subscription,
-          translate: translate,
-          energyIcon: energyIcon,
-          style: style,
-        ),
-      );
-      if (result == null) {
-        await ref
-            .read(storagePlanListControllerProvider)
-            .makeCurrentSubscriptionExpired(subscription);
-      } else if (result.yes) {
-        final extendsResult = await ref
-            .read(storagePlanListControllerProvider)
-            .extendsCurrentSub(subscription);
-        if (extendsResult != ExtendsPlanActionResult.success) {
-          await ref
-              .read(storagePlanListControllerProvider)
-              .makeCurrentSubscriptionExpired(subscription);
-          return false;
-        }
-        return true;
-      } else {
-        await ref
-            .read(storagePlanListControllerProvider)
-            .makeCurrentSubscriptionExpired(subscription);
-      }
-    } else {
-      await ref
-          .read(storagePlanListControllerProvider)
-          .makeCurrentSubscriptionExpired(subscription);
-    }
-    return false;
-  }
+  // Future<bool> listenToExpired(
+  //     Subscription subscription, bool openExtendsConfirm) async {
+  //   await Future.delayed(const Duration(milliseconds: 200));
+  //   if (!mounted) {
+  //     return false;
+  //   }
+  //   if (openExtendsConfirm) {
+  //     final result = await showDialog<ConfirmResult>(
+  //       context: context,
+  //       builder: (ctx) => ExtendsConfirmDialog(
+  //         subscription: subscription,
+  //         translate: translate,
+  //         energyIcon: energyIcon,
+  //         iconColor: subscriptionStyle.energyIconColor,
+  //         priceValueTextStyle: subscriptionStyle.billingValueTextStyle,
+  //         titleStyle: subscriptionStyle.billingTitleTextStyle,
+  //       ),
+  //     );
+  //     if (result == null) {
+  //       await ref
+  //           .read(storagePlanListControllerProvider)
+  //           .makeCurrentSubscriptionExpired(subscription);
+  //     } else if (result.yes) {
+  //       final extendsResult = await ref
+  //           .read(storagePlanListControllerProvider)
+  //           .extendsCurrentSub(subscription);
+  //       if (extendsResult != ExtendsPlanActionResult.success) {
+  //         await ref
+  //             .read(storagePlanListControllerProvider)
+  //             .makeCurrentSubscriptionExpired(subscription);
+  //         return false;
+  //       }
+  //       return true;
+  //     } else {
+  //       await ref
+  //           .read(storagePlanListControllerProvider)
+  //           .makeCurrentSubscriptionExpired(subscription);
+  //     }
+  //   } else {
+  //     await ref
+  //         .read(storagePlanListControllerProvider)
+  //         .makeCurrentSubscriptionExpired(subscription);
+  //   }
+  //   return false;
+  // }
 
-  Future<void> listenToCanceled(Subscription subscription) async {
-    await ref
-        .read(storagePlanListControllerProvider)
-        .cancelPlan
-        .call(subscription);
-  }
+  // Future<void> listenToCanceled(Subscription subscription) async {
+  //   await ref
+  //       .read(storagePlanListControllerProvider)
+  //       .cancelPlan
+  //       .call(subscription);
+  // }
 }

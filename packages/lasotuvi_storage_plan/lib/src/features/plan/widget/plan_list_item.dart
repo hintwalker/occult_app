@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../entity/storage_plan.dart';
-import '../../../presentation/widget/action/subscribe_button.dart';
+import '../../subscription/widget/subscribe_button.dart';
 import '../style/plan_list_item_style.dart';
 import '../widget/plan_list_item_price.dart';
 import '../widget/plan_list_item_properties.dart';

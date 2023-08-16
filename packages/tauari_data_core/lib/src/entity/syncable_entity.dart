@@ -11,11 +11,13 @@ abstract class SyncableEntity<T> extends Entity
     this.id, {
     this.syncStatus,
     this.storageState,
+    this.uploadDate,
     required this.modified,
   });
   final int id;
   final String? syncStatus;
   final String? storageState;
+  final DateTime? uploadDate;
 
   final int modified;
   @override
@@ -39,4 +41,7 @@ abstract class SyncableEntity<T> extends Entity
   String get sortId => docId;
 
   T copyWithModified(int value);
+
+  @override
+  DateTime? get getUploadDate => uploadDate;
 }

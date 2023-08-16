@@ -46,6 +46,7 @@ class VerifyCurrentSubscription {
         await cancelPlan(subscription);
       }
     }
+
     return PairSubscription(
       current: Subscription.free(),
       using: Subscription.free(),

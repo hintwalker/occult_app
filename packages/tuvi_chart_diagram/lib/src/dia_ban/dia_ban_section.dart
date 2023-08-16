@@ -35,6 +35,7 @@ class DiaBanSection extends StatelessWidget {
               chart: chart,
               humanBio: humanBio,
               translate: translate,
+              colorScheme: colorScheme,
             )),
       ),
     );

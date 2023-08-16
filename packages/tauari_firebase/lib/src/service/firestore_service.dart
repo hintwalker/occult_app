@@ -52,22 +52,31 @@ class FirestoreService implements CloudService {
       );
     }
 
-    if (orderBy != null) {
-      if (result == null) {
-        result =
-            collection.orderBy(orderBy.field, descending: orderBy.descending);
-      } else {
-        result = result.orderBy(orderBy.field, descending: orderBy.descending);
-      }
-    }
     if (limit != null) {
       if (result == null) {
-        result = collection.limit(limit);
+        result = collection.limit(limit).orderBy(FieldPath.documentId);
       } else {
-        result = result.limit(limit);
+        result = result.limit(limit).orderBy(FieldPath.documentId);
+      }
+    } else {
+      if (orderBy != null) {
+        if (result == null) {
+          result =
+              collection.orderBy(orderBy.field, descending: orderBy.descending);
+        } else {
+          result =
+              result.orderBy(orderBy.field, descending: orderBy.descending);
+        }
+      } else {
+        if (result == null) {
+          result = collection.orderBy(FieldPath.documentId);
+        } else {
+          result = result.orderBy(FieldPath.documentId);
+        }
       }
     }
-    return result!;
+
+    return result;
   }
 
   @override

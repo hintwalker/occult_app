@@ -78,7 +78,7 @@ class _ChartViewModalScreenState
                           context: context,
                           uid: uid,
                           ref: ref,
-                          callback: () =>
+                          doAfterDeleteForever: () =>
                               popToParrent(context, RouteName.chartView),
                         );
                       },
@@ -102,6 +102,15 @@ class _ChartViewModalScreenState
                           //       chart.syncStatus ?? RouterParams.nullValue,
                           // });
                         },
+                        onOpenChartSyncOptions: (context) =>
+                            StorageHelper.showOptionsModal(
+                          data.source,
+                          context: context,
+                          uid: uid,
+                          ref: ref,
+                          doAfterDeleteForever: () =>
+                              popToParrent(context, RouteName.chartView),
+                        ),
                         // onOpenChartSyncOptions: (context, chart) =>
                         //     StorageHelper.showOptionsModal<Chart>(chart,
                         //         context: context,
@@ -123,7 +132,8 @@ class _ChartViewModalScreenState
                           context: context,
                           uid: uid,
                           ref: ref,
-                          callback: tagListController.onSyncStatusChange,
+                          callback: (_) =>
+                              tagListController.onSyncStatusChange(),
                         ),
                         // (item, {required context, required callBack}) =>
                         //     StorageHelper.showOptionsModal(item, context: context, uid: uid, ref: ref),

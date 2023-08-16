@@ -33,10 +33,12 @@ class NetworkNotConnectedAlertDialog extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(
-                translate('Ok'),
+            Expanded(
+              child: TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  translate('Ok'),
+                ),
               ),
             ),
           ],

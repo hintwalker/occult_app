@@ -48,4 +48,6 @@ class RouteName {
   static const statistic = 'statistic';
 
   static const changeDate = 'changeDate';
+
+  static const manual = 'manual';
 }

@@ -13,29 +13,36 @@ class Tag extends SyncableEntity<Tag> {
     super.syncStatus,
     super.storageState,
     required super.modified,
+    super.uploadDate,
   });
   final String title;
   final String subTitle;
   final DateTime created;
 
   factory Tag.fromMap(Map<String, Object?> map) {
-    return Tag(map[columnId] as int,
-        title:
-            map[ColumnTag.title] == null ? '' : map[ColumnTag.title] as String,
-        subTitle: map[ColumnTag.description] == null
-            ? ''
-            : map[ColumnTag.description] as String,
-        created: map[columnCreated] == null
-            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-        storageState:
-            map[columnState] == null ? null : map[columnState] as String,
-        syncStatus: map[columnSyncStatus] == null
-            ? null
-            : map[columnSyncStatus] as String,
-        modified: map[columnModified] == null
-            ? LocalLocked.unlocked
-            : map[columnModified] as int);
+    return Tag(
+      map[columnId] as int,
+      title: map[ColumnTag.title] == null ? '' : map[ColumnTag.title] as String,
+      subTitle: map[ColumnTag.description] == null
+          ? ''
+          : map[ColumnTag.description] as String,
+      created: map[columnCreated] == null
+          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+      storageState:
+          map[columnState] == null ? null : map[columnState] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
+    );
   }
 
   static Tag fromOldVersion(Map<String, Object?> map) {
@@ -52,6 +59,7 @@ class Tag extends SyncableEntity<Tag> {
       storageState: null,
       syncStatus: null,
       modified: LocalLocked.unlocked,
+      uploadDate: null,
     );
   }
 
@@ -84,6 +92,7 @@ class Tag extends SyncableEntity<Tag> {
       columnState: state,
       columnSyncStatus: getSyncStatus,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -100,6 +109,7 @@ class Tag extends SyncableEntity<Tag> {
     String? syncStatus,
     String? storageState,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return Tag(
       id ?? this.id,
@@ -109,6 +119,7 @@ class Tag extends SyncableEntity<Tag> {
       syncStatus: syncStatus ?? this.syncStatus,
       storageState: storageState ?? this.storageState,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
@@ -117,4 +128,7 @@ class Tag extends SyncableEntity<Tag> {
 
   @override
   Tag copyWithModified(int value) => copyWith(modified: value);
+
+  @override
+  Tag copyWithUploadDate(DateTime? value) => copyWith(uploadDate: value);
 }

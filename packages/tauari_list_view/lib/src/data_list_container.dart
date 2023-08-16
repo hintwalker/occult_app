@@ -95,6 +95,32 @@ class _DataListContainerState<U, V> extends State<DataListContainer<U, V>> {
           const SizedBox(
             height: 4.0,
           ),
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 12.0,
+                top: 2.0,
+                bottom: 2.0,
+              ),
+              decoration: BoxDecoration(
+                color: widget.colorScheme.tertiaryContainer,
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(18.0),
+                  bottomLeft: Radius.circular(18.0),
+                ),
+              ),
+              child: Text(
+                '${widget.controller.foundData.length}',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: widget.colorScheme.tertiary,
+                ),
+              ),
+            )
+          ],
+        ),
         Expanded(
           child: DataListBodyWidget<U, V, U>(
             data: widget.controller.foundData,

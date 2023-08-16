@@ -27,6 +27,8 @@ export 'src/usecase/syncable/on_syncable_data_list.dart';
 export 'src/usecase/syncable/upload.dart';
 export 'src/usecase/syncable/download.dart';
 
+export 'src/usecase/cloud/data_on_cloud.dart';
+export 'src/usecase/cloud/delete_range_on_cloud.dart';
 export 'src/usecase/cloud/count_on_cloud.dart';
 export 'src/usecase/cloud/take_by_id_on_cloud.dart';
 export 'src/usecase/syncable/take_by_id.dart';

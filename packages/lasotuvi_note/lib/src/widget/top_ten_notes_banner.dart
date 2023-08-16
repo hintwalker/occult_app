@@ -19,6 +19,7 @@ class TopTenNotesBanner extends StatelessWidget {
     required this.onItemTap,
     required this.onOpenSyncOptions,
     required this.countController,
+    required this.countOnCloudController,
   });
   final String? uid;
   final NoteAndChartListController controller;
@@ -29,6 +30,7 @@ class TopTenNotesBanner extends StatelessWidget {
   final void Function(Note note) onItemTap;
   final void Function(Note note) onOpenSyncOptions;
   final CountNoteEveryWhereController countController;
+  final CountNoteOnCloudController countOnCloudController;
   // final Widget Function(Note, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
 
@@ -48,6 +50,7 @@ class TopTenNotesBanner extends StatelessWidget {
               uid: uid,
               controller: countController,
               colorScheme: colorScheme,
+              cloudController: countOnCloudController,
             ),
           ),
           // Expanded(

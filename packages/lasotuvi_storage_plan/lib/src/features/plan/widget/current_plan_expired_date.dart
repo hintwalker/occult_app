@@ -26,7 +26,7 @@ class CurrentPlanExpiredDate extends StatelessWidget {
                 height: 2.0,
               ),
               hasExpired
-                  ? Text(translate('expired'))
+                  ? Text(translate('expired'), style: style?.expiredText)
                   : Text(
                       '${translate('expiredDate')}: ${subscription!.expiredDate.toStringVn()}',
                       style: style?.expiredDate,
@@ -41,6 +41,11 @@ class CurrentPlanExpiredDate extends StatelessWidget {
               const SizedBox(
                 height: 2.0,
               ),
+              if (hasExpired)
+                Text(
+                  translate('warningDeleteOverloadData'),
+                  style: style?.deleteDataWarning,
+                )
               // const Divider(
               //   height: 1.0,
               //   thickness: 1.0,

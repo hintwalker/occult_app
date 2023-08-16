@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lasotuvi_presentation/src/features/storage_plan/usecase/resolve_extends_action_result.dart';
 import 'package:lasotuvi_presentation/src/styles/current_plan_style_impl.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
@@ -66,7 +67,11 @@ class _CurrentSubState
                 ref: ref,
               );
               await ref.read(currentPlanNotifierProvider.notifier).fetchData();
-              return result;
+              if (context.mounted) {
+                return await resolveExtendsActionResult(
+                    context: context, result: result);
+              }
+              return false;
             },
           );
     // : uid == null

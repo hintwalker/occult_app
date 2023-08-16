@@ -17,6 +17,7 @@ class TopTenTagsBanner extends StatelessWidget {
     required this.onItemTap,
     required this.onOpenSyncOptions,
     required this.countController,
+    required this.countOnCloudController,
   });
 
   final String? uid;
@@ -28,6 +29,7 @@ class TopTenTagsBanner extends StatelessWidget {
   final void Function(BuildContext context, Tag tag) onItemTap;
   final void Function(Tag tag) onOpenSyncOptions;
   final CountEveryWhereController countController;
+  final CountOnCloudController countOnCloudController;
   // final Widget Function(Tag, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
 
@@ -49,6 +51,7 @@ class TopTenTagsBanner extends StatelessWidget {
               uid: uid,
               controller: countController,
               colorScheme: colorScheme,
+              cloudController: countOnCloudController,
             ),
             // countEveryWhereController: countEveryWhereController,
           ),

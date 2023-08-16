@@ -22,6 +22,7 @@ class StorageOptionsModal<T extends SyncableEntity> extends StatefulWidget {
     required this.onDeleteFromLocal,
     required this.onDeleteForever,
     this.doBeforeDeleteForever,
+    this.doAfterDeleteForever,
     this.callback,
   });
 
@@ -37,7 +38,8 @@ class StorageOptionsModal<T extends SyncableEntity> extends StatefulWidget {
   final Future Function(T) onDeleteFromLocal;
   final Future Function(String, T) onDeleteForever;
   final void Function()? doBeforeDeleteForever;
-  final void Function()? callback;
+  final void Function()? doAfterDeleteForever;
+  final void Function(String? syncStatus)? callback;
 
   @override
   State<StatefulWidget> createState() => _StorageOptionsModalState<T>();
@@ -76,7 +78,7 @@ class _StorageOptionsModalState<T extends SyncableEntity>
       setState(() {
         onCloud = SyncStatus.synced;
       });
-      doCallback();
+      doCallback(onCloud);
     }
 
     // }
@@ -91,7 +93,7 @@ class _StorageOptionsModalState<T extends SyncableEntity>
       setState(() {
         onCloud = SyncStatus.synced;
       });
-      doCallback();
+      doCallback(onCloud);
     }
   }
 
@@ -101,10 +103,13 @@ class _StorageOptionsModalState<T extends SyncableEntity>
       // await ref
       //     .read(removerProvider)
       //     .deleteFromCloud<T>(uid: widget.uid!, items: widget.items);
-      setState(() {
-        onCloud = SyncStatus.onlyLocal;
-      });
-      doCallback();
+      if (context.mounted) {
+        setState(() {
+          onCloud = SyncStatus.onlyLocal;
+        });
+      }
+
+      doCallback(onCloud);
     }
   }
 
@@ -115,7 +120,7 @@ class _StorageOptionsModalState<T extends SyncableEntity>
     setState(() {
       onCloud = SyncStatus.onlyCloud;
     });
-    doCallback();
+    doCallback(onCloud);
     // }
   }
 
@@ -131,8 +136,10 @@ class _StorageOptionsModalState<T extends SyncableEntity>
     } else {
       await deleteFromLocal();
     }
-
-    doCallback();
+    if (widget.doAfterDeleteForever != null) {
+      widget.doAfterDeleteForever!();
+    }
+    // doCallback();
     try {
       if (context.mounted) {
         close(context);
@@ -214,9 +221,9 @@ class _StorageOptionsModalState<T extends SyncableEntity>
     );
   }
 
-  void doCallback() {
+  void doCallback(String? syncStatus) {
     if (widget.callback != null) {
-      widget.callback!();
+      widget.callback!(syncStatus);
     }
   }
 }

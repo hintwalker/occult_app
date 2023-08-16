@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_markdown/tauari_markdown.dart';
 import 'package:tauari_utils/tauari_utils.dart';
 import '../../controller/star_info_viewer_controller.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-import '../markdown_viewer.dart';
 
 class StarInfoViewer extends StatefulWidget {
   const StarInfoViewer(

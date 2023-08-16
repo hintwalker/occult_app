@@ -26,6 +26,12 @@ dependencies:
     path: ../sunoom
   lasotuvi_note_shared:
     path: ../lasotuvi_note_shared
+  flutter_riverpod: ^2.3.6
+  equatable: ^2.0.5
+  tauari_auth:
+    path: ../tauari_auth
+  note_editor:
+    path: ../note_editor
 
 dev_dependencies:
   flutter_test:

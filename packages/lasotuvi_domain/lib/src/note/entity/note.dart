@@ -14,6 +14,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
     required this.chartId,
     super.storageState,
     super.syncStatus,
+    super.uploadDate,
     required super.modified,
   });
   final String title;
@@ -23,27 +24,32 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
   final int chartId;
 
   factory Note.fromMap(Map<String, dynamic> map) {
-    return Note(map[columnId] as int,
-        title: map[ColumnNote.title] == null
-            ? ''
-            : map[ColumnNote.title] as String,
-        content: map[ColumnNote.content] as String,
-        created: map[columnCreated] == null
-            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-        edited: map[ColumnNote.edited] == null
-            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-            : DateTime.fromMillisecondsSinceEpoch(
-                map[ColumnNote.edited] as int),
-        chartId: map[ColumnNote.chartId] as int,
-        storageState:
-            map[columnState] == null ? null : map[columnState] as String,
-        syncStatus: map[columnSyncStatus] == null
-            ? null
-            : map[columnSyncStatus] as String,
-        modified: map[columnModified] == null
-            ? LocalLocked.unlocked
-            : map[columnModified] as int);
+    return Note(
+      map[columnId] as int,
+      title:
+          map[ColumnNote.title] == null ? '' : map[ColumnNote.title] as String,
+      content: map[ColumnNote.content] as String,
+      created: map[columnCreated] == null
+          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+      edited: map[ColumnNote.edited] == null
+          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+          : DateTime.fromMillisecondsSinceEpoch(map[ColumnNote.edited] as int),
+      chartId: map[ColumnNote.chartId] as int,
+      storageState:
+          map[columnState] == null ? null : map[columnState] as String,
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
+    );
   }
 
   static Note fromOldVersion(Map<String, Object?> map) {
@@ -61,6 +67,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
       storageState: null,
       syncStatus: null,
       modified: LocalLocked.unlocked,
+      uploadDate: null,
     );
   }
 
@@ -87,6 +94,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
     int? chartId,
     String? storageState,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return Note(
       id ?? this.id,
@@ -98,6 +106,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
       storageState: storageState ?? this.storageState,
       syncStatus: syncStatus ?? this.syncStatus,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
@@ -116,6 +125,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -154,4 +164,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
 
   @override
   String? get noteSyncStatus => syncStatus;
+
+  @override
+  Note copyWithUploadDate(DateTime? value) => copyWith(uploadDate: value);
 }

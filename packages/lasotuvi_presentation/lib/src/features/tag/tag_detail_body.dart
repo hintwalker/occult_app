@@ -53,7 +53,8 @@ class _TagDetailBodyState extends UserAuthDependedState<TagDetailBody> {
                 context: context,
                 uid: uid,
                 ref: ref,
-                callback: () => popToParrent(context, RouteName.tagDetail),
+                doAfterDeleteForever: () =>
+                    popToParrent(context, RouteName.tagDetail),
               ),
               child: TagDetailWidget(
                 uid: uid,
@@ -64,15 +65,15 @@ class _TagDetailBodyState extends UserAuthDependedState<TagDetailBody> {
                 //     ChartHelper.openChartView(context: context, chart: chart),
                 onChangeInfoTap: (context, tag) =>
                     TagNavigation.openTagEdit(context, tag),
-                // onOpenTagSyncOptions: (context, tag) =>
-                //     StorageHelper.showOptionsModal<Tag>(
-                //   tag,
-                //   context: context,
-                //   uid: uid,
-                //   ref: ref,
-                //   doBeforeDeleteForever: () =>
-                //       popToParrent(context, RouteName.tagDetail),
-                // ),
+                onOpenTagSyncOptions: (context, tag) =>
+                    StorageHelper.showOptionsModal<Tag>(
+                  tag,
+                  context: context,
+                  uid: uid,
+                  ref: ref,
+                  doAfterDeleteForever: () =>
+                      popToParrent(context, RouteName.tagDetail),
+                ),
                 // chartSyncOptions: (chart, {syncStatus, uid}) =>
                 //     StorageHelper.storageOptionsModalBuilder<Chart>(chart,
                 //         ref: ref),

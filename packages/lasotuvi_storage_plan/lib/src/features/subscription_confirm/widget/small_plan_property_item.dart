@@ -25,6 +25,7 @@ class SmallPlanPropertyItem extends StatelessWidget {
         Icon(
           icon,
           color: style.propertyName?.color,
+          size: style.propertyIconSize,
         ),
         const SizedBox(
           width: 4.0,

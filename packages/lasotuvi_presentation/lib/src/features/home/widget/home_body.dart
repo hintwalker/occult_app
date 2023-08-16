@@ -73,6 +73,8 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                     ),
                     countController:
                         ref.watch(countChartEveryWhereControllerProvider),
+                    countOnCloudController:
+                        ref.watch(countChartOnCloudControllerProvider),
                   ),
                 ),
                 // SizedBox(
@@ -121,6 +123,8 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                     ),
                     countController:
                         ref.watch(countTagEveryWhereControllerProvider),
+                    countOnCloudController:
+                        ref.watch(countTagOnCloudControllerProvider),
                   ),
                 ),
 
@@ -144,6 +148,8 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                   ),
                   countController:
                       ref.watch(countNoteEveryWhereControllerProvider),
+                  countOnCloudController:
+                      ref.watch(countNoteOnCloudControllerProvider),
                 ),
                 const SizedBox(
                   height: 48.0,

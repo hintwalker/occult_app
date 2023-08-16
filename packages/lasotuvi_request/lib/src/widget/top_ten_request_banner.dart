@@ -17,6 +17,7 @@ class TopTenRequestBanner extends StatelessWidget {
     required this.onOpenSyncOptions,
     required this.onItemTap,
     required this.countController,
+    required this.countOnCloudController,
   });
 
   final String? uid;
@@ -30,6 +31,7 @@ class TopTenRequestBanner extends StatelessWidget {
   //     storageOptionsModalBuilder;
   final void Function(BuildContext context, Request chart) onItemTap;
   final CountRequestEveryWhereController countController;
+  final CountOnCloudController countOnCloudController;
   // final Widget Function(String chartId) chartView;
 
   @override
@@ -50,6 +52,7 @@ class TopTenRequestBanner extends StatelessWidget {
               uid: uid,
               controller: countController,
               colorScheme: colorScheme,
+              cloudController: countOnCloudController,
             ),
           ),
           Expanded(

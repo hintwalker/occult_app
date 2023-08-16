@@ -8,10 +8,12 @@ abstract class SyncableModel<E extends SyncableEntity>
     this.id, {
     this.syncStatus,
     this.storageState,
+    this.uploadDate,
     required this.modified,
   });
   final int id;
   final String? syncStatus;
   final String? storageState;
   final int modified;
+  final DateTime? uploadDate;
 }

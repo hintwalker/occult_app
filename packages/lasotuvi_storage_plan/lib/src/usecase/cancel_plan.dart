@@ -25,11 +25,13 @@ class CancelPlan {
     required this.updateLastCanceledSubscription,
     required this.takeCurrentSubscription,
     required this.takeCurrentUser,
+    required this.deleteExcessData,
   });
   final UpdateCurrentSubscription updateCurrentSubscription;
   final UpdateLastCanceledSubscription updateLastCanceledSubscription;
   final TakeCurrentSubscription takeCurrentSubscription;
   final TakeCurrentUser takeCurrentUser;
+  final DeleteExcessData deleteExcessData;
 
   Future<CancelPlanActionResult> call(Subscription? currentSub) async {
     final user = takeCurrentUser();
@@ -48,6 +50,8 @@ class CancelPlan {
       user.uidInFirestore,
       Subscription.free(),
     );
+
+    await deleteExcessData();
 
     if (success) {
       return CancelPlanActionResult.success;

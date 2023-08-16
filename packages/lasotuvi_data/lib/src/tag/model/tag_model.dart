@@ -10,6 +10,7 @@ class TagModel extends SyncableModel<Tag> {
     super.storageState,
     super.syncStatus,
     super.modified = LocalLocked.unlocked,
+    super.uploadDate,
   });
   final String title;
   final String subTitle;
@@ -24,6 +25,7 @@ class TagModel extends SyncableModel<Tag> {
       storageState: storageState,
       syncStatus: syncStatus,
       modified: modified,
+      uploadDate: uploadDate,
     );
   }
 
@@ -52,6 +54,7 @@ class TagModel extends SyncableModel<Tag> {
       columnState: storageState,
       columnSyncStatus: syncStatus,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
       // columnCreated: created.millisecondsSinceEpoch
     };
   }
@@ -69,6 +72,11 @@ class TagModel extends SyncableModel<Tag> {
       modified: map[columnModified] == null
           ? LocalLocked.unlocked
           : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
     );
   }
 
@@ -80,6 +88,7 @@ class TagModel extends SyncableModel<Tag> {
       storageState: entity.storageState,
       syncStatus: entity.syncStatus,
       modified: entity.modified,
+      uploadDate: entity.uploadDate,
     );
   }
 

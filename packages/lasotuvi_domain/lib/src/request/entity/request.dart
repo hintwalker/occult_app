@@ -22,6 +22,7 @@ class Request extends SyncableEntity<Request> {
     this.avatar,
     super.syncStatus,
     required super.modified,
+    super.uploadDate,
   });
   final String name;
   final Gender gender;
@@ -65,51 +66,59 @@ class Request extends SyncableEntity<Request> {
       columnState: state,
       ColumnRequest.solved: solved,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 
   static Request fromMap(Map<String, Object?> map) {
-    return Request(map[columnId] as int,
-        name: map[ColumnRequest.name] == null
-            ? ''
-            : map[ColumnRequest.name] as String,
-        gender: map[ColumnRequest.gender] == null
-            ? Gender.female
-            : Gender.fromInt(map[ColumnRequest.gender] as int),
-        watchingYear: map[ColumnRequest.watchingYear] == null
-            ? 2023
-            : map[ColumnRequest.watchingYear] as int,
-        timeZoneOffset: map[ColumnRequest.timeZoneOffset] == null
-            ? 7
-            : map[ColumnRequest.timeZoneOffset] as int,
-        avatar: map[ColumnRequest.avatar] == null
-            ? null
-            : map[ColumnRequest.avatar] as String,
-        birthday: map[ColumnRequest.birthday] == null
-            ? DateTime(1990, 1, 1, 0, 1)
-            : DateTime.fromMillisecondsSinceEpoch(
-                map[ColumnRequest.birthday] as int),
-        created: map[columnCreated] == null
-            ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
-            : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
-        lastViewed: map[ColumnRequest.lastViewed] == null
-            ? DateTime.now()
-            : DateTime.fromMillisecondsSinceEpoch(
-                map[ColumnRequest.lastViewed] as int),
-        syncStatus: map[columnSyncStatus] == null
-            ? null
-            : map[columnSyncStatus] as String,
-        storageState:
-            map[columnState] == null ? null : map[columnState] as String,
-        solved: map[ColumnRequest.solved] == null
-            ? RequestSolved.unSolved
-            : map[ColumnRequest.solved] as int,
-        chartId: map[ColumnRequest.chartId] == null
-            ? 0
-            : map[ColumnRequest.chartId] as int,
-        modified: map[columnModified] == null
-            ? LocalLocked.unlocked
-            : map[columnModified] as int);
+    return Request(
+      map[columnId] as int,
+      name: map[ColumnRequest.name] == null
+          ? ''
+          : map[ColumnRequest.name] as String,
+      gender: map[ColumnRequest.gender] == null
+          ? Gender.female
+          : Gender.fromInt(map[ColumnRequest.gender] as int),
+      watchingYear: map[ColumnRequest.watchingYear] == null
+          ? 2023
+          : map[ColumnRequest.watchingYear] as int,
+      timeZoneOffset: map[ColumnRequest.timeZoneOffset] == null
+          ? 7
+          : map[ColumnRequest.timeZoneOffset] as int,
+      avatar: map[ColumnRequest.avatar] == null
+          ? null
+          : map[ColumnRequest.avatar] as String,
+      birthday: map[ColumnRequest.birthday] == null
+          ? DateTime(1990, 1, 1, 0, 1)
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[ColumnRequest.birthday] as int),
+      created: map[columnCreated] == null
+          ? DateTime.fromMillisecondsSinceEpoch(map[columnId] as int)
+          : DateTime.fromMillisecondsSinceEpoch(map[columnCreated] as int),
+      lastViewed: map[ColumnRequest.lastViewed] == null
+          ? DateTime.now()
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[ColumnRequest.lastViewed] as int),
+      syncStatus: map[columnSyncStatus] == null
+          ? null
+          : map[columnSyncStatus] as String,
+      storageState:
+          map[columnState] == null ? null : map[columnState] as String,
+      solved: map[ColumnRequest.solved] == null
+          ? RequestSolved.unSolved
+          : map[ColumnRequest.solved] as int,
+      chartId: map[ColumnRequest.chartId] == null
+          ? 0
+          : map[ColumnRequest.chartId] as int,
+      modified: map[columnModified] == null
+          ? LocalLocked.unlocked
+          : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
+    );
   }
 
   static Request fromChart(Chart chart) {
@@ -129,6 +138,7 @@ class Request extends SyncableEntity<Request> {
       chartId: chart.id,
       created: newId,
       modified: newId.millisecondsSinceEpoch,
+      uploadDate: null,
     );
   }
 
@@ -147,6 +157,7 @@ class Request extends SyncableEntity<Request> {
     int? solved,
     int? chartId,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return Request(
       id ?? this.id,
@@ -163,16 +174,18 @@ class Request extends SyncableEntity<Request> {
       solved: solved ?? this.solved,
       chartId: chartId ?? this.chartId,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
   HumanBio toHumanBio() {
     final moment = birthday.toMoment(TimeZone(offsetInHour: timeZoneOffset));
     return HumanBio(
-        name: name,
-        birthDay: moment,
-        watchingYear: watchingYear,
-        gender: gender);
+      name: name,
+      birthDay: moment,
+      watchingYear: watchingYear,
+      gender: gender,
+    );
   }
 
   @override
@@ -195,4 +208,7 @@ class Request extends SyncableEntity<Request> {
 
   @override
   Request copyWithModified(int value) => copyWith(modified: value);
+
+  @override
+  Request copyWithUploadDate(DateTime? value) => copyWith(uploadDate: value);
 }

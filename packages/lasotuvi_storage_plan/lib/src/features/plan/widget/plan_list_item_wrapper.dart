@@ -23,24 +23,17 @@ class PlanListItemWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isActived
-        ? PlanListItemActivedHolder(
-            translate: translate,
-            style: style,
-            child: PlanListItem(
-              plan: plan,
-              style: style,
-              translate: translate,
-              showSubscribeButton: showSubscribeButton,
-              onSubscribeButtonTap: onSubscribeButtonTap,
-            ),
-          )
-        : PlanListItem(
-            plan: plan,
-            style: style,
-            translate: translate,
-            showSubscribeButton: showSubscribeButton,
-            onSubscribeButtonTap: onSubscribeButtonTap,
-          );
+    return PlanListItemActivedHolder(
+      translate: translate,
+      style: style,
+      isActived: isActived,
+      child: PlanListItem(
+        plan: plan,
+        style: style,
+        translate: translate,
+        showSubscribeButton: showSubscribeButton,
+        onSubscribeButtonTap: onSubscribeButtonTap,
+      ),
+    );
   }
 }

@@ -41,6 +41,8 @@ class RoutePath {
 
   static const library = '/library';
 
+  static const manual = '/manual';
+
   static const chartDetail =
       '/chart/:${RouterParams.chartId}/:${RouterParams.syncStatus}';
 

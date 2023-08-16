@@ -20,6 +20,7 @@ class TopTenCommentaryBanner extends StatelessWidget {
     required this.onItemTap,
     required this.onOpenSyncOptions,
     required this.countController,
+    required this.countOnCloudController,
   });
   final String? uid;
   final CommentaryAndRequestListController controller;
@@ -30,6 +31,7 @@ class TopTenCommentaryBanner extends StatelessWidget {
   final void Function(Commentary commentary) onItemTap;
   final void Function(Commentary commentary) onOpenSyncOptions;
   final CountCommentaryEveryWhereController countController;
+  final CountOnCloudController countOnCloudController;
   // final OnCountCommentary onCommentaryCount;
   // final Widget Function(Commentary, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
@@ -50,6 +52,7 @@ class TopTenCommentaryBanner extends StatelessWidget {
               uid: uid,
               controller: countController,
               colorScheme: colorScheme,
+              cloudController: countOnCloudController,
             ),
           ),
           // Expanded(
@@ -66,7 +69,7 @@ class TopTenCommentaryBanner extends StatelessWidget {
             ),
             queryArgs: QueryArgs(
               uid: uid,
-              limit: 9,
+              limitDisplay: 10,
               orderBy: '${ColumnCommentary.lastViewed} DESC',
             ),
           ),

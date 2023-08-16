@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CurrentPlanStyle {
+  final TextStyle? expiredText;
+
   const CurrentPlanStyle({
     this.iconColor,
     this.energyIconColor,
@@ -11,6 +13,8 @@ class CurrentPlanStyle {
     this.priceStyle,
     this.titleStyle,
     this.expiredDate,
+    this.expiredText,
+    this.deleteDataWarning,
   });
   final Color? iconColor;
   final double? iconSize;
@@ -21,4 +25,5 @@ class CurrentPlanStyle {
   final double? energyIconSize;
   final Color? planInfoBackground;
   final TextStyle? expiredDate;
+  final TextStyle? deleteDataWarning;
 }

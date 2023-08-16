@@ -28,6 +28,7 @@ class RequestModel extends SyncableModel<Request> {
     required this.solved,
     required this.chartId,
     super.modified = LocalLocked.unlocked,
+    super.uploadDate,
   });
 
   @override
@@ -47,6 +48,7 @@ class RequestModel extends SyncableModel<Request> {
       solved: solved,
       chartId: chartId,
       modified: modified,
+      uploadDate: uploadDate,
     );
   }
 
@@ -65,6 +67,7 @@ class RequestModel extends SyncableModel<Request> {
       solved: entity.solved,
       chartId: entity.chartId,
       modified: entity.modified,
+      uploadDate: entity.uploadDate,
     );
   }
 
@@ -82,6 +85,7 @@ class RequestModel extends SyncableModel<Request> {
     int? solved,
     int? chartId,
     int? modified,
+    DateTime? uploadDate,
   }) {
     return RequestModel(
       id ?? this.id,
@@ -97,6 +101,7 @@ class RequestModel extends SyncableModel<Request> {
       solved: solved ?? this.solved,
       chartId: chartId ?? this.chartId,
       modified: modified ?? this.modified,
+      uploadDate: uploadDate ?? this.uploadDate,
     );
   }
 
@@ -138,6 +143,11 @@ class RequestModel extends SyncableModel<Request> {
       modified: map[columnModified] == null
           ? LocalLocked.unlocked
           : map[columnModified] as int,
+      uploadDate: map[columnUploadDate] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(
+              map[columnUploadDate] as int,
+            ),
     );
   }
 
@@ -167,6 +177,7 @@ class RequestModel extends SyncableModel<Request> {
       ColumnRequest.solved: solved,
       ColumnRequest.chartId: chartId,
       columnModified: modified,
+      columnUploadDate: uploadDate?.millisecondsSinceEpoch,
     };
   }
 

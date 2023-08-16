@@ -25,7 +25,7 @@ class EnergyWidgetController extends ChangeNotifier {
     }
     _streamController = StreamController<Energy>.broadcast();
     listen(uid);
-    return _streamController!.stream;
+    return _streamController!.stream.asBroadcastStream();
   }
 
   void listen(String? uid) {

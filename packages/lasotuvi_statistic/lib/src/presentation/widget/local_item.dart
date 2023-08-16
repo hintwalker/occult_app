@@ -30,7 +30,7 @@ class LocalItem extends StatelessWidget {
           Text(
             '$title:',
             style: const TextStyle(
-              fontSize: 20.0,
+              fontSize: 18.0,
             ),
           ),
           const SizedBox(
@@ -39,7 +39,7 @@ class LocalItem extends StatelessWidget {
           Text(
             '$value',
             style: TextStyle(
-              fontSize: 24.0,
+              fontSize: 18.0,
               fontWeight: FontWeight.bold,
               color: colorScheme.primary,
             ),

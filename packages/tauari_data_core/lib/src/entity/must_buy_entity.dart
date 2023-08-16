@@ -8,6 +8,7 @@ abstract class MustBuyEntity<T> extends SyncableEntity<T> {
     super.storageState,
     super.syncStatus,
     required super.modified,
+    super.uploadDate,
   });
   final int price;
   final int paid;

@@ -17,7 +17,7 @@ class StatisticTitle extends StatelessWidget {
       leading: leading,
       title: Text(title,
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 20,
             color: colorScheme.primary,
           )),
     );

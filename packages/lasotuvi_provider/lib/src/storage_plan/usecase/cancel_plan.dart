@@ -11,5 +11,6 @@ final cancelPlanProvider = Provider(
     ),
     takeCurrentSubscription: ref.read(takeCurrentSubProvider),
     takeCurrentUser: ref.read(takeCurrentUserProvider),
+    deleteExcessData: ref.read(deleteExcessDataProvider),
   ),
 );

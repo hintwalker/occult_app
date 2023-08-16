@@ -40,8 +40,8 @@ export 'src/subscription/data_source/subscription_data_source_provider.dart';
 export 'src/subscription/data_source/current_sub_data_source_provider.dart';
 export 'src/subscription/controller/current_sub_controller_provider.dart';
 
-export 'src/storage_plan/controller/expired_timer_controller_provider.dart';
-
+export 'src/storage_plan/usecase/delete_excess_data.dart';
+export 'src/storage_plan/usecase/able_to_upload.dart';
 export 'src/storage_plan/usecase/verify_current_plan_state.dart';
 export 'src/storage_plan/usecase/verify_current_subscription.dart';
 export 'src/storage_plan/usecase/take_current_storage_plan.dart';
@@ -50,7 +50,6 @@ export 'src/storage_plan/usecase/take_storage_plan_by_id_provider.dart';
 export 'src/storage_plan/usecase/take_all_storage_plans_provider.dart';
 export 'src/storage_plan/repository/storage_plan_repository_provider.dart';
 export 'src/storage_plan/data_source/storage_plan_data_source_provider.dart';
-export 'src/storage_plan/controller/storage_plan_list_controller_provider.dart';
 
 export 'src/storage_plan/features/subscription_confirm/notifier/subscription_confirm_notifier.dart';
 export 'src/storage_plan/features/plan/notifier/current_plan_notifier.dart';
@@ -64,6 +63,7 @@ export 'src/chart/repository/cloud_chart_repository.dart';
 export 'src/chart/repository/local_chart_repository.dart';
 
 export 'src/chart/controller/chart_options_modal_controller.dart';
+export 'src/chart/controller/count_chart_on_cloud_controller.dart';
 export 'src/chart/controller/count_chart_everywhere_controller.dart';
 export 'src/chart/controller/chart_detail_controller.dart';
 export 'src/chart/controller/chart_view_controller.dart';
@@ -104,6 +104,7 @@ export 'src/chart_tag/repository/cloud_chart_tag_repository.dart';
 export 'src/chart_tag/repository/local_chart_tag_repostory_provider.dart';
 export 'src/chart_tag/repository/chart_tag_repository.dart';
 
+export 'src/tag/controller/count_tag_on_cloud_controller.dart';
 export 'src/tag/controller/count_tag_everywhere_controller.dart';
 export 'src/tag/controller/tag_detail_controller.dart';
 export 'src/tag/controller/tag_list_controller_provider.dart';
@@ -129,6 +130,7 @@ export 'src/note/note_editor_cache.dart';
 
 export 'src/note/state/note_editing_state.dart';
 
+export 'src/note/controller/count_note_on_cloud_controller.dart';
 export 'src/note/controller/note_editor_controller.dart';
 export 'src/note/controller/note_list_controller.dart';
 export 'src/note/controller/note_and_chart_list_controller.dart';
@@ -159,6 +161,7 @@ export 'src/note/repository/note_and_chart/cloud_note_and_chart_repository.dart'
 export 'src/note/repository/note_and_chart/local_note_and_chart_repository.dart';
 export 'src/note/repository/note_and_chart/note_and_chart_repository.dart';
 
+export 'src/commentary/controller/count_commentary_on_cloud_controller.dart';
 export 'src/commentary/controller/count_commentary_everywhere_controller.dart';
 export 'src/commentary/controller/commentary_reader_controller.dart';
 export 'src/commentary/controller/commentary_list_controller.dart';
@@ -202,6 +205,7 @@ export 'src/request/repository/request_and_chart/request_and_chart_repository.da
 // export 'src/request/controller/request_view_controller.dart';
 // export 'src/request/controller/request_list_controller.dart';
 
+export 'src/request/controller/count_request_on_cloud_controller.dart';
 export 'src/request/controller/request_list_controller.dart';
 export 'src/request/controller/count_request_everywhere_controller.dart';
 export 'src/request/usecase/request_by_commentary_id.dart';

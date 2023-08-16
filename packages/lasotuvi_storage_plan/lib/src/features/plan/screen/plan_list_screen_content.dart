@@ -27,7 +27,8 @@ class PlanListScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return state.workingState == PlanListWorkingState.loading
+    return state.workingState == PlanListWorkingState.loading ||
+            state.workingState == PlanListWorkingState.initial
         ? const LoadingWidget()
         : Column(
             children: [

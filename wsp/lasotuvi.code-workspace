@@ -13,22 +13,16 @@
 			"path": "../packages/tuvi_strings"
 		},
 		{
-			"path": "../packages/lasotuvi_ads"
-		},
-		{
-			"path": "../packages/lasotuvi_statistic"
-		},
-		{
-			"path": "../packages/tauari_utils"
+			"path": "../packages/tauari_ui"
 		},
 		{
 			"path": "../packages/lasotuvi_storage_plan"
 		},
 		{
-			"path": "../packages/lasotuvi_provider"
+			"path": "../packages/energy_store"
 		},
 		{
-			"path": "../packages/tauari_subscription"
+			"path": "../packages/tauari_list_view"
 		}
 	],
 	"settings": {}

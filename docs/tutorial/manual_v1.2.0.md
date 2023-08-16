@@ -71,7 +71,7 @@ Sau khi đồng bộ thành công, lá số sẽ có biểu tượng hình đám
 
 Việc xóa dữ liệu có 2 tùy chọn: Xóa trên đám mây và xóa vĩnh viễn.
 
-Để xóa lá số trên đám mây, bạn bấm vào nút có hình đám mây ở góc trên bên trái của lá số, sau đó chọn xóa trên đám mây. Khi xóa trên đám mây, lá số vẫn còn trên thiết bị của bạn, các ghi chú của lá số không bị ảnh hưởng và vẫn còn trên thiết bị lẫn trên đám mây.
+Để xóa lá số trên đám mây, bạn bấm vào nút có hình đám mây ở trên lá số, sau đó chọn xóa trên đám mây. Khi xóa trên đám mây, lá số vẫn còn trên thiết bị của bạn, các ghi chú của lá số không bị ảnh hưởng và vẫn còn trên thiết bị lẫn trên đám mây.
 
 Để xóa lá số trên thiết bị (và cả trên đám mây), bạn bấm vào nút có hình đám mây ở góc trên bên trái của lá số, sau đó chọn xóa vĩnh viễn.
 
@@ -282,7 +282,7 @@ Bạn có thể dùng điểm năng lượng để:
 
 - &#9745; Đăng ký gói lưu trữ trên đám mây
 - &#9744; Đọc tài liệu chuyên sâu (chưa khả dụng)
-- &#9744; Xem luận giải (chưa khả dụng)
+- &#9744; Xem luận giải cụ thể (chưa khả dụng)
 - &#9744; Sử dụng công cụ hỗ trợ nâng cao (chưa khả dụng)
 
 ### 6.2 Mua điểm năng lượng
@@ -326,13 +326,23 @@ Thời hạn gia hạn tính từ lúc hết hạn đến lúc bị hủy là 7 
 
 Khi đăng ký bất kỳ gói nào hệ thống sẽ ngay lập tức trừ của bạn số điểm năng lượng tương ứng với giá của gói được chọn. Bạn được áp dụng giới hạn lưu trữ của gói đã đăng ký trong vòng 30 ngày kể từ thời điểm đăng ký.
 
+Trong trường hợp bạn đăng ký gói mới ở thời điểm gói cũ chưa hết hạn, hệ thống sẽ khấu trừ số điểm còn dư vào chi phí của gói mới.
+
+Số điểm còn dư được tính bằng công thức sau:
+
+```
+Giá của gói đăng ký x số ngày còn lại / 30
+```
+
 ### 7.4 Đăng ký gói lưu trữ
 
 Mở thanh menu bên trái màn hình, chọn "Gói lưu trữ". Trong màn hình hiển thị danh sách các gói lưu trữ, bạn bấm vào nút "Đăng ký" ở bất kỳ gói nào phù hợp. Hệ thống sẽ yêu cầu bạn xác nhận việc đăng ký, bạn bấm vào nút "Đăng ký" để tiến hành đăng ký.
 
+Bạn có thể vào màn hình danh sách gói lưu trữ bằng cách bấm vào nút đăng ký ở màn hình "Trang chủ", hoặc màn hình thống kê dữ liệu.
+
 ### 7.5 Gia hạn gói lưu trữ
 
-Sau 30 ngày, kể từ thời điểm đăng ký, hệ thống sẽ hiển thị hộp thoại nhắc bạn gia hạn gói lưu trữ mà bạn đang sử dụng. Trong trường hợp bạn không tiếp tục gia hạn, hệ thống sẽ thông báo gói đăng ký hết hạn, đồng thời áp dụng gói miễn phí cho bạn. Khi đó dữ liệu đã lưu trữ đám mây vượt hạn mức sẽ bị chặn truy cập. Để tiếp tục truy cập được dữ liệu này, bạn phải đăng ký gói lưu trữ mới.
+Sau 30 ngày, kể từ thời điểm đăng ký, hệ thống sẽ chuyển gói đăng ký sang trạng thái hết hạn, đồng thời áp dụng gói miễn phí cho bạn. Trong vòng 7 ngày tiếp theo, bạn phải gia hạn gói đã đăng ký hoặc đăng ký gói mới. Trường hợp bạn không tiếp tục gia hạn hoặc đăng ký gói mới, sau 7 ngày hệ thống sẽ chuyển gói đăng ký sang trạng thái đã hủy. Khi gói đăng ký bị hủy, dữ liệu lưu trữ đám mây vượt hạn mức (so với gói miễn phí) sẽ bị xóa vĩnh viễn.
 
 Dữ liệu vượt hạn mức là những dữ liệu đã lưu trữ đám mây nằm ngoài giới hạn lưu trữ, được xếp thứ tự theo thời điểm khởi tạo. 
 
@@ -340,19 +350,9 @@ Tất nhiên những dữ liệu này đều đã được đồng bộ về thi
 
 ### 7.6 Hủy gói lưu trữ đã đăng ký
 
-Bạn không thể hủy gói lưu trữ đã đăng ký. Bạn chỉ có thể hủy gia hạn.
+Bạn không thể hủy gói lưu trữ đã đăng ký.
 
-Việc hủy gói lưu trữ đã đăng ký được thực hiện tự động bởi hệ thống. Sau thời hạn 30 ngày kể từ thời điểm đăng ký, nếu bạn không gia hạn, gói lưu trữ của bạn sẽ chuyển sang trạng thái chờ hủy. Sau thời hạn 7 ngày, nếu bạn không tiếp tục gia hạn, hệ thống sẽ tự động hủy gói lưu trữ mà bạn đã đăng ký, đồng thời xóa tất cả dữ liệu vượt hạn mức so với gói miễn phí.
-
-### 7.7 Hủy gia hạn gói lưu trữ
-
-Bạn có thể hủy gia hạn gói lưu trữ đã đăng ký vào bất cứ thời điểm nào. Sau khi hủy gia hạn, bạn vẫn tiếp tục được sử dụng gói lưu trữ đã đăng ký cho đến khi hết hạn. Sau khi hết hạn, hệ thống không thông báo nhắc gia hạn cho bạn, mà tự động chuyển sang gói lưu trữ miễn phí.
-
-### 7.8 Tiếp tục gia hạn sau khi hủy gia hạn
-
-Sau khi hủy gia hạn, bạn vẫn có thể đăng ký gia hạn lại. 
-
-Bạn sẽ không bị trừ điểm năng lượng khi đăng ký gia hạn lại.
+Việc hủy gói lưu trữ đã đăng ký được thực hiện tự động bởi hệ thống. Sau thời hạn 30 ngày kể từ thời điểm đăng ký, nếu bạn không gia hạn, gói lưu trữ của bạn sẽ chuyển sang trạng thái hết hạn (chờ hủy). Sau thời hạn 7 ngày, nếu bạn không tiếp tục gia hạn, hệ thống sẽ tự động hủy gói lưu trữ mà bạn đã đăng ký, đồng thời xóa tất cả dữ liệu vượt hạn mức so với gói miễn phí.
 
 ## 8. Thư viện
 
@@ -363,6 +363,8 @@ Bạn sẽ không bị trừ điểm năng lượng khi đăng ký gia hạn l�
 Để đổi ngày dương sang ngày âm, hoặc đổi ngày âm sang ngày dương, bạn mở công cụ bằng cách bấm vào nút có biểu tượng hình lịch và cây bút ở thanh menu bên trên màn hình chính.
 
 Trong màn hình công cụ đổi ngày, bạn nhập vào ngày dương lịch, hệ thống tự tính ra ngày âm lịch, và ngược lại.
+
+Mỗi khi mở, công cụ hiển thị ngày và giờ hiện tại.
 
 ## 10. Đăng xuất
 

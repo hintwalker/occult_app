@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:lasotuvi_data/src/db/table_names.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_data_core/tauari_data_core.dart'
-    show columnId, columnModified, columnPaid, columnPrice;
+    show columnId, columnModified, columnPaid, columnPrice, columnUploadDate;
 
 class SqlTemplates {
   static const tableChart =
@@ -33,7 +33,8 @@ class SqlTemplates {
         ${ColumnChart.timeZoneOffset} INTEGER, 
         ${ColumnChart.lastViewed} INTEGER, 
         ${ColumnChart.avatar} TEXT,
-        $columnModified INTEGER
+        $columnModified INTEGER,
+        $columnUploadDate INTEGER
         )''';
   static String createIndexNameOnChart() => '''
 CREATE INDEX idx_name_chart ON $tableChart (${ColumnChart.name})
@@ -50,7 +51,8 @@ CREATE INDEX idx_last_viewed_chart ON $tableChart (${ColumnChart.lastViewed})
       '''CREATE TABLE $tableTag($columnId INTEGER PRIMARY KEY, 
         ${ColumnTag.title} TEXT, 
         ${ColumnTag.description} TEXT ,
-        $columnModified INTEGER
+        $columnModified INTEGER,
+        $columnUploadDate INTEGER
         )''';
   static String createIndexTitleOnTag() => '''
 CREATE INDEX idx_title_tag ON $tableTag (${ColumnTag.title})
@@ -63,6 +65,7 @@ CREATE INDEX idx_title_tag ON $tableTag (${ColumnTag.title})
         ${ColumnChartTag.tagId} INTEGER NOT NULL, 
         ${ColumnChartTag.chartId} INTEGER NOT NULL,
         $columnModified INTEGER,
+        $columnUploadDate INTEGER,
         FOREIGN KEY (${ColumnChartTag.tagId}) REFERENCES $tableTag($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -82,6 +85,7 @@ CREATE INDEX idx_title_tag ON $tableTag (${ColumnTag.title})
         ${ColumnNote.edited} INTEGER, 
         ${ColumnNote.chartId} INTEGER,
         $columnModified INTEGER,
+        $columnUploadDate INTEGER,
         FOREIGN KEY (${ColumnNote.chartId}) REFERENCES $tableChart($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -97,6 +101,7 @@ CREATE INDEX idx_title_tag ON $tableTag (${ColumnTag.title})
         $columnPrice INTEGER, 
         $columnPaid INTEGER,
         $columnModified INTEGER,
+        $columnUploadDate INTEGER,
         FOREIGN KEY (${ColumnCommentary.requestId}) REFERENCES $tableRequest($columnId)
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -115,7 +120,8 @@ CREATE INDEX idx_title_tag ON $tableTag (${ColumnTag.title})
         ${ColumnRequest.avatar} TEXT,
         ${ColumnRequest.solved} INTEGER,
         ${ColumnRequest.chartId} INTEGER,
-        $columnModified INTEGER
+        $columnModified INTEGER,
+        $columnUploadDate INTEGER
         )''';
   static String createIndexNameOnRequest() => '''
 CREATE INDEX idx_name_request ON $tableRequest (${ColumnRequest.name})
@@ -135,6 +141,7 @@ CREATE INDEX idx_last_viewed_request ON $tableRequest (${ColumnRequest.lastViewe
         ${ColumnNotification.type} TEXT, 
         ${ColumnNotification.url} INTEGER, 
         ${ColumnNotification.seen} INTEGER,
-        $columnModified INTEGER
+        $columnModified INTEGER,
+        $columnUploadDate INTEGER
         )''';
 }
