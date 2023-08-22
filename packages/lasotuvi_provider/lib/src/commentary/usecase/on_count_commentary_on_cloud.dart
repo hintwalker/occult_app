@@ -4,6 +4,6 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 
 final onCountCommentaryOnCloudProvider = Provider(
   (ref) => OnCountCommentaryOnCloud(
-    ref.read(cloudCommentaryRepositoryProvider),
+    ref.read(commentaryCloudCacheRepositoryProvider),
   ),
 );

@@ -9,9 +9,11 @@ class ChartNameInput extends ConsumerStatefulWidget {
     super.key,
     required this.translate,
     required this.controller,
+    this.clearTextAtFirst = false,
   });
   final String Function(String) translate;
   final ChartNameController controller;
+  final bool clearTextAtFirst;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChartNameInputState();
@@ -56,7 +58,14 @@ class _ChartNameInputState extends ConsumerState<ChartNameInput> {
         },
         onTap: () {
           if (firstTap) {
-            controller.clear();
+            if (widget.clearTextAtFirst) {
+              controller.clear();
+            } else {
+              controller.selection = TextSelection(
+                baseOffset: 0,
+                extentOffset: controller.value.text.length,
+              );
+            }
             setState(() {
               firstTap = false;
             });

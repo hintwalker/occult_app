@@ -15,7 +15,11 @@ class ModifyChartController extends StateNotifier<bool> {
     required WidgetRef ref,
   }) async {
     state = true;
-    await ref.read(updateChartProvider)(uid, chart);
+    await ref.read(updateChartProvider)(
+      uid,
+      chart,
+      false,
+    );
 
     state = false;
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -32,7 +36,11 @@ class ModifyChartController extends StateNotifier<bool> {
     required WidgetRef ref,
   }) async {
     state = true;
-    await ref.read(updateChartProvider)(uid, chart);
+    await ref.read(updateChartProvider)(
+      uid,
+      chart,
+      false,
+    );
     if (uid != null) {
       if (!(chart.avatar == null || chart.avatar!.isEmpty)) {
         await ref.read(uploadAvatarProvider).call(uid, chart.avatar!);

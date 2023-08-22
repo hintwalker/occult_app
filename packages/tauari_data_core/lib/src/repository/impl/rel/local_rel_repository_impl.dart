@@ -123,7 +123,8 @@ abstract class LocalRelRepositoryImpl<
     if (item == null) {
       return 0;
     }
-    return await deleteFromLocal(item.primaryKey);
+    await deleteFromLocal(item.primaryKey);
+    return item.primaryKey;
   }
 
   @override
@@ -156,13 +157,15 @@ abstract class LocalRelRepositoryImpl<
   }
 
   @override
-  Future<bool> disConnectManyRightFromLeft(L left, Iterable<R> rights) async {
+  Future<Iterable<String>> disConnectManyRightFromLeft(
+      L left, Iterable<R> rights) async {
     // final List<int> ids = [];
+    List<String> ids = [];
     for (var right in rights) {
-      await disConnectOnLocal(left.primaryKey, right.primaryKey);
-      // ids.add(id);
+      final id = await disConnectOnLocal(left.primaryKey, right.primaryKey);
+      ids.add(id.toString());
     }
-    return true;
+    return ids;
   }
 
   @override

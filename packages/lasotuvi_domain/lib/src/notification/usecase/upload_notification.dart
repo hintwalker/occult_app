@@ -5,5 +5,8 @@ import '../repository/notification_repository.dart';
 
 class UploadNotification
     extends Upload<TuviNotification, NotificationRepository> {
-  UploadNotification(super.repository);
+  UploadNotification({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

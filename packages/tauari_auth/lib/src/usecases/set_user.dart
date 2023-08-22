@@ -5,7 +5,7 @@ class SetUser {
   final UserRepository repository;
   const SetUser(this.repository);
   Future<String> call(UserEntity user) async {
-    await repository.insert(user.docId, user);
+    await repository.insert(user.docId, user, false);
     return user.docId;
   }
 }

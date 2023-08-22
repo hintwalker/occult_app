@@ -4,6 +4,6 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 
 final insertManyChartTagsToLocalProvider = Provider(
   (ref) => InsertManyChartTagsToLocal(
-    ref.read(localChartTagRepositoryProvider),
+    ref.read(chartTagLocalRepositoryProvider),
   ),
 );

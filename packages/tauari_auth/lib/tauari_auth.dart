@@ -15,6 +15,7 @@ export 'src/repository/auth_repository_impl.dart';
 export 'src/repository/user_repository.dart';
 export 'src/repository/user_repository_impl.dart';
 
+export 'src/service/user_firestore_service.dart';
 export 'src/service/firebase_auth_service.dart';
 
 export 'src/source/auth_data_source.dart';

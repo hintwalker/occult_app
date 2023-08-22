@@ -5,6 +5,7 @@ import 'package:lasotuvi_ads/lasotuvi_ads.dart';
 import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
+import 'package:tauari_auth_widget/tauari_auth_widget.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 
 class EnergyStoreContainer extends ConsumerStatefulWidget {
@@ -23,7 +24,9 @@ class EnergyStoreContainerState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.read(energyStoreControllerProvider.notifier).initStore();
-      await adsManager.createRewardedAd(AndroidAdsIds.reward1Energy);
+      if (AppConfig.showAds) {
+        await adsManager.createRewardedAd(AndroidAdsIds.reward1Energy);
+      }
     });
   }
 
@@ -35,57 +38,70 @@ class EnergyStoreContainerState
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 12.0,
-                    ),
-                    OutlinedButton.icon(
-                      onPressed: loadRewardAds,
-                      icon: Icon(
-                        Icons.ondemand_video,
-                        color: LasotuviAppStyle.colorScheme.tertiary,
-                      ),
-                      label: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            translate('watchAdsFor'),
-                          ),
-                          const Icon(Icons.energy_savings_leaf_outlined),
-                          const Text('1')
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: EnergyStoreWidget(
-                        products: ref.watch(energyStoreControllerProvider
-                            .select((value) => value.products)),
-                        colorScheme: LasotuviAppStyle.colorScheme,
-                        translate: translate,
-                        onItemTap: (product) async {
-                          await ref
-                              .read(energyStoreControllerProvider.notifier)
-                              .buy(product);
-                        },
-                        uid: uid,
-                        energyController:
-                            ref.watch(energyWidgetControllerProvider),
-                        energyStyle: LiveEnergyStyleImpl(),
-                      ),
-                    ),
-                  ],
+        : uid == null
+            ? Center(
+                child: GoogleSignInButton(
+                  onTap: () => signIn(ref),
+                  title: translate('signIn'),
                 ),
-              ),
-              // if (ref.watch(energyStoreControllerProvider
-              //     .select((value) => value.progressing)))
-              //   const Center(child: CircularProgressIndicator()),
-            ],
-          );
+              )
+            : Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
+                      children: [
+                        if (AppConfig.showAds)
+                          const SizedBox(
+                            height: 12.0,
+                          ),
+                        if (AppConfig.showAds)
+                          OutlinedButton.icon(
+                            onPressed: loadRewardAds,
+                            icon: Icon(
+                              Icons.ondemand_video,
+                              color: LasotuviAppStyle.colorScheme.tertiary,
+                            ),
+                            label: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  translate('watchAdsFor'),
+                                ),
+                                const Icon(Icons.energy_savings_leaf_outlined),
+                                const Text('1')
+                              ],
+                            ),
+                          ),
+                        Expanded(
+                          child: EnergyStoreWidget(
+                            products: ref.watch(energyStoreControllerProvider
+                                .select((value) => value.products)),
+                            colorScheme: LasotuviAppStyle.colorScheme,
+                            translate: translate,
+                            onItemTap: (product) async {
+                              await ref
+                                  .read(energyStoreControllerProvider.notifier)
+                                  .buy(product);
+                            },
+                            uid: uid,
+                            energyController:
+                                ref.watch(energyWidgetControllerProvider),
+                            energyStyle: LiveEnergyStyleImpl(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // if (ref.watch(energyStoreControllerProvider
+                  //     .select((value) => value.progressing)))
+                  //   const Center(child: CircularProgressIndicator()),
+                ],
+              );
+  }
+
+  Future<void> signIn(WidgetRef ref) async {
+    await ref.read(signInWithGoogleProvider)();
   }
 
   Future<void> loadRewardAds() async {

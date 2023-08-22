@@ -7,6 +7,8 @@ import '../current_subscription_repository.dart';
 class CurrentSubRepositoryImpl
     extends CloudSingleDocRepositoryImpl<Subscription, SubscriptionModel>
     implements CurrentSubscriptionRepository {
-  CurrentSubRepositoryImpl(super.dataSource)
-      : super(entityToModel: (e) => SubscriptionModel.fromEntity(e));
+  CurrentSubRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+  }) : super(entityToModel: (e) => SubscriptionModel.fromEntity(e));
 }

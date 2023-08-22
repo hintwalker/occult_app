@@ -33,7 +33,7 @@ class NoteItemWidget extends StatelessWidget {
       onSyncStatusTap: onSyncStatusTap,
       child: Container(
         padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
-        constraints: const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
+        // constraints: const BoxConstraints(minWidth: 64.0, maxWidth: 160.0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

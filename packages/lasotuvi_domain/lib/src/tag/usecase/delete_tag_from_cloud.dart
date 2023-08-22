@@ -4,5 +4,8 @@ import '../entity/tag.dart';
 import '../repository/cloud_tag_repository.dart';
 
 class DeleteTagFromCloud extends DeleteFromCloud<Tag, CloudTagRepository> {
-  DeleteTagFromCloud(super.repository);
+  DeleteTagFromCloud({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

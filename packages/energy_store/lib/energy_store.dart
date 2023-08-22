@@ -1,8 +1,13 @@
 library energy_store;
 
+export 'src/entity/doc_id_energy.dart';
+export 'src/entity/column_energy.dart';
+export 'src/service/energy_firestore_service.dart';
+
 export 'src/presentation/style/live_energy_style.dart';
 
 export 'src/data_source/energy_data_source.dart';
+export 'src/data_source/energy_firestore_data_source.dart';
 export 'src/model/energy_model.dart';
 export 'src/presentation/widget/live_energy_widget.dart';
 export 'src/presentation/widget/energy_icon.dart';
@@ -10,12 +15,11 @@ export 'src/presentation/widget/energy_list_item.dart';
 export 'src/presentation/widget/energy_store_widget.dart';
 export 'src/presentation/widget/static_energy_widget.dart';
 export 'src/listing/product_ids.dart';
-export 'src/entity/doc_id_energy.dart';
 // export 'src/entity/column_energy.dart';
 
 export 'src/entity/energy.dart';
-export 'src/repository/energy_repository.dart';
-export 'src/repository/energy_repository_impl.dart';
+export 'src/repository/energy_cloud_repository.dart';
+export 'src/repository/energy_firestore_repository.dart';
 
 export 'src/usecase/enough_energy.dart';
 export 'src/usecase/take_energy.dart';

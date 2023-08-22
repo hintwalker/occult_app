@@ -4,5 +4,8 @@ import '../entity/request.dart';
 import '../repository/request_repository.dart';
 
 class UploadRequest extends Upload<Request, RequestRepository> {
-  UploadRequest(super.repository);
+  UploadRequest({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

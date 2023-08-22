@@ -2,13 +2,30 @@ import '../../entity/syncable_entity.dart';
 import '../../repository/syncable_repository.dart';
 
 abstract class NewData<E extends SyncableEntity, R extends SyncableRepository> {
-  final R repository;
+  final R cacheRepository;
+  final R cloudRepository;
 
-  NewData(this.repository);
-  Future<void> call(String? uid, E entity) async {
-    await repository.localRepository.insertToLocal(entity);
+  NewData({
+    required this.cacheRepository,
+    required this.cloudRepository,
+  });
+  Future<void> call(
+    String? uid,
+    E entity,
+    bool refresh,
+  ) async {
+    await cacheRepository.localRepository.insertToLocal(entity);
     if (uid != null) {
-      await repository.cloudRepository.insert(uid, entity);
+      await cacheRepository.cloudRepository.insert(
+        uid,
+        entity,
+        refresh,
+      );
+      await cloudRepository.cloudRepository.insert(
+        uid,
+        entity,
+        false,
+      );
     }
   }
 }

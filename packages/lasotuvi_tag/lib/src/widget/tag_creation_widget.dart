@@ -18,6 +18,7 @@ class TagCreationWidget extends StatelessWidget {
     return TagFormWidget(
       colorScheme: colorScheme,
       translate: translate,
+      clearTextAtFirst: true,
       submitButtonText: translate('createTag'),
       onSubmit: (tagId, title, subTitle) => onCreateTag(title, subTitle),
     );

@@ -5,7 +5,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 final deleteAvatarFromCloudProvider = Provider(
   (ref) => DeleteAvatarFromCloud(
     ref.read(
-      chartRepositoryProvider,
+      chartCacheRepositoryProvider,
     ),
   ),
 );

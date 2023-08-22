@@ -4,5 +4,8 @@ import '../entity/commentary.dart';
 import '../repository/commentary_repository.dart';
 
 class UpdateCommentary extends Update<Commentary, CommentaryRepository> {
-  UpdateCommentary(super.repository);
+  UpdateCommentary({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

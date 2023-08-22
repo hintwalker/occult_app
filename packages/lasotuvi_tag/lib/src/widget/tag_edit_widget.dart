@@ -25,6 +25,7 @@ class TagEditWidget extends StatelessWidget {
       colorScheme: colorScheme,
       translate: translate,
       submitButtonText: 'Ok',
+      clearTextAtFirst: false,
       onSubmit: (tagId, title, subTitle) {
         if (tagId != null) {
           onSubmit(

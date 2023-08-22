@@ -111,7 +111,7 @@ class Chart extends SyncableEntity<Chart> {
 
   static Chart fromOldVersion(Map<String, Object?> map) {
     return Chart(
-      map[OldChartColumns.createdDate] as int,
+      map[OldChartColumns.humanId] as int,
       name: map[OldChartColumns.name] == null
           ? ''
           : map[OldChartColumns.name] as String,
@@ -130,7 +130,7 @@ class Chart extends SyncableEntity<Chart> {
           map[OldChartColumns.hour] as int,
           map[OldChartColumns.minute] as int),
       created: DateTime.fromMillisecondsSinceEpoch(
-          map[OldChartColumns.createdDate] as int),
+          map[OldChartColumns.humanId] as int),
       lastViewed: map[OldChartColumns.lastOpened] == null
           ? DateTime.now()
           : DateTime.fromMillisecondsSinceEpoch(
@@ -234,4 +234,12 @@ class Chart extends SyncableEntity<Chart> {
 
   @override
   Chart copyWithModified(int value) => copyWith(modified: value);
+
+  // @override
+  // Map<String, Object?> toCloud() {
+  //   final result = dump();
+  //   result.remove(columnId);
+  //   result.remove(columnSyncStatus);
+  //   return result;
+  // }
 }

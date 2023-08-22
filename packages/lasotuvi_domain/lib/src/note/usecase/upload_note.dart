@@ -4,5 +4,8 @@ import '../entity/note.dart';
 import '../repository/note_repository.dart';
 
 class UploadNote extends Upload<Note, NoteRepository> {
-  UploadNote(super.repository);
+  UploadNote({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

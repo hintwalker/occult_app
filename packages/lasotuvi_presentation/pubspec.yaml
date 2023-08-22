@@ -14,6 +14,9 @@ dependencies:
     path: ../energy_store
   sunoom_calendar_input:
     path: ../sunoom_calendar_input
+
+  lstv_firestore_cache:
+    path: ../lstv_firestore_cache
   lasotuvi_style:
     path: ../lasotuvi_style
   lasotuvi_storage_plan:
@@ -93,11 +96,15 @@ dependencies:
     path: ../sunoom
   hive: ^2.2.3
   cached_network_image: ^3.2.3
+  path_provider: ^2.1.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  lstv_test:
+    path: ../lstv_test
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

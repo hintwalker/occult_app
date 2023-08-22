@@ -6,5 +6,8 @@ import '../entity/chart_tag.dart';
 
 class DisConnectChartsFromTag
     extends DisConnectLeftFromRight<ChartTag, Chart, Tag> {
-  DisConnectChartsFromTag(super.repository);
+  DisConnectChartsFromTag({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

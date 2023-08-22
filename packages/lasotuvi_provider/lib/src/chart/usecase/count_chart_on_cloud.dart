@@ -5,7 +5,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 final countChartOnCloudProvider = Provider(
   (ref) => CountChartOnCloud(
     ref.read(
-      cloudChartRepositoryProvider,
+      chartCloudCacheRepositoryProvider,
     ),
   ),
 );

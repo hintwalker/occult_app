@@ -4,5 +4,8 @@ import '../entity/chart.dart';
 import '../repository/chart_repository.dart';
 
 class UploadChart extends Upload<Chart, ChartRepository> {
-  UploadChart(super.repository);
+  UploadChart({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

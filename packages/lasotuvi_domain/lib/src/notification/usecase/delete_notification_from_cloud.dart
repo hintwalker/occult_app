@@ -5,5 +5,8 @@ import '../repository/cloud_notification_repository.dart';
 
 class DeleteNotificationFromCloud
     extends DeleteFromCloud<TuviNotification, CloudNotificationRepository> {
-  DeleteNotificationFromCloud(super.repository);
+  DeleteNotificationFromCloud({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

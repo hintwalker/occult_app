@@ -40,10 +40,10 @@ class DataListBodyWidget<U, V, W> extends StatelessWidget {
         padding:
             const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 128.0),
         sort: sort,
-        order:
-            // order == ListOrder.asc
-            //     ?
-            GroupedListOrder.ASC,
+        // order:
+        // order == ListOrder.asc
+        //     ?
+        // GroupedListOrder.ASC,
         //     :
         // GroupedListOrder.DESC,
         itemBuilder: itemBuilder,

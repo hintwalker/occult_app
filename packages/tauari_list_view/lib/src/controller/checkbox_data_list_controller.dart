@@ -77,9 +77,9 @@ class CheckboxDataListController<U> extends ChangeNotifier {
           copied,
         );
         selected = [...selected, copied];
-        notifyListeners();
       } on StateError catch (_) {}
     }
+    notifyListeners();
   }
 
   void setData(Iterable<U> data) {

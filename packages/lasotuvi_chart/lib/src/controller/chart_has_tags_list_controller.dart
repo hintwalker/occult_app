@@ -13,7 +13,10 @@ class ChartHasTagsListController extends ChangeNotifier {
   StreamController<Iterable<ChartHasTags>>? _streamController;
 
   Stream<Iterable<ChartHasTags>> stream(String? uid, [QueryArgs? queryArgs]) {
-    _streamController = StreamController<Iterable<ChartHasTags>>.broadcast();
+    _streamController = StreamController<Iterable<ChartHasTags>>.broadcast(
+      onCancel: () => _subscription?.cancel(),
+      onListen: () => _subscription?.resume(),
+    );
     listen(uid, queryArgs);
     return _streamController!.stream;
   }
@@ -31,5 +34,9 @@ class ChartHasTagsListController extends ChangeNotifier {
     _subscription?.cancel();
     _streamController?.close();
     super.dispose();
+  }
+
+  void stop() {
+    _subscription?.pause();
   }
 }

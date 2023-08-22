@@ -18,6 +18,7 @@ class OldChartColumns {
   static const avatar = 'avatar';
   static const humanId = 'humanId';
   static const List<String> migratedColumns = [
+    humanId,
     name,
     gender,
     dayGreg,

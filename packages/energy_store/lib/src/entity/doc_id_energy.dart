@@ -1,1 +1,1 @@
-const docIdEnergy = 'i';
+const docIdEnergy = '0';

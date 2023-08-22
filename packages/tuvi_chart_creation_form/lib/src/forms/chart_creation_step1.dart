@@ -36,6 +36,7 @@ class ChartCreationStep1 extends ConsumerWidget {
                 .read(chartCreationNotifierProvider.notifier)
                 .updateName(value),
           ),
+          clearTextAtFirst: true,
         ),
         SizedBox(
           height: space,

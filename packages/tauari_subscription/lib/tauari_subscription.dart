@@ -1,5 +1,7 @@
 library tauari_subscription;
 
+export 'src/service/subscription_firestore_service.dart';
+
 export 'src/config/time_config.dart';
 
 export 'src/usecase/has_subscription_canceled.dart';
@@ -14,9 +16,13 @@ export 'src/usecase/insert_subscription.dart';
 export 'src/usecase/on_current_sub.dart';
 export 'src/usecase/take_current_subscription.dart';
 
-export 'src/data_source/firebase_last_canceled_sub_data_source.dart';
-export 'src/data_source/firebase_current_sub_data_source.dart';
-export 'src/data_source/firebase_subscription_data_source.dart';
+export 'src/data_source/last_canceled_sub_firestore_data_source.dart';
+export 'src/data_source/current_sub_firestore_data_source.dart';
+export 'src/data_source/subscription_list_firestore_data_source.dart';
+
+export 'src/data_source/current_sub_cloud_data_source.dart';
+export 'src/data_source/last_canceled_sub_cloud_data_source.dart';
+export 'src/data_source/subscription_list_cloud_data_source.dart';
 
 export 'src/repository/subscription_repository.dart';
 export 'src/repository/last_canceled_subscription_repository.dart';

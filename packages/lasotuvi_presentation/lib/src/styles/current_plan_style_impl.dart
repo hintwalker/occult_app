@@ -25,9 +25,10 @@ class CurrentPlanStyleImpl {
         color: colorScheme.secondary,
       ),
       expiredText: TextStyle(
-        fontSize: 14.0,
-        fontWeight: FontWeight.w500,
-        color: colorScheme.secondary,
+        fontSize: 18.0,
+        fontWeight: FontWeight.bold,
+        color: colorScheme.error,
+        letterSpacing: 1.2,
       ),
       deleteDataWarning: TextStyle(
         fontSize: 14.0,

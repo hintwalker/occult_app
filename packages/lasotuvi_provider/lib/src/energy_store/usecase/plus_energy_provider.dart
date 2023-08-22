@@ -1,7 +1,12 @@
 import 'package:energy_store/energy_store.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../energy_repository_provider.dart';
+import '../repository/energy_cache_repository.dart';
+// import '../repository/energy_firestore_repository.dart';
 
 final plusEnergyProvider = Provider.autoDispose<PlusEnergy>(
-    (ref) => PlusEnergy(ref.read(energyRepositoryProvider)));
+  (ref) => PlusEnergy(
+    cacheRepository: ref.read(energyCacheRepositoryProvider),
+    // cloudRepository: ref.read(energyFirestoreRepositoryProvider),
+  ),
+);

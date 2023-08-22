@@ -5,7 +5,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 final uploadAvatarProvider = Provider(
   (ref) => UploadAvatar(
     ref.read(
-      chartRepositoryProvider,
+      chartCacheRepositoryProvider,
     ),
   ),
 );

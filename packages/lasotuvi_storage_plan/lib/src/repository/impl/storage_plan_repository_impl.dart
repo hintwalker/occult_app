@@ -5,8 +5,10 @@ import '../../model/storage_plan_model.dart';
 import '../storage_plan_repository.dart';
 
 class StoragePlanRepositoryImpl
-    extends ReadOnlyCloudRepositoryImpl<StoragePlan, StoragePlanModel>
+    extends CloudRepositoryImpl<StoragePlan, StoragePlanModel>
     implements StoragePlanRepository {
-  StoragePlanRepositoryImpl(super.dataSource)
-      : super(entityToModel: (e) => StoragePlanModel.fromEntity(e));
+  StoragePlanRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+  }) : super(entityToModel: (e) => StoragePlanModel.fromEntity(e));
 }

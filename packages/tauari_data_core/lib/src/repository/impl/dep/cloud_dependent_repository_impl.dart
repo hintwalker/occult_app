@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../entity/cloud_getable.dart';
 import '../../../model/cloud_model.dart';
 import '../../../query/cloud_data_where.dart';
@@ -12,13 +14,18 @@ abstract class CloudDependentRepositoryImpl<
         O extends CloudGetable> extends CloudRepositoryImpl<E, M>
     implements CloudDependentRepository<E, O> {
   CloudDependentRepositoryImpl(
-    super.dataSource, {
+    super.cacheDataSource, {
+    required super.onlineDataSource,
     required this.ownerIdColumn,
     required this.ownerRepository,
     required super.entityToModel,
   }) {
     ownerRepository.addOnCloudDeletionTrigger(
-        (uid, docId) async => await deleteByOwnerCloud(uid, int.parse(docId)));
+        (uid, docId) async => await deleteByOwnerCloud(
+              uid,
+              int.parse(docId),
+              false,
+            ));
   }
 
   final String ownerIdColumn;
@@ -34,12 +41,34 @@ abstract class CloudDependentRepositoryImpl<
   }
 
   @override
-  Future<int> deleteByOwnerCloud(String uid, int ownerId) async {
-    return await dataSource.deleteWhere(
+  Future<Iterable<String>> deleteByOwnerCloud(
+    String uid,
+    int ownerId,
+    bool refresh,
+  ) async {
+    final result = await cacheDataSource.deleteWhere(
+      uid,
+      QueryArgs(
+          firestoreWhere:
+              CloudDataWhere(field: ownerIdColumn, isEqualTo: ownerId)),
+      refresh,
+    );
+
+    try {
+      await onlineDataSource?.deleteWhere(
         uid,
         QueryArgs(
             firestoreWhere:
-                CloudDataWhere(field: ownerIdColumn, isEqualTo: ownerId)));
+                CloudDataWhere(field: ownerIdColumn, isEqualTo: ownerId)),
+        false,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+
+    return result;
   }
 
   @override

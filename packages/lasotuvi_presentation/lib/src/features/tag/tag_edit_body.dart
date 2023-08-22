@@ -37,7 +37,12 @@ class _TagEditBodyState extends UserAuthDependedState<TagEditBody> {
     required Tag tag,
     required WidgetRef ref,
   }) async {
-    await ref.read(updateTagProvider).call(uid, tag);
+    // TODO: Consider refresh cloud
+    await ref.read(updateTagProvider).call(
+          uid,
+          tag,
+          false,
+        );
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.pop();
     });

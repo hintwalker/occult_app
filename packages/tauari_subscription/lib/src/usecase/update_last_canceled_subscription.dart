@@ -9,6 +9,10 @@ class UpdateLastCanceledSubscription {
     if (uid == null) {
       return Future.value(false);
     }
-    return repository.update(uid, sub);
+    return repository.update(
+      uid,
+      sub,
+      true,
+    );
   }
 }

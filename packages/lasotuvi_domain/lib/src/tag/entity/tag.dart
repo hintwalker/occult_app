@@ -47,15 +47,15 @@ class Tag extends SyncableEntity<Tag> {
 
   static Tag fromOldVersion(Map<String, Object?> map) {
     return Tag(
-      map[OldTagColumns.createdDate] as int,
+      map[OldTagColumns.tagId] as int,
       title: map[OldTagColumns.name] == null
           ? ''
           : map[OldTagColumns.name] as String,
       subTitle: map[OldTagColumns.description] == null
           ? ''
           : map[OldTagColumns.description] as String,
-      created: DateTime.fromMillisecondsSinceEpoch(
-          map[OldTagColumns.createdDate] as int),
+      created:
+          DateTime.fromMillisecondsSinceEpoch(map[OldTagColumns.tagId] as int),
       storageState: null,
       syncStatus: null,
       modified: LocalLocked.unlocked,

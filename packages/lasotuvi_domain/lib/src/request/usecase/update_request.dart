@@ -4,5 +4,8 @@ import '../entity/request.dart';
 import '../repository/request_repository.dart';
 
 class UpdateRequest extends Update<Request, RequestRepository> {
-  UpdateRequest(super.repository);
+  UpdateRequest({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

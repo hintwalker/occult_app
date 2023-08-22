@@ -6,6 +6,8 @@ import '../model/notification_model.dart';
 class CloudNotificationRepositoryImpl
     extends CloudRepositoryImpl<TuviNotification, NotificationModel>
     implements CloudNotificationRepository {
-  CloudNotificationRepositoryImpl(super.dataSource)
-      : super(entityToModel: (entity) => NotificationModel.fromEntity(entity));
+  CloudNotificationRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+  }) : super(entityToModel: (entity) => NotificationModel.fromEntity(entity));
 }

@@ -12,7 +12,11 @@ class NoteEditorBodyController {
     required Note note,
     required String? uid,
   }) async {
-    await update(uid, note);
+    await update(
+      uid,
+      note,
+      false,
+    );
     // await ref.read(noteRepositoryProvider).update(note, uid);
   }
 

@@ -5,12 +5,16 @@ import '../../query/query_args.dart';
 import '../../repository/cloud_repository.dart';
 
 class DeleteRangeOnCloud<E extends CloudGetable, R extends CloudRepository> {
-  final R repository;
+  final R cacheRepository;
+  // final R cloudRepository;
 
-  const DeleteRangeOnCloud(this.repository);
+  const DeleteRangeOnCloud({
+    required this.cacheRepository,
+    // required this.cloudRepository,
+  });
 
   Future<bool> call(String uid, int skipAtStart) async {
-    final data = await repository.dataCloud(
+    final data = await cacheRepository.dataCloud(
       uid,
       QueryArgs(
         uid: uid,
@@ -22,11 +26,21 @@ class DeleteRangeOnCloud<E extends CloudGetable, R extends CloudRepository> {
       return false;
     }
     for (var i = skipAtStart; i < len; i++) {
-      await repository.deleteFromCloud(
+      await cacheRepository.deleteFromCloud(
         uid: uid,
         docId: data.elementAt(i).docId,
+        refresh: false,
       );
     }
+    // for (var i = skipAtStart; i < len; i++) {
+    //   await cloudRepository.deleteFromCloud(
+    //     uid: uid,
+    //     docId: data.elementAt(i).docId,
+    //     refresh: false,
+    //   );
+    // }
+
+    cacheRepository.refresh();
     return true;
   }
 }

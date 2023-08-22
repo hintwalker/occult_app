@@ -4,5 +4,8 @@ import '../entity/note.dart';
 import '../repository/cloud_note_repository.dart';
 
 class DeleteNoteFromCloud extends DeleteFromCloud<Note, CloudNoteRepository> {
-  DeleteNoteFromCloud(super.repository);
+  DeleteNoteFromCloud({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

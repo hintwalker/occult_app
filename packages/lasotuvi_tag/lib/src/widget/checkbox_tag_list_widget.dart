@@ -121,11 +121,14 @@ class CheckBoxTagListWidget extends StatelessWidget {
     );
   }
 
-  bool initSelected(TagHasCharts item) => item.carry
-      .where(
-        (element) => element.id == chartId,
-      )
-      .isNotEmpty;
+  bool initSelected(TagHasCharts item) {
+    final result = item.carry
+        .where(
+          (element) => element.id == chartId,
+        )
+        .isNotEmpty;
+    return result;
+  }
 
   int itemId(TagHasCharts item) => item.source.id;
 

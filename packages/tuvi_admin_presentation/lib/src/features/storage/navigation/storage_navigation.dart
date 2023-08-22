@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:storage_options/storage_options.dart';
+import 'package:tauari_auth_widget/tauari_auth_widget.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
@@ -16,7 +17,7 @@ class StorageHelper {
     required WidgetRef ref,
     required String? syncStatus,
     void Function()? doBeforeDeleteForever,
-    void Function()? callback,
+    void Function(String?)? callback,
   }) {
     return StorageOptionsModal<T>(
       uid: uid,
@@ -61,7 +62,7 @@ class StorageHelper {
     );
   }
 
-  static Future<void> onUpload<T>({
+  static Future<bool> onUpload<T>({
     required BuildContext context,
     required String uid,
     required T item,
@@ -79,9 +80,12 @@ class StorageHelper {
       } else if (!value.signedIn) {
         await showDialog(
           context: context,
-          builder: (_) => const NeedSignInAlertDialog(
-            colorScheme: LasotuviAppStyle.colorScheme,
+          builder: (_) => NeedSignInAlertDialog(
             translate: translate,
+            signInButton: GoogleSignInButton(
+              onTap: () {},
+              title: translate('signIn'),
+            ),
           ),
         );
       } else {

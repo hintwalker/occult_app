@@ -116,6 +116,7 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
           toggleEditMode: (value) =>
               ref.read(noteEditingStateProvider.notifier).state = value,
           onHitMaxLength: (value) => onHitMaxLength(context, value),
+          maxLength: AppConfig.limitNoteCharaterCount,
         ),
         chartAvatar: (note) => chartAvatar(note),
       ),
@@ -207,17 +208,20 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
   }
 
   void onHitMaxLength(BuildContext context, int limit) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(
-        translate('msgHitLimitNoteLength'),
-        style: TextStyle(
-          color: LasotuviAppStyle.colorScheme.onErrorContainer,
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          translate('msgHitLimitNoteLength'),
+          style: TextStyle(
+            color: LasotuviAppStyle.colorScheme.onErrorContainer,
+          ),
         ),
-      ),
-      backgroundColor: LasotuviAppStyle.colorScheme.errorContainer,
-      duration: const Duration(seconds: 1),
-      showCloseIcon: true,
-    ));
+        backgroundColor: LasotuviAppStyle.colorScheme.errorContainer,
+        duration: const Duration(seconds: 1),
+        showCloseIcon: true,
+        closeIconColor: LasotuviAppStyle.colorScheme.onErrorContainer,
+      ));
+    }
   }
 
   // Future<void> onSave(Note note, WidgetRef ref, String? uid) async {
@@ -276,6 +280,7 @@ class _NoteEditorBodyState extends UserAuthDependedState<NoteEditorBody> {
           Navigator.of(context).pop(true);
         }
       } else if (result.yes) {
+        ref.read(noteEditingStateProvider.notifier).update((state) => false);
         final cache = await ref.read(noteEditorCacheProvider.future);
         final noteCached = await cache.get(note.docId);
         if (noteCached != null) {

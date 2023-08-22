@@ -209,6 +209,7 @@ class _StorageOptionsModalState<T extends SyncableEntity>
             //     translate: widget.translate,
             //   ),
             ListTileDeleteForever(
+              uid: widget.uid,
               onTap: () {
                 deleteForever();
               },

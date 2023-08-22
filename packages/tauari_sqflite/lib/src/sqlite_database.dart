@@ -11,11 +11,16 @@ class SqliteDatabase extends LocalDatabase<Database> {
   final DatabaseFactory dbFactory;
   final Future<void> Function(Database db)? onCreated;
   final FutureOr<void> Function(Database db)? onConfigure;
-  final FutureOr<void> Function(Database db)? onUpgrade;
+  final FutureOr<void> Function(
+    Database db,
+    int oldVersion,
+    int newVersion,
+  )? onUpgrade;
   // final updateTriggerController = StreamController<bool>.broadcast();
   // Database? db;
   // final dbVersion = 1;
   // final dbName = 'lasotuvi_v1_2.db';
+  final int version;
 
   SqliteDatabase(
     this.dbFactory, {
@@ -23,6 +28,7 @@ class SqliteDatabase extends LocalDatabase<Database> {
     this.onConfigure,
     this.onUpgrade,
     required super.databaseName,
+    this.version = 1,
   });
 
   @override
@@ -49,7 +55,11 @@ class SqliteDatabase extends LocalDatabase<Database> {
         },
         onUpgrade: (db, oldVersion, newVersion) async {
           if (oldVersion < dbVersion) {
-            await _onUpgrade(db);
+            await _onUpgrade(
+              db: db,
+              oldVersion: oldVersion,
+              newVersion: newVersion,
+            );
           } else {
             await _createDb(db);
           }
@@ -71,9 +81,17 @@ class SqliteDatabase extends LocalDatabase<Database> {
     }
   }
 
-  FutureOr<void> _onUpgrade(Database db) async {
+  FutureOr<void> _onUpgrade({
+    required Database db,
+    required int oldVersion,
+    required int newVersion,
+  }) async {
     if (onUpgrade != null) {
-      await onUpgrade!(db);
+      await onUpgrade!(
+        db,
+        oldVersion,
+        newVersion,
+      );
     }
   }
 
@@ -90,7 +108,7 @@ class SqliteDatabase extends LocalDatabase<Database> {
   Future _fixPath(String path) async => join(await getDatabasesPath(), path);
 
   @override
-  int get dbVersion => 1;
+  int get dbVersion => version;
 
   static Future<Database> openOtherDatabase(String name) async {
     return await openDatabase(join(await getDatabasesPath(), name));

@@ -29,6 +29,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/manual_v1.2.0.md
+    - assets/images/logo_192.png
 
   # To add assets to your package, add an assets section, like this:
   # assets:

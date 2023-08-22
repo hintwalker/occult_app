@@ -11,6 +11,7 @@ class TagFormWidget extends StatefulWidget {
     required this.translate,
     required this.submitButtonText,
     required this.onSubmit,
+    required this.clearTextAtFirst,
   });
 
   final ColorScheme colorScheme;
@@ -19,6 +20,7 @@ class TagFormWidget extends StatefulWidget {
   final String? title;
   final String? subTitle;
   final String submitButtonText;
+  final bool clearTextAtFirst;
   final void Function(int? tagId, String title, String subTitle) onSubmit;
 
   @override
@@ -80,7 +82,14 @@ class _TagFormWidgetState extends State<TagFormWidget> {
               },
               onTap: () {
                 if (firstTapTitle) {
-                  titleController.clear();
+                  if (widget.clearTextAtFirst) {
+                    titleController.clear();
+                  } else {
+                    titleController.selection = TextSelection(
+                      baseOffset: 0,
+                      extentOffset: titleController.value.text.length,
+                    );
+                  }
                   setState(() {
                     firstTapTitle = false;
                   });
@@ -109,7 +118,14 @@ class _TagFormWidgetState extends State<TagFormWidget> {
               },
               onTap: () {
                 if (firstTapSubTitle) {
-                  subTitleController.clear();
+                  if (widget.clearTextAtFirst) {
+                    subTitleController.clear();
+                  } else {
+                    subTitleController.selection = TextSelection(
+                      baseOffset: 0,
+                      extentOffset: subTitleController.value.text.length,
+                    );
+                  }
                   setState(() {
                     firstTapSubTitle = false;
                   });

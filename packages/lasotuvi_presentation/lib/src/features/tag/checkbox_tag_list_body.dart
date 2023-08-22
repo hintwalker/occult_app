@@ -72,11 +72,13 @@ class _CheckboxTagListBodyState
   }
 
   Future<void> doAfterCreation(Tag tag, Chart chart) async {
+    // TODO: Consider refresh cloud
     await ref.read(connectChartsToTagProvider).call(
-      uid: uid,
-      right: tag,
-      lefts: [chart],
-    );
+          uid: uid,
+          right: tag,
+          lefts: [chart],
+          refresh: false,
+        );
     setState(() {});
   }
 
@@ -86,6 +88,13 @@ class _CheckboxTagListBodyState
 
   Future<void> onSubmit(BuildContext context,
       Iterable<SelectableItem<TagHasCharts>> tagHasCharts, String? uid) async {
+    ref.read(tagHasChartsListControllerProvider).stop();
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Future.delayed(Duration.zero);
+      if (context.mounted) {
+        Navigator.maybePop(context);
+      }
+    });
     final connectedTags = tagHasCharts
         .where(
           (element) => !element.initSelected && element.selected,
@@ -98,21 +107,22 @@ class _CheckboxTagListBodyState
         )
         .map((e) => e.data.source);
     if (connectedTags.isNotEmpty) {
-      await ref
-          .read(connectTagsToChartProvider)
-          .call(uid: uid, left: widget.chart, rights: connectedTags);
+      await ref.read(connectTagsToChartProvider).call(
+            uid: uid,
+            left: widget.chart,
+            rights: connectedTags,
+            refresh: false,
+          );
     }
 
     if (disConnectedTags.isNotEmpty) {
-      await ref
-          .read(disConnectTagsFromChartProvider)
-          .call(uid: uid, left: widget.chart, rights: disConnectedTags);
+      await ref.read(disConnectTagsFromChartProvider).call(
+            uid: uid,
+            left: widget.chart,
+            rights: disConnectedTags,
+            refresh: false,
+          );
     }
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (context.mounted) {
-        Navigator.maybePop(context);
-      }
-    });
   }
 
   Future<bool> onWillPop() async {

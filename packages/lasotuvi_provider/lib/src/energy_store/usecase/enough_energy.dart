@@ -5,7 +5,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 final enoughEnergyProvider = Provider.autoDispose<EnoughEnergy>(
   (ref) => EnoughEnergy(
     ref.read(
-      energyRepositoryProvider,
+      energyCacheRepositoryProvider,
     ),
   ),
 );

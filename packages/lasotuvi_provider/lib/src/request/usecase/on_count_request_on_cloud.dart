@@ -4,6 +4,6 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 
 final onCountRequestOnCloudProvider = Provider(
   (ref) => OnCountRequestOnCloud(
-    ref.read(cloudRequestRepositoryProvider),
+    ref.read(requestCloudCacheRepositoryProvider),
   ),
 );

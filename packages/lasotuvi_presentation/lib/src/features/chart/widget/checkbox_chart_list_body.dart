@@ -50,11 +50,8 @@ class _CheckBoxChartListBodyState
                         CheckboxDataListController<ChartHasTags>(
                       whereTest: (item, query) =>
                           chartWhereClause(item.source, query),
-                      initSelected: (ChartHasTags item) => item.carry
-                          .where(
-                            (element) => element.id == widget.tag.id,
-                          )
-                          .isNotEmpty,
+                      initSelected: (ChartHasTags item) =>
+                          initSelected(item, widget.tag.id),
                       itemId: (ChartHasTags item) => item.source.id,
                       sortOption: sortValue,
                       itemComparator: selectableChartHasTagsComparator,
@@ -87,6 +84,15 @@ class _CheckBoxChartListBodyState
     );
   }
 
+  bool initSelected(ChartHasTags item, int tagId) {
+    final result = item.carry
+        .where(
+          (element) => element.id == tagId,
+        )
+        .isNotEmpty;
+    return result;
+  }
+
   Future<bool> onWillPop() async {
     await CheckboxDataListController.clearCache();
     return true;
@@ -98,6 +104,13 @@ class _CheckBoxChartListBodyState
 
   Future<void> onSubmit(BuildContext context,
       Iterable<SelectableItem<ChartHasTags>> chartHasTags, String? uid) async {
+    ref.read(chartHasTagsListControllerProvider).stop();
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Future.delayed(Duration.zero);
+      if (context.mounted) {
+        Navigator.maybePop(context);
+      }
+    });
     final connectedCharts = chartHasTags
         .where(
           (element) => !element.initSelected && element.selected,
@@ -110,20 +123,23 @@ class _CheckBoxChartListBodyState
         )
         .map((e) => e.data.source);
     if (connectedCharts.isNotEmpty) {
-      await ref
-          .read(connectChartsToTagProvider)
-          .call(uid: uid, right: widget.tag, lefts: connectedCharts);
+      await ref.read(connectChartsToTagProvider).call(
+            uid: uid,
+            right: widget.tag,
+            lefts: connectedCharts,
+            refresh: false,
+          );
     }
 
     if (disConnectedCharts.isNotEmpty) {
-      await ref
-          .read(disConnectChartsFromTagProvider)
-          .call(uid: uid, right: widget.tag, lefts: disConnectedCharts);
+      await ref.read(disConnectChartsFromTagProvider).call(
+            uid: uid,
+            right: widget.tag,
+            lefts: disConnectedCharts,
+            refresh: false,
+          );
     }
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (context.mounted) {
-        Navigator.maybePop(context);
-      }
-    });
+    // TODO: Consider refresh cloud
+    // ref.read(refreshCloudProvider)();
   }
 }

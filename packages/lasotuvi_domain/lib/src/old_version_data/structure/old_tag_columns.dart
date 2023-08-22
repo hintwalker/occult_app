@@ -4,6 +4,7 @@ class OldTagColumns {
   static const createdDate = 'createdDate';
   static const tagId = 'tagId';
   static const List<String> migratedColumns = [
+    tagId,
     name,
     description,
     createdDate,

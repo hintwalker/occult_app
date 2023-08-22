@@ -5,5 +5,8 @@ import '../../tag/entity/tag.dart';
 import '../entity/chart_tag.dart';
 
 class ConnectChartsToTag extends ConnectLeftToRight<ChartTag, Chart, Tag> {
-  ConnectChartsToTag(super.repository);
+  ConnectChartsToTag({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

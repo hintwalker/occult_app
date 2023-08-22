@@ -4,5 +4,8 @@ import '../entity/chart.dart';
 import '../repository/chart_repository.dart';
 
 class UpdateChart extends Update<Chart, ChartRepository> {
-  UpdateChart(super.repository);
+  UpdateChart({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

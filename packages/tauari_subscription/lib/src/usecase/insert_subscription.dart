@@ -19,8 +19,15 @@ class InsertSubscription {
     if (uid == null) {
       return;
     }
-    await subscriptionRepository.insert(uid, subscription);
+    await subscriptionRepository.insert(
+      uid,
+      subscription,
+      false,
+    );
     await currentSubscriptionRepository.update(
-        uid, subscription.copyWith(id: 0));
+      uid,
+      subscription.copyWith(id: 0),
+      true,
+    );
   }
 }

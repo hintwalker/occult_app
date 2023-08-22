@@ -16,37 +16,55 @@ abstract class CloudRelRepository<E extends CloudGetable,
     required int id,
     required int leftId,
     required int rightId,
+    required bool refresh,
   });
   Future<bool> connectManyRightToLeft({
     required String uid,
     required Iterable<int> ids,
     required L left,
     required Iterable<R> rights,
+    required bool refresh,
   });
   Future<bool> connectManyLeftToRight({
     required String uid,
     required Iterable<int> ids,
     required R right,
     required Iterable<L> lefts,
+    required bool refresh,
   });
-  Future<bool> disConnectOnCloud({
+  Future<String?> disConnectOnCloud({
     required String uid,
     required int leftId,
     required int rightId,
+    required bool refresh,
   });
-  Future<bool> disConnectManyRightFromLeft({
+  Future<Iterable<String>> disConnectManyRightFromLeft({
     required String uid,
     required L left,
     required Iterable<R> rights,
+    required bool refresh,
   });
-  Future<bool> disConnectManyLeftFromRight({
+  Future<Iterable<String>> disConnectManyLeftFromRight({
     required String uid,
     required R right,
     required Iterable<L> lefts,
+    required bool refresh,
   });
-  Future<int> deleteOnCloud(String uid, int id);
-  Future<int> deleteByLeftIdOnCloud(String uid, int leftId);
-  Future<int> deleteByRightIdOnCloud(String uid, int rightId);
+  // Future<int> deleteOnCloud(
+  //   String uid,
+  //   int id,
+  //   bool refresh,
+  // );
+  Future<Iterable<String>> deleteByLeftIdOnCloud(
+    String uid,
+    int leftId,
+    bool refresh,
+  );
+  Future<Iterable<String>> deleteByRightIdOnCloud(
+    String uid,
+    int rightId,
+    bool refresh,
+  );
   Future<E?> findByLeftAndRightIdOnCloud({
     required String uid,
     required int leftId,

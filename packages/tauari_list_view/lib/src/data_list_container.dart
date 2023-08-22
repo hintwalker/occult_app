@@ -105,7 +105,7 @@ class _DataListContainerState<U, V> extends State<DataListContainer<U, V>> {
                 bottom: 2.0,
               ),
               decoration: BoxDecoration(
-                color: widget.colorScheme.tertiaryContainer,
+                color: widget.colorScheme.primaryContainer,
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(18.0),
                   bottomLeft: Radius.circular(18.0),
@@ -115,7 +115,7 @@ class _DataListContainerState<U, V> extends State<DataListContainer<U, V>> {
                 '${widget.controller.foundData.length}',
                 style: TextStyle(
                   fontSize: 16,
-                  color: widget.colorScheme.tertiary,
+                  color: widget.colorScheme.primary,
                 ),
               ),
             )

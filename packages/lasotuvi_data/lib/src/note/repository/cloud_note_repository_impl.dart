@@ -6,10 +6,13 @@ import '../model/note_model.dart';
 class CloudNoteRepositoryImpl
     extends CloudDependentRepositoryImpl<Note, NoteModel, Chart>
     implements CloudNoteRepository {
-  CloudNoteRepositoryImpl(super.dataSource,
-      {required super.ownerIdColumn,
-      required super.ownerRepository,
-      required super.entityToModel});
+  CloudNoteRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+    required super.ownerIdColumn,
+    required super.ownerRepository,
+    required super.entityToModel,
+  });
 
   @override
   int getOwnerId(Note entity) => entity.chartId;

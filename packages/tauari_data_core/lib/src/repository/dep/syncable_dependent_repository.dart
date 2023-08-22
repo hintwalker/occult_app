@@ -29,16 +29,17 @@ abstract class SyncableDependentRepository<E extends SyncableEntity,
     String? uid,
     int ownerId,
     String? syncStatus,
+    bool refresh,
   );
 
   Stream<Iterable<SyncableEntityCarrier<O, E>>> onOwnerHasThese({
-    String? uid,
+    required String? uid,
     QueryArgs? queryArgs,
     required SyncableEntityCarrier<O, E> Function(O, Iterable<E>) onCreateItem,
   });
 
   Stream<Iterable<SyncableEntityPair<E, O>>> onOwnerAndThis({
-    String? uid,
+    required String? uid,
     QueryArgs? queryArgs,
     required SyncableEntityPair<E, O> Function(E p1, O p2) onCreateItem,
   });

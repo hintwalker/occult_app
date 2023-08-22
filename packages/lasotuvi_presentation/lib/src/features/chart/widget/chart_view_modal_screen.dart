@@ -42,6 +42,7 @@ class _ChartViewModalScreenState
   void initState() {
     super.initState();
     tagListController.addListener(listenToController);
+    updateLastViewed(uid, widget.chart, widget.saveLastView);
   }
 
   void listenToController() {
@@ -57,6 +58,9 @@ class _ChartViewModalScreenState
           )
         : BasicStreamBuilder(
             stream: controller.stream(uid, widget.chart),
+            loadingWidget: const BasicLoadingModal(
+              colorScheme: LasotuviAppStyle.colorScheme,
+            ),
             child: (data) => data == null
                 ? const ErrorTextWidget()
                 : WillPopScope(
@@ -159,6 +163,7 @@ class _ChartViewModalScreenState
                             ref.read(uploadRequestProvider).call(
                                   uid!,
                                   Request.fromChart(chart),
+                                  true,
                                 ),
                         // onOpenCommentaryReader:
                         //     (BuildContext context, Commentary commentary) =>
@@ -173,20 +178,38 @@ class _ChartViewModalScreenState
           );
   }
 
-  Future<bool> onWillPop(
+  Future<void> updateLastViewed(
     String? uid,
     Chart? chart,
     bool saveLastView,
   ) async {
     if (chart == null || !saveLastView) {
-      return true;
+      return;
     }
+    // TODO: Consider refresh cloud
     await ref.read(updateChartProvider).call(
           uid,
           chart.copyWith(
             lastViewed: DateTime.now(),
           ),
+          false,
         );
+  }
+
+  Future<bool> onWillPop(
+    String? uid,
+    Chart? chart,
+    bool saveLastView,
+  ) async {
+    // if (chart == null || !saveLastView) {
+    //   return true;
+    // }
+    // await ref.read(updateChartProvider).call(
+    //       uid,
+    //       chart.copyWith(
+    //         lastViewed: DateTime.now(),
+    //       ),
+    //     );
     return true;
   }
 }

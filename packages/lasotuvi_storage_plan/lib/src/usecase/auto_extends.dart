@@ -36,6 +36,7 @@ class AutoExtends {
             ? SubscriptionStatus.actived
             : SubscriptionStatus.cancelExtend,
       ),
+      true,
     );
     if (success) {
       return AutoExtendActionResult.success;

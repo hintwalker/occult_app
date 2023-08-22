@@ -101,7 +101,7 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 168.0,
+                  height: 184.0,
                   child: TopTenTagsBanner(
                     controller: ref.watch(tagListControllerProvider),
                     uid: uid,
@@ -290,6 +290,9 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
     if (result == null || !result) {
       return false;
     } else {
+      await ref.read(firestoreCacheHelperProvider).close(
+            clearAllData: false,
+          );
       SystemNavigator.pop();
       return true;
     }

@@ -1,8 +1,8 @@
-import '../repository/energy_repository.dart';
+import '../repository/energy_cloud_repository.dart';
 
 class EnoughEnergy {
   const EnoughEnergy(this.repository);
-  final EnergyRepository repository;
+  final EnergyCloudRepository repository;
   Future<bool> call(String? uid, int checkValue) async {
     if (uid == null) {
       return Future.value(false);

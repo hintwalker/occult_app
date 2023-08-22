@@ -1,8 +1,8 @@
 import '../entity/energy.dart';
-import '../repository/energy_repository.dart';
+import '../repository/energy_cloud_repository.dart';
 
 class OnEnergy {
-  final EnergyRepository repository;
+  final EnergyCloudRepository repository;
   const OnEnergy(this.repository);
   Stream<Energy> call(String? uid) {
     if (uid == null) {

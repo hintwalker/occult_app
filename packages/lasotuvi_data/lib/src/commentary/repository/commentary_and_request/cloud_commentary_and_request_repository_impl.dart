@@ -7,8 +7,9 @@ class CloudCommentaryAndRequestRepositoryImpl
     extends CloudDependentRepositoryImpl<Commentary, CommentaryModel, Request>
     implements CloudCommentaryAndRequestRepository {
   CloudCommentaryAndRequestRepositoryImpl(
-    super.dataSource, {
+    super.cacheDataSource, {
     required super.ownerRepository,
+    required super.onlineDataSource,
   }) : super(
           ownerIdColumn: ColumnCommentary.requestId,
           entityToModel: (entity) => CommentaryModel.fromEntity(entity),

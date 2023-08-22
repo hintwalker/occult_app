@@ -7,6 +7,8 @@ import '../subscription_repository.dart';
 class SubscriptionRepositoryImpl
     extends CloudRepositoryImpl<Subscription, SubscriptionModel>
     implements SubscriptionRepository {
-  SubscriptionRepositoryImpl(super.dataSource)
-      : super(entityToModel: (e) => SubscriptionModel.fromEntity(e));
+  SubscriptionRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+  }) : super(entityToModel: (e) => SubscriptionModel.fromEntity(e));
 }

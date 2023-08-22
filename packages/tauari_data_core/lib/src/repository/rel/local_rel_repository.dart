@@ -17,7 +17,8 @@ abstract class LocalRelRepository<
   Future<List<int>> connectManyRightToLeft(L left, Iterable<R> rights);
   Future<List<int>> connectManyLeftToRight(R right, Iterable<L> lefts);
   Future<int> disConnectOnLocal(int leftId, int rightId);
-  Future<bool> disConnectManyRightFromLeft(L left, Iterable<R> rights);
+  Future<Iterable<String>> disConnectManyRightFromLeft(
+      L left, Iterable<R> rights);
   Future<bool> disConnectManyLeftFromRight(R right, Iterable<L> lefts);
   Future<int> deleteByLeftIdOnLocal(int leftId);
   Future<int> deleteByRightIdOnLocal(int rightId);

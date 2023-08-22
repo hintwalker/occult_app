@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../entity/cloud_getable.dart';
 import '../../../model/cloud_model.dart';
 import '../../../query/cloud_data_where.dart';
@@ -16,7 +18,8 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
   final E Function(int id, int leftId, int rightId) entityFromIds;
 
   CloudRelRepositoryImpl(
-    super.dataSource, {
+    super.cacheDataSource, {
+    required super.onlineDataSource,
     required super.entityToModel,
     required this.leftIdColumn,
     required this.rightIdColumn,
@@ -24,28 +27,39 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
     required this.rightRepository,
     required this.entityFromIds,
   }) {
-    leftRepository.addOnCloudDeletionTrigger((uid, docId) async =>
-        await deleteByLeftIdOnCloud(uid, int.parse(docId)));
-    rightRepository.addOnCloudDeletionTrigger((uid, docId) async =>
-        await deleteByRightIdOnCloud(uid, int.parse(docId)));
+    leftRepository.addOnCloudDeletionTrigger(
+        (uid, docId) async => await deleteByLeftIdOnCloud(
+              uid,
+              int.parse(docId),
+              false,
+            ));
+    rightRepository.addOnCloudDeletionTrigger(
+        (uid, docId) async => await deleteByRightIdOnCloud(
+              uid,
+              int.parse(docId),
+              false,
+            ));
   }
 
   @override
   Future<Iterable<E>> byLeftIdOnCloud(String uid, int leftId) async {
     return await dataCloud(
-        uid,
-        QueryArgs(
-            firestoreWhere:
-                CloudDataWhere(field: leftIdColumn, isEqualTo: leftId)));
+      uid,
+      QueryArgs(
+        firestoreWhere: CloudDataWhere(field: leftIdColumn, isEqualTo: leftId),
+      ),
+    );
   }
 
   @override
   Future<Iterable<E>> byRightIdOnCloud(String uid, int rightId) async {
     return await dataCloud(
-        uid,
-        QueryArgs(
-            firestoreWhere:
-                CloudDataWhere(field: rightIdColumn, isEqualTo: rightId)));
+      uid,
+      QueryArgs(
+        firestoreWhere:
+            CloudDataWhere(field: rightIdColumn, isEqualTo: rightId),
+      ),
+    );
   }
 
   @override
@@ -54,8 +68,10 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
     final leftIds = rels.map((e) => getLeftId(e));
     final List<L> result = [];
     for (var id in leftIds) {
-      final entity =
-          await leftRepository.byIdOnCloud(uid: uid, docId: id.toString());
+      final entity = await leftRepository.byIdOnCloud(
+        uid: uid,
+        docId: id.toString(),
+      );
       if (entity != null) {
         result.add(entity);
       }
@@ -128,57 +144,126 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
   }
 
   @override
-  Future<bool> connectOnCloud(
-      {required String uid,
-      required int id,
-      required int leftId,
-      required int rightId}) async {
-    return await insert(uid, entityFromIds(id, leftId, rightId));
+  Future<bool> connectOnCloud({
+    required String uid,
+    required int id,
+    required int leftId,
+    required int rightId,
+    required bool refresh,
+  }) async {
+    return await insert(
+      uid,
+      entityFromIds(
+        id,
+        leftId,
+        rightId,
+      ),
+      refresh,
+    );
   }
 
   @override
-  Future<int> deleteByLeftIdOnCloud(String uid, int leftId) async {
-    return await dataSource.deleteWhere(
+  Future<Iterable<String>> deleteByLeftIdOnCloud(
+    String uid,
+    int leftId,
+    bool refresh,
+  ) async {
+    final result = await cacheDataSource.deleteWhere(
+      uid,
+      QueryArgs(
+        firestoreWhere: CloudDataWhere(field: leftIdColumn, isEqualTo: leftId),
+      ),
+      refresh,
+    );
+    try {
+      await onlineDataSource?.deleteWhere(
         uid,
         QueryArgs(
-            firestoreWhere:
-                CloudDataWhere(field: leftIdColumn, isEqualTo: leftId)));
-  }
-
-  @override
-  Future<int> deleteByRightIdOnCloud(String uid, int rightId) async {
-    return await dataSource.deleteWhere(
-        uid,
-        QueryArgs(
-            firestoreWhere:
-                CloudDataWhere(field: rightIdColumn, isEqualTo: rightId)));
-  }
-
-  @override
-  Future<int> deleteOnCloud(String uid, int id) async {
-    final exists = await dataSource.exist(uid, id.toString());
-    if (!exists) {
-      return 0;
+          firestoreWhere:
+              CloudDataWhere(field: leftIdColumn, isEqualTo: leftId),
+        ),
+        false,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
-    final result = await dataSource.delete(uid, id.toString());
-    return result ? 1 : 0;
+    return result;
   }
 
   @override
-  Future<bool> disConnectOnCloud({
+  Future<Iterable<String>> deleteByRightIdOnCloud(
+    String uid,
+    int rightId,
+    bool refresh,
+  ) async {
+    final result = await cacheDataSource.deleteWhere(
+      uid,
+      QueryArgs(
+        firestoreWhere:
+            CloudDataWhere(field: rightIdColumn, isEqualTo: rightId),
+      ),
+      refresh,
+    );
+    try {
+      await onlineDataSource?.deleteWhere(
+        uid,
+        QueryArgs(
+          firestoreWhere:
+              CloudDataWhere(field: rightIdColumn, isEqualTo: rightId),
+        ),
+        false,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+    return result;
+  }
+
+  // @override
+  // Future<int> deleteOnCloud(
+  //   String uid,
+  //   int id,
+  //   bool refresh,
+  // ) async {
+  //   final exists = await dataSource.exist(uid, id.toString());
+  //   if (!exists) {
+  //     return 0;
+  //   }
+  //   final result = await dataSource.delete(
+  //     uid,
+  //     id.toString(),
+  //     refresh,
+  //   );
+  //   return result ? 1 : 0;
+  // }
+
+  @override
+  Future<String?> disConnectOnCloud({
     required String uid,
     required int leftId,
     required int rightId,
+    required bool refresh,
   }) async {
+    // Just search on cache, dont search on firestore
+    // Get needed item, then delete on firestore later
     final item = await findByLeftAndRightIdOnCloud(
       uid: uid,
       leftId: leftId,
       rightId: rightId,
     );
     if (item == null) {
-      return false;
+      return null;
     }
-    return await deleteFromCloud(uid: uid, docId: item.docId);
+    await deleteFromCloud(
+      uid: uid,
+      docId: item.docId,
+      refresh: refresh,
+    );
+    return item.docId;
   }
 
   @override
@@ -198,6 +283,7 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
     required Iterable<int> ids,
     required L left,
     required Iterable<R> rights,
+    required bool refresh,
   }) async {
     int i = 0;
     for (var right in rights) {
@@ -206,7 +292,11 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
         id: ids.elementAt(i),
         leftId: int.parse(left.docId),
         rightId: int.parse(right.docId),
+        refresh: false,
       );
+    }
+    if (refresh) {
+      this.refresh();
     }
     return true;
   }
@@ -217,6 +307,7 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
     required Iterable<int> ids,
     required R right,
     required Iterable<L> lefts,
+    required bool refresh,
   }) async {
     int i = 0;
     for (var left in lefts) {
@@ -225,40 +316,62 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
         id: ids.elementAt(i),
         leftId: int.parse(left.docId),
         rightId: int.parse(right.docId),
+        refresh: false,
       );
+    }
+    if (refresh) {
+      this.refresh();
     }
     return true;
   }
 
   @override
-  Future<bool> disConnectManyRightFromLeft({
+  Future<Iterable<String>> disConnectManyRightFromLeft({
     required String uid,
     required L left,
     required Iterable<R> rights,
+    required bool refresh,
   }) async {
+    List<String> ids = [];
     for (var right in rights) {
-      await disConnectOnCloud(
+      final id = await disConnectOnCloud(
         uid: uid,
         leftId: int.parse(left.docId),
         rightId: int.parse(right.docId),
+        refresh: false,
       );
+      if (id != null) {
+        ids.add(id);
+      }
     }
-    return true;
+    if (refresh) {
+      this.refresh();
+    }
+    return ids;
   }
 
   @override
-  Future<bool> disConnectManyLeftFromRight({
+  Future<Iterable<String>> disConnectManyLeftFromRight({
     required String uid,
     required R right,
     required Iterable<L> lefts,
+    required bool refresh,
   }) async {
+    List<String> ids = [];
     for (var left in lefts) {
-      await disConnectOnCloud(
+      final id = await disConnectOnCloud(
         uid: uid,
         leftId: int.parse(left.docId),
         rightId: int.parse(right.docId),
+        refresh: false,
       );
+      if (id != null) {
+        ids.add(id);
+      }
     }
-    return true;
+    if (refresh) {
+      this.refresh();
+    }
+    return ids;
   }
 }

@@ -26,6 +26,10 @@ class TagHasChartsListController extends ChangeNotifier {
     });
   }
 
+  void stop() {
+    _subscription?.pause();
+  }
+
   @override
   void dispose() {
     _subscription?.cancel();

@@ -144,4 +144,19 @@ CREATE INDEX idx_last_viewed_request ON $tableRequest (${ColumnRequest.lastViewe
         $columnModified INTEGER,
         $columnUploadDate INTEGER
         )''';
+
+  static String addColumnUploadDate(String table) => '''
+ALTER TABLE $table DROP COLUMN $columnUploadDate;
+ALTER TABLE $table ADD COLUMN $columnUploadDate INTEGER;''';
+
+  static String upgrade1_2() {
+    return '''${addColumnUploadDate(tableChart)}
+    ${addColumnUploadDate(tableTag)}
+    ${addColumnUploadDate(tableChartTag)}
+    ${addColumnUploadDate(tableNote)}
+    ${addColumnUploadDate(tableRequest)}
+    ${addColumnUploadDate(tableCommentary)}
+    ${addColumnUploadDate(tableNotification)}
+    ''';
+  }
 }

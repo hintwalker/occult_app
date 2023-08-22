@@ -4,5 +4,8 @@ import '../entity/tag.dart';
 import '../repository/tag_repository.dart';
 
 class UpdateTag extends Update<Tag, TagRepository> {
-  UpdateTag(super.repository);
+  UpdateTag({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

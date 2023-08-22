@@ -1,10 +1,13 @@
 library lasotuvi_storage_plan;
 
+export 'src/service/storage_plan_firestore_service.dart';
+
 export 'src/presentation/style/storage_plan_style.dart';
 
 export 'src/features/plan/widget/plan_list_item_title.dart';
 export 'src/features/subscription_confirm/screen/extends_confirm_dialog.dart';
-export 'src/data_source/firebase_storage_plan_data_source.dart';
+export 'src/data_source/storage_plan_firestore_data_source.dart';
+export 'src/data_source/storage_plan_cloud_data_source.dart';
 
 export 'src/usecase/delete_excess_data.dart';
 export 'src/usecase/able_to_upload.dart';

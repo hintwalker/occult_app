@@ -8,7 +8,7 @@ import 'database_names.dart';
 import 'table_names_old.dart';
 
 class MigrateOldData {
-  const MigrateOldData({
+  MigrateOldData({
     required this.insertChartsToLocal,
     required this.insertTagsToLocal,
     required this.insertNotesToLocal,
@@ -18,6 +18,8 @@ class MigrateOldData {
   final InsertManyTagsToLocal insertTagsToLocal;
   final InsertManyNotesToLocal insertNotesToLocal;
   final InsertManyChartTagsToLocal insertChartTagsToLocal;
+  // Map<int, int> chartIdsChange = {};
+  // Map<int, int> tagIdsChange = {};
   Future<void> loadOldData() async {
     if (!kDebugMode) {
       final exists = await SqliteDatabase.exists(DatabaseNames.old);
@@ -27,10 +29,11 @@ class MigrateOldData {
     }
 
     final oldDb = await SqliteDatabase.openOtherDatabase(DatabaseNames.old);
+
     await loadOldCharts(oldDb);
     await loadOldTags(oldDb);
-    await loadOldNotes(oldDb);
     await loadOldChartTags(oldDb);
+    await loadOldNotes(oldDb);
   }
 
   Future<Either<List<Map<String, Object?>>, String>> loadOldCharts(
@@ -38,6 +41,7 @@ class MigrateOldData {
     final data = kDebugMode
         ? [
             {
+              OldChartColumns.humanId: 1691035285269,
               OldChartColumns.name: 'ABC',
               OldChartColumns.avatar: 'file///asdf/asdf.sdf.asd',
               OldChartColumns.createdDate: 1691035285269,
@@ -55,6 +59,8 @@ class MigrateOldData {
             columns: OldChartColumns.migratedColumns);
     List<Chart> charts = [];
     for (var item in data) {
+      // chartIdsChange[item[OldChartColumns.humanId]! as int] =
+      //     item[OldChartColumns.createdDate]! as int;
       charts.add(Chart.fromOldVersion(item));
     }
     await insertChartsToLocal(charts);
@@ -69,6 +75,7 @@ class MigrateOldData {
             {
               OldTagColumns.name: 'ABC',
               OldTagColumns.description: 'description',
+              OldTagColumns.tagId: 1691035285270,
               OldTagColumns.createdDate: 1691035285270,
             }
           ]
@@ -90,8 +97,10 @@ class MigrateOldData {
     final data = kDebugMode
         ? [
             {
+              OldNoteColumns.noteId: 1691035285269,
               OldNoteColumns.noteTitle: 'ABC',
-              OldNoteColumns.noteText: 'description',
+              OldNoteColumns.noteText:
+                  'description\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n',
               OldNoteColumns.createdDate: 1691035285269,
               OldNoteColumns.lastUpdated: 1691035285269,
               OldNoteColumns.humanId: 1691035285269,

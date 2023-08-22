@@ -442,10 +442,15 @@
   "paymentFailure": "Thanh toán thất bại",
   "created": "Ngày tạo",
   "outOfSpace": "Hết dung lượng lưu trữ đám mây!",
-  "warningDeleteOverloadData": "Sau khi hủy gói đăng ký, dữ liệu đám mây vượt mức sẽ bị xóa!",
+  "warningDeleteOverloadData": "Chú ý! Sau khi gói đăng ký bị hủy, hệ thống sẽ tự động xóa dữ liệu lưu trữ đám mây vượt mức so với gói miễn phí!",
   "manual": "Hướng dẫn sử dụng",
   "watchAdsFor": "Xem quảng cáo để có",
-  "vuotMuc": "Vượt mức:",
+  "vuotMuc": "Vượt mức",
   "needUploadChartFollow": "Khi tải ghi chú lên, cần phải tải kèm theo lá số.",
-  "noNetwork": "Không có mạng"
+  "noNetwork": "Không có mạng",
+  "close": "Đóng",
+  "leapMonth": "Tháng nhuận",
+  "normalMonth": "Tháng thường",
+  "msgHitLimitNoteLength": "Quá giới hạn số lượng ký tự cho phép!",
+  "deleteFromDevice": "Xóa khỏi thiết bị"
 }

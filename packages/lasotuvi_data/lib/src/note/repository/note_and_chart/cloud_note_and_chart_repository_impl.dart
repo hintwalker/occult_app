@@ -7,7 +7,8 @@ class CloudNoteAndChartRepositoryImpl
     extends CloudDependentRepositoryImpl<Note, NoteModel, Chart>
     implements CloudNoteAndChartRepository {
   CloudNoteAndChartRepositoryImpl(
-    super.dataSource, {
+    super.cacheDataSource, {
+    required super.onlineDataSource,
     required super.ownerRepository,
   }) : super(
           ownerIdColumn: ColumnNote.chartId,

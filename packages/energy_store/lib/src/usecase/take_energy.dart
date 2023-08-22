@@ -1,8 +1,8 @@
 import '../entity/energy.dart';
-import '../repository/energy_repository.dart';
+import '../repository/energy_cloud_repository.dart';
 
 class TakeEnergy {
-  final EnergyRepository repository;
+  final EnergyCloudRepository repository;
   const TakeEnergy(this.repository);
   Future<Energy> call(String? uid) async {
     if (uid == null) {

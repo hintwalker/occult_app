@@ -4,6 +4,10 @@
 >
 > Được phát triển bởi TAUARI
 
+> Mỗi khi cần sự trợ giúp về phần mềm bạn hãy liên hệ qua hộp thư thinkerstandup@gmail.com
+
+![](resource:packages/lasotuvi_manual/assets/images/logo_192.png)
+
 ## 1. Giao diện chính
 Giao diện chính gồm 3 phần:
  - Thanh menu trên cùng
@@ -59,13 +63,17 @@ Trong màn hình chi tết của lá số, bạn bạn bấm vào nút trên cù
 - Cách an Lưu Hà
 - Cách an Đẩu Quân
 
-### 3.4 Đồng bộ lá số lên đám mây
+### 3.4 Tải lá số lên lưu trữ đám mây
 
 Để đồng bộ dữ liệu, bạn cần phải đăng nhập. 
 
-Để đồng bộ lá số lên đám mây, bạn bấm vào nút có hình đám mây gạch chéo ở góc trên bên trái của lá số, sau đó chọn "Tải lên".
+Để đồng bộ lá số lên lưu trữ đám mây, bạn bấm vào nút có hình đám mây gạch chéo ở góc trên bên trái của lá số, sau đó chọn "Tải lên".
 
 Sau khi đồng bộ thành công, lá số sẽ có biểu tượng hình đám mây màu xanh lá cây.
+
+Các nhãn đã gắn lá số không đồng bộ theo lá số.
+
+Các ghi chú của lá số không đồng bộ theo lá số.
 
 ### 3.5 Xóa lá số
 
@@ -119,7 +127,7 @@ Các thông tin lá số có thể thay đổi sau khi lá số đã được l�
 - Năm xem
 
 Để thay đổi thông tin cho lá số, bạn có thể thực hiện theo 2 cách:
-- Cách 1: Trong màn hình tổng quan lá số, bạn bấm vào nút "Đổi thông tin", sau đó chọn thông tin cần đổi,
+- Cách 1: Trong màn hình tổng quan lá số, bạn bấm vào nút có biểu tượng hình "cây bút", sau đó chọn thông tin cần đổi,
 - Cách 2: Trong màn hình xem lá số, bạn bấm vào nút có biểu tượng hình "cây bút" ở ngoài cùng bên phải của thanh menu bên trên màn hình. 
 
 ## 4. Nhãn
@@ -137,12 +145,14 @@ Có 3 cách tạo nhãn mới:
 - Cách 2: Trong màn hình "Trang chủ" Bấm vào nút dấu cộng ở khu vực hiển thị 10 nhãn đã xem gần nhất.
 - Cách 3: Trong màn hình tổng quan lá số, bấm vào nút dấu cộng ở khu vực hiển thị danh sách nhãn của lá số.
 
-### 4.2 Đồng bộ nhãn lên đám mây
+### 4.2 Tải nhãn lên lưu trữ đám mây
 Để đồng bộ dữ liệu, bạn cần phải đăng nhập. 
 
-Để đồng bộ nhãn lên đám mây, bạn bấm vào nút có hình đám mây gạch chéo ở góc trên bên trái của nhãn, sau đó chọn "Tải lên".
+Để đồng bộ nhãn lên lưu trữ đám mây, bạn bấm vào nút có hình đám mây gạch chéo ở góc trên bên trái của nhãn, sau đó chọn "Tải lên".
 
 Sau khi đồng bộ thành công, nhãn sẽ có biểu tượng hình đám mây màu xanh lá cây.
+
+Các lá số đã gắn nhãn không đồng bộ theo nhãn.
 
 ### 4.3 Xóa nhãn
 
@@ -190,6 +200,10 @@ Các nhãn có thể được sắp xếp theo các tiêu chí sau:
 Để sắp xếp nhãn, trong danh sách nhãn, bạn bấm vào nút bên phải ô tìm kiếm.
 Danh sách tùy chọn tiêu chí sắp xếp sẽ hiện ra. Bạn chọn tiêu chí mong muốn.
 
+### 4.8 Thay đổi nội dung nhãn
+
+Trong màn hình chi tiết của nhãn, bạn bấm vào nút có biểu tượng hình cây bút.
+
 ## 5. Ghi chú
 
 Bạn có thể dùng ghi chú để ghi lại nghiệm lý cho lá số, những bình luận của bạn về lá số.
@@ -213,20 +227,17 @@ Sau khi hoàn tất, bạn bấm vào nút có biểu tượng hình dấu tích
 
 Trong trường hợp bạn không muốn lưu lại những thay đổi, bạn có thể bấm nút trở về ở góc trên bên trái màn hình hoặc nút trở về của thiết bị. Hệ thống sẽ hỏi bạn có muốn lưu nội dung đã thay đổi hay không, bạn bấm vào nút không.
 
-### 5.3 Đồng bộ ghi chú lên đám mây
+Hiện tại mỗi ghi chú giới hạn 5000 kí tự.
 
-Có 2 cách để xem danh sách tất cả ghi chú:
+### 5.3 Tải ghi chú lên lưu trữ đám mây
 
-- Cách 1: Ở màn hình "Trang chủ" bạn bấm vào nút "Tất cả" ở dòng "Ghi chú". 
-- Cách 2: Mở thanh menu chính bên trái màn hình, sau đó chọn "Ghi chú".
+Để đồng bộ dữ liệu, bạn cần phải đăng nhập. 
 
-Những ghi chú đã đồng bộ (vừa có trên thiết bị, vừa có lưu trữ đám mây) thì sẽ có biểu tượng đám mây màu xanh lá cây.
+Để đồng bộ ghi chú lên lưu trữ đám mây, bạn bấm vào nút có hình đám mây gạch chéo ở góc trên bên trái của ghi chú, sau đó chọn "Tải lên".
 
-Ghi chú nào chỉ có trên thiết bị, thì sẽ có biểu tượng đám mây bị gạch chéo.
+Sau khi đồng bộ thành công, ghi chú sẽ có biểu tượng hình đám mây màu xanh lá cây.
 
-Hệ thống luôn cố gắng đồng bộ dữ liệu từ đám mây về thiết bị khi có kết nối mạng, nên sẽ không có trường hợp ghi chú có lưu trữ đám mây mà không có trên thiết bị.
-
-Trong trường hợp bạn chưa đăng nhập, các ghi chú đều có biểu tượng đám mây bị gạch chéo.
+Lá số của ghi chú sẽ được đồng bộ kèm theo ghi chú. Nếu hệ thống phát hiện lượng lưu trữ đám mây của lá số đã đầy, việc đồng bộ ghi chú cũng không thực hiện được.
 
 ### 5.4 Xóa ghi chú
 
@@ -331,7 +342,7 @@ Trong trường hợp bạn đăng ký gói mới ở thời điểm gói cũ ch
 Số điểm còn dư được tính bằng công thức sau:
 
 ```
-Giá của gói đăng ký x số ngày còn lại / 30
+Giá của gói đăng ký x (với số ngày còn lại / 30)
 ```
 
 ### 7.4 Đăng ký gói lưu trữ
@@ -344,7 +355,7 @@ Bạn có thể vào màn hình danh sách gói lưu trữ bằng cách bấm v�
 
 Sau 30 ngày, kể từ thời điểm đăng ký, hệ thống sẽ chuyển gói đăng ký sang trạng thái hết hạn, đồng thời áp dụng gói miễn phí cho bạn. Trong vòng 7 ngày tiếp theo, bạn phải gia hạn gói đã đăng ký hoặc đăng ký gói mới. Trường hợp bạn không tiếp tục gia hạn hoặc đăng ký gói mới, sau 7 ngày hệ thống sẽ chuyển gói đăng ký sang trạng thái đã hủy. Khi gói đăng ký bị hủy, dữ liệu lưu trữ đám mây vượt hạn mức (so với gói miễn phí) sẽ bị xóa vĩnh viễn.
 
-Dữ liệu vượt hạn mức là những dữ liệu đã lưu trữ đám mây nằm ngoài giới hạn lưu trữ, được xếp thứ tự theo thời điểm khởi tạo. 
+Dữ liệu vượt hạn mức là những dữ liệu đã lưu trữ đám mây nằm ngoài giới hạn lưu trữ, được xếp thứ tự theo thời điểm tải lên. Những dữ liệu tải lên trước sẽ được ưu tiên giữ lại.
 
 Tất nhiên những dữ liệu này đều đã được đồng bộ về thiết bị của bạn, bạn vẫn có thể truy cập được bình thường trên thiết bị đã đồng bộ. Khi bạn thay đổi thiết bị và tiến hành đồng bộ, thì dữ liệu vượt hạn mức sẽ không được đồng bộ về thiết bị mới.
 
@@ -353,6 +364,7 @@ Tất nhiên những dữ liệu này đều đã được đồng bộ về thi
 Bạn không thể hủy gói lưu trữ đã đăng ký.
 
 Việc hủy gói lưu trữ đã đăng ký được thực hiện tự động bởi hệ thống. Sau thời hạn 30 ngày kể từ thời điểm đăng ký, nếu bạn không gia hạn, gói lưu trữ của bạn sẽ chuyển sang trạng thái hết hạn (chờ hủy). Sau thời hạn 7 ngày, nếu bạn không tiếp tục gia hạn, hệ thống sẽ tự động hủy gói lưu trữ mà bạn đã đăng ký, đồng thời xóa tất cả dữ liệu vượt hạn mức so với gói miễn phí.
+
 
 ## 8. Thư viện
 

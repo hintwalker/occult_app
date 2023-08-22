@@ -3,10 +3,9 @@ import 'package:tauari_firebase/tauari_firebase.dart';
 
 import '../model/user_model.dart';
 
-class UserDataSource extends RemoteDataSource<UserModel> {
-  UserDataSource(
-    super.service,
-  ) : super(
+class UserDataSource extends CloudDataSource<UserModel> {
+  UserDataSource(super.service, {required super.availableNetwork})
+      : super(
           itemMapper: (snapshot) => snapshotToModel(snapshot,
               fromMap: UserModel.fromMap, idIsString: true),
           listMapper: (snapshot) => snapshotToModelList(snapshot,
@@ -48,7 +47,11 @@ class UserDataSource extends RemoteDataSource<UserModel> {
   // }
 
   Future<String> setupInitUser(UserModel user) async {
-    await insert(user.docId, user);
+    await insert(
+      user.docId,
+      user,
+      false,
+    );
     await setupInitUserData(user);
     return user.docId;
   }

@@ -1,5 +1,6 @@
 library tauari_utils;
 
+export 'src/print_debug_console.dart';
 export 'src/check_network_status.dart';
 
 export 'src/format_thousand_seperator.dart';

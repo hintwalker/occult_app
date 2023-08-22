@@ -1,19 +1,46 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_utils/tauari_utils.dart';
+// import 'package:tauari_utils/tauari_utils.dart';
 
 class FirestoreService implements CloudService {
-  const FirestoreService(this.firestore);
+  FirestoreService(
+    this.firestore, {
+    required this.availableNetwork,
+  });
+
+  final FutureOr<bool> Function() availableNetwork;
+
+  final updateTriggerController = StreamController<bool>.broadcast();
 
   final FirebaseFirestore firestore;
 
+  @override
+  void triggerUpdate() {
+    if (kDebugMode) {
+      printWarning('[FIRESTORE] refresh cloud');
+    }
+    updateTriggerController.sink.add(true);
+  }
+
   /// Collection Operations
 
-  @override
-  Future<DocumentReference<Map<String, dynamic>>> addToCollection(
-          {required Map<String, dynamic> data,
-          required String collectionPath}) =>
-      firestore.collection(collectionPath).add(data);
+  // @override
+  // Future<DocumentReference<Map<String, dynamic>>> addToCollection({
+  //   required Map<String, dynamic> data,
+  //   required String collectionPath,
+  //   required bool refresh,
+  // }) async {
+  //   final result = await firestore.collection(collectionPath).add(data);
+  //   if (refresh) {
+  //     triggerUpdate();
+  //   }
+
+  //   return result;
+  // }
 
   Future<void> createEmptyCollection({required String collectionPath}) async {
     final collection = firestore.collection(collectionPath);
@@ -21,11 +48,19 @@ class FirestoreService implements CloudService {
   }
 
   @override
-  Future<void> setToCollection(
-      {required String key,
-      required Map<String, dynamic> data,
-      required String collectionPath}) async {
+  Future<void> setToCollection({
+    required String key,
+    required Map<String, dynamic> data,
+    required String collectionPath,
+    required bool refresh,
+  }) async {
+    if (kDebugMode) {
+      printWarning('[FIRESTORE] setToCollection $collectionPath: $data');
+    }
     firestore.collection(collectionPath).doc(key).set(data);
+    if (refresh) {
+      triggerUpdate();
+    }
   }
 
   Query<Map<String, dynamic>> _buildQuery(
@@ -54,9 +89,9 @@ class FirestoreService implements CloudService {
 
     if (limit != null) {
       if (result == null) {
-        result = collection.limit(limit).orderBy(FieldPath.documentId);
+        result = collection.orderBy(FieldPath.documentId).limit(limit);
       } else {
-        result = result.limit(limit).orderBy(FieldPath.documentId);
+        result = result.orderBy(FieldPath.documentId).limit(limit);
       }
     } else {
       if (orderBy != null) {
@@ -85,6 +120,9 @@ class FirestoreService implements CloudService {
       CloudDataOrderBy? orderBy,
       int? limit,
       CloudDataWhere? where}) async {
+    if (kDebugMode) {
+      printWarning('[FIRESTORE] getFromCollection $collectionPath');
+    }
     var collection = firestore.collection(collectionPath);
     final online = await availableNetwork();
     if (orderBy == null && limit == null && where == null) {
@@ -100,6 +138,7 @@ class FirestoreService implements CloudService {
       limit: limit,
       where: where,
     );
+
     return await result.get(
       GetOptions(
         source: online ? Source.serverAndCache : Source.cache,
@@ -113,25 +152,61 @@ class FirestoreService implements CloudService {
       CloudDataOrderBy? orderBy,
       int? limit,
       CloudDataWhere? where}) {
-    var collection = firestore.collection(collectionPath);
+    late StreamController<QuerySnapshot<Map<String, dynamic>>> ctlr;
 
-    if (orderBy == null && limit == null && where == null) {
-      return collection.snapshots(includeMetadataChanges: true);
+    StreamSubscription? triggerSubscription;
+    Future<void> sendUpdate() async {
+      final items = await getFromCollection(
+        collectionPath: collectionPath,
+        orderBy: orderBy,
+        limit: limit,
+        where: where,
+      );
+      if (!ctlr.isClosed) {
+        ctlr.add(items);
+      }
     }
-    final result = _buildQuery(
-      collection: collection,
-      orderBy: orderBy,
-      limit: limit,
-      where: where,
-    );
 
-    return result.snapshots(includeMetadataChanges: true);
-    // return firestore
-    //     .collection(collectionPath)
-    //     .orderBy(orderField, descending: descending)
-    //     .limit(limit)
-    //     .snapshots();
+    ctlr = StreamController<QuerySnapshot<Map<String, dynamic>>>(onListen: () {
+      sendUpdate();
+      triggerSubscription = updateTriggerController.stream.listen((_) {
+        sendUpdate();
+      });
+    }, onCancel: () {
+      triggerSubscription?.cancel();
+    });
+
+    return ctlr.stream.asBroadcastStream(
+      onCancel: ((subscription) => subscription.pause()),
+      onListen: (subscription) => subscription.resume(),
+    );
   }
+
+  // @override
+  // Stream<QuerySnapshot<Map<String, dynamic>>> getSnapshotStreamFromCollection(
+  //     {required String collectionPath,
+  //     CloudDataOrderBy? orderBy,
+  //     int? limit,
+  //     CloudDataWhere? where}) {
+  //   var collection = firestore.collection(collectionPath);
+
+  //   if (orderBy == null && limit == null && where == null) {
+  //     return collection.snapshots(includeMetadataChanges: true);
+  //   }
+  //   final result = _buildQuery(
+  //     collection: collection,
+  //     orderBy: orderBy,
+  //     limit: limit,
+  //     where: where,
+  //   );
+
+  //   return result.snapshots(includeMetadataChanges: true);
+  //   // return firestore
+  //   //     .collection(collectionPath)
+  //   //     .orderBy(orderField, descending: descending)
+  //   //     .limit(limit)
+  //   //     .snapshots();
+  // }
 
   /// Document Operations
 
@@ -140,7 +215,11 @@ class FirestoreService implements CloudService {
     required String collectionPath,
     required String docId,
     required bool online,
+    required bool refresh,
   }) async {
+    if (kDebugMode) {
+      printWarning('[FIRESTORE] deleteDocumentFromCollection');
+    }
     final doc = firestore.collection(collectionPath).doc(docId);
     final data = await doc.get(
       GetOptions(
@@ -149,8 +228,15 @@ class FirestoreService implements CloudService {
     );
     if (data.exists) {
       await firestore.collection(collectionPath).doc(docId).delete();
+      if (refresh) {
+        triggerUpdate();
+      }
       return true;
     }
+    if (refresh) {
+      triggerUpdate();
+    }
+
     return false;
   }
 
@@ -160,6 +246,9 @@ class FirestoreService implements CloudService {
     required String docId,
     required bool online,
   }) async {
+    if (kDebugMode) {
+      printWarning('[FIRESTORE] getFromDocument $collectionPath ($docId)');
+    }
     return firestore.collection(collectionPath).doc(docId).get(
           GetOptions(
             source: online ? Source.serverAndCache : Source.cache,
@@ -172,36 +261,108 @@ class FirestoreService implements CloudService {
     required Map<String, dynamic> data,
     required String collectionPath,
     required String doc,
+    required bool refresh,
   }) async {
     final docRef = firestore.collection(collectionPath).doc(doc);
-
+    if (kDebugMode) {
+      printWarning('[FIRESTORE] setDataOnDocument');
+    }
     await docRef.set(
       data,
     );
+    if (refresh) {
+      triggerUpdate();
+    }
   }
 
   @override
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getSnapshotStreamFromDocument(
-          {required String collectionPath, required String docId}) =>
-      firestore
-          .collection(collectionPath)
-          .doc(docId)
-          .snapshots(includeMetadataChanges: true);
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getSnapshotStreamFromDocument({
+    required String collectionPath,
+    required String docId,
+    required bool online,
+  }) {
+    late StreamController<DocumentSnapshot<Map<String, dynamic>>> ctlr;
+
+    StreamSubscription? triggerSubscription;
+    Future<void> sendUpdate() async {
+      final item = await getFromDocument(
+          collectionPath: collectionPath, online: online, docId: docId);
+      if (!ctlr.isClosed) {
+        ctlr.add(item);
+      }
+    }
+
+    ctlr =
+        StreamController<DocumentSnapshot<Map<String, dynamic>>>(onListen: () {
+      sendUpdate();
+      triggerSubscription = updateTriggerController.stream.listen((_) {
+        sendUpdate();
+      });
+    }, onCancel: () {
+      triggerSubscription?.cancel();
+    });
+
+    return ctlr.stream.asBroadcastStream(
+      onCancel: ((subscription) => subscription.pause()),
+      onListen: (subscription) => subscription.resume(),
+    );
+  }
+  // firestore
+  //     .collection(collectionPath)
+  //     .doc(docId)
+  //     .snapshots(includeMetadataChanges: true);
 
   @override
-  Future<void> updateDataOnDocument(
-          {required Map<String, dynamic> data,
-          required String collectionPath,
-          required String docId}) =>
-      firestore.collection(collectionPath).doc(docId).update(data);
+  Future<void> updateDataOnDocument({
+    required Map<String, dynamic> data,
+    required String collectionPath,
+    required String docId,
+    required bool refresh,
+  }) async {
+    if (kDebugMode) {
+      printWarning('[FIRESTORE] updateDataOnDocument on cloud');
+    }
+    await firestore.collection(collectionPath).doc(docId).update(data);
+    if (refresh) {
+      triggerUpdate();
+    }
+  }
 
   @override
-  Stream<int> countDocuments(String collectionPath) => firestore
-      .collection(collectionPath)
-      .count()
-      .get()
-      .asStream()
-      .map((event) => event.count);
+  Stream<int> countDocuments(String collectionPath) {
+    late StreamController<int> ctlr;
+
+    StreamSubscription? triggerSubscription;
+    Future<void> sendUpdate() async {
+      if (kDebugMode) {
+        printWarning('[FIRESTORE] countDocuments');
+      }
+      final items = await firestore.collection(collectionPath).count().get();
+      if (!ctlr.isClosed) {
+        ctlr.add(items.count);
+      }
+    }
+
+    ctlr = StreamController<int>(onListen: () {
+      sendUpdate();
+      triggerSubscription = updateTriggerController.stream.listen((_) {
+        sendUpdate();
+      });
+    }, onCancel: () {
+      triggerSubscription?.cancel();
+    });
+
+    return ctlr.stream.asBroadcastStream(
+      onCancel: ((subscription) => subscription.pause()),
+      onListen: (subscription) => subscription.resume(),
+    );
+  }
+  // firestore
+  //     .collection(collectionPath)
+  //     .count()
+  //     .get()
+  //     .asStream()
+  //     .map((event) => event.count);
 
   @override
   Future<bool> exists({

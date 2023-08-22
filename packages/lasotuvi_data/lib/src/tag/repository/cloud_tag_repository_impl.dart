@@ -5,6 +5,8 @@ import '../model/tag_model.dart';
 
 class CloudTagRepositoryImpl extends CloudRepositoryImpl<Tag, TagModel>
     implements CloudTagRepository {
-  CloudTagRepositoryImpl(super.dataSource)
-      : super(entityToModel: (entity) => TagModel.fromEntity(entity));
+  CloudTagRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+  }) : super(entityToModel: (entity) => TagModel.fromEntity(entity));
 }

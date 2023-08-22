@@ -49,10 +49,15 @@ abstract class SyncableDependentRepositoryImpl<
     String? uid,
     int ownerId,
     String? syncStatus,
+    bool refresh,
   ) async {
     final rows = await localDependentRepository.deleteByOwnerLocal(ownerId);
     if (!onlyOnLocal(uid: uid, syncStatus: syncStatus)) {
-      await cloudDependentRepository.deleteByOwnerCloud(uid!, ownerId);
+      await cloudDependentRepository.deleteByOwnerCloud(
+        uid!,
+        ownerId,
+        refresh,
+      );
     }
     return rows;
   }

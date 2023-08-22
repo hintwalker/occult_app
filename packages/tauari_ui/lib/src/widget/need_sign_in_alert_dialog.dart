@@ -7,8 +7,10 @@ class NeedSignInAlertDialog extends StatelessWidget {
     super.key,
     // required this.colorScheme,
     required this.translate,
+    required this.signInButton,
   });
   final String Function(String) translate;
+  final Widget? signInButton;
   // final ColorScheme colorScheme;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class NeedSignInAlertDialog extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             translate('needSignIn'),
-            style: const TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 18),
           ),
         ),
         const SizedBox(
@@ -38,9 +40,14 @@ class NeedSignInAlertDialog extends StatelessWidget {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text(
-                translate('Ok'),
+                translate('close'),
               ),
             ),
+            if (signInButton != null)
+              const SizedBox(
+                width: 8.0,
+              ),
+            if (signInButton != null) signInButton!
           ],
         ),
         // const SizedBox(

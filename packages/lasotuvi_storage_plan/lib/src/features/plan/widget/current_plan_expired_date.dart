@@ -26,7 +26,10 @@ class CurrentPlanExpiredDate extends StatelessWidget {
                 height: 2.0,
               ),
               hasExpired
-                  ? Text(translate('expired'), style: style?.expiredText)
+                  ? Text(
+                      translate('expired'),
+                      style: style?.expiredText,
+                    )
                   : Text(
                       '${translate('expiredDate')}: ${subscription!.expiredDate.toStringVn()}',
                       style: style?.expiredDate,

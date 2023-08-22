@@ -34,7 +34,12 @@ class SyncableRelRepositoryImpl<
   ///
   /// Nếu [L] hoặc [R] chỉ có trên local thì không thực hiện kết nối trên cloud.
   @override
-  Future connect({String? uid, required L left, required R right}) async {
+  Future connect({
+    String? uid,
+    required L left,
+    required R right,
+    required bool refresh,
+  }) async {
     final id = await localRelRepository.connectOnLocal(left.id, right.id);
     if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus) ||
         onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
@@ -45,6 +50,7 @@ class SyncableRelRepositoryImpl<
       id: id,
       leftId: left.id,
       rightId: right.id,
+      refresh: refresh,
     );
   }
 
@@ -59,10 +65,15 @@ class SyncableRelRepositoryImpl<
   Future<int> deleteByLeftId({
     required String? uid,
     required int leftId,
+    required bool refresh,
   }) async {
     final rows = await localRelRepository.deleteByLeftIdOnLocal(leftId);
     if (uid != null) {
-      await cloudRelRepository.deleteByLeftIdOnCloud(uid, leftId);
+      await cloudRelRepository.deleteByLeftIdOnCloud(
+        uid,
+        leftId,
+        refresh,
+      );
     }
     return rows;
   }
@@ -78,10 +89,15 @@ class SyncableRelRepositoryImpl<
   Future<int> deleteByRightId({
     required String? uid,
     required int rightId,
+    required bool refresh,
   }) async {
     final rows = await localRelRepository.deleteByRightIdOnLocal(rightId);
     if (uid != null) {
-      await cloudRelRepository.deleteByRightIdOnCloud(uid, rightId);
+      await cloudRelRepository.deleteByRightIdOnCloud(
+        uid,
+        rightId,
+        refresh,
+      );
     }
     return rows;
   }
@@ -247,14 +263,23 @@ class SyncableRelRepositoryImpl<
   ///
   /// Nếu [L] hoặc [R] chỉ có trên local thì không thực hiện ngắt kết nối trên cloud
   @override
-  Future disConnect({String? uid, required L left, required R right}) async {
-    await localRelRepository.disConnectOnLocal(left.id, right.id);
+  Future<String?> disConnect({
+    required String? uid,
+    required L left,
+    required R right,
+    required refresh,
+  }) async {
+    final id = await localRelRepository.disConnectOnLocal(left.id, right.id);
     if (onlyOnLocal(uid: uid, syncStatus: left.syncStatus) ||
         onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
-      return;
+      return id.toString();
     }
-    await cloudRelRepository.disConnectOnCloud(
-        uid: uid!, leftId: left.id, rightId: right.id);
+    return await cloudRelRepository.disConnectOnCloud(
+      uid: uid!,
+      leftId: left.id,
+      rightId: right.id,
+      refresh: refresh,
+    );
   }
 
   @override
@@ -262,14 +287,16 @@ class SyncableRelRepositoryImpl<
       String? uid,
       SyncableEntityCarrier<R, L> Function(R right, Iterable<L> lefts)
           onCreateItem) {
-    return rightRepository
-        .onEveryWhere(uid)
-        .asyncMap((event) async => await Future.wait(event.map(
+    return rightRepository.onEveryWhere(uid).asyncMap(
+          (event) async => await Future.wait(
+            event.map(
               (right) async {
                 final lefts = await leftData(uid, right);
                 return onCreateItem(right, lefts);
               },
-            )));
+            ),
+          ),
+        );
   }
 
   ///
@@ -350,10 +377,11 @@ class SyncableRelRepositoryImpl<
   }
 
   @override
-  Future<void> connectLeftToRight({
+  Future<List<int>> connectLeftToRight({
     required String? uid,
     required R right,
     required Iterable<L> lefts,
+    required bool refresh,
   }) async {
     List<int> ids = [];
     ids = await localRelRepository.connectManyLeftToRight(right, lefts);
@@ -363,35 +391,41 @@ class SyncableRelRepositoryImpl<
         ids: ids,
         right: right,
         lefts: lefts,
+        refresh: refresh,
       );
     }
+    return ids;
   }
 
   @override
-  Future<void> disConnectLeftFromRight({
+  Future<Iterable<String>> disConnectLeftFromRight({
     required String? uid,
     required R right,
     required Iterable<L> lefts,
+    required bool refresh,
   }) async {
     await localRelRepository.disConnectManyLeftFromRight(right, lefts);
 
     if (!onlyOnLocal(uid: uid, syncStatus: right.syncStatus)) {
-      await cloudRelRepository.disConnectManyLeftFromRight(
+      return await cloudRelRepository.disConnectManyLeftFromRight(
         uid: uid!,
         right: right,
         lefts: lefts,
+        refresh: refresh,
       );
     }
+    return const [];
   }
 
   /// Thực hiện kết nối nhiều [R] vào 1 [L]
   ///
   /// Nếu L chỉ có trên local thì chỉ thực hiện kết nối trên local
   @override
-  Future<void> connectRightToLeft({
+  Future<List<int>> connectRightToLeft({
     required String? uid,
     required L left,
     required Iterable<R> rights,
+    required bool refresh,
   }) async {
     List<int> ids = [];
 
@@ -402,23 +436,28 @@ class SyncableRelRepositoryImpl<
         ids: ids,
         left: left,
         rights: rights,
+        refresh: refresh,
       );
     }
+    return ids;
   }
 
   @override
-  Future<void> disConnectRightFromLeft({
+  Future<Iterable<String>> disConnectRightFromLeft({
     required String? uid,
     required L left,
     required Iterable<R> rights,
+    required bool refresh,
   }) async {
     await localRelRepository.disConnectManyRightFromLeft(left, rights);
     if (!onlyOnLocal(uid: uid, syncStatus: left.syncStatus)) {
-      await cloudRelRepository.disConnectManyRightFromLeft(
+      return await cloudRelRepository.disConnectManyRightFromLeft(
         uid: uid!,
         left: left,
         rights: rights,
+        refresh: refresh,
       );
     }
+    return const [];
   }
 }

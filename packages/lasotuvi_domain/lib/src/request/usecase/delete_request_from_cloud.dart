@@ -5,5 +5,8 @@ import '../repository/cloud_request_repository.dart';
 
 class DeleteRequestFromCloud
     extends DeleteFromCloud<Request, CloudRequestRepository> {
-  DeleteRequestFromCloud(super.repository);
+  DeleteRequestFromCloud({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

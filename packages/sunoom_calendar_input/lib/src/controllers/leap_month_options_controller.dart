@@ -20,7 +20,7 @@ class LeapMonthOptionsController extends ChangeNotifier {
   }
 
   void choose(String value) {
-    if (value == 'leap_month') {
+    if (value == 'leapMonth') {
       isLeapMonth = true;
     } else {
       isLeapMonth = false;

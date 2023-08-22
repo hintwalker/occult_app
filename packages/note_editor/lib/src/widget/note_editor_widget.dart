@@ -39,6 +39,7 @@ class _NoteEditorState<T> extends State<NoteEditorWidget<T>> {
   final FocusNode _focusNode = FocusNode();
   bool readOnly = true;
   int contentLenght = 0;
+  DateTime lastHitMaxLength = DateTime.now();
   @override
   void initState() {
     super.initState();
@@ -62,14 +63,23 @@ class _NoteEditorState<T> extends State<NoteEditorWidget<T>> {
   }
 
   void onContentChanged() async {
-    final data = _contentController!.document.toDelta().toJson();
+    // final data = _contentController!.document.toDelta().toJson();
 
-    final stringData = jsonEncode(data);
-    final documentLength = _contentController!.document.length;
+    // final stringData = jsonEncode(data);
+    final documentString = _contentController!.document.toPlainText();
+
+    int documentLength =
+        documentString.length - 1; //_contentController!.document.length;
 
     if (documentLength > widget.maxLength) {
       _contentController?.undo();
-      widget.onHitMaxLength(widget.maxLength);
+      documentLength = _contentController!.document.toPlainText().length - 1;
+      final now = DateTime.now();
+      if (now.difference(lastHitMaxLength).inMilliseconds > 1000) {
+        widget.onHitMaxLength(widget.maxLength);
+        lastHitMaxLength = now;
+      }
+
       // final latestIndex = widget.maxLength - 1;
       // _contentController?.replaceText(
       //   latestIndex,
@@ -81,12 +91,12 @@ class _NoteEditorState<T> extends State<NoteEditorWidget<T>> {
 
     await widget.onChanged(
       widget.note.copyWithContent(
-        stringData,
+        jsonEncode(_contentController!.document.toDelta().toJson()),
       ),
       widget.uid,
     );
     setState(() {
-      contentLenght = documentLength - 1;
+      contentLenght = documentLength;
     });
   }
 
@@ -94,6 +104,7 @@ class _NoteEditorState<T> extends State<NoteEditorWidget<T>> {
     final data = _contentController!.document.toDelta().toJson();
 
     final stringData = jsonEncode(data);
+    // final test = _contentController!.document.toPlainText().trim();
     await widget.onSave(
       widget.note.coppyWithTitleAndContent(
         title: _titleController.text,

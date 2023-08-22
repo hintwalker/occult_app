@@ -4,6 +4,6 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 
 final onCountNoteOnCloudProvider = Provider(
   (ref) => OnCountNoteOnCloud(
-    ref.read(cloudNoteRepositoryProvider),
+    ref.read(noteCloudCacheRepositoryProvider),
   ),
 );

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,8 +36,9 @@ void main() async {
     // 1. Debug provider
     // 2. Safety Net provider
     // 3. Play Integrity provider
-    // androidProvider: AndroidProvider.playIntegrity,
-    androidProvider: AndroidProvider.debug,
+    androidProvider:
+        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    // androidProvider: AndroidProvider.debug,
     // Default provider for iOS/macOS is the Device Check provider. You can use the "AppleProvider" enum to choose
     // your preferred provider. Choose from:
     // 1. Debug provider
@@ -49,7 +51,9 @@ void main() async {
   await initTempStorage();
   final localDatabase = await initLocalDatabase();
 
-  await initAds();
+  if (AppConfig.showAds) {
+    await initAds();
+  }
 
   // await loadOldData();
   GoRouter.optionURLReflectsImperativeAPIs = true;
@@ -92,7 +96,7 @@ Future<void> initAds() async {
 
 Future<void> initTempStorage() async {
   final Directory directory =
-      await path_provider.getApplicationDocumentsDirectory();
+      await path_provider.getApplicationCacheDirectory();
   // Hive.init(directory.path);
   await Hive.initFlutter(directory.path);
   await LasotuviSettings.openSettingsBoxes();
@@ -100,10 +104,18 @@ Future<void> initTempStorage() async {
 
 Future<LocalDatabase<Database>> initLocalDatabase() async {
   final dbFactory = sqflite.databaseFactory;
-  final localDatabase = SqliteDatabase(dbFactory,
-      onCreated: onDbCreated,
-      onConfigure: onDbConfigure,
-      databaseName: DatabaseNames.v1_2);
+  final localDatabase = SqliteDatabase(
+    dbFactory,
+    onCreated: onDbCreated,
+    onConfigure: onDbConfigure,
+    // onUpgrade: (db, oldVersion, newVersion) => onDbUpgrade(
+    //   db: db,
+    //   oldVersion: oldVersion,
+    //   newVersion: newVersion,
+    // ),
+    databaseName: DatabaseNames.v1_2,
+    version: 1,
+  );
   await localDatabase.ready;
 
   return localDatabase;

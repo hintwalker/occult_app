@@ -127,8 +127,16 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   }
 
   @override
-  Future<bool> upload(String uid, E item) async {
-    return await cloudRepository.insert(uid, item);
+  Future<bool> upload(
+    String uid,
+    E item,
+    bool refresh,
+  ) async {
+    return await cloudRepository.insert(
+      uid,
+      item,
+      refresh,
+    );
   }
 
   @override
@@ -213,7 +221,11 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   }
 
   @override
-  Future<void> update(E item, String? uid) async {
+  Future<void> update(
+    E item,
+    String? uid,
+    bool refresh,
+  ) async {
     // final hasNetwork = await availableNetwork();
 
     // await localRepository.updateOnLocal(
@@ -234,6 +246,7 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
           now,
         ),
         uid!,
+        refresh,
       );
     }
     // else {
@@ -245,12 +258,20 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   }
 
   @override
-  Future<void> deleteEveryWhere(String? uid, E item) async {
+  Future<void> deleteEveryWhere(
+    String? uid,
+    E item,
+    bool refresh,
+  ) async {
     if (!onlyOnLocal(
       uid: uid,
       syncStatus: item.syncStatus,
     )) {
-      await cloudRepository.deleteFromCloud(uid: uid!, docId: item.docId);
+      await cloudRepository.deleteFromCloud(
+        uid: uid!,
+        docId: item.docId,
+        refresh: refresh,
+      );
     }
     await localRepository.deleteFromLocal(item.primaryKey);
   }

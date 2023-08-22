@@ -42,7 +42,7 @@ class _LeapMonthOptionsInputState extends State<LeapMonthOptionsInput> {
     super.dispose();
   }
 
-  final buttons = ['normal_month', 'leap_month'];
+  final buttons = ['normalMonth', 'leapMonth'];
 
   @override
   Widget build(BuildContext context) {

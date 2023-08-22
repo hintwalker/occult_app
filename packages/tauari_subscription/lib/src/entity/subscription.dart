@@ -94,6 +94,13 @@ class Subscription implements CloudGetable, Dumpable {
     };
   }
 
+  // @override
+  // Map<String, Object?> toCloud() {
+  //   final map = dump();
+  //   map.remove(columnId);
+  //   return map;
+  // }
+
   @override
   String get docId => id.toString();
 

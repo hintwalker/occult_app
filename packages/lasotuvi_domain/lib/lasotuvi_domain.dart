@@ -126,8 +126,8 @@ export 'src/chart/entity/chart.dart';
 export 'src/chart/entity/chart_and_note.dart';
 export 'src/chart/entity/chart_has_notes.dart';
 export 'src/chart/repository/chart_repository.dart';
-export 'src/chart/repository/cloud_chart_repository.dart';
-export 'src/chart/repository/local_chart_repository.dart';
+export 'src/chart/repository/chart_cloud_repository.dart';
+export 'src/chart/repository/chart_local_repository.dart';
 export 'src/chart/column_chart.dart';
 
 export 'src/tag/usecase/delete_tag_range_on_cloud.dart';

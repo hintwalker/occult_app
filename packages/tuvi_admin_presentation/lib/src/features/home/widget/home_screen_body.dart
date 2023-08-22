@@ -27,7 +27,7 @@ class _HomeScreenBodyState extends AdminAuthDependedState<HomeScreenBody> {
                   future: SortHelper.getSortOption(requestSortKey),
                   child: (sortValue) => AllRequestListWidget(
                     uid: uid,
-                    data: data,
+                    data: data ?? [],
                     colorScheme: LasotuviAppStyle.colorScheme,
                     translate: translate,
                     onItemTap: (context, request, uid) =>

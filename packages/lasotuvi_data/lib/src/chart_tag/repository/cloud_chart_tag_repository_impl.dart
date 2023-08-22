@@ -6,7 +6,8 @@ import '../model/chart_tag_model.dart';
 class CloudChartTagRepositoryImpl
     extends CloudRelRepositoryImpl<ChartTag, ChartTagModel, Chart, Tag> {
   CloudChartTagRepositoryImpl(
-    super.dataSource, {
+    super.cacheDataSource, {
+    required super.onlineDataSource,
     required super.leftIdColumn,
     required super.rightIdColumn,
     required super.leftRepository,

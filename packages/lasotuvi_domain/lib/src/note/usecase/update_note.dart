@@ -4,5 +4,8 @@ import '../entity/note.dart';
 import '../repository/note_repository.dart';
 
 class UpdateNote extends Update<Note, NoteRepository> {
-  UpdateNote(super.repository);
+  UpdateNote({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

@@ -7,14 +7,16 @@ import 'user_repository.dart';
 
 class UserRepositoryImpl extends CloudRepositoryImpl<UserEntity, UserModel>
     implements UserRepository {
-  UserRepositoryImpl(UserDataSource ds)
-      : super(ds, entityToModel: (e) => UserModel.fromEntity(e));
+  UserRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+  }) : super(entityToModel: (e) => UserModel.fromEntity(e));
   // @override
   // Future<String> setUser(UserEntity user) => dataSource.setUser(user);
 
   @override
   Future<String> setupInitUser(UserEntity user) =>
-      (dataSource as UserDataSource).setupInitUser(entityToModel(user));
+      (cacheDataSource as UserDataSource).setupInitUser(entityToModel(user));
 
   // @override
   // Future<String> setupInitUserData(UserEntity user) =>

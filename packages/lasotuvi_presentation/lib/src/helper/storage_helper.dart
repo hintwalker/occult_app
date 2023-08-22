@@ -6,6 +6,7 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 import 'package:lasotuvi_storage_plan/lasotuvi_storage_plan.dart';
 import 'package:lasotuvi_style/lasotuvi_style.dart';
 import 'package:storage_options/storage_options.dart';
+import 'package:tauari_auth_widget/tauari_auth_widget.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_translate/tauari_translate.dart';
 import 'package:tauari_ui/tauari_ui.dart';
@@ -30,7 +31,7 @@ class StorageHelper {
       translate: translate,
       onUpload: (uid, item) => onUpload(
         context: context,
-        uid: uid,
+        uid: ref.read(takeCurrentUserProvider)()?.uidInFirestore,
         item: item,
         ref: ref,
       ),
@@ -82,8 +83,42 @@ class StorageHelper {
     if (uid == null) {
       await showDialog(
         context: context,
-        builder: (_) => const NeedSignInAlertDialog(
+        builder: (ctx) => NeedSignInAlertDialog(
           translate: translate,
+          signInButton: GoogleSignInButton(
+            onTap: () async {
+              if (context.mounted) {
+                final user = await ref.read(signInWithGoogleProvider)();
+                if (user != null) {
+                  if (context.mounted) {
+                    Navigator.pop(ctx);
+                    Navigator.pop(context);
+                    // onUpload(
+                    //   context: context,
+                    //   uid: user.uidInFirestore,
+                    //   item: item,
+                    //   ref: ref,
+                    // );
+                  }
+                }
+
+                // onUpload(
+                //   context: context,
+                //   uid: uid,
+                //   item: item,
+                //   ref: ref,
+                // );
+                // Navigator.popUntil(
+                //     ctx, (route) => route.settings.name == RouteName.chartView);
+                // Navigator.maybePop(ctx);
+                // Navigator.maybePop(context);
+                // if (user != null) {
+                //   Navigator.maybePop(context);
+                // }
+              }
+            },
+            title: translate('signIn'),
+          ),
         ),
       );
       return false;
@@ -102,8 +137,18 @@ class StorageHelper {
       } else if (!value.signedIn) {
         await showDialog(
           context: context,
-          builder: (_) => const NeedSignInAlertDialog(
+          builder: (ctx) => NeedSignInAlertDialog(
             translate: translate,
+            signInButton: GoogleSignInButton(
+              onTap: () async {
+                await ref.read(signInWithGoogleProvider).call();
+                if (context.mounted) {
+                  Navigator.maybePop(ctx);
+                  Navigator.maybePop(context);
+                }
+              },
+              title: translate('signIn'),
+            ),
           ),
         );
         resultOfExcutor = false;

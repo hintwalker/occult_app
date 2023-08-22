@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 // import 'package:lasotuvi_data/lasotuvi_data.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 // import 'package:tauari_sqflite/tauari_sqflite.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tauari_utils/tauari_utils.dart';
@@ -29,6 +30,7 @@ class _SplashScreenBodyState extends ConsumerState<SplashScreenBody> {
   void initState() {
     super.initState();
     loadOldData();
+    // loadCloudData();
   }
 
   @override
@@ -94,4 +96,18 @@ class _SplashScreenBodyState extends ConsumerState<SplashScreenBody> {
       }
     });
   }
+
+  // Future<void> loadCloudData() async {
+  //   final online = await ref.read(checkNetworkStatusProvider)();
+  //   if (!online) {
+  //     return;
+  //   }
+  //   final user = ref.read(takeCurrentUserProvider)();
+  //   if (user == null) {
+  //     return;
+  //   }
+  //   final cache = ref.read(firestoreCacheHelperProvider);
+  //   final directory = await getApplicationCacheDirectory();
+  //   await cache.ready(user.uidInFirestore, path: directory.path);
+  // }
 }

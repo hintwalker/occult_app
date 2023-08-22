@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ListTileDeleteForever extends StatelessWidget {
   const ListTileDeleteForever({
     super.key,
+    required this.uid,
     required this.onTap,
     required this.colorScheme,
     required this.translate,
@@ -10,14 +11,16 @@ class ListTileDeleteForever extends StatelessWidget {
   final void Function() onTap;
   final ColorScheme colorScheme;
   final String Function(String) translate;
+  final String? uid;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      iconColor: colorScheme.error,
-      textColor: colorScheme.error,
-      leading: const Icon(Icons.delete_forever),
-      title: Text(translate('deleteForever')),
+      iconColor: uid == null ? colorScheme.secondary : colorScheme.error,
+      textColor: uid == null ? colorScheme.secondary : colorScheme.error,
+      leading: Icon(uid == null ? Icons.mobile_off : Icons.delete_forever),
+      title:
+          Text(translate(uid == null ? 'deleteFromDevice' : 'deleteForever')),
       onTap: onTap,
     );
   }

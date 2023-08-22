@@ -5,5 +5,8 @@ import '../repository/cloud_commentary_repository.dart';
 
 class DeleteCommentaryFromCloud
     extends DeleteFromCloud<Commentary, CloudCommentaryRepository> {
-  DeleteCommentaryFromCloud(super.repository);
+  DeleteCommentaryFromCloud({
+    required super.cacheRepository,
+    // required super.cloudRepository,
+  });
 }

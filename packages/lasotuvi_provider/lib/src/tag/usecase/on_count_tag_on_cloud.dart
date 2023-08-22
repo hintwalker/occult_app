@@ -4,6 +4,6 @@ import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 
 final onCountTagOnCloudProvider = Provider(
   (ref) => OnCountTagOnCloud(
-    ref.read(cloudTagRepositoryProvider),
+    ref.read(tagCloudCacheRepositoryProvider),
   ),
 );

@@ -31,6 +31,13 @@ class StoragePlan implements CloudGetable, Dumpable {
     };
   }
 
+  // @override
+  // Map<String, Object?> toCloud() {
+  //   final map = dump();
+  //   map.remove(columnId);
+  //   return map;
+  // }
+
   factory StoragePlan.fromMap(Map<String, Object?> map) {
     return StoragePlan(
       id: map[columnId] as String,

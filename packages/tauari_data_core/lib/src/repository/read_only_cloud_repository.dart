@@ -7,4 +7,6 @@ abstract class ReadOnlyCloudRepository<E extends CloudGetable> {
   Stream<E?> onByIdOnCloud({required String uid, required String docId});
   Future<E?> byIdOnCloud({required String uid, required String docId});
   Future<Iterable<E>> dataCloud(String uid, [QueryArgs? queryArgs]);
+  Future<Iterable<E>> fetchOnlineData(String uid);
+  void refresh();
 }

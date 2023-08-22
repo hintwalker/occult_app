@@ -7,6 +7,8 @@ import '../last_canceled_subscription_repository.dart';
 class LastCanceledSubscriptionRepositoryImpl
     extends CloudSingleDocRepositoryImpl<Subscription, SubscriptionModel>
     implements LastCanceledSubscriptionRepository {
-  LastCanceledSubscriptionRepositoryImpl(super.dataSource)
-      : super(entityToModel: (e) => SubscriptionModel.fromEntity(e));
+  LastCanceledSubscriptionRepositoryImpl(
+    super.cacheDataSource, {
+    required super.onlineDataSource,
+  }) : super(entityToModel: (e) => SubscriptionModel.fromEntity(e));
 }
