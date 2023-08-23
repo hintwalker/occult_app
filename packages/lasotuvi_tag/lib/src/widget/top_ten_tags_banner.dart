@@ -56,21 +56,30 @@ class TopTenTagsBanner extends StatelessWidget {
             // countEveryWhereController: countEveryWhereController,
           ),
           Expanded(
-              child: HorizontalDataListBuilder<Tag>(
-                  uid: uid,
-                  controller: controller,
-                  itemWidget: (item) => HoriTagItemWidget(
-                        item,
-                        uid: uid,
-                        onTap: onItemTap,
-                        colorScheme: colorScheme,
-                        onSyncStatusTap: () => onOpenSyncOptions(item),
-                      ),
-                  queryArgs: QueryArgs(
-                    uid: uid,
-                    limitDisplay: 10,
-                    orderBy: '$columnId DESC',
-                  )))
+            child: HorizontalDataListBuilder<Tag>(
+              uid: uid,
+              controller: controller,
+              itemWidget: (item) => HoriTagItemWidget(
+                item,
+                uid: uid,
+                onTap: onItemTap,
+                colorScheme: colorScheme,
+                onSyncStatusTap: () => onOpenSyncOptions(item),
+              ),
+              queryArgs: QueryArgs(
+                uid: uid,
+                limitDisplay: 10,
+                orderBy: '$columnId DESC',
+              ),
+              emptyDataText: Text(
+                translate('emptyTag'),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: colorScheme.outline,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

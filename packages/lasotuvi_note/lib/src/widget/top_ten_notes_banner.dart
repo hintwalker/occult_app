@@ -70,6 +70,13 @@ class TopTenNotesBanner extends StatelessWidget {
               limitDisplay: 10,
               orderBy: '${ColumnNote.edited} DESC',
             ),
+            emptyDataText: Text(
+              translate('emptyNote'),
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.outline,
+              ),
+            ),
           ),
           // )
         ]));

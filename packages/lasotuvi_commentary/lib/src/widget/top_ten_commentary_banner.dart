@@ -72,6 +72,13 @@ class TopTenCommentaryBanner extends StatelessWidget {
               limitDisplay: 10,
               orderBy: '${ColumnCommentary.lastViewed} DESC',
             ),
+            emptyDataText: Text(
+              translate('emptyCommentary'),
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.outline,
+              ),
+            ),
           ),
           // )
         ]));

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import 'builder/basic_future_builder.dart';
 import 'female_avatar_widget.dart';
@@ -61,9 +62,10 @@ class CircleHumanAvatar extends StatelessWidget {
           ? const FemaleAvatarWidget()
           : const MaleAvatarWidget();
     }
-    File profileImage = File(avatar);
-
-    if (profileImage.existsSync() == false) {
+    final avatarFile = AvatarFile(avatar);
+    File profileImage = File(await avatarFile.localPath());
+    final exists = await profileImage.exists();
+    if (exists == false) {
       return gender == 0
           ? const FemaleAvatarWidget()
           : const MaleAvatarWidget();

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+import 'package:lasotuvi_provider/src/chart_tag/usecase/refresh_chart_tag_cloud.dart';
 
 import '../chart/usecase/delete_avatar_from_cloud.dart';
 import '../chart/usecase/delete_chart_from_cloud.dart';
@@ -24,5 +25,6 @@ final removerProvider = Provider(
     refreshChartCloud: ref.read(refreshChartCloudProvider),
     refreshTagCloud: ref.read(refreshTagCloudProvider),
     refreshNoteCloud: ref.read(refreshNoteCloudProvider),
+    refreshChartTagCloud: ref.read(refreshChartTagCloudProvider),
   ),
 );

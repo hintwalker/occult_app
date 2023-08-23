@@ -57,23 +57,32 @@ class TopTenChartsBanner extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: HorizontalDataListBuilder<Chart>(
-                  uid: uid,
-                  controller: controller,
-                  itemWidget: (item) => HoriChartItemWidget(
-                        item,
-                        uid: uid,
-                        translate: translate,
-                        colorScheme: colorScheme,
-                        // chartView: chartView,
-                        onTap: onItemTap,
-                        onSyncStatusTap: () => onOpenSyncOptions(item),
-                      ),
-                  queryArgs: QueryArgs(
-                    uid: uid,
-                    limitDisplay: 10,
-                    orderBy: '${ColumnChart.lastViewed} DESC',
-                  )))
+            child: HorizontalDataListBuilder<Chart>(
+              uid: uid,
+              controller: controller,
+              itemWidget: (item) => HoriChartItemWidget(
+                item,
+                uid: uid,
+                translate: translate,
+                colorScheme: colorScheme,
+                // chartView: chartView,
+                onTap: onItemTap,
+                onSyncStatusTap: () => onOpenSyncOptions(item),
+              ),
+              queryArgs: QueryArgs(
+                uid: uid,
+                limitDisplay: 10,
+                orderBy: '${ColumnChart.lastViewed} DESC',
+              ),
+              emptyDataText: Text(
+                translate('emptyChart'),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: colorScheme.outline,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

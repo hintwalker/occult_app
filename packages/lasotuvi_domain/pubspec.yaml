@@ -18,6 +18,8 @@ dependencies:
     path: ../tauari_data_core
   tauari_values:
     path: ../tauari_values
+  tauari_utils:
+    path: ../tauari_utils
 
 dev_dependencies:
   flutter_test:

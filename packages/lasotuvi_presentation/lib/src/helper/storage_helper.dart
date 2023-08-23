@@ -35,11 +35,16 @@ class StorageHelper {
         item: item,
         ref: ref,
       ),
-      onDownload: (uid, item) => onDownload(uid, item, ref),
-      onDeleteFromCloud: (uid, item) => onDeleteFromCloud(uid, item, ref),
+      onDownload: (uid, item) => onDownload(
+          ref.read(takeCurrentUserProvider)()?.uidInFirestore, item, ref),
+      onDeleteFromCloud: (uid, item) => onDeleteFromCloud(
+          context: context,
+          uid: ref.read(takeCurrentUserProvider)()?.uidInFirestore,
+          item: item,
+          ref: ref),
       onDeleteFromLocal: (item) => onDeleteFromLocal(item, ref),
       onDeleteForever: (uid, item) => onDeleteForever(
-        uid: uid,
+        uid: ref.read(takeCurrentUserProvider)()?.uidInFirestore,
         item: item,
         ref: ref,
         context: context,
@@ -259,11 +264,36 @@ class StorageHelper {
   //   }
   // }
 
-  static Future<void> onDownload<T>(String uid, T item, WidgetRef ref) =>
+  static Future<void> onDownload<T>(String? uid, T item, WidgetRef ref) async {
+    if (uid != null) {
       ref.read(downloaderProvider).download(uid: uid, items: [item]);
+    }
+  }
 
-  static Future<void> onDeleteFromCloud<T>(String uid, T item, WidgetRef ref) =>
-      ref.read(removerProvider).deleteFromCloud(uid: uid, items: [item]);
+  static Future<void> onDeleteFromCloud<T>({
+    required BuildContext context,
+    required String? uid,
+    required T item,
+    required WidgetRef ref,
+  }) async {
+    await ref.read(guardProvider).review().then((value) async {
+      if (!value.connected) {
+        await showDialog(
+          context: context,
+          builder: (_) => const NetworkNotConnectedAlertDialog(
+            colorScheme: LasotuviAppStyle.colorScheme,
+            translate: translate,
+          ),
+        );
+      } else {
+        if (uid != null) {
+          await ref
+              .read(removerProvider)
+              .deleteFromCloud(uid: uid, items: [item]);
+        }
+      }
+    });
+  }
 
   static Future<void> onDeleteFromLocal<T>(
     T item,
@@ -272,7 +302,7 @@ class StorageHelper {
       ref.read(removerProvider).deleteFromLocal(items: [item]);
 
   static Future<void> onDeleteForever<T>({
-    required String uid,
+    required String? uid,
     required T item,
     required WidgetRef ref,
     required BuildContext context,

@@ -50,7 +50,7 @@ class _ChartAvatarChosenState extends ConsumerState<ChartAvatarChosenWidget> {
       await pickedFile.delete();
     }
 
-    widget.controller.onChanged(path, true);
+    widget.controller.onChanged(widget.chartId, true);
     callback();
     // ref.read(chartCreationNotifierProvider.notifier).updateAvatar(image?.path);
   }

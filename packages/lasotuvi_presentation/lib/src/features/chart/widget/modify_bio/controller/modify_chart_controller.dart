@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 class ModifyChartController extends StateNotifier<bool> {
   ModifyChartController(super.state);
@@ -43,7 +44,9 @@ class ModifyChartController extends StateNotifier<bool> {
     );
     if (uid != null) {
       if (!(chart.avatar == null || chart.avatar!.isEmpty)) {
-        await ref.read(uploadAvatarProvider).call(uid, chart.avatar!);
+        await ref
+            .read(uploadAvatarProvider)
+            .call(uid, AvatarFile(chart.avatar!));
       }
     }
     state = false;

@@ -38,7 +38,7 @@ class NoteItemContentWidget extends StatelessWidget {
       //   mainAxisSize: MainAxisSize.min,
       //   children: [
       child: Text(
-        content.substring(0, len < 200 ? len : 200),
+        '${content.substring(0, len < 200 ? len : 200)}...',
         // contentController.document
         //     .getPlainText(0, contentController.document.length),
         style: const TextStyle(

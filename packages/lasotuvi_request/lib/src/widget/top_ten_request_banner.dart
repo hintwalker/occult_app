@@ -57,21 +57,27 @@ class TopTenRequestBanner extends StatelessWidget {
           ),
           Expanded(
               child: HorizontalDataListBuilder<Request>(
-                  uid: uid,
-                  controller: controller,
-                  itemWidget: (item) => HoriRequestItemWidget(
-                        item,
-                        uid: uid,
-                        translate: translate,
-                        colorScheme: colorScheme,
-                        // chartView: chartView,
-                        onTap: onItemTap,
-                        onSyncStatusTap: () => onOpenSyncOptions(item),
-                      ),
-                  queryArgs: QueryArgs(
-                      uid: uid,
-                      limitDisplay: 9,
-                      orderBy: '$columnModified DESC')))
+            uid: uid,
+            controller: controller,
+            itemWidget: (item) => HoriRequestItemWidget(
+              item,
+              uid: uid,
+              translate: translate,
+              colorScheme: colorScheme,
+              // chartView: chartView,
+              onTap: onItemTap,
+              onSyncStatusTap: () => onOpenSyncOptions(item),
+            ),
+            queryArgs: QueryArgs(
+                uid: uid, limitDisplay: 9, orderBy: '$columnModified DESC'),
+            emptyDataText: Text(
+              translate('emptyRequest'),
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.outline,
+              ),
+            ),
+          ))
         ],
       ),
     );

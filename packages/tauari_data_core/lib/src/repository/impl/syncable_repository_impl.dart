@@ -1,7 +1,7 @@
 // import 'package:ordered_set/ordered_set.dart';
 // import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tauari_utils/tauari_utils.dart';
+// import 'package:tauari_utils/tauari_utils.dart';
 // import 'package:tauari_utils/tauari_utils.dart';
 import 'package:tauari_values/tauari_values.dart';
 
@@ -81,8 +81,8 @@ class SyncableRepositoryImpl<E extends SyncableEntity, M extends SyncableModel>
   Stream<Iterable<E>> onEveryWhere(String? uid, [QueryArgs? queryArgs]) async* {
     final Stream<Iterable<E>> localStream = localRepository.onLocal(queryArgs);
     // .map((list) => list.map((e) => e.toEntity()));
-    final hasNetwork = await availableNetwork();
-    if (uid == null || !hasNetwork) {
+    // final hasNetwork = await availableNetwork();
+    if (uid == null) {
       yield* localStream;
     }
     if (uid == null) {

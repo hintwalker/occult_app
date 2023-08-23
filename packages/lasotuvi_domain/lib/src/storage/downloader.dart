@@ -1,3 +1,5 @@
+import 'package:tauari_utils/tauari_utils.dart';
+
 import '../chart/entity/chart.dart';
 import '../chart/usecase/download_avatar.dart';
 import '../chart/usecase/download_chart.dart';
@@ -29,7 +31,7 @@ class Downloader {
           item,
         );
         if (!(item.avatar == null || item.avatar!.isEmpty)) {
-          await downloadAvatar(uid, item.avatar!);
+          await downloadAvatar(uid, AvatarFile(item.avatar!));
         }
       }
     } else if (T == Tag) {

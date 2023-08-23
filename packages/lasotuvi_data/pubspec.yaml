@@ -26,6 +26,8 @@ dependencies:
     path: ../tauari_firebase
   hive: ^2.2.3
   either_dart: ^1.0.0
+  tauari_utils:
+    path: ../tauari_utils
 
 dev_dependencies:
   flutter_test:

@@ -1,10 +1,11 @@
+import 'package:either_dart/either.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:go_router/go_router.dart';
 // import 'package:lasotuvi_data/lasotuvi_data.dart';
-import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+// import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:lasotuvi_provider/lasotuvi_provider.dart';
 // import 'package:path_provider/path_provider.dart';
 // import 'package:tauari_sqflite/tauari_sqflite.dart';
@@ -24,6 +25,7 @@ class SplashScreenBody extends ConsumerStatefulWidget {
 
 class _SplashScreenBodyState extends ConsumerState<SplashScreenBody> {
   List<Map<String, Object?>> data = [];
+  Either<List<Map<String, Object?>>, bool> notes = const Right(false);
   String error = '';
   bool finished = false;
   @override
@@ -45,18 +47,21 @@ class _SplashScreenBodyState extends ConsumerState<SplashScreenBody> {
                   child: (Text(error)),
                 )
               ]))
-            : data.isEmpty
-                ? const LoadingWidget()
-                : ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) => Card(
-                      child: Column(
-                        children: OldChartColumns.migratedColumns
-                            .map((e) => Text('$e: ${data[index][e]}'))
-                            .toList(),
-                      ),
-                    ),
-                  ),
+            : notes.fold(
+                (left) => const Center(child: Icon(Icons.done)),
+                // ListView.builder(
+                //   itemCount: left.length,
+                //   itemBuilder: (context, index) => Card(
+                //       child: Text(left[index][ColumnNote.content].toString())
+                //       // child: Column(
+                //       //   children: OldNoteColumns.migratedColumns
+                //       //       .map((e) => Text('$e: ${left[index][e]}'))
+                //       //       .toList(),
+                //       // ),
+                //       ),
+                // ),
+                (right) => const LoadingWidget(),
+              ),
       ),
     );
   }
@@ -66,6 +71,10 @@ class _SplashScreenBodyState extends ConsumerState<SplashScreenBody> {
     if (needLoadOldData) {
       try {
         await ref.read(migrateOldDataProvider).loadOldData();
+        // setState(() {
+        //   notes = data;
+        // });
+
         // final db = await SqliteDatabase.openOtherDatabase(DatabaseNames.old);
         // final charts = await ref.read(migrateOldDataProvider).loadOldCharts(db);
         // charts.fold(

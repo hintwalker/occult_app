@@ -154,9 +154,9 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                 const SizedBox(
                   height: 48.0,
                 ),
-                ElevatedButton(
-                    onPressed: openAllNotesScreen,
-                    child: Text(translate('showAllNotes'))),
+                // ElevatedButton(
+                //     onPressed: openAllNotesScreen,
+                //     child: Text(translate('showAllNotes'))),
                 const SizedBox(
                   height: 192.0,
                 ),

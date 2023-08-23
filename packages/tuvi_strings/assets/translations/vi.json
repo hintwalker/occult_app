@@ -452,5 +452,10 @@
   "leapMonth": "Tháng nhuận",
   "normalMonth": "Tháng thường",
   "msgHitLimitNoteLength": "Quá giới hạn số lượng ký tự cho phép!",
-  "deleteFromDevice": "Xóa khỏi thiết bị"
+  "deleteFromDevice": "Xóa khỏi thiết bị",
+  "emptyChart": "Chưa có lá số!",
+  "emptyTag": "Chưa có nhãn!",
+  "emptyNote": "Chưa có ghi chú!",
+  "emptyRequest": "Chưa có yêu cầu!",
+  "emptyCommentary": "Chưa có luận giải!"
 }

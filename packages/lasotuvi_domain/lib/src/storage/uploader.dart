@@ -1,4 +1,5 @@
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import '../chart/entity/chart.dart';
 import '../chart/usecase/upload_avatar.dart';
@@ -43,7 +44,7 @@ class Uploader {
           false,
         );
         if (!(item.avatar == null || item.avatar!.isEmpty)) {
-          await uploadAvatar(uid, item.avatar!);
+          await uploadAvatar(uid, AvatarFile(item.avatar!));
         }
 
         // for (var listener in listeners) {

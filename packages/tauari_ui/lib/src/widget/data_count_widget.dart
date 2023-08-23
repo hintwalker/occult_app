@@ -33,34 +33,35 @@ class DataCountWidget extends StatelessWidget {
                     width: 4.0,
                   ),
                 if (uid != null)
-                  BasicFutureBuilder(
-                    future: cloudController.hasNetwork(),
-                    child: (network) => network == null || !network
-                        ? const SizedBox.shrink()
-                        : BasicStreamBuilder(
-                            stream: cloudController.stream(uid!),
-                            child: (cloudCount) => Stack(
-                              alignment: AlignmentDirectional.center,
-                              children: [
-                                Icon(
-                                  Icons.cloud,
-                                  color: colorScheme.tertiaryContainer,
-                                  size: 28,
-                                ),
-                                const SizedBox(
-                                  width: 2.0,
-                                ),
-                                Text(
-                                  '${cloudCount ?? 0}',
-                                  style: TextStyle(
-                                    color: colorScheme.tertiary,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
+                  // BasicFutureBuilder(
+                  //   future: cloudController.hasNetwork(),
+                  //   child: (network) => network == null || !network
+                  //       ? const SizedBox.shrink()
+                  //       :
+                  BasicStreamBuilder(
+                    stream: cloudController.stream(uid!),
+                    child: (cloudCount) => Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: [
+                        Icon(
+                          Icons.cloud,
+                          color: colorScheme.tertiaryContainer,
+                          size: 28,
+                        ),
+                        const SizedBox(
+                          width: 2.0,
+                        ),
+                        Text(
+                          '${cloudCount ?? 0}',
+                          style: TextStyle(
+                            color: colorScheme.tertiary,
+                            fontSize: 14,
                           ),
-                  )
+                        ),
+                      ],
+                    ),
+                  ),
+                //     )
               ],
             ));
   }

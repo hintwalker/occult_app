@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:lasotuvi_data/src/chart/model/chart_model.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 abstract class ChartCloudDataSource extends CloudDataSource<ChartModel> {
   final RemoteFileService remoteFileService;
@@ -23,10 +24,12 @@ abstract class ChartCloudDataSource extends CloudDataSource<ChartModel> {
 
   String avatarCollectionPath(String uid) => 'a/$uid';
 
-  Future<void> uploadAvatar(String uid, String localFilePath) async {
-    final file = File(localFilePath);
+  Future<void> uploadAvatar(String uid, AvatarFile avatar) async {
+    final file = File(await avatar.localPath());
     await remoteFileService.uploadFile(
-        file, '${avatarCollectionPath(uid)}/${localFilePath.split('/').last}');
+        file, '${avatarCollectionPath(uid)}/${avatar.name}');
+    // await remoteFileService.uploadFile(
+    //     file, '${avatarCollectionPath(uid)}/${localFilePath.split('/').last}');
   }
 
   Future<void> deleteAvatar(String uid, String fileName) async {
@@ -34,12 +37,13 @@ abstract class ChartCloudDataSource extends CloudDataSource<ChartModel> {
         .deleteFile('${avatarCollectionPath(uid)}/$fileName');
   }
 
-  Future<void> downloadAvatar(String uid, String localFilePath) async {
-    final fileName = localFilePath.split('/').last;
+  Future<void> downloadAvatar(String uid, AvatarFile avatar) async {
+    // final fileName = localFilePath.split('/').last;
+    final path = await avatar.localPath();
     await remoteFileService.downloadFile(
       uid: uid,
-      localFilePath: localFilePath,
-      remoteFilePath: '${avatarCollectionPath(uid)}/$fileName',
+      localFilePath: path,
+      remoteFilePath: '${avatarCollectionPath(uid)}/${avatar.name}',
     );
   }
 }

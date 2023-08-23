@@ -20,11 +20,11 @@ class MigrateOldData {
   final InsertManyChartTagsToLocal insertChartTagsToLocal;
   // Map<int, int> chartIdsChange = {};
   // Map<int, int> tagIdsChange = {};
-  Future<void> loadOldData() async {
+  Future<Either<List<Map<String, Object?>>, bool>> loadOldData() async {
     if (!kDebugMode) {
       final exists = await SqliteDatabase.exists(DatabaseNames.old);
       if (!exists) {
-        return;
+        return const Right(false);
       }
     }
 
@@ -33,7 +33,8 @@ class MigrateOldData {
     await loadOldCharts(oldDb);
     await loadOldTags(oldDb);
     await loadOldChartTags(oldDb);
-    await loadOldNotes(oldDb);
+    final note = await loadOldNotes(oldDb);
+    return note;
   }
 
   Future<Either<List<Map<String, Object?>>, String>> loadOldCharts(
@@ -92,7 +93,7 @@ class MigrateOldData {
     return Left(data);
   }
 
-  Future<Either<List<Map<String, Object?>>, String>> loadOldNotes(
+  Future<Either<List<Map<String, Object?>>, bool>> loadOldNotes(
       Database db) async {
     final data = kDebugMode
         ? [
@@ -100,7 +101,7 @@ class MigrateOldData {
               OldNoteColumns.noteId: 1691035285269,
               OldNoteColumns.noteTitle: 'ABC',
               OldNoteColumns.noteText:
-                  'description\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n',
+                  "is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
               OldNoteColumns.createdDate: 1691035285269,
               OldNoteColumns.lastUpdated: 1691035285269,
               OldNoteColumns.humanId: 1691035285269,
@@ -116,7 +117,7 @@ class MigrateOldData {
     }
     await insertNotesToLocal(notes);
 
-    return Left(data);
+    return Left(notes.map((e) => e.dump()).toList());
   }
 
   Future<Either<List<Map<String, Object?>>, String>> loadOldChartTags(

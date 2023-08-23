@@ -53,14 +53,22 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
   }
 
   static Note fromOldVersion(Map<String, Object?> map) {
+    final rawContent = map[OldNoteColumns.noteText] == null
+        ? ''
+        : map[OldNoteColumns.noteText] as String;
+    final content = rawContent
+        .trim()
+        // .replaceAll(RegExp(r'\\n'), r'\\n')
+        .replaceAll('\n', r'\n');
+
     return Note(
       map[OldNoteColumns.noteId] as int,
       title: map[OldNoteColumns.noteTitle] == null
           ? ''
           : map[OldNoteColumns.noteTitle] as String,
-      content: map[OldNoteColumns.noteText] == null
+      content: rawContent.isEmpty
           ? '[{"insert":"..."}]'
-          : '[{"insert":"${(map[OldNoteColumns.noteText] as String).trim()}\\n"}]',
+          : '[{"insert":"$content\\n"}]',
       created: DateTime.fromMillisecondsSinceEpoch(
           map[OldNoteColumns.noteId] as int),
       edited: DateTime.fromMillisecondsSinceEpoch(
