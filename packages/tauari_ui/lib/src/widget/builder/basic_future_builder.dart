@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../tauari_ui.dart';
+import '../loading_widget.dart';
 
 class BasicFutureBuilder<T> extends StatelessWidget {
   const BasicFutureBuilder({

@@ -211,8 +211,8 @@ export 'src/commentary/repository/local_commentary_repository.dart';
 export 'src/commentary/repository/commentary_cache_repostiory.dart';
 
 export 'src/commentary/repository/commentary_and_request/cmtry_req_cloud_cache_repository.dart';
-export 'src/commentary/repository/commentary_and_request/commentary_and_request_local_repository.dart';
-export 'src/commentary/repository/commentary_and_request/commentary_and_request_cache_repository.dart';
+export 'src/commentary/repository/commentary_and_request/cmtry_req_local_repository.dart';
+export 'src/commentary/repository/commentary_and_request/cmtry_req_cache_repository.dart';
 
 export 'src/request/dao/request_dao.dart';
 export 'src/request/data_source/request_cache_data_source.dart';

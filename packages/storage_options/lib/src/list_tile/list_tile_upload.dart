@@ -6,7 +6,7 @@ class ListTileUpload extends StatelessWidget {
     required this.onTap,
     required this.translate,
   });
-  final void Function() onTap;
+  final void Function()? onTap;
   final String Function(String) translate;
   // final String? uid;
   // final String? onCloud;

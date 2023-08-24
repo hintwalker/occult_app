@@ -1,6 +1,7 @@
 import 'package:lasotuvi_domain/src/chart/usecase/delete_avatar_from_cloud.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_utils/tauari_utils.dart';
+import 'package:tauari_values/tauari_values.dart';
 
 import '../chart/entity/chart.dart';
 import '../chart/usecase/delete_chart_from_cloud.dart';
@@ -93,44 +94,58 @@ class Remover {
     }
   }
 
-  Future<void> deleteForever<T>(
+  Future<void> deleteForever<T extends Syncable>(
       {required String? uid, required Iterable<T> items}) async {
     if (T == Chart) {
       for (var i = 0; i < items.length; i++) {
         await deleteChartFromLocal(items.elementAt(i) as Chart);
         if (uid != null) {
-          await deleteChartFromCloud(
-            uid,
-            items.elementAt(i) as Chart,
-            false,
-          );
+          final item = items.elementAt(i);
+          if (item.getSyncStatus == SyncStatus.synced ||
+              item.getSyncStatus == SyncStatus.onlyCloud) {
+            await deleteChartFromCloud(
+              uid,
+              items.elementAt(i) as Chart,
+              false,
+            );
+            refreshChartCloud();
+            refreshChartTagCloud();
+          }
         }
       }
-      refreshChartCloud();
     } else if (T == Tag) {
       for (var i = 0; i < items.length; i++) {
         await deleteTagFromLocal(items.elementAt(i) as Tag);
         if (uid != null) {
-          await deleteTagFromCloud(
-            uid,
-            items.elementAt(i) as Tag,
-            false,
-          );
+          final item = items.elementAt(i);
+          if (item.getSyncStatus == SyncStatus.synced ||
+              item.getSyncStatus == SyncStatus.onlyCloud) {
+            await deleteTagFromCloud(
+              uid,
+              items.elementAt(i) as Tag,
+              false,
+            );
+            refreshTagCloud();
+            refreshChartTagCloud();
+          }
         }
       }
-      refreshTagCloud();
     } else if (T == Note) {
       for (var i = 0; i < items.length; i++) {
         await deleteNoteFromLocal(items.elementAt(i) as Note);
         if (uid != null) {
-          await deleteNoteFromCloud(
-            uid,
-            items.elementAt(i) as Note,
-            false,
-          );
+          final item = items.elementAt(i);
+          if (item.getSyncStatus == SyncStatus.synced ||
+              item.getSyncStatus == SyncStatus.onlyCloud) {
+            await deleteNoteFromCloud(
+              uid,
+              items.elementAt(i) as Note,
+              false,
+            );
+            refreshNoteCloud();
+          }
         }
       }
-      refreshNoteCloud();
     }
   }
 }

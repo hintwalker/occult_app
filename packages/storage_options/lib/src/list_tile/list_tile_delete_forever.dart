@@ -8,7 +8,7 @@ class ListTileDeleteForever extends StatelessWidget {
     required this.colorScheme,
     required this.translate,
   });
-  final void Function() onTap;
+  final void Function()? onTap;
   final ColorScheme colorScheme;
   final String Function(String) translate;
   final String? uid;

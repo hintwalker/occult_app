@@ -301,7 +301,7 @@ class StorageHelper {
   ) =>
       ref.read(removerProvider).deleteFromLocal(items: [item]);
 
-  static Future<void> onDeleteForever<T>({
+  static Future<void> onDeleteForever<T extends Syncable>({
     required String? uid,
     required T item,
     required WidgetRef ref,

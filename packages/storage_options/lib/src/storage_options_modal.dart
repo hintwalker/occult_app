@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 import 'package:tauari_values/tauari_values.dart';
 
 import 'list_tile/list_tile_delete_forever.dart';
@@ -48,6 +49,7 @@ class StorageOptionsModal<T extends SyncableEntity> extends StatefulWidget {
 class _StorageOptionsModalState<T extends SyncableEntity>
     extends State<StorageOptionsModal<T>> {
   String? onCloud;
+  bool working = false;
   @override
   void initState() {
     super.initState();
@@ -59,9 +61,11 @@ class _StorageOptionsModalState<T extends SyncableEntity>
   @override
   void didUpdateWidget(covariant StorageOptionsModal<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    setState(() {
-      onCloud = widget.syncStatus;
-    });
+    if (onCloud != widget.syncStatus) {
+      setState(() {
+        onCloud = widget.syncStatus;
+      });
+    }
   }
 
   void close(BuildContext context) {
@@ -70,6 +74,9 @@ class _StorageOptionsModalState<T extends SyncableEntity>
 
   Future<void> upload() async {
     // if (widget.uid != null) {
+    setState(() {
+      working = true;
+    });
     final result = await widget.onUpload(widget.uid, widget.item);
     // await ref
     //     .read(uploaderProvider)
@@ -77,6 +84,7 @@ class _StorageOptionsModalState<T extends SyncableEntity>
     if (result) {
       setState(() {
         onCloud = SyncStatus.synced;
+        working = false;
       });
       doCallback(onCloud);
     }
@@ -86,12 +94,16 @@ class _StorageOptionsModalState<T extends SyncableEntity>
 
   Future<void> download() async {
     if (widget.uid != null) {
+      setState(() {
+        working = true;
+      });
       await widget.onDownload(widget.uid!, widget.item);
       // await ref
       //     .read(downloaderProvider)
       //     .download<T>(uid: widget.uid!, items: widget.items);
       setState(() {
         onCloud = SyncStatus.synced;
+        working = false;
       });
       doCallback(onCloud);
     }
@@ -99,6 +111,9 @@ class _StorageOptionsModalState<T extends SyncableEntity>
 
   Future<void> deleteFromCloud() async {
     if (widget.uid != null) {
+      setState(() {
+        working = true;
+      });
       await widget.onDeleteFromCloud(widget.uid!, widget.item);
       // await ref
       //     .read(removerProvider)
@@ -106,6 +121,7 @@ class _StorageOptionsModalState<T extends SyncableEntity>
       if (context.mounted) {
         setState(() {
           onCloud = SyncStatus.onlyLocal;
+          working = false;
         });
       }
 
@@ -115,16 +131,23 @@ class _StorageOptionsModalState<T extends SyncableEntity>
 
   Future<void> deleteFromLocal() async {
     // if (widget.uid != null) {
+    setState(() {
+      working = true;
+    });
     await widget.onDeleteFromLocal(widget.item);
     // await ref.read(removerProvider).deleteFromLocal<T>(items: widget.items);
     setState(() {
       onCloud = SyncStatus.onlyCloud;
+      working = false;
     });
     doCallback(onCloud);
     // }
   }
 
   Future<void> deleteForever() async {
+    setState(() {
+      working = true;
+    });
     if (widget.doBeforeDeleteForever != null) {
       widget.doBeforeDeleteForever!();
     }
@@ -181,42 +204,53 @@ class _StorageOptionsModalState<T extends SyncableEntity>
                       icon: const Icon(Icons.close))
                 ],
               )),
-          ...ListTile.divideTiles(context: context, tiles: [
-            if (onCloud == SyncStatus.onlyCloud)
-              ListTileDownload(
-                onTap: () async => await download(),
+          if (working)
+            const Center(
+              child: LoadingWidget(),
+            ),
+          if (!working)
+            ...ListTile.divideTiles(context: context, tiles: [
+              if (onCloud == SyncStatus.onlyCloud)
+                ListTileDownload(
+                  onTap: working ? null : () async => await download(),
+                  translate: widget.translate,
+                ),
+              if (onCloud == SyncStatus.onlyLocal || onCloud == null)
+                ListTileUpload(
+                  onTap: working
+                      ? null
+                      : () async {
+                          await upload();
+                        },
+                  translate: widget.translate,
+                ),
+              if (onCloud == SyncStatus.synced)
+                ListTileDeleteFromCloud(
+                  onTap: working
+                      ? null
+                      : () async {
+                          await deleteFromCloud();
+                        },
+                  translate: widget.translate,
+                ),
+              // if (onCloud == OnCloudValues.synced)
+              //   ListTileDeleteFromLocal(
+              //     onTap: () async {
+              //       await deleteFromLocal();
+              //     },
+              //     translate: widget.translate,
+              //   ),
+              ListTileDeleteForever(
+                uid: widget.uid,
+                onTap: working
+                    ? null
+                    : () {
+                        deleteForever();
+                      },
+                colorScheme: widget.colorScheme,
                 translate: widget.translate,
-              ),
-            if (onCloud == SyncStatus.onlyLocal || onCloud == null)
-              ListTileUpload(
-                onTap: () async {
-                  await upload();
-                },
-                translate: widget.translate,
-              ),
-            if (onCloud == SyncStatus.synced)
-              ListTileDeleteFromCloud(
-                onTap: () async {
-                  await deleteFromCloud();
-                },
-                translate: widget.translate,
-              ),
-            // if (onCloud == OnCloudValues.synced)
-            //   ListTileDeleteFromLocal(
-            //     onTap: () async {
-            //       await deleteFromLocal();
-            //     },
-            //     translate: widget.translate,
-            //   ),
-            ListTileDeleteForever(
-              uid: widget.uid,
-              onTap: () {
-                deleteForever();
-              },
-              colorScheme: widget.colorScheme,
-              translate: widget.translate,
-            )
-          ]).toList()
+              )
+            ]).toList()
         ],
       ),
     );

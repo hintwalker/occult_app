@@ -14,6 +14,27 @@
 		},
 		{
 			"path": "../packages/lasotuvi_data"
+		},
+		{
+			"path": "../packages/lasotuvi_presentation"
+		},
+		{
+			"path": "../packages/storage_options"
+		},
+		{
+			"path": "../packages/lasotuvi_domain"
+		},
+		{
+			"path": "../packages/tauari_data_core"
+		},
+		{
+			"path": "../packages/lstv_firestore_cache"
+		},
+		{
+			"path": "../packages/lasotuvi_provider"
+		},
+		{
+			"path": "../packages/tauari_ui"
 		}
 	],
 	"settings": {}

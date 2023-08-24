@@ -175,18 +175,25 @@ abstract class CloudRelRepositoryImpl<E extends CloudGetable,
       ),
       refresh,
     );
-    try {
-      await onlineDataSource?.deleteWhere(
-        uid,
-        QueryArgs(
-          firestoreWhere:
-              CloudDataWhere(field: leftIdColumn, isEqualTo: leftId),
-        ),
-        false,
-      );
-    } catch (e) {
-      if (kDebugMode) {
-        print(e.toString());
+    if (result.isEmpty) {
+      return result;
+    }
+    for (var docId in result) {
+      try {
+        await onlineDataSource?.delete(uid, docId, false);
+
+        // await onlineDataSource?.deleteWhere(
+        //   uid,
+        //   QueryArgs(
+        //     firestoreWhere:
+        //         CloudDataWhere(field: leftIdColumn, isEqualTo: leftId),
+        //   ),
+        //   false,
+        // );
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
       }
     }
     return result;
