@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:tauari_local_file/tauari_local_file.dart';
 import 'package:tauari_utils/tauari_utils.dart';
 
 import '../../repository/remote_file_repository.dart';

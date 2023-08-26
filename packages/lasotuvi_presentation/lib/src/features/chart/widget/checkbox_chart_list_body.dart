@@ -139,7 +139,5 @@ class _CheckBoxChartListBodyState
             refresh: false,
           );
     }
-    // TODO: Consider refresh cloud
-    // ref.read(refreshCloudProvider)();
   }
 }

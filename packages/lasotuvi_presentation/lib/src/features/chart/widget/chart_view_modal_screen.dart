@@ -186,7 +186,6 @@ class _ChartViewModalScreenState
     if (chart == null || !saveLastView) {
       return;
     }
-    // TODO: Consider refresh cloud
     await ref.read(updateChartProvider).call(
           uid,
           chart.copyWith(

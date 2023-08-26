@@ -41,7 +41,6 @@ android {
             keyPassword keystoreProperties.getProperty('keyPassword')
         }
     }
-
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion "25.2.9519653"
 
@@ -67,6 +66,7 @@ android {
         targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        consumerProguardFiles 'lib-proguard-rules.txt'
     }
 
     buildTypes {

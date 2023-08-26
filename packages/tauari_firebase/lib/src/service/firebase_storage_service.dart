@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
-import 'package:tauari_utils/tauari_utils.dart';
+import 'package:tauari_local_file/tauari_local_file.dart';
 
 class FirebaseStorageService extends RemoteFileService {
   const FirebaseStorageService(this.firebaseStorage);
@@ -140,6 +140,7 @@ class FirebaseStorageService extends RemoteFileService {
     if (await file.exists()) {
       return;
     }
+
     final fileRef = firebaseStorage.ref().child(remoteFilePath);
     fileRef.writeToFile(file);
   }

@@ -109,9 +109,9 @@ class Chart extends SyncableEntity<Chart> {
     );
   }
 
-  static Chart fromOldVersion(Map<String, Object?> map) {
+  static Chart fromOldVersion(Map<String, Object?> map, int newId) {
     return Chart(
-      map[OldChartColumns.humanId] as int,
+      newId,
       name: map[OldChartColumns.name] == null
           ? ''
           : map[OldChartColumns.name] as String,
@@ -122,7 +122,7 @@ class Chart extends SyncableEntity<Chart> {
           ? 2023
           : map[OldChartColumns.watchingYear] as int,
       timeZoneOffset: 7,
-      avatar: _getOldAvatar(map[OldChartColumns.avatar]),
+      avatar: newId.toString(),
       birthday: DateTime(
           map[OldChartColumns.yearGreg] as int,
           map[OldChartColumns.monthGreg] as int,
@@ -142,7 +142,21 @@ class Chart extends SyncableEntity<Chart> {
     );
   }
 
-  static String? _getOldAvatar(Object? oldAvatar) {
+  static int generateNewId(Object? oldId, Object? oldCreatedDate) {
+    if (oldId == null) {
+      return DateTime.now().millisecondsSinceEpoch;
+    }
+    final oldIdValue = int.parse(oldId.toString());
+    if (oldIdValue < 100000) {
+      if (oldCreatedDate == null) {
+        return DateTime.now().millisecondsSinceEpoch;
+      }
+      return int.parse(oldCreatedDate.toString());
+    }
+    return oldIdValue;
+  }
+
+  static String? getOldAvatar(Object? oldAvatar) {
     if (oldAvatar == null) {
       return null;
     }

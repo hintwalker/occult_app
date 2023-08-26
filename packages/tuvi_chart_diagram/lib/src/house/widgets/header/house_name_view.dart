@@ -16,6 +16,7 @@ class HouseNameView extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
       textAlign: TextAlign.center,
+      overflow: TextOverflow.fade,
     );
   }
 }

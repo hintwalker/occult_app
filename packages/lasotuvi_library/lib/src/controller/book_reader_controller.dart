@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:tauari_utils/tauari_utils.dart';
+import 'package:tauari_local_file/tauari_local_file.dart';
 import '../box/library_box_name.dart';
 
 import '../entity/book_item.dart';

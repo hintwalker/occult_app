@@ -8,9 +8,11 @@ class NeedSignInAlertDialog extends StatelessWidget {
     // required this.colorScheme,
     required this.translate,
     required this.signInButton,
+    required this.onCancel,
   });
   final String Function(String) translate;
   final Widget? signInButton;
+  final void Function() onCancel;
   // final ColorScheme colorScheme;
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,10 @@ class NeedSignInAlertDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+                onCancel();
+              },
               child: Text(
                 translate('close'),
               ),

@@ -98,16 +98,23 @@ class Remover {
       {required String? uid, required Iterable<T> items}) async {
     if (T == Chart) {
       for (var i = 0; i < items.length; i++) {
-        await deleteChartFromLocal(items.elementAt(i) as Chart);
+        final item = items.elementAt(i) as Chart;
+        await deleteChartFromLocal(item);
         if (uid != null) {
-          final item = items.elementAt(i);
           if (item.getSyncStatus == SyncStatus.synced ||
               item.getSyncStatus == SyncStatus.onlyCloud) {
             await deleteChartFromCloud(
               uid,
-              items.elementAt(i) as Chart,
+              item,
               false,
             );
+            if (await availableNetwork()) {
+              try {
+                if (!(item.avatar == null || item.avatar!.isEmpty)) {
+                  await deleteAvatarFromCloud(uid, item.avatar!);
+                }
+              } catch (_) {}
+            }
             refreshChartCloud();
             refreshChartTagCloud();
           }

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tauari_local_file/tauari_local_file.dart';
 import 'package:tauari_ui/tauari_ui.dart';
-import 'package:tauari_utils/tauari_utils.dart';
 
 import '../controller/chart_avatar_controller.dart';
 

@@ -42,7 +42,7 @@ class StorageHelper {
           uid: ref.read(takeCurrentUserProvider)()?.uidInFirestore,
           item: item,
           ref: ref),
-      onDeleteFromLocal: (item) => onDeleteFromLocal(item, ref),
+      onDeleteFromLocal: (item) => onDeleteFromLocal(context, item, ref),
       onDeleteForever: (uid, item) => onDeleteForever(
         uid: ref.read(takeCurrentUserProvider)()?.uidInFirestore,
         item: item,
@@ -90,6 +90,10 @@ class StorageHelper {
         context: context,
         builder: (ctx) => NeedSignInAlertDialog(
           translate: translate,
+          onCancel: () {
+            // Navigator.pop(ctx);
+            Navigator.pop(context);
+          },
           signInButton: GoogleSignInButton(
             onTap: () async {
               if (context.mounted) {
@@ -144,6 +148,10 @@ class StorageHelper {
           context: context,
           builder: (ctx) => NeedSignInAlertDialog(
             translate: translate,
+            onCancel: () {
+              // Navigator.pop(ctx);
+              Navigator.pop(context);
+            },
             signInButton: GoogleSignInButton(
               onTap: () async {
                 await ref.read(signInWithGoogleProvider).call();
@@ -296,10 +304,39 @@ class StorageHelper {
   }
 
   static Future<void> onDeleteFromLocal<T>(
+    BuildContext context,
     T item,
     WidgetRef ref,
-  ) =>
-      ref.read(removerProvider).deleteFromLocal(items: [item]);
+  ) async {
+    final result = await showDialog<ConfirmResult>(
+      context: context,
+      builder: (ctx) {
+        String message = '';
+        String confirmText = '';
+
+        if (T == Chart) {
+          message = 'warningDeleteChartOnLocal';
+          confirmText = 'confirmDeleteChartOnLocal';
+        } else if (T == Tag) {
+          message = 'warningDeleteTagOnLocal';
+          confirmText = 'confirmDeleteTagOnLocal';
+        } else {
+          message = 'warningDeleteNoteOnLocal';
+          confirmText = 'confirmDeleteNoteOnLocal';
+        }
+        return DeleteDataConfirmDialog(
+          translate: translate,
+          message: translate(message),
+          confirmText: translate(confirmText),
+        );
+      },
+    );
+    if (result != null) {
+      if (result.yes) {
+        await ref.read(removerProvider).deleteFromLocal(items: [item]);
+      }
+    }
+  }
 
   static Future<void> onDeleteForever<T extends Syncable>({
     required String? uid,

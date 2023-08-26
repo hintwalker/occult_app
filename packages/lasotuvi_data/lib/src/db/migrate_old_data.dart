@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:either_dart/either.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tauari_sqflite/tauari_sqflite.dart';
+import 'package:tauari_utils/tauari_utils.dart';
 
 import 'database_names.dart';
 import 'table_names_old.dart';
@@ -18,6 +21,7 @@ class MigrateOldData {
   final InsertManyTagsToLocal insertTagsToLocal;
   final InsertManyNotesToLocal insertNotesToLocal;
   final InsertManyChartTagsToLocal insertChartTagsToLocal;
+  Map<int, int> newGenChartIds = {};
   // Map<int, int> chartIdsChange = {};
   // Map<int, int> tagIdsChange = {};
   Future<Either<List<Map<String, Object?>>, bool>> loadOldData() async {
@@ -59,10 +63,34 @@ class MigrateOldData {
         : await db.query(TableNamesOld.chart,
             columns: OldChartColumns.migratedColumns);
     List<Chart> charts = [];
+
     for (var item in data) {
+      final oldId = item[OldChartColumns.humanId];
+      final newId = Chart.generateNewId(
+        oldId,
+        item[OldChartColumns.createdDate],
+      );
+      newGenChartIds[oldId! as int] = newId;
+
+      final avatar = Chart.getOldAvatar(item[OldChartColumns.avatar]);
+      if (avatar != null) {
+        final avatarFile = File(avatar);
+        if (await avatarFile.exists()) {
+          // final id = item[OldChartColumns.createdDate] as int;
+          final newAvatar = AvatarFile(newId.toString());
+          final newPath = await newAvatar.localPath();
+          try {
+            await avatarFile.copy(newPath);
+          } catch (e) {
+            if (kDebugMode) {
+              print(e.toString());
+            }
+          }
+        }
+      }
       // chartIdsChange[item[OldChartColumns.humanId]! as int] =
       //     item[OldChartColumns.createdDate]! as int;
-      charts.add(Chart.fromOldVersion(item));
+      charts.add(Chart.fromOldVersion(item, newId));
     }
     await insertChartsToLocal(charts);
 
@@ -113,7 +141,10 @@ class MigrateOldData {
           );
     List<Note> notes = [];
     for (var item in data) {
-      notes.add(Note.fromOldVersion(item));
+      final newChartId = newGenChartIds[item[OldNoteColumns.humanId] as int];
+      if (newChartId != null) {
+        notes.add(Note.fromOldVersion(item, newChartId));
+      }
     }
     await insertNotesToLocal(notes);
 
@@ -135,9 +166,18 @@ class MigrateOldData {
           );
     List<ChartTag> chartTags = [];
     for (var item in data) {
-      await Future.delayed(const Duration(milliseconds: 1));
-      chartTags.add(
-          ChartTag.fromOldVersion(DateTime.now().millisecondsSinceEpoch, item));
+      final newChartId =
+          newGenChartIds[item[OldChartTagColumns.humanId] as int];
+      if (newChartId != null) {
+        await Future.delayed(const Duration(milliseconds: 1));
+        chartTags.add(
+          ChartTag.fromOldVersion(
+            DateTime.now().millisecondsSinceEpoch,
+            item,
+            newChartId,
+          ),
+        );
+      }
     }
     await insertChartTagsToLocal(chartTags);
 

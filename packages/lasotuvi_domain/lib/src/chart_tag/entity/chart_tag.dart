@@ -38,10 +38,11 @@ class ChartTag extends SyncableEntity<ChartTag> {
     );
   }
 
-  static ChartTag fromOldVersion(int id, Map<String, Object?> map) {
+  static ChartTag fromOldVersion(
+      int id, Map<String, Object?> map, int newChartId) {
     return ChartTag(
       id,
-      chartId: map[OldChartTagColumns.humanId] as int,
+      chartId: newChartId,
       tagId: map[OldChartTagColumns.tagId] as int,
       syncStatus: null,
       storageState: null,

@@ -52,7 +52,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
     );
   }
 
-  static Note fromOldVersion(Map<String, Object?> map) {
+  static Note fromOldVersion(Map<String, Object?> map, int newChartId) {
     final rawContent = map[OldNoteColumns.noteText] == null
         ? ''
         : map[OldNoteColumns.noteText] as String;
@@ -73,7 +73,7 @@ class Note extends SyncableEntity<Note> implements NoteLike<Note> {
           map[OldNoteColumns.noteId] as int),
       edited: DateTime.fromMillisecondsSinceEpoch(
           map[OldNoteColumns.lastUpdated] as int),
-      chartId: map[OldNoteColumns.humanId] as int,
+      chartId: newChartId,
       storageState: null,
       syncStatus: null,
       modified: LocalLocked.unlocked,

@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   hive: ^2.2.3
   path_provider: ^2.0.15
+  tauari_local_file:
+    path: ../tauari_local_file
 
 dev_dependencies:
   flutter_test:

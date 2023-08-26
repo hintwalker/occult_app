@@ -19,22 +19,22 @@
 			"path": "../packages/lasotuvi_presentation"
 		},
 		{
-			"path": "../packages/storage_options"
+			"path": "../packages/tuvi_strings"
 		},
 		{
-			"path": "../packages/lasotuvi_domain"
+			"path": "../packages/tuvi_chart_diagram"
+		},
+		{
+			"path": "../packages/tuvi_request"
 		},
 		{
 			"path": "../packages/tauari_data_core"
 		},
 		{
-			"path": "../packages/lstv_firestore_cache"
+			"path": "../packages/lasotuvi_domain"
 		},
 		{
-			"path": "../packages/lasotuvi_provider"
-		},
-		{
-			"path": "../packages/tauari_ui"
+			"path": "../packages/tuvi_chart"
 		}
 	],
 	"settings": {}

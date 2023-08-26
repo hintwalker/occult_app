@@ -16,14 +16,23 @@ class HouseThanView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return visible
-        ? BasicAutoSizeText(
-            translate('than'),
-            upperCase: true,
-            style: TextStyle(
-                fontSize: 8,
-                fontWeight: FontWeight.w500,
-                backgroundColor: colorScheme.primary,
-                color: colorScheme.onPrimary),
+        ? Container(
+            decoration: BoxDecoration(
+                color: colorScheme.primary,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                  color: colorScheme.secondary,
+                )),
+            child: BasicAutoSizeText(
+              translate('than'),
+              upperCase: true,
+              overflow: TextOverflow.fade,
+              style: TextStyle(
+                  fontSize: 7,
+                  // fontWeight: FontWeight.w500,
+                  // backgroundColor: colorScheme.primary,
+                  color: colorScheme.onPrimary),
+            ),
           )
         : const SizedBox.shrink();
   }

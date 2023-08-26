@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
+// import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-import 'screen/energy_market.dart';
+// import 'screen/energy_market.dart';
+import 'global_key.dart';
 import 'screen/home.dart';
 
 final router = GoRouter(
@@ -20,13 +21,13 @@ final router = GoRouter(
     routes: [
       ShellRoute(
           navigatorKey: shellNavigatorKey,
-          pageBuilder: (context, state, child) => MaterialPage(
+          pageBuilder: (context, state, child) => const MaterialPage(
               name: 'dashboard',
               restorationId: 'router.shell',
-              child: Dashboard(
+              child: HomeScreen(
                 restorationId: 'dashboard',
                 // drawerController: mainDrawerController,
-                child: child,
+                // child: Text('Dashboard'),
               )),
           routes: [
             GoRoute(
@@ -38,14 +39,5 @@ final router = GoRouter(
                 // drawerController: mainDrawerController,
               )),
             ),
-            GoRoute(
-                name: 'energyMarket',
-                path: '/energyMarket',
-                pageBuilder: (context, state) => const FadeTransitionPage(
-                      child: EnergyMarketScreen(
-                        restorationId: 'energyMarket',
-                        // drawerController: mainDrawerController,
-                      ),
-                    ))
           ])
     ]);

@@ -1,4 +1,4 @@
-import 'package:tauari_utils/src/temp_path.dart';
+import 'package:tauari_local_file/tauari_local_file.dart';
 
 class AvatarFile {
   final String name;

@@ -1,4 +1,4 @@
-import 'package:tauari_utils/tauari_utils.dart';
+import 'package:tauari_local_file/tauari_local_file.dart';
 
 class LoadStarInfoFromLocal {
   Future<String> call(String? uid, String starName) async {

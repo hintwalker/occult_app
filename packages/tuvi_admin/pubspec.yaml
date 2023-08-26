@@ -36,8 +36,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_riverpod: ^2.3.6
-  go_router: ^9.0.3
+  go_router: ^10.1.0
 
+  tauari_entry_point:
+    path: ../tauari_entry_point
+  tauari_restorable_app:
+    path: ../tauari_restorable_app
   tauari_drawer:
     path: ../tauari_drawer
   tauari_ui:
@@ -46,10 +50,12 @@ dependencies:
     path: ../tauari_translate
   tuvi_style:
     path: ../tuvi_style
-  lasotuvi_presentation:
-    path: ../lasotuvi_presentation
-  lasotuvi_provider:
-    path: ../lasotuvi_provider
+  tuvi_strings:
+    path: ../tuvi_strings
+  # lasotuvi_presentation:
+  #   path: ../lasotuvi_presentation
+  # lasotuvi_provider:
+  #   path: ../lasotuvi_provider
   firebase_core: ^2.15.0
 
 dev_dependencies:

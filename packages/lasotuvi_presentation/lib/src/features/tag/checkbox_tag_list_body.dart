@@ -72,7 +72,6 @@ class _CheckboxTagListBodyState
   }
 
   Future<void> doAfterCreation(Tag tag, Chart chart) async {
-    // TODO: Consider refresh cloud
     await ref.read(connectChartsToTagProvider).call(
           uid: uid,
           right: tag,

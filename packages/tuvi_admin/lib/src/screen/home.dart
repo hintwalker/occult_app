@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
+// import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -12,7 +12,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeBody();
+    return const Placeholder(
+      child: Scaffold(
+        body: Text('Home'),
+      ),
+    );
     // RestorationScope(restorationId: restorationId, child: const HomeBody()
     // Center(
     //   child: FilledButton(
