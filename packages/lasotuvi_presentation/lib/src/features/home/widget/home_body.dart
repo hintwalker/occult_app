@@ -174,9 +174,12 @@ class _HomeBodyState extends UserAuthDependedState<HomeBody> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('---',
-                        style: TextStyle(
-                            color: LasotuviAppStyle.colorScheme.primary))
+                    Text(
+                      AppConfig.version,
+                      style: TextStyle(
+                        color: LasotuviAppStyle.colorScheme.primary,
+                      ),
+                    )
                   ],
                 )
                 // )

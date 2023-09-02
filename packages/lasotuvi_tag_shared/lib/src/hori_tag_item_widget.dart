@@ -28,7 +28,10 @@ class HoriTagItemWidget extends StatelessWidget {
       constraints: const BoxConstraints(minWidth: 84.0, maxWidth: 240.0),
       child: SyncableCardItemScaffold(
         uid: uid,
-        colorScheme: colorScheme,
+        onlyCloudColor: colorScheme.outlineVariant,
+        onlyLocalColor: colorScheme.outline,
+        syncedColor: colorScheme.tertiary,
+        // colorScheme: colorScheme,
         onItemTap: () => onTap(context, item),
         syncStatus: item.syncStatus,
         onSyncStatusTap: onSyncStatusTap,

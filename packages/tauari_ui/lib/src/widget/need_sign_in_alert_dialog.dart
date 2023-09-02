@@ -18,6 +18,7 @@ class NeedSignInAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasicDialog(
       title: translate('alert'),
+      onClose: onCancel,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),

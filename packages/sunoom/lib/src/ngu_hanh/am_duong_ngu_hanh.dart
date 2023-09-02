@@ -14,6 +14,13 @@ class AmDuongNguHanh {
     required this.nguHanh,
   });
 
+  const AmDuongNguHanh.initial({
+    this.index = -1,
+    this.amDuong = const AmDuong.initial(),
+    this.nguHanh = const NguHanh.initial(),
+    this.name = '',
+  });
+
   factory AmDuongNguHanh.fromIndex(int index) {
     final data = amDuongNguHanhData[index]!;
     return AmDuongNguHanh.fromMap(data);

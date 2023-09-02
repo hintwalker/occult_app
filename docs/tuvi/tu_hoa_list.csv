@@ -1,0 +1,71 @@
+can	school	loc	quyen	khoa	ki	diff
+giap	vuongDinhChi	liemTrinh	phaQuan	vuKhuc	thaiDuong	
+at	vuongDinhChi	thienCo	thienLuong	tuVi	thaiAm	
+binh	vuongDinhChi	thienDong	thienCo	vanXuong	liemTrinh	
+dinh	vuongDinhChi	thaiAm	thienDong	thienCo	cuMon	
+mau	vuongDinhChi	thamLang	thaiAm	thaiDuong	thienCo	khoa
+ky	vuongDinhChi	vuKhuc	thamLang	thienLuong	vanKhuc	
+canh	vuongDinhChi	thaiDuong	vuKhuc	thienPhu	thienDong	khoa,ki
+tan	vuongDinhChi	cuMon	thaiDuong	vanKhuc	vanXuong	
+nham	vuongDinhChi	thienLuong	tuVi	thienPhu	vuKhuc	khoa
+quy	vuongDinhChi	phaQuan	cuMon	thaiAm	thamLang	
+giap	tuViDauSoToanTap	liemTrinh	phaQuan	vuKhuc	thaiDuong	
+at	tuViDauSoToanTap	thienCo	thienLuong	tuVi	thaiAm	
+binh	tuViDauSoToanTap	thienDong	thienCo	vanXuong	liemTrinh	
+dinh	tuViDauSoToanTap	thaiAm	thienDong	thienCo	cuMon	
+mau	tuViDauSoToanTap	thamLang	thaiAm	huuBat	thienCo	khoa
+ky	tuViDauSoToanTap	vuKhuc	thamLang	thienLuong	vanKhuc	
+canh	tuViDauSoToanTap	thaiDuong	vuKhuc	thaiAm	thienDong	khoa,ki
+tan	tuViDauSoToanTap	cuMon	thaiDuong	vanKhuc	vanXuong	
+nham	tuViDauSoToanTap	thienLuong	tuVi	taPhu	vuKhuc	khoa
+quy	tuViDauSoToanTap	phaQuan	cuMon	thaiAm	thamLang	
+giap	lucBanTrieu	liemTrinh	phaQuan	vuKhuc	thaiDuong	
+at	lucBanTrieu	thienCo	thienLuong	tuVi	thaiAm	
+binh	lucBanTrieu	thienDong	thienCo	vanXuong	liemTrinh	
+dinh	lucBanTrieu	thaiAm	thienDong	thienCo	cuMon	
+mau	lucBanTrieu	thamLang	thaiAm	huuBat	thienCo	khoa
+ky	lucBanTrieu	vuKhuc	thamLang	thienLuong	vanKhuc	
+canh	lucBanTrieu	thaiDuong	vuKhuc	thaiAm	thienDong	khoa,ki
+tan	lucBanTrieu	cuMon	thaiDuong	vanKhuc	vanXuong	
+nham	lucBanTrieu	thienLuong	tuVi	taPhu	vuKhuc	khoa
+quy	lucBanTrieu	phaQuan	cuMon	thaiAm	thamLang	
+giap	khamThienMon	liemTrinh	phaQuan	vuKhuc	thaiDuong	
+at	khamThienMon	thienCo	thienLuong	tuVi	thaiAm	
+binh	khamThienMon	thienDong	thienCo	vanXuong	liemTrinh	
+dinh	khamThienMon	thaiAm	thienDong	thienCo	cuMon	
+mau	khamThienMon	thamLang	thaiAm	huuBat	thienCo	khoa
+ky	khamThienMon	vuKhuc	thamLang	thienLuong	vanKhuc	
+canh	khamThienMon	thaiDuong	vuKhuc	thaiAm	thienDong	khoa,ki
+tan	khamThienMon	cuMon	thaiDuong	vanKhuc	vanXuong	
+nham	khamThienMon	thienLuong	tuVi	taPhu	vuKhuc	khoa
+quy	khamThienMon	phaQuan	cuMon	thaiAm	thamLang	
+giap	tuViDauSoToanThu	liemTrinh	phaQuan	vuKhuc	thaiDuong	
+at	tuViDauSoToanThu	thienCo	thienLuong	tuVi	thaiAm	
+binh	tuViDauSoToanThu	thienDong	thienCo	vanXuong	liemTrinh	
+dinh	tuViDauSoToanThu	thaiAm	thienDong	thienCo	cuMon	
+mau	tuViDauSoToanThu	thamLang	thaiAm	huuBat	thienCo	khoa
+ky	tuViDauSoToanThu	vuKhuc	thamLang	thienLuong	vanKhuc	
+canh	tuViDauSoToanThu	thaiDuong	vuKhuc	thienDong	thaiAm	khoa,ki
+tan	tuViDauSoToanThu	cuMon	thaiDuong	vanKhuc	vanXuong	
+nham	tuViDauSoToanThu	thienLuong	tuVi	thienPhu	vuKhuc	khoa
+quy	tuViDauSoToanThu	phaQuan	cuMon	thaiAm	thamLang	
+giap	manPhai	liemTrinh	phaQuan	vuKhuc	thaiDuong	
+at	manPhai	thienCo	thienLuong	tuVi	thaiAm	
+binh	manPhai	thienDong	thienCo	vanXuong	liemTrinh	
+dinh	manPhai	thaiAm	thienDong	thienCo	cuMon	
+mau	manPhai	thamLang	thaiAm	huuBat	thienCo	khoa
+ky	manPhai	vuKhuc	thamLang	thienLuong	vanKhuc	
+canh	manPhai	thaiDuong	vuKhuc	thienDong	thaiAm	khoa,ki
+tan	manPhai	cuMon	thaiDuong	vanKhuc	vanXuong	
+nham	manPhai	thienLuong	tuVi	thienPhu	vuKhuc	khoa
+quy	manPhai	phaQuan	cuMon	thaiAm	thamLang	
+giap	khac	liemTrinh	phaQuan	vuKhuc	thaiDuong	
+at	khac	thienCo	thienLuong	tuVi	thaiAm	
+binh	khac	thienDong	thienCo	vanXuong	liemTrinh	
+dinh	khac	thaiAm	thienDong	thienCo	cuMon	
+mau	khac	thamLang	thaiAm	huuBat	thienCo	khoa
+ky	khac	vuKhuc	thamLang	thienLuong	vanKhuc	
+canh	khac	thaiDuong	vuKhuc	thienDong	thienTuong	khoa,ki
+tan	khac	cuMon	thaiDuong	vanKhuc	vanXuong	
+nham	khac	thienLuong	tuVi	taPhu	vuKhuc	khoa
+quy	khac	phaQuan	cuMon	thaiAm	thamLang	

@@ -31,8 +31,12 @@ class SingleSelectableChartListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = DataListController(
-      whereTest: chartWhereClause,
+    final controller = DataListController<Chart>(
+      whereTest: (chart, query) => chartWhereClause(
+        chart,
+        query,
+        translate: translate,
+      ),
       sortOption: initSortValue,
       itemComparator: chartItemComparator,
       onSaveSortOption: (e) => onSaveSortOption(chartSortKey, e),

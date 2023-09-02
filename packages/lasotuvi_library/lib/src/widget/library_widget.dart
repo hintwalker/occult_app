@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:tauari_ui/tauari_ui.dart';
 import 'library_item_widget.dart';
 
-class LibraryWidget extends StatelessWidget {
+class LibraryWidget extends UniversalWidget {
   const LibraryWidget({
     super.key,
     required this.onOpenStarsSceen,
     required this.onOpenBooksScreen,
-    required this.translate,
+    required this.onOpenTuHoaScreen,
+    required super.translate,
   });
   final void Function() onOpenStarsSceen;
   final void Function() onOpenBooksScreen;
-  final String Function(String) translate;
+  final void Function() onOpenTuHoaScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,11 @@ class LibraryWidget extends StatelessWidget {
           title: translate('books'),
           onTap: onOpenBooksScreen,
           backgroundImage: 'assets/images/books.jpg',
+        ),
+        LibraryItemWidget(
+          title: translate('tuHoa'),
+          onTap: onOpenTuHoaScreen,
+          backgroundImage: 'assets/images/tu_hoa.png',
         ),
       ],
     );

@@ -17,6 +17,7 @@ export 'src/repository/user_repository_impl.dart';
 
 export 'src/service/user_firestore_service.dart';
 export 'src/service/firebase_auth_service.dart';
+export 'src/service/user_cache_service.dart';
 
 export 'src/source/auth_data_source.dart';
 export 'src/source/firebase_auth_data_source.dart';
@@ -29,3 +30,5 @@ export 'src/usecases/setup_init_user.dart';
 export 'src/usecases/sign_in_with_google.dart';
 export 'src/usecases/sign_out.dart';
 export 'src/usecases/take_current_user.dart';
+export 'src/usecases/sign_in_recovery_attempt.dart';
+export 'src/usecases/sign_in_with_email.dart';

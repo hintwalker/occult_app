@@ -13,6 +13,8 @@ export 'src/cache/helper/firestore_cache_helper.dart';
 
 export 'src/statistic/statistic_state_notifier.dart';
 
+export 'src/library/tu_hoa/notifier/tu_hoa_list_notifier.dart';
+
 export 'src/tuvi_chart_diagram/tuvi_chart_grid_controller.dart';
 export 'src/library/controller/star_info_viewer_controller.dart';
 export 'src/library/controller/star_list_controller.dart';

@@ -18,10 +18,10 @@ class Sky {
   StarIterator get starIterator => _starIterator;
   Sky({required this.config, required this.formulas}) {
     stars = {};
-    _starIterator = StarIterator(StarName.values);
+    _starIterator = StarIterator(StarName.availableList());
     // List<StarName> starNames = StarName.values; // getStarNames(config.school);
     final starInfos = getStarInfos(config.school);
-    for (var starName in StarName.values) {
+    for (var starName in StarName.availableList()) {
       final info = starInfos[starName.name];
       stars[starName] = Star(
         name: starName,

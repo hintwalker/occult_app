@@ -23,7 +23,10 @@ class HoriTagItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SyncableCardItemScaffold(
       uid: uid,
-      colorScheme: colorScheme,
+      onlyCloudColor: colorScheme.outlineVariant,
+      onlyLocalColor: colorScheme.outline,
+      syncedColor: colorScheme.tertiary,
+      // colorScheme: colorScheme,
       onItemTap: () => onTap(context, item),
       syncStatus: item.syncStatus,
       onSyncStatusTap: onSyncStatusTap,

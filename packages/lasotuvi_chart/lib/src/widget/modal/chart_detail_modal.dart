@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:tauari_ui/tauari_ui.dart';
 
-class ChartDetailModal extends StatelessWidget {
+class ChartDetailModal extends UniversalWidget {
   const ChartDetailModal(
     this.chart, {
     super.key,
@@ -10,7 +10,9 @@ class ChartDetailModal extends StatelessWidget {
     required this.onOpenStarsModal,
     required this.onOpenBooksModal,
     required this.onOpenChartOptions,
+    required this.onOpenTuHoaList,
     required this.onOpenChartEditOptions,
+    required super.translate,
     // required this.topBanner,
     required this.child,
   });
@@ -21,6 +23,7 @@ class ChartDetailModal extends StatelessWidget {
   final void Function() onOpenStarsModal;
   final void Function() onOpenBooksModal;
   final void Function() onOpenChartOptions;
+  final void Function() onOpenTuHoaList;
   final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
   @override
   Widget build(BuildContext context) {
@@ -71,22 +74,60 @@ class ChartDetailModal extends StatelessWidget {
                               ),
                             ),
                             IconButton(
+                              onPressed: onOpenTuHoaList,
+                              icon: CircleContainer(
+                                fillColor: colorScheme.background,
+                                borderColor: colorScheme.onBackground,
+                                child: Text(
+                                  '4',
+                                  style: TextStyle(
+                                      color: colorScheme.onBackground),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                            IconButton(
                               icon: const Icon(Icons.auto_awesome),
                               onPressed: onOpenStarsModal,
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.book),
-                              onPressed: onOpenBooksModal,
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.tune),
-                              onPressed: onOpenChartOptions,
-                            ),
-                            IconButton(
-                              onPressed: () =>
-                                  onOpenChartEditOptions(context, chart!),
-                              icon: const Icon(Icons.edit),
-                            ),
+                            MenuAnchor(
+                                builder: (BuildContext context,
+                                    MenuController controller, Widget? child) {
+                                  return IconButton(
+                                    onPressed: () {
+                                      if (controller.isOpen) {
+                                        controller.close();
+                                      } else {
+                                        controller.open();
+                                      }
+                                    },
+                                    icon: const Icon(Icons.more_vert),
+                                  );
+                                },
+                                menuChildren: [
+                                  MenuItemButton(
+                                    onPressed: onOpenBooksModal,
+                                    leadingIcon: const Icon(Icons.book),
+                                    child: Text(
+                                      translate('referenceBooks'),
+                                    ),
+                                  ),
+                                  MenuItemButton(
+                                    onPressed: onOpenChartOptions,
+                                    leadingIcon: const Icon(Icons.tune),
+                                    child: Text(
+                                      translate('chartOptions'),
+                                    ),
+                                  ),
+                                  MenuItemButton(
+                                    onPressed: () =>
+                                        onOpenChartEditOptions(context, chart!),
+                                    leadingIcon: const Icon(Icons.edit),
+                                    child: Text(
+                                      translate('editChart'),
+                                    ),
+                                  ),
+                                ])
                           ],
                         )),
                     Expanded(child: child),

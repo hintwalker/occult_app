@@ -4,6 +4,7 @@ import 'fit_to_house_position.dart';
 class HousePosition {
   final Chi chi;
   const HousePosition(this.chi);
+  const HousePosition.initial({this.chi = const Chi.initial()});
 
   factory HousePosition.unknown() => HousePosition.fromIndex(-1);
   factory HousePosition.tys() => HousePosition.fromIndex(Chies.tys.index);

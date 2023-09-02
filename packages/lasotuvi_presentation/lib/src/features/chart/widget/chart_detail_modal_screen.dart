@@ -69,6 +69,7 @@ class _ChartDetailModalScreenState
             chartId: widget.chartId,
             onOpenBooksModal: () => LibraryNavigation.showBooksScreen(context),
             onOpenStarsModal: () => LibraryNavigation.showStarsScreen(context),
+            onOpenTuHoaList: () => LibraryNavigation.showTuHoaScreen(context),
             onOpenChartOptions: (callback) => ChartNavigation.showChartOptions(
                 context: context, ref: ref, callback: callback),
             onOpenChartEditOptions: (context, chart) =>

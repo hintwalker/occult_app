@@ -18,6 +18,11 @@ class Chi {
     required this.nguHanh,
   });
 
+  const Chi.initial(
+      {this.index = -1,
+      this.name = '',
+      this.nguHanh = const NguHanh.initial()});
+
   Chies get value => Chies.values.firstWhere((element) => element.name == name);
 
   // factory Chi.unknown() = ChiUnknown;

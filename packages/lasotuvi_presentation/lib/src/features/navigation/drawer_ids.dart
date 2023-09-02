@@ -13,6 +13,7 @@ class DrawerIds {
   static const statistic = 'statistic';
 
   static const manual = 'manual';
+
   // static const changeDate = 'changeDate';
   // static const groupStars = 'groupStars';
 }

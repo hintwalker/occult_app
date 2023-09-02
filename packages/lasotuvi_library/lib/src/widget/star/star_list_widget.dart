@@ -30,7 +30,11 @@ class StarListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DataListController<StarItem> controller = DataListController(
-        whereTest: (item, query) => starWhereClause(item, query),
+        whereTest: (item, query) => starWhereClause(
+              item,
+              query,
+              translate: translate,
+            ),
         sortOption: initSortValue,
         itemComparator: starItemComparator,
         onSaveSortOption: (event) => onSaveSortOption(starSortKey, event));

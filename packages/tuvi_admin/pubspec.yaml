@@ -42,21 +42,39 @@ dependencies:
     path: ../tauari_entry_point
   tauari_restorable_app:
     path: ../tauari_restorable_app
-  tauari_drawer:
-    path: ../tauari_drawer
+  
+  # tauari_drawer:
+  #   path: ../tauari_drawer
   tauari_ui:
     path: ../tauari_ui
   tauari_translate:
     path: ../tauari_translate
+  tauari_local_database_provider:
+    path: ../tauari_local_database_provider
+  tauari_data_core:
+    path: ../tauari_data_core
+  tauari_sqflite:
+    path: ../tauari_sqflite
+  tuvi_admin_presentation:
+    path: ../tuvi_admin_presentation
   tuvi_style:
     path: ../tuvi_style
   tuvi_strings:
     path: ../tuvi_strings
+  tuvi_sqlite_db:
+    path: ../tuvi_sqlite_db
+  
   # lasotuvi_presentation:
   #   path: ../lasotuvi_presentation
   # lasotuvi_provider:
   #   path: ../lasotuvi_provider
-  firebase_core: ^2.15.0
+  firebase_core: ^2.15.1
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.2
+  firebase_app_check: ^0.1.5+2
+  sqflite: ^2.3.0
+  path_provider: ^2.1.0
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -37,7 +37,10 @@ class SyncableItemScaffold extends StatelessWidget {
             child: SyncStatusRibbonWidget(
                 uid: uid,
                 syncStatus: syncStatus,
-                colorScheme: colorScheme,
+                onlyCloudColor: colorScheme.outlineVariant,
+                onlyLocalColor: colorScheme.outline,
+                syncedColor: colorScheme.tertiary,
+                // colorScheme: colorScheme,
                 onTap: () {
                   if (onSyncStatusTap != null) {
                     onSyncStatusTap!();

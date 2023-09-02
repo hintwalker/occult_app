@@ -8,6 +8,11 @@ class AmDuong {
     required this.index,
     required this.name,
   });
+
+  const AmDuong.initial({
+    this.index = -1,
+    this.name = '',
+  });
   factory AmDuong.unknown() => AmDuong.fromEnum(AmDuongs.unknown);
   factory AmDuong.am() => AmDuong.fromEnum(AmDuongs.am);
   factory AmDuong.duong() => AmDuong.fromEnum(AmDuongs.duong);

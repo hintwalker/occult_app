@@ -7,34 +7,25 @@
 			"path": "../packages/lasotuvi"
 		},
 		{
-			"path": "../packages/lstv_test"
-		},
-		{
-			"path": "../packages/tuvi_admin"
-		},
-		{
-			"path": "../packages/lasotuvi_data"
+			"path": "../packages/tuvi_request"
 		},
 		{
 			"path": "../packages/lasotuvi_presentation"
 		},
 		{
-			"path": "../packages/tuvi_strings"
+			"path": "../packages/lasotuvi_library"
 		},
 		{
-			"path": "../packages/tuvi_chart_diagram"
+			"path": "../packages/lasotuvi_ads"
 		},
 		{
-			"path": "../packages/tuvi_request"
+			"path": "../packages/tuvi_chart_data"
 		},
 		{
-			"path": "../packages/tauari_data_core"
+			"path": "../packages/tuvi_chart_presentation"
 		},
 		{
-			"path": "../packages/lasotuvi_domain"
-		},
-		{
-			"path": "../packages/tuvi_chart"
+			"path": "../packages/tuvi_chart_domain"
 		}
 	],
 	"settings": {}

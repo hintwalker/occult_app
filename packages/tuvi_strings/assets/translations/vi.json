@@ -463,5 +463,22 @@
   "emptyTag": "Chưa có nhãn!",
   "emptyNote": "Chưa có ghi chú!",
   "emptyRequest": "Chưa có yêu cầu!",
-  "emptyCommentary": "Chưa có luận giải!"
+  "emptyCommentary": "Chưa có luận giải!",
+  "checkingUpdate": "Kiểm tra bản cập nhật...",
+  "downloadingUpdate": "Đang tải bản cập nhật...",
+  "installingUpdate": "Đang cài đặt bản cập nhật...",
+  "vuongDinhChi": "Vương Đình Chi",
+  "tvdsToanThu": "TVĐS toàn thư",
+  "tvdsToanTap": "TVĐS toàn tập",
+  "lucBanTrieu": "Lục Bân Triệu",
+  "khamThienMon": "Khâm Thiên Môn",
+  "manPhai": "Mân Phái",
+  "bacPhaiKhac": "Bắc phái khác",
+  "loc": "Lộc",
+  "quyen": "Quyền",
+  "khoa": "Khoa",
+  "ki": "Kị",
+  "referenceBooks": "Sách tham khảo",
+  "chartOptions": "Tùy chỉnh an sao",
+  "editChart": "Đổi thông tin"
 }

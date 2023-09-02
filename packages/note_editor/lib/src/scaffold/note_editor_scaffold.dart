@@ -41,7 +41,7 @@ class NoteEditorScaffold<T> extends StatelessWidget {
             SyncStatusRibbonWidget(
                 uid: uid,
                 syncStatus: syncStatus,
-                colorScheme: colorScheme,
+                // colorScheme: colorScheme,
                 onTap: () => onOpenSyncOptions(context))
           ],
         ),

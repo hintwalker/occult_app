@@ -8,12 +8,19 @@ class Star {
   final StarName name;
   final HousePosition position;
   final StarInfo info;
-  StarBrightness? strength;
+  final StarBrightness? strength;
 
-  Star({
+  const Star({
     required this.name,
     required this.position,
     required this.info,
+    this.strength,
+  });
+
+  const Star.initial({
+    this.name = StarName.unknown,
+    this.position = const HousePosition.initial(),
+    this.info = const StarInfo.noInfo(),
     this.strength,
   });
 

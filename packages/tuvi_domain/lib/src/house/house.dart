@@ -9,47 +9,94 @@ import 'house_triad.dart';
 import 'life_milestone.dart';
 
 class House {
-  HouseName name;
-  List<Star> majorStars;
-  List<Star> minorStars;
-  Star? lifeStar;
-  late HousePosition _position;
-  HousePosition get position => _position;
-  LifeMilestone lifeMilestone;
-  bool isThan;
-  Can? can;
-  bool isTuan;
-  bool isTriet;
-  late HousePair _pair;
-  HousePair get pair => _pair;
-  late HouseTriad _triad;
-  HouseTriad get triad => _triad;
-  late HousePair _opposition;
-  HousePair get opposition => _opposition;
+  final HouseName name;
+  final List<Star> majorStars;
+  final List<Star> minorStars;
+  final Star lifeStar;
+  final HousePosition position;
 
-  House(
-      {required this.name,
-      List<Star>? majorStars,
-      List<Star>? minorStars,
-      this.lifeStar,
-      HousePosition? position,
-      LifeMilestone? lifeMilestone,
-      this.isThan = false,
-      this.isTuan = false,
-      this.isTriet = false,
-      this.can})
-      : majorStars = majorStars ?? [],
-        minorStars = minorStars ?? [],
-        // _position = position ?? HousePosition.unknown(),
-        lifeMilestone = lifeMilestone ?? LifeMilestone.unknown() {
-    updatePosition(position);
-  }
+  final LifeMilestone lifeMilestone;
+  final bool isThan;
+  final Can can;
+  final bool isTuan;
+  final bool isTriet;
+  // late HousePair _pair;
 
-  void updatePosition(HousePosition? value) {
-    _position = value ?? HousePosition.unknown();
-    _pair = findPair();
-    _triad = findTriad();
-  }
+  // final HouseTriad _triad;
+
+  // final HousePair opposition;
+  // HousePair get opposition => _opposition;
+
+// HousePair get pair => _pair;
+// HouseTriad get triad => _triad;
+//   HousePosition get position => _position;
+
+  const House({
+    required this.name,
+    required this.majorStars,
+    required this.minorStars,
+    required this.lifeStar,
+    required this.position,
+    required this.lifeMilestone,
+    this.isThan = false,
+    this.isTuan = false,
+    this.isTriet = false,
+    required this.can,
+  });
+  //     : majorStars = majorStars ?? [],
+  //       minorStars = minorStars ?? [],
+  //       // _position = position ?? HousePosition.unknown(),
+  //       lifeMilestone = lifeMilestone ?? LifeMilestone.unknown() {
+  //   updatePosition(position);
+  // }
+
+  // const House initial({
+
+  // });
+
+  // void updatePosition(HousePosition? value) {
+  //   _position = value ?? HousePosition.unknown();
+  //   _pair = findPair();
+  //   _triad = findTriad();
+  // }
+
+  const House.initial({
+    this.name = HouseName.unknown,
+    this.position = const HousePosition.initial(),
+    this.can = const Can.initial(),
+    this.majorStars = const [],
+    this.minorStars = const [],
+    this.lifeStar = const Star.initial(),
+    this.lifeMilestone = const LifeMilestone.initial(),
+    this.isThan = false,
+    this.isTriet = false,
+    this.isTuan = false,
+  });
+
+  House copyWith({
+    HouseName? name,
+    List<Star>? majorStars,
+    List<Star>? minorStars,
+    Star? lifeStar,
+    HousePosition? position,
+    LifeMilestone? lifeMilestone,
+    bool? isThan,
+    Can? can,
+    bool? isTuan,
+    bool? isTriet,
+  }) =>
+      House(
+        name: name ?? this.name,
+        majorStars: majorStars ?? this.majorStars,
+        minorStars: minorStars ?? this.minorStars,
+        lifeStar: lifeStar ?? this.lifeStar,
+        position: position ?? this.position,
+        lifeMilestone: lifeMilestone ?? this.lifeMilestone,
+        can: can ?? this.can,
+        isThan: isThan ?? this.isThan,
+        isTriet: isTriet ?? this.isTriet,
+        isTuan: isTuan ?? this.isTuan,
+      );
 
   HousePair findPair() {
     if (position == HousePosition.unknown()) {

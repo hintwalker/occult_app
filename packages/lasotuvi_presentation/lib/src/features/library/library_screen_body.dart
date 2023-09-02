@@ -27,6 +27,7 @@ class _LibraryBodyState extends UserAuthDependedState<LibraryScreenBody> {
         translate: translate,
         onOpenStarsSceen: () => LibraryNavigation.showStarsScreen(context),
         onOpenBooksScreen: () => LibraryNavigation.showBooksScreen(context),
+        onOpenTuHoaScreen: () => LibraryNavigation.showTuHoaScreen(context),
       ),
     );
     // findingUid

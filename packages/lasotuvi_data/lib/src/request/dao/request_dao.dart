@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:sqflite/sqflite.dart';
 import 'package:tauari_data_core/tauari_data_core.dart';
 import 'package:tauari_sqflite/tauari_sqflite.dart';
@@ -9,6 +8,6 @@ class RequestDao extends SqliteDao {
   RequestDao(LocalDatabase<Database> database)
       : super(
           database: database,
-          tableName: kDebugMode ? TableNames.requestTest : TableNames.request,
+          tableName: TableNames.request,
         );
 }

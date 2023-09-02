@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tuvi_admin_presentation/tuvi_admin_presentation.dart';
 // import 'package:lasotuvi_presentation/lasotuvi_presentation.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Placeholder(
       child: Scaffold(
-        body: Text('Home'),
+        body: HomeScreenBody(),
       ),
     );
     // RestorationScope(restorationId: restorationId, child: const HomeBody()

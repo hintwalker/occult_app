@@ -31,4 +31,8 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Stream<UserEntity?> authStateChanges() => dataSource.authStateChanges();
+
+  @override
+  Future<UserEntity?> signInWithEmail(String email, String password) =>
+      dataSource.signInWithEmail(email, password);
 }

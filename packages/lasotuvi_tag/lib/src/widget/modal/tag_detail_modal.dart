@@ -27,7 +27,7 @@ class TagDetailModal extends StatelessWidget {
         SyncStatusRibbonWidget(
           uid: uid,
           syncStatus: syncStatus,
-          colorScheme: colorScheme,
+          // colorScheme: colorScheme,
           onTap: () => onSyncDataTap(context),
         ),
       ],

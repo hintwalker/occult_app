@@ -1,4 +1,4 @@
-import 'package:tauari_ui/tauari_ui.dart';
+import 'package:tauari_restorable_app/tauari_restorable_app.dart';
 
 import 'app_state_impl.dart';
 

@@ -19,6 +19,12 @@ class Can {
     required this.short,
     required this.amDuongNguHanh,
   });
+  const Can.initial({
+    this.index = -1,
+    this.name = '',
+    this.short = '',
+    this.amDuongNguHanh = const AmDuongNguHanh.initial(),
+  });
   Cans get value => Cans.values.firstWhere((element) => element.name == name);
 
   // factory Can.unknown() = CanUnknown;

@@ -1,5 +1,7 @@
 library tauari_ui;
 
+export 'src/widget/universal_stateful_widget.dart';
+export 'src/widget/universal_widget.dart';
 export 'src/widget/not_enough_energy_dialog.dart';
 export 'src/widget/payment_failure_dialog.dart';
 export 'src/widget/payment_success_dialog.dart';

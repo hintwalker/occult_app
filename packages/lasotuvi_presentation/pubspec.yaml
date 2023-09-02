@@ -85,6 +85,8 @@ dependencies:
     path: ../tuvi_domain
   tuvi_chart_diagram:
     path: ../tuvi_chart_diagram
+  tuvi_chart_domain:
+    path: ../tuvi_chart_domain
   lasotuvi_statistic:
     path: ../lasotuvi_statistic
   lasotuvi_ads:
@@ -100,6 +102,7 @@ dependencies:
   cached_network_image: ^3.2.3
   path_provider: ^2.1.0
   either_dart: ^1.0.0
+  material_segmented_control: ^5.0.0
 
 
 dev_dependencies:

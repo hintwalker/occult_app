@@ -10,6 +10,11 @@ class NguHanh {
     required this.name,
   });
 
+  const NguHanh.initial({
+    this.index = -1,
+    this.name = '',
+  });
+
   // const factory NguHanh.unknown() = NguHanhUnknown;
   // const factory NguHanh.thuy() = NguHanhThuy;
   // const factory NguHanh.moc() = NguHanhMoc;

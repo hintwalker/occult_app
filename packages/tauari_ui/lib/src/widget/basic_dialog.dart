@@ -14,16 +14,21 @@ class BasicDialog extends StatelessWidget {
       bottom: 12.0,
     ),
     required this.children,
+    this.onClose,
   });
   final String title;
   final List<Widget>? children;
   final TextStyle? titleTextStyle;
   final EdgeInsetsGeometry contentPadding;
+  final void Function()? onClose;
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: SimpleDialogHeader(title),
+      title: SimpleDialogHeader(
+        title,
+        onClose: onClose,
+      ),
       titlePadding:
           const EdgeInsets.only(left: 12.0, top: 8.0, right: 8.0, bottom: 0.0),
       titleTextStyle: titleTextStyle,

@@ -57,13 +57,14 @@ class StarInfo {
     );
   }
 
-  factory StarInfo.noInfo() => StarInfo(
-      isMajor: false,
-      isKiller: false,
-      isLife: false,
-      isGood: false,
-      isLuuNien: false,
-      bold: false,
-      nguHanh: AmDuongNguHanh.unknown(),
-      brightness: {});
+  const StarInfo.noInfo({
+    this.isMajor = false,
+    this.isKiller = false,
+    this.isLife = false,
+    this.isGood = false,
+    this.isLuuNien = false,
+    this.bold = false,
+    this.nguHanh = const AmDuongNguHanh.initial(),
+    this.brightness = const {},
+  });
 }

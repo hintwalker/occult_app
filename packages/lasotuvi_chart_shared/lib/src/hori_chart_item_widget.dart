@@ -32,7 +32,10 @@ class HoriChartItemWidget extends StatelessWidget {
     return SyncableCardItemScaffold(
       padding: const EdgeInsets.only(right: 12.0),
       uid: uid,
-      colorScheme: colorScheme,
+      onlyCloudColor: colorScheme.outlineVariant,
+      onlyLocalColor: colorScheme.outline,
+      syncedColor: colorScheme.tertiary,
+      // colorScheme: colorScheme,
       onItemTap: () => onTap(context, item),
       syncStatus: item.syncStatus,
       onSyncStatusTap: onSyncStatusTap,

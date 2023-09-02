@@ -1,0 +1,23 @@
+flutter_native_splash:
+  color: "#fffbff"
+  image: assets/images/logo_1152.png
+  # branding: assets/images/logo.png
+  color_dark: "#fffbff"
+  image_dark: assets/images/logo_1152.png
+  # branding_dark: assets/images/logo.png
+  # branding_mode: top
+
+  android_12:
+    image: assets/images/logo_1152.png
+    icon_background_color: "#fffbff"
+    image_dark: assets/images/logo_1152.png
+    icon_background_color_dark: "#fffbff"
+  # android_gravity can be one of the following Android Gravity (see
+  # https://developer.android.com/reference/android/view/Gravity): bottom, center,
+  # center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal,
+  # fill_vertical, left, right, start, or top.
+  android_gravity: center
+  fullscreen: true
+
+  ios: false
+  web: true

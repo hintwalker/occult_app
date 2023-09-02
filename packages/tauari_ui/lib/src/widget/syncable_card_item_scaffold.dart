@@ -5,14 +5,20 @@ class SyncableCardItemScaffold extends StatelessWidget {
   const SyncableCardItemScaffold({
     super.key,
     required this.uid,
-    required this.colorScheme,
+    // required this.colorScheme,
     required this.onItemTap,
     required this.syncStatus,
     required this.onSyncStatusTap,
     this.padding = const EdgeInsets.only(right: 12.0),
     required this.child,
+    this.onlyCloudColor,
+    this.onlyLocalColor,
+    this.syncedColor,
   });
-  final ColorScheme colorScheme;
+  final Color? onlyLocalColor;
+  final Color? syncedColor;
+  final Color? onlyCloudColor;
+  // final ColorScheme colorScheme;
   final EdgeInsetsGeometry padding;
   final void Function() onItemTap;
   final String? uid;
@@ -47,7 +53,10 @@ class SyncableCardItemScaffold extends StatelessWidget {
             child: SyncStatusRibbonWidget(
               uid: uid,
               syncStatus: syncStatus,
-              colorScheme: colorScheme,
+              onlyCloudColor: onlyCloudColor,
+              onlyLocalColor: onlyLocalColor,
+              syncedColor: syncedColor,
+              // colorScheme: colorScheme,
               onTap: () {
                 if (onSyncStatusTap != null) {
                   onSyncStatusTap!();

@@ -18,6 +18,8 @@ dependencies:
     path: ../tauari_data_core
   tauari_firebase:
     path: ../tauari_firebase
+  tauari_firestore_cache:
+    path: ../tauari_firestore_cache
 
 dev_dependencies:
   flutter_test:

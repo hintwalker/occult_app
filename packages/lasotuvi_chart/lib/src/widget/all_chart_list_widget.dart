@@ -66,7 +66,8 @@ class AllChartListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DataListController<ChartHasTags> controller = DataListController(
-        whereTest: (item, query) => chartWhereClause(item.source, query),
+        whereTest: (item, query) =>
+            chartWhereClause(item.source, query, translate: translate),
         sortOption: initSortValue,
         itemComparator: chartHasTagsComparator,
         onSaveSortOption: (event) => onSaveSortOption(chartSortKey, event));

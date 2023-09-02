@@ -15,4 +15,6 @@ abstract class AuthDataSource {
 
   Stream<UserEntity?> onCurrentUser();
   Stream<UserEntity?> authStateChanges();
+
+  Future<UserEntity?> signInWithEmail(String email, String password);
 }

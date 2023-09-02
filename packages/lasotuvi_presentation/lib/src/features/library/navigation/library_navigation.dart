@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasotuvi_library/lasotuvi_library.dart';
+import '../tu_hoa_list_modal_screen.dart';
 import '../book_list_modal_screen.dart';
 import '../book_reader_modal_screen.dart';
 import '../star_info_body.dart';
@@ -33,6 +34,13 @@ class LibraryNavigation {
       builder: (_) => Material(
         child: BookReaderModalScreen(item),
       ),
+    );
+  }
+
+  static void showTuHoaScreen(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => const TuHoaListModalScreen(),
     );
   }
 }

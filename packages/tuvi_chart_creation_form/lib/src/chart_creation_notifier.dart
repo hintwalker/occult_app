@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+// import 'package:lasotuvi_domain/lasotuvi_domain.dart';
 import 'package:sunoom/sunoom.dart';
+import 'package:tuvi_chart_domain/tuvi_chart_domain.dart';
 import 'package:tuvi_domain/tuvi_domain.dart';
 
 import 'initial_moment.dart';

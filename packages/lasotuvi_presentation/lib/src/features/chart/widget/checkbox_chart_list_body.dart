@@ -48,8 +48,9 @@ class _CheckBoxChartListBodyState
                   child: (sortValue) {
                     final CheckboxDataListController<ChartHasTags> controller =
                         CheckboxDataListController<ChartHasTags>(
-                      whereTest: (item, query) =>
-                          chartWhereClause(item.source, query),
+                      whereTest: (item, query) => chartWhereClause(
+                          item.source, query,
+                          translate: translate),
                       initSelected: (ChartHasTags item) =>
                           initSelected(item, widget.tag.id),
                       itemId: (ChartHasTags item) => item.source.id,

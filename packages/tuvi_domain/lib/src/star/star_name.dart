@@ -1,4 +1,5 @@
 enum StarName {
+  unknown,
   tuVi,
   liemTrinh,
   thienDong,
@@ -126,5 +127,11 @@ enum StarName {
   luuThaiTue,
   luuThienHu,
   luuThienKhoc,
-  luuThienMa,
+  luuThienMa;
+
+  static List<StarName> availableList() {
+    final result = values.skip(1);
+    // result.remove(StarName.unknown);
+    return result.toList();
+  }
 }

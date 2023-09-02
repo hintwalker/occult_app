@@ -1,4 +1,6 @@
-import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+// import 'package:lasotuvi_domain/lasotuvi_domain.dart';
+
+import 'package:tuvi_chart_domain/tuvi_chart_domain.dart';
 
 class ChartCreationState {
   const ChartCreationState({

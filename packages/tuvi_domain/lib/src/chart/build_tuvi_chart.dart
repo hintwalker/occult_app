@@ -14,6 +14,7 @@ import '../navigator/navigate_than.dart';
 import '../navigator/navigate_triet.dart';
 import '../navigator/navigate_tuan.dart';
 import '../sky/sky.dart';
+import '../star/star.dart';
 import '../term/find_decade_term.dart';
 import '../term/find_monthly_term.dart';
 import '../term/find_yearly_term.dart';
@@ -62,33 +63,68 @@ TuViChart buildTuViChart({
       bornMonth: humanBio.birthDay.luniSolarDate.month,
       yearlyTermOfWatchingYear: watchingYearHouse.key.chi);
 
-  final Map<HousePosition, House> houses = poses.map((key, value) => MapEntry(
+  House house = House.initial();
+  final Map<HousePosition, House> houses = poses.map(
+    (key, value) => MapEntry(
       key,
-      House(
-          name: value,
-          can: canOfHouse(key, canOfBornYear),
-          position: key,
-          lifeMilestone: LifeMilestone(
-              month: monthlyTerm[key]!,
-              year: yearlyTerm[key]!,
-              decade: decadeTerm[key]!))));
+      house.copyWith(
+        name: value,
+        can: canOfHouse(key, canOfBornYear),
+        position: key,
+        lifeMilestone: LifeMilestone(
+          month: monthlyTerm[key]!,
+          year: yearlyTerm[key]!,
+          decade: decadeTerm[key]!,
+        ),
+      ),
+      // House(
+      //   name: value,
+      //   can: canOfHouse(key, canOfBornYear),
+      //   position: key,
+      //   lifeMilestone: LifeMilestone(
+      //       month: monthlyTerm[key]!,
+      //       year: yearlyTerm[key]!,
+      //       decade: decadeTerm[key]!),
+      // ),
+    ),
+  );
 
-  houses[posOfThan]!.isThan = true;
-  houses[posOfTriet.first]!.isTriet = true;
-  houses[posOfTriet.second]!.isTriet = true;
-  houses[posOfTuan.first]!.isTuan = true;
-  houses[posOfTuan.second]!.isTuan = true;
+  houses[posOfThan] = houses[posOfThan]!.copyWith(isThan: true);
+  houses[posOfTriet.first] = houses[posOfTriet.first]!.copyWith(isTriet: true);
+  houses[posOfTriet.second] =
+      houses[posOfTriet.second]!.copyWith(isTriet: true);
+  houses[posOfTuan.first] = houses[posOfTuan.first]!.copyWith(isTuan: true);
+  houses[posOfTuan.second] = houses[posOfTuan.second]!.copyWith(isTuan: true);
 
+  Map<HousePosition, List<Star>> majorStars = {};
+  Map<HousePosition, List<Star>> minorStars = {};
+  Map<HousePosition, Star> lifeStars = {};
   for (var star in stars.values) {
     if (star.position != HousePosition.unknown()) {
       if (star.info.isMajor) {
-        houses[star.position]?.majorStars.add(star);
+        if (majorStars[star.position] == null) {
+          majorStars[star.position] = [];
+        }
+        majorStars[star.position]!.add(star);
+        // houses[star.position]?.majorStars.add(star);
       } else if (star.info.isLife) {
-        houses[star.position]?.lifeStar = star;
+        lifeStars[star.position] = star;
+        // houses[star.position] = houses[star.position]!.copyWith(lifeStar: star);
       } else {
-        houses[star.position]?.minorStars.add(star);
+        if (minorStars[star.position] == null) {
+          minorStars[star.position] = [];
+        }
+        minorStars[star.position]!.add(star);
+        // houses[star.position]?.minorStars.add(star);
       }
     }
+  }
+  for (var position in lifeStars.keys) {
+    houses[position] = houses[position]!.copyWith(
+      majorStars: majorStars[position],
+      minorStars: minorStars[position],
+      lifeStar: lifeStars[position],
+    );
   }
 
   return TuViChart(

@@ -2,6 +2,9 @@ library tauari_data_core;
 
 export 'src/utils/only_on_local.dart';
 
+export 'src/usecase/cache/pull_collection.dart';
+export 'src/usecase/cache/pull_single_doc.dart';
+
 export 'src/usecase/cloud/refresh_cache.dart';
 
 export 'src/usecase/remote_storage/download_file_to_temp.dart';

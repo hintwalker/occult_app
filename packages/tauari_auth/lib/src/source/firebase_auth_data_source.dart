@@ -12,6 +12,10 @@ class FirebaseAuthDataSource extends AuthDataSource {
   Future<UserEntity?> signInWithGoole() => service.signInWithGoogle();
 
   @override
+  Future<UserEntity?> signInWithEmail(String email, String password) =>
+      service.signInWithEmail(email, password);
+
+  @override
   Future<void> signOut() => service.signOut();
 
   @override

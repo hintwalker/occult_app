@@ -10,6 +10,12 @@ class LifeMilestone {
     required this.decade,
   });
 
+  const LifeMilestone.initial({
+    this.month = 0,
+    this.year = const Chi.initial(),
+    this.decade = 0,
+  });
+
   factory LifeMilestone.unknown() {
     return LifeMilestone(month: -1, year: Chi.fromEnum(Chies.tys), decade: -1);
   }

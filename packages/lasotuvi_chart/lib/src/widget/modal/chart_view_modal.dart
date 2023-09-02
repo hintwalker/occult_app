@@ -58,7 +58,10 @@ class ChartViewModal extends StatelessWidget {
         SyncStatusRibbonWidget(
           uid: uid,
           syncStatus: syncStatus,
-          colorScheme: colorScheme,
+          onlyCloudColor: colorScheme.outlineVariant,
+          onlyLocalColor: colorScheme.outline,
+          syncedColor: colorScheme.tertiary,
+          // colorScheme: colorScheme,
           onTap: () => onOpenSyncOptions(context),
         )
       ],

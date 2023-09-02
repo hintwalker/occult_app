@@ -53,7 +53,7 @@ class FirebaseAuthService {
         email: email,
         password: password,
       );
-      // await _storeCredential(credential.credential);
+      await _storeCredential(credential.credential);
 
       return userFromCredential(credential);
     } on FirebaseAuthException catch (e) {
@@ -70,20 +70,20 @@ class FirebaseAuthService {
     }
   }
 
-  // Future<void> _storeCredential(AuthCredential? credential) async {
-  //   if (credential == null) return;
-  //   final box = await Hive.openBox('token');
-  //   if (kDebugMode) {
-  //     print(
-  //         'providerId: ${credential.providerId}, signInMethod: ${credential.signInMethod}, accessToken: ${credential.accessToken}, token: ${credential.token}');
-  //   }
-  //   await box.put('lastSignIn', {
-  //     'providerId': credential.providerId,
-  //     'accessToken': credential.accessToken,
-  //     'signInMethod': credential.signInMethod,
-  //     'token': credential.token,
-  //   });
-  // }
+  Future<void> _storeCredential(AuthCredential? credential) async {
+    if (credential == null) return;
+    final box = await Hive.openBox('token');
+    if (kDebugMode) {
+      print(
+          'providerId: ${credential.providerId}, signInMethod: ${credential.signInMethod}, accessToken: ${credential.accessToken}, token: ${credential.token}');
+    }
+    await box.put('lastSignIn', {
+      'providerId': credential.providerId,
+      'accessToken': credential.accessToken,
+      'signInMethod': credential.signInMethod,
+      'token': credential.token,
+    });
+  }
 
   Future<AuthCredential?> _getCredential() async {
     final box = await Hive.openBox('token');

@@ -29,6 +29,8 @@ dependencies:
     path: ../tauari_date_format
   tauari_local_file:
     path: ../tauari_local_file
+  tuvi_chart_domain:
+    path: ../tuvi_chart_domain
 
 dev_dependencies:
   flutter_test:

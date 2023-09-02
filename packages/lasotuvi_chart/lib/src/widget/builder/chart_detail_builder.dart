@@ -19,6 +19,7 @@ class ChartDetailBuilder extends StatefulWidget {
     required this.onOpenBooksModal,
     required this.onOpenChartOptions,
     required this.onOpenChartEditOptions,
+    required this.onOpenTuHoaList,
     // required this.topBanner,
   });
   final String? uid;
@@ -30,6 +31,7 @@ class ChartDetailBuilder extends StatefulWidget {
   final String Function(String) translate;
   final void Function() onOpenStarsModal;
   final void Function() onOpenBooksModal;
+  final void Function() onOpenTuHoaList;
   final void Function(Function(Map<String, dynamic>) callback)
       onOpenChartOptions;
   final void Function(BuildContext context, Chart chart) onOpenChartEditOptions;
@@ -72,10 +74,12 @@ class _ChartDetailBuilderState extends State<ChartDetailBuilder> {
       child: (data) => ChartDetailModal(
         data,
         // topBanner: widget.topBanner,
+        translate: widget.translate,
         colorScheme: widget.colorScheme,
         onOpenBooksModal: widget.onOpenBooksModal,
         onOpenStarsModal: widget.onOpenStarsModal,
         onOpenChartEditOptions: widget.onOpenChartEditOptions,
+        onOpenTuHoaList: widget.onOpenTuHoaList,
         onOpenChartOptions: () =>
             widget.onOpenChartOptions(gridController!.updateOptions),
         child: ChartDetailWidget(

@@ -6,14 +6,20 @@ class SyncStatusRibbonWidget extends StatelessWidget {
     super.key,
     required this.uid,
     required this.syncStatus,
-    required this.colorScheme,
+    // required this.colorScheme,
     required this.onTap,
+    this.onlyCloudColor,
+    this.onlyLocalColor,
+    this.syncedColor,
     // required this.storageOptionsModalBuilder,
   });
 
   final String? syncStatus;
   final String? uid;
-  final ColorScheme colorScheme;
+  // final ColorScheme colorScheme;
+  final Color? onlyLocalColor;
+  final Color? syncedColor;
+  final Color? onlyCloudColor;
   final void Function() onTap;
   // final Widget Function(T, {String? uid, String? syncStatus})
   //     storageOptionsModalBuilder;
@@ -22,23 +28,27 @@ class SyncStatusRibbonWidget extends StatelessWidget {
     if (uid == null) {
       return Icon(
         Icons.cloud_off,
-        color: colorScheme.outline,
+        color: onlyLocalColor,
+        // color: colorScheme.outline,
       );
     }
     if (syncStatus == SyncStatus.synced) {
       return Icon(
         Icons.cloud_done,
-        color: colorScheme.tertiary,
+        color: syncedColor,
+        // color: colorScheme.tertiary,
       );
     } else if (syncStatus == SyncStatus.onlyCloud) {
       return Icon(
         Icons.cloud_outlined,
-        color: colorScheme.outlineVariant,
+        color: onlyCloudColor,
+        // color: colorScheme.outlineVariant,
       );
     }
     return Icon(
       Icons.cloud_off,
-      color: colorScheme.outline,
+      color: onlyLocalColor,
+      // color: colorScheme.outline,
     );
   }
 
